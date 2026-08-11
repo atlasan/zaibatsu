@@ -1,0 +1,9 @@
+# Normalize line endings: store text as LF in the repo, regardless of platform.
+# Keeps the Go + TS mirrors byte-consistent across Windows/macOS/Linux.
+* text=auto eol=lf
+
+# Binary/asset types (never normalized).
+*.png binary
+*.pdf binary
+*.rar binary
+*.lockb binary
