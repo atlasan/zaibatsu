@@ -1,0 +1,4 @@
+# Generated, provisional outputs (overlays + vision JSON). Regenerate with
+# `python -m hexvision generate`. Not tracked.
+out/
+__pycache__/
