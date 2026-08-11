@@ -10,9 +10,13 @@ For every cut block tile (`tmp/artifacts/build/<asset>/png/<asset>-pNN-cMM.png`)
 
 - **Hexagon geometry** — center, the 6 vertices, and the inradius, taken from the
   tile's alpha outline. **Reliable.**
-- **Passages** — `edges[6]`: which of the 6 edges expose a connecting space.
-- **Placements** — the circular space slots inside (`spaces[]`, normalized).
-- **Bonus slots** — `bonusCorners[6]`: bonus fragments at the corners.
+- **Passages** — `edges[6]`: an edge is a passage unless a **black wall** blocks
+  it (detected along the edge span).
+- **Placements** — the circular space slots inside (`spaces[]`, normalized),
+  across a wide size range with non-max-suppression so they don't heavily
+  overlap. Pills/ovals are approximated as circles.
+- **Bonus slots** — `bonusCorners[6]`: a **white corner** (three hexes meeting at
+  white corners form a bonus zone).
 
 Geometry is trustworthy; **passages / placements / bonus are assistive candidates**
 on stylised art. Every run writes a verification **overlay** so a human confirms
@@ -32,10 +36,14 @@ python -m hexvision verify       # re-extract; confirm determinism vs the JSON
 ```
 
 Options: `--asset` (default `sp-en-blocks-a4`), `--build-dir`
-(default `tmp/artifacts/build`), `--out` (default `tools/hexvision/out`).
+(default `tmp/artifacts/build`), `--out` (default
+`<build>/<asset>/hexvision/`).
 
-Outputs live in `tools/hexvision/out/` and are **git-ignored** (regenerate any
-time). The `.vision.json` is marked `"provisional": true`.
+Outputs live under the artifacts pipeline's own build tree —
+`tmp/artifacts/build/<asset>/hexvision/` (overlays + `<asset>.vision.json`) — so
+the process is **unified** with the asset tool and everything for an asset sits
+together. It's **git-ignored** (regenerate any time); the JSON is marked
+`"provisional": true`.
 
 ## Workflow
 

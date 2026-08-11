@@ -7,7 +7,8 @@ block geometry + feature candidates. Run from the repo root:
     python -m hexvision check               # structural validation of the JSON
     python -m hexvision verify              # re-extract, confirm determinism
 
-Outputs go to tools/hexvision/out/ (git-ignored). The JSON is PROVISIONAL: the
+Outputs go under the pipeline's build tree — tmp/artifacts/build/<asset>/hexvision/
+(git-ignored, unified with the artifacts tool). The JSON is PROVISIONAL: the
 overlays are the human review surface before promoting anything into spec/data.
 """
 
@@ -25,7 +26,12 @@ from . import detect
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_BUILD = os.path.join("tmp", "artifacts", "build")
-DEFAULT_OUT = os.path.join("tools", "hexvision", "out")
+
+
+def _out_dir(args: argparse.Namespace) -> str:
+    """Outputs live alongside the pipeline's build tree for a unified process:
+    tmp/artifacts/build/<asset>/hexvision/ (override with --out)."""
+    return args.out or os.path.join(args.build_dir, args.asset, "hexvision")
 
 
 def _tile_paths(build_dir: str, asset: str) -> list[str]:
@@ -43,7 +49,8 @@ def cmd_generate(args: argparse.Namespace) -> int:
         print(f"error: no cut tiles found for asset '{args.asset}' under {args.build_dir}", file=sys.stderr)
         print("hint: run the artifacts pipeline first so its cut tiles exist.", file=sys.stderr)
         return 2
-    ov_dir = os.path.join(args.out, "overlays")
+    out = _out_dir(args)
+    ov_dir = os.path.join(out, "overlays")
     os.makedirs(ov_dir, exist_ok=True)
     tiles = []
     for p in paths:
@@ -62,8 +69,8 @@ def cmd_generate(args: argparse.Namespace) -> int:
                 "before promoting into spec/data.",
         "tiles": tiles,
     }
-    os.makedirs(args.out, exist_ok=True)
-    out_json = os.path.join(args.out, f"{args.asset}.vision.json")
+    os.makedirs(out, exist_ok=True)
+    out_json = os.path.join(out, f"{args.asset}.vision.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(doc, f, indent=2, ensure_ascii=False)
         f.write("\n")
@@ -73,7 +80,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
 
 
 def _load_doc(args: argparse.Namespace) -> dict:
-    with open(os.path.join(args.out, f"{args.asset}.vision.json"), encoding="utf-8") as f:
+    with open(os.path.join(_out_dir(args), f"{args.asset}.vision.json"), encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -81,7 +88,7 @@ def cmd_check(args: argparse.Namespace) -> int:
     try:
         doc = _load_doc(args)
     except FileNotFoundError:
-        print("error: no vision JSON — run `generate` first.", file=sys.stderr)
+        print("error: no vision JSON - run `generate` first.", file=sys.stderr)
         return 2
     errors: list[str] = []
     warns: list[str] = []
@@ -106,7 +113,7 @@ def cmd_check(args: argparse.Namespace) -> int:
         if all(t.get("edges", [])) or not any(t.get("edges", [])):
             warns.append(f"{aid}: all edges {'open' if all(t['edges']) else 'walls'} - verify passages")
         if not t.get("spaces"):
-            warns.append(f"{aid}: no spaces detected — verify placements")
+            warns.append(f"{aid}: no spaces detected - verify placements")
     for w in warns:
         print(f"warning: {w}")
     for e in errors:
@@ -121,7 +128,7 @@ def cmd_verify(args: argparse.Namespace) -> int:
     try:
         doc = _load_doc(args)
     except FileNotFoundError:
-        print("error: no vision JSON — run `generate` first.", file=sys.stderr)
+        print("error: no vision JSON - run `generate` first.", file=sys.stderr)
         return 2
     stored = {t["asset"]: t for t in doc.get("tiles", [])}
     paths = _tile_paths(args.build_dir, args.asset)
@@ -145,7 +152,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="hexvision", description=__doc__)
     ap.add_argument("--asset", default="sp-en-blocks-a4", help="asset id (default: sp-en-blocks-a4)")
     ap.add_argument("--build-dir", default=DEFAULT_BUILD, help="artifacts build dir with cut tiles")
-    ap.add_argument("--out", default=DEFAULT_OUT, help="output dir (git-ignored)")
+    ap.add_argument("--out", default=None, help="output dir (default: <build>/<asset>/hexvision)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name, fn in (("generate", cmd_generate), ("check", cmd_check), ("verify", cmd_verify)):
         sp = sub.add_parser(name)
