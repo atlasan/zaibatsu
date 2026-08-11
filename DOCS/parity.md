@@ -52,6 +52,16 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Movement gating | `engine.CanActivateMovement(p,pawn)` | `canActivateMovement(p,pawn)` |
 | End-on capacity check | `engine.CanEndOn(...)` | `canEndOn(...)` |
 | Hex movement | `engine.MoveHex(...)` | `moveHex(...)` |
+| Attack roll | `engine.AttackRoll(rng,skulls)` | `attackRoll(rng,skulls)` |
+| Defense-hit test | `engine.Defeats(roll,def)` | `defeats(roll,def)` |
+| Delete ability | `engine.Delete(...)` | `deleteAbility(...)` ¹ |
+| Eliminate a pawn | `engine.` (internal `eliminatePawn`) | `eliminatePawn(...)` |
+| Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
+
+¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
+export is `deleteAbility`. This is the only intentional name divergence; behavior
+is identical (verified: seed 123 green→yellow yields roll `[2,4]`, eliminated, on
+both sides).
 
 ## Shared, not mirrored
 
@@ -83,7 +93,8 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Pawn positions + occupancy | ✅ | ✅ | pawns on core at setup; capacity by space type |
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
+| Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
 | Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
+| Abilities: Search/Icebreaker/Reboot | ⛔ | ⛔ | backlog (T-104 cont.) |
 | Card-use resolution | ⛔ | ⛔ | backlog |
-| Abilities resolution | ⛔ | ⛔ | backlog |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

@@ -162,6 +162,7 @@ func NewGame(cfg Config) (*domain.GameState, error) {
 		Discard:       []string{},
 		BlockPile:     blockPile,
 		Cybernet:      cybernet,
+		Eliminated:    []string{},
 		RNG:           rng,
 	}
 

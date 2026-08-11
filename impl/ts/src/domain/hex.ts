@@ -85,6 +85,14 @@ export class Cybernet {
   placePawn(p: PawnOnBoard): void {
     this.pawns.push(p);
   }
+
+  /** Removes the board pawn with the given id; returns whether it was present. */
+  removePawn(pawnId: string): boolean {
+    const i = this.pawns.findIndex((p) => p.pawnId === pawnId);
+    if (i < 0) return false;
+    this.pawns.splice(i, 1);
+    return true;
+  }
 }
 
 export function newCybernet(): Cybernet {

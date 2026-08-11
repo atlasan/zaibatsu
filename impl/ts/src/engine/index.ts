@@ -16,6 +16,7 @@ import {
 
 export * from "./placement.ts";
 export * from "./movement.ts";
+export * from "./combat.ts";
 
 export interface Config {
   data: GameData;
@@ -135,6 +136,7 @@ export function newGame(cfg: Config): GameState {
     discard: [],
     blockPile,
     cybernet,
+    eliminated: [],
     rng,
   };
 

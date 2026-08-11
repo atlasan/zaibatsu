@@ -76,3 +76,15 @@ func (cy *Cybernet) SpaceOccupants(c Coord, spaceID string) []*PawnOnBoard {
 func (cy *Cybernet) PlacePawn(p *PawnOnBoard) {
 	cy.Pawns = append(cy.Pawns, p)
 }
+
+// RemovePawn removes the board pawn with the given id, reporting whether it was
+// present.
+func (cy *Cybernet) RemovePawn(pawnID string) bool {
+	for i, p := range cy.Pawns {
+		if p.PawnID == pawnID {
+			cy.Pawns = append(cy.Pawns[:i], cy.Pawns[i+1:]...)
+			return true
+		}
+	}
+	return false
+}

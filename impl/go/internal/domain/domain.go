@@ -211,8 +211,11 @@ type GameState struct {
 	Discard       []string  `json:"discard"`
 	BlockPile     []string  `json:"blockPile"`
 	Cybernet      *Cybernet `json:"cybernet"`
-	WinnerID      string    `json:"winnerId,omitempty"`
-	RNG           *RNG      `json:"-"`
+	// Eliminated holds pawn ids removed from the Cybernet (a Reboot re-enters them
+	// at the Central Core — see the Reboot ability, a later task).
+	Eliminated []string `json:"eliminated"`
+	WinnerID   string   `json:"winnerId,omitempty"`
+	RNG        *RNG     `json:"-"`
 }
 
 // CurrentPlayerPtr returns the player whose turn it is.

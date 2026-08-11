@@ -164,6 +164,8 @@ export interface GameState {
   discard: string[];
   blockPile: string[];
   cybernet: Cybernet;
+  /** Pawn ids removed from the Cybernet (a Reboot re-enters them at the core). */
+  eliminated: string[];
   winnerId?: string;
   rng: Rng;
 }
