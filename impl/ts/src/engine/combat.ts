@@ -17,6 +17,7 @@ import {
   type Ability,
 } from "../domain/types.ts";
 import type { Rng } from "../domain/rng.ts";
+import { discardAttachments } from "./attach.ts";
 
 /** Namespaces a pawn's once-per-turn ability marker. */
 export function abilityUsedKey(ability: string, pawnId: string): string {
@@ -103,8 +104,11 @@ export function deleteAbility(
 
 /**
  * Removes a pawn from the board and records it in the eliminated pool (for a
- * later Reboot). Attached-card discard and control-card handling are later tasks.
+ * later Reboot). Attached cards are discarded and any bonus counters they held
+ * are returned to the owner.
  */
 export function eliminatePawn(s: GameState, pawnId: string): void {
+  const pob = s.cybernet.pawnById(pawnId);
+  if (pob) discardAttachments(s, pob);
   if (s.cybernet.removePawn(pawnId)) s.eliminated.push(pawnId);
 }

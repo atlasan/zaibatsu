@@ -127,9 +127,12 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 }
 
 // eliminatePawn removes a pawn from the board and records it in the Eliminated
-// pool (for a later Reboot). Attached-card discard and control-card handling are
-// later tasks.
+// pool (for a later Reboot). Attached cards are discarded and any bonus counters
+// they held are returned to the owner.
 func eliminatePawn(s *domain.GameState, pawnID string) {
+	if pob := s.Cybernet.PawnByID(pawnID); pob != nil {
+		discardAttachments(s, pob)
+	}
 	if s.Cybernet.RemovePawn(pawnID) {
 		s.Eliminated = append(s.Eliminated, pawnID)
 	}

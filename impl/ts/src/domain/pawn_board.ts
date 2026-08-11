@@ -5,12 +5,29 @@
 import type { Block } from "./types.ts";
 import type { Coord } from "./hex.ts";
 
+/**
+ * An action card attached to a pawn or block, occupying a slot and optionally
+ * holding bonus counters paid to attach it. See DOCS/rules/speedrunners.md
+ * ("Attaching cards").
+ */
+export interface Attachment {
+  cardId: string;
+  slot?: string;
+  bonusPaid?: number;
+}
+
 /** A pawn instance positioned in the Cybernet. */
 export interface PawnOnBoard {
   pawnId: string;
   ownerId: string; // player id, or "" if free of player control
   coord: Coord;
   spaceId: string;
+  attachments?: Attachment[];
+}
+
+/** Whether an attachment already occupies the given slot on a pawn. */
+export function slotFilled(pob: PawnOnBoard, slot: string): boolean {
+  return (pob.attachments ?? []).some((a) => a.slot === slot);
 }
 
 /** Capacity of special / pawn spaces (no pawn limit). */

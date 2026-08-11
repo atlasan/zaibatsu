@@ -4,12 +4,32 @@ package domain
 // impl/ts/src/domain/pawn_board.ts. See DOCS/domain-model.md and
 // DOCS/rules/speedrunners.md ("Spaces", "Movement").
 
+// Attachment is an action card attached to a pawn or block, occupying a slot and
+// optionally holding bonus counters paid to attach it. See DOCS/rules/speedrunners.md
+// ("Attaching cards").
+type Attachment struct {
+	CardID    string `json:"cardId"`
+	Slot      string `json:"slot,omitempty"`
+	BonusPaid int    `json:"bonusPaid,omitempty"`
+}
+
 // PawnOnBoard is a pawn instance positioned in the Cybernet.
 type PawnOnBoard struct {
-	PawnID  string `json:"pawnId"`
-	OwnerID string `json:"ownerId"` // player id, or "" if free of player control
-	Coord   Coord  `json:"coord"`
-	SpaceID string `json:"spaceId"`
+	PawnID      string       `json:"pawnId"`
+	OwnerID     string       `json:"ownerId"` // player id, or "" if free of player control
+	Coord       Coord        `json:"coord"`
+	SpaceID     string       `json:"spaceId"`
+	Attachments []Attachment `json:"attachments,omitempty"`
+}
+
+// HasSlotFilled reports whether an attachment already occupies the given slot.
+func (p *PawnOnBoard) HasSlotFilled(slot string) bool {
+	for _, a := range p.Attachments {
+		if a.Slot == slot {
+			return true
+		}
+	}
+	return false
 }
 
 // Unlimited is the capacity of special / pawn spaces (no pawn limit).

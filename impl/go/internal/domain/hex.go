@@ -46,6 +46,8 @@ type PlacedBlock struct {
 	// OwnerID is the player controlling this block (via Icebreaker), or "" if
 	// uncontrolled. A controlled block carries one of that player's control markers.
 	OwnerID string `json:"ownerId,omitempty"`
+	// Attachments are action cards attached to this block.
+	Attachments []Attachment `json:"attachments,omitempty"`
 }
 
 // Cybernet is the growing hex layout of placed blocks and the pawns on them.

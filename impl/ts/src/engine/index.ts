@@ -22,6 +22,7 @@ export * from "./combat.ts";
 export * from "./icebreaker.ts";
 export * from "./abilities.ts";
 export * from "./cards.ts";
+export * from "./attach.ts";
 export { winner } from "./win.ts";
 
 export interface Config {

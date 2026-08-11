@@ -70,6 +70,11 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Play card → Icebreak pawn | `engine.PlayIcebreakPawn(...)` | `playIcebreakPawn(...)` |
 | Discard 1 → Search | `engine.PlaySearch(...)` | `playSearch(...)` |
 | Discard 4 → Reboot | `engine.PlayReboot(...)` | `playReboot(...)` |
+| Attachment | `domain.Attachment` (`PawnOnBoard`/`PlacedBlock.Attachments`) | `Attachment` (`.attachments`) |
+| Attach to own pawn | `engine.AttachToPawn(...)` | `attachToPawn(...)` |
+| Attach to enemy pawn | `engine.AttachToEnemy(...)` | `attachToEnemy(...)` |
+| Attach to block | `engine.AttachToBlock(...)` | `attachToBlock(...)` |
+| Effective classes | `engine.EffectivePawnClasses(...)` | `effectivePawnClasses(...)` |
 | Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
 ¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
@@ -116,6 +121,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
+| Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
 | Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
 | Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

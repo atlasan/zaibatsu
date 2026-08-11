@@ -25,6 +25,7 @@ import {
 } from "../domain/types.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import { abilityUsedKey, eliminatePawn, findAbility } from "./combat.ts";
+import { discardAttachments } from "./attach.ts";
 import { checkWin } from "./win.ts";
 
 /** The d6 faces that count as a successful Icebreak. Empty for "none". */
@@ -183,6 +184,9 @@ export function icebreakPawn(
   let attackerEliminated = false;
 
   if (success) {
+    // Gaining control of a pawn discards its attached cards (returning any bonus
+    // counters to the previous owner) before ownership transfers.
+    discardAttachments(s, tgtPob);
     tgtPob.ownerId = owner.id;
   } else {
     attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue, attackerId, success);

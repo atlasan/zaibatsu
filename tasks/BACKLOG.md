@@ -30,7 +30,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
   - [ ] Replace provisional `IceFaces` with real per-block/pawn ICE die faces once transcribed (enables exact ICE-value modifier redundancy).
   - [ ] Multi-target Delete (split dice across co-located targets) + area attacks.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
-- [ ] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
+- [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
+  - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.
+  - [ ] Apply attached effects in resolution: armor replaces defense dice & nullifies ICE; weapon/gadget/ability/movement grants; hand-size modifiers.
 - [ ] (docs) Update domain-model + parity as each lands.
 
 ## Next (Phase 2 — full Speedrunners content)

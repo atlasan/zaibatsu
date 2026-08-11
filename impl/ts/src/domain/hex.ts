@@ -7,7 +7,7 @@
 // edge i faces grid direction i. HEX_DIRECTIONS[i] is the delta to the neighbor
 // across edge i. The neighbor's edge facing back is opposite(i).
 
-import type { PawnOnBoard } from "./pawn_board.ts";
+import type { Attachment, PawnOnBoard } from "./pawn_board.ts";
 
 export interface Coord {
   q: number;
@@ -54,6 +54,8 @@ export interface PlacedBlock {
   coord: Coord;
   /** Player controlling this block (via Icebreaker), or undefined if uncontrolled. */
   ownerId?: string;
+  /** Action cards attached to this block. */
+  attachments?: Attachment[];
 }
 
 /**

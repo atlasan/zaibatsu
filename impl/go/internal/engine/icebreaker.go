@@ -197,6 +197,9 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 	res.Success = anyMatch(res.Roll, faces)
 
 	if res.Success {
+		// Gaining control of a pawn discards its attached cards (returning any
+		// bonus counters to the previous owner) before ownership transfers.
+		discardAttachments(s, tgtPob)
 		tgtPob.OwnerID = owner.ID
 	} else {
 		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue, attackerID, res.Success)
