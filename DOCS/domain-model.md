@@ -117,8 +117,22 @@ enumerates every legal `(dir, rotation)`.
 > rules don't. Revisit if Total War's table-space rule or play experience
 > demands it.
 
-_Planned:_ pawn positions on spaces, attached cards, and placed counters on the
-board.
+**Pawns on the board:** a `PawnOnBoard` is `{ pawnId, ownerId, coord, spaceId }`.
+Each player's starting pawn is placed on the Central Core at setup. A space's pawn
+capacity is by type: normal/effect = 1, double = 2, special/pawn = unlimited
+(`SpaceCapacity`). `CanEndOn` enforces capacity (a moving pawn doesn't count
+against itself).
+
+**Movement:** `ResolveSteps` yields an activation's step budget — fixed `steps`,
+`d6`, `2d6` (seeded RNG), or `hex` (1 block) — plus cumulative modifiers, clamped
+at zero. `CanActivateMovement` gates on the activation mode (`card` /
+`once-per-turn` with a start-of-turn marker / `none`). **`MoveHex`** executes one
+block of hex movement (ignores spaces/modifiers; needs only a placed block with
+room to land). _Space-to-space stepping for `steps`/`d6`/`2d6` execution is
+deferred_ — it needs a space-adjacency graph the provisional data doesn't yet
+encode (tracked in `tasks/BACKLOG.md`); the step budget already resolves.
+
+_Planned:_ attached cards and placed counters on the board.
 
 ### Zaibatsu (player)
 - `id`, `name`, `color`

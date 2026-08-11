@@ -15,6 +15,7 @@ import {
 } from "../domain/types.ts";
 
 export * from "./placement.ts";
+export * from "./movement.ts";
 
 export interface Config {
   data: GameData;
@@ -111,7 +112,19 @@ export function newGame(cfg: Config): GameState {
   const core = centralCore(cfg.data);
   if (!core) throw new Error("no Central Core block in data");
   const cybernet = newCybernet();
-  cybernet.blocks.push({ blockId: core.id, rotation: 0, coord: { q: 0, r: 0 } });
+  const origin = { q: 0, r: 0 };
+  cybernet.blocks.push({ blockId: core.id, rotation: 0, coord: origin });
+  // Each player's starting pawn begins on the Central Core. Its (special) space
+  // has unlimited capacity, so all starting pawns share it.
+  const coreSpace = core.spaces?.[0]?.id ?? "";
+  for (const p of players) {
+    cybernet.placePawn({
+      pawnId: p.pawnId,
+      ownerId: p.id,
+      coord: origin,
+      spaceId: coreSpace,
+    });
+  }
 
   const state: GameState = {
     players,

@@ -46,6 +46,12 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Validate placement | `engine.CanPlace(...)` | `canPlace(...)` |
 | Place a block | `engine.PlaceBlock(...)` | `placeBlock(...)` |
 | Enumerate placements | `engine.ValidPlacements(...)` | `validPlacements(...)` |
+| Pawn on board | `domain.PawnOnBoard` | `PawnOnBoard` |
+| Space capacity | `domain.SpaceCapacity(type)` / `domain.Unlimited` | `spaceCapacity(type)` / `UNLIMITED` |
+| Step budget | `engine.ResolveSteps(m,rng,extra)` | `resolveSteps(m,rng,extra)` |
+| Movement gating | `engine.CanActivateMovement(p,pawn)` | `canActivateMovement(p,pawn)` |
+| End-on capacity check | `engine.CanEndOn(...)` | `canEndOn(...)` |
+| Hex movement | `engine.MoveHex(...)` | `moveHex(...)` |
 
 ## Shared, not mirrored
 
@@ -74,7 +80,10 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Win detection | ✅ | ✅ | |
 | Seeded RNG + shuffle | ✅ | ✅ | LCG, Fisher–Yates |
 | Hex model + tile placement | ✅ | ✅ | axial coords; edge-connectivity + valid-orientation (Search) |
+| Pawn positions + occupancy | ✅ | ✅ | pawns on core at setup; capacity by space type |
+| Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
+| Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
+| Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
 | Card-use resolution | ⛔ | ⛔ | backlog |
-| Movement resolution | ⛔ | ⛔ | backlog |
 | Abilities resolution | ⛔ | ⛔ | backlog |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

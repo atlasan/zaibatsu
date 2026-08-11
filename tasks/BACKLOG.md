@@ -15,8 +15,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 
 ## Now (Phase 1 — core rules resolution)
 - [x] (go/ts) Cybernet model: place blocks with hex adjacency + edge/space connectivity + valid orientation (Search). *Axial coords, `PlaceBlock`/`CanPlace`/`ValidPlacements`, Central Core seeded at origin; mirrored + tested.*
+- [x] (go/ts) Pawn positions on the board + occupancy + movement budget + hex movement. *`PawnOnBoard` on Cybernet, pawns start on core, space capacity by type, `ResolveSteps` (fixed/d6/2d6/hex+modifiers, seeded), `CanActivateMovement`, `CanEndOn`, `MoveHex`; d6 sequence verified identical across mirrors (seed 99).*
+- [ ] (spec + go/ts) **Space-adjacency schema + space-to-space movement.** Extend the block schema so each space lists intra-block neighbors and each edge maps to its boundary space(s); then execute steps/d6/2d6 movement over the space graph (pass-through vs end-on capacity, unused steps lost, no interleaving). *Currently only hex movement executes; step budgets already resolve.*
 - [ ] (spec) Add JSON-Schema validation to the loaders (or a `spec/validate` step) so bad data fails loudly, not silently.
-- [ ] (go/ts) Pawn positions on the board; movement resolution (steps / d6 / 2d6 / hex, occupancy, modifiers). *Next: pawns occupy spaces on placed blocks; build on the hex model.*
 - [ ] (go/ts) Action-card **use choice** as first-class actions (move / activate / attach / discard-to-search / discard-4-to-reboot).
 - [ ] (go/ts) Ability resolution: Search, Delete (attack roll vs defense dice), Reboot, Icebreaker (roll vs ICE, Black ICE penalty) incl. control-marker placement on Icebroken blocks.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.

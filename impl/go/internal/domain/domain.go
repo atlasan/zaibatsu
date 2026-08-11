@@ -171,6 +171,16 @@ func (gd *GameData) CentralCore() (*Block, bool) {
 	return nil, false
 }
 
+// PawnByID returns the pawn definition with the given id.
+func (gd *GameData) PawnByID(id string) (*Pawn, bool) {
+	for i := range gd.Pawns {
+		if gd.Pawns[i].ID == id {
+			return &gd.Pawns[i], true
+		}
+	}
+	return nil, false
+}
+
 // Player is a Zaibatsu — one participant.
 type Player struct {
 	ID                   string   `json:"id"`
@@ -208,4 +218,14 @@ type GameState struct {
 // CurrentPlayerPtr returns the player whose turn it is.
 func (s *GameState) CurrentPlayerPtr() *Player {
 	return s.Players[s.CurrentPlayer]
+}
+
+// PlayerByID returns the player with the given id, or nil.
+func (s *GameState) PlayerByID(id string) *Player {
+	for _, p := range s.Players {
+		if p.ID == id {
+			return p
+		}
+	}
+	return nil
 }

@@ -45,15 +45,17 @@ type PlacedBlock struct {
 	Coord    Coord  `json:"coord"`
 }
 
-// Cybernet is the growing hex layout of placed blocks. Blocks are stored in
-// placement order (deterministic iteration); lookups scan the small slice.
+// Cybernet is the growing hex layout of placed blocks and the pawns on them.
+// Both are stored in insertion order (deterministic iteration); lookups scan the
+// small slices.
 type Cybernet struct {
 	Blocks []*PlacedBlock `json:"blocks"`
+	Pawns  []*PawnOnBoard `json:"pawns"`
 }
 
 // NewCybernet returns an empty Cybernet.
 func NewCybernet() *Cybernet {
-	return &Cybernet{Blocks: []*PlacedBlock{}}
+	return &Cybernet{Blocks: []*PlacedBlock{}, Pawns: []*PawnOnBoard{}}
 }
 
 // At returns the placed block at coord c, or nil if the cell is empty.

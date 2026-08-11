@@ -134,6 +134,10 @@ export function centralCore(data: GameData): Block | undefined {
   return data.blocks.find((b) => b.isCentralCore);
 }
 
+export function pawnById(data: GameData, id: string): Pawn | undefined {
+  return data.pawns.find((p) => p.id === id);
+}
+
 export interface Player {
   id: string;
   name: string;
@@ -166,4 +170,8 @@ export interface GameState {
 
 export function currentPlayer(s: GameState): Player {
   return s.players[s.currentPlayer]!;
+}
+
+export function playerById(s: GameState, id: string): Player | undefined {
+  return s.players.find((p) => p.id === id);
 }

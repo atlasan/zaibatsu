@@ -132,11 +132,26 @@ func NewGame(cfg Config) (*domain.GameState, error) {
 		return nil, fmt.Errorf("no Central Core block in data")
 	}
 	cybernet := domain.NewCybernet()
+	origin := domain.Coord{Q: 0, R: 0}
 	cybernet.Blocks = append(cybernet.Blocks, &domain.PlacedBlock{
 		BlockID:  core.ID,
 		Rotation: 0,
-		Coord:    domain.Coord{Q: 0, R: 0},
+		Coord:    origin,
 	})
+	// Each player's starting pawn begins on the Central Core. Its (special) space
+	// has unlimited capacity, so all starting pawns share it.
+	coreSpace := ""
+	if len(core.Spaces) > 0 {
+		coreSpace = core.Spaces[0].ID
+	}
+	for _, p := range players {
+		cybernet.PlacePawn(&domain.PawnOnBoard{
+			PawnID:  p.PawnID,
+			OwnerID: p.ID,
+			Coord:   origin,
+			SpaceID: coreSpace,
+		})
+	}
 
 	state := &domain.GameState{
 		Players:       players,

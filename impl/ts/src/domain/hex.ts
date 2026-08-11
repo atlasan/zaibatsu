@@ -7,6 +7,8 @@
 // edge i faces grid direction i. HEX_DIRECTIONS[i] is the delta to the neighbor
 // across edge i. The neighbor's edge facing back is opposite(i).
 
+import type { PawnOnBoard } from "./pawn_board.ts";
+
 export interface Coord {
   q: number;
   r: number;
@@ -53,11 +55,12 @@ export interface PlacedBlock {
 }
 
 /**
- * The growing hex layout of placed blocks. Blocks are stored in placement order
- * (deterministic iteration); lookups scan the small array.
+ * The growing hex layout of placed blocks and the pawns on them. Both are stored
+ * in insertion order (deterministic iteration); lookups scan the small arrays.
  */
 export class Cybernet {
   blocks: PlacedBlock[] = [];
+  pawns: PawnOnBoard[] = [];
 
   at(c: Coord): PlacedBlock | undefined {
     return this.blocks.find((pb) => coordEqual(pb.coord, c));
@@ -65,6 +68,22 @@ export class Cybernet {
 
   occupied(c: Coord): boolean {
     return this.at(c) !== undefined;
+  }
+
+  pawnById(pawnId: string): PawnOnBoard | undefined {
+    return this.pawns.find((p) => p.pawnId === pawnId);
+  }
+
+  pawnsAt(c: Coord): PawnOnBoard[] {
+    return this.pawns.filter((p) => coordEqual(p.coord, c));
+  }
+
+  spaceOccupants(c: Coord, spaceId: string): PawnOnBoard[] {
+    return this.pawns.filter((p) => coordEqual(p.coord, c) && p.spaceId === spaceId);
+  }
+
+  placePawn(p: PawnOnBoard): void {
+    this.pawns.push(p);
   }
 }
 

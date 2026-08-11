@@ -1,0 +1,22 @@
+{
+  "status": "provisional",
+  "files": {
+    "data/speedrunners/blocks.json": {
+      "candidateSources": ["sp-en-blocks-a4", "sp-en-blocks-letter", "sp-en-rulebook"],
+      "note": "Seed fixtures only; no block record has been verified."
+    },
+    "data/speedrunners/pawns.json": {
+      "candidateSources": ["sp-en-control-cards", "sp-en-pawns", "sp-en-rulebook"],
+      "note": "Seed fixtures only; no pawn record has been verified."
+    },
+    "data/speedrunners/action-cards.json": {
+      "candidateSources": ["sp-en-action-cards", "sp-en-rulebook"],
+      "note": "Seed fixtures only; no action-card record has been verified."
+    },
+    "data/speedrunners/mode.json": {
+      "candidateSources": ["sp-en-rulebook"],
+      "note": "Opening-hand information remains an explicit rule-digest interpretation."
+    }
+  },
+  "records": {}
+}
