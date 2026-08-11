@@ -37,6 +37,13 @@
       "default": 0,
       "description": "Count of one-third bonus-icon corners on this block."
     },
+    "bonusCorners": {
+      "type": "array",
+      "description": "Visual/source layout: six clockwise corner flags. The true count must equal bonusFragments.",
+      "items": { "type": "boolean" },
+      "minItems": 6,
+      "maxItems": 6
+    },
     "spaces": {
       "type": "array",
       "items": { "$ref": "#/$defs/space" }
@@ -67,6 +74,16 @@
         "type": { "enum": ["normal", "double", "special", "pawn", "effect"] },
         "pawnId": { "type": "string" },
         "effectId": { "type": "string" },
+        "location": {
+          "type": "object",
+          "description": "Visual/source layout only: normalized position in the block crop (0..100); it does not define game movement.",
+          "required": ["x", "y"],
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 100 },
+            "y": { "type": "number", "minimum": 0, "maximum": 100 }
+          }
+        },
         "neighbors": {
           "type": "array",
           "description": "Intra-block adjacent space ids used for step movement.",

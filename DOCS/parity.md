@@ -28,6 +28,8 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Game state | `domain.GameState` | `GameState` |
 | Player | `domain.Player` | `Player` |
 | Block | `domain.Block` | `Block` |
+| Block visual layout | `Block.BoundarySpaces`, `Block.BonusCorners`, `Block.AssetRefs` | `Block.boundarySpaces`, `Block.bonusCorners`, `Block.assetRefs` |
+| Space visual location | `Space.Location` | `Space.location` |
 | Pawn | `domain.Pawn` | `Pawn` |
 | Action card | `domain.ActionCard` | `ActionCard` |
 | Phase enum | `domain.Phase*` | `Phase` |
@@ -128,7 +130,8 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
 | Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
-| Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
+| Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and normalized source positions; content/editor data only, no effect or movement resolution |
+| Space-to-space movement | blocked | blocked | backlog - needs source-verified space-adjacency data |
 | Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
 

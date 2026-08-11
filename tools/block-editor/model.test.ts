@@ -17,6 +17,16 @@ describe("block editor model", () => {
     expect(validateDocument(draft, [asset]).join(" ")).toContain("unknown space");
   });
 
+  test("validates bonus-corner count and visual space placement", () => {
+    const draft = draftForAsset(asset);
+    draft.block.bonusCorners[0] = true;
+    draft.block.bonusFragments = 0;
+    draft.block.spaces.push({ id: "space-a", type: "normal", location: { x: 101, y: 50 } });
+    const errors = validateDocument(draft, [asset]).join(" ");
+    expect(errors).toContain("Bonus fragment count");
+    expect(errors).toContain("within 0..100");
+  });
+
   test("exports an optimistic-concurrency patch", () => {
     const patch = buildPatch(draftForAsset(asset), "abc123");
     expect(patch.targetPath).toBe("spec/data/speedrunners/blocks.json");

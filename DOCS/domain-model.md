@@ -47,7 +47,9 @@ A hexagonal tile forming the Cybernet.
 - `spaces: Space[]` — the cells pawns occupy
 - `edges: bool[6]` — which of the 6 hex sides expose a connecting space (drives
   legal tile placement/orientation) _(planned use)_
-- `bonusFragments: int` — count of ⅓-bonus-icon corners (0..6) _(planned use)_
+- `bonusFragments: int` — count of one-third bonus-icon corners (0..6) _(planned use)_
+- `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. This is visual/reference data, not an effect resolver.
+- `assetRefs?: assetId[]` — source-linked physical assets resolved from the asset manifest.
 - `effects: { inCybernet?, underControl? }` — effect ids fired on placement /
   on gaining control _(planned resolution)_
 
@@ -58,6 +60,7 @@ A cell on a block.
 - `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }`
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect
+- `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.
 
 ### Pawn _(slice: identity/defense/movement/abilities/class/slots; effects planned)_
 An agent, represented by a piece (position) + control card (attributes).

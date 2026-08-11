@@ -17,9 +17,11 @@ export interface BlockRecord {
   name: string;
   expansion: Expansion;
   iceValue?: "none" | "low" | "medium" | "high" | "black";
+  bonusFragments: number;
+  bonusCorners: EdgeList;
   edges: EdgeList;
   boundarySpaces: BoundarySpaces;
-  spaces: Array<{ id: string; type: "normal" | "double" | "special" | "pawn" | "effect"; pawnId?: string; effectId?: string }>;
+  spaces: Array<{ id: string; type: "normal" | "double" | "special" | "pawn" | "effect"; pawnId?: string; effectId?: string; location?: { x: number; y: number } }>;
   assetRefs: string[];
   provisional: boolean;
 }
@@ -56,6 +58,8 @@ export function draftForAsset(asset: AssetRecord): BlockDocument {
       name: "Untranscribed block",
       expansion,
       iceValue: "none",
+      bonusFragments: 0,
+      bonusCorners: [false, false, false, false, false, false],
       edges: [false, false, false, false, false, false],
       boundarySpaces: [[], [], [], [], [], []],
       spaces: [],
@@ -77,9 +81,12 @@ export function validateDocument(document: BlockDocument, assets: AssetRecord[])
   if (!ids.has(document.source.assetId)) errors.push("Selected source asset is not in the asset manifest.");
   if (!document.block.assetRefs.includes(document.source.assetId)) errors.push("Block assetRefs must include the selected source asset.");
   if (document.block.edges.length !== 6 || document.block.boundarySpaces.length !== 6) errors.push("Blocks need exactly six edges and six boundary-space lists.");
+  if (document.block.bonusCorners.length !== 6) errors.push("Blocks need exactly six bonus-corner flags.");
+  if (document.block.bonusCorners.filter(Boolean).length !== document.block.bonusFragments) errors.push("Bonus fragment count must equal the marked bonus corners.");
   const spaceIds = new Set<string>();
   for (const space of document.block.spaces) {
     if (!validId.test(space.id) || spaceIds.has(space.id)) errors.push(`Space id '${space.id}' is invalid or duplicated.`);
+    if (space.location && (space.location.x < 0 || space.location.x > 100 || space.location.y < 0 || space.location.y > 100)) errors.push(`Space ${space.id} location must be within 0..100.`);
     spaceIds.add(space.id);
   }
   document.block.boundarySpaces.forEach((edge, index) => edge.forEach((spaceId) => {

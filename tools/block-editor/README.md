@@ -27,7 +27,7 @@ Open `http://localhost:4173`.
   Shadowraiders.
 - Shows the extracted source image alongside the selected asset/source IDs.
 - Creates and edits a source-linked block draft: identity, expansion, ICE,
-  six edges, boundary spaces, spaces JSON, and provenance.
+  visual entrances, six bonus corners, typed space placements/locations, and provenance.
 - Validates draft structure and cross-references before saving or export.
 - Saves editable sessions under ignored `.sessions/` and exports ignored
   `exports/*.patch.json` + `*.report.json` files.
@@ -44,4 +44,4 @@ bun test
 ```
 
 See [the editor plan](../../DOCS/block-editor-plan.md) for the next phases,
-including visual space geometry and resource-type plug-ins.
+including richer space topology and resource-type plug-ins.

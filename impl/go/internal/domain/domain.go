@@ -45,11 +45,19 @@ type SpaceModifier struct {
 }
 
 // Space is a cell on a block that pawns occupy.
+// SpaceLocation is a normalized visual/source position in the block crop; it has no movement semantics.
+type SpaceLocation struct {
+	X float64 `json:"x"`
+	Y float64 `json:"y"`
+}
+
+// Space is a cell on a block that pawns occupy.
 type Space struct {
 	ID       string         `json:"id"`
 	Type     string         `json:"type"`
 	PawnID   string         `json:"pawnId,omitempty"`
 	EffectID string         `json:"effectId,omitempty"`
+	Location *SpaceLocation `json:"location,omitempty"`
 	Modifier *SpaceModifier `json:"modifier,omitempty"`
 }
 
@@ -67,8 +75,11 @@ type Block struct {
 	IsCentralCore  bool         `json:"isCentralCore,omitempty"`
 	IceValue       IceValue     `json:"iceValue,omitempty"`
 	Edges          []bool       `json:"edges,omitempty"`
+	BoundarySpaces [][]string   `json:"boundarySpaces,omitempty"`
 	BonusFragments int          `json:"bonusFragments,omitempty"`
+	BonusCorners   []bool       `json:"bonusCorners,omitempty"`
 	Spaces         []Space      `json:"spaces,omitempty"`
+	AssetRefs      []string     `json:"assetRefs,omitempty"`
 	Effects        BlockEffects `json:"effects,omitempty"`
 	Provisional    bool         `json:"provisional,omitempty"`
 }

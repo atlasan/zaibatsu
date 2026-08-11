@@ -101,6 +101,15 @@ for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
   if (!Array.isArray(block?.edges) || block.edges.length !== 6 || !Array.isArray(block?.boundarySpaces) || block.boundarySpaces.length !== 6) {
     fail(`block editor document ${String(document.id)} must define six edges and six boundary-space lists`);
   }
+  if (!Array.isArray(block?.bonusCorners) || block.bonusCorners.length !== 6 || block.bonusCorners.filter((corner) => corner === true).length !== block.bonusFragments) {
+    fail(`block editor document ${String(document.id)} must keep bonus fragments aligned with six bonus corners`);
+  }
+  for (const space of (block?.spaces as Json[] | undefined) ?? []) {
+    const location = space.location as Json | undefined;
+    if (location && (!Number.isFinite(location.x) || !Number.isFinite(location.y) || (location.x as number) < 0 || (location.x as number) > 100 || (location.y as number) < 0 || (location.y as number) > 100)) {
+      fail(`block editor document ${String(document.id)} has an invalid visual space location`);
+    }
+  }
   if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) {
     fail(`block editor document ${String(document.id)} must retain its selected asset reference`);
   }

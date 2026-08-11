@@ -30,11 +30,18 @@ export interface SpaceModifier {
   amount?: number;
 }
 
+/** Normalized visual/source position in a block crop; not movement geometry. */
+export interface SpaceLocation {
+  x: number;
+  y: number;
+}
+
 export interface Space {
   id: string;
   type: SpaceType;
   pawnId?: string;
   effectId?: string;
+  location?: SpaceLocation;
   modifier?: SpaceModifier;
 }
 
@@ -50,8 +57,11 @@ export interface Block {
   isCentralCore?: boolean;
   iceValue?: IceValue;
   edges?: boolean[];
+  boundarySpaces?: string[][];
   bonusFragments?: number;
+  bonusCorners?: boolean[];
   spaces?: Space[];
+  assetRefs?: string[];
   effects?: BlockEffects;
   provisional?: boolean;
 }

@@ -13,6 +13,8 @@
         "id": "speedrunners-draft-p01-c01",
         "name": "Untranscribed Speedrunners block",
         "expansion": "speedrunners",
+        "bonusFragments": 0,
+        "bonusCorners": [false, false, false, false, false, false],
         "edges": [false, false, false, false, false, false],
         "boundarySpaces": [[], [], [], [], [], []],
         "spaces": [],
