@@ -23,6 +23,16 @@ fails closed when a grid cannot be detected or a crop falls below the configured
 confidence threshold. The detection preview and generated manifest live in
 `tmp/artifacts/`.
 
+`build` selects a detector from the catalogued source role. Regular cards use
+the grid detector. English block, pawn, and marker pages use `page-content`:
+their cut lines and irregular, edge-to-edge artwork do not yield safe
+individual rectangular cells. The pipeline records one stable `*-pNN-sheet`
+asset per printable page (`block-sheet`, `pawn-sheet`, or `marker-sheet`) and
+does not claim it is a gameplay-entity crop. A future verified override recipe
+may split a sheet into `block/<id>`, `pawn/<id>`, or marker records. Pass
+`--detector grid` or `--detector page-content` only for diagnostic work; the
+default `auto` selection is the reproducible build configuration.
+
 ## Outputs and attribution
 
 The tool emits 300-DPI PNG masters, lossless WebP derivatives, a 2048px atlas,

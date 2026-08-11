@@ -6,7 +6,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from tools.artifacts.pipeline import Crop, DetectedAsset, crop_asset, detect_crops, pack_atlas
+from tools.artifacts.pipeline import (Crop, DetectedAsset, crop_asset, detect_crops,
+                                      detect_page_content, pack_atlas)
 
 
 class PipelineTests(unittest.TestCase):
@@ -22,6 +23,14 @@ class PipelineTests(unittest.TestCase):
         crops = detect_crops(self.sheet(), min_size=30)
         self.assertEqual(6, len(crops))
         self.assertTrue(all(crop.confidence >= 0.70 for crop in crops))
+
+    def test_detects_page_content_as_one_sheet(self) -> None:
+        image = Image.new("RGB", (500, 300), "white")
+        ImageDraw.Draw(image).rectangle((25, 20, 475, 280), fill="#102030")
+        crops = detect_page_content(image, min_size=30)
+        self.assertEqual(1, len(crops))
+        self.assertEqual((25, 20, 451, 261), (crops[0].x, crops[0].y, crops[0].width, crops[0].height))
+        self.assertGreaterEqual(crops[0].confidence, 0.70)
 
     def test_crop_and_atlas(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

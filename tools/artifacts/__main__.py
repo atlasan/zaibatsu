@@ -12,9 +12,9 @@ from pathlib import Path
 
 from PIL import Image
 
-from .pipeline import (contact_sheet, crop_asset, detected_assets, detect_crops,
-                       manifest_entry, pdftoppm_path, render_pdf, source_catalog,
-                       verified_source, write_json)
+from .pipeline import (contact_sheet, crop_asset, detected_assets, detected_sheet_asset,
+                       detect_crops, detect_page_content, manifest_entry, pdftoppm_path,
+                       render_pdf, source_catalog, verified_source, write_json)
 
 
 def repo_root() -> Path:
@@ -32,6 +32,21 @@ def kind_for(role: str) -> str:
         "chaos-card": "chaos-card", "block-backs": "block-back", "card-backs": "card-back",
         "token-and-minihex-backs": "token-back",
     }.get(role, role)
+
+
+def detector_for(role: str, requested: str) -> str:
+    if requested != "auto":
+        return requested
+    if role in {"blocks-a4", "blocks-letter", "pawns", "markers"}:
+        return "page-content"
+    return "grid"
+
+
+def sheet_kind_for(role: str) -> str:
+    return {
+        "blocks-a4": "block-sheet", "blocks-letter": "block-sheet",
+        "pawns": "pawn-sheet", "markers": "marker-sheet",
+    }.get(role, f"{kind_for(role)}-sheet")
 
 
 def artifact(args: argparse.Namespace) -> tuple[Path, dict]:
@@ -60,8 +75,15 @@ def detect(args: argparse.Namespace) -> int:
     if not path.exists():
         raise FileNotFoundError(f"render page first: {path}")
     image = Image.open(path)
-    assets = detected_assets(args.artifact, args.page, kind_for(item["role"]), detect_crops(image))
+    detector = detector_for(item["role"], args.detector)
+    if detector == "grid":
+        assets = detected_assets(args.artifact, args.page, kind_for(item["role"]), detect_crops(image))
+    elif detector == "page-content":
+        assets = detected_sheet_asset(args.artifact, args.page, sheet_kind_for(item["role"]), detect_page_content(image))
+    else:
+        raise ValueError(f"unsupported detector: {detector}")
     detections = {"version": 1, "artifactId": args.artifact, "page": args.page, "renderDpi": args.dpi,
+                  "detector": detector,
                   "assets": [{"assetId": a.asset_id, "kind": a.kind, "ordinal": a.ordinal,
                               "crop": a.crop.__dict__} for a in assets]}
     base = output_root(repo) / "detections" / args.artifact
@@ -208,6 +230,7 @@ def parser() -> argparse.ArgumentParser:
     common.add_argument("--page", type=int, default=1)
     common.add_argument("--minimum-confidence", type=float, default=0.70)
     common.add_argument("--atlas-size", type=int, default=2048)
+    common.add_argument("--detector", choices=("auto", "grid", "page-content"), default="auto")
     root = argparse.ArgumentParser(description="Zaibatsu printable-artifact pipeline")
     commands = root.add_subparsers(dest="command", required=True)
     for name, func in (("render", render), ("detect", detect), ("extract", extract), ("atlas", atlas), ("build", build)):

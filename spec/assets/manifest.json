@@ -1,5 +1,631 @@
 {
+  "assets": [
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p01-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "16423ba657691c9bec69c16c81d3cdf87bfce6030466c522034987c398e2f406",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p02-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "69015c2906c49cfc2cda38c83c0a184d40adbc71d28811221455415550265c11",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p03-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2341,
+        "x": 69,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2341
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p03-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-sheet.webp"
+      },
+      "page": 3,
+      "pngSha256": "7f212c7be94033f9b96a0bb01885f51bd7ddf1f0523000a01f534f30076e56ed",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p04-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p04-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-sheet.webp"
+      },
+      "page": 4,
+      "pngSha256": "37301c591ed70ed770d6ae574b82047766b03da18e2acf71fd4127ba7560e691",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p05-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p05-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-sheet.webp"
+      },
+      "page": 5,
+      "pngSha256": "eecfbed81f4388ad187fdd4c891976cf692c16b3331435e8b1bc692609ca6395",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p06-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p06-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-sheet.webp"
+      },
+      "page": 6,
+      "pngSha256": "283e0cca0605cc9a016ed507dc01cb09638e5652062e3041dde81ea414f4326e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p07-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p07-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-sheet.webp"
+      },
+      "page": 7,
+      "pngSha256": "1e079e1823517cc53310d3d52488aff81880f6482eac7ea6928631e4debfee6e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p08-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p08-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-sheet.webp"
+      },
+      "page": 8,
+      "pngSha256": "3525f3b74c8dafd5ef90e2f27b450e46bec2f3f74675e5742780bf85bafeded5",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-markers",
+      "assetId": "sh-en-markers-p01-sheet",
+      "crop": {
+        "confidence": 0.951,
+        "height": 3140,
+        "width": 2024,
+        "x": 347,
+        "y": 80
+      },
+      "dimensions": {
+        "height": 3140,
+        "width": 2024
+      },
+      "kind": "marker-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-markers/png/sh-en-markers-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-markers/webp/sh-en-markers-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "5e6d67d6e4253ee354e41504505fcc80adeb83cf77f00792fbfb9e858d57a79e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa"
+    },
+    {
+      "artifactId": "sh-en-markers",
+      "assetId": "sh-en-markers-p02-sheet",
+      "crop": {
+        "confidence": 0.909,
+        "height": 2291,
+        "width": 1993,
+        "x": 348,
+        "y": 166
+      },
+      "dimensions": {
+        "height": 2291,
+        "width": 1993
+      },
+      "kind": "marker-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-markers/png/sh-en-markers-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-markers/webp/sh-en-markers-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "eea5497db37c213ad9387dcdc1c9339db1a73f2ed4af047adff4b37e0005a2e9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa"
+    },
+    {
+      "artifactId": "sh-en-pawns",
+      "assetId": "sh-en-pawns-p01-sheet",
+      "crop": {
+        "confidence": 0.965,
+        "height": 3094,
+        "width": 2241,
+        "x": 151,
+        "y": 103
+      },
+      "dimensions": {
+        "height": 3094,
+        "width": 2241
+      },
+      "kind": "pawn-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-pawns/png/sh-en-pawns-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "cbb1d3d5579f41d70f1c17f16baa02aeccbddc50b27e6c8bdfc467e34ea66304",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
+    },
+    {
+      "artifactId": "sh-en-pawns",
+      "assetId": "sh-en-pawns-p02-sheet",
+      "crop": {
+        "confidence": 0.945,
+        "height": 3094,
+        "width": 1969,
+        "x": 400,
+        "y": 103
+      },
+      "dimensions": {
+        "height": 3094,
+        "width": 1969
+      },
+      "kind": "pawn-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-pawns/png/sh-en-pawns-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "67a19855e73d04b47c67cf009dde582a6d6b96398b142fd1595d7694459e2db4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
+    },
+    {
+      "artifactId": "sh-en-pawns",
+      "assetId": "sh-en-pawns-p03-sheet",
+      "crop": {
+        "confidence": 0.963,
+        "height": 3088,
+        "width": 2216,
+        "x": 167,
+        "y": 106
+      },
+      "dimensions": {
+        "height": 3088,
+        "width": 2216
+      },
+      "kind": "pawn-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-pawns/png/sh-en-pawns-p03-sheet.png",
+        "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p03-sheet.webp"
+      },
+      "page": 3,
+      "pngSha256": "3cdf2d0323040250e0133d37c9284137f15c3531eac613caa7b5fa63a158e6b1",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p01-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "8a51d52b0f2d1e5f4b19c3ca658d9d0f07468634c3b150cffc073782e88d2e4d",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p02-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "9cbf2ce40ae56006ac7008de658098915bb530788df3062ae6d66af321db4e0a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p03-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p03-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-sheet.webp"
+      },
+      "page": 3,
+      "pngSha256": "2d2fd29c59f8b92efdb19b015e635ba2d67e37f6f0e64f237f84737211b6e024",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p04-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p04-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-sheet.webp"
+      },
+      "page": 4,
+      "pngSha256": "72b4dcf4ea2c16484f592a32c0423c545f3d6eea8cd80ff79cb8981da9b366e2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p05-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p05-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-sheet.webp"
+      },
+      "page": 5,
+      "pngSha256": "aed5936262e64dacadd088d50304366555f285727a83a7997e423c619b35624e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p06-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p06-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-sheet.webp"
+      },
+      "page": 6,
+      "pngSha256": "bdab5b79bbc67c632ab517460dcea7f7d562329d763b57783a284158786f8774",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p07-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p07-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-sheet.webp"
+      },
+      "page": 7,
+      "pngSha256": "1c5d6637c5cf13eb45bd970754f74653512b21545d3c5f5d63be803c47901f94",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p08-sheet",
+      "crop": {
+        "confidence": 0.979,
+        "height": 3329,
+        "width": 2340,
+        "x": 70,
+        "y": 89
+      },
+      "dimensions": {
+        "height": 3329,
+        "width": 2340
+      },
+      "kind": "block-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p08-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-sheet.webp"
+      },
+      "page": 8,
+      "pngSha256": "e8d5fc02d2cfc1cc74f6affc99975c4e46eb385aa4bbcf95c797201d5ef45d78",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-markers",
+      "assetId": "sp-en-markers-p01-sheet",
+      "crop": {
+        "confidence": 0.973,
+        "height": 3155,
+        "width": 2304,
+        "x": 123,
+        "y": 80
+      },
+      "dimensions": {
+        "height": 3155,
+        "width": 2304
+      },
+      "kind": "marker-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-markers/png/sp-en-markers-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-markers/webp/sp-en-markers-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "1fd9dfe374f4d82d49c777725ee9a4d1f5cd1b349757d7365a092704993c5e49",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66"
+    },
+    {
+      "artifactId": "sp-en-markers",
+      "assetId": "sp-en-markers-p02-sheet",
+      "crop": {
+        "confidence": 0.945,
+        "height": 3002,
+        "width": 2032,
+        "x": 170,
+        "y": 233
+      },
+      "dimensions": {
+        "height": 3002,
+        "width": 2032
+      },
+      "kind": "marker-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-markers/png/sp-en-markers-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-markers/webp/sp-en-markers-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "1031116a60bb540a7a1ffb6e2b3975c3aa037bb2788df5e1476bba1fb483ba9f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66"
+    },
+    {
+      "artifactId": "sp-en-pawns",
+      "assetId": "sp-en-pawns-p01-sheet",
+      "crop": {
+        "confidence": 0.965,
+        "height": 3094,
+        "width": 2241,
+        "x": 151,
+        "y": 103
+      },
+      "dimensions": {
+        "height": 3094,
+        "width": 2241
+      },
+      "kind": "pawn-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-pawns/png/sp-en-pawns-p01-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-pawns/webp/sp-en-pawns-p01-sheet.webp"
+      },
+      "page": 1,
+      "pngSha256": "9ba85fd509d940afccd7917004f1d7bf5cf7653d955a384d8daa9cb222c6cee9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753"
+    },
+    {
+      "artifactId": "sp-en-pawns",
+      "assetId": "sp-en-pawns-p02-sheet",
+      "crop": {
+        "confidence": 0.964,
+        "height": 3094,
+        "width": 2234,
+        "x": 158,
+        "y": 103
+      },
+      "dimensions": {
+        "height": 3094,
+        "width": 2234
+      },
+      "kind": "pawn-sheet",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-pawns/png/sp-en-pawns-p02-sheet.png",
+        "webp": "tmp/artifacts/build/sp-en-pawns/webp/sp-en-pawns-p02-sheet.webp"
+      },
+      "page": 2,
+      "pngSha256": "537714c361b7ccf351fff09b6fd78f89945630e11393a0fd2e726e5b22dfbd27",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753"
+    }
+  ],
   "manifestVersion": 1,
-  "policy": "Generated component imagery is ignored under tmp/artifacts. This tracked manifest contains only source-linked crop metadata and optional game-data references.",
-  "assets": []
+  "policy": "Generated component imagery is ignored under tmp/artifacts. This tracked manifest contains only source-linked crop metadata and optional game-data references."
 }

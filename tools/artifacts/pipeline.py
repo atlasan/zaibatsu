@@ -128,10 +128,44 @@ def detect_crops(image: Image.Image, *, threshold: int = 242, min_size: int = 48
     return boxes
 
 
+def detect_page_content(image: Image.Image, *, threshold: int = 242, min_size: int = 48) -> list[Crop]:
+    """Return one conservative crop for an edge-to-edge printable sheet.
+
+    Blocks, pawn sheets, and marker sheets deliberately pack irregular shapes
+    together. They do not have trustworthy rectangular gutters between every
+    gameplay piece, so applying the card-grid detector would invent strips
+    from interior artwork. Until a source-verified piece recipe exists, their
+    reproducible physical asset is the page's printed content.
+    """
+    gray = np.asarray(image.convert("L"), dtype=np.uint8)
+    ink = gray < threshold
+    ys, xs = np.where(ink)
+    if len(xs) == 0 or len(ys) == 0:
+        return []
+    x0, x1 = int(xs.min()), int(xs.max()) + 1
+    y0, y1 = int(ys.min()), int(ys.max()) + 1
+    width, height = x1 - x0, y1 - y0
+    if width < min_size or height < min_size:
+        return []
+    page_coverage = (width * height) / float(image.width * image.height)
+    if page_coverage < 0.20 or x0 == 0 or y0 == 0 or x1 == image.width or y1 == image.height:
+        return []
+    confidence = round(min(0.99, 0.80 + min(0.19, page_coverage * 0.20)), 3)
+    return [Crop(x0, y0, width, height, confidence)]
+
+
 def detected_assets(artifact_id: str, page: int, kind: str, crops: Iterable[Crop]) -> list[DetectedAsset]:
     ordered = sorted(crops, key=lambda crop: (crop.y, crop.x, crop.width, crop.height))
     return [DetectedAsset(f"{artifact_id}-p{page:02d}-c{i:02d}", artifact_id, page, i, kind, crop)
             for i, crop in enumerate(ordered, start=1)]
+
+
+def detected_sheet_asset(artifact_id: str, page: int, kind: str, crops: Iterable[Crop]) -> list[DetectedAsset]:
+    """Name a page-content crop as a stable, non-gameplay sheet asset."""
+    ordered = list(crops)
+    if len(ordered) != 1:
+        raise ValueError("page-content detection must produce exactly one crop")
+    return [DetectedAsset(f"{artifact_id}-p{page:02d}-sheet", artifact_id, page, 1, kind, ordered[0])]
 
 
 def contact_sheet(image: Image.Image, assets: Iterable[DetectedAsset], target: Path) -> None:
