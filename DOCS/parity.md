@@ -65,6 +65,11 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Top-of-pile block | `engine.SearchTopBlock(s)` | `searchTopBlock(s)` |
 | Valid search placements | `engine.ValidSearchPlacements(...)` | `validSearchPlacements(...)` |
 | Reboot ability | `engine.Reboot(s,gd,pawn,player)` | `reboot(s,gd,pawn,player)` |
+| Play card → Delete | `engine.PlayDelete(...)` | `playDelete(...)` |
+| Play card → Icebreak block | `engine.PlayIcebreakBlock(...)` | `playIcebreakBlock(...)` |
+| Play card → Icebreak pawn | `engine.PlayIcebreakPawn(...)` | `playIcebreakPawn(...)` |
+| Discard 1 → Search | `engine.PlaySearch(...)` | `playSearch(...)` |
+| Discard 4 → Reboot | `engine.PlayReboot(...)` | `playReboot(...)` |
 | Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
 ¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
@@ -110,8 +115,9 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
+| Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
 | Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
-| Card-use resolution | ⛔ | ⛔ | backlog |
+| Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
 
 ## Content-catalog parity

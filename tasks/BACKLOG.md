@@ -18,7 +18,10 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [x] (go/ts) Pawn positions on the board + occupancy + movement budget + hex movement. *`PawnOnBoard` on Cybernet, pawns start on core, space capacity by type, `ResolveSteps` (fixed/d6/2d6/hex+modifiers, seeded), `CanActivateMovement`, `CanEndOn`, `MoveHex`; d6 sequence verified identical across mirrors (seed 99).*
 - [ ] (spec + go/ts) **Space-adjacency schema + space-to-space movement.** Extend the block schema so each space lists intra-block neighbors and each edge maps to its boundary space(s); then execute steps/d6/2d6 movement over the space graph (pass-through vs end-on capacity, unused steps lost, no interleaving). *Currently only hex movement executes; step budgets already resolve.*
 - [ ] (spec) Add JSON-Schema validation to the loaders (or a `spec/validate` step) so bad data fails loudly, not silently.
-- [ ] (go/ts) Action-card **use choice** as first-class actions (move / activate / attach / discard-to-search / discard-4-to-reboot).
+- [~] (go/ts) Action-card **use choice** (move / activate / attach / discard-to-search / discard-4-to-reboot).
+  - [x] Activate abilities: `PlayDelete`, `PlayIcebreakBlock`/`PlayIcebreakPawn` (play a matching card), `PlaySearch` (discard 1), `PlayReboot` (discard 4). Card consumed→discard; illegal plays don't consume; verified identical across mirrors (seed 123).
+  - [ ] Activate movement by card (blocked on space-to-space movement).
+  - [ ] Attach a card to a pawn/enemy/block element (blocked on the attach system).
 - [~] (go/ts) Ability resolution (**T-104**): Search, Delete, Reboot, Icebreaker.
   - [x] Delete + combat: attack roll (1 d6/skull) vs unshielded defense dice, single-target elimination, `Eliminated` pool, once-per-turn gating. *Full pipeline verified identical across mirrors (seed 123 → roll [2,4]).*
   - [x] Icebreaker: roll d6 vs target ICE faces → gain control (block: place/steal a control marker → real win path; pawn: change owner); Black-ICE-fail eliminates the attacker. *Block control tracked on `PlacedBlock.OwnerID`; ICE faces derived from category (provisional). Identical across mirrors (seed 5 → [6], success).*
