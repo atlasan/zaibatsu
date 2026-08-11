@@ -22,8 +22,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [~] (go/ts) Ability resolution (**T-104**): Search, Delete, Reboot, Icebreaker.
   - [x] Delete + combat: attack roll (1 d6/skull) vs unshielded defense dice, single-target elimination, `Eliminated` pool, once-per-turn gating. *Full pipeline verified identical across mirrors (seed 123 → roll [2,4]).*
   - [x] Icebreaker: roll d6 vs target ICE faces → gain control (block: place/steal a control marker → real win path; pawn: change owner); Black-ICE-fail eliminates the attacker. *Block control tracked on `PlacedBlock.OwnerID`; ICE faces derived from category (provisional). Identical across mirrors (seed 5 → [6], success).*
-  - [ ] Search: draw top of block pile + place via `PlaceBlock` (wire the pile draw).
-  - [ ] Reboot: return an eliminated pawn (from the `Eliminated` pool) to the Central Core.
+  - [x] Search: draw top of block pile + place via `PlaceBlock` (`Search`, `SearchTopBlock`, `ValidSearchPlacements`; block consumed only on legal placement).
+  - [x] Reboot: return an eliminated pawn (from the `Eliminated` pool) to the Central Core under the rebooting player's control.
   - [ ] Replace provisional `IceFaces` with real per-block/pawn ICE die faces once transcribed (enables exact ICE-value modifier redundancy).
   - [ ] Multi-target Delete (split dice across co-located targets) + area attacks.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
@@ -31,6 +31,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (docs) Update domain-model + parity as each lands.
 
 ## Next (Phase 2 — full Speedrunners content)
+- [x] (spec/docs) Source-verified 2017 product inventory, mode register, rights evidence, external source register, and cataloged Shadowraiders mode provenance. Individual component records remain provisional until directly transcribed.
 - [ ] (spec) Transcribe 24 blocks from `Sp 01 Blocks` + rulebook; replace provisional blocks.
 - [ ] (spec) Transcribe 16 pawns from `Sp 02 Control Cards`; replace provisional pawns.
 - [ ] (spec) Transcribe the 54-card action deck from `Sp 03 Action Cards`.

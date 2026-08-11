@@ -61,6 +61,10 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | ICE faces (provisional) | `engine.IceFaces(ice)` | `iceFaces(ice)` |
 | Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
 | Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
+| Search ability | `engine.Search(...)` | `search(...)` |
+| Top-of-pile block | `engine.SearchTopBlock(s)` | `searchTopBlock(s)` |
+| Valid search placements | `engine.ValidSearchPlacements(...)` | `validSearchPlacements(...)` |
+| Reboot ability | `engine.Reboot(s,gd,pawn,player)` | `reboot(s,gd,pawn,player)` |
 | Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
 ¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
@@ -104,7 +108,16 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
+| Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
+| Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
-| Abilities: Search / Reboot | ⛔ | ⛔ | backlog (T-104 cont.) |
 | Card-use resolution | ⛔ | ⛔ | backlog |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
+
+## Content-catalog parity
+
+Both loaders expose the same optional `controlCards`, `threats`, `missions`, and
+`modes` collections. Missing collection files load as empty arrays, while the
+primary `mode.json` is always represented as the one-item `modes` fallback.
+
+This is data-model parity only. It intentionally does not claim implementation
