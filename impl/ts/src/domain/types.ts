@@ -2,6 +2,7 @@
 // impl/go/internal/domain. See DOCS/domain-model.md and DOCS/parity.md.
 
 import type { Rng } from "./rng.ts";
+import type { Cybernet } from "./hex.ts";
 
 export type Expansion = "speedrunners" | "shadowraiders";
 
@@ -125,6 +126,14 @@ export interface GameData {
   mode: Mode;
 }
 
+export function blockById(data: GameData, id: string): Block | undefined {
+  return data.blocks.find((b) => b.id === id);
+}
+
+export function centralCore(data: GameData): Block | undefined {
+  return data.blocks.find((b) => b.isCentralCore);
+}
+
 export interface Player {
   id: string;
   name: string;
@@ -150,6 +159,7 @@ export interface GameState {
   deck: string[];
   discard: string[];
   blockPile: string[];
+  cybernet: Cybernet;
   winnerId?: string;
   rng: Rng;
 }

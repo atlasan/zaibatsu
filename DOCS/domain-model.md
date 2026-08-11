@@ -93,9 +93,32 @@ completing grants **medals** (→ control markers) or **control of a pawn**.
 - **Medal** _(shadowraiders)_ — earned from missions; each medal = one control
   marker you may place.
 
-### Cybernet (board) _(slice: central core + placed blocks list; adjacency planned)_
-The growing hex layout: placed blocks, their positions/orientations, pawn
-positions, attached cards, and placed counters.
+### Cybernet (board) _(slice: hex model + block placement; pawn positions & attachments planned)_
+The growing hex layout of placed blocks. Model:
+- **Coord** — axial `(q, r)`. Six edge/grid directions `0..5`; `HexDirections[i]`
+  is the neighbor delta across edge `i`; `Opposite(i) = (i+3) mod 6`.
+- **PlacedBlock** — `{ blockId, rotation (0..5), coord }`. A block's *local* edge
+  `e` faces grid direction `(e + rotation) mod 6`; so the local edge exposed on
+  grid direction `d` is `(d − rotation) mod 6`, and `edgeHasSpace(block, rot, d)`
+  reads `block.edges[(d − rot) mod 6]`.
+- **Cybernet** — placed blocks in placement order (deterministic iteration);
+  `At(coord)` / `Occupied(coord)` scan the small set. Setup seeds the **Central
+  Core at `(0,0)`, rotation 0**.
+
+**Placing a block (Search), relative to a reference block:** the target cell must
+be empty and adjacent to the reference; the reference's edge facing the target
+must expose a space; and the new block, at the chosen rotation, must expose a
+space on the edge facing the reference. `ValidPlacements(refCoord, block)`
+enumerates every legal `(dir, rotation)`.
+
+> **Interpretation (documented):** the base rulebook only requires a spaced
+> connection to the *reference* block. We deliberately do **not** additionally
+> constrain the new block against other incidental neighbors it may touch — the
+> rules don't. Revisit if Total War's table-space rule or play experience
+> demands it.
+
+_Planned:_ pawn positions on spaces, attached cards, and placed counters on the
+board.
 
 ### Zaibatsu (player)
 - `id`, `name`, `color`

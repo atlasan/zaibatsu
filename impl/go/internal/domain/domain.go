@@ -151,6 +151,26 @@ type GameData struct {
 	Mode   Mode
 }
 
+// BlockByID returns the block definition with the given id.
+func (gd *GameData) BlockByID(id string) (*Block, bool) {
+	for i := range gd.Blocks {
+		if gd.Blocks[i].ID == id {
+			return &gd.Blocks[i], true
+		}
+	}
+	return nil, false
+}
+
+// CentralCore returns the single Central Core block definition.
+func (gd *GameData) CentralCore() (*Block, bool) {
+	for i := range gd.Blocks {
+		if gd.Blocks[i].IsCentralCore {
+			return &gd.Blocks[i], true
+		}
+	}
+	return nil, false
+}
+
 // Player is a Zaibatsu — one participant.
 type Player struct {
 	ID                   string   `json:"id"`
@@ -180,6 +200,7 @@ type GameState struct {
 	Deck          []string  `json:"deck"`
 	Discard       []string  `json:"discard"`
 	BlockPile     []string  `json:"blockPile"`
+	Cybernet      *Cybernet `json:"cybernet"`
 	WinnerID      string    `json:"winnerId,omitempty"`
 	RNG           *RNG      `json:"-"`
 }

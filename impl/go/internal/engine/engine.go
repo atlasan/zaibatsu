@@ -126,6 +126,18 @@ func NewGame(cfg Config) (*domain.GameState, error) {
 	blockPile := buildBlockPile(cfg.Data)
 	rng.Shuffle(blockPile)
 
+	// Seed the Cybernet with the Central Core at the origin. All pawns start here.
+	core, ok := cfg.Data.CentralCore()
+	if !ok {
+		return nil, fmt.Errorf("no Central Core block in data")
+	}
+	cybernet := domain.NewCybernet()
+	cybernet.Blocks = append(cybernet.Blocks, &domain.PlacedBlock{
+		BlockID:  core.ID,
+		Rotation: 0,
+		Coord:    domain.Coord{Q: 0, R: 0},
+	})
+
 	state := &domain.GameState{
 		Players:       players,
 		CurrentPlayer: 0,
@@ -134,6 +146,7 @@ func NewGame(cfg Config) (*domain.GameState, error) {
 		Deck:          deck,
 		Discard:       []string{},
 		BlockPile:     blockPile,
+		Cybernet:      cybernet,
 		RNG:           rng,
 	}
 

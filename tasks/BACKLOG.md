@@ -14,9 +14,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [x] Project memory (`MEMORIES/`).
 
 ## Now (Phase 1 — core rules resolution)
+- [x] (go/ts) Cybernet model: place blocks with hex adjacency + edge/space connectivity + valid orientation (Search). *Axial coords, `PlaceBlock`/`CanPlace`/`ValidPlacements`, Central Core seeded at origin; mirrored + tested.*
 - [ ] (spec) Add JSON-Schema validation to the loaders (or a `spec/validate` step) so bad data fails loudly, not silently.
-- [ ] (go/ts) Cybernet model: place blocks with hex adjacency + edge/space connectivity + valid orientation (Search).
-- [ ] (go/ts) Pawn positions on the board; movement resolution (steps / d6 / 2d6 / hex, occupancy, modifiers).
+- [ ] (go/ts) Pawn positions on the board; movement resolution (steps / d6 / 2d6 / hex, occupancy, modifiers). *Next: pawns occupy spaces on placed blocks; build on the hex model.*
 - [ ] (go/ts) Action-card **use choice** as first-class actions (move / activate / attach / discard-to-search / discard-4-to-reboot).
 - [ ] (go/ts) Ability resolution: Search, Delete (attack roll vs defense dice), Reboot, Icebreaker (roll vs ICE, Black ICE penalty) incl. control-marker placement on Icebroken blocks.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.

@@ -3,7 +3,9 @@
 // impl/go/internal/engine. See DOCS/turn-flow.md and DOCS/parity.md.
 
 import { newRng } from "../domain/rng.ts";
+import { newCybernet } from "../domain/hex.ts";
 import {
+  centralCore,
   currentPlayer,
   markersRemaining,
   type GameData,
@@ -11,6 +13,8 @@ import {
   type Mode,
   type Player,
 } from "../domain/types.ts";
+
+export * from "./placement.ts";
 
 export interface Config {
   data: GameData;
@@ -103,6 +107,12 @@ export function newGame(cfg: Config): GameState {
   const blockPile = buildBlockPile(cfg.data);
   rng.shuffle(blockPile);
 
+  // Seed the Cybernet with the Central Core at the origin. All pawns start here.
+  const core = centralCore(cfg.data);
+  if (!core) throw new Error("no Central Core block in data");
+  const cybernet = newCybernet();
+  cybernet.blocks.push({ blockId: core.id, rotation: 0, coord: { q: 0, r: 0 } });
+
   const state: GameState = {
     players,
     currentPlayer: 0,
@@ -111,6 +121,7 @@ export function newGame(cfg: Config): GameState {
     deck,
     discard: [],
     blockPile,
+    cybernet,
     rng,
   };
 

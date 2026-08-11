@@ -38,6 +38,14 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Advance one full turn | `engine.RunTurn(state, actions)` | `runTurn(state, actions)` |
 | Control markers by player count | `engine.ControlMarkersFor(n)` | `controlMarkersFor(n)` |
 | Win check | `engine.Winner(state)` | `winner(state)` |
+| Hex coordinate | `domain.Coord{Q,R}` | `Coord {q,r}` |
+| Neighbor deltas | `domain.HexDirections` | `HEX_DIRECTIONS` |
+| Neighbor / opposite | `Coord.Neighbor(dir)` / `domain.Opposite(dir)` | `neighbor(c,dir)` / `opposite(dir)` |
+| Board | `domain.Cybernet` (`Blocks []*PlacedBlock`) | `Cybernet` (`blocks: PlacedBlock[]`) |
+| Edge-space test | `engine.EdgeHasSpace(b,rot,dir)` | `edgeHasSpace(b,rot,dir)` |
+| Validate placement | `engine.CanPlace(...)` | `canPlace(...)` |
+| Place a block | `engine.PlaceBlock(...)` | `placeBlock(...)` |
+| Enumerate placements | `engine.ValidPlacements(...)` | `validPlacements(...)` |
 
 ## Shared, not mirrored
 
@@ -65,7 +73,8 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Turn loop + phases | ✅ | ✅ | |
 | Win detection | ✅ | ✅ | |
 | Seeded RNG + shuffle | ✅ | ✅ | LCG, Fisher–Yates |
+| Hex model + tile placement | ✅ | ✅ | axial coords; edge-connectivity + valid-orientation (Search) |
 | Card-use resolution | ⛔ | ⛔ | backlog |
-| Tile placement/adjacency | ⛔ | ⛔ | backlog |
+| Movement resolution | ⛔ | ⛔ | backlog |
 | Abilities resolution | ⛔ | ⛔ | backlog |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
