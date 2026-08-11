@@ -21,9 +21,10 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (go/ts) Action-card **use choice** as first-class actions (move / activate / attach / discard-to-search / discard-4-to-reboot).
 - [~] (go/ts) Ability resolution (**T-104**): Search, Delete, Reboot, Icebreaker.
   - [x] Delete + combat: attack roll (1 d6/skull) vs unshielded defense dice, single-target elimination, `Eliminated` pool, once-per-turn gating. *Full pipeline verified identical across mirrors (seed 123 → roll [2,4]).*
+  - [x] Icebreaker: roll d6 vs target ICE faces → gain control (block: place/steal a control marker → real win path; pawn: change owner); Black-ICE-fail eliminates the attacker. *Block control tracked on `PlacedBlock.OwnerID`; ICE faces derived from category (provisional). Identical across mirrors (seed 5 → [6], success).*
   - [ ] Search: draw top of block pile + place via `PlaceBlock` (wire the pile draw).
-  - [ ] Icebreaker: roll d6 vs target ICE dice → gain control (block: place a control marker; pawn: change owner); Black-ICE-fail eliminates the attacker.
   - [ ] Reboot: return an eliminated pawn (from the `Eliminated` pool) to the Central Core.
+  - [ ] Replace provisional `IceFaces` with real per-block/pawn ICE die faces once transcribed (enables exact ICE-value modifier redundancy).
   - [ ] Multi-target Delete (split dice across co-located targets) + area attacks.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
 - [ ] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.

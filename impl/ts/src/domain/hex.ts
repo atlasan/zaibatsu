@@ -52,6 +52,8 @@ export interface PlacedBlock {
   blockId: string;
   rotation: number;
   coord: Coord;
+  /** Player controlling this block (via Icebreaker), or undefined if uncontrolled. */
+  ownerId?: string;
 }
 
 /**

@@ -57,11 +57,20 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Delete ability | `engine.Delete(...)` | `deleteAbility(...)` ¹ |
 | Eliminate a pawn | `engine.` (internal `eliminatePawn`) | `eliminatePawn(...)` |
 | Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
+| Block controller | `domain.PlacedBlock.OwnerID` | `PlacedBlock.ownerId` |
+| ICE faces (provisional) | `engine.IceFaces(ice)` | `iceFaces(ice)` |
+| Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
+| Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
+| Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
 ¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
 export is `deleteAbility`. This is the only intentional name divergence; behavior
 is identical (verified: seed 123 green→yellow yields roll `[2,4]`, eliminated, on
 both sides).
+
+² Win logic lives in Go's `engine` package (internal `checkWin`, exported
+`Winner`); on the TS side it is factored into `src/engine/win.ts` (`checkWin`,
+`winner`) to avoid an import cycle with `icebreaker.ts`. Behavior is identical.
 
 ## Shared, not mirrored
 
@@ -94,7 +103,8 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
+| Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Space-to-space movement | ⛔ | ⛔ | backlog — needs space-adjacency schema |
-| Abilities: Search/Icebreaker/Reboot | ⛔ | ⛔ | backlog (T-104 cont.) |
+| Abilities: Search / Reboot | ⛔ | ⛔ | backlog (T-104 cont.) |
 | Card-use resolution | ⛔ | ⛔ | backlog |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

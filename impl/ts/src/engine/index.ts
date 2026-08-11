@@ -14,9 +14,13 @@ import {
   type Player,
 } from "../domain/types.ts";
 
+import { checkWin } from "./win.ts";
+
 export * from "./placement.ts";
 export * from "./movement.ts";
 export * from "./combat.ts";
+export * from "./icebreaker.ts";
+export { winner } from "./win.ts";
 
 export interface Config {
   data: GameData;
@@ -226,20 +230,4 @@ function recycle(s: GameState, p: Player): void {
   while (p.hand.length > p.maxHandSize) {
     s.discard.push(p.hand.pop()!);
   }
-}
-
-/** Sets winnerId for the first player who has placed all markers. */
-function checkWin(s: GameState): void {
-  if (s.winnerId) return;
-  for (const p of s.players) {
-    if (p.controlMarkersPlaced >= p.controlMarkersTotal) {
-      s.winnerId = p.id;
-      return;
-    }
-  }
-}
-
-/** Returns the winning player's id, or undefined if the game is ongoing. */
-export function winner(s: GameState): string | undefined {
-  return s.winnerId;
 }
