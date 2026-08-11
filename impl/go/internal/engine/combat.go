@@ -137,3 +137,95 @@ func eliminatePawn(s *domain.GameState, pawnID string) {
 		s.Eliminated = append(s.Eliminated, pawnID)
 	}
 }
+
+// MultiTargetResult is the outcome for one target of a multi-target Delete.
+type MultiTargetResult struct {
+	TargetPawnID string `json:"targetPawnId"`
+	Die          int    `json:"die"`
+	Eliminated   bool   `json:"eliminated"`
+}
+
+// DeleteMultiResult reports a multi-target Delete: the full roll and per-target
+// outcomes.
+type DeleteMultiResult struct {
+	Roll    []int               `json:"roll"`
+	Targets []MultiTargetResult `json:"targets"`
+}
+
+// DeleteMulti resolves a single Delete attack roll split across several co-located
+// targets — one attack die per target, in order (Speedrunners "Combat Against
+// Multiple Threats"). The attacker rolls one die per skull; the first len(targets)
+// dice are assigned one-to-one. A target is eliminated if its die matches an
+// unshielded defense die.
+//
+// SCOPE: one die per target. Concentrating multiple dice on a single tough target
+// (and area attacks) is a later refinement — tracked in tasks/BACKLOG.md.
+func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, targetIDs []string, extraSkulls int) (DeleteMultiResult, error) {
+	var res DeleteMultiResult
+	if len(targetIDs) == 0 {
+		return res, fmt.Errorf("no targets given")
+	}
+	atkPob := s.Cybernet.PawnByID(attackerID)
+	if atkPob == nil {
+		return res, fmt.Errorf("attacker %q is not on the board", attackerID)
+	}
+	atk, ok := gd.PawnByID(attackerID)
+	if !ok {
+		return res, fmt.Errorf("unknown attacker pawn %q", attackerID)
+	}
+	ability := findAbility(atk, "delete")
+	if ability == nil || ability.Activation == "none" {
+		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
+	}
+	owner := s.PlayerByID(atkPob.OwnerID)
+	if owner == nil {
+		return res, fmt.Errorf("attacker %q has no controlling player", attackerID)
+	}
+	key := abilityUsedKey("delete", attackerID)
+	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+		return res, fmt.Errorf("pawn %q already used its once-per-turn Delete this turn", attackerID)
+	}
+
+	skulls := ability.Skulls
+	if skulls < 1 {
+		skulls = 1
+	}
+	skulls += extraSkulls
+	if len(targetIDs) > skulls {
+		return res, fmt.Errorf("cannot attack %d targets with only %d skull(s)", len(targetIDs), skulls)
+	}
+
+	// Validate targets: distinct, on the board, co-located, not the attacker.
+	seen := map[string]bool{}
+	for _, tid := range targetIDs {
+		if tid == attackerID {
+			return res, fmt.Errorf("a pawn cannot Delete itself")
+		}
+		if seen[tid] {
+			return res, fmt.Errorf("target %q listed more than once", tid)
+		}
+		seen[tid] = true
+		tPob := s.Cybernet.PawnByID(tid)
+		if tPob == nil {
+			return res, fmt.Errorf("target %q is not on the board", tid)
+		}
+		if tPob.Coord != atkPob.Coord {
+			return res, fmt.Errorf("target %q is not in the same block", tid)
+		}
+	}
+
+	res.Roll = AttackRoll(s.RNG, skulls)
+	for i, tid := range targetIDs {
+		die := res.Roll[i]
+		tgt, _ := gd.PawnByID(tid)
+		eliminated := tgt != nil && Defeats([]int{die}, tgt.Defense)
+		res.Targets = append(res.Targets, MultiTargetResult{TargetPawnID: tid, Die: die, Eliminated: eliminated})
+		if eliminated {
+			eliminatePawn(s, tid)
+		}
+	}
+	if ability.Activation == "once-per-turn" {
+		owner.OncePerTurnUsed[key] = true
+	}
+	return res, nil
+}

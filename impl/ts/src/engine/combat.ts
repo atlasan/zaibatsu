@@ -112,3 +112,78 @@ export function eliminatePawn(s: GameState, pawnId: string): void {
   if (pob) discardAttachments(s, pob);
   if (s.cybernet.removePawn(pawnId)) s.eliminated.push(pawnId);
 }
+
+/** The outcome for one target of a multi-target Delete. */
+export interface MultiTargetResult {
+  targetPawnId: string;
+  die: number;
+  eliminated: boolean;
+}
+
+export interface DeleteMultiResult {
+  roll: number[];
+  targets: MultiTargetResult[];
+}
+
+/**
+ * Resolves a single Delete attack roll split across several co-located targets —
+ * one attack die per target, in order (Speedrunners "Combat Against Multiple
+ * Threats"). Rolls one die per skull; the first targets.length dice are assigned
+ * one-to-one. A target is eliminated if its die matches an unshielded defense die.
+ *
+ * SCOPE: one die per target. Concentrating multiple dice on one target (and area
+ * attacks) is a later refinement — tracked in tasks/BACKLOG.md.
+ */
+export function deleteMulti(
+  s: GameState,
+  gd: GameData,
+  attackerId: string,
+  targetIds: string[],
+  extraSkulls = 0,
+): DeleteMultiResult {
+  if (targetIds.length === 0) throw new Error("no targets given");
+  const atkPob = s.cybernet.pawnById(attackerId);
+  if (!atkPob) throw new Error(`attacker "${attackerId}" is not on the board`);
+  const atk = pawnById(gd, attackerId);
+  if (!atk) throw new Error(`unknown attacker pawn "${attackerId}"`);
+  const ability = findAbility(atk, "delete");
+  if (!ability || ability.activation === "none") {
+    throw new Error(`pawn "${attackerId}" cannot activate Delete`);
+  }
+  const owner = playerById(s, atkPob.ownerId);
+  if (!owner) throw new Error(`attacker "${attackerId}" has no controlling player`);
+  const key = abilityUsedKey("delete", attackerId);
+  if (ability.activation === "once-per-turn" && owner.oncePerTurnUsed[key]) {
+    throw new Error(`pawn "${attackerId}" already used its once-per-turn Delete this turn`);
+  }
+
+  let skulls = ability.skulls && ability.skulls >= 1 ? ability.skulls : 1;
+  skulls += extraSkulls;
+  if (targetIds.length > skulls) {
+    throw new Error(`cannot attack ${targetIds.length} targets with only ${skulls} skull(s)`);
+  }
+
+  const seen = new Set<string>();
+  for (const tid of targetIds) {
+    if (tid === attackerId) throw new Error("a pawn cannot Delete itself");
+    if (seen.has(tid)) throw new Error(`target "${tid}" listed more than once`);
+    seen.add(tid);
+    const tPob = s.cybernet.pawnById(tid);
+    if (!tPob) throw new Error(`target "${tid}" is not on the board`);
+    if (tPob.coord.q !== atkPob.coord.q || tPob.coord.r !== atkPob.coord.r) {
+      throw new Error(`target "${tid}" is not in the same block`);
+    }
+  }
+
+  const roll = attackRoll(s.rng, skulls);
+  const targets: MultiTargetResult[] = [];
+  targetIds.forEach((tid, i) => {
+    const die = roll[i]!;
+    const tgt = pawnById(gd, tid);
+    const eliminated = !!tgt && defeats([die], tgt.defense);
+    targets.push({ targetPawnId: tid, die, eliminated });
+    if (eliminated) eliminatePawn(s, tid);
+  });
+  if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
+  return { roll, targets };
+}

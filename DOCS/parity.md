@@ -55,6 +55,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Attack roll | `engine.AttackRoll(rng,skulls)` | `attackRoll(rng,skulls)` |
 | Defense-hit test | `engine.Defeats(roll,def)` | `defeats(roll,def)` |
 | Delete ability | `engine.Delete(...)` | `deleteAbility(...)` ¹ |
+| Multi-target Delete | `engine.DeleteMulti(...)` | `deleteMulti(...)` |
 | Eliminate a pawn | `engine.` (internal `eliminatePawn`) | `eliminatePawn(...)` |
 | Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
 | Block controller | `domain.PlacedBlock.OwnerID` | `PlacedBlock.ownerId` |
@@ -117,6 +118,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
+| Multi-target Delete | ✅ | ✅ | one die per co-located target (up to skull count); identical (seed 3 → roll [3,1]) |
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
