@@ -1,0 +1,17 @@
+{
+  "name": "@zaibatsu/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zaibatsu core engine — TypeScript/Bun mirror of impl/go.",
+  "module": "src/index.ts",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5"
+  }
+}

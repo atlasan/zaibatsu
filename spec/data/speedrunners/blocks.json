@@ -1,0 +1,65 @@
+{
+  "$comment": "Speedrunners information blocks. SEED DATA — provisional and incomplete. The real 24 blocks must be transcribed from 'Sp 01 Blocks' + rulebook. Tracked in tasks/BACKLOG.md.",
+  "blocks": [
+    {
+      "id": "central-core",
+      "name": "Central Core",
+      "expansion": "speedrunners",
+      "isCentralCore": true,
+      "iceValue": "none",
+      "edges": [true, true, true, true, true, true],
+      "bonusFragments": 0,
+      "spaces": [{ "id": "core", "type": "special" }],
+      "provisional": true
+    },
+    {
+      "id": "data-haven",
+      "name": "Data Haven",
+      "expansion": "speedrunners",
+      "iceValue": "low",
+      "edges": [true, false, true, true, false, true],
+      "bonusFragments": 1,
+      "spaces": [
+        { "id": "a", "type": "normal" },
+        { "id": "b", "type": "double" }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "firewall-node",
+      "name": "Firewall Node",
+      "expansion": "speedrunners",
+      "iceValue": "medium",
+      "edges": [true, true, false, true, true, false],
+      "bonusFragments": 1,
+      "spaces": [
+        { "id": "a", "type": "normal" },
+        { "id": "b", "type": "normal", "modifier": { "kind": "defense", "amount": 1 } }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "black-market",
+      "name": "Black Market",
+      "expansion": "speedrunners",
+      "iceValue": "high",
+      "edges": [true, false, true, false, true, false],
+      "bonusFragments": 1,
+      "spaces": [
+        { "id": "a", "type": "normal" },
+        { "id": "b", "type": "effect", "effectId": "sp-black-market" }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "server-farm",
+      "name": "Server Farm",
+      "expansion": "speedrunners",
+      "iceValue": "black",
+      "edges": [true, true, true, false, false, false],
+      "bonusFragments": 0,
+      "spaces": [{ "id": "a", "type": "special" }],
+      "provisional": true
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "$comment": "Speedrunners pawns. SEED DATA — provisional. The four starter Speedrunners plus a couple of recruitable pawns, with representative (not yet transcribed) stats. Real values come from 'Sp 02 Control Cards' + rulebook. Tracked in tasks/BACKLOG.md.",
+  "pawns": [
+    {
+      "id": "speedrunner-red",
+      "name": "Speedrunner (Red)",
+      "expansion": "speedrunners",
+      "isStarter": true,
+      "class": ["operative"],
+      "defense": [
+        { "value": 2, "shielded": true },
+        { "value": 4, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 3, "activation": "once-per-turn" },
+      "abilities": [
+        { "ability": "search", "activation": "card" },
+        { "ability": "delete", "activation": "card", "skulls": 1 },
+        { "ability": "icebreaker", "activation": "card" },
+        { "ability": "reboot", "activation": "card" }
+      ],
+      "slots": ["add-on", "gadget", "weapon", "armor"],
+      "provisional": true
+    },
+    {
+      "id": "speedrunner-blue",
+      "name": "Speedrunner (Blue)",
+      "expansion": "speedrunners",
+      "isStarter": true,
+      "class": ["operative"],
+      "defense": [
+        { "value": 3, "shielded": true },
+        { "value": 5, "shielded": false }
+      ],
+      "movement": { "type": "d6", "activation": "once-per-turn" },
+      "abilities": [
+        { "ability": "search", "activation": "card" },
+        { "ability": "delete", "activation": "card", "skulls": 1 },
+        { "ability": "icebreaker", "activation": "card" },
+        { "ability": "reboot", "activation": "card" }
+      ],
+      "slots": ["add-on", "gadget", "weapon", "armor"],
+      "provisional": true
+    },
+    {
+      "id": "speedrunner-green",
+      "name": "Speedrunner (Green)",
+      "expansion": "speedrunners",
+      "isStarter": true,
+      "class": ["operative"],
+      "defense": [
+        { "value": 1, "shielded": true },
+        { "value": 2, "shielded": true },
+        { "value": 6, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 2, "activation": "once-per-turn" },
+      "abilities": [
+        { "ability": "search", "activation": "card" },
+        { "ability": "delete", "activation": "card", "skulls": 2 },
+        { "ability": "icebreaker", "activation": "card" },
+        { "ability": "reboot", "activation": "card" }
+      ],
+      "slots": ["add-on", "gadget", "weapon", "armor"],
+      "provisional": true
+    },
+    {
+      "id": "speedrunner-yellow",
+      "name": "Speedrunner (Yellow)",
+      "expansion": "speedrunners",
+      "isStarter": true,
+      "class": ["operative"],
+      "defense": [
+        { "value": 4, "shielded": false },
+        { "value": 5, "shielded": false }
+      ],
+      "movement": { "type": "hex", "activation": "once-per-turn" },
+      "abilities": [
+        { "ability": "search", "activation": "card" },
+        { "ability": "delete", "activation": "card", "skulls": 1 },
+        { "ability": "icebreaker", "activation": "card" },
+        { "ability": "reboot", "activation": "card" }
+      ],
+      "slots": ["add-on", "gadget", "weapon", "armor"],
+      "provisional": true
+    },
+    {
+      "id": "drone-turret",
+      "name": "Drone Turret",
+      "expansion": "speedrunners",
+      "class": ["drone"],
+      "defense": [{ "value": 3, "shielded": true }],
+      "movement": { "type": "steps", "steps": 0, "activation": "none" },
+      "abilities": [{ "ability": "delete", "activation": "once-per-turn", "skulls": 1 }],
+      "iceValue": "low",
+      "slots": ["module"],
+      "special": "May activate abilities during any player's turn.",
+      "provisional": true
+    },
+    {
+      "id": "merc-cyberninja",
+      "name": "Cyberninja",
+      "expansion": "speedrunners",
+      "class": ["operative", "mercenary"],
+      "defense": [
+        { "value": 2, "shielded": true },
+        { "value": 3, "shielded": true },
+        { "value": 4, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 3, "activation": "once-per-turn" },
+      "abilities": [{ "ability": "delete", "activation": "card", "skulls": 3 }],
+      "iceValue": "high",
+      "slots": ["add-on", "weapon", "armor"],
+      "mercCost": 2,
+      "provisional": true
+    }
+  ]
+}

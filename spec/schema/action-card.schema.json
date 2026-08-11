@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/action-card.schema.json",
+  "title": "Action card",
+  "description": "A multi-use card from the shared action deck. One use is chosen per play; the rest are void. See DOCS/domain-model.md.",
+  "type": "object",
+  "required": ["id", "name"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "copies": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "How many identical copies of this card are in the deck."
+    },
+    "movement": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Steps granted when the card is used for movement."
+    },
+    "activates": {
+      "type": "array",
+      "items": { "enum": ["search", "delete", "reboot", "icebreaker"] },
+      "description": "Abilities this card can activate when played."
+    },
+    "attach": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "as": { "enum": ["pawn", "enemy", "block"] },
+        "slot": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] },
+        "class": { "type": "array", "items": { "type": "string" } },
+        "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach." }
+      }
+    },
+    "provisional": { "type": "boolean", "default": false }
+  }
+}

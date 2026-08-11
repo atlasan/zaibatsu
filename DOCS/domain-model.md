@@ -1,0 +1,126 @@
+# Domain model
+
+Canonical description of the entities both implementations model. When this doc
+and the code disagree, this doc is what we intend; fix the code or fix the doc,
+never leave them diverged.
+
+Legend: fields marked _(slice)_ exist in the current bootstrap slice; fields
+marked _(planned)_ are modeled in the schema/docs but not yet fully resolved by
+the engine.
+
+---
+
+## Enumerations
+
+- **Expansion**: `speedrunners` | `shadowraiders`
+- **Phase**: `beginning` | `action` | `recycle` | `end`
+- **Ability**: `search` | `delete` | `reboot` | `icebreaker`
+- **Activation**: `card` (played via action card) | `once-per-turn` (free) | `none` (cannot activate)
+- **IceValue**: `none` | `low` (3 dice) | `medium` (2 dice) | `high` (1 die) | `black`
+- **SpaceType**: `normal` (1 pawn) | `double` (2 pawns) | `special` (unlimited) | `pawn` (specific pawn's home) | `effect`
+- **SpaceModifier**: `defense` | `hand-size` | `attack`
+- **SlotType**: `add-on` | `gadget` | `weapon` | `armor` | `module` | `mission`
+- **MovementType**: `steps` (fixed N) | `d6` | `2d6` | `hex` (one whole block)
+- **Class** (non-exhaustive, data-driven): `operative`, `drone`, `bot`, `cyborg`,
+  `lovedoll`, `cyberdeck`, `malware`, `trade-secret`, `explosive`, `brainchip`,
+  `hazard`, `accelerator`, `e-synapse`, `bomb`, `mercenary`, `shadowraider`, …
+- **ThreatType** _(shadowraiders)_: `drone` | `token` | `mark` | `chaos`
+
+## Value objects
+
+- **DefenseDie**: `{ value: 1..6, shielded: bool }`. A pawn's defense is a set of
+  these. An attack die value that matches an **unshielded** die eliminates the
+  pawn; a match on a **shielded** die is blocked.
+- **AttackRoll**: N six-sided dice, one per **skull icon** on the Delete ability.
+- **AttackDie** _(shadowraiders)_: a *fixed* attack value (4, 5, or 6) carried by
+  threats.
+
+---
+
+## Entities
+
+### Block (information block / hex tile) _(slice: id/name/ice/spaces/core; effects planned)_
+A hexagonal tile forming the Cybernet.
+- `id`, `name`, `expansion`
+- `isCentralCore: bool` — the Central Core (and Shadowraiders' Central Core 02)
+- `iceValue: IceValue` — defense vs Icebreaker; `none` means uncontrollable
+- `spaces: Space[]` — the cells pawns occupy
+- `edges: bool[6]` — which of the 6 hex sides expose a connecting space (drives
+  legal tile placement/orientation) _(planned use)_
+- `bonusFragments: int` — count of ⅓-bonus-icon corners (0..6) _(planned use)_
+- `effects: { inCybernet?, underControl? }` — effect ids fired on placement /
+  on gaining control _(planned resolution)_
+
+### Space
+A cell on a block.
+- `id`, `type: SpaceType`
+- `capacity` — derived from type (normal 1, double 2, special/pawn ∞)
+- `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }`
+- `pawnId?` — for `pawn` spaces, the pawn that belongs there
+- `effectId?` — for `effect` spaces, optional activatable effect
+
+### Pawn _(slice: identity/defense/movement/abilities/class/slots; effects planned)_
+An agent, represented by a piece (position) + control card (attributes).
+- `id`, `name`, `expansion`, `class: Class[]`
+- `defense: DefenseDie[]`
+- `movement: { type: MovementType, steps?: int, activation: Activation }`
+- `abilities: { ability: Ability, activation: Activation, skulls?: int, modifiers?: … }[]`
+- `iceValue?: IceValue` — if present, the pawn can be Icebroken/taken over
+- `slots: SlotType[]` — attachment slots the pawn exposes
+- `special?: string` — free-text special ability (resolved case-by-case)
+- _(shadowraiders)_ `blackIce?: bool`, `mercCost?: int`, `missionSlot?: bool`
+
+### ActionCard _(slice: identity + attach metadata; use-resolution planned)_
+A card from the shared action deck. **Multi-use**: when played, the controller
+chooses exactly one use; the others are void.
+- `id`, `name`
+- `movement?: int` — steps it can grant when used for movement
+- `activates?: Ability[]` — abilities it can activate when played
+- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[], grants?: {…}, cost?: int }`
+
+### MissionCard _(shadowraiders, planned)_
+Attached to a pawn's mission slot; tracks state via tags (mark/cargo/counter);
+completing grants **medals** (→ control markers) or **control of a pawn**.
+
+### Counters
+- **ControlMarker** — a player's claim on a block/mission. **Placing all of
+  yours is the win condition.** Count per player set at setup by player count.
+- **BonusCounter** — currency to pay card costs; returned to owner, never lost.
+  _(shadowraiders: **ThreatToken** replaces BonusCounter and is interchangeable
+  in Total War mode.)_
+- **StartOfTurnMarker** — marks a once-per-turn ability as spent; all of a
+  player's are cleared in their `beginning` phase.
+- **Medal** _(shadowraiders)_ — earned from missions; each medal = one control
+  marker you may place.
+
+### Cybernet (board) _(slice: central core + placed blocks list; adjacency planned)_
+The growing hex layout: placed blocks, their positions/orientations, pawn
+positions, attached cards, and placed counters.
+
+### Zaibatsu (player)
+- `id`, `name`, `color`
+- `controlMarkersTotal`, `controlMarkersPlaced`
+- `bonusCounters: int`
+- `hand: cardId[]`, `maxHandSize` (default 5)
+- controlled pawns / blocks / missions
+
+### GameState
+- `players: Zaibatsu[]`, `currentPlayerIndex`, `turn`, `phase`
+- `cybernet`, `deck: cardId[]`, `discard: cardId[]`, `blockPile: blockId[]`
+- `common` (uncontrolled control cards), `reserve` (unused pieces)
+- `rng` (seeded), `winnerId?`
+
+---
+
+## Setup constants (Speedrunners)
+
+- Control markers per player by player count: **2p→10, 3p→8, 4p→6**.
+- Default max hand size: **5**.
+- Opening hand deal is asymmetric (starting player gets fewer). The exact table
+  is transcribed provisionally as p1→3, p2→4, p3→5, p4→6; see
+  `DOCS/rules/speedrunners.md`. After turn 1 everyone draws to max normally.
+
+## Win condition
+
+A player wins the instant they have placed **all** of their control markers in
+the Cybernet (`controlMarkersPlaced == controlMarkersTotal`).

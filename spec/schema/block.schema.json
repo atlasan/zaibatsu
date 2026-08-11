@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/block.schema.json",
+  "title": "Information block",
+  "description": "A hexagonal Cybernet tile. See DOCS/domain-model.md.",
+  "type": "object",
+  "required": ["id", "name", "expansion"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "expansion": { "enum": ["speedrunners", "shadowraiders"] },
+    "isCentralCore": { "type": "boolean", "default": false },
+    "iceValue": {
+      "enum": ["none", "low", "medium", "high", "black"],
+      "default": "none",
+      "description": "low=3 dice, medium=2, high=1, black=Black ICE"
+    },
+    "edges": {
+      "type": "array",
+      "description": "Six hex sides; true = the side exposes a connecting space.",
+      "items": { "type": "boolean" },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "bonusFragments": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "default": 0,
+      "description": "Count of one-third bonus-icon corners on this block."
+    },
+    "spaces": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/space" }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inCybernet": { "type": "string", "description": "Effect id fired on placement." },
+        "underControl": { "type": "string", "description": "Effect id fired on gaining control." }
+      }
+    },
+    "provisional": { "type": "boolean", "default": false }
+  },
+  "$defs": {
+    "space": {
+      "type": "object",
+      "required": ["id", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "enum": ["normal", "double", "special", "pawn", "effect"] },
+        "pawnId": { "type": "string" },
+        "effectId": { "type": "string" },
+        "modifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "enum": ["defense", "hand-size", "attack"] },
+            "amount": { "type": "integer" }
+          }
+        }
+      }
+    }
+  }
+}

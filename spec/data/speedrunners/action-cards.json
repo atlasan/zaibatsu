@@ -1,0 +1,12 @@
+{
+  "$comment": "Speedrunners action deck. SEED DATA — provisional. The real deck is 54 cards ('Sp 03 Action Cards'); this seed uses representative cards with copy counts to exercise the deck/hand/draw machinery. Tracked in tasks/BACKLOG.md.",
+  "cards": [
+    { "id": "move-1", "name": "Uplink", "copies": 6, "movement": 1, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
+    { "id": "move-2", "name": "Fast Uplink", "copies": 6, "movement": 2, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
+    { "id": "move-3", "name": "Overclock", "copies": 4, "movement": 3, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
+    { "id": "add-on-accelerator", "name": "Accelerator", "copies": 2, "movement": 1, "activates": ["search"], "attach": { "as": "pawn", "slot": "add-on", "class": ["accelerator"] }, "provisional": true },
+    { "id": "weapon-gunhed", "name": "Gunhed", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "pawn", "slot": "weapon" }, "provisional": true },
+    { "id": "armor-brainchip", "name": "Brainchip", "copies": 2, "movement": 1, "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "armor", "class": ["brainchip"] }, "provisional": true },
+    { "id": "enemy-malware", "name": "Malware", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "enemy", "slot": "add-on", "class": ["malware"] }, "provisional": true }
+  ]
+}

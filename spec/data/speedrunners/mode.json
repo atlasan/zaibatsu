@@ -1,0 +1,13 @@
+{
+  "$comment": "The base Speedrunners game mode. See DOCS/rules/speedrunners.md. startingHand is provisional (see rulebook note).",
+  "id": "speedrunners",
+  "name": "Speedrunners",
+  "expansions": ["speedrunners"],
+  "players": { "min": 2, "max": 4 },
+  "controlMarkers": { "2": 10, "3": 8, "4": 6, "default": 8 },
+  "maxHandSize": 5,
+  "startingHand": [3, 4, 5, 6],
+  "win": ["all-control-markers-placed"],
+  "lose": [],
+  "notes": "First to place all control markers in the Cybernet wins."
+}

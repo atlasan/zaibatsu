@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/mode.schema.json",
+  "title": "Game mode",
+  "description": "A playable mode = config + setup recipe + end conditions over the shared core. See DOCS/rules and DOCS/roadmap.md (Phase 4).",
+  "type": "object",
+  "required": ["id", "name", "players", "controlMarkers"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "expansions": {
+      "type": "array",
+      "items": { "enum": ["speedrunners", "shadowraiders"] },
+      "description": "Which component sets this mode draws from."
+    },
+    "players": {
+      "type": "object",
+      "required": ["min", "max"],
+      "additionalProperties": false,
+      "properties": {
+        "min": { "type": "integer", "minimum": 1 },
+        "max": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "controlMarkers": {
+      "type": "object",
+      "description": "Control markers per player, keyed by player count (string) with a 'default'.",
+      "additionalProperties": { "type": "integer", "minimum": 1 }
+    },
+    "maxHandSize": { "type": "integer", "minimum": 1, "default": 5 },
+    "startingHand": {
+      "type": "array",
+      "description": "Opening (asymmetric) deal by seat order; index 0 = starting player.",
+      "items": { "type": "integer", "minimum": 0 }
+    },
+    "win": { "type": "array", "items": { "type": "string" }, "description": "Win-condition ids." },
+    "lose": { "type": "array", "items": { "type": "string" }, "description": "Lose-condition ids." },
+    "notes": { "type": "string" }
+  }
+}
