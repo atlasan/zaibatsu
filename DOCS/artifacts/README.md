@@ -34,3 +34,13 @@ BoardGameGeek is supporting metadata only.
 
 The English 2017 rulebooks state CC BY-NC 2.5 MX at p. 2. The source sheets and
 art remain ignored even when their license permits non-commercial sharing:
+only checksum-pinned source identifiers and structured derivatives are tracked.
+
+## Derived asset pipeline
+
+The [artifact toolset](toolset.md) renders and crops printable PDF sheets into
+ignored local PNG/WebP masters and deterministic atlases. Its tracked
+`spec/assets/manifest.json` records crop geometry, source hashes, output hashes,
+and optional gameplay references; it never embeds original PDFs or artwork.
+
+Run `python -m tools.artifacts verify` alongside the existing source verifier.

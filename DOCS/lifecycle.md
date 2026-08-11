@@ -68,3 +68,12 @@ tracked by task `T-101`.
 before individual component transcription. Such evidence is recorded as
 `cataloged` provenance, never as a verified component record. Run
 `bun tools/validate-spec.ts` to validate the inventory, its source locators,
+and component evidence.
+
+## Derived assets
+
+The artifact pipeline may create a tracked `spec/assets/manifest.json` entry
+only after its source PDF passes catalog checksum validation. It records a
+render DPI, page, stable automatic crop ID, crop geometry, and output hashes.
+The PNG/WebP crops and atlas files remain ignored. A `gameplayRef` may be added
+only when its matching content record has record-level provenance; an asset

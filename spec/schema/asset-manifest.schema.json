@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/asset-manifest.schema.json",
+  "title": "Zaibatsu asset manifest",
+  "type": "object",
+  "required": ["manifestVersion", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "manifestVersion": { "const": 1 },
+    "policy": { "type": "string" },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": ["assetId", "artifactId", "page", "kind", "role", "renderDpi", "sourceSha256", "crop", "dimensions", "pngSha256", "outputs"],
+      "additionalProperties": false,
+      "properties": {
+        "assetId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "artifactId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "kind": { "type": "string" },
+        "role": { "enum": ["face", "back", "token"] },
+        "renderDpi": { "type": "integer", "minimum": 72 },
+        "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "crop": { "$ref": "#/$defs/crop" },
+        "dimensions": { "$ref": "#/$defs/dimensions" },
+        "pngSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "gameplayRef": { "type": "string", "pattern": "^(block|pawn|action-card|control-card|threat|mission)/[a-z0-9-]+$" },
+        "outputs": {
+          "type": "object",
+          "required": ["png", "webp"],
+          "additionalProperties": false,
+          "properties": { "png": { "type": "string" }, "webp": { "type": "string" } }
+        }
+      }
+    },
+    "crop": {
+      "type": "object",
+      "required": ["x", "y", "width", "height", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 }, "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 }, "height": { "type": "integer", "minimum": 1 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "dimensions": {
+      "type": "object", "required": ["width", "height"], "additionalProperties": false,
+      "properties": { "width": { "type": "integer", "minimum": 1 }, "height": { "type": "integer", "minimum": 1 } }
+    }
+  }
+}

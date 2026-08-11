@@ -35,6 +35,12 @@
         "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach." }
       }
     },
+    "assetRefs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true,
+      "description": "Physical asset ids resolved through spec/assets/manifest.json."
+    },
     "provisional": { "type": "boolean", "default": false }
   }
 }

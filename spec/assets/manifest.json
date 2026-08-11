@@ -1,0 +1,5 @@
+{
+  "manifestVersion": 1,
+  "policy": "Generated component imagery is ignored under tmp/artifacts. This tracked manifest contains only source-linked crop metadata and optional game-data references.",
+  "assets": []
+}

@@ -18,3 +18,10 @@ is transcribed, add its evidence here in the same change that removes its
 `cataloged` is valid only for source-verified inventory or mode facts. It does
 not mean every physical component has been transcribed. A component record is
 `verified` only after its English primary locator and Spanish cross-check are
+recorded together.
+
+Asset provenance is complementary: `spec/assets/manifest.json` binds a physical
+crop to an artifact/page/hash, while `spec/provenance/` binds the game-data
+record to its source locator. Add `gameplayRef` only when both records identify
+the same printed component. Generated crop IDs may remain source-page/cell IDs
+until the game component is transcribed.

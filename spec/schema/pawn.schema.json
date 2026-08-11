@@ -40,6 +40,12 @@
       "description": "One of the drawable starting pawns (Speedrunner/Shadowraider)."
     },
     "mercCost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to recruit (mercenary)." },
+    "assetRefs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true,
+      "description": "Physical asset ids resolved through spec/assets/manifest.json."
+    },
     "provisional": { "type": "boolean", "default": false }
   },
   "$defs": {
