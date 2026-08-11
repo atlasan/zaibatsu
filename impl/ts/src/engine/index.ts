@@ -20,6 +20,7 @@ export * from "./placement.ts";
 export * from "./movement.ts";
 export * from "./combat.ts";
 export * from "./icebreaker.ts";
+export * from "./abilities.ts";
 export { winner } from "./win.ts";
 
 export interface Config {
