@@ -24,8 +24,22 @@
         "renderDpi": { "type": "integer", "minimum": 72 },
         "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
         "crop": { "$ref": "#/$defs/crop" },
-        "dimensions": { "$ref": "#/$defs/dimensions" },
+        "mask": {
+      "type": "object", "required": ["kind", "points"], "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "polygon" },
+        "points": {
+          "type": "array", "minItems": 3,
+          "items": {
+            "type": "object", "required": ["x", "y"], "additionalProperties": false,
+            "properties": { "x": { "type": "integer", "minimum": 0 }, "y": { "type": "integer", "minimum": 0 } }
+          }
+        }
+      }
+    },
+    "dimensions": { "$ref": "#/$defs/dimensions" },
         "pngSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "mask": { "$ref": "#/$defs/mask" },
         "gameplayRef": { "type": "string", "pattern": "^(block|pawn|action-card|control-card|threat|mission)/[a-z0-9-]+$" },
         "outputs": {
           "type": "object",
@@ -43,6 +57,19 @@
         "x": { "type": "integer", "minimum": 0 }, "y": { "type": "integer", "minimum": 0 },
         "width": { "type": "integer", "minimum": 1 }, "height": { "type": "integer", "minimum": 1 },
         "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "mask": {
+      "type": "object", "required": ["kind", "points"], "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "polygon" },
+        "points": {
+          "type": "array", "minItems": 3,
+          "items": {
+            "type": "object", "required": ["x", "y"], "additionalProperties": false,
+            "properties": { "x": { "type": "integer", "minimum": 0 }, "y": { "type": "integer", "minimum": 0 } }
+          }
+        }
       }
     },
     "dimensions": {

@@ -24,14 +24,28 @@ confidence threshold. The detection preview and generated manifest live in
 `tmp/artifacts/`.
 
 `build` selects a detector from the catalogued source role. Regular cards use
-the grid detector. English block, pawn, and marker pages use `page-content`:
-their cut lines and irregular, edge-to-edge artwork do not yield safe
-individual rectangular cells. The pipeline records one stable `*-pNN-sheet`
-asset per printable page (`block-sheet`, `pawn-sheet`, or `marker-sheet`) and
-does not claim it is a gameplay-entity crop. A future verified override recipe
-may split a sheet into `block/<id>`, `pawn/<id>`, or marker records. Pass
-`--detector grid` or `--detector page-content` only for diagnostic work; the
-default `auto` selection is the reproducible build configuration.
+the grid detector. Both English block PDFs use the source-layout `block-hex`
+cutter: it produces three individual, polygon-masked `*-pNN-cNN` block assets
+per page (24 for Speedrunners and 24 for Shadowraiders). English pawn and
+marker pages use `page-content`, because their irregular, edge-to-edge artwork
+does not yet yield safe individual rectangular cells. Those sources remain one
+stable `*-pNN-sheet` physical asset per printable page. Block assets and
+pawn/marker sheets do not claim a gameplay-entity reference until the source
+mapping is verified. Pass `--detector grid`, `--detector block-hex`, or
+`--detector page-content` only for diagnostic work; the default `auto`
+selection is the reproducible build configuration.
+
+Refresh both English games in one command (render, cut, atlas, promote, and
+verify):
+
+```powershell
+.\tools\refresh-artifacts.ps1
+# If Poppler is not on PATH:
+.\tools\refresh-artifacts.ps1 -Pdftoppm C:\path\to\pdftoppm.exe
+```
+
+The wrapper delegates to `python -m tools.artifacts refresh-core`; use that
+command directly on non-Windows systems.
 
 ## Outputs and attribution
 

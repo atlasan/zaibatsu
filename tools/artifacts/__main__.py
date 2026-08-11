@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image
 
 from .pipeline import (contact_sheet, crop_asset, detected_assets, detected_sheet_asset,
-                       detect_crops, detect_page_content, manifest_entry, pdftoppm_path,
+                       detect_block_hex_assets, detect_crops, detect_page_content, manifest_entry, pdftoppm_path,
                        render_pdf, source_catalog, verified_source, write_json)
 
 
@@ -37,7 +37,9 @@ def kind_for(role: str) -> str:
 def detector_for(role: str, requested: str) -> str:
     if requested != "auto":
         return requested
-    if role in {"blocks-a4", "blocks-letter", "pawns", "markers"}:
+    if role in {"blocks-a4", "blocks-letter"}:
+        return "block-hex"
+    if role in {"pawns", "markers"}:
         return "page-content"
     return "grid"
 
@@ -47,6 +49,12 @@ def sheet_kind_for(role: str) -> str:
         "blocks-a4": "block-sheet", "blocks-letter": "block-sheet",
         "pawns": "pawn-sheet", "markers": "marker-sheet",
     }.get(role, f"{kind_for(role)}-sheet")
+
+
+CORE_ARTIFACTS = (
+    "sp-en-blocks-a4", "sp-en-pawns", "sp-en-markers",
+    "sh-en-blocks-a4", "sh-en-pawns", "sh-en-markers",
+)
 
 
 def artifact(args: argparse.Namespace) -> tuple[Path, dict]:
@@ -78,6 +86,8 @@ def detect(args: argparse.Namespace) -> int:
     detector = detector_for(item["role"], args.detector)
     if detector == "grid":
         assets = detected_assets(args.artifact, args.page, kind_for(item["role"]), detect_crops(image))
+    elif detector == "block-hex":
+        assets = detect_block_hex_assets(args.artifact, args.page, image)
     elif detector == "page-content":
         assets = detected_sheet_asset(args.artifact, args.page, sheet_kind_for(item["role"]), detect_page_content(image))
     else:
@@ -85,7 +95,8 @@ def detect(args: argparse.Namespace) -> int:
     detections = {"version": 1, "artifactId": args.artifact, "page": args.page, "renderDpi": args.dpi,
                   "detector": detector,
                   "assets": [{"assetId": a.asset_id, "kind": a.kind, "ordinal": a.ordinal,
-                              "crop": a.crop.__dict__} for a in assets]}
+                              "crop": a.crop.__dict__,
+                              **({"mask": [[x, y] for x, y in a.mask]} if a.mask is not None else {})} for a in assets]}
     base = output_root(repo) / "detections" / args.artifact
     write_json(base / f"page-{args.page}.json", detections)
     contact_sheet(image, assets, base / f"page-{args.page}.png")
@@ -109,11 +120,12 @@ def extract(args: argparse.Namespace) -> int:
         crop = Crop(**raw["crop"])
         if crop.confidence < args.minimum_confidence:
             raise ValueError(f"low-confidence crop {raw['assetId']} ({crop.confidence})")
-        asset = DetectedAsset(raw["assetId"], args.artifact, args.page, raw["ordinal"], raw["kind"], crop)
+        mask = tuple(tuple(point) for point in raw["mask"]) if "mask" in raw else None
+        asset = DetectedAsset(raw["assetId"], args.artifact, args.page, raw["ordinal"], raw["kind"], crop, mask)
         out = output_root(repo) / "build" / args.artifact
         png = out / "png" / f"{asset.asset_id}.png"
         webp = out / "webp" / f"{asset.asset_id}.webp"
-        digest, size = crop_asset(image, crop, png, webp)
+        digest, size = crop_asset(image, crop, png, webp, asset.mask)
         records.append(manifest_entry(asset, args.dpi, item["sha256"], digest, size, Path("tmp/artifacts/build") / args.artifact))
     manifest_path = output_root(repo) / "build" / args.artifact / "manifest.json"
     existing = json.loads(manifest_path.read_text(encoding="utf-8"))["assets"] if manifest_path.exists() else []
@@ -167,6 +179,8 @@ def promote(args: argparse.Namespace) -> int:
     tracked_path = repo / "spec" / "assets" / "manifest.json"
     tracked = json.loads(tracked_path.read_text(encoding="utf-8"))
     generated = json.loads(generated_path.read_text(encoding="utf-8"))
+    if getattr(args, "replace_artifact", False):
+        tracked["assets"] = [entry for entry in tracked["assets"] if entry["artifactId"] != args.artifact]
     existing = {entry["assetId"] for entry in tracked["assets"]}
     duplicates = existing.intersection(entry["assetId"] for entry in generated["assets"])
     if duplicates:
@@ -175,6 +189,18 @@ def promote(args: argparse.Namespace) -> int:
     write_json(tracked_path, tracked)
     print(f"promoted {len(generated['assets'])} source-linked asset records")
     return 0
+
+def refresh_core(args: argparse.Namespace) -> int:
+    """Rebuild and replace the tracked core English asset contracts."""
+    for artifact_id in CORE_ARTIFACTS:
+        args.artifact = artifact_id
+        build(args)
+        args.replace_artifact = True
+        promote(args)
+    verify(argparse.Namespace(require_outputs=True))
+    print(f"refreshed {len(CORE_ARTIFACTS)} core printable artifacts")
+    return 0
+
 
 def verify(args: argparse.Namespace) -> int:
     repo = repo_root()
@@ -230,14 +256,23 @@ def parser() -> argparse.ArgumentParser:
     common.add_argument("--page", type=int, default=1)
     common.add_argument("--minimum-confidence", type=float, default=0.70)
     common.add_argument("--atlas-size", type=int, default=2048)
-    common.add_argument("--detector", choices=("auto", "grid", "page-content"), default="auto")
+    common.add_argument("--detector", choices=("auto", "grid", "block-hex", "page-content"), default="auto")
     root = argparse.ArgumentParser(description="Zaibatsu printable-artifact pipeline")
     commands = root.add_subparsers(dest="command", required=True)
     for name, func in (("render", render), ("detect", detect), ("extract", extract), ("atlas", atlas), ("build", build)):
         sub = commands.add_parser(name, parents=[common])
         sub.set_defaults(func=func)
     promote_parser = commands.add_parser("promote", parents=[common])
+    promote_parser.add_argument("--replace-artifact", action="store_true")
     promote_parser.set_defaults(func=promote)
+    refresh_common = argparse.ArgumentParser(add_help=False)
+    refresh_common.add_argument("--dpi", type=int, default=300)
+    refresh_common.add_argument("--pdftoppm")
+    refresh_common.add_argument("--minimum-confidence", type=float, default=0.70)
+    refresh_common.add_argument("--atlas-size", type=int, default=2048)
+    refresh_common.add_argument("--detector", choices=("auto", "grid", "block-hex", "page-content"), default="auto")
+    refresh_parser = commands.add_parser("refresh-core", parents=[refresh_common])
+    refresh_parser.set_defaults(func=refresh_core)
     verify_parser = commands.add_parser("verify")
     verify_parser.add_argument("--require-outputs", action="store_true")
     verify_parser.set_defaults(func=verify)

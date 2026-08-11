@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from tools.artifacts.pipeline import (Crop, DetectedAsset, crop_asset, detect_crops,
-                                      detect_page_content, pack_atlas)
+                                      detect_block_hex_assets, detect_page_content, pack_atlas)
 
 
 class PipelineTests(unittest.TestCase):
@@ -31,6 +31,13 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(1, len(crops))
         self.assertEqual((25, 20, 451, 261), (crops[0].x, crops[0].y, crops[0].width, crops[0].height))
         self.assertGreaterEqual(crops[0].confidence, 0.70)
+
+    def test_detects_three_masked_block_hexes(self) -> None:
+        image = Image.new("RGB", (2481, 3508), "white")
+        assets = detect_block_hex_assets("sp-en-blocks-a4", 1, image)
+        self.assertEqual(3, len(assets))
+        self.assertEqual("sp-en-blocks-a4-p01-c01", assets[0].asset_id)
+        self.assertTrue(all(asset.mask is not None and len(asset.mask) == 6 for asset in assets))
 
     def test_crop_and_atlas(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

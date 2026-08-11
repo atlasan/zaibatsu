@@ -2,200 +2,1296 @@
   "assets": [
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p01-sheet",
+      "assetId": "sh-en-blocks-a4-p01-c01",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p01-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p01-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c01.webp"
       },
       "page": 1,
-      "pngSha256": "16423ba657691c9bec69c16c81d3cdf87bfce6030466c522034987c398e2f406",
+      "pngSha256": "8b5dfe73299a7f4b7aeb4991d080b1178a697ee2e47eb2e1052686544b9fbb38",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p02-sheet",
+      "assetId": "sh-en-blocks-a4-p01-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p02-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p01-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "405f1e71f863d4c7dd3e2f3592c87f0e31d5df93428754d0542e7193b30f204a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p01-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "5f1c977ea8f6f25a125f0a3a7ab30032cf19961ccc2311e4467f1e6542a4a3b2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p02-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c01.webp"
       },
       "page": 2,
-      "pngSha256": "69015c2906c49cfc2cda38c83c0a184d40adbc71d28811221455415550265c11",
+      "pngSha256": "e88a09b0fbd33a2036f6c20a8f09e65f141454c2b0398a07d0b579c8896a9a39",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p03-sheet",
+      "assetId": "sh-en-blocks-a4-p02-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2341,
-        "x": 69,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2341
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p03-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p02-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "8f3e5fe0547e0d781f3336a0238c0c5518872dcbf3a107a639b0d40947e53a40",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p02-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "f0beb46c8f4c6bc984ff02e37f1644d69072f47b83ee9595fc3a63b900d5c662",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p03-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p03-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c01.webp"
       },
       "page": 3,
-      "pngSha256": "7f212c7be94033f9b96a0bb01885f51bd7ddf1f0523000a01f534f30076e56ed",
+      "pngSha256": "18b4dc70c40b1781d9c9d3f7312a49cfafcf71f268791a3f059ed5393466c239",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p04-sheet",
+      "assetId": "sh-en-blocks-a4-p03-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p04-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p03-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c02.webp"
+      },
+      "page": 3,
+      "pngSha256": "b23c92394fbf25afc8d69d97700d6d6b08b4f083f5af4b5b33a0c287143e94f2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p03-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p03-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c03.webp"
+      },
+      "page": 3,
+      "pngSha256": "1374f19f5a79a426168732799e9cc15507bac9aa4a69fbed24d48e551fa3d9bd",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p04-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p04-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c01.webp"
       },
       "page": 4,
-      "pngSha256": "37301c591ed70ed770d6ae574b82047766b03da18e2acf71fd4127ba7560e691",
+      "pngSha256": "614a3be96f94029c84fd49387171f8d703f0415714bafe0c0ed019368555fdf7",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p05-sheet",
+      "assetId": "sh-en-blocks-a4-p04-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p05-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p04-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c02.webp"
+      },
+      "page": 4,
+      "pngSha256": "159b75de1b33f9c229516773b9eeff8720070db31bd349da3f2d5e0140873c37",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p04-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p04-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c03.webp"
+      },
+      "page": 4,
+      "pngSha256": "1973ab222cb4cc9e3b7e32b2f3347fafb6112e878cdd8acd5aa3e5e2efd29bf4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p05-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p05-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c01.webp"
       },
       "page": 5,
-      "pngSha256": "eecfbed81f4388ad187fdd4c891976cf692c16b3331435e8b1bc692609ca6395",
+      "pngSha256": "1642abef6a292fd37a0beb39c0460b371d690da6197b5669ac3f16c1e366af32",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p06-sheet",
+      "assetId": "sh-en-blocks-a4-p05-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p06-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p05-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c02.webp"
+      },
+      "page": 5,
+      "pngSha256": "c5ea2e3d8fe66931c29d95284f2cc6d6638303405294e5e263104728eccf1839",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p05-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p05-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c03.webp"
+      },
+      "page": 5,
+      "pngSha256": "35f4eee66776e13f05122858cec684e5e2ab995c2be4c496b2d3e98c4d20e399",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p06-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p06-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c01.webp"
       },
       "page": 6,
-      "pngSha256": "283e0cca0605cc9a016ed507dc01cb09638e5652062e3041dde81ea414f4326e",
+      "pngSha256": "f147bfe190aa4c6936c57f10de15fc3b863a990f26546864fcd473124a1ad0d6",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p07-sheet",
+      "assetId": "sh-en-blocks-a4-p06-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p07-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p06-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c02.webp"
+      },
+      "page": 6,
+      "pngSha256": "f425b23f3c309d876a42cfd0a5d939a83470209e4a1fb2ad5301215dc5111687",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p06-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p06-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c03.webp"
+      },
+      "page": 6,
+      "pngSha256": "8a436e0efe21f6ef0068bde33bac05381cc22b9bb199ac838c2d8fe5c7377e00",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p07-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p07-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c01.webp"
       },
       "page": 7,
-      "pngSha256": "1e079e1823517cc53310d3d52488aff81880f6482eac7ea6928631e4debfee6e",
+      "pngSha256": "68825d39d489e0e9585237f8069ed56abe9bf1a4611d2dcf5dce1e408851d40b",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
       "artifactId": "sh-en-blocks-a4",
-      "assetId": "sh-en-blocks-a4-p08-sheet",
+      "assetId": "sh-en-blocks-a4-p07-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p08-sheet.png",
-        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-sheet.webp"
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p07-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c02.webp"
+      },
+      "page": 7,
+      "pngSha256": "80025ef75cf5e50cb1556cb171fef480499904536347fe69ebaf8cb2789e585e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p07-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p07-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c03.webp"
+      },
+      "page": 7,
+      "pngSha256": "74dadf3951314e3dad00b5c0d9e142f0ab66dfa6155bf81ac0eb948372d2b2c1",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p08-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p08-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c01.webp"
       },
       "page": 8,
-      "pngSha256": "3525f3b74c8dafd5ef90e2f27b450e46bec2f3f74675e5742780bf85bafeded5",
+      "pngSha256": "ca674cd7c5182b027ea700ed100dc08666484565f0a94b3efad896b0e24c8150",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p08-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p08-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c02.webp"
+      },
+      "page": 8,
+      "pngSha256": "1714809516ce26aeee3381b0df15c3a30593205d75c2c6fbc99202889ac1fae9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
+    },
+    {
+      "artifactId": "sh-en-blocks-a4",
+      "assetId": "sh-en-blocks-a4-p08-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-blocks-a4/png/sh-en-blocks-a4-p08-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c03.webp"
+      },
+      "page": 8,
+      "pngSha256": "25a79bae31bfc5635f13fefbe8597d0ea1db694273df0b09196c601a861c0699",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -327,200 +1423,1296 @@
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p01-sheet",
+      "assetId": "sp-en-blocks-a4-p01-c01",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c01.webp"
       },
       "page": 1,
-      "pngSha256": "8a51d52b0f2d1e5f4b19c3ca658d9d0f07468634c3b150cffc073782e88d2e4d",
+      "pngSha256": "b631e73c9faee7c08b59433d977f1761d5819e737d77d03a23a43917781ce9cb",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p02-sheet",
+      "assetId": "sp-en-blocks-a4-p01-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p02-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "8e26d17284bd70ddc895163d89ca8b6367cd2d6534e0f050d50e26f20fecb9a0",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "fdf1c75b5604599fda20ad17077a007e5bbab083b5c4c2a6dabdebbda2098f40",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p02-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c01.webp"
       },
       "page": 2,
-      "pngSha256": "9cbf2ce40ae56006ac7008de658098915bb530788df3062ae6d66af321db4e0a",
+      "pngSha256": "306112f7598151bf9b4c66142dbb905bcc3773cf7b831638e0116074a020e17f",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p03-sheet",
+      "assetId": "sp-en-blocks-a4-p02-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p03-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p02-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "2007a947fbcb06aa03b12ae4167fd696c73390442c01c650f121b28058c22582",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p02-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "29f8c923ea6f85958d5a972d900f5699840a647098f24126c05e282e76f3260b",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p03-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p03-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c01.webp"
       },
       "page": 3,
-      "pngSha256": "2d2fd29c59f8b92efdb19b015e635ba2d67e37f6f0e64f237f84737211b6e024",
+      "pngSha256": "328998d3900c97569bca0dc3deb3b5d0a57b6ea32cc02d3e25e65f33381a3b04",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p04-sheet",
+      "assetId": "sp-en-blocks-a4-p03-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p04-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p03-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c02.webp"
+      },
+      "page": 3,
+      "pngSha256": "04bc6470958e76009fb8b68b680336abdbe3d1451c9f7ea17d826293ac089acc",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p03-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p03-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c03.webp"
+      },
+      "page": 3,
+      "pngSha256": "44ae4c553fb07b9c3c57f9c06f841712970254614c96447fbb9193472f81d4f7",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p04-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p04-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c01.webp"
       },
       "page": 4,
-      "pngSha256": "72b4dcf4ea2c16484f592a32c0423c545f3d6eea8cd80ff79cb8981da9b366e2",
+      "pngSha256": "14ed836a2c7749beb92967e281f46ac39eb5b422bc0237589258924a39d2bf77",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p05-sheet",
+      "assetId": "sp-en-blocks-a4-p04-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p05-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p04-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c02.webp"
+      },
+      "page": 4,
+      "pngSha256": "10855389ea085b0ef4b292d7774e20e69dd9ecded9d516c5f2de4a6e128e2ac9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p04-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p04-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c03.webp"
+      },
+      "page": 4,
+      "pngSha256": "ea1fc8757ef4a179e7a961cc0895497d7888a91ab0d8617855948fc21023c597",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p05-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p05-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c01.webp"
       },
       "page": 5,
-      "pngSha256": "aed5936262e64dacadd088d50304366555f285727a83a7997e423c619b35624e",
+      "pngSha256": "03ba06b367acf4c402d3e6d683be59d7d8d4f2fadfb1ce8cef323733f4088137",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p06-sheet",
+      "assetId": "sp-en-blocks-a4-p05-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p06-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p05-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c02.webp"
+      },
+      "page": 5,
+      "pngSha256": "648763976c839352864890137ff58495b9f43f55c6b27d61b29beb2f3246eaf6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p05-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p05-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c03.webp"
+      },
+      "page": 5,
+      "pngSha256": "7f1ad4466eea08fd3b33d9dfe7af91c2277a8c163ec431d3b856d2577a56b40a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p06-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p06-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c01.webp"
       },
       "page": 6,
-      "pngSha256": "bdab5b79bbc67c632ab517460dcea7f7d562329d763b57783a284158786f8774",
+      "pngSha256": "5840c3deceed4deae2bf69771e05c6589057b8ce24776fcc646049bf2cb253c7",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p07-sheet",
+      "assetId": "sp-en-blocks-a4-p06-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p07-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p06-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c02.webp"
+      },
+      "page": 6,
+      "pngSha256": "93ba6d3d36f9dbb3f769c633eb7853caadd56bfb460a7f99dcc539be8afd53f6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p06-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p06-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c03.webp"
+      },
+      "page": 6,
+      "pngSha256": "df598f9fd8269beaafb93e7851f80ca5e14e1baca151bbe9a65415016c9d5ae3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p07-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p07-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c01.webp"
       },
       "page": 7,
-      "pngSha256": "1c5d6637c5cf13eb45bd970754f74653512b21545d3c5f5d63be803c47901f94",
+      "pngSha256": "332ef755aa6bc86e0e63e7e5e9b868eedbcad2e02a166cf2ab09b2350070ea53",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
     },
     {
       "artifactId": "sp-en-blocks-a4",
-      "assetId": "sp-en-blocks-a4-p08-sheet",
+      "assetId": "sp-en-blocks-a4-p07-c02",
       "crop": {
-        "confidence": 0.979,
-        "height": 3329,
-        "width": 2340,
-        "x": 70,
-        "y": 89
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
       },
       "dimensions": {
-        "height": 3329,
-        "width": 2340
+        "height": 1499,
+        "width": 1300
       },
-      "kind": "block-sheet",
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
       "outputs": {
-        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p08-sheet.png",
-        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-sheet.webp"
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p07-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c02.webp"
+      },
+      "page": 7,
+      "pngSha256": "487ed7797a33dd2fe3f6b1b4547946980815a112f9c64195de2960478cf84bb9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p07-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p07-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c03.webp"
+      },
+      "page": 7,
+      "pngSha256": "eea6460ec672a74c105a372bc5e18dac5f106a44e2fe5a445c16d9c68472349a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p08-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 84
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p08-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c01.webp"
       },
       "page": 8,
-      "pngSha256": "e8d5fc02d2cfc1cc74f6affc99975c4e46eb385aa4bbcf95c797201d5ef45d78",
+      "pngSha256": "e7c7cfb7b545767bacc0b7fb70c99cfed456e8e484770c15f3029d5b8cbce078",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p08-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 1047,
+        "y": 1004
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p08-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c02.webp"
+      },
+      "page": 8,
+      "pngSha256": "9d1c9ee1cdec4f6229b2d39de9bbe14aefb38cbce5090f0eaad9d0ea2394b7a0",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-blocks-a4",
+      "assetId": "sp-en-blocks-a4-p08-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1499,
+        "width": 1300,
+        "x": 65,
+        "y": 1924
+      },
+      "dimensions": {
+        "height": 1499,
+        "width": 1300
+      },
+      "kind": "block",
+      "mask": {
+        "kind": "polygon",
+        "points": [
+          {
+            "x": 650,
+            "y": 6
+          },
+          {
+            "x": 1294,
+            "y": 378
+          },
+          {
+            "x": 1294,
+            "y": 1121
+          },
+          {
+            "x": 650,
+            "y": 1493
+          },
+          {
+            "x": 6,
+            "y": 1121
+          },
+          {
+            "x": 6,
+            "y": 378
+          }
+        ]
+      },
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p08-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c03.webp"
+      },
+      "page": 8,
+      "pngSha256": "25fd3d43db62e84b5f6f1ef68b2b98890e2d07e27bdcfc37268d58bfde324f81",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"

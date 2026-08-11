@@ -32,6 +32,7 @@ class DetectedAsset:
     ordinal: int
     kind: str
     crop: Crop
+    mask: tuple[tuple[int, int], ...] | None = None
 
 
 def read_json(path: Path) -> dict:
@@ -160,6 +161,38 @@ def detected_assets(artifact_id: str, page: int, kind: str, crops: Iterable[Crop
             for i, crop in enumerate(ordered, start=1)]
 
 
+def detect_block_hex_assets(artifact_id: str, page: int, image: Image.Image) -> list[DetectedAsset]:
+    """Extract the three cut-line hex blocks printed on an A4/Letter block page.
+
+    Both English editions use this documented repeating print layout. The crop
+    geometry is derived from the source page coordinate system instead of
+    fragile artwork density, while the polygon mask follows the cut line so
+    overlapping hex bounding rectangles never retain their neighbours.
+    """
+    page_width, page_height = 595.2756, 841.8898
+    x_scale, y_scale = image.width / page_width, image.height / page_height
+    slots = ((17.0923, 21.5153), (252.7648, 242.3488), (17.0923, 463.2049))
+    block_width, block_height = 309.1150, 356.9349
+    right_top, right_bottom = 89.2338, 267.7012
+    padding = max(2, round(min(x_scale, y_scale) * 1.5))
+    assets: list[DetectedAsset] = []
+    for ordinal, (x, y) in enumerate(slots, start=1):
+        x0, y0 = round(x * x_scale), round(y * y_scale)
+        width, height = round(block_width * x_scale), round(block_height * y_scale)
+        crop = Crop(x0 - padding, y0 - padding, width + padding * 2, height + padding * 2, 0.99)
+        mask = (
+            (round(width / 2) + padding, padding),
+            (width + padding, round(right_top * y_scale) + padding),
+            (width + padding, round(right_bottom * y_scale) + padding),
+            (round(width / 2) + padding, height + padding),
+            (padding, round(right_bottom * y_scale) + padding),
+            (padding, round(right_top * y_scale) + padding),
+        )
+        assets.append(DetectedAsset(f"{artifact_id}-p{page:02d}-c{ordinal:02d}", artifact_id,
+                                    page, ordinal, "block", crop, mask))
+    return assets
+
+
 def detected_sheet_asset(artifact_id: str, page: int, kind: str, crops: Iterable[Crop]) -> list[DetectedAsset]:
     """Name a page-content crop as a stable, non-gameplay sheet asset."""
     ordered = list(crops)
@@ -179,10 +212,15 @@ def contact_sheet(image: Image.Image, assets: Iterable[DetectedAsset], target: P
     preview.save(target, "PNG")
 
 
-def crop_asset(image: Image.Image, crop: Crop, png_path: Path, webp_path: Path) -> tuple[str, tuple[int, int]]:
+def crop_asset(image: Image.Image, crop: Crop, png_path: Path, webp_path: Path,
+               mask: tuple[tuple[int, int], ...] | None = None) -> tuple[str, tuple[int, int]]:
     if crop.x < 0 or crop.y < 0 or crop.x + crop.width > image.width or crop.y + crop.height > image.height:
         raise ValueError("crop is outside rendered page bounds")
     extracted = image.crop((crop.x, crop.y, crop.x + crop.width, crop.y + crop.height)).convert("RGBA")
+    if mask is not None:
+        alpha = Image.new("L", extracted.size, 0)
+        ImageDraw.Draw(alpha).polygon(mask, fill=255)
+        extracted.putalpha(alpha)
     png_path.parent.mkdir(parents=True, exist_ok=True)
     webp_path.parent.mkdir(parents=True, exist_ok=True)
     extracted.save(png_path, "PNG", optimize=True)
@@ -223,7 +261,7 @@ def pack_atlas(images: list[tuple[str, Path]], target_dir: Path, max_size: int =
 
 
 def manifest_entry(asset: DetectedAsset, dpi: int, source_sha256: str, png_hash: str, size: tuple[int, int], output_root: Path) -> dict:
-    return {
+    entry = {
         "assetId": asset.asset_id,
         "artifactId": asset.artifact_id,
         "page": asset.page,
@@ -239,3 +277,6 @@ def manifest_entry(asset: DetectedAsset, dpi: int, source_sha256: str, png_hash:
             "webp": str(output_root / "webp" / f"{asset.asset_id}.webp").replace("\\", "/"),
         },
     }
+    if asset.mask is not None:
+        entry["mask"] = {"kind": "polygon", "points": [{"x": x, "y": y} for x, y in asset.mask]}
+    return entry
