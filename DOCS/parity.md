@@ -77,6 +77,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Attach to enemy pawn | `engine.AttachToEnemy(...)` | `attachToEnemy(...)` |
 | Attach to block | `engine.AttachToBlock(...)` | `attachToBlock(...)` |
 | Effective classes | `engine.EffectivePawnClasses(...)` | `effectivePawnClasses(...)` |
+| Canonical state snapshot | `engine.Snapshot(state)` | `snapshot(state)` |
 | Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
 ¹ **Naming exception:** `delete` is a reserved word in JavaScript, so the TS
@@ -113,6 +114,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Setup + marker counts | ✅ | ✅ | |
 | Turn loop + phases | ✅ | ✅ | |
 | Unified action reducer | ✅ | ✅ | `Apply` dispatches every ability/card/attach action; `RunTurn` drives a turn; identical (seed 123 delete) |
+| Canonical snapshot + golden games | ✅ | ✅ | byte-identical snapshots; both mirrors assert the SAME `golden/*.snap` fixtures (whole-game + combat scenario) |
 | Win detection | ✅ | ✅ | |
 | Seeded RNG + shuffle | ✅ | ✅ | LCG, Fisher–Yates |
 | Hex model + tile placement | ✅ | ✅ | axial coords; edge-connectivity + valid-orientation (Search) |

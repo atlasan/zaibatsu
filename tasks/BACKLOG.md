@@ -45,7 +45,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (spec) Transcribe the 54-card action deck from `Sp 03 Action Cards`.
 - [ ] (spec) Transcribe the 18 control cards.
 - [ ] (go/ts) Effect registry keyed by effect id; implement every block/pawn/card effect.
-- [ ] (go/ts) Golden-game tests: scripted games with asserted end states, cross-checked between mirrors.
+- [x] (go/ts) Golden-game tests: canonical `Snapshot(state)` (byte-identical across mirrors) + shared `golden/*.snap` fixtures that BOTH mirrors assert against (seed-42 whole game + seed-7 combat scenario). Whole-state cross-mirror equivalence check. Add scenarios as coverage grows.
 - [ ] Resolve the opening-hand deal ambiguity against the physical rulebook (currently provisional p1→3,p2→4,p3→5,p4→6).
 
 ## Later (Phase 3 — Shadowraiders expansion)
