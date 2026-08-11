@@ -115,8 +115,9 @@ def _edge_mid_normal(center, verts, i):
 
 
 def detect_edges(bgr: np.ndarray, center, verts, inr: int) -> list[bool]:
-    """An edge is a PASSAGE unless a black wall blocks it. Sample points along the
-    edge span (pulled just inside the tile); a substantial black run => wall."""
+    """An edge is a PASSAGE where a space opens onto the middle of the edge; it is
+    a WALL where a solid dark frame blocks it. Sample only the middle stretch of
+    the edge (a space touches the edge near its midpoint) just inside the tile."""
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
     h, w = gray.shape
     cx, cy = center
@@ -124,62 +125,87 @@ def detect_edges(bgr: np.ndarray, center, verts, inr: int) -> list[bool]:
     for i in range(6):
         ax, ay = verts[i]
         bx, by = verts[(i + 1) % 6]
-        blacks = []
-        for t in np.linspace(0.16, 0.84, 17):
+        light = black = n = 0
+        for t in np.linspace(0.32, 0.68, 13):  # middle ~36% of the edge
             ex, ey = ax + (bx - ax) * t, ay + (by - ay) * t
-            px = int(cx + (ex - cx) * 0.90)
-            py = int(cy + (ey - cy) * 0.90)
+            px = int(cx + (ex - cx) * 0.88)
+            py = int(cy + (ey - cy) * 0.88)
             if 0 <= px < w and 0 <= py < h:
-                blacks.append(gray[py, px] < 70)
-        frac = float(np.mean(blacks)) if blacks else 1.0
-        out.append(bool(frac < 0.30))  # mostly-black edge => wall
+                g = int(gray[py, px])
+                n += 1
+                light += g > 120
+                black += g < 60
+        if n == 0:
+            out.append(False)
+            continue
+        out.append(bool(light / n >= 0.30 and black / n < 0.55))
     return out
 
 
 def detect_bonus_corners(bgr: np.ndarray, center, verts) -> list[bool]:
-    """A bonus-zone corner is a WHITE corner: three hexes meeting at a shared
-    vertex with white corners form a bonus zone. Detect strong white near each
-    vertex (pulled inward so the transparent outside is excluded)."""
+    """A bonus-zone corner is a WHITE corner tip (three hexes meeting at white
+    corners form a bonus zone). Sample a SMALL patch right at the corner tip and
+    require it to be dominantly white — avoids false positives from white art
+    (dice/text/rings) nearer the tile interior."""
     h, w = bgr.shape[:2]
     cx, cy = center
     out = []
     for vx, vy in verts:
-        px, py = int(cx + (vx - cx) * 0.80), int(cy + (vy - cy) * 0.80)
-        x0, y0 = px - 55, py - 55
-        patch = bgr[max(0, y0):min(h, y0 + 110), max(0, x0):min(w, x0 + 110)]
+        px, py = int(cx + (vx - cx) * 0.90), int(cy + (vy - cy) * 0.90)
+        x0, y0 = px - 34, py - 34
+        patch = bgr[max(0, y0):min(h, y0 + 68), max(0, x0):min(w, x0 + 68)]
         if patch.size == 0:
             out.append(False)
             continue
-        white = (patch[:, :, 0] > 205) & (patch[:, :, 1] > 205) & (patch[:, :, 2] > 205)
-        out.append(bool(white.mean() > 0.30))
+        white = (patch[:, :, 0] > 210) & (patch[:, :, 1] > 210) & (patch[:, :, 2] > 210)
+        out.append(bool(white.mean() > 0.45))
     return out
 
 
-def _hough(gray, inr, minr, maxr, p2, mindist) -> list[tuple]:
-    c = cv2.HoughCircles(
-        gray, cv2.HOUGH_GRADIENT, dp=1.0, minDist=int(inr * mindist),
-        param1=140, param2=p2, minRadius=int(inr * minr), maxRadius=int(inr * maxr),
-    )
-    return [] if c is None else [(float(x), float(y), float(r)) for x, y, r in c[0]]
+def _white_mask(bgr: np.ndarray) -> np.ndarray:
+    m = cv2.inRange(bgr, (195, 195, 195), (255, 255, 255))
+    return cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
+
+
+def _ring_whiteness(white: np.ndarray, x: float, y: float, r: float) -> float:
+    """Fraction of a circle's circumference that lies on a white line."""
+    h, w = white.shape
+    hits = tot = 0
+    for a in range(0, 360, 12):
+        px = int(x + r * math.cos(math.radians(a)))
+        py = int(y + r * math.sin(math.radians(a)))
+        if 0 <= px < w and 0 <= py < h:
+            tot += 1
+            hits += 1 if white[py, px] > 0 else 0
+    return hits / tot if tot else 0.0
 
 
 def detect_spaces(bgr: np.ndarray, center, inr: int) -> list[Space]:
-    """Detect circular/round space slots across a wide size range (Hough at two
-    scales), then non-max-suppress overlaps (spaces shouldn't heavily collide).
-    Big circles and pills are captured as circles. Assistive; verify via overlay."""
-    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    """Cells are outlined by WHITE lines (a hex grid marks the spaces). Detect
+    circles on the white mask, then keep only those whose circumference actually
+    lies on a white ring — this rejects decorative art that isn't a cell. Strong
+    non-max-suppression avoids overlap; pills are approximated by a circle.
+    Assistive; verify via overlay."""
     cx, cy = center
-    # two passes: normal spaces, and big/bigger circles
-    cands = _hough(gray, inr, 0.12, 0.42, 66, 0.34)
-    cands += _hough(gray, inr, 0.42, 0.92, 60, 0.5)
-    # prefer larger, then greedy NMS on center distance vs radius
-    cands.sort(key=lambda c: -c[2])
+    white = _white_mask(bgr)
+    c = cv2.HoughCircles(
+        white, cv2.HOUGH_GRADIENT, dp=1.0, minDist=int(inr * 0.4),
+        param1=100, param2=40, minRadius=int(inr * 0.13), maxRadius=int(inr * 0.62),
+    )
+    scored: list[tuple] = []
+    if c is not None:
+        for x, y, r in c[0]:
+            if (x - cx) ** 2 + (y - cy) ** 2 > (inr * 0.9) ** 2:
+                continue
+            wr = max(_ring_whiteness(white, x, y, rr) for rr in (r - 7, r, r + 7))
+            if wr < 0.30:  # must be backed by a white cell outline
+                continue
+            scored.append((float(x), float(y), float(r)))
+    scored.sort(key=lambda t: -t[2])  # keep the larger of overlapping detections
     kept: list[Space] = []
     picks: list[tuple] = []
-    for x, y, r in cands:
-        if (x - cx) ** 2 + (y - cy) ** 2 > (inr * 0.96) ** 2:
-            continue
-        if any(math.hypot(x - px, y - py) < 0.6 * (r + pr) for px, py, pr in picks):
+    for x, y, r in scored:
+        if any(math.hypot(x - px, y - py) < 0.7 * max(r, pr) for px, py, pr in picks):
             continue
         picks.append((x, y, r))
         kept.append(Space(

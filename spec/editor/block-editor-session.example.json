@@ -1,0 +1,39 @@
+{
+  "sessionVersion": 1,
+  "projectId": "zaibatsu-block-editor",
+  "assetManifestPath": "spec/assets/manifest.json",
+  "documents": [
+    {
+      "id": "sp-draft-p01-c01",
+      "resourceType": "block",
+      "title": "Speedrunners page 1, cut block 1",
+      "status": "draft",
+      "source": { "assetId": "sp-en-blocks-a4-p01-c01" },
+      "block": {
+        "id": "speedrunners-draft-p01-c01",
+        "name": "Untranscribed Speedrunners block",
+        "expansion": "speedrunners",
+        "edges": [false, false, false, false, false, false],
+        "boundarySpaces": [[], [], [], [], [], []],
+        "spaces": [],
+        "assetRefs": ["sp-en-blocks-a4-p01-c01"],
+        "provisional": true
+      },
+      "provenance": {
+        "primaryArtifactId": "sp-en-blocks-a4",
+        "page": 1,
+        "locator": "cut block c01; draft requires direct transcription before verification",
+        "notes": "Example session only; not canonical game data."
+      },
+      "annotations": ["Confirm title, ICE, spaces, edges, bonuses, and effects from source."]
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-08-12T00:00:00Z",
+      "operation": "create",
+      "documentId": "sp-draft-p01-c01",
+      "summary": "Example draft created from a source-linked cut block asset."
+    }
+  ]
+}

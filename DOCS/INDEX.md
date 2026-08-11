@@ -13,6 +13,7 @@ before changing a cross-cutting rule or artifact.
 | Lifecycle | [lifecycle.md](lifecycle.md) | Required evidence from source to shipped behavior |
 | Decisions | [adr/](adr/) | Long-lived architecture decisions |
 | Sources and audit | [artifacts/](artifacts/) | Ignored-original catalog and coverage record |
+| Content editor | [block-editor-plan.md](block-editor-plan.md) | Standalone source-linked content-authoring plan |
 
 The local upstream assets live under `DOCS/Original/`. They are deliberately
 ignored by Git; their identities and checksums are recorded in

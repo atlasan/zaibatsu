@@ -1,0 +1,73 @@
+const app = document.querySelector("#app");
+const state = { assets: [], drafts: [], selectedAssetId: null, sessionName: "block-drafts", notice: "Loading source-linked block assets…", validation: [] };
+
+const escape = (value = "") => String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+const titleFor = (asset) => `${asset.assetId.startsWith("sp-") ? "Speedrunners" : "Shadowraiders"} · page ${asset.page} · ${asset.assetId.split("-").at(-1)}`;
+const selectedAsset = () => state.assets.find((asset) => asset.assetId === state.selectedAssetId) ?? state.assets[0];
+const selectedDraft = () => state.drafts.find((draft) => draft.source.assetId === state.selectedAssetId);
+const blankDraft = (asset) => ({
+  id: `${asset.assetId}-draft`, resourceType: "block", title: titleFor(asset), status: "draft",
+  source: { assetId: asset.assetId },
+  block: { id: `${asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners"}-draft-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed block", expansion: asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners", iceValue: "none", edges: [false, false, false, false, false, false], boundarySpaces: [[], [], [], [], [], []], spaces: [], assetRefs: [asset.assetId], provisional: true },
+  provenance: { primaryArtifactId: asset.artifactId, page: asset.page, locator: `cut block ${asset.assetId.split("-").at(-1)}`, notes: "" }, annotations: []
+});
+const ensureDraft = () => {
+  const asset = selectedAsset(); if (!asset) return null;
+  let draft = selectedDraft();
+  if (!draft) { draft = blankDraft(asset); state.drafts.push(draft); }
+  return draft;
+};
+const api = async (path, options = {}) => { const response = await fetch(path, options); const data = await response.json(); if (!response.ok) throw new Error(data.error ?? data.errors?.join(" ") ?? "Request failed"); return data; };
+
+function render() {
+  const asset = selectedAsset(); const draft = selectedDraft();
+  const speed = state.assets.filter((item) => item.assetId.startsWith("sp-"));
+  const shadow = state.assets.filter((item) => item.assetId.startsWith("sh-"));
+  app.innerHTML = `
+    <header class="topbar"><div><span class="eyebrow">LOCAL CONTENT AUTHORING</span><h1>Zaibatsu <em>Block Editor</em></h1></div><div class="status"><span class="pulse"></span>${escape(state.notice)}</div></header>
+    <section class="workspace">
+      <aside class="assets panel"><div class="panel-title"><h2>Cut blocks</h2><span>${state.assets.length}</span></div><input id="asset-filter" aria-label="Filter block assets" placeholder="Filter source assets">
+      <div id="asset-list" class="asset-list">${renderAssetGroup("Speedrunners", speed)}${renderAssetGroup("Shadowraiders", shadow)}</div></aside>
+      <section class="canvas panel"><div class="canvas-title"><div><span class="eyebrow">${asset ? escape(asset.artifactId) : "no asset"}</span><h2>${asset ? escape(titleFor(asset)) : "Select a block"}</h2></div><button id="new-draft" class="secondary" ${asset ? "" : "disabled"}>${draft ? "Reset draft" : "Create draft"}</button></div>
+        ${asset ? `<div class="hex-stage"><img src="/api/artifact/${encodeURIComponent(asset.assetId)}" alt="${escape(titleFor(asset))}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing-art',textContent:'Run the artifact refresh to load this local source image.'}))"><div class="mask-note">cut mask · source page ${asset.page}</div></div>` : ""}
+        <div class="asset-meta">assetId <code>${asset ? escape(asset.assetId) : "—"}</code> · source <code>${asset ? escape(asset.artifactId) : "—"}</code></div>
+      </section>
+      <section class="inspector panel">${draft ? renderInspector(draft) : `<div class="empty"><h2>Start a draft</h2><p>Select a block and create its source-linked draft. Nothing is written to canonical game data.</p></div>`}</section>
+    </section>
+    <footer class="commandbar"><div><label>Session <input id="session-name" value="${escape(state.sessionName)}" aria-label="Session name"></label><button id="save">Save session</button><button id="load">Load session</button></div><div><button id="validate" class="secondary">Validate</button><button id="export" class="accent">Export patch + report</button></div></footer>
+  `;
+  bind();
+}
+function renderAssetGroup(name, assets) { return `<section class="asset-group"><h3>${name}<span>${assets.length}</span></h3>${assets.map((asset) => `<button class="asset ${asset.assetId === state.selectedAssetId ? "selected" : ""}" data-asset="${asset.assetId}"><span class="minihex"></span><span>${escape(asset.assetId.split("-").slice(-2).join(" · "))}</span><small>p${asset.page}</small></button>`).join("")}</section>`; }
+function renderInspector(draft) {
+  const block = draft.block; const spaces = JSON.stringify(block.spaces, null, 2);
+  return `<div class="inspector-head"><div><span class="eyebrow">STRUCTURED DRAFT</span><h2>Block data</h2></div><span class="draft-state">${escape(draft.status)}</span></div>
+  <form id="editor-form"><div class="form-grid"><label>Block id<input name="block-id" value="${escape(block.id)}"></label><label>Name<input name="block-name" value="${escape(block.name)}"></label><label>Expansion<select name="expansion"><option value="speedrunners" ${block.expansion === "speedrunners" ? "selected" : ""}>Speedrunners</option><option value="shadowraiders" ${block.expansion === "shadowraiders" ? "selected" : ""}>Shadowraiders</option></select></label><label>ICE<select name="ice"><option value="none" ${block.iceValue === "none" ? "selected" : ""}>none</option><option value="low" ${block.iceValue === "low" ? "selected" : ""}>low</option><option value="medium" ${block.iceValue === "medium" ? "selected" : ""}>medium</option><option value="high" ${block.iceValue === "high" ? "selected" : ""}>high</option><option value="black" ${block.iceValue === "black" ? "selected" : ""}>black</option></select></label></div>
+  <fieldset><legend>Hex edges</legend><div class="edges">${block.edges.map((edge, index) => `<label class="edge"><input type="checkbox" data-edge="${index}" ${edge ? "checked" : ""}><span>${index + 1}</span><input data-boundary="${index}" value="${escape(block.boundarySpaces[index].join(", "))}" placeholder="boundary space ids"></label>`).join("")}</div></fieldset>
+  <label>Spaces <span class="hint">JSON array of { id, type, pawnId?, effectId? }</span><textarea name="spaces" rows="7">${escape(spaces)}</textarea></label>
+  <div class="form-grid"><label>Source locator<input name="locator" value="${escape(draft.provenance.locator)}"></label><label>Notes<input name="notes" value="${escape(draft.provenance.notes ?? "")}"></label></div>
+  <label class="toggle"><input type="checkbox" name="provisional" ${block.provisional ? "checked" : ""}> Keep as provisional until reviewed against the source</label>
+  </form><section class="diagnostics"><h3>Validation</h3>${state.validation.length ? `<ul>${state.validation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : "<p>Not validated yet.</p>"}</section>`;
+}
+function readDraft() {
+  const draft = ensureDraft(); if (!draft) return null; const form = document.querySelector("#editor-form"); if (!form) return draft;
+  const get = (name) => form.querySelector(`[name="${name}"]`);
+  draft.block.id = get("block-id").value.trim(); draft.block.name = get("block-name").value.trim(); draft.block.expansion = get("expansion").value; draft.block.iceValue = get("ice").value;
+  draft.block.edges = [...form.querySelectorAll("[data-edge]")].map((input) => input.checked);
+  draft.block.boundarySpaces = [...form.querySelectorAll("[data-boundary]")].map((input) => input.value.split(",").map((value) => value.trim()).filter(Boolean));
+  draft.provenance.locator = get("locator").value.trim(); draft.provenance.notes = get("notes").value.trim(); draft.block.provisional = get("provisional").checked;
+  try { const spaces = JSON.parse(get("spaces").value); if (!Array.isArray(spaces)) throw new Error(); draft.block.spaces = spaces; form.querySelector("textarea").dataset.error = ""; } catch { form.querySelector("textarea").dataset.error = "Spaces must be valid JSON array."; }
+  draft.block.assetRefs = [draft.source.assetId]; return draft;
+}
+async function validate() { const draft = readDraft(); if (!draft) return; try { const data = await api("/api/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ document: draft }) }); state.validation = [...data.errors]; const badJson = document.querySelector("textarea")?.dataset.error; if (badJson) state.validation.unshift(badJson); state.notice = state.validation.length ? `${state.validation.length} issue${state.validation.length === 1 ? "" : "s"} to resolve` : "Draft is valid for export"; } catch (error) { state.validation = [error.message]; state.notice = "Validation failed"; } render(); }
+async function save() { const draft = readDraft(); if (draft) await validate(); const name = document.querySelector("#session-name")?.value.trim(); if (!/^[a-z0-9-]+$/.test(name)) { state.notice = "Session name uses lowercase letters, digits, and hyphens."; render(); return; } state.sessionName = name; const session = { sessionVersion: 1, projectId: "zaibatsu-block-editor", assetManifestPath: "spec/assets/manifest.json", documents: state.drafts, history: [] }; try { await api("/api/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, session }) }); state.notice = "Session saved locally"; } catch (error) { state.notice = error.message; } render(); }
+async function load() { const name = document.querySelector("#session-name")?.value.trim(); try { const session = await api(`/api/sessions/${encodeURIComponent(name)}`); state.drafts = session.documents ?? []; state.selectedAssetId = state.drafts[0]?.source.assetId ?? state.selectedAssetId; state.sessionName = name; state.validation = []; state.notice = "Session loaded"; } catch (error) { state.notice = error.message; } render(); }
+async function exportPatch() { const draft = readDraft(); if (!draft) return; await validate(); if (state.validation.length) return; try { const data = await api("/api/export", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: `${state.sessionName}-${draft.block.id}`, document: draft }) }); state.notice = `Exported ${data.patch}`; } catch (error) { state.notice = error.message; } render(); }
+function bind() {
+  document.querySelectorAll("[data-asset]").forEach((button) => button.addEventListener("click", () => { readDraft(); state.selectedAssetId = button.dataset.asset; state.validation = []; state.notice = "Selected source block"; render(); }));
+  document.querySelector("#new-draft")?.addEventListener("click", () => { const asset = selectedAsset(); state.drafts = state.drafts.filter((draft) => draft.source.assetId !== asset.assetId); state.drafts.push(blankDraft(asset)); state.validation = []; state.notice = "Fresh draft created"; render(); });
+  document.querySelector("#validate")?.addEventListener("click", validate); document.querySelector("#save")?.addEventListener("click", save); document.querySelector("#load")?.addEventListener("click", load); document.querySelector("#export")?.addEventListener("click", exportPatch);
+  document.querySelector("#asset-filter")?.addEventListener("input", (event) => { const query = event.target.value.toLowerCase(); document.querySelectorAll(".asset").forEach((item) => item.hidden = !item.textContent.toLowerCase().includes(query)); });
+}
+async function start() { try { const data = await api("/api/assets"); state.assets = data.assets; state.selectedAssetId = state.assets[0]?.assetId ?? null; state.notice = `${state.assets.length} individual source blocks ready`; } catch (error) { state.notice = error.message; } render(); }
+start();

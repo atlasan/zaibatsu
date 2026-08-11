@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/editor/block-editor-session.schema.json",
+  "title": "Zaibatsu block editor session",
+  "description": "Local working state for source-linked block transcription. It is not canonical game data.",
+  "type": "object",
+  "required": ["sessionVersion", "projectId", "assetManifestPath", "documents"],
+  "additionalProperties": false,
+  "properties": {
+    "sessionVersion": { "const": 1 },
+    "projectId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "assetManifestPath": { "type": "string", "const": "spec/assets/manifest.json" },
+    "documents": { "type": "array", "items": { "$ref": "#/$defs/blockDocument" }, "uniqueItems": true },
+    "history": { "type": "array", "items": { "$ref": "#/$defs/historyEntry" } }
+  },
+  "$defs": {
+    "blockDocument": {
+      "type": "object",
+      "required": ["id", "resourceType", "title", "status", "source", "block", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "resourceType": { "const": "block" },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "review", "verified"] },
+        "source": {
+          "type": "object", "required": ["assetId"], "additionalProperties": false,
+          "properties": { "assetId": { "type": "string", "pattern": "^[a-z0-9-]+$" } }
+        },
+        "block": { "$ref": "../schema/block.schema.json" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["primaryArtifactId", "page", "locator"],
+      "additionalProperties": false,
+      "properties": {
+        "primaryArtifactId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "locator": { "type": "string", "minLength": 1 },
+        "crossCheckArtifactId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "notes": { "type": "string" }
+      }
+    },
+    "historyEntry": {
+      "type": "object",
+      "required": ["at", "operation", "documentId"],
+      "additionalProperties": false,
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "operation": { "enum": ["create", "update", "validate", "export"] },
+        "documentId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "summary": { "type": "string" }
+      }
+    }
+  }
+}

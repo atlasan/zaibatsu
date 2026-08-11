@@ -68,6 +68,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 ## Cross-cutting / tech debt
 - [x] (tools/spec/docs) Reproducible artifact toolset: checksum-verified PDF render, automatic crop detection, PNG/WebP extraction, page atlases, ignored outputs, and source-linked asset-manifest contract. Gameplay mapping remains pending component transcription.
 - [ ] Extract the shuffle-order sequence into a documented "setup RNG protocol" so future setup steps preserve cross-mirror parity.
+- [x] (tools/editor/spec/docs) **Standalone block-editor MVP.** Local asset browser, source-linked draft form, validation, session save/reopen, and explicit patch/report export implemented under `tools/block-editor/`. It remains independent of the mirror engines.
 - [ ] CI: run `go test`, `bun test`, `tsc`, and a demo-parity check (Go vs TS output must match) on every change.
 - [ ] Decide and add `LICENSE` for engine code (game remains CC BY-NC 2.5 MX).
 - [ ] Consider a JSON snapshot format for `GameState` to diff Go vs TS states directly.

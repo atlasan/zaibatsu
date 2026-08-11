@@ -21,6 +21,8 @@ function validId(value: unknown): value is string { return typeof value === "str
 
 const artifactCatalog = readJson(join(root, "DOCS/artifacts/source-catalog.json"));
 const artifactIds = new Set(strings((artifactCatalog.assets as Json[] | undefined)?.map((asset) => asset.id)));
+const assetManifest = readJson(join(root, "spec/assets/manifest.json"));
+const assetIds = new Set(strings((assetManifest.assets as Json[] | undefined)?.map((asset) => asset.assetId)));
 const inventory = readJson(join(root, "spec/inventory.json"));
 const externalCatalog = readJson(join(root, "DOCS/artifacts/external-sources.json"));
 const externalIds = new Set<string>();
@@ -77,6 +79,33 @@ for (const mode of (inventory.modes as Json[] | undefined) ?? []) {
   const evidence = mode.evidence as Json | undefined;
   if (!validId(evidence?.artifactId) || !artifactIds.has(evidence.artifactId) || typeof evidence.locator !== "string") {
     fail(`mode ${String(mode.id)} lacks cataloged evidence`);
+  }
+}
+
+// The editor example is non-canonical, but it must remain usable against the
+// source-backed asset contract and the block record shape it is intended to edit.
+const editorSession = readJson(join(root, "spec/editor/block-editor-session.example.json"));
+if (editorSession.sessionVersion !== 1 || editorSession.assetManifestPath !== "spec/assets/manifest.json") {
+  fail("block editor example must declare sessionVersion 1 and the canonical asset manifest");
+}
+for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
+  const source = document.source as Json | undefined;
+  const block = document.block as Json | undefined;
+  const provenance = document.provenance as Json | undefined;
+  if (document.resourceType !== "block" || !validId(document.id) || !assetIds.has(String(source?.assetId))) {
+    fail(`block editor document ${String(document.id)} has an invalid source asset`);
+  }
+  if (!validId(block?.id) || typeof block?.name !== "string" || !["speedrunners", "shadowraiders"].includes(String(block?.expansion))) {
+    fail(`block editor document ${String(document.id)} has an invalid block draft`);
+  }
+  if (!Array.isArray(block?.edges) || block.edges.length !== 6 || !Array.isArray(block?.boundarySpaces) || block.boundarySpaces.length !== 6) {
+    fail(`block editor document ${String(document.id)} must define six edges and six boundary-space lists`);
+  }
+  if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) {
+    fail(`block editor document ${String(document.id)} must retain its selected asset reference`);
+  }
+  if (!artifactIds.has(String(provenance?.primaryArtifactId)) || !Number.isInteger(provenance?.page) || typeof provenance?.locator !== "string") {
+    fail(`block editor document ${String(document.id)} lacks primary provenance`);
   }
 }
 
