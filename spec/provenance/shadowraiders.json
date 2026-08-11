@@ -1,0 +1,18 @@
+{
+  "status": "cataloged",
+  "files": {
+    "data/shadowraiders/modes.json": {
+      "sources": ["sh-en-rulebook", "sh-es-rulebook"],
+      "note": "Mode-level facts verified; component records have not yet been transcribed."
+    }
+  },
+  "records": {
+    "mode/shadowraiders": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 4-7" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 4-7" }] },
+    "mode/chaos": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 26-33" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 26-33" }] },
+    "mode/outbreak": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 34-37" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 34-37" }] },
+    "mode/total-war": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 38-41" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 38-41" }] },
+    "mode/strategic-alliance": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 42" }, { "artifactId": "sh-es-rulebook", "locator": "p. 42" }] },
+    "mode/cyber-revolution": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 43" }, { "artifactId": "sh-es-rulebook", "locator": "p. 43" }] },
+    "mode/total-war-chaos": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 44" }, { "artifactId": "sh-es-rulebook", "locator": "p. 44" }] }
+  }
+}

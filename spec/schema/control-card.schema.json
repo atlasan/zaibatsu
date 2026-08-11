@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/control-card.schema.json",
+  "title": "Control card",
+  "type": "object",
+  "required": ["id", "name", "expansion", "subject"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "expansion": { "enum": ["speedrunners", "shadowraiders"] },
+    "subject": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["pawn", "block"] },
+        "id": { "type": "string" }
+      }
+    },
+    "isStarter": { "type": "boolean", "default": false },
+    "provisional": { "type": "boolean", "default": false }
+  }
+}

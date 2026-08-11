@@ -33,6 +33,11 @@ Cybernet. **Win:** be first to place *all* your control markers in the Cybernet.
    interpretation:** transcribed as p1→3, p2→4, p3→5, p4→6 (the PDF's table text
    is lossy: it shows "3 / 4 / 5 …"). After turn 1, everyone draws to max (5).
 
+> **Verified correction (sp-en-rulebook p. 6):** the opening table is
+> player one = 3, player two = 4, player three = 5, player four = 5.
+> This supersedes the earlier lossy-text interpretation above; the structured
+> `startingHand` value in `spec/data/speedrunners/mode.json` uses the verified
+
 ## Turn phases
 1. **Beginning** — resolve "at beginning of turn" card skills; remove all your
    start-of-turn markers.

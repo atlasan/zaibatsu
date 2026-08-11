@@ -80,6 +80,9 @@ func Load(specDataDir, expansion string) (*domain.GameData, error) {
 		Cards:  cf.Cards,
 		Mode:   mode,
 	}
+	if err := loadOptionalContent(base, gd); err != nil {
+		return nil, err
+	}
 	if err := validate(gd); err != nil {
 		return nil, err
 	}

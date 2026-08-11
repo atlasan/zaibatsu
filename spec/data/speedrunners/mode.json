@@ -6,7 +6,7 @@
   "players": { "min": 2, "max": 4 },
   "controlMarkers": { "2": 10, "3": 8, "4": 6, "default": 8 },
   "maxHandSize": 5,
-  "startingHand": [3, 4, 5, 6],
+  "startingHand": [3, 4, 5, 5],
   "win": ["all-control-markers-placed"],
   "lose": [],
   "notes": "First to place all control markers in the Cybernet wins."

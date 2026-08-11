@@ -61,3 +61,10 @@ print/archive support. Existing `spec/data/speedrunners/` records are
 explicitly **provisional** seed data; they are not verified transcriptions.
 Current loaders perform light structural checks only. JSON-Schema validation is
 tracked by task `T-101`.
+
+## Inventory verification
+
+`spec/inventory.json` may verify release-level component counts and mode facts
+before individual component transcription. Such evidence is recorded as
+`cataloged` provenance, never as a verified component record. Run
+`bun tools/validate-spec.ts` to validate the inventory, its source locators,

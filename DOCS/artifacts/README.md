@@ -25,3 +25,12 @@ assets as warnings. The second requires all cataloged local assets and verifies
 their exact SHA-256 values.
 
 See [coverage.md](coverage.md) for the current source-set assessment.
+
+## External register and rights
+
+`external-sources.json` records the official project, game, and download pages,
+plus the two BoardGameGeek listing identifiers. Official sources are primary;
+BoardGameGeek is supporting metadata only.
+
+The English 2017 rulebooks state CC BY-NC 2.5 MX at p. 2. The source sheets and
+art remain ignored even when their license permits non-commercial sharing:

@@ -161,3 +161,13 @@ _Planned:_ attached cards and placed counters on the board.
 
 A player wins the instant they have placed **all** of their control markers in
 the Cybernet (`controlMarkersPlaced == controlMarkersTotal`).
+
+## Content verification boundary
+
+`spec/inventory.json` is the source-verified product, component-count, and
+mode register. `GameData` additionally exposes optional control cards, threats,
+missions, and mode collections so both mirrors can consume complete structured
+content as it is transcribed. Inventory verification does not imply that every
+effect is executable; that status remains governed by `DOCS/parity.md`.
+
+See [the knowledge index](knowledge/INDEX.md) for scope and source policy.

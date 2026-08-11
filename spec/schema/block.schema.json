@@ -23,6 +23,13 @@
       "minItems": 6,
       "maxItems": 6
     },
+    "boundarySpaces": {
+      "type": "array",
+      "description": "The local space ids exposed by each of the six edges. Index matches edges; empty array means no boundary space.",
+      "items": { "type": "array", "items": { "type": "string" } },
+      "minItems": 6,
+      "maxItems": 6
+    },
     "bonusFragments": {
       "type": "integer",
       "minimum": 0,
@@ -54,6 +61,12 @@
         "type": { "enum": ["normal", "double", "special", "pawn", "effect"] },
         "pawnId": { "type": "string" },
         "effectId": { "type": "string" },
+        "neighbors": {
+          "type": "array",
+          "description": "Intra-block adjacent space ids used for step movement.",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
         "modifier": {
           "type": "object",
           "additionalProperties": false,

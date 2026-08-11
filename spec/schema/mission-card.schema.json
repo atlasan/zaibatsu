@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/mission-card.schema.json",
+  "title": "Shadowraiders mission card",
+  "type": "object",
+  "required": ["id", "name", "tags", "reward"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "tags": { "type": "array", "items": { "enum": ["mark", "cargo", "counter", "location"] }, "minItems": 1 },
+    "cost": { "type": "integer", "minimum": 0 },
+    "reward": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "medals": { "type": "integer", "minimum": 0 }, "pawnId": { "type": "string" } }
+    },
+    "provisional": { "type": "boolean", "default": false }
+  }
+}

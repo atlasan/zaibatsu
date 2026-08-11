@@ -1,0 +1,51 @@
+{
+  "catalogVersion": 1,
+  "policy": "Official sources establish game facts. BoardGameGeek records are discovery metadata only and are never used as rules or component evidence.",
+  "sources": [
+    {
+      "id": "official-home",
+      "title": "Zaibatsu official home",
+      "url": "https://zaibatsugame.blogspot.com/",
+      "publisher": "Froylan Rutiaga",
+      "authority": "primary",
+      "purpose": "official-project-home",
+      "auditedOn": "2026-08-11"
+    },
+    {
+      "id": "official-game",
+      "title": "Zaibatsu: The game",
+      "url": "https://zaibatsugame.blogspot.com/p/zaibatsu.html",
+      "publisher": "Froylan Rutiaga",
+      "authority": "primary",
+      "purpose": "product-scope-and-player-counts",
+      "auditedOn": "2026-08-11"
+    },
+    {
+      "id": "official-downloads",
+      "title": "Zaibatsu downloads",
+      "url": "https://zaibatsugame.blogspot.com/p/downloads.html",
+      "publisher": "Froylan Rutiaga",
+      "authority": "primary",
+      "purpose": "official-download-index",
+      "auditedOn": "2026-08-11"
+    },
+    {
+      "id": "bgg-speedrunners",
+      "title": "Zaibatsu Speedrunners",
+      "url": "https://boardgamegeek.com/boardgame/231474/zaibatsu-speedrunners",
+      "boardGameGeekId": 231474,
+      "authority": "supporting",
+      "purpose": "listing-metadata-only",
+      "auditedOn": "2026-08-11"
+    },
+    {
+      "id": "bgg-shadowraiders",
+      "title": "Zaibatsu Shadowraiders",
+      "url": "https://boardgamegeek.com/boardgame/231475/zaibatsu-shadowraiders",
+      "boardGameGeekId": 231475,
+      "authority": "supporting",
+      "purpose": "listing-metadata-only",
+      "auditedOn": "2026-08-11"
+    }
+  ]
+}

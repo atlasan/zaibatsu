@@ -101,6 +101,34 @@ export interface ActionCard {
   provisional?: boolean;
 }
 
+/** A physical control card is distinct from the pawn or block it controls. */
+export interface ControlCard {
+  id: string;
+  name: string;
+  expansion: Expansion;
+  subject: { kind: "pawn" | "block"; id: string };
+  isStarter?: boolean;
+  provisional?: boolean;
+}
+
+export interface Threat {
+  id: string;
+  name: string;
+  type: "drone" | "token" | "mark" | "chaos";
+  attackDie?: 4 | 5 | 6;
+  effects?: string[];
+  provisional?: boolean;
+}
+
+export interface MissionCard {
+  id: string;
+  name: string;
+  tags: ("mark" | "cargo" | "counter" | "location")[];
+  cost?: number;
+  reward: { medals?: number; pawnId?: string };
+  provisional?: boolean;
+}
+
 export interface PlayerRange {
   min: number;
   max: number;
@@ -124,6 +152,10 @@ export interface GameData {
   pawns: Pawn[];
   cards: ActionCard[];
   mode: Mode;
+  controlCards?: ControlCard[];
+  threats?: Threat[];
+  missions?: MissionCard[];
+  modes?: Mode[];
 }
 
 export function blockById(data: GameData, id: string): Block | undefined {

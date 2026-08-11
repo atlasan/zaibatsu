@@ -1,0 +1,55 @@
+{
+  "inventoryVersion": 1,
+  "rights": {
+    "license": "CC BY-NC 2.5 MX",
+    "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 2" },
+    "attribution": "Designed by Froylan Rutiaga; English translation by Nick Hayes; art by KoTdeSigN and Froylan Rutiaga.",
+    "assetPolicy": "Original print-and-play PDFs, archives, and illustrations remain ignored local evidence. This repository stores structured derivative facts and provenance, not source artwork or layouts."
+  },
+  "products": [
+    {
+      "id": "speedrunners-2017-en",
+      "game": "speedrunners",
+      "edition": "2017-06-26",
+      "canonicalLanguage": "en",
+      "primaryArtifacts": ["sp-en-rulebook", "sp-en-blocks-a4", "sp-en-control-cards", "sp-en-action-cards", "sp-en-pawns", "sp-en-markers"],
+      "crossCheckArtifacts": ["sp-es-rulebook", "sp-es-blocks-a4", "sp-es-control-cards", "sp-es-action-cards", "sp-es-pawns", "sp-es-markers"],
+      "components": [
+        { "kind": "information-block", "count": 24, "notes": "23 blocks plus Central Core", "evidence": { "artifactId": "sp-en-rulebook", "locator": "pp. 2, 4" } },
+        { "kind": "action-card", "count": 54, "evidence": { "artifactId": "sp-en-rulebook", "locator": "pp. 2, 4" } },
+        { "kind": "control-card", "count": 18, "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 2" } },
+        { "kind": "pawn", "count": 16, "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 4" } },
+        { "kind": "bonus-counter", "count": 24, "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 2" } },
+        { "kind": "control-marker", "count": 40, "notes": "10 per colour", "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 2" } },
+        { "kind": "start-of-turn-marker", "count": 16, "evidence": { "artifactId": "sp-en-rulebook", "locator": "p. 2" } }
+      ]
+    },
+    {
+      "id": "shadowraiders-2017-en",
+      "game": "shadowraiders",
+      "edition": "2017-06-28",
+      "canonicalLanguage": "en",
+      "primaryArtifacts": ["sh-en-rulebook", "sh-en-blocks-a4", "sh-en-control-cards", "sh-en-action-cards", "sh-en-pawns", "sh-en-markers", "sh-en-chaos-card", "sh-en-updates"],
+      "crossCheckArtifacts": ["sh-es-rulebook", "sh-es-blocks-a4", "sh-es-control-cards", "sh-es-action-cards", "sh-es-pawns", "sh-es-markers", "sh-es-chaos-card", "sh-es-updates"],
+      "components": [
+        { "kind": "information-block", "count": 24, "notes": "23 blocks plus Central Core 02", "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "action-card", "count": 54, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "control-card", "count": 18, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "pawn", "count": 16, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "threat-token", "count": 24, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "control-marker", "count": 32, "notes": "8 per colour", "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } },
+        { "kind": "start-of-turn-marker", "count": 16, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 2" } }
+      ]
+    }
+  ],
+  "modes": [
+    { "id": "speedrunners", "name": "Speedrunners", "players": { "min": 2, "max": 4 }, "evidence": { "artifactId": "sp-en-rulebook", "locator": "pp. 6-7" } },
+    { "id": "shadowraiders", "name": "Shadowraiders", "players": { "min": 2, "max": 4 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "pp. 4-7" } },
+    { "id": "chaos", "name": "Chaos", "players": { "min": 1, "max": 1 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "pp. 26-33" } },
+    { "id": "outbreak", "name": "Outbreak", "players": { "min": 1, "max": 1 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "pp. 34-37" } },
+    { "id": "total-war", "name": "Total War", "players": { "min": 2, "max": 8 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "pp. 38-41" } },
+    { "id": "strategic-alliance", "name": "Strategic Alliance", "players": { "min": 2, "max": 4 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 42" } },
+    { "id": "cyber-revolution", "name": "Cyber-Revolution", "players": { "min": 2, "max": 8 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 43" } },
+    { "id": "total-war-chaos", "name": "Total War - Chaos", "players": { "min": 1, "max": 8 }, "evidence": { "artifactId": "sh-en-rulebook", "locator": "p. 44" } }
+  ]
+}

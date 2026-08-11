@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/threat.schema.json",
+  "title": "Shadowraiders threat",
+  "type": "object",
+  "required": ["id", "name", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "type": { "enum": ["drone", "token", "mark", "chaos"] },
+    "attackDie": { "enum": [4, 5, 6] },
+    "effects": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "provisional": { "type": "boolean", "default": false }
+  }
+}

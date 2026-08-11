@@ -9,6 +9,9 @@ import type {
   Pawn,
   ActionCard,
   Mode,
+  ControlCard,
+  Threat,
+  MissionCard,
 } from "../domain/types.ts";
 
 /**
@@ -44,6 +47,10 @@ function readJson<T>(path: string): T {
   }
 }
 
+function readOptionalJson<T>(path: string, fallback: T): T {
+  return existsSync(path) ? readJson<T>(path) : fallback;
+}
+
 /** Loads game data for the given expansion from the given spec/data directory. */
 export function loadGameData(specDataDir: string, expansion: string): GameData {
   const base = join(specDataDir, expansion);
@@ -55,7 +62,11 @@ export function loadGameData(specDataDir: string, expansion: string): GameData {
   ).cards;
   const mode = readJson<Mode>(join(base, "mode.json"));
 
-  const data: GameData = { blocks, pawns, cards, mode };
+  const controlCards = readOptionalJson<{ controlCards: ControlCard[] }>(join(base, "control-cards.json"), { controlCards: [] }).controlCards;
+  const threats = readOptionalJson<{ threats: Threat[] }>(join(base, "threats.json"), { threats: [] }).threats;
+  const missions = readOptionalJson<{ missions: MissionCard[] }>(join(base, "missions.json"), { missions: [] }).missions;
+  const modes = readOptionalJson<{ modes: Mode[] }>(join(base, "modes.json"), { modes: [mode] }).modes;
+  const data: GameData = { blocks, pawns, cards, mode, controlCards, threats, missions, modes };
   validate(data);
   return data;
 }

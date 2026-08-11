@@ -89,19 +89,19 @@ type Ability struct {
 
 // Pawn is an agent: piece (position) + control card (attributes).
 type Pawn struct {
-	ID          string    `json:"id"`
-	Name        string    `json:"name"`
-	Expansion   Expansion `json:"expansion"`
-	Class       []string  `json:"class"`
+	ID          string       `json:"id"`
+	Name        string       `json:"name"`
+	Expansion   Expansion    `json:"expansion"`
+	Class       []string     `json:"class"`
 	Defense     []DefenseDie `json:"defense"`
-	Movement    Movement  `json:"movement"`
-	Abilities   []Ability `json:"abilities,omitempty"`
-	IceValue    IceValue  `json:"iceValue,omitempty"`
-	Slots       []string  `json:"slots,omitempty"`
-	Special     string    `json:"special,omitempty"`
-	IsStarter   bool      `json:"isStarter,omitempty"`
-	MercCost    int       `json:"mercCost,omitempty"`
-	Provisional bool      `json:"provisional,omitempty"`
+	Movement    Movement     `json:"movement"`
+	Abilities   []Ability    `json:"abilities,omitempty"`
+	IceValue    IceValue     `json:"iceValue,omitempty"`
+	Slots       []string     `json:"slots,omitempty"`
+	Special     string       `json:"special,omitempty"`
+	IsStarter   bool         `json:"isStarter,omitempty"`
+	MercCost    int          `json:"mercCost,omitempty"`
+	Provisional bool         `json:"provisional,omitempty"`
 }
 
 // Attach describes how an action card may attach to a game element.
@@ -121,6 +121,46 @@ type ActionCard struct {
 	Activates   []string `json:"activates,omitempty"`
 	Attach      *Attach  `json:"attach,omitempty"`
 	Provisional bool     `json:"provisional,omitempty"`
+}
+
+// ControlCard is a physical card that controls a pawn or block.
+type ControlCard struct {
+	ID          string      `json:"id"`
+	Name        string      `json:"name"`
+	Expansion   Expansion   `json:"expansion"`
+	Subject     CardSubject `json:"subject"`
+	IsStarter   bool        `json:"isStarter,omitempty"`
+	Provisional bool        `json:"provisional,omitempty"`
+}
+
+type CardSubject struct {
+	Kind string `json:"kind"`
+	ID   string `json:"id"`
+}
+
+// Threat is a Shadowraiders hostile entity. Resolution remains an engine concern.
+type Threat struct {
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	Type        string   `json:"type"`
+	AttackDie   int      `json:"attackDie,omitempty"`
+	Effects     []string `json:"effects,omitempty"`
+	Provisional bool     `json:"provisional,omitempty"`
+}
+
+// MissionCard holds data for a Shadowraiders mission and its normalized reward.
+type MissionCard struct {
+	ID          string        `json:"id"`
+	Name        string        `json:"name"`
+	Tags        []string      `json:"tags"`
+	Cost        int           `json:"cost,omitempty"`
+	Reward      MissionReward `json:"reward"`
+	Provisional bool          `json:"provisional,omitempty"`
+}
+
+type MissionReward struct {
+	Medals int    `json:"medals,omitempty"`
+	PawnID string `json:"pawnId,omitempty"`
 }
 
 // Mode is a playable game mode definition.
@@ -145,10 +185,14 @@ type PlayerRange struct {
 
 // GameData is the loaded, validated content the engine plays with.
 type GameData struct {
-	Blocks []Block
-	Pawns  []Pawn
-	Cards  []ActionCard
-	Mode   Mode
+	Blocks       []Block
+	Pawns        []Pawn
+	Cards        []ActionCard
+	Mode         Mode
+	ControlCards []ControlCard
+	Threats      []Threat
+	Missions     []MissionCard
+	Modes        []Mode
 }
 
 // BlockByID returns the block definition with the given id.
@@ -211,8 +255,8 @@ type GameState struct {
 	Discard       []string  `json:"discard"`
 	BlockPile     []string  `json:"blockPile"`
 	Cybernet      *Cybernet `json:"cybernet"`
-	// Eliminated holds pawn ids removed from the Cybernet (a Reboot re-enters them
-	// at the Central Core — see the Reboot ability, a later task).
+	// Eliminated holds pawn ids removed from the Cybernet. A Reboot re-enters one
+	// at the Central Core under the rebooting player's control.
 	Eliminated []string `json:"eliminated"`
 	WinnerID   string   `json:"winnerId,omitempty"`
 	RNG        *RNG     `json:"-"`
