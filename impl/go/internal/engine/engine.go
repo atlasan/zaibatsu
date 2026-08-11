@@ -16,17 +16,47 @@ type Config struct {
 	Seed        uint64
 }
 
-// ActionType enumerates the player actions the slice engine understands.
+// ActionType enumerates the player actions the engine understands. Each maps to
+// a resolver; Apply dispatches on it. See DOCS/architecture.md ("State & actions").
 type ActionType string
 
 const (
-	ActPass        ActionType = "pass"
-	ActPlaceMarker ActionType = "place-marker"
+	ActPass         ActionType = "pass"
+	ActPlaceMarker  ActionType = "place-marker" // direct marker placement (utility)
+	ActMoveHex      ActionType = "move-hex"
+	ActDelete       ActionType = "delete"
+	ActDeleteMulti  ActionType = "delete-multi"
+	ActIcebreakBlk  ActionType = "icebreak-block"
+	ActIcebreakPawn ActionType = "icebreak-pawn"
+	ActSearch       ActionType = "search"
+	ActReboot       ActionType = "reboot"
+	// Card-driven variants (consume cards from hand).
+	ActPlayDelete       ActionType = "play-delete"
+	ActPlayIcebreakBlk  ActionType = "play-icebreak-block"
+	ActPlayIcebreakPawn ActionType = "play-icebreak-pawn"
+	ActPlaySearch       ActionType = "play-search"
+	ActPlayReboot       ActionType = "play-reboot"
+	ActAttachPawn       ActionType = "attach-pawn"
+	ActAttachEnemy      ActionType = "attach-enemy"
+	ActAttachBlock      ActionType = "attach-block"
 )
 
-// Action is a single player intent submitted during the action phase.
+// Action is a single player intent — a tagged union whose Type selects which
+// fields are read. PlayerID defaults to the current player when empty. It mirrors
+// impl/ts Action. Not every field applies to every Type.
 type Action struct {
-	Type ActionType
+	Type          ActionType    `json:"type"`
+	PlayerID      string        `json:"playerId,omitempty"`
+	CardID        string        `json:"cardId,omitempty"`
+	CardIDs       []string      `json:"cardIds,omitempty"`
+	PawnID        string        `json:"pawnId,omitempty"`  // acting pawn (attacker/actor/searcher/rebooted)
+	TargetID      string        `json:"targetId,omitempty"`
+	TargetIDs     []string      `json:"targetIds,omitempty"`
+	Coord         *domain.Coord `json:"coord,omitempty"`
+	Dir           int           `json:"dir,omitempty"`
+	Rotation      int           `json:"rotation,omitempty"`
+	ExtraSkulls   int           `json:"extraSkulls,omitempty"`
+	ExtraRollDice int           `json:"extraRollDice,omitempty"`
 }
 
 var colors = []string{"red", "blue", "green", "yellow", "cyan", "magenta", "orange", "white"}
@@ -202,19 +232,89 @@ func draw(s *domain.GameState) (string, bool) {
 	return card, true
 }
 
-// Apply validates and applies a single action during the action phase.
-func Apply(s *domain.GameState, a Action) error {
-	p := s.CurrentPlayerPtr()
+// Apply validates and applies a single action, dispatching on its Type to the
+// matching resolver. PlayerID defaults to the current player when empty. This is
+// the engine's single reducer entry point (state × action → state).
+func Apply(s *domain.GameState, gd *domain.GameData, a Action) error {
+	pid := a.PlayerID
+	if pid == "" {
+		pid = s.CurrentPlayerPtr().ID
+	}
+	coord := func() (domain.Coord, error) {
+		if a.Coord == nil {
+			return domain.Coord{}, fmt.Errorf("action %q requires a coord", a.Type)
+		}
+		return *a.Coord, nil
+	}
+
 	switch a.Type {
 	case ActPass:
 		return nil
 	case ActPlaceMarker:
+		p := s.PlayerByID(pid)
+		if p == nil {
+			return fmt.Errorf("unknown player %q", pid)
+		}
 		if p.MarkersRemaining() <= 0 {
 			return fmt.Errorf("player %s has no control markers left", p.ID)
 		}
 		p.ControlMarkersPlaced++
 		checkWin(s)
 		return nil
+	case ActMoveHex:
+		_, err := MoveHex(s, gd, a.PawnID, a.Dir)
+		return err
+	case ActDelete:
+		_, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return err
+	case ActDeleteMulti:
+		_, err := DeleteMulti(s, gd, a.PawnID, a.TargetIDs, a.ExtraSkulls)
+		return err
+	case ActIcebreakBlk:
+		c, err := coord()
+		if err != nil {
+			return err
+		}
+		_, err = IcebreakBlock(s, gd, a.PawnID, c, a.ExtraRollDice)
+		return err
+	case ActIcebreakPawn:
+		_, err := IcebreakPawn(s, gd, a.PawnID, a.TargetID, a.ExtraRollDice)
+		return err
+	case ActSearch:
+		_, err := Search(s, gd, a.PawnID, a.Dir, a.Rotation)
+		return err
+	case ActReboot:
+		_, err := Reboot(s, gd, a.PawnID, pid)
+		return err
+	case ActPlayDelete:
+		_, err := PlayDelete(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return err
+	case ActPlayIcebreakBlk:
+		c, err := coord()
+		if err != nil {
+			return err
+		}
+		_, err = PlayIcebreakBlock(s, gd, pid, a.CardID, a.PawnID, c, a.ExtraRollDice)
+		return err
+	case ActPlayIcebreakPawn:
+		_, err := PlayIcebreakPawn(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraRollDice)
+		return err
+	case ActPlaySearch:
+		_, err := PlaySearch(s, gd, pid, a.CardID, a.PawnID, a.Dir, a.Rotation)
+		return err
+	case ActPlayReboot:
+		_, err := PlayReboot(s, gd, pid, a.CardIDs, a.PawnID)
+		return err
+	case ActAttachPawn:
+		return AttachToPawn(s, gd, pid, a.CardID, a.TargetID)
+	case ActAttachEnemy:
+		return AttachToEnemy(s, gd, pid, a.CardID, a.PawnID, a.TargetID)
+	case ActAttachBlock:
+		c, err := coord()
+		if err != nil {
+			return err
+		}
+		return AttachToBlock(s, gd, pid, a.CardID, a.PawnID, c)
 	default:
 		return fmt.Errorf("unknown action %q", a.Type)
 	}
@@ -222,7 +322,7 @@ func Apply(s *domain.GameState, a Action) error {
 
 // RunTurn executes the four phases of the current player's turn, applying the
 // given action-phase actions in order, then advances to the next player.
-func RunTurn(s *domain.GameState, actions []Action) error {
+func RunTurn(s *domain.GameState, gd *domain.GameData, actions []Action) error {
 	// 1. Beginning: clear once-per-turn markers; (begin-of-turn effects: planned).
 	s.Phase = domain.PhaseBeginning
 	s.CurrentPlayerPtr().OncePerTurnUsed = map[string]bool{}
@@ -233,7 +333,7 @@ func RunTurn(s *domain.GameState, actions []Action) error {
 		if s.WinnerID != "" {
 			break
 		}
-		if err := Apply(s, a); err != nil {
+		if err := Apply(s, gd, a); err != nil {
 			return err
 		}
 	}

@@ -35,6 +35,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
   - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.
   - [ ] Apply attached effects in resolution: armor replaces defense dice & nullifies ICE; weapon/gadget/ability/movement grants; hand-size modifiers.
+- [x] (go/ts) Unified action interface: `Action` tagged union + `Apply(state, gd, action)` reducer dispatching every ability/card/attach action; `RunTurn` drives a turn through it. `playerId` defaults to the current player. Verified identical across mirrors. *Connective tissue for UI / bots / golden-game harness.*
 - [ ] (docs) Update domain-model + parity as each lands.
 
 ## Next (Phase 2 — full Speedrunners content)

@@ -42,7 +42,7 @@ func main() {
 			os.Exit(1)
 		}
 		cur := s.CurrentPlayerPtr().Name
-		if err := engine.RunTurn(s, []engine.Action{{Type: engine.ActPlaceMarker}}); err != nil {
+		if err := engine.RunTurn(s, gd, []engine.Action{{Type: engine.ActPlaceMarker}}); err != nil {
 			fmt.Fprintln(os.Stderr, "error:", err)
 			os.Exit(1)
 		}

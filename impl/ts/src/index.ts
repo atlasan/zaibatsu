@@ -23,7 +23,7 @@ console.log("Playing: each player places one control marker per turn...");
 let guard = 0;
 while (!winner(s)) {
   if (++guard > 10000) throw new Error("game failed to terminate");
-  runTurn(s, [{ type: "place-marker" }]);
+  runTurn(s, data, [{ type: "place-marker" }]);
 }
 
 const win = winner(s);

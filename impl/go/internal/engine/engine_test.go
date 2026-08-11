@@ -79,7 +79,7 @@ func TestRecycleRefillsHand(t *testing.T) {
 	gd := loadOrSkip(t)
 	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
 	// Player 1 opened with fewer than max; after their turn's recycle they should be at max.
-	if err := RunTurn(s, []Action{{Type: ActPass}}); err != nil {
+	if err := RunTurn(s, gd, []Action{{Type: ActPass}}); err != nil {
 		t.Fatalf("RunTurn: %v", err)
 	}
 	// After RunTurn, current player advanced to p2; inspect p1 (index 0).
@@ -94,12 +94,12 @@ func TestTurnAdvances(t *testing.T) {
 	if s.CurrentPlayer != 0 {
 		t.Fatalf("expected to start on player 0")
 	}
-	_ = RunTurn(s, nil)
+	_ = RunTurn(s, gd, nil)
 	if s.CurrentPlayer != 1 {
 		t.Errorf("after one turn CurrentPlayer = %d, want 1", s.CurrentPlayer)
 	}
-	_ = RunTurn(s, nil)
-	_ = RunTurn(s, nil)
+	_ = RunTurn(s, gd, nil)
+	_ = RunTurn(s, gd, nil)
 	if s.CurrentPlayer != 0 {
 		t.Errorf("after three turns CurrentPlayer = %d, want 0 (wrapped)", s.CurrentPlayer)
 	}
@@ -116,7 +116,7 @@ func TestWinByPlacingAllMarkers(t *testing.T) {
 			t.Fatal("game did not terminate")
 		}
 		// Whoever's turn it is places one marker.
-		if err := RunTurn(s, []Action{{Type: ActPlaceMarker}}); err != nil {
+		if err := RunTurn(s, gd, []Action{{Type: ActPlaceMarker}}); err != nil {
 			t.Fatalf("RunTurn: %v", err)
 		}
 	}
@@ -134,7 +134,7 @@ func TestCannotOverplaceMarkers(t *testing.T) {
 	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 5})
 	p := s.CurrentPlayerPtr()
 	p.ControlMarkersPlaced = p.ControlMarkersTotal
-	if err := Apply(s, Action{Type: ActPlaceMarker}); err == nil {
+	if err := Apply(s, gd, Action{Type: ActPlaceMarker}); err == nil {
 		t.Errorf("expected error placing marker with none remaining")
 	}
 }

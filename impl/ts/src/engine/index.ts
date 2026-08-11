@@ -3,11 +3,12 @@
 // impl/go/internal/engine. See DOCS/turn-flow.md and DOCS/parity.md.
 
 import { newRng } from "../domain/rng.ts";
-import { newCybernet } from "../domain/hex.ts";
+import { newCybernet, type Coord } from "../domain/hex.ts";
 import {
   centralCore,
   currentPlayer,
   markersRemaining,
+  playerById,
   type GameData,
   type GameState,
   type Mode,
@@ -15,6 +16,12 @@ import {
 } from "../domain/types.ts";
 
 import { checkWin } from "./win.ts";
+import { moveHex } from "./movement.ts";
+import { deleteAbility, deleteMulti } from "./combat.ts";
+import { icebreakBlock, icebreakPawn } from "./icebreaker.ts";
+import { reboot, search } from "./abilities.ts";
+import { playDelete, playIcebreakBlock, playIcebreakPawn, playReboot, playSearch } from "./cards.ts";
+import { attachToBlock, attachToEnemy, attachToPawn } from "./attach.ts";
 
 export * from "./placement.ts";
 export * from "./movement.ts";
@@ -31,10 +38,43 @@ export interface Config {
   seed: number | bigint;
 }
 
-export type ActionType = "pass" | "place-marker";
+export type ActionType =
+  | "pass"
+  | "place-marker"
+  | "move-hex"
+  | "delete"
+  | "delete-multi"
+  | "icebreak-block"
+  | "icebreak-pawn"
+  | "search"
+  | "reboot"
+  | "play-delete"
+  | "play-icebreak-block"
+  | "play-icebreak-pawn"
+  | "play-search"
+  | "play-reboot"
+  | "attach-pawn"
+  | "attach-enemy"
+  | "attach-block";
 
+/**
+ * A single player intent — a tagged union whose `type` selects which fields are
+ * read. `playerId` defaults to the current player when omitted. Mirrors the Go
+ * Action struct. Not every field applies to every type.
+ */
 export interface Action {
   type: ActionType;
+  playerId?: string;
+  cardId?: string;
+  cardIds?: string[];
+  pawnId?: string; // acting pawn (attacker/actor/searcher/rebooted)
+  targetId?: string;
+  targetIds?: string[];
+  coord?: Coord;
+  dir?: number;
+  rotation?: number;
+  extraSkulls?: number;
+  extraRollDice?: number;
 }
 
 const COLORS = [
@@ -175,18 +215,73 @@ function draw(s: GameState): string | undefined {
   return s.deck.pop();
 }
 
-/** Validates and applies a single action during the action phase. */
-export function applyAction(s: GameState, a: Action): void {
-  const p = currentPlayer(s);
+/**
+ * Validates and applies a single action, dispatching on its type to the matching
+ * resolver. `playerId` defaults to the current player when omitted. The engine's
+ * single reducer entry point (state × action → state).
+ */
+export function applyAction(s: GameState, gd: GameData, a: Action): void {
+  const pid = a.playerId ?? currentPlayer(s).id;
+  const coord = (): Coord => {
+    if (!a.coord) throw new Error(`action "${a.type}" requires a coord`);
+    return a.coord;
+  };
+
   switch (a.type) {
     case "pass":
       return;
-    case "place-marker":
-      if (markersRemaining(p) <= 0) {
-        throw new Error(`player ${p.id} has no control markers left`);
-      }
+    case "place-marker": {
+      const p = playerById(s, pid);
+      if (!p) throw new Error(`unknown player "${pid}"`);
+      if (markersRemaining(p) <= 0) throw new Error(`player ${p.id} has no control markers left`);
       p.controlMarkersPlaced++;
       checkWin(s);
+      return;
+    }
+    case "move-hex":
+      moveHex(s, gd, a.pawnId!, a.dir ?? 0);
+      return;
+    case "delete":
+      deleteAbility(s, gd, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);
+      return;
+    case "delete-multi":
+      deleteMulti(s, gd, a.pawnId!, a.targetIds ?? [], a.extraSkulls ?? 0);
+      return;
+    case "icebreak-block":
+      icebreakBlock(s, gd, a.pawnId!, coord(), a.extraRollDice ?? 0);
+      return;
+    case "icebreak-pawn":
+      icebreakPawn(s, gd, a.pawnId!, a.targetId!, a.extraRollDice ?? 0);
+      return;
+    case "search":
+      search(s, gd, a.pawnId!, a.dir ?? 0, a.rotation ?? 0);
+      return;
+    case "reboot":
+      reboot(s, gd, a.pawnId!, pid);
+      return;
+    case "play-delete":
+      playDelete(s, gd, pid, a.cardId!, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);
+      return;
+    case "play-icebreak-block":
+      playIcebreakBlock(s, gd, pid, a.cardId!, a.pawnId!, coord(), a.extraRollDice ?? 0);
+      return;
+    case "play-icebreak-pawn":
+      playIcebreakPawn(s, gd, pid, a.cardId!, a.pawnId!, a.targetId!, a.extraRollDice ?? 0);
+      return;
+    case "play-search":
+      playSearch(s, gd, pid, a.cardId!, a.pawnId!, a.dir ?? 0, a.rotation ?? 0);
+      return;
+    case "play-reboot":
+      playReboot(s, gd, pid, a.cardIds ?? [], a.pawnId!);
+      return;
+    case "attach-pawn":
+      attachToPawn(s, gd, pid, a.cardId!, a.targetId!);
+      return;
+    case "attach-enemy":
+      attachToEnemy(s, gd, pid, a.cardId!, a.pawnId!, a.targetId!);
+      return;
+    case "attach-block":
+      attachToBlock(s, gd, pid, a.cardId!, a.pawnId!, coord());
       return;
     default:
       throw new Error(`unknown action "${(a as Action).type}"`);
@@ -197,7 +292,7 @@ export function applyAction(s: GameState, a: Action): void {
  * Executes the four phases of the current player's turn, applying the given
  * action-phase actions in order, then advances to the next player.
  */
-export function runTurn(s: GameState, actions: Action[] = []): void {
+export function runTurn(s: GameState, gd: GameData, actions: Action[] = []): void {
   // 1. Beginning: clear once-per-turn markers; (begin-of-turn effects: planned).
   s.phase = "beginning";
   currentPlayer(s).oncePerTurnUsed = {};
@@ -206,7 +301,7 @@ export function runTurn(s: GameState, actions: Action[] = []): void {
   s.phase = "action";
   for (const a of actions) {
     if (s.winnerId) break;
-    applyAction(s, a);
+    applyAction(s, gd, a);
   }
 
   // 3. Recycle: refill/trim hand to max hand size.

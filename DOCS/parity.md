@@ -34,8 +34,9 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | RNG (seeded) | `domain.RNG` / `NewRNG(seed)` | `RNG` / `newRng(seed)` |
 | Load game data | `data.Load(dir)` | `loadGameData(dir)` |
 | New game | `engine.NewGame(cfg)` | `newGame(cfg)` |
-| Apply action | `engine.Apply(state, action)` | `applyAction(state, action)` |
-| Advance one full turn | `engine.RunTurn(state, actions)` | `runTurn(state, actions)` |
+| Apply action (reducer) | `engine.Apply(state, gd, action)` | `applyAction(state, gd, action)` |
+| Advance one full turn | `engine.RunTurn(state, gd, actions)` | `runTurn(state, gd, actions)` |
+| Action (tagged union) | `engine.Action{Type,…}` | `Action {type,…}` |
 | Control markers by player count | `engine.ControlMarkersFor(n)` | `controlMarkersFor(n)` |
 | Win check | `engine.Winner(state)` | `winner(state)` |
 | Hex coordinate | `domain.Coord{Q,R}` | `Coord {q,r}` |
@@ -111,6 +112,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Data loader | ✅ | ✅ | reads `spec/data/speedrunners` |
 | Setup + marker counts | ✅ | ✅ | |
 | Turn loop + phases | ✅ | ✅ | |
+| Unified action reducer | ✅ | ✅ | `Apply` dispatches every ability/card/attach action; `RunTurn` drives a turn; identical (seed 123 delete) |
 | Win detection | ✅ | ✅ | |
 | Seeded RNG + shuffle | ✅ | ✅ | LCG, Fisher–Yates |
 | Hex model + tile placement | ✅ | ✅ | axial coords; edge-connectivity + valid-orientation (Search) |

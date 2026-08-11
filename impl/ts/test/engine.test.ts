@@ -51,17 +51,17 @@ describe("determinism", () => {
 describe("turn loop", () => {
   test("recycle refills hand to max", () => {
     const s = game(["A", "B"], 1);
-    runTurn(s, [{ type: "pass" }]);
+    runTurn(s, data, [{ type: "pass" }]);
     expect(s.players[0]!.hand.length).toBe(s.players[0]!.maxHandSize);
   });
 
   test("turns advance and wrap", () => {
     const s = game(["A", "B", "C"], 3);
     expect(s.currentPlayer).toBe(0);
-    runTurn(s);
+    runTurn(s, data);
     expect(s.currentPlayer).toBe(1);
-    runTurn(s);
-    runTurn(s);
+    runTurn(s, data);
+    runTurn(s, data);
     expect(s.currentPlayer).toBe(0);
   });
 });
@@ -73,7 +73,7 @@ describe("win condition", () => {
     let guard = 0;
     while (!winner(s)) {
       if (++guard > 1000) throw new Error("game did not terminate");
-      runTurn(s, [{ type: "place-marker" }]);
+      runTurn(s, data, [{ type: "place-marker" }]);
     }
     expect(winner(s)).toBe("p1");
     expect(s.players[0]!.controlMarkersPlaced).toBe(total);
@@ -83,6 +83,6 @@ describe("win condition", () => {
     const s = game(["A", "B"], 5);
     const p = s.players[s.currentPlayer]!;
     p.controlMarkersPlaced = p.controlMarkersTotal;
-    expect(() => applyAction(s, { type: "place-marker" })).toThrow();
+    expect(() => applyAction(s, data, { type: "place-marker" })).toThrow();
   });
 });
