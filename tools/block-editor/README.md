@@ -27,7 +27,10 @@ Open `http://localhost:4173`.
   Shadowraiders.
 - Shows the extracted source image alongside the selected asset/source IDs.
 - Creates and edits a source-linked block draft: identity, expansion, ICE,
-  visual entrances, six bonus corners, typed space placements/locations, and provenance.
+  source-aligned entrances, six bonus corners, typed hex-grid space footprints, and provenance.
+- Renders each source block at an inspectable size in a vertically scrollable canvas.
+  `normal`, `effect`, and `pawn` spaces use one hex; `double` is a two-adjacent-hex
+  pill; `large / special` is unlimited and grows across one or more connected hexes.
 - Validates draft structure and cross-references before saving or export.
 - Saves editable sessions under ignored `.sessions/` and exports ignored
   `exports/*.patch.json` + `*.report.json` files.

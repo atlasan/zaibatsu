@@ -12,6 +12,30 @@ export interface AssetRecord {
   outputs?: { png?: string; webp?: string };
 }
 
+export type EditorSpaceType = "normal" | "double" | "special" | "pawn" | "effect";
+export type SpaceShape = "hex" | "pill" | "large";
+
+/** Axial coordinate in the visual pointy-hex grid drawn over a source block. */
+export interface GridCell {
+  q: number;
+  r: number;
+}
+
+/** Printed coverage only; runtime movement/capacity continue to come from `type`. */
+export interface SpaceFootprint {
+  shape: SpaceShape;
+  cells: GridCell[];
+}
+
+export interface EditorSpace {
+  id: string;
+  type: EditorSpaceType;
+  pawnId?: string;
+  effectId?: string;
+  location?: { x: number; y: number };
+  footprint: SpaceFootprint;
+}
+
 export interface BlockRecord {
   id: string;
   name: string;
@@ -21,7 +45,7 @@ export interface BlockRecord {
   bonusCorners: EdgeList;
   edges: EdgeList;
   boundarySpaces: BoundarySpaces;
-  spaces: Array<{ id: string; type: "normal" | "double" | "special" | "pawn" | "effect"; pawnId?: string; effectId?: string; location?: { x: number; y: number } }>;
+  spaces: EditorSpace[];
   assetRefs: string[];
   provisional: boolean;
 }
@@ -71,6 +95,54 @@ export function draftForAsset(asset: AssetRecord): BlockDocument {
   };
 }
 
+function axialDistance(a: GridCell, b: GridCell): number {
+  return Math.max(Math.abs(a.q - b.q), Math.abs(a.r - b.r), Math.abs((-a.q - a.r) - (-b.q - b.r)));
+}
+
+function cellsConnected(cells: GridCell[]): boolean {
+  if (!cells.length) return false;
+  const keys = new Set(cells.map((cell) => `${cell.q},${cell.r}`));
+  const seen = new Set([`${cells[0]!.q},${cells[0]!.r}`]);
+  const queue = [cells[0]!];
+  while (queue.length) {
+    const current = queue.shift()!;
+    for (const candidate of cells) {
+      const key = `${candidate.q},${candidate.r}`;
+      if (!seen.has(key) && axialDistance(current, candidate) === 1) {
+        seen.add(key);
+        queue.push(candidate);
+      }
+    }
+  }
+  return seen.size === keys.size;
+}
+
+function validateFootprint(space: EditorSpace, errors: string[]): void {
+  const footprint = space.footprint;
+  if (!footprint) {
+    errors.push(`Space ${space.id} needs a hex-grid footprint.`);
+    return;
+  }
+  const keys = new Set<string>();
+  for (const cell of footprint.cells) {
+    const key = `${cell.q},${cell.r}`;
+    if (!Number.isInteger(cell.q) || !Number.isInteger(cell.r) || Math.max(Math.abs(cell.q), Math.abs(cell.r), Math.abs(-cell.q - cell.r)) > 2) {
+      errors.push(`Space ${space.id} has a cell outside the editable hex grid.`);
+    }
+    if (keys.has(key)) errors.push(`Space ${space.id} repeats grid cell ${key}.`);
+    keys.add(key);
+  }
+  if (space.type === "double" && (footprint.shape !== "pill" || footprint.cells.length !== 2 || axialDistance(footprint.cells[0]!, footprint.cells[1]!) !== 1)) {
+    errors.push(`Double space ${space.id} must be a pill covering two adjacent hexes.`);
+  }
+  if (space.type === "special" && (footprint.shape !== "large" || !footprint.cells.length || !cellsConnected(footprint.cells))) {
+    errors.push(`Special space ${space.id} must be a connected large footprint of one or more hexes.`);
+  }
+  if (["normal", "effect", "pawn"].includes(space.type) && (footprint.shape !== "hex" || footprint.cells.length !== 1)) {
+    errors.push(`${space.type} space ${space.id} must cover exactly one hex.`);
+  }
+}
+
 export function validateDocument(document: BlockDocument, assets: AssetRecord[]): string[] {
   const errors: string[] = [];
   const ids = new Set(assets.map((asset) => asset.assetId));
@@ -87,6 +159,7 @@ export function validateDocument(document: BlockDocument, assets: AssetRecord[])
   for (const space of document.block.spaces) {
     if (!validId.test(space.id) || spaceIds.has(space.id)) errors.push(`Space id '${space.id}' is invalid or duplicated.`);
     if (space.location && (space.location.x < 0 || space.location.x > 100 || space.location.y < 0 || space.location.y > 100)) errors.push(`Space ${space.id} location must be within 0..100.`);
+    validateFootprint(space, errors);
     spaceIds.add(space.id);
   }
   document.block.boundarySpaces.forEach((edge, index) => edge.forEach((spaceId) => {

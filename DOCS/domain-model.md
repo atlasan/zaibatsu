@@ -61,7 +61,9 @@ A cell on a block.
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect
 - `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.
+- `footprint?: { shape, cells }` - source-layout-only coverage on the editor pointy-hex grid (`q`,`r`, radius 2). `hex` is one printed cell; `pill` is exactly two adjacent cells; `large` is one or more connected cells. It does **not** create movement links or override capacity.
 
+The rule type remains authoritative for occupancy: `normal` and `effect` hold one pawn; `double` holds two and must use a two-hex `pill`; `special` is the large/unlimited space and may use a connected one-or-more-hex `large` footprint; a `pawn` home is unlimited and uses one visual hex. The footprint records what is printed on the tile, not a second board grid.
 ### Pawn _(slice: identity/defense/movement/abilities/class/slots; effects planned)_
 An agent, represented by a piece (position) + control card (attributes).
 - `id`, `name`, `expansion`, `class: Class[]`

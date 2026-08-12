@@ -109,6 +109,26 @@ for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
     if (location && (!Number.isFinite(location.x) || !Number.isFinite(location.y) || (location.x as number) < 0 || (location.x as number) > 100 || (location.y as number) < 0 || (location.y as number) > 100)) {
       fail(`block editor document ${String(document.id)} has an invalid visual space location`);
     }
+    const footprint = space.footprint as Json | undefined;
+    const cells = footprint?.cells as Json[] | undefined;
+    const cellKey = (cell: Json) => `${String(cell.q)},${String(cell.r)}`;
+    const distance = (a: Json, b: Json) => Math.max(Math.abs((a.q as number) - (b.q as number)), Math.abs((a.r as number) - (b.r as number)), Math.abs(-((a.q as number) + (a.r as number)) + (b.q as number) + (b.r as number)));
+    const inGrid = (cell: Json) => Number.isInteger(cell.q) && Number.isInteger(cell.r) && Math.max(Math.abs(cell.q as number), Math.abs(cell.r as number), Math.abs(-((cell.q as number) + (cell.r as number)))) <= 2;
+    if (!footprint || !["hex", "pill", "large"].includes(String(footprint.shape)) || !Array.isArray(cells) || !cells.length || !cells.every(inGrid) || new Set(cells.map(cellKey)).size !== cells.length) {
+      fail(`block editor document ${String(document.id)} has an invalid hex-grid space footprint`);
+      continue;
+    }
+    if (space.type === "double" && (footprint.shape !== "pill" || cells.length !== 2 || distance(cells[0]!, cells[1]!) !== 1)) {
+      fail(`block editor document ${String(document.id)} has a double space without a two-hex pill`);
+    }
+    const connected = new Set([cellKey(cells[0]!)]); const queue = [cells[0]!];
+    while (queue.length) { const current = queue.shift()!; for (const candidate of cells) if (!connected.has(cellKey(candidate)) && distance(current, candidate) === 1) { connected.add(cellKey(candidate)); queue.push(candidate); } }
+    if (space.type === "special" && (footprint.shape !== "large" || connected.size !== cells.length)) {
+      fail(`block editor document ${String(document.id)} has a large space without a connected footprint`);
+    }
+    if (["normal", "effect", "pawn"].includes(String(space.type)) && (footprint.shape !== "hex" || cells.length !== 1)) {
+      fail(`block editor document ${String(document.id)} has a single-hex space with an invalid footprint`);
+    }
   }
   if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) {
     fail(`block editor document ${String(document.id)} must retain its selected asset reference`);

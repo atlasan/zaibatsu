@@ -21,10 +21,19 @@ describe("block editor model", () => {
     const draft = draftForAsset(asset);
     draft.block.bonusCorners[0] = true;
     draft.block.bonusFragments = 0;
-    draft.block.spaces.push({ id: "space-a", type: "normal", location: { x: 101, y: 50 } });
+    draft.block.spaces.push({ id: "space-a", type: "normal", location: { x: 101, y: 50 }, footprint: { shape: "hex", cells: [{ q: 0, r: 0 }] } });
     const errors = validateDocument(draft, [asset]).join(" ");
     expect(errors).toContain("Bonus fragment count");
     expect(errors).toContain("within 0..100");
+  });
+
+  test("requires a double pill and a connected large footprint", () => {
+    const draft = draftForAsset(asset);
+    draft.block.spaces.push({ id: "double-a", type: "double", footprint: { shape: "pill", cells: [{ q: 0, r: 0 }, { q: 2, r: 0 }] } });
+    draft.block.spaces.push({ id: "large-a", type: "special", footprint: { shape: "large", cells: [{ q: -2, r: 0 }, { q: 2, r: 0 }] } });
+    const errors = validateDocument(draft, [asset]).join(" ");
+    expect(errors).toContain("two adjacent hexes");
+    expect(errors).toContain("connected large footprint");
   });
 
   test("exports an optimistic-concurrency patch", () => {

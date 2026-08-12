@@ -51,14 +51,27 @@ type SpaceLocation struct {
 	Y float64 `json:"y"`
 }
 
+// SpaceGridCell is one axial coordinate on the source-layout pointy-hex grid.
+type SpaceGridCell struct {
+	Q int `json:"q"`
+	R int `json:"r"`
+}
+
+// SpaceFootprint describes printed source-layout coverage; it never changes runtime movement or capacity.
+type SpaceFootprint struct {
+	Shape string          `json:"shape"`
+	Cells []SpaceGridCell `json:"cells"`
+}
+
 // Space is a cell on a block that pawns occupy.
 type Space struct {
-	ID       string         `json:"id"`
-	Type     string         `json:"type"`
-	PawnID   string         `json:"pawnId,omitempty"`
-	EffectID string         `json:"effectId,omitempty"`
-	Location *SpaceLocation `json:"location,omitempty"`
-	Modifier *SpaceModifier `json:"modifier,omitempty"`
+	ID        string          `json:"id"`
+	Type      string          `json:"type"`
+	PawnID    string          `json:"pawnId,omitempty"`
+	EffectID  string          `json:"effectId,omitempty"`
+	Location  *SpaceLocation  `json:"location,omitempty"`
+	Footprint *SpaceFootprint `json:"footprint,omitempty"`
+	Modifier  *SpaceModifier  `json:"modifier,omitempty"`
 }
 
 // BlockEffects holds effect ids fired at placement / on gaining control.

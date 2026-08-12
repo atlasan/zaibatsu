@@ -36,12 +36,25 @@ export interface SpaceLocation {
   y: number;
 }
 
+/** One axial coordinate on the source-layout pointy-hex grid. */
+export interface SpaceGridCell {
+  q: number;
+  r: number;
+}
+
+/** Physical printed coverage for a space; it never changes runtime movement or capacity. */
+export interface SpaceFootprint {
+  shape: "hex" | "pill" | "large";
+  cells: SpaceGridCell[];
+}
+
 export interface Space {
   id: string;
   type: SpaceType;
   pawnId?: string;
   effectId?: string;
   location?: SpaceLocation;
+  footprint?: SpaceFootprint;
   modifier?: SpaceModifier;
 }
 

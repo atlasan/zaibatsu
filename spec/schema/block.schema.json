@@ -65,6 +65,32 @@
     "provisional": { "type": "boolean", "default": false }
   },
   "$defs": {
+    "spaceGridCell": {
+      "type": "object",
+      "required": ["q", "r"],
+      "additionalProperties": false,
+      "properties": {
+        "q": { "type": "integer", "minimum": -2, "maximum": 2 },
+        "r": { "type": "integer", "minimum": -2, "maximum": 2 }
+      }
+    },
+    "spaceFootprint": {
+      "type": "object",
+      "required": ["shape", "cells"],
+      "additionalProperties": false,
+      "properties": {
+        "shape": {
+          "enum": ["hex", "pill", "large"],
+          "description": "hex = one printed cell; pill = two adjacent printed cells; large = one or more connected printed cells."
+        },
+        "cells": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/spaceGridCell" }
+        }
+      }
+    },
     "space": {
       "type": "object",
       "required": ["id", "type"],
@@ -83,6 +109,10 @@
             "x": { "type": "number", "minimum": 0, "maximum": 100 },
             "y": { "type": "number", "minimum": 0, "maximum": 100 }
           }
+        },
+        "footprint": {
+          "$ref": "#/$defs/spaceFootprint",
+          "description": "Visual/source layout footprint on the block internal pointy-hex grid. It describes printed space coverage only; it does not define movement adjacency or alter gameplay capacity."
         },
         "neighbors": {
           "type": "array",

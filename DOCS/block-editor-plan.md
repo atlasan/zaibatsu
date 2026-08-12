@@ -89,7 +89,7 @@ session; export a JSON patch only after validation.
 |---|---|---|
 | 0 - contracts | Session schema, example draft, UX/design record | Data lifecycle and acceptance tests agreed |
 | 1 - block MVP | Standalone local UI, asset browser, form editor, session save | **Implemented:** a block draft can be created, reopened, validated and exported |
-| 2 - block geometry | Hex canvas, six entrances, bonus corners, and typed source-positioned spaces | **Partially implemented:** visual layout editing + validation are available; space-adjacency remains a source-transcription follow-up |
+| 2 - block geometry | Hex canvas, six entrances, bonus corners, and typed source-positioned spaces | **Implemented for print layout:** a source-aligned, scrollable pointy-hex canvas validates entrance/corner order, two-hex double pills, and connected large/special footprints. Space-adjacency remains a source-transcription follow-up. |
 | 3 - source workflow | Provenance locator forms, review report, draft/verified gating | Reviewer can trace every exported field to source evidence |
 | 4 - generic resources | Card/pawn/marker schemas and list/canvas plug-ins | One shared editor shell manages all core resource types |
 | 5 - import helpers | Optional OCR/image-assisted suggestions | Suggestions remain draft-only and require confirmation |
