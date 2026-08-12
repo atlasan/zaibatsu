@@ -60,3 +60,10 @@ the downloaded page to ignored local cache.
 The source files remain authoritative. The English rulebooks state CC BY-NC
 2.5 MX while separately identifying illustrations as their creators' property;
 keep the resulting assets non-commercial and retain the source attribution.
+
+## Core action-card assets
+
+`refresh-core` includes the English Speedrunners and Shadowraiders action-card
+PDFs. Each produces 54 `action-card` manifest entries. English files are the
+primary transcription evidence; Spanish files may be consulted manually as
+supporting evidence and are never substituted automatically.

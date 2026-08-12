@@ -85,6 +85,7 @@ type Block struct {
 	ID             string       `json:"id"`
 	Name           string       `json:"name"`
 	Expansion      Expansion    `json:"expansion"`
+	LayoutID       string       `json:"layoutId,omitempty"`
 	IsCentralCore  bool         `json:"isCentralCore,omitempty"`
 	IceValue       IceValue     `json:"iceValue,omitempty"`
 	Edges          []bool       `json:"edges,omitempty"`
@@ -116,6 +117,7 @@ type Pawn struct {
 	ID          string       `json:"id"`
 	Name        string       `json:"name"`
 	Expansion   Expansion    `json:"expansion"`
+	LayoutID    string       `json:"layoutId,omitempty"`
 	Class       []string     `json:"class"`
 	Defense     []DefenseDie `json:"defense"`
 	Movement    Movement     `json:"movement"`
@@ -152,6 +154,7 @@ type ControlCard struct {
 	ID          string      `json:"id"`
 	Name        string      `json:"name"`
 	Expansion   Expansion   `json:"expansion"`
+	LayoutID    string      `json:"layoutId,omitempty"`
 	Subject     CardSubject `json:"subject"`
 	IsStarter   bool        `json:"isStarter,omitempty"`
 	Provisional bool        `json:"provisional,omitempty"`

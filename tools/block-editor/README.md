@@ -27,9 +27,9 @@ Open `http://localhost:4173`.
   Shadowraiders.
 - Shows the extracted source image alongside the selected asset/source IDs.
 - Creates and edits a source-linked block draft: identity, expansion, ICE,
-  source-aligned entrances, six bonus corners, typed hex-grid space footprints, and provenance.
+  source-aligned entrances, six bonus corners, typed seven-small-hex space footprints, and provenance.
 - Renders each source block at an inspectable size in a vertically scrollable canvas.
-  `normal`, `effect`, and `pawn` spaces use one hex; `double` is a two-adjacent-hex
+  Each block has seven printed small hexes (one centre plus six adjacent). `normal`, `effect`, and `pawn` spaces use one hex; `double` is a two-adjacent-hex
   pill; `large / special` is unlimited and grows across one or more connected hexes.
 - Validates draft structure and cross-references before saving or export.
 - Saves editable sessions under ignored `.sessions/` and exports ignored
@@ -48,3 +48,12 @@ bun test
 
 See [the editor plan](../../DOCS/block-editor-plan.md) for the next phases,
 including richer space topology and resource-type plug-ins.
+## Action-card workflow
+
+The editor now also browses source-linked `action-card` assets for both English
+editions. A card draft stores the printed transcription and vision evidence
+outside canonical game data. OCR, icon candidates, and duplicate groups are
+suggestions only: confirm both the transcription and copy grouping before
+export. Card exports target `action-cards.json`; a missing Shadowraiders target
+is represented by an explicit `targetAbsent` precondition in the review patch.
+Existing v1 block sessions are accepted and saved as v2 data-editor sessions.

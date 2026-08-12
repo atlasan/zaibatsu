@@ -72,3 +72,4 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] CI: run `go test`, `bun test`, `tsc`, and a demo-parity check (Go vs TS output must match) on every change.
 - [ ] Decide and add `LICENSE` for engine code (game remains CC BY-NC 2.5 MX).
 - [ ] Consider a JSON snapshot format for `GameState` to diff Go vs TS states directly.
+- [x] (tools/spec/docs) Source-linked action-card automation: both English 54-card decks are cropped into the manifest; local review-only vision emits OCR/icon/duplicate candidates; the data editor supports v2 action-card drafts and provenance reports. No candidate directly changes canonical data or engine effects.

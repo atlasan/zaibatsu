@@ -28,7 +28,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Game state | `domain.GameState` | `GameState` |
 | Player | `domain.Player` | `Player` |
 | Block | `domain.Block` | `Block` |
-| Block visual layout | `Block.BoundarySpaces`, `Block.BonusCorners`, `Block.AssetRefs` | `Block.boundarySpaces`, `Block.bonusCorners`, `Block.assetRefs` |
+| Block visual layout | `Block.LayoutID`, `Block.BoundarySpaces`, `Block.BonusCorners`, `Block.AssetRefs` | `Block.layoutId`, `Block.boundarySpaces`, `Block.bonusCorners`, `Block.assetRefs` |
 | Space visual location | `Space.Location` | `Space.location` |
 | Space visual footprint | `Space.Footprint` / `SpaceGridCell` | `Space.footprint` / `SpaceGridCell` |
 | Pawn | `domain.Pawn` | `Pawn` |
@@ -131,7 +131,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
 | Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
-| Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and normalized source positions; source-grid footprints render hex/pill/large print coverage only, with no effect or movement resolution |
+| Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-confirmed seven-small-hex layout; footprints render hex/pill/large print coverage only, with no effect or movement resolution |
 | Space-to-space movement | blocked | blocked | backlog - needs source-verified space-adjacency data |
 | Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

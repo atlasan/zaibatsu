@@ -7,7 +7,7 @@ block geometry + feature candidates. Run from the repo root:
     python -m hexvision check               # structural validation of the JSON
     python -m hexvision verify              # re-extract, confirm determinism
 
-Outputs go under the pipeline's build tree — tmp/artifacts/build/<asset>/hexvision/
+Outputs go under the pipeline's build tree â€” tmp/artifacts/build/<asset>/hexvision/
 (git-ignored, unified with the artifacts tool). The JSON is PROVISIONAL: the
 overlays are the human review surface before promoting anything into spec/data.
 """
@@ -23,6 +23,7 @@ import sys
 import cv2
 
 from . import detect
+from . import cards
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_BUILD = os.path.join("tmp", "artifacts", "build")
@@ -53,21 +54,34 @@ def cmd_generate(args: argparse.Namespace) -> int:
     ov_dir = os.path.join(out, "overlays")
     os.makedirs(ov_dir, exist_ok=True)
     tiles = []
+    kind = "action-card" if "action-cards" in args.asset else "block"
     for p in paths:
         aid = _asset_id(p)
-        tile = detect.extract_tile(p, aid)
-        bgr, _ = detect.load_tile(p)
-        cv2.imwrite(os.path.join(ov_dir, f"{aid}.overlay.png"), detect.draw_overlay(bgr, tile))
-        tiles.append(tile.to_dict())
+        if kind == "block":
+            tile = detect.extract_tile(p, aid)
+            bgr, _ = detect.load_tile(p)
+            cv2.imwrite(os.path.join(ov_dir, f"{aid}.overlay.png"), detect.draw_overlay(bgr, tile))
+            tiles.append(tile.to_dict())
+        else:
+            card = cards.extract_card(p, aid)
+            image = cv2.imread(p, cv2.IMREAD_COLOR)
+            cv2.imwrite(os.path.join(ov_dir, f"{aid}.overlay.png"), cards.overlay(image, card))
+            tiles.append(card)
+    duplicate_groups: dict[str, list[str]] = {}
+    if kind == "action-card":
+        for item in tiles:
+            duplicate_groups.setdefault(item["perceptualHash"], []).append(item["asset"])
     doc = {
         "tool": "hexvision",
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "asset": args.asset,
+        "kind": kind,
         "provisional": True,
         "note": "Geometry (center/vertices/inradius) is reliable; edges/spaces/"
-                "bonusCorners are assistive candidates — verify via out/overlays/ "
+                "bonusCorners are assistive candidates â€” verify via out/overlays/ "
                 "before promoting into spec/data.",
         "tiles": tiles,
+        **({"duplicateGroups": [group for group in duplicate_groups.values() if len(group) > 1]} if kind == "action-card" else {}),
     }
     os.makedirs(out, exist_ok=True)
     out_json = os.path.join(out, f"{args.asset}.vision.json")
@@ -93,6 +107,26 @@ def cmd_check(args: argparse.Namespace) -> int:
     errors: list[str] = []
     warns: list[str] = []
     seen = set()
+    if doc.get("kind") == "action-card":
+        for card in doc.get("tiles", []):
+            aid = card.get("asset", "?")
+            if aid in seen:
+                errors.append(f"{aid}: duplicate card asset id")
+            seen.add(aid)
+            if card.get("kind") != "action-card":
+                errors.append(f"{aid}: wrong component kind")
+            if not isinstance(card.get("perceptualHash"), str) or len(card["perceptualHash"]) != 256:
+                errors.append(f"{aid}: missing perceptual hash")
+            if not 0 <= card.get("confidence", -1) <= 1:
+                errors.append(f"{aid}: invalid OCR confidence")
+            if not card.get("reviewRequired"):
+                errors.append(f"{aid}: action cards must remain review-required")
+        for error in errors:
+            print(f"error: {error}", file=sys.stderr)
+        if errors:
+            return 1
+        print(f"check: {len(seen)} action cards OK (all require review)")
+        return 0
     for t in doc.get("tiles", []):
         aid = t.get("asset", "?")
         if aid in seen:
@@ -135,7 +169,7 @@ def cmd_verify(args: argparse.Namespace) -> int:
     mismatches = 0
     for p in paths:
         aid = _asset_id(p)
-        fresh = detect.extract_tile(p, aid).to_dict()
+        fresh = (cards.extract_card(p, aid) if doc.get("kind") == "action-card" else detect.extract_tile(p, aid).to_dict())
         if stored.get(aid) != fresh:
             mismatches += 1
             print(f"verify: {aid} differs from stored JSON (re-run generate)", file=sys.stderr)

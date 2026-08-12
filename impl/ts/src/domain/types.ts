@@ -67,6 +67,8 @@ export interface Block {
   id: string;
   name: string;
   expansion: Expansion;
+  /** Source layout: one centre plus six adjacent printed small hexes. */
+  layoutId?: "standard-seven-small-hex-grid";
   isCentralCore?: boolean;
   iceValue?: IceValue;
   edges?: boolean[];

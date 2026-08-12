@@ -13,6 +13,7 @@
         "id": "speedrunners-draft-p01-c01",
         "name": "Untranscribed Speedrunners block",
         "expansion": "speedrunners",
+        "layoutId": "standard-seven-small-hex-grid",
         "bonusFragments": 0,
         "bonusCorners": [false, false, false, false, false, false],
         "edges": [false, false, false, false, false, false],

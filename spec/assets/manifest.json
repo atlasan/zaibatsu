@@ -1,6 +1,1356 @@
 {
   "assets": [
     {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c01.webp"
+      },
+      "page": 1,
+      "pngSha256": "c48e9b784b13b6133706c996af12ec8edddc3f872ebd267a518e208d3b933087",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "3015c6ab11e3dc26a1fa4494edc373dfae6bd68de0008a17429c89f12c89a6b0",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "cbac09f13f4ffaa49a1e377e09d2d08bb26d125f6a4e8f864153c7f2ac5ad9ac",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c04.webp"
+      },
+      "page": 1,
+      "pngSha256": "8821da4209b23fbca85ee82e28041f7073bc37e7253e48dce91daf118146cd77",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c05.webp"
+      },
+      "page": 1,
+      "pngSha256": "67bcd44313c624c7221029a185e40159738129541700174dbb26ef4386de88d8",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c06.webp"
+      },
+      "page": 1,
+      "pngSha256": "b4be3808f33525caf0c2e4f06a261abeb864d7439b41094caeb9a15f51c31a6d",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c07.webp"
+      },
+      "page": 1,
+      "pngSha256": "df620bd8075616438ee744ac64577044a9d920c54b682f3b3926d1f25819d07f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c08.webp"
+      },
+      "page": 1,
+      "pngSha256": "1d101e6d47e778024f4a465d7ac7765e3c14fee5c3f04ad9679e4e1870f9e88c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p01-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p01-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p01-c09.webp"
+      },
+      "page": 1,
+      "pngSha256": "72a2097746407a348f8179f351c8b5332aacfaea3eedc468be4d24148454ef1e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c01.webp"
+      },
+      "page": 2,
+      "pngSha256": "86e5bc1b83d01cebec3b78807f5676c1051590d1a8d8b580347115bb6a5a374f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "abe52e92077a96dca403c2c77594e79aff7592051ec97eedede953048ef2f0c3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "92da26f4e742d40897a77452819d52f4221fbd7e79e2600d1878422495060886",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c04.webp"
+      },
+      "page": 2,
+      "pngSha256": "037b327e3e5c40ba3fc275625a56e6a4dbc540d6c5ff6970e6442d6f3fb54023",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c05.webp"
+      },
+      "page": 2,
+      "pngSha256": "c8c3406d8a457f0ee5cc5e3a8a5653e5a392e30dd2ca36bb10a9aa5be45177ec",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c06.webp"
+      },
+      "page": 2,
+      "pngSha256": "99cabe7a59d603363072beb6dd85f878bfa384982beaa0056c8697e6e4eee099",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c07.webp"
+      },
+      "page": 2,
+      "pngSha256": "aa0effffa78986167242d2de9485cf23136318f2630820964b04898c1e062847",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c08.webp"
+      },
+      "page": 2,
+      "pngSha256": "e0af95ac0c571c94991f4df45672b7a712be89ca79b6e96687a6ad3132ef275f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p02-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p02-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p02-c09.webp"
+      },
+      "page": 2,
+      "pngSha256": "12ded2df500e65930154fc8aaf8f37d19ef1dceeb2e7b03becea9421101e2318",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c01.webp"
+      },
+      "page": 3,
+      "pngSha256": "dd6e571095684079d3e356c434652bdac7614c8ab887f760b3d4e8c439387185",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c02.webp"
+      },
+      "page": 3,
+      "pngSha256": "af138251380a2e6bb06fbd2924dedce4ba1ee2ef6fe97a1e8e5391245d8336f0",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c03.webp"
+      },
+      "page": 3,
+      "pngSha256": "7548bcf0adfbb5b642042277c8dafe45a16195210f58341f6933c114c13de444",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c04.webp"
+      },
+      "page": 3,
+      "pngSha256": "2132fbd52dbd491ba77ffd34f6068858306211a200a713f399f129c5adb26b5f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c05.webp"
+      },
+      "page": 3,
+      "pngSha256": "ab2b1251babea29d289b4ce6a62900b2738e26284aa0e9fefff4b22bf9eac075",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c06.webp"
+      },
+      "page": 3,
+      "pngSha256": "991232ec02652b208b1f587909378b718e54703db375a196bfec2ac8c0cee91e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c07.webp"
+      },
+      "page": 3,
+      "pngSha256": "665f34a913106716a427e4daa73befcf04ef7d5522c5b3724c8e8b997e8396f4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c08.webp"
+      },
+      "page": 3,
+      "pngSha256": "2d02d2cd80a5269dd01ffd435d502d709f6fcd91c87186421f62c5736f9dcda5",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p03-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p03-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p03-c09.webp"
+      },
+      "page": 3,
+      "pngSha256": "6d007e6bc63c92f258f325298f541c0fcc791efcd984907f75019970aaff02bb",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c01.webp"
+      },
+      "page": 4,
+      "pngSha256": "51a09cdba31571eb8f029db66e9cb16dcc289cbba264537a7769080bac6f03f7",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c02.webp"
+      },
+      "page": 4,
+      "pngSha256": "d12be0c650a53b1b77391dd71c0845a578dbecfd53bbae0105e87f2ab5eff6c3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c03.webp"
+      },
+      "page": 4,
+      "pngSha256": "6e1aa66f382f4dcfd700bc2ec5721276e84c07c8556ace5f34240d4aeb83526c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c04.webp"
+      },
+      "page": 4,
+      "pngSha256": "1aa378d2a0ef0a659ce49b981f8ac80342dad38e24732ed1bda9239b8b56d83d",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c05.webp"
+      },
+      "page": 4,
+      "pngSha256": "39dd5605ed81b5f0d1ad3ca85e6e636d79865617f8c0312eb19896de86f9a98e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c06.webp"
+      },
+      "page": 4,
+      "pngSha256": "c2b17dd1824347ed9c9765c09a8e104dd8d12df8d4e97e4fb1cb20f2959c28ea",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c07.webp"
+      },
+      "page": 4,
+      "pngSha256": "589638d57dd474e9ec32831474c7a7f10e38907ea32b263e569fa5e72b611852",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c08.webp"
+      },
+      "page": 4,
+      "pngSha256": "100afba39ba6cc1587ca444992f2dc6f5f671091e816871c88467bdb66fb7e64",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p04-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p04-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p04-c09.webp"
+      },
+      "page": 4,
+      "pngSha256": "e930d830ca94eb55e4e637ce0e3b0defc84d10be1361187e17a6cb041ceb16fd",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c01.webp"
+      },
+      "page": 5,
+      "pngSha256": "02a71043819965f88454ab5c2f8adfb0775f2bd425d005b6601f53647dfbc80c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c02.webp"
+      },
+      "page": 5,
+      "pngSha256": "bb633b9ba52ca5d6db9779d58d2de4ba709e1e485776539c40b12e532ce14b86",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c03.webp"
+      },
+      "page": 5,
+      "pngSha256": "af0749baea71b1c5483f5227e9db9bd97a2a9430f041f356f000295e744cfd12",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c04.webp"
+      },
+      "page": 5,
+      "pngSha256": "6a9c54447e8123cecb2ab9dbbf773dddd685e42f37bc2939a5563f0d79fd6327",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c05.webp"
+      },
+      "page": 5,
+      "pngSha256": "38ac872d4ad05ae12d5f99e13a7e101abd297bec58ea1f4f0ff327bebcb54632",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c06.webp"
+      },
+      "page": 5,
+      "pngSha256": "02fcbd6809523b0edbf850bd66e723adcd484471c8b7400b335b923463348804",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c07.webp"
+      },
+      "page": 5,
+      "pngSha256": "a189f8e267e649cccf82cd09f57422ec225a8441cfe4a2ec92cfccc583a89c43",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c08.webp"
+      },
+      "page": 5,
+      "pngSha256": "addb90ca2b824a91b3a78323f411ae251151152f42ad0515a4bd6f11864558a2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p05-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p05-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p05-c09.webp"
+      },
+      "page": 5,
+      "pngSha256": "53926eb78d8a3161a7f868cb007805b7df3ae01ca71bf5a02da4aa7b0e167ab9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c01.webp"
+      },
+      "page": 6,
+      "pngSha256": "ead75753bbb6bac7bc37dbdb287583369c8b0ae9c733ae791141497af7b32cd8",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c02.webp"
+      },
+      "page": 6,
+      "pngSha256": "bc710237478a315fb240248fb53a1aed64e8f389e270076cce247781462aa93c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c03.webp"
+      },
+      "page": 6,
+      "pngSha256": "6db9b18a89135143bf541ceb6d918e95d751fae55f437eeb6a13c5dc42d15ac3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c04.webp"
+      },
+      "page": 6,
+      "pngSha256": "42f1cf4d328470a15d834cdb7c1c313da54e02c321b1be1e5da4d74e910ffe3d",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c05.webp"
+      },
+      "page": 6,
+      "pngSha256": "fcc544d8c2cbd625642d7aa22fc6dced96bf17a4c8acfe00102d9b1f698ee82e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c06.webp"
+      },
+      "page": 6,
+      "pngSha256": "1bef488ec261ad13d4e52502763390622965ef9e40150abb261ad9fc97283653",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c07.webp"
+      },
+      "page": 6,
+      "pngSha256": "2b1ccb6e5dd56a9fbdd0192a955759ec22893ad9afd6166731e0c5fc083afcce",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c08.webp"
+      },
+      "page": 6,
+      "pngSha256": "28a2317e4e95bdf03013d1afc492f7781bb9a753b05c2ee6ff63b82d4fd392d9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
+      "artifactId": "sh-en-action-cards",
+      "assetId": "sh-en-action-cards-p06-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-action-cards/png/sh-en-action-cards-p06-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-action-cards/webp/sh-en-action-cards-p06-c09.webp"
+      },
+      "page": 6,
+      "pngSha256": "fc15b8feb05c5a2ec2de4bcd638f20f8dac8917c5d5098907d21dbe0de1c06d4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee"
+    },
+    {
       "artifactId": "sh-en-blocks-a4",
       "assetId": "sh-en-blocks-a4-p01-c01",
       "crop": {
@@ -1420,6 +2770,1356 @@
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c01.webp"
+      },
+      "page": 1,
+      "pngSha256": "fa649cfe28535ab9d292751cfce0134b9e5d4a94e9d857791910d900adba2f86",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "8cb810d4bb17416026b15fb51ee59b2f6062787a07d2946e6b21622665401b9e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "c64b7a4ea73e911649a7afb2df25c67204f95936042c7d6cf08a0f0bdacebada",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c04.webp"
+      },
+      "page": 1,
+      "pngSha256": "3932dc900dedf3c223ab3c781f98cd0cab0631753a83bf02775d8b8ce4d68f44",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c05.webp"
+      },
+      "page": 1,
+      "pngSha256": "e50c1be29c6fce8af945f4d7fa91a4229ba683c94eb96732439de6ec32314428",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c06.webp"
+      },
+      "page": 1,
+      "pngSha256": "80dc14ceafc3c9cb6f4674531fbb0f814a04e8cca2cb6ae4d841ea8d3b736fc9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c07.webp"
+      },
+      "page": 1,
+      "pngSha256": "18368666af9f914dfbb130d4ed36558af41b427242ce1b69281e6a97f729c996",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c08.webp"
+      },
+      "page": 1,
+      "pngSha256": "9b28b4f94029e636716c1ebc8bae3a47f77a181a5a17142bb876f0bac6f2b9a8",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p01-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c09.webp"
+      },
+      "page": 1,
+      "pngSha256": "9d8be9510be01a0bd92b0cf07aff4073d993da2cfa44a82e8e0fecb22d6083a2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c01.webp"
+      },
+      "page": 2,
+      "pngSha256": "0b3c6864dd2eddcbee149b1324c91ba3f688bbcf8bd960c13e79c4d70ddc801d",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "f11fd70c535115cd49e0c3a33b537663f09c36d3b5fabe5a04c431bd1975ce3a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "9dfb502efa0867752e3e304d54698d71c841301e4ba2420ca232b5535fa1b20e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c04.webp"
+      },
+      "page": 2,
+      "pngSha256": "6ac7e4f1aabed1988526b72519239147a191863768784d4e2557c662568981b2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c05.webp"
+      },
+      "page": 2,
+      "pngSha256": "237e0d8e616411a4c297c5b241644ced7e7187fb250316464948000467530fc8",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c06.webp"
+      },
+      "page": 2,
+      "pngSha256": "f1f6ea5d67fd96029a72f69e2efe491e9442e99f7dca3dd2f2bc60619e06f956",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c07.webp"
+      },
+      "page": 2,
+      "pngSha256": "4ea8588400276daae1049b1b6b7d08a8ac1990504a37ee0ffb525efb5f7f28c4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c08.webp"
+      },
+      "page": 2,
+      "pngSha256": "38a0a4a2a029add520a844238f5d03c98828222c4e27fae6c4bb4baea863b590",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p02-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p02-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p02-c09.webp"
+      },
+      "page": 2,
+      "pngSha256": "4f9516c9285d4224c5b7d2888fd9af4e63e73cc9ea964e4ee770d4d08a6f2543",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c01.webp"
+      },
+      "page": 3,
+      "pngSha256": "6c9dde5a1251049a4209418191c226abe7ebedb3dea4cb7e75934266c5b59369",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c02.webp"
+      },
+      "page": 3,
+      "pngSha256": "4a80dcf8302ff516bff02580377194a3340760a517705f8d774e25b18866e0cc",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c03.webp"
+      },
+      "page": 3,
+      "pngSha256": "93940780b2d9e4e8f9c41673453f91234206268412e343af51b18aedfa4b3ef2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c04.webp"
+      },
+      "page": 3,
+      "pngSha256": "22db9e9b86b26eeabf515fa2f32b130cea291304ee68ea0820f719ff2b9e2f45",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c05.webp"
+      },
+      "page": 3,
+      "pngSha256": "5c3446316cf9a6d9f4b2d38c0bd89799ee2d6604d3344a068a5fab10442d141f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c06.webp"
+      },
+      "page": 3,
+      "pngSha256": "95574448f492946c7295ffd2000d25f0aa085e4f80d26ec87a835bc698719447",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c07.webp"
+      },
+      "page": 3,
+      "pngSha256": "c61b8d09cafbbc4f1857e1a3a3d4bfed104f77efac5ce0e5de338def0a109fa5",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c08.webp"
+      },
+      "page": 3,
+      "pngSha256": "bf522ecc9f1af3b5b3c4f306787fa2ea503b49351b8e9ca9d8ea970bbab39546",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p03-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p03-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p03-c09.webp"
+      },
+      "page": 3,
+      "pngSha256": "00df385565ea0052e07b54e2b169dd42194505f21e86f43bb73a9a3dad4cb2db",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 749,
+        "x": 150,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 749
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c01.webp"
+      },
+      "page": 4,
+      "pngSha256": "f8ed6402844e93b1cfecae8a09f4d65dba327081240d80b3d4b64cf77d0112e6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c02.webp"
+      },
+      "page": 4,
+      "pngSha256": "3dcd8b115f4cbae6655870a771559a66b52dc38efd0c5846775c480be217fc9c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c03.webp"
+      },
+      "page": 4,
+      "pngSha256": "5529be57ebaf4ac2150a92d6025be39624732f8a090b27f6ecc816d5f12feb13",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 749,
+        "x": 150,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 749
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c04.webp"
+      },
+      "page": 4,
+      "pngSha256": "a31431ec86578e65e6ca560b6dc0e42d5e94ed141478bf2f21ab2ab9930bb774",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c05.webp"
+      },
+      "page": 4,
+      "pngSha256": "b401fc4bc26f445ff410bbbbfdc945f078144e629ec86d8676196a78aa46a05a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c06.webp"
+      },
+      "page": 4,
+      "pngSha256": "ce202f58f79c5873b99070cddf0aa08d4f1375c2824f3066de28f69ac5063bf5",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 749,
+        "x": 150,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 749
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c07.webp"
+      },
+      "page": 4,
+      "pngSha256": "174b88b6d46067483745ded8bd22f1aad1943a035815038c4688f63af5ccf306",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c08.webp"
+      },
+      "page": 4,
+      "pngSha256": "fbb437a661c96e7a8ca3e797b3f24e9df89c5e3a5ce41830c518b062b6f3602e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p04-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p04-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p04-c09.webp"
+      },
+      "page": 4,
+      "pngSha256": "d2cda37098834ff5423c34e9033ba78864783292daad3ebc877149d72e8d7086",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c01.webp"
+      },
+      "page": 5,
+      "pngSha256": "51e3ee246f80d1ca3855e42f65465f269246168ee9f44dcf4af479a3d2653308",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c02.webp"
+      },
+      "page": 5,
+      "pngSha256": "b15eeb56283446281e8f662d3aafeb94719d6934f886b7c36dbb3e0874572bc6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c03.webp"
+      },
+      "page": 5,
+      "pngSha256": "8162ef0d7b827766bc67ab50969bc06b8aaf5265f44b5e6f60890edfc64a656a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c04.webp"
+      },
+      "page": 5,
+      "pngSha256": "66c1b338667907ee23ba35dcb3ca5a4ddb82410952f2073ea83f7fb4ecdd7a4b",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c05.webp"
+      },
+      "page": 5,
+      "pngSha256": "89d3a3d8df1488cf27b8828217e834edbdcf6aca718e4c661ad3761073dfd24f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c06.webp"
+      },
+      "page": 5,
+      "pngSha256": "c1f77ee9827e751fcd501e8ef481f1548ccbe566fc8c647edbc9bd18686c0347",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c07.webp"
+      },
+      "page": 5,
+      "pngSha256": "d5d8b104ebf6b49517ef58066359b4e6ea4deabc0496ff7ff10c3cc526d49122",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c08.webp"
+      },
+      "page": 5,
+      "pngSha256": "c61aa66a23bd9283e0f7673c17132dbd375d83a294e61c2fedfbe5ae00f57db6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p05-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p05-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p05-c09.webp"
+      },
+      "page": 5,
+      "pngSha256": "d40030b864b7dcb383578d5abe580a106b633f15069052d7a8ab03b423b95d39",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c01.webp"
+      },
+      "page": 6,
+      "pngSha256": "55fd14790667cd4c1634677e5d80a8236826c77174962ee629541d512d115f30",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c02.webp"
+      },
+      "page": 6,
+      "pngSha256": "25f06467c684606445e55bb69482ff303aa6208d678a54312f386b8288e31dbc",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c03.webp"
+      },
+      "page": 6,
+      "pngSha256": "119d360d9759ba9cc5d20832a4ad171cb91830d90813b47826f02ea0aba43f57",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c04.webp"
+      },
+      "page": 6,
+      "pngSha256": "895acbbf90870e88ffc08879296ddf778e80ab70b50d437dc2bf6cc10bad5e80",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c05.webp"
+      },
+      "page": 6,
+      "pngSha256": "8da5888dbc071f78329ef79e3b0f3f2761366f902cf1beb788fbeed2b2e5235f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c06.webp"
+      },
+      "page": 6,
+      "pngSha256": "48513b91edec0a6631038c41c4441a73e04d4b1d55dec17f69513f2e54c21c1f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c07.webp"
+      },
+      "page": 6,
+      "pngSha256": "8b4e35334f3df0fae561aaeb9454b9734a3ef90b64b81fa985e7858d26bbb13c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c08.webp"
+      },
+      "page": 6,
+      "pngSha256": "a29bc7dc98cb7152b741269378c6959ecaa5d96914dfec813bfdba47ec53dab0",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
+    },
+    {
+      "artifactId": "sp-en-action-cards",
+      "assetId": "sp-en-action-cards-p06-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "action-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p06-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p06-c09.webp"
+      },
+      "page": 6,
+      "pngSha256": "1ef4e1cdab52223541296a5ca87c57826ad98780ace6b57aed04ba53f09ed5b3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0"
     },
     {
       "artifactId": "sp-en-blocks-a4",

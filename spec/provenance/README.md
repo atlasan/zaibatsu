@@ -25,3 +25,12 @@ crop to an artifact/page/hash, while `spec/provenance/` binds the game-data
 record to its source locator. Add `gameplayRef` only when both records identify
 the same printed component. Generated crop IDs may remain source-page/cell IDs
 until the game component is transcribed.
+
+## Review-only component automation
+
+Blocks and action cards may be processed by the local artifact, component-vision,
+and data-editor tools. Derived vision/OCR output remains ignored and provisional;
+only a reviewer may promote an exported patch after checking its source locators,
+asset checksums, and confidence/evidence report. English artwork is primary;
+Spanish editions are optional supporting cross-checks. No extraction result is
+an executable effect definition.

@@ -1,22 +1,22 @@
 const app = document.querySelector("#app");
 
-const GRID_RADIUS = 2;
+const STANDARD_BLOCK_LAYOUT_ID = "standard-seven-small-hex-grid";
 const GRID_X_STEP = 14.98;
 const GRID_Y_STEP = 11.25;
 const GRID_HEX_X = 8.65;
 const GRID_HEX_Y = 7.5;
 const GRID_DIRECTIONS = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
-const state = { assets: [], drafts: [], selectedAssetId: null, sessionName: "block-drafts", notice: "Loading source-linked block assets...", validation: [] };
+const state = { assets: [], layoutCells: [], drafts: [], selectedAssetId: null, sessionName: "block-drafts", notice: "Loading source-linked block assets...", validation: [] };
 
 const escape = (value = "") => String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
-const titleFor = (asset) => `${asset.assetId.startsWith("sp-") ? "Speedrunners" : "Shadowraiders"} · page ${asset.page} · ${asset.assetId.split("-").at(-1)}`;
+const titleFor = (asset) => `${asset.assetId.startsWith("sp-") ? "Speedrunners" : "Shadowraiders"} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· page ${asset.page} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ${asset.assetId.split("-").at(-1)}`;
 const selectedAsset = () => state.assets.find((asset) => asset.assetId === state.selectedAssetId) ?? state.assets[0];
-const validCell = (cell) => Number.isInteger(cell?.q) && Number.isInteger(cell?.r) && Math.max(Math.abs(cell.q), Math.abs(cell.r), Math.abs(-cell.q - cell.r)) <= GRID_RADIUS;
 const cellKey = (cell) => `${cell.q},${cell.r}`;
+const allGridCells = () => state.layoutCells;
+const validCell = (cell) => Number.isInteger(cell?.q) && Number.isInteger(cell?.r) && allGridCells().some((candidate) => candidate.q === cell.q && candidate.r === cell.r);
 const axialDistance = (a, b) => Math.max(Math.abs(a.q - b.q), Math.abs(a.r - b.r), Math.abs((-a.q - a.r) - (-b.q - b.r)));
 const gridToPercent = (cell) => ({ x: 50 + GRID_X_STEP * (cell.q + cell.r / 2), y: 50 + GRID_Y_STEP * cell.r });
 const locationForCell = (cell) => gridToPercent(cell);
-const allGridCells = () => Array.from({ length: GRID_RADIUS * 2 + 1 }, (_, qIndex) => qIndex - GRID_RADIUS).flatMap((q) => Array.from({ length: GRID_RADIUS * 2 + 1 }, (_, rIndex) => rIndex - GRID_RADIUS).map((r) => ({ q, r }))).filter(validCell);
 const fallbackCell = (index = 0) => allGridCells()[index % allGridCells().length] ?? { q: 0, r: 0 };
 
 function gridFromLocation(location, index = 0) {
@@ -63,28 +63,45 @@ const selectedDraft = () => normalizeDraft(state.drafts.find((draft) => draft.so
 const blankDraft = (asset) => ({
   id: `${asset.assetId}-draft`, resourceType: "block", title: titleFor(asset), status: "draft",
   source: { assetId: asset.assetId },
-  block: { id: `${asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners"}-draft-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed block", expansion: asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners", iceValue: "none", bonusFragments: 0, bonusCorners: [false, false, false, false, false, false], edges: [false, false, false, false, false, false], boundarySpaces: [[], [], [], [], [], []], spaces: [], assetRefs: [asset.assetId], provisional: true },
+  block: { id: `${asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners"}-draft-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed block", expansion: asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners", layoutId: "standard-seven-small-hex-grid", iceValue: "none", bonusFragments: 0, bonusCorners: [false, false, false, false, false, false], edges: [false, false, false, false, false, false], boundarySpaces: [[], [], [], [], [], []], spaces: [], assetRefs: [asset.assetId], provisional: true },
   provenance: { primaryArtifactId: asset.artifactId, page: asset.page, locator: `cut block ${asset.assetId.split("-").at(-1)}`, notes: "" }, annotations: []
+});
+const blankCardDraft = (asset) => ({
+  id: `${asset.assetId}-draft`, resourceType: "action-card", title: titleFor(asset), status: "draft", source: { assetId: asset.assetId },
+  actionCard: { id: `${asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners"}-card-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed action card", expansion: asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners", copies: 1, assetRefs: [asset.assetId], provisional: true },
+  transcription: { printedText: "", reviewerConfirmed: false, duplicateGroupConfirmed: false }, provenance: { primaryArtifactId: asset.artifactId, page: asset.page, locator: `cut action card ${asset.assetId.split("-").at(-1)}`, notes: "" }, annotations: []
 });
 const ensureDraft = () => {
   const asset = selectedAsset(); if (!asset) return null;
   let draft = selectedDraft();
-  if (!draft) { draft = blankDraft(asset); state.drafts.push(draft); }
+  if (!draft) { draft = asset.kind === "action-card" ? blankCardDraft(asset) : blankDraft(asset); state.drafts.push(draft); }
   return draft;
 };
 const api = async (path, options = {}) => { const response = await fetch(path, options); const data = await response.json(); if (!response.ok) throw new Error(data.error ?? data.errors?.join(" ") ?? "Request failed"); return data; };
 
+async function loadVision(asset) {
+  const draft = selectedDraft();
+  if (!asset || asset.kind !== "action-card" || !draft || draft.resourceType !== "action-card" || draft.transcription.vision) return;
+  try {
+    const data = await api(`/api/vision/${encodeURIComponent(asset.assetId)}`);
+    if (!data.vision) return;
+    draft.transcription.vision = { confidence: data.vision.confidence, reviewRequired: data.vision.reviewRequired, reasons: data.vision.reasons ?? [] };
+    if (!draft.transcription.printedText && data.vision.printedTextCandidate) draft.transcription.printedText = data.vision.printedTextCandidate;
+    state.notice = `Loaded review-only vision candidate for ${asset.assetId}`;
+    render();
+  } catch { /* Vision output is optional. */ }
+}
 function render() {
   const asset = selectedAsset(); const draft = selectedDraft();
   const speed = state.assets.filter((item) => item.assetId.startsWith("sp-"));
   const shadow = state.assets.filter((item) => item.assetId.startsWith("sh-"));
   app.innerHTML = `
-    <header class="topbar"><div><span class="eyebrow">LOCAL CONTENT AUTHORING</span><h1>Zaibatsu <em>Block Editor</em></h1></div><div class="status"><span class="pulse"></span>${escape(state.notice)}</div></header>
+    <header class="topbar"><div><span class="eyebrow">LOCAL CONTENT AUTHORING</span><h1>Zaibatsu <em>Data Editor</em></h1></div><div class="status"><span class="pulse"></span>${escape(state.notice)}</div></header>
     <section class="workspace">
-      <aside class="assets panel"><div class="panel-title"><h2>Cut blocks</h2><span>${state.assets.length}</span></div><input id="asset-filter" aria-label="Filter block assets" placeholder="Filter source assets"><div id="asset-list" class="asset-list">${renderAssetGroup("Speedrunners", speed)}${renderAssetGroup("Shadowraiders", shadow)}</div></aside>
+      <aside class="assets panel"><div class="panel-title"><h2>Source components</h2><span>${state.assets.length}</span></div><input id="asset-filter" aria-label="Filter block assets" placeholder="Filter blocks and action cards"><div id="asset-list" class="asset-list">${renderAssetGroup("Speedrunners", speed)}${renderAssetGroup("Shadowraiders", shadow)}</div></aside>
       <section class="canvas panel"><div class="canvas-title"><div><span class="eyebrow">${asset ? escape(asset.artifactId) : "no asset"}</span><h2>${asset ? escape(titleFor(asset)) : "Select a block"}</h2></div><button id="new-draft" class="secondary" ${asset ? "" : "disabled"}>${draft ? "Reset draft" : "Create draft"}</button></div>
-        ${asset ? `<div class="hex-stage"><div class="tile-canvas"><img src="/api/artifact/${encodeURIComponent(asset.assetId)}" alt="${escape(titleFor(asset))}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing-art',textContent:'Run the artifact refresh to load this local source image.'}))">${draft ? renderLayoutOverlay(draft) : ""}</div><div class="mask-note">full block crop · scroll to inspect · source page ${asset.page}</div></div>` : ""}
-        <div class="asset-meta">assetId <code>${asset ? escape(asset.assetId) : "—"}</code> · source <code>${asset ? escape(asset.artifactId) : "—"}</code></div>
+        ${asset ? `<div class="hex-stage"><div class="tile-canvas"><img src="/api/artifact/${encodeURIComponent(asset.assetId)}" alt="${escape(titleFor(asset))}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing-art',textContent:'Run the artifact refresh to load this local source image.'}))">${draft?.resourceType === "block" ? renderLayoutOverlay(draft) : ""}</div><div class="mask-note">full block crop ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· scroll to inspect ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· source page ${asset.page}</div></div>` : ""}
+        <div class="asset-meta">assetId <code>${asset ? escape(asset.assetId) : "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â"}</code> ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· source <code>${asset ? escape(asset.artifactId) : "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â"}</code></div>
       </section>
       <section class="inspector panel">${draft ? renderInspector(draft) : `<div class="empty"><h2>Start a draft</h2><p>Select a block and create its source-linked draft. Nothing is written to canonical game data.</p></div>`}</section>
     </section>
@@ -93,17 +110,21 @@ function render() {
   bind();
 }
 
-function renderAssetGroup(name, assets) { return `<section class="asset-group"><h3>${name}<span>${assets.length}</span></h3>${assets.map((asset) => `<button class="asset ${asset.assetId === state.selectedAssetId ? "selected" : ""}" data-asset="${asset.assetId}"><span class="minihex"></span><span>${escape(asset.assetId.split("-").slice(-2).join(" · "))}</span><small>p${asset.page}</small></button>`).join("")}</section>`; }
+function renderAssetGroup(name, assets) { return `<section class="asset-group"><h3>${name}<span>${assets.length}</span></h3>${assets.map((asset) => `<button class="asset ${asset.assetId === state.selectedAssetId ? "selected" : ""}" data-asset="${asset.assetId}"><span class="minihex"></span><span>${escape(asset.assetId.split("-").slice(-2).join(" ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· "))}</span><small>p${asset.page}</small></button>`).join("")}</section>`; }
 
 function typeRule(type) {
-  return ({ normal: "normal · 1 pawn · one hex", double: "double · 2 pawns · pill of two adjacent hexes", special: "large / special · unlimited pawns · one or more connected hexes", pawn: "pawn home · unlimited pawns · one hex", effect: "effect · 1 pawn · one hex" })[type] ?? type;
+  return ({ normal: "normal ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· 1 pawn ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· one hex", double: "double ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· 2 pawns ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· pill of two adjacent hexes", special: "large / special ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· unlimited pawns ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· one or more connected hexes", pawn: "pawn home ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· unlimited pawns ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· one hex", effect: "effect ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· 1 pawn ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· one hex" })[type] ?? type;
+}
+
+function occupiedCells(block, exceptIndex = -1) {
+  return new Set(block.spaces.flatMap((space, index) => index === exceptIndex ? [] : footprintFor(space, index).cells.map(cellKey)));
 }
 
 function renderSpaces(block) {
   if (!block.spaces.length) return `<p class="empty-spaces">No spaces yet. Add each printed location, then drag its hex footprint over the source art.</p>`;
   return block.spaces.map((space, index) => {
     const footprint = footprintFor(space, index); const anchor = footprint.cells[0];
-    return `<article class="space-card" data-space-row="${index}"><div class="space-card-head"><strong>Space ${index + 1}</strong><span>${escape(typeRule(space.type))}</span><button type="button" data-remove-space="${index}" class="icon-button" aria-label="Remove space">×</button></div><div class="space-fields"><label>id<input data-space-id value="${escape(space.id)}" placeholder="id"></label><label>rule type<select data-space-type>${["normal", "double", "special", "pawn", "effect"].map((type) => `<option value="${type}" ${space.type === type ? "selected" : ""}>${type === "special" ? "large / special" : type}</option>`).join("")}</select></label><label>q<input data-space-q type="number" min="-2" max="2" step="1" value="${anchor.q}"></label><label>r<input data-space-r type="number" min="-2" max="2" step="1" value="${anchor.r}"></label></div><div class="space-footprint-tools"><span class="shape-badge">${footprint.shape} · ${footprint.cells.length} hex${footprint.cells.length === 1 ? "" : "es"}</span>${space.type === "special" ? `<button type="button" class="compact secondary" data-grow-space="${index}">+ hex</button>${footprint.cells.length > 1 ? `<button type="button" class="compact secondary" data-shrink-space="${index}">− hex</button>` : ""}` : ""}</div></article>`;
+    return `<article class="space-card" data-space-row="${index}"><div class="space-card-head"><strong>Space ${index + 1}</strong><span>${escape(typeRule(space.type))}</span><button type="button" data-remove-space="${index}" class="icon-button" aria-label="Remove space">ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â</button></div><div class="space-fields"><label>id<input data-space-id value="${escape(space.id)}" placeholder="id"></label><label>rule type<select data-space-type>${["normal", "double", "special", "pawn", "effect"].map((type) => `<option value="${type}" ${space.type === type ? "selected" : ""}>${type === "special" ? "large / special" : type}</option>`).join("")}</select></label><label>q<input data-space-q type="number" min="-2" max="2" step="1" value="${anchor.q}"></label><label>r<input data-space-r type="number" min="-2" max="2" step="1" value="${anchor.r}"></label></div><div class="space-footprint-tools"><span class="shape-badge">${footprint.shape} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ${footprint.cells.length} hex${footprint.cells.length === 1 ? "" : "es"}</span>${space.type === "special" ? `<button type="button" class="compact secondary" data-grow-space="${index}">+ hex</button>${footprint.cells.length > 1 ? `<button type="button" class="compact secondary" data-shrink-space="${index}">ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ hex</button>` : ""}` : ""}</div></article>`;
   }).join("");
 }
 
@@ -125,7 +146,7 @@ function renderLayoutOverlay(draft) {
   const bonuses = cornerPositions.map(([x, y], index) => `<button class="bonus ${block.bonusCorners[index] ? "active" : ""}" data-canvas-bonus="${index}" style="left:${x}%;top:${y}%" title="Bonus corner V${index + 1}">V${index + 1}</button>`).join("");
   const spaces = block.spaces.map((space, index) => {
     const footprint = footprintFor(space, index); const center = footprintCenter(footprint.cells);
-    return `<div class="space-footprint type-${space.type}">${footprint.cells.map((cell, cellIndex) => { const point = gridToPercent(cell); return `<button class="space-hex" data-canvas-space="${index}" data-cell-index="${cellIndex}" style="left:${point.x}%;top:${point.y}%" title="${escape(space.id)} · ${escape(typeRule(space.type))}"></button>`; }).join("")}<span class="space-label" data-space-label="${index}" style="left:${center.x}%;top:${center.y}%">${escape(space.id || "?")}</span></div>`;
+    return `<div class="space-footprint type-${space.type}">${footprint.cells.map((cell, cellIndex) => { const point = gridToPercent(cell); return `<button class="space-hex" data-canvas-space="${index}" data-cell-index="${cellIndex}" style="left:${point.x}%;top:${point.y}%" title="${escape(space.id)} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ${escape(typeRule(space.type))}"></button>`; }).join("")}<span class="space-label" data-space-label="${index}" style="left:${center.x}%;top:${center.y}%">${escape(space.id || "?")}</span></div>`;
   }).join("");
   return `<div class="layout-overlay">${grid}${entrances}${bonuses}${spaces}</div>`;
 }
@@ -134,13 +155,17 @@ function renderInspector(draft) {
   const block = draft.block;
   return `<div class="inspector-head"><div><span class="eyebrow">STRUCTURED DRAFT</span><h2>Block data</h2></div><span class="draft-state">${escape(draft.status)}</span></div>
   <form id="editor-form"><div class="form-grid"><label>Block id<input name="block-id" value="${escape(block.id)}"></label><label>Name<input name="block-name" value="${escape(block.name)}"></label><label>Expansion<select name="expansion"><option value="speedrunners" ${block.expansion === "speedrunners" ? "selected" : ""}>Speedrunners</option><option value="shadowraiders" ${block.expansion === "shadowraiders" ? "selected" : ""}>Shadowraiders</option></select></label><label>ICE<select name="ice"><option value="none" ${block.iceValue === "none" ? "selected" : ""}>none</option><option value="low" ${block.iceValue === "low" ? "selected" : ""}>low</option><option value="medium" ${block.iceValue === "medium" ? "selected" : ""}>medium</option><option value="high" ${block.iceValue === "high" ? "selected" : ""}>high</option><option value="black" ${block.iceValue === "black" ? "selected" : ""}>black</option></select></label></div>
-  <fieldset><legend>Entrances / connections</legend><p class="hint rule-hint">The source is pointy-top: V1 is top, then clockwise. E1 spans V1→V2; toggle an E button on the image and name the spaces exposed there.</p><div class="edges">${block.edges.map((edge, index) => `<label class="edge"><input type="checkbox" data-edge="${index}" ${edge ? "checked" : ""}><span>E${index + 1}</span><input data-boundary="${index}" value="${escape(block.boundarySpaces[index].join(", "))}" placeholder="boundary space ids"></label>`).join("")}</div></fieldset>
-  <fieldset><legend>Bonus corners</legend><p class="hint rule-hint">V1–V6 follow the same clockwise source order. Each marked corner is exactly one bonus fragment.</p><div class="corners">${block.bonusCorners.map((bonus, index) => `<label><input type="checkbox" data-bonus="${index}" ${bonus ? "checked" : ""}> V${index + 1}</label>`).join("")}</div><p class="derived">${block.bonusFragments} bonus fragment${block.bonusFragments === 1 ? "" : "s"}</p></fieldset>
-  <fieldset><legend>Placed spaces</legend><p class="hint rule-hint">The faint source-grid is a pointy-hex layout. A double is always a pill of two adjacent hexes. A large/special space is unlimited and may cover one or more connected hexes. Drag a footprint to snap it to the grid.</p><button type="button" id="add-space" class="secondary compact">+ Add normal hex</button><div class="space-list">${renderSpaces(block)}</div></fieldset>
+  <fieldset><legend>Entrances / connections</legend><p class="hint rule-hint">The source is pointy-top: V1 is top, then clockwise. E1 spans V1ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢V2; toggle an E button on the image and name the spaces exposed there.</p><div class="edges">${block.edges.map((edge, index) => `<label class="edge"><input type="checkbox" data-edge="${index}" ${edge ? "checked" : ""}><span>E${index + 1}</span><input data-boundary="${index}" value="${escape(block.boundarySpaces[index].join(", "))}" placeholder="boundary space ids"></label>`).join("")}</div></fieldset>
+  <fieldset><legend>Bonus corners</legend><p class="hint rule-hint">V1ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œV6 follow the same clockwise source order. Each marked corner is exactly one bonus fragment.</p><div class="corners">${block.bonusCorners.map((bonus, index) => `<label><input type="checkbox" data-bonus="${index}" ${bonus ? "checked" : ""}> V${index + 1}</label>`).join("")}</div><p class="derived">${block.bonusFragments} bonus fragment${block.bonusFragments === 1 ? "" : "s"}</p></fieldset>
+  <fieldset><legend>Placed spaces</legend><p class="hint rule-hint">Every block card has seven printed small-hex positions: a centre plus six adjacent positions. A double is a pill of two adjacent positions. A large/special space is unlimited and may cover connected positions. Drag a footprint to snap it to the source layout.</p><button type="button" id="add-space" class="secondary compact">+ Add normal hex</button><div class="space-list">${renderSpaces(block)}</div></fieldset>
   <div class="form-grid"><label>Source locator<input name="locator" value="${escape(draft.provenance.locator)}"></label><label>Notes<input name="notes" value="${escape(draft.provenance.notes ?? "")}"></label></div>
   <label class="toggle"><input type="checkbox" name="provisional" ${block.provisional ? "checked" : ""}> Keep as provisional until reviewed against the source</label></form><section class="diagnostics"><h3>Validation</h3>${state.validation.length ? `<ul>${state.validation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : "<p>Not validated yet.</p>"}</section>`;
 }
 
+function renderActionCardInspector(draft) {
+  const card = draft.actionCard; const transcription = draft.transcription;
+  return `<div class="inspector-head"><div><span class="eyebrow">REVIEW-REQUIRED DRAFT</span><h2>Action card data</h2></div><span class="draft-state">${escape(draft.status)}</span></div><form id="editor-form"><div class="form-grid"><label>Card id<input name="card-id" value="${escape(card.id)}"></label><label>Name<input name="card-name" value="${escape(card.name)}"></label><label>Copies<input name="copies" type="number" min="1" value="${card.copies}"></label><label>Movement candidate<input name="movement" type="number" min="1" value="${card.movement ?? ""}"></label></div><fieldset><legend>Printed source transcription</legend><textarea name="printed-text" rows="8" placeholder="Transcribe the printed card text; OCR suggestions remain provisional.">${escape(transcription.printedText)}</textarea><label class="toggle"><input type="checkbox" name="confirm-text" ${transcription.reviewerConfirmed ? "checked" : ""}> I confirmed the transcription against this source card</label><label class="toggle"><input type="checkbox" name="confirm-duplicates" ${transcription.duplicateGroupConfirmed ? "checked" : ""}> I confirmed the copy/duplicate grouping</label></fieldset><div class="form-grid"><label>Source locator<input name="locator" value="${escape(draft.provenance.locator)}"></label><label>Notes<input name="notes" value="${escape(draft.provenance.notes ?? "")}"></label></div></form><section class="diagnostics"><h3>Validation</h3>${state.validation.length ? `<ul>${state.validation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : "<p>Vision and OCR candidates are never authoritative. Confirm text and copies before export.</p>"}</section>`;
+}
 function translatedFootprint(space, type, anchor, index) {
   const source = footprintFor({ ...space, type }, index);
   const origin = source.cells[0];
@@ -151,6 +176,11 @@ function translatedFootprint(space, type, anchor, index) {
 function readDraft() {
   const draft = ensureDraft(); if (!draft) return null;
   const form = document.querySelector("#editor-form"); if (!form) return draft;
+  if (draft.resourceType === "action-card") {
+    const get = (name) => form.querySelector(`[name="${name}"]`);
+    draft.actionCard.id = get("card-id").value.trim(); draft.actionCard.name = get("card-name").value.trim(); draft.actionCard.copies = Number(get("copies").value); const movement = get("movement").value.trim(); draft.actionCard.movement = movement ? Number(movement) : undefined;
+    draft.transcription.printedText = get("printed-text").value.trim(); draft.transcription.reviewerConfirmed = get("confirm-text").checked; draft.transcription.duplicateGroupConfirmed = get("confirm-duplicates").checked; draft.provenance.locator = get("locator").value.trim(); draft.provenance.notes = get("notes").value.trim(); return draft;
+  }
   const get = (name) => form.querySelector(`[name="${name}"]`);
   draft.block.id = get("block-id").value.trim(); draft.block.name = get("block-name").value.trim(); draft.block.expansion = get("expansion").value; draft.block.iceValue = get("ice").value;
   draft.block.edges = [...form.querySelectorAll("[data-edge]")].map((input) => input.checked);
@@ -169,9 +199,9 @@ function readDraft() {
 }
 
 async function validate() { const draft = readDraft(); if (!draft) return; try { const data = await api("/api/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ document: draft }) }); state.validation = [...data.errors]; state.notice = state.validation.length ? `${state.validation.length} issue${state.validation.length === 1 ? "" : "s"} to resolve` : "Draft is valid for export"; } catch (error) { state.validation = [error.message]; state.notice = "Validation failed"; } render(); }
-async function save() { const draft = readDraft(); if (draft) await validate(); const name = document.querySelector("#session-name")?.value.trim(); if (!/^[a-z0-9-]+$/.test(name)) { state.notice = "Session name uses lowercase letters, digits, and hyphens."; render(); return; } state.sessionName = name; const session = { sessionVersion: 1, projectId: "zaibatsu-block-editor", assetManifestPath: "spec/assets/manifest.json", documents: state.drafts, history: [] }; try { await api("/api/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, session }) }); state.notice = "Session saved locally"; } catch (error) { state.notice = error.message; } render(); }
+async function save() { const draft = readDraft(); if (draft) await validate(); const name = document.querySelector("#session-name")?.value.trim(); if (!/^[a-z0-9-]+$/.test(name)) { state.notice = "Session name uses lowercase letters, digits, and hyphens."; render(); return; } state.sessionName = name; const session = { sessionVersion: 2, projectId: "zaibatsu-data-editor", assetManifestPath: "spec/assets/manifest.json", documents: state.drafts, history: [] }; try { await api("/api/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, session }) }); state.notice = "Session saved locally"; } catch (error) { state.notice = error.message; } render(); }
 async function load() { const name = document.querySelector("#session-name")?.value.trim(); try { const session = await api(`/api/sessions/${encodeURIComponent(name)}`); state.drafts = (session.documents ?? []).map(normalizeDraft); state.selectedAssetId = state.drafts[0]?.source.assetId ?? state.selectedAssetId; state.sessionName = name; state.validation = []; state.notice = "Session loaded"; } catch (error) { state.notice = error.message; } render(); }
-async function exportPatch() { const draft = readDraft(); if (!draft) return; await validate(); if (state.validation.length) return; try { const data = await api("/api/export", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: `${state.sessionName}-${draft.block.id}`, document: draft }) }); state.notice = `Exported ${data.patch}`; } catch (error) { state.notice = error.message; } render(); }
+async function exportPatch() { const draft = readDraft(); if (!draft) return; await validate(); if (state.validation.length) return; try { const data = await api("/api/export", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: `${state.sessionName}-${draft.resourceType === "block" ? draft.block.id : draft.actionCard.id}`, document: draft }) }); state.notice = `Exported ${data.patch}`; } catch (error) { state.notice = error.message; } render(); }
 
 function moveFootprintToGrid(index, target) {
   const draft = readDraft(); const space = draft?.block.spaces[index]; if (!space) return false;
@@ -195,8 +225,8 @@ function growSpace(index) {
 }
 
 function bind() {
-  document.querySelectorAll("[data-asset]").forEach((button) => button.addEventListener("click", () => { readDraft(); state.selectedAssetId = button.dataset.asset; state.validation = []; state.notice = "Selected source block"; render(); }));
-  document.querySelector("#new-draft")?.addEventListener("click", () => { const asset = selectedAsset(); state.drafts = state.drafts.filter((draft) => draft.source.assetId !== asset.assetId); state.drafts.push(blankDraft(asset)); state.validation = []; state.notice = "Fresh draft created"; render(); });
+  document.querySelectorAll("[data-asset]").forEach((button) => button.addEventListener("click", () => { readDraft(); state.selectedAssetId = button.dataset.asset; state.validation = []; state.notice = "Selected source component"; render(); void loadVision(selectedAsset()); }));
+  document.querySelector("#new-draft")?.addEventListener("click", () => { const asset = selectedAsset(); state.drafts = state.drafts.filter((draft) => draft.source.assetId !== asset.assetId); state.drafts.push(asset.kind === "action-card" ? blankCardDraft(asset) : blankDraft(asset)); state.validation = []; state.notice = "Fresh draft created"; render(); void loadVision(asset); });
   document.querySelector("#validate")?.addEventListener("click", validate); document.querySelector("#save")?.addEventListener("click", save); document.querySelector("#load")?.addEventListener("click", load); document.querySelector("#export")?.addEventListener("click", exportPatch);
   document.querySelector("#asset-filter")?.addEventListener("input", (event) => { const query = event.target.value.toLowerCase(); document.querySelectorAll(".asset").forEach((item) => item.hidden = !item.textContent.toLowerCase().includes(query)); });
   document.querySelectorAll("[data-canvas-edge]").forEach((button) => button.addEventListener("click", () => { const draft = readDraft(); const index = Number(button.dataset.canvasEdge); draft.block.edges[index] = !draft.block.edges[index]; state.notice = `Entrance E${index + 1} ${draft.block.edges[index] ? "opened" : "closed"}`; render(); }));
@@ -208,5 +238,5 @@ function bind() {
   document.querySelectorAll("[data-canvas-space]").forEach((node) => node.addEventListener("pointerdown", (event) => { event.preventDefault(); const index = Number(node.dataset.canvasSpace); const tile = document.querySelector(".tile-canvas"); node.setPointerCapture(event.pointerId); const move = (pointer) => { if (moveFootprintToGrid(index, gridFromPointer(pointer, tile))) { const draft = selectedDraft(); const cells = footprintFor(draft.block.spaces[index], index).cells; document.querySelectorAll(`[data-canvas-space="${index}"]`).forEach((cellNode, cellIndex) => { const point = gridToPercent(cells[cellIndex]); cellNode.style.left = `${point.x}%`; cellNode.style.top = `${point.y}%`; }); const center = footprintCenter(cells); const label = document.querySelector(`[data-space-label="${index}"]`); if (label) { label.style.left = `${center.x}%`; label.style.top = `${center.y}%`; } } }; node.addEventListener("pointermove", move); node.addEventListener("pointerup", () => { state.notice = `Moved ${selectedDraft().block.spaces[index].id} on the source grid`; render(); }, { once: true }); }));
 }
 
-async function start() { try { const data = await api("/api/assets"); state.assets = data.assets; state.selectedAssetId = state.assets[0]?.assetId ?? null; state.notice = `${state.assets.length} individual source blocks ready`; } catch (error) { state.notice = error.message; } render(); }
+async function start() { try { const [assetData, layoutData] = await Promise.all([api("/api/assets"), api("/api/block-layouts")]); const layout = layoutData.layouts?.find((item) => item.id === STANDARD_BLOCK_LAYOUT_ID); if (!layout || layout.smallHexCount !== 7 || !Array.isArray(layout.cells) || layout.cells.length !== 7) throw new Error("The canonical seven-small-hex layout is unavailable."); state.assets = assetData.assets; state.layoutCells = layout.cells; state.selectedAssetId = state.assets[0]?.assetId ?? null; state.notice = `${state.assets.length} individual source blocks ready Ãƒâ€šÃ‚Â· 7 small hexes each`; } catch (error) { state.notice = error.message; } render(); }
 start();

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { buildPatch, draftForAsset, validateDocument, type AssetRecord } from "./model";
+import { actionCardDraftForAsset, buildActionCardPatch, buildPatch, draftForAsset, validateDocument, type AssetRecord } from "./model";
 
 const asset: AssetRecord = { assetId: "sp-en-blocks-a4-p01-c01", artifactId: "sp-en-blocks-a4", page: 1, kind: "block" };
 
@@ -41,5 +41,21 @@ describe("block editor model", () => {
     expect(patch.targetPath).toBe("spec/data/speedrunners/blocks.json");
     expect(patch.baseDataSha256).toBe("abc123");
     expect(patch.operations[0].sourceAssetId).toBe(asset.assetId);
+  });
+});
+describe("action-card editor model", () => {
+  const cardAsset: AssetRecord = { assetId: "sp-en-action-cards-p01-c01", artifactId: "sp-en-action-cards", page: 1, kind: "action-card" };
+  test("keeps vision candidates provisional until confirmed", () => {
+    const draft = actionCardDraftForAsset(cardAsset, { confidence: 0.2, reviewRequired: true, reasons: ["OCR unavailable"] });
+    expect(validateDocument(draft, [cardAsset]).join(" ")).toContain("reviewer confirmation");
+    draft.transcription.reviewerConfirmed = true;
+    draft.transcription.duplicateGroupConfirmed = true;
+    draft.transcription.printedText = "Discard this card.";
+    expect(validateDocument(draft, [cardAsset])).toEqual([]);
+  });
+  test("marks a missing Shadowraiders target as absent", () => {
+    const patch = buildActionCardPatch(actionCardDraftForAsset({ ...cardAsset, assetId: "sh-en-action-cards-p01-c01", artifactId: "sh-en-action-cards" }), null);
+    expect(patch.targetAbsent).toBe(true);
+    expect(patch.targetPath).toBe("spec/data/shadowraiders/action-cards.json");
   });
 });

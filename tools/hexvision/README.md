@@ -63,3 +63,12 @@ cd tools/hexvision && python -m pytest
 
 Synthetic tests are self-contained; the real-tile test runs only if the
 pipeline's cut tiles are present.
+
+## Action cards
+
+`generate --asset sp-en-action-cards` and `generate --asset sh-en-action-cards`
+now analyse the 54 cut cards for each English deck. The output records orientation,
+optional local-Tesseract text regions, colour/icon candidates, perceptual hashes,
+and duplicate groups. Tesseract is optional and no network OCR is used. Every
+card candidate remains review-required and the overlay is evidence, not a game
+rule transcription.

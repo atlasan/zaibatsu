@@ -10,6 +10,11 @@
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "name": { "type": "string" },
     "expansion": { "enum": ["speedrunners", "shadowraiders"] },
+    "layoutId": {
+      "const": "standard-seven-small-hex-grid",
+      "default": "standard-seven-small-hex-grid",
+      "description": "Every information block card uses the seven-position printed small-hex layout declared in spec/data/block-layouts.json."
+    },
     "isCentralCore": { "type": "boolean", "default": false },
     "iceValue": {
       "enum": ["none", "low", "medium", "high", "black"],
@@ -66,15 +71,17 @@
   },
   "$defs": {
     "spaceGridCell": {
-      "type": "object",
-      "required": ["q", "r"],
-      "additionalProperties": false,
-      "properties": {
-        "q": { "type": "integer", "minimum": -2, "maximum": 2 },
-        "r": { "type": "integer", "minimum": -2, "maximum": 2 }
-      }
-    },
-    "spaceFootprint": {
+      "description": "One of the seven declared small-hex positions in the standard block layout.",
+      "oneOf": [
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": 0 }, "r": { "const": 0 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": 0 }, "r": { "const": -1 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": 1 }, "r": { "const": -1 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": 1 }, "r": { "const": 0 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": 0 }, "r": { "const": 1 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": -1 }, "r": { "const": 1 } } },
+        { "type": "object", "required": ["q", "r"], "additionalProperties": false, "properties": { "q": { "const": -1 }, "r": { "const": 0 } } }
+      ]
+    },    "spaceFootprint": {
       "type": "object",
       "required": ["shape", "cells"],
       "additionalProperties": false,

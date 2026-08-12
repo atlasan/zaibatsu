@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/block-layout.schema.json",
+  "title": "Zaibatsu block small-hex layout",
+  "description": "The fixed seven printed small-hex positions on every information-block card.",
+  "type": "object",
+  "required": ["layoutVersion", "layouts"],
+  "additionalProperties": false,
+  "properties": {
+    "layoutVersion": { "const": 1 },
+    "layouts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/layout" } }
+  },
+  "$defs": {
+    "layout": {
+      "type": "object",
+      "required": ["id", "name", "smallHexCount", "cells"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "const": "standard-seven-small-hex-grid" },
+        "name": { "type": "string" },
+        "smallHexCount": { "const": 7 },
+        "cells": {
+          "type": "array", "minItems": 7, "maxItems": 7,
+          "items": { "type": "object", "required": ["id", "q", "r"], "additionalProperties": false, "properties": { "id": { "type": "string", "pattern": "^h[1-7]$" }, "q": { "type": "integer" }, "r": { "type": "integer" } } }
+        }
+      }
+    }
+  }
+}

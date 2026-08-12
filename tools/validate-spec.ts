@@ -24,6 +24,16 @@ const artifactIds = new Set(strings((artifactCatalog.assets as Json[] | undefine
 const assetManifest = readJson(join(root, "spec/assets/manifest.json"));
 const assetIds = new Set(strings((assetManifest.assets as Json[] | undefined)?.map((asset) => asset.assetId)));
 const inventory = readJson(join(root, "spec/inventory.json"));
+const blockLayoutData = readJson(join(root, "spec/data/block-layouts.json"));
+const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-small-hex-grid");
+const standardCellKeys = new Set(["0,0", "0,-1", "1,-1", "1,0", "0,1", "-1,1", "-1,0"]);
+if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.isArray(standardBlockLayout.cells) || standardBlockLayout.cells.length !== 7) {
+  fail("block-layouts.json must declare the standard seven-small-hex layout");
+} else {
+  const cells = standardBlockLayout.cells as Json[];
+  const keys = new Set(cells.map((cell) => `${String(cell.q)},${String(cell.r)}`));
+  if (keys.size !== 7 || [...standardCellKeys].some((key) => !keys.has(key))) fail("standard seven-small-hex layout must contain its exact centre-and-ring positions");
+}
 const externalCatalog = readJson(join(root, "DOCS/artifacts/external-sources.json"));
 const externalIds = new Set<string>();
 for (const source of (externalCatalog.sources as Json[] | undefined) ?? []) {
@@ -95,6 +105,7 @@ for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
   if (document.resourceType !== "block" || !validId(document.id) || !assetIds.has(String(source?.assetId))) {
     fail(`block editor document ${String(document.id)} has an invalid source asset`);
   }
+  if (block?.layoutId !== "standard-seven-small-hex-grid") fail(`block editor document ${String(document.id)} must use the standard seven-small-hex layout`);
   if (!validId(block?.id) || typeof block?.name !== "string" || !["speedrunners", "shadowraiders"].includes(String(block?.expansion))) {
     fail(`block editor document ${String(document.id)} has an invalid block draft`);
   }
@@ -151,6 +162,7 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
       const ids = new Set<string>();
       for (const record of records as Json[]) {
         if (!validId(record.id) || ids.has(record.id)) fail(`${expansion}/${name} has invalid or duplicate record id ${String(record.id)}`);
+        if (group === "blocks" && record.layoutId !== "standard-seven-small-hex-grid") fail(`${expansion}/${name} block ${String(record.id)} must use the standard seven-small-hex layout`);
         if (typeof record.id === "string") ids.add(record.id);
       }
     }

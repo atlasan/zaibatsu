@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/block-layout.schema.json",
+  "layoutVersion": 1,
+  "layouts": [
+    {
+      "id": "standard-seven-small-hex-grid",
+      "name": "Standard seven small hex positions",
+      "smallHexCount": 7,
+      "cells": [
+        { "id": "h1", "q": 0, "r": 0 },
+        { "id": "h2", "q": 0, "r": -1 },
+        { "id": "h3", "q": 1, "r": -1 },
+        { "id": "h4", "q": 1, "r": 0 },
+        { "id": "h5", "q": 0, "r": 1 },
+        { "id": "h6", "q": -1, "r": 1 },
+        { "id": "h7", "q": -1, "r": 0 }
+      ]
+    }
+  ]
+}
