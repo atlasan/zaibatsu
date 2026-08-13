@@ -1,5 +1,5 @@
 {
-  "$comment": "The base Speedrunners game mode. See DOCS/rules/speedrunners.md. startingHand is provisional (see rulebook note).",
+  "$comment": "The base Speedrunners game mode. See DOCS/rules/speedrunners.md. startingHand matches the verified English rulebook correction for the asymmetric opening deal.",
   "id": "speedrunners",
   "name": "Speedrunners",
   "expansions": ["speedrunners"],

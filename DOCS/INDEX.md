@@ -7,7 +7,7 @@ before changing a cross-cutting rule or artifact.
 |------|--------------------|---------|
 | Architecture | [architecture.md](architecture.md) | Layering and dependency direction |
 | Domain | [domain-model.md](domain-model.md), [glossary.md](glossary.md) | Shared engine language and model |
-| Rules | [rules/](rules/) | Implementable digests of the original rulebooks |
+| Rules | [rules/](rules/), [rules/transcripts/](rules/transcripts/) | Implementable digests plus tracked rule/component transcripts |
 | Mirror contract | [parity.md](parity.md) | Go/TypeScript structural and behavioral parity |
 | Delivery plan | [roadmap.md](roadmap.md), [../tasks/BACKLOG.md](../tasks/BACKLOG.md) | Phases and ordered work |
 | Lifecycle | [lifecycle.md](lifecycle.md) | Required evidence from source to shipped behavior |
@@ -19,6 +19,10 @@ The local upstream assets live under `DOCS/Original/`. They are deliberately
 ignored by Git; their identities and checksums are recorded in
 [artifacts/source-catalog.json](artifacts/source-catalog.json), not the assets
 themselves.
+
+Tracked transcript derivatives live under
+[rules/transcripts/](rules/transcripts/). They remain source-linked review
+artifacts, not canonical gameplay data.
 
 ## Status vocabulary
 

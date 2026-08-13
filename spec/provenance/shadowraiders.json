@@ -4,6 +4,18 @@
     "data/shadowraiders/modes.json": {
       "sources": ["sh-en-rulebook", "sh-es-rulebook"],
       "note": "Mode-level facts verified; component records have not yet been transcribed."
+    },
+    "data/shadowraiders/control-cards.json": {
+      "candidateSources": ["sh-en-control-cards", "sh-es-control-cards"],
+      "note": "Canonical file shell present; no control-card record has been transcribed yet."
+    },
+    "data/shadowraiders/threats.json": {
+      "candidateSources": ["sh-en-rulebook", "sh-es-rulebook", "sh-en-markers", "sh-es-markers", "sh-en-chaos-card", "sh-es-chaos-card"],
+      "note": "Canonical file shell present; no threat record has been transcribed yet."
+    },
+    "data/shadowraiders/missions.json": {
+      "candidateSources": ["sh-en-control-cards", "sh-es-control-cards", "sh-en-rulebook", "sh-es-rulebook"],
+      "note": "Canonical file shell present; no mission-card record has been transcribed yet."
     }
   },
   "records": {

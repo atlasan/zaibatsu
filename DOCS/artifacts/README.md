@@ -13,6 +13,10 @@ Use a catalog id in rules digests and `spec/provenance/` entries. Use a
 specific page, card, tile, section, or archive member as the locator; a source
 id alone is not enough for a verified transcription.
 
+Tracked rulebook/component transcripts derived from these sources live in
+`DOCS/rules/transcripts/`. They are reviewable derivatives, not replacements
+for the original PDFs.
+
 ## Verification
 
 ```bash
@@ -51,5 +55,5 @@ that point; it simply remains an asset-first reference instead of a verified
 gameplay identity.
 
 Run `python -m tools.artifacts verify` alongside the existing source verifier
-and `bun tools/validate-spec.ts` so asset links, provenance, and the knowledge
-catalog stay aligned.
+and `bun tools/validate-spec.ts` so transcripts, asset links, provenance, and
+the knowledge catalog stay aligned.

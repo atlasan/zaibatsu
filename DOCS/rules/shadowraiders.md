@@ -4,6 +4,13 @@ Distilled from `ShadowRaiders/…/Sh 09 Rulebook (2017-06-28) (en).pdf` (v2.0).
 Shadowraiders is an **expansion to Speedrunners** — all base rules apply; this
 digest covers only what's new. Read `speedrunners.md` first.
 
+Tracked page-level transcripts live in:
+
+- `DOCS/rules/transcripts/shadowraiders-rulebook.en.md`
+- `DOCS/rules/transcripts/shadowraiders-rulebook.es.md`
+- `DOCS/rules/transcripts/shadowraiders-components.en.md`
+- `DOCS/rules/transcripts/shadowraiders-components.es.md`
+
 ## What the expansion adds
 - **Threats** — anything with an *attack die*: drone threats, threat tokens,
   mark threats (from missions), and Chaos. Attack dice are *fixed* values

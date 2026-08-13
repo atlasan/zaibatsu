@@ -14,11 +14,17 @@
       "note": "Mixed baseline: seed fixtures remain provisional while verified page-1 action-card records are tracked below."
     },
     "data/speedrunners/mode.json": {
-      "candidateSources": ["sp-en-rulebook"],
-      "note": "Opening-hand information remains an explicit rule-digest interpretation."
+      "sources": ["sp-en-rulebook", "sp-es-rulebook"],
+      "note": "Mode-level setup and win-condition facts are source-verified."
     }
   },
   "records": {
+    "mode/speedrunners": {
+      "sources": [
+        { "artifactId": "sp-en-rulebook", "locator": "pp. 6-7" },
+        { "artifactId": "sp-es-rulebook", "locator": "pp. 6-7" }
+      ]
+    },
     "block/idoru": {
       "sources": [
         { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 1" },

@@ -8,6 +8,7 @@ repository's structured evidence across:
 - `spec/data/` - engine-facing game records;
 - `spec/provenance/` - record verification and candidate-source context;
 - `spec/assets/manifest.json` - source-linked physical assets;
+- `DOCS/rules/transcripts/` - tracked rulebook and component-sheet transcripts;
 - `DOCS/` - rules, lifecycle, and design docs.
 
 It covers the official 2017 Speedrunners base game and Shadowraiders
@@ -35,3 +36,4 @@ The current runtime seed records remain provisional until every physical compone
 - [Source and rights policy](../artifacts/README.md)
 - [Speedrunners rules digest](../rules/speedrunners.md)
 - [Shadowraiders rules digest](../rules/shadowraiders.md)
+- [Rule transcripts](../rules/transcripts/README.md)

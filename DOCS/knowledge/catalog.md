@@ -44,6 +44,8 @@ Each machine-readable entry answers the same baseline questions:
 - `tags` - controlled vocabulary from `taxonomy.json`;
 - `refs.filePaths` - canonical tracked files that own the fact;
 - `refs.docPaths` - human docs that explain it;
+- `refs.docPaths` may include tracked transcript artifacts when a source-facing
+  review surface is useful;
 - `refs.assetIds` - physical derived assets, if any;
 - `refs.sourceIds` - authoritative source artifacts behind it.
 

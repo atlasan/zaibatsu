@@ -5,6 +5,10 @@ local game-client assets. It is a development tool: PDFs and generated images
 stay ignored; only `spec/assets/manifest.json` and source-linked metadata may
 be committed.
 
+For searchable page text and review transcripts, use `tools/ruletext/`. The
+artifact pipeline handles physical crops; the transcript pipeline handles cited
+text derivatives.
+
 ## Install and run
 
 Use a virtual environment, then install the development-only dependencies:

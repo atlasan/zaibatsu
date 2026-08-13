@@ -6,6 +6,13 @@ implementation, not a replacement for the rulebook. Where the PDF is ambiguous
 or its text extraction is lossy, the chosen interpretation is called out with
 **⚠ interpretation**.
 
+Tracked page-level transcripts live in:
+
+- `DOCS/rules/transcripts/speedrunners-rulebook.en.md`
+- `DOCS/rules/transcripts/speedrunners-rulebook.es.md`
+- `DOCS/rules/transcripts/speedrunners-components.en.md`
+- `DOCS/rules/transcripts/speedrunners-components.es.md`
+
 ## Overview
 2–4 players, 60–120 min. Each player is a Zaibatsu racing to dominate the
 Cybernet. **Win:** be first to place *all* your control markers in the Cybernet.

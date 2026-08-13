@@ -8,6 +8,7 @@ This layer is intentionally separate from runtime content:
 - `spec/data/` stays engine-facing and gameplay-oriented;
 - `spec/provenance/` stays the source-verification record;
 - `spec/assets/manifest.json` stays the physical-asset manifest;
+- `DOCS/rules/transcripts/` stays the tracked source-text layer;
 - `spec/knowledge/` answers cross-cutting questions such as:
   - what this thing is;
   - where it is documented;

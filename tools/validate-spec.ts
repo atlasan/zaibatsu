@@ -27,6 +27,20 @@ const knowledgeTaxonomy = readJson(join(root, "spec/knowledge/taxonomy.json"));
 const knowledgeCatalog = readJson(join(root, "spec/knowledge/catalog.json"));
 const knowledgeRelations = readJson(join(root, "spec/knowledge/relations.json"));
 const inventory = readJson(join(root, "spec/inventory.json"));
+const transcriptPaths = [
+  "DOCS/rules/transcripts/README.md",
+  "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+  "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+  "DOCS/rules/transcripts/shadowraiders-rulebook.en.md",
+  "DOCS/rules/transcripts/shadowraiders-rulebook.es.md",
+  "DOCS/rules/transcripts/speedrunners-components.en.md",
+  "DOCS/rules/transcripts/speedrunners-components.es.md",
+  "DOCS/rules/transcripts/shadowraiders-components.en.md",
+  "DOCS/rules/transcripts/shadowraiders-components.es.md",
+];
+for (const path of transcriptPaths) {
+  if (!existsSync(join(root, path))) fail(`missing tracked transcript ${path}`);
+}
 const blockLayoutData = readJson(join(root, "spec/data/block-layouts.json"));
 const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-small-hex-grid");
 const standardZoneIds = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);

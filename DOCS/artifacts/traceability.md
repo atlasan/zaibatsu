@@ -7,7 +7,7 @@ normalized. New tasks use the stable IDs below; work remains ordered by phase in
 | Phase | Delivery evidence | Current task IDs |
 |-------|-------------------|------------------|
 | Bootstrap | ADR-0001/2/3, source catalog, provisional seed data, two mirror tests | T-001–T-007 |
-| Core rules | Speedrunners digest, shared schemas, Go+TS behavior/tests, parity | T-100–T-107 |
+| Core rules | transcript set + Speedrunners digest, shared schemas, Go+TS behavior/tests, parity | T-100–T-107 |
 | Speedrunners content | component source locators, canonical data, effects, golden games | T-200–T-206 |
 | Shadowraiders | expansion sources, schemas/provenance, mirrors and tests | T-300–T-303 |
 | Modes | sourced mode manifests, setup/end-condition behavior and tests | T-400–T-402 |

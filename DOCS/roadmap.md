@@ -26,6 +26,9 @@ hand refill, seeded RNG, win detection, tests on both sides.
 - Golden-game tests: scripted games with asserted end states on both mirrors.
 
 ## Phase 3 — Shadowraiders expansion
+- Structural shells for `control-cards`, `threats`, and `missions` already live
+  under `spec/data/shadowraiders/`; this phase fills them with source-backed
+  records.
 - New primitives: threats (drone/token/mark/chaos), attack dice, event spaces,
   stealth movement, Black ICE on pawns, mercenary cost, medals.
 - Mission cards + tags (mark/cargo/counter), rewards (medals / pawn control).

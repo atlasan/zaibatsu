@@ -46,7 +46,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (spec) Transcribe the 18 control cards.
 - [ ] (go/ts) Effect registry keyed by effect id; implement every block/pawn/card effect.
 - [x] (go/ts) Golden-game tests: canonical `Snapshot(state)` (byte-identical across mirrors) + shared `golden/*.snap` fixtures that BOTH mirrors assert against (seed-42 whole game + seed-7 combat scenario). Whole-state cross-mirror equivalence check. Add scenarios as coverage grows.
-- [ ] Resolve the opening-hand deal ambiguity against the physical rulebook (currently provisional p1→3,p2→4,p3→5,p4→6).
+- [x] Resolve the opening-hand deal ambiguity against the physical rulebook. *Verified as p1→3, p2→4, p3→5, p4→5 in the English and Spanish rulebooks; `spec/data/speedrunners/mode.json` and `spec/provenance/speedrunners.json` now reflect the sourced value.*
 
 ## Later (Phase 3 — Shadowraiders expansion)
 - [ ] (spec) Schema extensions: threats (attack die, type), event/drone spaces, missions (tags), medals, Black ICE on pawns, merc cost.
@@ -75,3 +75,4 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] Decide and add `LICENSE` for engine code (game remains CC BY-NC 2.5 MX).
 - [ ] Consider a JSON snapshot format for `GameState` to diff Go vs TS states directly.
 - [x] (tools/spec/docs) Source-linked action-card automation: both English 54-card decks are cropped into the manifest; local review-only vision emits OCR/icon/duplicate candidates; the data editor supports v2 action-card drafts and provenance reports. No candidate directly changes canonical data or engine effects.
+- [x] (tools/docs/spec) Tracked transcript corpus: rulebook and component-sheet transcripts for both games are generated from cataloged source PDFs under `DOCS/rules/transcripts/`, with raw extractor output kept in `tmp/ruletext/`.

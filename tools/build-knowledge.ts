@@ -42,6 +42,18 @@ const taxonomy = readJson<TaxonomyFile>(join(root, "spec/knowledge/taxonomy.json
 const allowedTags = new Set(taxonomy.tags.map((item) => item.tag));
 const allowedRelations = new Set(taxonomy.relationTypes.map((item) => item.type));
 
+const transcriptPaths = [
+  "DOCS/rules/transcripts/README.md",
+  "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+  "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+  "DOCS/rules/transcripts/shadowraiders-rulebook.en.md",
+  "DOCS/rules/transcripts/shadowraiders-rulebook.es.md",
+  "DOCS/rules/transcripts/speedrunners-components.en.md",
+  "DOCS/rules/transcripts/speedrunners-components.es.md",
+  "DOCS/rules/transcripts/shadowraiders-components.en.md",
+  "DOCS/rules/transcripts/shadowraiders-components.es.md",
+];
+
 const docPaths = [
   "README.md",
   "DOCS/knowledge/INDEX.md",
@@ -53,6 +65,7 @@ const docPaths = [
   "DOCS/rules/speedrunners.md",
   "DOCS/rules/shadowraiders.md",
   "DOCS/block-editor-plan.md",
+  ...transcriptPaths,
 ];
 
 const inventory = readJson<Json>(join(root, "spec/inventory.json"));
@@ -107,7 +120,21 @@ function addDocEntry(path: string, title: string): void {
   });
 }
 
-function sourceDocs(role: string): string[] {
+function transcriptDocsForSource(artifactId: string, role: string): string[] {
+  const speedrunners = artifactId.startsWith("sp-");
+  const shadowraiders = artifactId.startsWith("sh-");
+  if (role === "rulebook" && speedrunners) return ["DOCS/rules/transcripts/speedrunners-rulebook.en.md", "DOCS/rules/transcripts/speedrunners-rulebook.es.md"];
+  if (role === "rulebook" && shadowraiders) return ["DOCS/rules/transcripts/shadowraiders-rulebook.en.md", "DOCS/rules/transcripts/shadowraiders-rulebook.es.md"];
+  if (speedrunners && ["blocks-a4", "blocks-letter", "control-cards", "action-cards", "pawns", "markers"].includes(role)) {
+    return ["DOCS/rules/transcripts/speedrunners-components.en.md", "DOCS/rules/transcripts/speedrunners-components.es.md"];
+  }
+  if (shadowraiders && ["blocks-a4", "blocks-letter", "control-cards", "action-cards", "pawns", "markers", "chaos-card"].includes(role)) {
+    return ["DOCS/rules/transcripts/shadowraiders-components.en.md", "DOCS/rules/transcripts/shadowraiders-components.es.md"];
+  }
+  return [];
+}
+
+function sourceDocs(artifactId: string, role: string): string[] {
   const docs = ["DOCS/artifacts/README.md", "DOCS/knowledge/INDEX.md", "DOCS/knowledge/catalog.md"];
   if (role === "action-cards" || role === "blocks-a4" || role === "blocks-letter" || role === "pawns" || role === "markers") {
     docs.push("DOCS/artifacts/toolset.md");
@@ -115,13 +142,15 @@ function sourceDocs(role: string): string[] {
   if (role === "action-cards" || role === "blocks-a4" || role === "blocks-letter") {
     docs.push("DOCS/block-editor-plan.md");
   }
-  return docs;
+  return [...docs, ...transcriptDocsForSource(artifactId, role)];
 }
 
 function contentDocs(kind: string, expansion: "speedrunners" | "shadowraiders" | "shared"): string[] {
   const docs = ["README.md", "DOCS/knowledge/INDEX.md", "DOCS/knowledge/catalog.md", "DOCS/domain-model.md"];
   if (expansion === "speedrunners") docs.push("DOCS/rules/speedrunners.md");
   if (expansion === "shadowraiders") docs.push("DOCS/rules/shadowraiders.md");
+  if (expansion === "speedrunners") docs.push("DOCS/rules/transcripts/speedrunners-rulebook.en.md", "DOCS/rules/transcripts/speedrunners-rulebook.es.md", "DOCS/rules/transcripts/speedrunners-components.en.md", "DOCS/rules/transcripts/speedrunners-components.es.md");
+  if (expansion === "shadowraiders") docs.push("DOCS/rules/transcripts/shadowraiders-rulebook.en.md", "DOCS/rules/transcripts/shadowraiders-rulebook.es.md", "DOCS/rules/transcripts/shadowraiders-components.en.md", "DOCS/rules/transcripts/shadowraiders-components.es.md");
   if (kind === "block" || kind === "action-card") docs.push("DOCS/block-editor-plan.md");
   return docs;
 }
@@ -148,6 +177,15 @@ for (const [path, title] of [
   ["DOCS/artifacts/toolset.md", "Artifact toolset"],
   ["DOCS/rules/speedrunners.md", "Speedrunners rules digest"],
   ["DOCS/rules/shadowraiders.md", "Shadowraiders rules digest"],
+  ["DOCS/rules/transcripts/README.md", "Rule transcript guide"],
+  ["DOCS/rules/transcripts/speedrunners-rulebook.en.md", "Speedrunners English rulebook transcript"],
+  ["DOCS/rules/transcripts/speedrunners-rulebook.es.md", "Speedrunners Spanish rulebook transcript"],
+  ["DOCS/rules/transcripts/shadowraiders-rulebook.en.md", "Shadowraiders English rulebook transcript"],
+  ["DOCS/rules/transcripts/shadowraiders-rulebook.es.md", "Shadowraiders Spanish rulebook transcript"],
+  ["DOCS/rules/transcripts/speedrunners-components.en.md", "Speedrunners English component transcript"],
+  ["DOCS/rules/transcripts/speedrunners-components.es.md", "Speedrunners Spanish component transcript"],
+  ["DOCS/rules/transcripts/shadowraiders-components.en.md", "Shadowraiders English component transcript"],
+  ["DOCS/rules/transcripts/shadowraiders-components.es.md", "Shadowraiders Spanish component transcript"],
   ["DOCS/block-editor-plan.md", "Block and card editor plan"],
 ] as const) {
   addDocEntry(path, title);
@@ -196,7 +234,7 @@ for (const [id, title, docs, workflowTag] of [
 for (const asset of (sourceCatalog.assets as Json[] | undefined) ?? []) {
   const artifactId = String(asset.id);
   const expansion = (asset.game === "speedrunners" || asset.game === "shadowraiders") ? asset.game as "speedrunners" | "shadowraiders" : "shared";
-  const docRefs = sourceDocs(String(asset.role));
+  const docRefs = sourceDocs(artifactId, String(asset.role));
   addEntry({
     entryId: entryId("source", artifactId),
     kind: "source",

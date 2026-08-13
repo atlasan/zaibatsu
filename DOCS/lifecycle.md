@@ -4,7 +4,7 @@ Every game rule and implementation change must retain evidence across this
 chain:
 
 ```
-original source -> rules digest / ADR -> schema -> data + provenance
+original source -> transcript / rules digest / ADR -> schema -> data + provenance
 -> knowledge catalog -> Go and TypeScript behavior -> parity contract
 -> tests -> task completion
 ```
@@ -14,6 +14,7 @@ original source -> rules digest / ADR -> schema -> data + provenance
 | Artifact | Owner / location | Required before it advances |
 |----------|------------------|-----------------------------|
 | Original source | ignored `DOCS/Original/`; cataloged in `DOCS/artifacts/` | catalog id, SHA-256, edition/language, authority and role |
+| Transcript derivative | `DOCS/rules/transcripts/` | cataloged source artifact, page identity, reviewer-visible extracted text |
 | Rule fact or ambiguity | `DOCS/rules/` | source id + locator; interpretations state rationale |
 | Architectural choice | `DOCS/adr/` | alternatives, decision, consequences and supersession link |
 | Schema and content | `spec/schema/`, `spec/data/`, `spec/provenance/` | schema-first change; every canonical record has source locators |
@@ -26,19 +27,22 @@ original source -> rules digest / ADR -> schema -> data + provenance
 
 1. Start from an authoritative source or an accepted ADR. Never encode a
    rulebook interpretation only in code.
-2. Extend the shared schema before adding a new content field. Update both
+2. Generate or update the tracked transcript when a new rulebook/component source
+   becomes implementation-relevant. Raw extraction output may stay ignored, but
+   the repo should retain a searchable cited transcript artifact.
+3. Extend the shared schema before adding a new content field. Update both
    loaders and both domain models in the same change.
-3. For a transcription, add the record-level entry to the matching
+4. For a transcription, add the record-level entry to the matching
    `spec/provenance/<expansion>.json` with source artifact IDs and page/card
    locators. A `provisional` record may cite candidate sources but must not
    claim verification.
-4. Regenerate `spec/knowledge/catalog.json` and `spec/knowledge/relations.json`
+5. Regenerate `spec/knowledge/catalog.json` and `spec/knowledge/relations.json`
    so the new or changed record has current tags, source refs, asset refs, doc
    refs, and cross-links.
-5. Implement engine behavior in Go and TypeScript together; update
+6. Implement engine behavior in Go and TypeScript together; update
    `DOCS/parity.md` and add equivalent tests. A temporary gap is exceptional
    and must have a backlog task id.
-6. Close a task only when its linked source, docs, schema/data, knowledge
+7. Close a task only when its linked source, docs, schema/data, knowledge
    catalog, both mirrors,
    and tests are current. Update its status in the same commit.
 
