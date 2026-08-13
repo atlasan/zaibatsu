@@ -46,7 +46,7 @@ def test_extract_tile_shapes(tmp_path):
     cv2.imwrite(str(p), img)
     tile = detect.extract_tile(str(p), "syn")
     assert len(tile.edges) == 6
-    assert len(tile.bonusCorners) == 6
+    assert len(tile.whiteCorners) == 6
     assert len(tile.vertices) == 6
     d = tile.to_dict()
     assert d["asset"] == "syn"

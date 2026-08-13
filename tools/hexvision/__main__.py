@@ -78,7 +78,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
         "kind": kind,
         "provisional": True,
         "note": "Geometry (center/vertices/inradius) is reliable; edges/spaces/"
-                "bonusCorners are assistive candidates â€” verify via out/overlays/ "
+                "whiteCorners are assistive candidates - verify via the overlays "
                 "before promoting into spec/data.",
         "tiles": tiles,
         **({"duplicateGroups": [group for group in duplicate_groups.values() if len(group) > 1]} if kind == "action-card" else {}),
@@ -136,8 +136,8 @@ def cmd_check(args: argparse.Namespace) -> int:
             errors.append(f"{aid}: expected 6 vertices, got {len(t.get('vertices', []))}")
         if len(t.get("edges", [])) != 6:
             errors.append(f"{aid}: expected 6 edges")
-        if len(t.get("bonusCorners", [])) != 6:
-            errors.append(f"{aid}: expected 6 bonusCorners")
+        if len(t.get("whiteCorners", [])) != 6:
+            errors.append(f"{aid}: expected 6 whiteCorners")
         if t.get("inradius", 0) <= 0:
             errors.append(f"{aid}: non-positive inradius")
         for s in t.get("spaces", []):

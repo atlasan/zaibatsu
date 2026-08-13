@@ -9,7 +9,7 @@ is precise and only the interior features are inferred.
 Per tile it detects:
   * passages   — which of the 6 edges expose a connecting space (block.edges[6]);
   * placements — the circular space slots inside;
-  * bonus slots — bonus fragments at the 6 corners.
+  * white corners — which of the 6 corners are white (bonus zone = 3 aligned).
 
 The art is stylised, so passage/placement/bonus detection is DELIBERATELY
 provisional and assistive: every run also writes a verification overlay so a
@@ -45,7 +45,7 @@ class Tile:
     inradius: int
     vertices: list[tuple[int, int]]  # 6, ordered from top clockwise
     edges: list[bool]  # [6] passage per edge
-    bonusCorners: list[bool]  # [6] bonus fragment per corner
+    whiteCorners: list[bool]  # [6] white corner per vertex (bonus zone = 3 aligned)
     spaces: list[Space] = field(default_factory=list)
 
     def to_dict(self) -> dict:
@@ -114,60 +114,76 @@ def _edge_mid_normal(center, verts, i):
     return (mx, my), ((mx - cx) / d, (my - cy) / d)
 
 
-def detect_edges(bgr: np.ndarray, center, verts, inr: int) -> list[bool]:
+def detect_edges(bgr: np.ndarray, alpha, center, verts, inr: int) -> list[bool]:
     """An edge is a PASSAGE where the white hex-grid line reaches a cell outline
     and crosses the black wall out to the edge. So: scan the middle of each edge
-    and look for a white line that SPANS the wall band (present both at the inner
-    cell-outline radius and out at the tile boundary). Otherwise it's a wall."""
-    white = _white_mask(bgr)
+    and look for a white line that reaches the OUTER wall (crosses to the
+    boundary) over a limited stretch. Otherwise it's a wall."""
+    white = _white_mask(bgr, alpha)
     h, w = white.shape
     cx, cy = center
     out = []
     for i in range(6):
         ax, ay = verts[i]
         bx, by = verts[(i + 1) % 6]
-        passage = False
-        for t in np.linspace(0.28, 0.72, 23):  # scan the middle of the edge
+        # count middle-edge positions where a white line reaches the OUTER wall
+        # (crosses to the boundary). A solid dark wall has none; a cell merely
+        # sitting near the edge doesn't reach the boundary.
+        reach = span = 0
+        for t in np.linspace(0.30, 0.70, 21):
+            span += 1
             ex, ey = ax + (bx - ax) * t, ay + (by - ay) * t
-            inner = outer = False
-            for f in np.linspace(0.84, 1.0, 10):  # across the wall band
+            hit = False
+            for f in (0.95, 0.97, 0.99):
                 px = int(cx + (ex - cx) * f)
                 py = int(cy + (ey - cy) * f)
                 if 0 <= px < w and 0 <= py < h and white[py, px] > 0:
-                    if f < 0.92:
-                        inner = True
-                    if f >= 0.95:
-                        outer = True
-            if inner and outer:  # a white line spans the wall here => entrance
-                passage = True
-                break
-        out.append(passage)
+                    hit = True
+            reach += 1 if hit else 0
+        frac = reach / span if span else 0.0
+        # a crossing grid line spans a limited stretch; the whole edge being
+        # white/black are both non-passages
+        out.append(bool(0.10 <= frac <= 0.75))
     return out
 
 
-def detect_bonus_corners(bgr: np.ndarray, center, verts) -> list[bool]:
-    """A bonus-zone corner is a WHITE corner tip (three hexes meeting at white
-    corners form a bonus zone). Sample a SMALL patch right at the corner tip and
-    require it to be dominantly white — avoids false positives from white art
-    (dice/text/rings) nearer the tile interior."""
+def detect_white_corners(bgr: np.ndarray, alpha, center, verts) -> list[bool]:
+    """Detect which of the 6 corners are WHITE. This is a factual per-tile signal:
+    a bonus zone forms on the board where three white corners meet (the tool does
+    not decide bonus by itself). White is measured AMONG IN-TILE pixels — the
+    alpha mask excludes the (composited-white) transparent outside, which would
+    otherwise make every tip read as white."""
     h, w = bgr.shape[:2]
     cx, cy = center
+    inside = cv2.erode(alpha, np.ones((9, 9), np.uint8)) if alpha is not None else None
     out = []
     for vx, vy in verts:
         px, py = int(cx + (vx - cx) * 0.90), int(cy + (vy - cy) * 0.90)
-        x0, y0 = px - 34, py - 34
-        patch = bgr[max(0, y0):min(h, y0 + 68), max(0, x0):min(w, x0 + 68)]
+        x0, y0 = max(0, px - 30), max(0, py - 30)
+        patch = bgr[y0:min(h, y0 + 60), x0:min(w, x0 + 60)]
         if patch.size == 0:
             out.append(False)
             continue
-        white = (patch[:, :, 0] > 210) & (patch[:, :, 1] > 210) & (patch[:, :, 2] > 210)
-        out.append(bool(white.mean() > 0.45))
+        white = (patch[:, :, 0] > 215) & (patch[:, :, 1] > 215) & (patch[:, :, 2] > 215)
+        if inside is not None:
+            tile = inside[y0:y0 + patch.shape[0], x0:x0 + patch.shape[1]] > 0
+            if tile.sum() < patch.shape[0] * patch.shape[1] * 0.35:
+                out.append(False)  # patch is mostly outside the tile
+                continue
+            out.append(bool((white & tile).sum() / max(1, tile.sum()) > 0.55))
+        else:
+            out.append(bool(white.mean() > 0.55))
     return out
 
 
-def _white_mask(bgr: np.ndarray) -> np.ndarray:
+def _white_mask(bgr: np.ndarray, alpha: np.ndarray | None = None) -> np.ndarray:
     m = cv2.inRange(bgr, (195, 195, 195), (255, 255, 255))
-    return cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
+    if alpha is not None:
+        # the transparent OUTSIDE was composited over white; exclude it so the
+        # white grid/lines are only counted inside the tile.
+        m[cv2.erode(alpha, np.ones((9, 9), np.uint8)) == 0] = 0
+    return m
 
 
 def _ring_whiteness(white: np.ndarray, x: float, y: float, r: float) -> float:
@@ -183,14 +199,14 @@ def _ring_whiteness(white: np.ndarray, x: float, y: float, r: float) -> float:
     return hits / tot if tot else 0.0
 
 
-def detect_spaces(bgr: np.ndarray, center, inr: int) -> list[Space]:
+def detect_spaces(bgr: np.ndarray, alpha, center, inr: int) -> list[Space]:
     """Cells are outlined by WHITE lines (a hex grid marks the spaces). Detect
     circles on the white mask, then keep only those whose circumference actually
     lies on a white ring — this rejects decorative art that isn't a cell. Strong
     non-max-suppression avoids overlap; pills are approximated by a circle.
     Assistive; verify via overlay."""
     cx, cy = center
-    white = _white_mask(bgr)
+    white = _white_mask(bgr, alpha)
     c = cv2.HoughCircles(
         white, cv2.HOUGH_GRADIENT, dp=1.0, minDist=int(inr * 0.4),
         param1=100, param2=40, minRadius=int(inr * 0.13), maxRadius=int(inr * 0.62),
@@ -230,9 +246,9 @@ def extract_tile(path: str, asset: str) -> Tile:
         center=center,
         inradius=inr,
         vertices=verts,
-        edges=detect_edges(bgr, center, verts, inr),
-        bonusCorners=detect_bonus_corners(bgr, center, verts),
-        spaces=detect_spaces(bgr, center, inr),
+        edges=detect_edges(bgr, alpha, center, verts, inr),
+        whiteCorners=detect_white_corners(bgr, alpha, center, verts),
+        spaces=detect_spaces(bgr, alpha, center, inr),
     )
 
 
@@ -245,7 +261,7 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
     cv2.circle(ov, (cx, cy), 10, (0, 255, 0), -1)
     for i, (vx, vy) in enumerate(tile.vertices):
         cv2.putText(ov, str(i), (vx, vy), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 140, 255), 3)
-        if tile.bonusCorners[i]:
+        if tile.whiteCorners[i]:
             cv2.rectangle(ov, (vx - 20, vy - 20), (vx + 20, vy + 20), (0, 255, 255), 4)
     for i in range(6):
         (mx, my), _ = _edge_mid_normal(tile.center, tile.vertices, i)

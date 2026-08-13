@@ -10,13 +10,17 @@ For every cut block tile (`tmp/artifacts/build/<asset>/png/<asset>-pNN-cMM.png`)
 
 - **Hexagon geometry** — center, the 6 vertices, and the inradius, taken from the
   tile's alpha outline. **Reliable.**
-- **Passages** — `edges[6]`: an edge is a passage unless a **black wall** blocks
-  it (detected along the edge span).
-- **Placements** — the circular space slots inside (`spaces[]`, normalized),
-  across a wide size range with non-max-suppression so they don't heavily
-  overlap. Pills/ovals are approximated as circles.
-- **Bonus slots** — `bonusCorners[6]`: a **white corner** (three hexes meeting at
-  white corners form a bonus zone).
+- **Placements** — `spaces[]`: cells are outlined by **white lines** (a hex grid
+  marks the cells), so circles are detected on the white mask and kept only when
+  their circumference actually lies on a white ring (rejecting decorative art),
+  with non-max-suppression so they don't overlap. Pills are approximated as
+  circles.
+- **Passages** — `edges[6]`: an edge is a passage where a **white grid line
+  crosses the black wall** out to the tile boundary (the white cell grid reaches
+  through the wall to connect to the neighbour); a solid dark wall is not.
+- **White corners** — `whiteCorners[6]`: which corners are white (measured among
+  in-tile pixels via the alpha mask). A **bonus zone** forms on the board where
+  three white corners meet — the tool reports the raw signal, not the bonus.
 
 Geometry is trustworthy; **passages / placements / bonus are assistive candidates**
 on stylised art. Every run writes a verification **overlay** so a human confirms

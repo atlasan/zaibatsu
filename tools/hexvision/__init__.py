@@ -7,7 +7,7 @@ only consumes that pipeline's pre-cut tile PNGs. See README.md and detect.py.
 from .detect import (
     Space,
     Tile,
-    detect_bonus_corners,
+    detect_white_corners,
     detect_edges,
     detect_spaces,
     draw_overlay,
@@ -25,5 +25,5 @@ __all__ = [
     "draw_overlay",
     "detect_edges",
     "detect_spaces",
-    "detect_bonus_corners",
+    "detect_white_corners",
 ]
