@@ -29,7 +29,7 @@ Open `http://localhost:4173`.
 - Creates and edits a source-linked block draft: identity, expansion, ICE,
   source-aligned entrances, six bonus corners, calibrated seven-zone gameplay-space selection, and provenance.
 - Renders each source block at an inspectable size in a vertically scrollable canvas.
-  Each block has seven printed small hexes (one centre plus six adjacent). spaces select one or more physical zones; finite capacity defaults to selected-zone count, while special/pawn spaces default to unlimited
+  Each block uses seven standardized point-up placement hexes in a source-aligned 2-3-2 arrangement (`h2 h3 / h7 h1 h4 / h6 h5`). A gameplay space selects one or more zones; finite capacity defaults to selected-zone count, while special/pawn spaces default to unlimited. Source circles, capsules, and large locations are display metadata, not new gameplay types.
   pill; `large / special` is unlimited and grows across one or more connected hexes.
 - Validates draft structure and cross-references before saving or export.
 - Saves editable sessions under ignored `.sessions/` and exports ignored
@@ -75,11 +75,11 @@ bun tools/block-editor/server.ts
 - Action-card editor: `http://localhost:4173/action-cards/`
 
 The block editor receives only `kind: "block"` manifest entries and retains the
-seven-small-hex placement tools. The action-card editor receives only
+2-3-2 seven-hex placement tools. The action-card editor receives only
 `kind: "action-card"` entries. It records a physical-copy group as explicit
 asset IDs, derives `copies` from that group, stores source transcription only
 in the local review session, and exports normalized gameplay fields plus a
 concise source-reviewed summary. Both interfaces serve UTF-8 HTML/JSON and
 never promote an OCR/vision suggestion without reviewer confirmation.
 
-The block authoring screen exposes an explicit **1–N space → zone mapping**: h1–h7 each map to one gameplay space, while a gameplay space may own one or more physical zones. The seven calibrated zone hexes collectively span the whole source block tile; they are not a small central movement grid.
+The block authoring screen exposes an explicit **1–N space → zone mapping**: h1–h7 each map to one gameplay space, while a gameplay space may own one or more physical zones. The seven calibrated zone anchors follow the source circles; outer tile points, entrances, corners, and artwork remain independent geometry.

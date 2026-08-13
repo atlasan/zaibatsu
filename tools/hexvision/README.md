@@ -76,3 +76,7 @@ optional local-Tesseract text regions, colour/icon candidates, perceptual hashes
 and duplicate groups. Tesseract is optional and no network OCR is used. Every
 card candidate remains review-required and the overlay is evidence, not a game
 rule transcription.
+
+## Seven-hex mapping
+
+The standard block model is h2 h3 / h7 h1 h4 / h6 h5. Hexvision renders those anchors and emits suggestedZoneIds plus confidence for every detected circle. These are editor review hints only; they never promote block data automatically.

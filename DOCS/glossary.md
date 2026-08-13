@@ -7,9 +7,9 @@ them verbatim so code, data, and rulebook line up.
 |------|---------|
 | **Zaibatsu** | A player — a megacorporation controlling pawns. |
 | **Cybernet** | The board: a growing hex layout of information blocks, seeded by the Central Core. |
-| **Information block** | A hexagonal tile forming the Cybernet; has spaces, an ICE value, effects, and bonus fragments. |
+| **Information block** | A hexagonal tile forming the Cybernet; has seven standard internal placement hexes, gameplay spaces, ICE, effects, and bonus fragments. |
 | **Central Core** | The starting block at the center; all pawns begin here. Shadowraiders adds **Central Core 02** with a direction die. |
-| **Space** | A cell on a block that pawns occupy: normal (1), double (2), special/pawn (∞), effect. |
+| **Space** | A gameplay location mapping one or more of a block's seven standardized placement hexes; capacity is explicit (legacy `double` means 2). |
 | **Pawn** | An agent under (or free of) player control; a piece (position) + control card (attributes). |
 | **Class-type** | A pawn/card category (operative, drone, bot, cyborg, …); some effects target specific classes. |
 | **Control card** | Represents control of a specific pawn or block; kept face-up in a player's control zone. |

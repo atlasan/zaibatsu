@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://zaibatsu/spec/editor/data-editor-session.schema.json",
-  "title": "Zaibatsu data editor session v3",
+  "title": "Zaibatsu data editor session v4",
   "description": "Local review state for blocks and action cards; it is not canonical game data.",
   "type": "object",
   "required": ["sessionVersion", "projectId", "assetManifestPath", "documents"],
   "additionalProperties": false,
   "properties": {
-    "sessionVersion": { "const": 3 },
+    "sessionVersion": { "const": 4 },
     "projectId": { "const": "zaibatsu-data-editor" },
     "assetManifestPath": { "const": "spec/assets/manifest.json" },
     "documents": { "type": "array", "items": { "$ref": "#/$defs/document" } },
@@ -30,7 +30,7 @@
         "source": { "type": "object", "required": ["assetId"], "properties": { "assetId": { "type": "string" } } },
         "provenance": { "type": "object", "required": ["primaryArtifactId", "page", "locator"], "properties": { "primaryArtifactId": { "type": "string" }, "page": { "type": "integer", "minimum": 1 }, "locator": { "type": "string", "minLength": 1 } } },
         "annotations": { "type": "array", "items": { "type": "string" } },
-        "knowledge": { "$ref": "#/$defs/knowledgeHints" }
+        "knowledge": { "$ref": "#/$defs/knowledgeHints" }, "geometryReviewRequired": { "type": "boolean" }
       }
     },
     "knowledgeHints": {

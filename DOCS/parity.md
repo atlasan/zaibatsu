@@ -30,7 +30,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Block | `domain.Block` | `Block` |
 | Block visual layout | `Block.LayoutID`, `Block.BoundarySpaces`, `Block.BonusCorners`, `Block.AssetRefs` | `Block.layoutId`, `Block.boundarySpaces`, `Block.bonusCorners`, `Block.assetRefs` |
 | Space visual location | `Space.Location` | `Space.location` |
-| Seven-zone space geometry | `Space.ZoneIDs`, `Space.Capacity`, `Space.Neighbors` | `Space.zoneIds`, `Space.capacity`, `Space.neighbors` |
+| Seven-zone space geometry | `Space.ZoneIDs`, `Space.Capacity`, `Space.DisplayShape`, `Space.Neighbors` | `Space.zoneIds`, `Space.capacity`, `Space.displayShape`, `Space.neighbors` |
 | Pawn | `domain.Pawn` | `Pawn` |
 | Action card | `domain.ActionCard` | `ActionCard` |
 | Phase enum | `domain.Phase*` | `Phase` |
@@ -131,7 +131,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
 | Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
-| Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-confirmed seven-small-hex layout; footprints render hex/pill/large print coverage only, with no effect or movement resolution |
+| Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-aligned 2–3–2 point-up placement layout; displayShape renders circle/capsule/compound source coverage only, with no effect or movement resolution |
 | Space-to-space movement | blocked | blocked | backlog - needs source-verified space-adjacency data |
 | Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |

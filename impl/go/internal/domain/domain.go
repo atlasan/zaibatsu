@@ -95,7 +95,7 @@ func (c ExplicitSpaceCapacity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(int(c))
 }
 
-// Space is a gameplay location on a block. ZoneIDs are physical source geometry;
+// Space is a gameplay location on a block. ZoneIDs are standardized source-aligned placement hexes;
 // neighbors are inferred candidates for future step movement.
 type Space struct {
 	ID           string                `json:"id"`
@@ -103,12 +103,14 @@ type Space struct {
 	ZoneIDs      []string              `json:"zoneIds,omitempty"`
 	Capacity     ExplicitSpaceCapacity `json:"capacity,omitempty"`
 	CapacityNote string                `json:"capacityNote,omitempty"`
-	Neighbors    []string              `json:"neighbors,omitempty"`
-	PawnID       string                `json:"pawnId,omitempty"`
-	EffectID     string                `json:"effectId,omitempty"`
-	Location     *SpaceLocation        `json:"location,omitempty"`
-	Footprint    *SpaceFootprint       `json:"footprint,omitempty"`
-	Modifier     *SpaceModifier        `json:"modifier,omitempty"`
+	// DisplayShape is source-facing/editor metadata only; it has no runtime behavior.
+	DisplayShape string          `json:"displayShape,omitempty"`
+	Neighbors    []string        `json:"neighbors,omitempty"`
+	PawnID       string          `json:"pawnId,omitempty"`
+	EffectID     string          `json:"effectId,omitempty"`
+	Location     *SpaceLocation  `json:"location,omitempty"`
+	Footprint    *SpaceFootprint `json:"footprint,omitempty"`
+	Modifier     *SpaceModifier  `json:"modifier,omitempty"`
 }
 
 // BlockEffects holds effect ids fired at placement / on gaining control.

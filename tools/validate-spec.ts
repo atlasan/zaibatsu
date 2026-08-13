@@ -42,7 +42,7 @@ for (const path of transcriptPaths) {
   if (!existsSync(join(root, path))) fail(`missing tracked transcript ${path}`);
 }
 const blockLayoutData = readJson(join(root, "spec/data/block-layouts.json"));
-const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-small-hex-grid");
+const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-zone-2-3-2-pointy");
 const standardZoneIds = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);
 if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.isArray(standardBlockLayout.zones) || standardBlockLayout.zones.length !== 7 || !Array.isArray(standardBlockLayout.corners) || standardBlockLayout.corners.length !== 6 || !Array.isArray(standardBlockLayout.edges) || standardBlockLayout.edges.length !== 6) {
   fail("block-layouts.json must declare calibrated seven-zone block geometry");
@@ -56,7 +56,7 @@ if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.is
   else {
     const minX = Math.min(...zones.map((zone) => (zone.x as number) - width! / 2)); const maxX = Math.max(...zones.map((zone) => (zone.x as number) + width! / 2));
     const minY = Math.min(...zones.map((zone) => (zone.y as number) - height! / 2)); const maxY = Math.max(...zones.map((zone) => (zone.y as number) + height! / 2));
-    if (minX > 8 || maxX < 92 || minY > 2 || maxY < 98) fail("seven physical zones must collectively span the full source block hex, not a central sub-grid");
+    if (Math.abs(Number((zones.find((z) => z.id === "h2")?.x)) - 33.3333) > .01 || Math.abs(Number((zones.find((z) => z.id === "h3")?.x)) - 66.6667) > .01 || Math.abs(Number((zones.find((z) => z.id === "h7")?.x)) - 16.6667) > .01 || Math.abs(Number((zones.find((z) => z.id === "h4")?.x)) - 83.3333) > .01) fail("seven placement hexes must use the source-aligned 2-3-2 point-up anchors");
   }
 }
 const externalCatalog = readJson(join(root, "DOCS/artifacts/external-sources.json"));
@@ -120,11 +120,11 @@ for (const mode of (inventory.modes as Json[] | undefined) ?? []) {
 // The editor example is non-canonical, but must use the source-backed seven-zone model.
 const editorSession = readJson(join(root, "spec/editor/block-editor-session.example.json"));
 const zoneIds = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);
-if (editorSession.sessionVersion !== 3 || editorSession.assetManifestPath !== "spec/assets/manifest.json") fail("block editor example must declare sessionVersion 3 and the canonical asset manifest");
+if (editorSession.sessionVersion !== 4 || editorSession.assetManifestPath !== "spec/assets/manifest.json") fail("block editor example must declare sessionVersion 4 and the canonical asset manifest");
 for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
   const source = document.source as Json | undefined; const block = document.block as Json | undefined; const provenance = document.provenance as Json | undefined;
   if (document.resourceType !== "block" || !validId(document.id) || !assetIds.has(String(source?.assetId))) fail(`block editor document ${String(document.id)} has an invalid source asset`);
-  if (block?.layoutId !== "standard-seven-small-hex-grid") fail(`block editor document ${String(document.id)} must use the standard seven-zone layout`);
+  if (block?.layoutId !== "standard-seven-zone-2-3-2-pointy") fail(`block editor document ${String(document.id)} must use the standard seven-zone layout`);
   if (!Array.isArray(block?.edges) || block.edges.length !== 6 || !Array.isArray(block?.boundarySpaces) || block.boundarySpaces.length !== 6 || !Array.isArray(block?.bonusCorners) || block.bonusCorners.length !== 6) fail(`block editor document ${String(document.id)} must define six edges, boundary lists, and corners`);
   const owners = new Set<string>(); const spaces = (block?.spaces as Json[] | undefined) ?? []; const spaceIds = new Set(spaces.map((space) => String(space.id)));
   for (const space of spaces) {
@@ -132,6 +132,7 @@ for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
     if (!validId(space.id) || !Array.isArray(selected) || !selected.length || new Set(selected.map(String)).size !== selected.length || selected.some((id) => !zoneIds.has(String(id)))) fail(`block editor document ${String(document.id)} has invalid selected zones`);
     for (const id of selected ?? []) { if (owners.has(String(id))) fail(`block editor document ${String(document.id)} has duplicate zone ownership ${String(id)}`); owners.add(String(id)); }
     if (!(capacity === "unlimited" || (Number.isInteger(capacity) && (capacity as number) > 0))) fail(`block editor document ${String(document.id)} has invalid explicit capacity`);
+    if (space.displayShape !== undefined && !["auto", "circle", "capsule", "compound"].includes(String(space.displayShape))) fail(`block editor document ${String(document.id)} has invalid display shape`);
     if (!Array.isArray(space.neighbors) || space.neighbors.some((id) => !spaceIds.has(String(id)))) fail(`block editor document ${String(document.id)} has invalid inferred neighbours`);
   }
   if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) fail(`block editor document ${String(document.id)} must retain its selected asset reference`);
@@ -150,7 +151,7 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
       const ids = new Set<string>();
       for (const record of records as Json[]) {
         if (!validId(record.id) || ids.has(record.id)) fail(`${expansion}/${name} has invalid or duplicate record id ${String(record.id)}`);
-        if (group === "blocks" && record.layoutId !== "standard-seven-small-hex-grid") fail(`${expansion}/${name} block ${String(record.id)} must use the standard seven-small-hex layout`);
+        if (group === "blocks" && record.layoutId !== "standard-seven-zone-2-3-2-pointy") fail(`${expansion}/${name} block ${String(record.id)} must use the standard 2-3-2 seven-hex layout`);
         if (typeof record.id === "string") ids.add(record.id);
       }
     }

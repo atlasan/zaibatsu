@@ -2,12 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://zaibatsu/spec/schema/block.schema.json",
   "title": "Information block",
-  "description": "A hexagonal Cybernet tile. Internal source zones are physical print geometry; gameplay capacity and neighbours are explicit data.",
+  "description": "A hexagonal Cybernet tile. Seven standardized internal placement hexes map source-marked gameplay spaces; capacity and neighbours are explicit data.",
   "type": "object",
   "required": ["id", "name", "expansion"], "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "name": { "type": "string" }, "expansion": { "enum": ["speedrunners", "shadowraiders"] },
-    "layoutId": { "const": "standard-seven-small-hex-grid", "default": "standard-seven-small-hex-grid" }, "isCentralCore": { "type": "boolean", "default": false },
+    "layoutId": { "const": "standard-seven-zone-2-3-2-pointy", "default": "standard-seven-zone-2-3-2-pointy" }, "isCentralCore": { "type": "boolean", "default": false },
     "iceValue": { "enum": ["none", "low", "medium", "high", "black"], "default": "none" },
     "edges": { "type": "array", "items": { "type": "boolean" }, "minItems": 6, "maxItems": 6 },
     "boundarySpaces": { "type": "array", "items": { "type": "array", "items": { "type": "string" } }, "minItems": 6, "maxItems": 6 },
@@ -24,8 +24,8 @@
       "type": "object", "required": ["id", "type", "zoneIds", "capacity", "neighbors"], "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "type": { "enum": ["normal", "special", "pawn", "effect"] },
-        "zoneIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/zoneId" }, "description": "Physical printed zones selected by this gameplay space." },
-        "capacity": { "$ref": "#/$defs/capacity" }, "capacityNote": { "type": "string", "minLength": 1, "description": "Required source-review explanation when capacity differs from the default for selected zones." },
+        "zoneIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/zoneId" }, "description": "One or more standardized internal placement hexes selected by this gameplay space." },
+        "capacity": { "$ref": "#/$defs/capacity" }, "displayShape": { "enum": ["auto", "circle", "capsule", "compound"], "default": "auto", "description": "Source-facing editor rendering only; it never changes gameplay capacity or movement." }, "capacityNote": { "type": "string", "minLength": 1, "description": "Required source-review explanation when capacity differs from the default for selected zones." },
         "neighbors": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "description": "Derived gameplay-space links from touching selected zones; not yet executable step movement." },
         "pawnId": { "type": "string" }, "effectId": { "type": "string" },
         "modifier": { "type": "object", "additionalProperties": false, "properties": { "kind": { "enum": ["defense", "hand-size", "attack"] }, "amount": { "type": "integer" } } }

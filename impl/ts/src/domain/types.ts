@@ -51,6 +51,9 @@ export interface SpaceFootprint {
 /** Explicit finite capacity or unlimited; absent values are legacy type-derived data. */
 export type ExplicitSpaceCapacity = number | "unlimited";
 
+/** Source-facing render metadata only; never interpreted by the engine. */
+export type SpaceDisplayShape = "auto" | "circle" | "capsule" | "compound";
+
 export interface Space {
   id: string;
   /** `double` remains readable for legacy data only; new canonical data uses explicit capacity. */
@@ -58,6 +61,8 @@ export interface Space {
   zoneIds?: ("h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7")[];
   capacity?: ExplicitSpaceCapacity;
   capacityNote?: string;
+  /** Source-facing rendering only; zoneIds and capacity remain authoritative. */
+  displayShape?: SpaceDisplayShape;
   /** Inferred from touching selected zones; not yet executed as step movement. */
   neighbors?: string[];
   pawnId?: string;
@@ -76,8 +81,8 @@ export interface Block {
   id: string;
   name: string;
   expansion: Expansion;
-  /** Source layout: one centre plus six adjacent printed small hexes. */
-  layoutId?: "standard-seven-small-hex-grid";
+  /** Standardized internal placement layout: h2/h3, h7/h1/h4, h6/h5. */
+  layoutId?: "standard-seven-zone-2-3-2-pointy";
   isCentralCore?: boolean;
   iceValue?: IceValue;
   edges?: boolean[];

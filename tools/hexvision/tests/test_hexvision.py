@@ -72,3 +72,13 @@ def test_real_cut_tiles_if_present():
         tile = detect.extract_tile(t, os.path.basename(t))
         assert len(tile.vertices) == 6
         assert tile.inradius > 0
+
+
+def test_standard_anchor_suggestions_follow_2_3_2_layout():
+    upper_left = detect.Space(x=-0.337, y=-0.583, r=0.22, kind="space")
+    center = detect.Space(x=0.0, y=0.0, r=0.22, kind="space")
+    assert detect.suggest_zone_ids(upper_left)[0] == ["h2"]
+    assert detect.suggest_zone_ids(center)[0] == ["h1"]
+    anchors = detect.standard_zone_centers((500, 500), 300)
+    assert anchors["h2"][1] < anchors["h1"][1] == anchors["h4"][1]
+    assert anchors["h6"][1] > anchors["h1"][1]

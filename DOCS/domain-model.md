@@ -61,8 +61,9 @@ A cell on a block.
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect
 - `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.
-- `layoutId: standard-seven-small-hex-grid` - every information block has the same seven printed small hexes: one centre plus six adjacent positions. The canonical coordinates live in `spec/data/block-layouts.json`.
-- `zoneIds: ZoneId[]` - one or more of the seven physical printed zones (`h1` centre, then `h2`–`h7` clockwise); a zone has one gameplay-space owner.
+- `layoutId: standard-seven-zone-2-3-2-pointy` - every block uses seven standardized point-up placement hexes arranged `h2 h3 / h7 h1 h4 / h6 h5`. Outer tile points, entrances, corners, and source artwork remain separate geometry; canonical anchors live in `spec/data/block-layouts.json`.
+- `zoneIds: ZoneId[]` - one or more standardized placement hexes; a zone has one gameplay-space owner. Verified blocks account for all seven exactly once.
+- `displayShape?: auto | circle | capsule | compound` - source-facing editor metadata derived from the mapping unless reviewed otherwise; it has no engine behaviour.
 - `capacity: positive int | unlimited` - explicit occupancy. The editor defaults finite capacity to selected-zone count; a different value needs `capacityNote` evidence. `special` and pawn-home spaces default to `unlimited`.
 - `neighbors: SpaceId[]` - symmetric candidate links inferred from touching selected zones and loaded by both mirrors. They are data available for future step movement, not an executable traversal yet.
 

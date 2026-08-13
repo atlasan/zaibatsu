@@ -14,6 +14,8 @@ from .detect import (
     extract_tile,
     hexagon,
     load_tile,
+    suggest_zone_ids,
+    standard_zone_centers,
 )
 
 __all__ = [
@@ -26,4 +28,6 @@ __all__ = [
     "detect_edges",
     "detect_spaces",
     "detect_white_corners",
+    "suggest_zone_ids",
+    "standard_zone_centers",
 ]

@@ -36,6 +36,8 @@ class Space:
     y: float
     r: float  # radius as a fraction of the inradius
     kind: str  # heuristic label; refine by hand
+    suggestedZoneIds: list[str] = field(default_factory=list)
+    suggestionConfidence: float = 0.0
 
 
 @dataclass
@@ -55,6 +57,32 @@ class Tile:
         return d
 
 
+# Source-aligned standardized 2-3-2 placement anchors, in tile-inradius units.
+# h2/h3 are upper, h7/h1/h4 are middle, h6/h5 are lower.
+STANDARD_ZONE_ANCHORS: dict[str, tuple[float, float]] = {
+    "h1": (0.0, 0.0), "h2": (-0.337, -0.583), "h3": (0.337, -0.583),
+    "h4": (0.674, 0.0), "h5": (0.337, 0.583), "h6": (-0.337, 0.583),
+    "h7": (-0.674, 0.0),
+}
+
+
+def suggest_zone_ids(space: Space) -> tuple[list[str], float]:
+    """Return a provisional nearest-anchor mapping for a detected source circle."""
+    distances = sorted((math.hypot(space.x - x, space.y - y), zone_id)
+                       for zone_id, (x, y) in STANDARD_ZONE_ANCHORS.items())
+    nearest, nearest_id = distances[0]
+    selected = [zone_id for distance, zone_id in distances if distance <= max(0.16, space.r * 0.82)]
+    if not selected:
+        selected = [nearest_id]
+    order = ("h1", "h2", "h3", "h4", "h5", "h6", "h7")
+    selected.sort(key=order.index)
+    return selected, round(max(0.0, min(1.0, 1.0 - nearest / 0.42)), 4)
+
+
+def standard_zone_centers(center: tuple[int, int], inradius: int) -> dict[str, tuple[int, int]]:
+    cx, cy = center
+    return {zone_id: (int(round(cx + x * inradius)), int(round(cy + y * inradius)))
+            for zone_id, (x, y) in STANDARD_ZONE_ANCHORS.items()}
 def load_tile(path: str) -> tuple[np.ndarray, np.ndarray]:
     """Load a cut tile; returns (BGR composited over white, alpha mask uint8)."""
     img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
@@ -227,12 +255,14 @@ def detect_spaces(bgr: np.ndarray, alpha, center, inr: int) -> list[Space]:
         if any(math.hypot(x - px, y - py) < 0.7 * max(r, pr) for px, py, pr in picks):
             continue
         picks.append((x, y, r))
-        kept.append(Space(
+        normalized = Space(
             x=round((x - cx) / inr, 4),
             y=round((y - cy) / inr, 4),
             r=round(r / inr, 4),
             kind="space",
-        ))
+        )
+        normalized.suggestedZoneIds, normalized.suggestionConfidence = suggest_zone_ids(normalized)
+        kept.append(normalized)
         if len(kept) >= 7:
             break
     return kept
@@ -269,7 +299,12 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
         py = int(cy + (my - cy) * 0.88)
         cv2.circle(ov, (px, py), 16, (0, 200, 0) if tile.edges[i] else (0, 0, 200), -1)
         cv2.putText(ov, f"e{i}", (px - 14, py + 6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+    for zone_id, (zx, zy) in standard_zone_centers(tile.center, tile.inradius).items():
+        cv2.circle(ov, (zx, zy), 12, (255, 220, 80), 2)
+        cv2.putText(ov, zone_id, (zx - 14, zy + 5), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 220, 80), 2)
     for s in tile.spaces:
         sx, sy = int(cx + s.x * tile.inradius), int(cy + s.y * tile.inradius)
         cv2.circle(ov, (sx, sy), int(s.r * tile.inradius), (255, 120, 0), 3)
+        label = "/".join(s.suggestedZoneIds) if s.suggestedZoneIds else "?"
+        cv2.putText(ov, label, (sx - 22, sy - int(s.r * tile.inradius) - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 220, 80), 2)
     return ov

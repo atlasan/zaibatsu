@@ -66,6 +66,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (both) Grow the CLI demos into playable hotseat clients.
 
 ## Cross-cutting / tech debt
+- [x] (tools/spec/docs) Source-aligned 2-3-2 seven-hex model: standard placement anchors, 1-N space mapping, source-facing circle/capsule/compound display metadata, migration review gating, and mirror loading; source transcription and step-movement execution remain separate work.
 - [x] (spec/tools/docs) Knowledge catalog foundation: canonical `spec/knowledge/` taxonomy + generated catalog/relations, validation hooks, workflow docs, and editor knowledge hints are now tracked in-repo.
 - [~] (spec/docs) Speedrunners pilot verification slice: page-1 action cards and the first two page-1 blocks are source-linked through provenance and `gameplayRef`; continue the remaining block confirmations before expanding the workflow across the full set.
 - [x] (tools/spec/docs) Reproducible artifact toolset: checksum-verified PDF render, automatic crop detection, PNG/WebP extraction, page atlases, ignored outputs, and source-linked asset-manifest contract. Gameplay mapping remains pending component transcription.
