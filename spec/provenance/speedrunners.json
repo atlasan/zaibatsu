@@ -1,9 +1,9 @@
 {
-  "status": "provisional",
+  "status": "cataloged",
   "files": {
     "data/speedrunners/blocks.json": {
       "candidateSources": ["sp-en-blocks-a4", "sp-en-blocks-letter", "sp-en-rulebook"],
-      "note": "Seed fixtures only; no block record has been verified."
+      "note": "Mixed baseline: seed fixtures remain provisional while verified page-1 block records are tracked below."
     },
     "data/speedrunners/pawns.json": {
       "candidateSources": ["sp-en-control-cards", "sp-en-pawns", "sp-en-rulebook"],
@@ -11,12 +11,79 @@
     },
     "data/speedrunners/action-cards.json": {
       "candidateSources": ["sp-en-action-cards", "sp-en-rulebook"],
-      "note": "Seed fixtures only; no action-card record has been verified."
+      "note": "Mixed baseline: seed fixtures remain provisional while verified page-1 action-card records are tracked below."
     },
     "data/speedrunners/mode.json": {
       "candidateSources": ["sp-en-rulebook"],
       "note": "Opening-hand information remains an explicit rule-digest interpretation."
     }
   },
-  "records": {}
+  "records": {
+    "block/idoru": {
+      "sources": [
+        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 1" },
+        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 1" }
+      ]
+    },
+    "block/hacktivism": {
+      "sources": [
+        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 2" },
+        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 2" }
+      ]
+    },
+    "action-card/octagon-dex": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 1" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 1" }
+      ]
+    },
+    "action-card/simstim-record": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 2" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 2" }
+      ]
+    },
+    "action-card/dj": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 3" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 3" }
+      ]
+    },
+    "action-card/accelerator-transgenic-therapy": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 4" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 4" }
+      ]
+    },
+    "action-card/hyper-accelerator": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 5" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 5" }
+      ]
+    },
+    "action-card/accela-accelerator": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 6" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 6" }
+      ]
+    },
+    "action-card/biochip": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 7" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 7" }
+      ]
+    },
+    "action-card/e-synapse-neural-interface": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 8" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 8" }
+      ]
+    },
+    "action-card/cracker": {
+      "sources": [
+        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 9" },
+        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 9" }
+      ]
+    }
+  }
 }

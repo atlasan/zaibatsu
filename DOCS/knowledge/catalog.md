@@ -1,6 +1,19 @@
 # Component and mode catalog
 
-The structured inventory is the canonical count and source locator register: [`spec/inventory.json`](../../spec/inventory.json).
+The structured inventory is the canonical count and source locator register:
+[`spec/inventory.json`](../../spec/inventory.json).
+
+The broader cross-reference catalog now lives in:
+
+- [`spec/knowledge/catalog.json`](../../spec/knowledge/catalog.json) - one
+  entry per tracked entity;
+- [`spec/knowledge/relations.json`](../../spec/knowledge/relations.json) -
+  explicit links between records, sources, assets, docs, and workflow steps;
+- [`spec/knowledge/taxonomy.json`](../../spec/knowledge/taxonomy.json) -
+  allowed tags and relation types.
+
+Use this page as the quick human summary. Use `spec/knowledge/` when a tool,
+reviewer, or editor needs a stable answer to "what is this thing connected to?"
 
 | Product | Canonical release | Verified physical inventory |
 |---|---|---|
@@ -21,3 +34,19 @@ The structured inventory is the canonical count and source locator register: [`s
 | Total War - Chaos | 1-8 | Total War plus Chaos |
 
 Every row links to an exact rulebook locator in `spec/inventory.json`. Individual cards, pawns, blocks, missions, and threats move from this inventory to record-level provenance only after direct transcription from the matching component sheet.
+
+## Reading the catalog
+
+Each machine-readable entry answers the same baseline questions:
+
+- `kind` / `localId` / `title` - what it is;
+- `status` - provisional, cataloged, verified, or implemented;
+- `tags` - controlled vocabulary from `taxonomy.json`;
+- `refs.filePaths` - canonical tracked files that own the fact;
+- `refs.docPaths` - human docs that explain it;
+- `refs.assetIds` - physical derived assets, if any;
+- `refs.sourceIds` - authoritative source artifacts behind it.
+
+`relations.json` then makes the graph explicit: for example, a card can be
+documented by a rules digest, evidenced by a source sheet, and depicted by one
+or more asset crops without forcing each consumer to rediscover those links.

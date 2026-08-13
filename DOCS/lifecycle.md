@@ -5,7 +5,8 @@ chain:
 
 ```
 original source -> rules digest / ADR -> schema -> data + provenance
--> Go and TypeScript behavior -> parity contract -> tests -> task completion
+-> knowledge catalog -> Go and TypeScript behavior -> parity contract
+-> tests -> task completion
 ```
 
 ## Ownership and transitions
@@ -16,6 +17,7 @@ original source -> rules digest / ADR -> schema -> data + provenance
 | Rule fact or ambiguity | `DOCS/rules/` | source id + locator; interpretations state rationale |
 | Architectural choice | `DOCS/adr/` | alternatives, decision, consequences and supersession link |
 | Schema and content | `spec/schema/`, `spec/data/`, `spec/provenance/` | schema-first change; every canonical record has source locators |
+| Knowledge catalog | `spec/knowledge/` | tags, relations, source/doc/asset refs stay consistent with canonical files |
 | Engine behavior | `impl/go/` and `impl/ts/` | idiomatic mirror API/behavior and equivalent tests |
 | Parity evidence | `DOCS/parity.md` | symbol/status update and any intentional gap task id |
 | Delivery work | `tasks/BACKLOG.md` | stable task id, phase, status, dependencies and artifact links |
@@ -30,10 +32,14 @@ original source -> rules digest / ADR -> schema -> data + provenance
    `spec/provenance/<expansion>.json` with source artifact IDs and page/card
    locators. A `provisional` record may cite candidate sources but must not
    claim verification.
-4. Implement engine behavior in Go and TypeScript together; update
+4. Regenerate `spec/knowledge/catalog.json` and `spec/knowledge/relations.json`
+   so the new or changed record has current tags, source refs, asset refs, doc
+   refs, and cross-links.
+5. Implement engine behavior in Go and TypeScript together; update
    `DOCS/parity.md` and add equivalent tests. A temporary gap is exceptional
    and must have a backlog task id.
-5. Close a task only when its linked source, docs, schema/data, both mirrors,
+6. Close a task only when its linked source, docs, schema/data, knowledge
+   catalog, both mirrors,
    and tests are current. Update its status in the same commit.
 
 ## Decision and memory policy
@@ -67,8 +73,8 @@ tracked by task `T-101`.
 `spec/inventory.json` may verify release-level component counts and mode facts
 before individual component transcription. Such evidence is recorded as
 `cataloged` provenance, never as a verified component record. Run
-`bun tools/validate-spec.ts` to validate the inventory, its source locators,
-and component evidence.
+`bun tools/validate-spec.ts` to validate the inventory, knowledge catalog, its
+source locators, and component evidence.
 
 ## Derived assets
 
@@ -77,3 +83,6 @@ only after its source PDF passes catalog checksum validation. It records a
 render DPI, page, stable automatic crop ID, crop geometry, and output hashes.
 The PNG/WebP crops and atlas files remain ignored. A `gameplayRef` may be added
 only when its matching content record has record-level provenance; an asset
+with `gameplayRef` must therefore also resolve to a **verified**
+`spec/knowledge/catalog.json` entry. Keep asset linking honest: cataloged crops
+are useful before transcription, but they are not gameplay identity.

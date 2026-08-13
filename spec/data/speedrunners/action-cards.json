@@ -1,5 +1,5 @@
 {
-  "$comment": "Speedrunners action deck. SEED DATA — provisional. The real deck is 54 cards ('Sp 03 Action Cards'); this seed uses representative cards with copy counts to exercise the deck/hand/draw machinery. Tracked in tasks/BACKLOG.md.",
+  "$comment": "Speedrunners action deck. Mixed baseline: the original seed helpers remain provisional so current tests keep a stable fixture deck, while page-1 source-backed cards from 'Sp 03 Action Cards' are now transcribed with record-level provenance. Full deck transcription is still tracked in tasks/BACKLOG.md.",
   "cards": [
     { "id": "move-1", "name": "Uplink", "copies": 6, "movement": 1, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
     { "id": "move-2", "name": "Fast Uplink", "copies": 6, "movement": 2, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
@@ -7,6 +7,15 @@
     { "id": "add-on-accelerator", "name": "Accelerator", "copies": 2, "movement": 1, "activates": ["search"], "attach": { "as": "pawn", "slot": "add-on", "class": ["accelerator"] }, "provisional": true },
     { "id": "weapon-gunhed", "name": "Gunhed", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "pawn", "slot": "weapon" }, "provisional": true },
     { "id": "armor-brainchip", "name": "Brainchip", "copies": 2, "movement": 1, "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "armor", "class": ["brainchip"] }, "provisional": true },
-    { "id": "enemy-malware", "name": "Malware", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "enemy", "slot": "add-on", "class": ["malware"] }, "provisional": true }
+    { "id": "enemy-malware", "name": "Malware", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "enemy", "slot": "add-on", "class": ["malware"] }, "provisional": true },
+    { "id": "octagon-dex", "name": "Octagon \"dex\"", "copies": 1, "summary": "Attach to a pawn as an add-on; the pawn ignores direction arrows.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c01"] },
+    { "id": "simstim-record", "name": "Simstim Record", "copies": 1, "summary": "Attach to a pawn as an add-on; while you control this card, gain one bonus counter.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c02"] },
+    { "id": "dj", "name": "DJ", "copies": 1, "summary": "Attach to a pawn as an add-on; while you control this card, you choose the music that plays during the game.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c03"] },
+    { "id": "accelerator-transgenic-therapy", "name": "Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed card identifies this copy as Accelerator with transgenic therapy branding.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c04"] },
+    { "id": "hyper-accelerator", "name": "Hyper Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source identifies this as a Hyper Accelerator card.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c05"] },
+    { "id": "accela-accelerator", "name": "Accela Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source identifies this as an Accela Accelerator card.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c06"] },
+    { "id": "biochip", "name": "Biochip", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names Biochip and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c07"] },
+    { "id": "e-synapse-neural-interface", "name": "E-Synapse Neural Interface", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names E-Synapse neural interface and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c08"] },
+    { "id": "cracker", "name": "Cracker", "copies": 1, "summary": "Use with Icebreaker on a block; place the Cracker in this block under your control.", "activates": ["icebreaker"], "assetRefs": ["sp-en-action-cards-p01-c09"] }
   ]
 }

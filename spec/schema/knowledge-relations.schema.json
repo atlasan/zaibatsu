@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/knowledge-relations.schema.json",
+  "title": "Zaibatsu knowledge relations",
+  "type": "object",
+  "required": ["catalogVersion", "relations"],
+  "additionalProperties": false,
+  "properties": {
+    "catalogVersion": { "const": 1 },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    }
+  },
+  "$defs": {
+    "entryId": {
+      "type": "string",
+      "pattern": "^[a-z0-9./-]+$"
+    },
+    "relation": {
+      "type": "object",
+      "required": ["type", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "from": { "$ref": "#/$defs/entryId" },
+        "to": { "$ref": "#/$defs/entryId" },
+        "locator": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

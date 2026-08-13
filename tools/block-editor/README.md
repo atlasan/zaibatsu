@@ -36,9 +36,15 @@ Open `http://localhost:4173`.
   `exports/*.patch.json` + `*.report.json` files.
 - Includes the target data file's SHA-256 in every patch, so a stale draft
   cannot be applied over changed canonical data unnoticed.
+- Carries optional session-only knowledge hints (tags / relation hints) through
+  export metadata so review can promote them into `spec/knowledge/` without
+  leaking them into runtime records by accident.
 
 The editor never writes `spec/data` itself. Review and apply exported patches
-through the normal source/provenance workflow.
+through the normal source/provenance workflow. Canonical status, source links,
+asset links, and doc relations are finalized when reviewed changes land in
+`spec/data/`, `spec/provenance/`, `spec/assets/manifest.json`, and the
+generated `spec/knowledge/` outputs.
 
 ## Tests
 
@@ -75,3 +81,5 @@ asset IDs, derives `copies` from that group, stores source transcription only
 in the local review session, and exports normalized gameplay fields plus a
 concise source-reviewed summary. Both interfaces serve UTF-8 HTML/JSON and
 never promote an OCR/vision suggestion without reviewer confirmation.
+
+The block authoring screen exposes an explicit **1–N space → zone mapping**: h1–h7 each map to one gameplay space, while a gameplay space may own one or more physical zones. The seven calibrated zone hexes collectively span the whole source block tile; they are not a small central movement grid.

@@ -178,4 +178,16 @@ missions, and mode collections so both mirrors can consume complete structured
 content as it is transcribed. Inventory verification does not imply that every
 effect is executable; that status remains governed by `DOCS/parity.md`.
 
+Cross-cutting metadata does **not** belong in the runtime model by default.
+Source links, asset links, status labels, documentation links, and relation
+graphs now live in `spec/knowledge/`, which joins:
+
+- `spec/data/` runtime records;
+- `spec/provenance/` verification facts;
+- `spec/assets/manifest.json` physical asset identities;
+- `DOCS/` human explanations and workflow guidance.
+
+That split is deliberate: mirrors load gameplay data, while the knowledge
+catalog gives humans and tools a reusable index over the same canonical facts.
+
 See [the knowledge index](knowledge/INDEX.md) for scope and source policy.

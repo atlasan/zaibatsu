@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/knowledge-catalog.schema.json",
+  "title": "Zaibatsu knowledge catalog",
+  "type": "object",
+  "required": ["catalogVersion", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "catalogVersion": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entryId": {
+      "type": "string",
+      "pattern": "^[a-z0-9./-]+$"
+    },
+    "status": {
+      "enum": ["provisional", "cataloged", "verified", "implemented"]
+    },
+    "refPaths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(DOCS|README\\.md|MEMORIES|spec|tasks|tools)/.*"
+      },
+      "default": []
+    },
+    "refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "filePaths": { "$ref": "#/$defs/refPaths" },
+        "docPaths": { "$ref": "#/$defs/refPaths" },
+        "assetIds": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "default": []
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "default": []
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "required": ["entryId", "kind", "localId", "title", "status", "tags", "refs"],
+      "additionalProperties": false,
+      "properties": {
+        "entryId": { "$ref": "#/$defs/entryId" },
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "localId": {
+          "type": "string",
+          "pattern": "^[a-z0-9./-]+$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "$ref": "#/$defs/status" },
+        "expansion": {
+          "enum": ["speedrunners", "shadowraiders", "shared"]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*:[a-z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "summary": { "type": "string" },
+        "refs": { "$ref": "#/$defs/refs" }
+      }
+    }
+  }
+}

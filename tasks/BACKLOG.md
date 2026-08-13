@@ -66,6 +66,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (both) Grow the CLI demos into playable hotseat clients.
 
 ## Cross-cutting / tech debt
+- [x] (spec/tools/docs) Knowledge catalog foundation: canonical `spec/knowledge/` taxonomy + generated catalog/relations, validation hooks, workflow docs, and editor knowledge hints are now tracked in-repo.
+- [~] (spec/docs) Speedrunners pilot verification slice: page-1 action cards and the first two page-1 blocks are source-linked through provenance and `gameplayRef`; continue the remaining block confirmations before expanding the workflow across the full set.
 - [x] (tools/spec/docs) Reproducible artifact toolset: checksum-verified PDF render, automatic crop detection, PNG/WebP extraction, page atlases, ignored outputs, and source-linked asset-manifest contract. Gameplay mapping remains pending component transcription.
 - [ ] Extract the shuffle-order sequence into a documented "setup RNG protocol" so future setup steps preserve cross-mirror parity.
 - [x] (tools/editor/spec/docs) **Standalone block-editor MVP.** Local asset browser, source-linked draft form, validation, session save/reopen, and explicit patch/report export implemented under `tools/block-editor/`. It remains independent of the mirror engines.

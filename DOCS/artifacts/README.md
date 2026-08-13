@@ -43,4 +43,13 @@ ignored local PNG/WebP masters and deterministic atlases. Its tracked
 `spec/assets/manifest.json` records crop geometry, source hashes, output hashes,
 and optional gameplay references; it never embeds original PDFs or artwork.
 
-Run `python -m tools.artifacts verify` alongside the existing source verifier.
+`gameplayRef` is the promotion boundary between a physical crop and a canonical
+gameplay record. Only add it when the target record is record-verified in
+`spec/provenance/` and therefore resolves to a **verified** entry in
+`spec/knowledge/catalog.json`. A crop may still be cataloged and useful before
+that point; it simply remains an asset-first reference instead of a verified
+gameplay identity.
+
+Run `python -m tools.artifacts verify` alongside the existing source verifier
+and `bun tools/validate-spec.ts` so asset links, provenance, and the knowledge
+catalog stay aligned.

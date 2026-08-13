@@ -26,6 +26,7 @@ This is an umbrella workspace with **one language-neutral specification** and
 | Path         | What it is |
 |--------------|------------|
 | `spec/`      | **Single source of truth.** JSON Schemas (`spec/schema/`) + shared game data (`spec/data/`) consumed by *both* implementations. Rules live here as data, not code. |
+| `spec/knowledge/` | Machine-readable catalog joining data, provenance, assets, docs, tags, and relations. |
 | `impl/go/`   | Go mirror of the engine. |
 | `impl/ts/`   | TypeScript / Bun mirror of the engine. |
 | `DOCS/`      | Design docs: architecture, domain model, turn flow, glossary, parity contract, roadmap, and per-game rules digests. |
@@ -40,6 +41,9 @@ same test intent, expressed idiomatically in each language. The
 The original PDFs and print archives (`ShadowRaiders/`, `SpeedRunners/`,
 `SortMe/`) are kept locally for reference but are **not** tracked in git — their
 *transcribed* content lives under `spec/`.
+
+For a repo-wide content view, start with `spec/knowledge/` for machine-readable
+catalog data and `DOCS/knowledge/` for the human guide to that catalog.
 
 ---
 

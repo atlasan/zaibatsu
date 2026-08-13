@@ -1,10 +1,76 @@
 {
-  "$comment": "Speedrunners information blocks. SEED DATA — provisional and incomplete. Zones/capacities are engine-ready shape records but require source review before verification.",
+  "$comment": "Speedrunners information blocks. Mixed baseline: the original seed fixtures remain provisional, while page-1 source-backed blocks from 'Sp 01 Blocks A4' are now added as source-linked seven-zone records. Full block transcription is still tracked in tasks/BACKLOG.md.",
   "blocks": [
     { "id": "central-core", "name": "Central Core", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "isCentralCore": true, "iceValue": "none", "edges": [true, true, true, true, true, true], "bonusFragments": 0, "spaces": [{ "id": "core", "type": "special", "zoneIds": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"], "capacity": "unlimited", "neighbors": [] }], "provisional": true },
     { "id": "data-haven", "name": "Data Haven", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "iceValue": "low", "edges": [true, false, true, true, false, true], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "normal", "zoneIds": ["h2", "h3"], "capacity": 2, "neighbors": ["a"] }], "provisional": true },
     { "id": "firewall-node", "name": "Firewall Node", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "iceValue": "medium", "edges": [true, true, false, true, true, false], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["a"], "modifier": { "kind": "defense", "amount": 1 } }], "provisional": true },
     { "id": "black-market", "name": "Black Market", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "iceValue": "high", "edges": [true, false, true, false, true, false], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "effect", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["a"], "effectId": "sp-black-market" }], "provisional": true },
-    { "id": "server-farm", "name": "Server Farm", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "iceValue": "black", "edges": [true, true, true, false, false, false], "bonusFragments": 0, "spaces": [{ "id": "a", "type": "special", "zoneIds": ["h1", "h2", "h3"], "capacity": "unlimited", "neighbors": [] }], "provisional": true }
+    { "id": "server-farm", "name": "Server Farm", "expansion": "speedrunners", "layoutId": "standard-seven-small-hex-grid", "iceValue": "black", "edges": [true, true, true, false, false, false], "bonusFragments": 0, "spaces": [{ "id": "a", "type": "special", "zoneIds": ["h1", "h2", "h3"], "capacity": "unlimited", "neighbors": [] }], "provisional": true },
+    {
+      "id": "idoru",
+      "name": "Idoru",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-small-hex-grid",
+      "iceValue": "low",
+      "edges": [false, false, true, true, false, false],
+      "boundarySpaces": [[], [], ["h4", "h5"], ["h5", "h6"], [], []],
+      "bonusFragments": 4,
+      "bonusCorners": [false, true, true, false, true, true],
+      "spaces": [
+        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
+        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
+        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
+        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
+        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
+        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
+        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      ],
+      "effects": { "underControl": "sp-idoru" },
+      "assetRefs": ["sp-en-blocks-a4-p01-c01"]
+    },
+    {
+      "id": "hacktivism",
+      "name": "Hacktivism",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-small-hex-grid",
+      "iceValue": "low",
+      "edges": [true, false, true, false, true, false],
+      "boundarySpaces": [["h2", "h3"], [], ["h4", "h5"], [], ["h6", "h7"], []],
+      "bonusFragments": 5,
+      "bonusCorners": [true, true, true, true, true, false],
+      "spaces": [
+        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
+        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
+        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
+        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
+        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
+        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
+        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      ],
+      "effects": { "underControl": "sp-hacktivism" },
+      "assetRefs": ["sp-en-blocks-a4-p01-c02"]
+    },
+    {
+      "id": "chiba-city",
+      "name": "Chiba City",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-small-hex-grid",
+      "iceValue": "low",
+      "edges": [false, false, true, false, false, false],
+      "boundarySpaces": [[], [], ["h4", "h5"], [], [], []],
+      "bonusFragments": 5,
+      "bonusCorners": [true, true, true, false, true, true],
+      "spaces": [
+        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
+        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
+        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
+        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
+        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
+        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
+        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      ],
+      "effects": { "underControl": "sp-chiba-city" },
+      "assetRefs": ["sp-en-blocks-a4-p01-c03"]
+    }
   ]
 }

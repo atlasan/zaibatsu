@@ -23,6 +23,9 @@ const artifactCatalog = readJson(join(root, "DOCS/artifacts/source-catalog.json"
 const artifactIds = new Set(strings((artifactCatalog.assets as Json[] | undefined)?.map((asset) => asset.id)));
 const assetManifest = readJson(join(root, "spec/assets/manifest.json"));
 const assetIds = new Set(strings((assetManifest.assets as Json[] | undefined)?.map((asset) => asset.assetId)));
+const knowledgeTaxonomy = readJson(join(root, "spec/knowledge/taxonomy.json"));
+const knowledgeCatalog = readJson(join(root, "spec/knowledge/catalog.json"));
+const knowledgeRelations = readJson(join(root, "spec/knowledge/relations.json"));
 const inventory = readJson(join(root, "spec/inventory.json"));
 const blockLayoutData = readJson(join(root, "spec/data/block-layouts.json"));
 const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-small-hex-grid");
@@ -33,6 +36,14 @@ if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.is
   const zones = standardBlockLayout.zones as Json[];
   const ids = new Set(zones.map((zone) => String(zone.id)));
   if (ids.size !== 7 || [...standardZoneIds].some((id) => !ids.has(id)) || zones.some((zone) => !Number.isFinite(zone.x) || !Number.isFinite(zone.y) || !Array.isArray(zone.touches))) fail("standard seven-zone layout must contain exact named zones with coordinates and adjacency");
+  const shape = standardBlockLayout.zoneShape as Json | undefined;
+  const width = shape?.width as number | undefined; const height = shape?.height as number | undefined;
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width! <= 0 || height! <= 0) fail("standard seven-zone layout must declare positive zone dimensions");
+  else {
+    const minX = Math.min(...zones.map((zone) => (zone.x as number) - width! / 2)); const maxX = Math.max(...zones.map((zone) => (zone.x as number) + width! / 2));
+    const minY = Math.min(...zones.map((zone) => (zone.y as number) - height! / 2)); const maxY = Math.max(...zones.map((zone) => (zone.y as number) + height! / 2));
+    if (minX > 8 || maxX < 92 || minY > 2 || maxY < 98) fail("seven physical zones must collectively span the full source block hex, not a central sub-grid");
+  }
 }
 const externalCatalog = readJson(join(root, "DOCS/artifacts/external-sources.json"));
 const externalIds = new Set<string>();
@@ -132,8 +143,83 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
   }
 }
 
+// The knowledge layer is the canonical cross-reference index across sources, assets, data, and docs.
+if (knowledgeTaxonomy.taxonomyVersion !== 1) fail("spec/knowledge/taxonomy.json must declare taxonomyVersion 1");
+const allowedKnowledgeTags = new Set<string>();
+for (const tag of (knowledgeTaxonomy.tags as Json[] | undefined) ?? []) {
+  if (typeof tag.tag !== "string" || !/^[a-z][a-z0-9-]*:[a-z0-9-]+$/.test(tag.tag) || typeof tag.description !== "string" || !tag.description.trim()) {
+    fail(`invalid knowledge tag ${String(tag.tag)}`);
+    continue;
+  }
+  if (allowedKnowledgeTags.has(tag.tag)) fail(`duplicate knowledge tag ${tag.tag}`);
+  allowedKnowledgeTags.add(tag.tag);
+}
+const allowedRelationTypes = new Set<string>();
+for (const relationType of (knowledgeTaxonomy.relationTypes as Json[] | undefined) ?? []) {
+  if (typeof relationType.type !== "string" || !/^[a-z][a-z0-9-]*$/.test(relationType.type) || typeof relationType.description !== "string" || !relationType.description.trim()) {
+    fail(`invalid knowledge relation type ${String(relationType.type)}`);
+    continue;
+  }
+  if (allowedRelationTypes.has(relationType.type)) fail(`duplicate knowledge relation type ${relationType.type}`);
+  allowedRelationTypes.add(relationType.type);
+}
+
+if (knowledgeCatalog.catalogVersion !== 1) fail("spec/knowledge/catalog.json must declare catalogVersion 1");
+const knowledgeEntries = new Map<string, Json>();
+for (const entry of (knowledgeCatalog.entries as Json[] | undefined) ?? []) {
+  if (typeof entry.entryId !== "string" || !/^[a-z0-9./-]+$/.test(entry.entryId)) { fail(`invalid knowledge entry id ${String(entry.entryId)}`); continue; }
+  if (knowledgeEntries.has(entry.entryId)) { fail(`duplicate knowledge entry id ${entry.entryId}`); continue; }
+  knowledgeEntries.set(entry.entryId, entry);
+  if (typeof entry.kind !== "string" || !/^[a-z][a-z0-9-]*$/.test(entry.kind)) fail(`invalid knowledge entry kind for ${entry.entryId}`);
+  if (typeof entry.localId !== "string" || !/^[a-z0-9./-]+$/.test(entry.localId)) fail(`invalid knowledge localId for ${entry.entryId}`);
+  if (typeof entry.title !== "string" || !entry.title.trim()) fail(`knowledge entry ${entry.entryId} needs a title`);
+  if (!["provisional", "cataloged", "verified", "implemented"].includes(String(entry.status))) fail(`knowledge entry ${entry.entryId} has invalid status ${String(entry.status)}`);
+  if (entry.expansion !== undefined && !["speedrunners", "shadowraiders", "shared"].includes(String(entry.expansion))) fail(`knowledge entry ${entry.entryId} has invalid expansion ${String(entry.expansion)}`);
+  const tags = entry.tags as Json[] | undefined;
+  if (!Array.isArray(tags) || tags.length === 0) fail(`knowledge entry ${entry.entryId} must declare tags`);
+  const tagSet = new Set<string>();
+  for (const tag of tags ?? []) {
+    if (typeof tag !== "string" || !allowedKnowledgeTags.has(tag)) fail(`knowledge entry ${entry.entryId} references unknown tag ${String(tag)}`);
+    else if (tagSet.has(tag)) fail(`knowledge entry ${entry.entryId} duplicates tag ${tag}`);
+    else tagSet.add(tag);
+  }
+  if (typeof entry.kind === "string" && !tagSet.has(`resource:${entry.kind}`)) fail(`knowledge entry ${entry.entryId} must include resource:${entry.kind}`);
+  if (typeof entry.status === "string" && !tagSet.has(`status:${entry.status}`)) fail(`knowledge entry ${entry.entryId} must include status:${entry.status}`);
+  if (typeof entry.expansion === "string" && !tagSet.has(`game:${entry.expansion}`)) fail(`knowledge entry ${entry.entryId} must include game:${entry.expansion}`);
+  const refs = entry.refs as Json | undefined;
+  if (!refs) { fail(`knowledge entry ${entry.entryId} is missing refs`); continue; }
+  for (const path of strings(refs.filePaths)) {
+    if (!existsSync(join(root, path))) fail(`knowledge entry ${entry.entryId} references missing file path ${path}`);
+  }
+  for (const path of strings(refs.docPaths)) {
+    if (!existsSync(join(root, path))) fail(`knowledge entry ${entry.entryId} references missing doc path ${path}`);
+  }
+  for (const assetId of strings(refs.assetIds)) {
+    if (!assetIds.has(assetId)) fail(`knowledge entry ${entry.entryId} references unknown asset ${assetId}`);
+  }
+  for (const sourceId of strings(refs.sourceIds)) {
+    if (!artifactIds.has(sourceId)) fail(`knowledge entry ${entry.entryId} references unknown source ${sourceId}`);
+  }
+}
+
+if (knowledgeRelations.catalogVersion !== 1) fail("spec/knowledge/relations.json must declare catalogVersion 1");
+for (const relation of (knowledgeRelations.relations as Json[] | undefined) ?? []) {
+  if (typeof relation.type !== "string" || !allowedRelationTypes.has(relation.type)) fail(`invalid knowledge relation type ${String(relation.type)}`);
+  if (typeof relation.from !== "string" || !knowledgeEntries.has(relation.from)) fail(`knowledge relation references unknown from entry ${String(relation.from)}`);
+  if (typeof relation.to !== "string" || !knowledgeEntries.has(relation.to)) fail(`knowledge relation references unknown to entry ${String(relation.to)}`);
+  if (relation.locator !== undefined && (typeof relation.locator !== "string" || !relation.locator.trim())) fail(`knowledge relation ${String(relation.type)} must use a non-empty locator`);
+  if (relation.note !== undefined && (typeof relation.note !== "string" || !relation.note.trim())) fail(`knowledge relation ${String(relation.type)} must use a non-empty note`);
+}
+
+for (const asset of (assetManifest.assets as Json[] | undefined) ?? []) {
+  if (typeof asset.gameplayRef !== "string") continue;
+  const target = knowledgeEntries.get(asset.gameplayRef);
+  if (!target) { fail(`asset ${String(asset.assetId)} gameplayRef points to unknown knowledge entry ${asset.gameplayRef}`); continue; }
+  if (target.status !== "verified") fail(`asset ${String(asset.assetId)} gameplayRef must point to a verified knowledge entry`);
+}
+
 if (failures.length) {
   for (const message of failures) console.error(`error: ${message}`);
   process.exit(1);
 }
-console.log(`spec validation passed: ${productIds.size} products, ${modeIds.size} modes, ${artifactIds.size} local source artifacts`);
+console.log(`spec validation passed: ${productIds.size} products, ${modeIds.size} modes, ${artifactIds.size} local source artifacts, ${knowledgeEntries.size} knowledge entries`);

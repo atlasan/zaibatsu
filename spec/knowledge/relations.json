@@ -1,0 +1,6337 @@
+{
+  "catalogVersion": 1,
+  "relations": [
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/accela-accelerator",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/add-on-accelerator",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/armor-brainchip",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/biochip",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/cracker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/dj",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/enemy-malware",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/hyper-accelerator",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/move-1",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/move-2",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/move-3",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/octagon-dex",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/simstim-record",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/weapon-gunhed",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p01-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p02-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p03-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p04-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p05-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-action-cards-p06-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p01-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p01-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p01-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p02-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p02-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p02-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p03-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p03-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p03-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p04-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p04-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p04-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p05-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p05-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p05-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p06-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p06-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p06-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p07-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p07-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p07-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p08-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p08-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-markers-p01-sheet",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-markers-p02-sheet",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-pawns-p01-sheet",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-pawns-p02-sheet",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-pawns-p03-sheet",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p01-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p02-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p03-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p04-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p05-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-action-cards-p06-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p01-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p01-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p01-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p02-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p02-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p02-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p03-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p03-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p03-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p04-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p04-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p04-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p05-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p05-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p05-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p06-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p06-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p06-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p07-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p07-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p07-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p08-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p08-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-blocks-a4-p08-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-markers-p01-sheet",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-markers-p02-sheet",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-pawns-p01-sheet",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-pawns-p02-sheet",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/black-market",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/central-core",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/chiba-city",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/data-haven",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/firewall-node",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/hacktivism",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/idoru",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/server-farm",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/chaos",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/cyber-revolution",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/outbreak",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/shadowraiders",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/speedrunners",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/strategic-alliance",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/total-war",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "mode/total-war-chaos",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/drone-turret",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/merc-cyberninja",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/speedrunner-blue",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/speedrunner-green",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/speedrunner-red",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/speedrunner-yellow",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "product/shadowraiders-2017-en",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "product/speedrunners-2017-en",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-action-cards",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-blocks-a4",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-blocks-letter",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-chaos-card",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-control-cards",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-markers",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-pawns",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-readme",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-rulebook",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-en-updates",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-action-cards",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-blocks-a4",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-blocks-letter",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-chaos-card",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-control-cards",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-markers",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-pawns",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-readme",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-rulebook",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sh-es-updates",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-block-backs",
+      "to": "game/shared"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-card-backs",
+      "to": "game/shared"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-en-archive",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-es-archive",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-markers-color-b",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-markers-color-c",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-pawns-acetate-b",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-pawns-acetate-c",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-pawns-color-b",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sh-pawns-color-c",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-en-archive",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-es-archive",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-markers-color-b",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-markers-color-c",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-pawns-acetate-b",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-pawns-acetate-c",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-pawns-color-b",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-sp-pawns-color-c",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sortme-token-backs",
+      "to": "game/shared"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-action-cards",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-blocks-a4",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-blocks-letter",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-control-cards",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-markers",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-pawns",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-readme",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-en-rulebook",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-action-cards",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-blocks-a4",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-blocks-letter",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-control-cards",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-markers",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-pawns",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-readme",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "source/sp-es-rulebook",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 1 <-> page 1, card 1"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 2 <-> page 1, card 2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 3 <-> page 1, card 3"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 4 <-> page 1, card 4"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 5 <-> page 1, card 5"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 6 <-> page 1, card 6"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 7 <-> page 1, card 7"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 8 <-> page 1, card 8"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 9 <-> page 1, card 9"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 1 <-> page 1, tile 1"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 2 <-> page 1, tile 2"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/accela-accelerator",
+      "to": "asset/sp-en-action-cards-p01-c06"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "asset/sp-en-action-cards-p01-c04"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/biochip",
+      "to": "asset/sp-en-action-cards-p01-c07"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/cracker",
+      "to": "asset/sp-en-action-cards-p01-c09"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/dj",
+      "to": "asset/sp-en-action-cards-p01-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "asset/sp-en-action-cards-p01-c08"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/hyper-accelerator",
+      "to": "asset/sp-en-action-cards-p01-c05"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/octagon-dex",
+      "to": "asset/sp-en-action-cards-p01-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/simstim-record",
+      "to": "asset/sp-en-action-cards-p01-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/chiba-city",
+      "to": "asset/sp-en-blocks-a4-p01-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/hacktivism",
+      "to": "asset/sp-en-blocks-a4-p01-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/idoru",
+      "to": "asset/sp-en-blocks-a4-p01-c01"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p01-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p02-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p03-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p04-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p05-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-action-cards-p06-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p03-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p04-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p05-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p06-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p07-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-markers-p01-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-markers-p01-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-markers-p02-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-markers-p02-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p01-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p01-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p02-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p02-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p03-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-pawns-p03-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p01-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p02-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p03-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p04-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p05-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-action-cards-p06-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p03-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p04-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p05-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p06-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p07-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-blocks-a4-p08-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-markers-p01-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-markers-p01-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-markers-p02-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-markers-p02-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-pawns-p01-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-pawns-p01-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-pawns-p02-sheet",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-pawns-p02-sheet",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-action-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-action-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-blocks-a4",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-blocks-a4",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-blocks-letter",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-blocks-letter",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-chaos-card",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-chaos-card",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-control-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-control-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-markers",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-markers",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-pawns",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-pawns",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-readme",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-readme",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-rulebook",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-rulebook",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-updates",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-en-updates",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-action-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-action-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-blocks-a4",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-blocks-a4",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-blocks-letter",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-blocks-letter",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-chaos-card",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-chaos-card",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-control-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-control-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-markers",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-markers",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-pawns",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-pawns",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-readme",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-readme",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-rulebook",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-rulebook",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-updates",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sh-es-updates",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-block-backs",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-block-backs",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-card-backs",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-card-backs",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-en-archive",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-en-archive",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-es-archive",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-es-archive",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-markers-color-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-markers-color-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-markers-color-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-markers-color-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-acetate-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-acetate-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-acetate-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-acetate-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-color-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-color-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-color-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sh-pawns-color-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-en-archive",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-en-archive",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-es-archive",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-es-archive",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-markers-color-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-markers-color-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-markers-color-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-markers-color-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-acetate-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-acetate-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-acetate-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-acetate-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-color-b",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-color-b",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-color-c",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-sp-pawns-color-c",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-token-backs",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sortme-token-backs",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-action-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-action-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-blocks-a4",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-blocks-a4",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-blocks-letter",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-blocks-letter",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-control-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-control-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-markers",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-markers",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-pawns",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-pawns",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-readme",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-readme",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-rulebook",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-en-rulebook",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-action-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-action-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-blocks-a4",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-blocks-a4",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-blocks-letter",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-blocks-letter",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-control-cards",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-control-cards",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-markers",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-markers",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-pawns",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-pawns",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-readme",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-readme",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-rulebook",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "source/sp-es-rulebook",
+      "to": "workflow-step/source-evidence"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/accela-accelerator",
+      "to": "asset/sp-en-action-cards-p01-c06"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "asset/sp-en-action-cards-p01-c04"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/biochip",
+      "to": "asset/sp-en-action-cards-p01-c07"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/cracker",
+      "to": "asset/sp-en-action-cards-p01-c09"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/dj",
+      "to": "asset/sp-en-action-cards-p01-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "asset/sp-en-action-cards-p01-c08"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/hyper-accelerator",
+      "to": "asset/sp-en-action-cards-p01-c05"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/octagon-dex",
+      "to": "asset/sp-en-action-cards-p01-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/simstim-record",
+      "to": "asset/sp-en-action-cards-p01-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/chiba-city",
+      "to": "asset/sp-en-blocks-a4-p01-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/hacktivism",
+      "to": "asset/sp-en-blocks-a4-p01-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/idoru",
+      "to": "asset/sp-en-blocks-a4-p01-c01"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accela-accelerator",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accela-accelerator",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accela-accelerator",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/add-on-accelerator",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/add-on-accelerator",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/armor-brainchip",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/armor-brainchip",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/biochip",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/biochip",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/biochip",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/cracker",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 9"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/cracker",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/cracker",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 9"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/dj",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/dj",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/dj",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/enemy-malware",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/enemy-malware",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/hyper-accelerator",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/hyper-accelerator",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/hyper-accelerator",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-1",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-1",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-2",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-2",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-3",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/move-3",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/octagon-dex",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/octagon-dex",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/octagon-dex",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/simstim-record",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1, card 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/simstim-record",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/simstim-record",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 1, card 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/weapon-gunhed",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/weapon-gunhed",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p01-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p02-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p03-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p04-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p05-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c01",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c02",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c03",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c04",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c05",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c06",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c07",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c08",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-action-cards-p06-c09",
+      "to": "source/sh-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p01-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p01-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p01-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p02-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p02-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p02-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p03-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p03-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p03-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p04-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p04-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p04-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p05-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p05-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p05-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p06-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p06-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p06-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p07-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p07-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p07-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p08-c01",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p08-c02",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "source/sh-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-markers-p01-sheet",
+      "to": "source/sh-en-markers",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-markers-p02-sheet",
+      "to": "source/sh-en-markers",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-pawns-p01-sheet",
+      "to": "source/sh-en-pawns",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-pawns-p02-sheet",
+      "to": "source/sh-en-pawns",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-pawns-p03-sheet",
+      "to": "source/sh-en-pawns",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p01-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p02-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p03-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p04-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p05-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c01",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c02",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c03",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c04",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c05",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c06",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c07",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c08",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-action-cards-p06-c09",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p01-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p01-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p01-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p02-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p02-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p02-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p03-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p03-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p03-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p04-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p04-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p04-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p05-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p05-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p05-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p06-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p06-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p06-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p07-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p07-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p07-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p08-c01",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p08-c02",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-blocks-a4-p08-c03",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-markers-p01-sheet",
+      "to": "source/sp-en-markers",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-markers-p02-sheet",
+      "to": "source/sp-en-markers",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-pawns-p01-sheet",
+      "to": "source/sp-en-pawns",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-pawns-p02-sheet",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-market",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-market",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-market",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/central-core",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/central-core",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/central-core",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/chiba-city",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/chiba-city",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/chiba-city",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/data-haven",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/data-haven",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/data-haven",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/firewall-node",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/firewall-node",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/firewall-node",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/hacktivism",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1, tile 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/hacktivism",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/hacktivism",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/hacktivism",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/idoru",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1, tile 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/idoru",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/idoru",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/idoru",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/server-farm",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/server-farm",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/server-farm",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/chaos",
+      "to": "source/sh-en-rulebook",
+      "locator": "pp. 26-33"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/cyber-revolution",
+      "to": "source/sh-en-rulebook",
+      "locator": "p. 43"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/outbreak",
+      "to": "source/sh-en-rulebook",
+      "locator": "pp. 34-37"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/shadowraiders",
+      "to": "source/sh-en-rulebook",
+      "locator": "pp. 4-7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/speedrunners",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/speedrunners",
+      "to": "source/sp-en-rulebook",
+      "locator": "pp. 6-7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/strategic-alliance",
+      "to": "source/sh-en-rulebook",
+      "locator": "p. 42"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/total-war",
+      "to": "source/sh-en-rulebook",
+      "locator": "pp. 38-41"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/total-war-chaos",
+      "to": "source/sh-en-rulebook",
+      "locator": "p. 44"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/merc-cyberninja",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/merc-cyberninja",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/merc-cyberninja",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-blue",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-blue",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-blue",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-green",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-green",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-green",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-red",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-red",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-red",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-yellow",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-yellow",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-yellow",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-chaos-card"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-en-updates"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-chaos-card"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/shadowraiders-2017-en",
+      "to": "source/sh-es-updates"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-blocks-a4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-control-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-pawns"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "product/speedrunners-2017-en",
+      "to": "source/sp-es-rulebook"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c01",
+      "to": "action-card/octagon-dex"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c02",
+      "to": "action-card/simstim-record"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c03",
+      "to": "action-card/dj"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c04",
+      "to": "action-card/accelerator-transgenic-therapy"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c05",
+      "to": "action-card/hyper-accelerator"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c06",
+      "to": "action-card/accela-accelerator"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c07",
+      "to": "action-card/biochip"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c08",
+      "to": "action-card/e-synapse-neural-interface"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-action-cards-p01-c09",
+      "to": "action-card/cracker"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-blocks-a4-p01-c01",
+      "to": "block/idoru"
+    },
+    {
+      "type": "implemented-by-data-record",
+      "from": "asset/sp-en-blocks-a4-p01-c02",
+      "to": "block/hacktivism"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/accela-accelerator",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/biochip",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/cracker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/dj",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/hyper-accelerator",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/octagon-dex",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/simstim-record",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/hacktivism",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/idoru",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zaibatsu/spec/schema/knowledge-taxonomy.schema.json",
+  "title": "Zaibatsu knowledge taxonomy",
+  "type": "object",
+  "required": ["taxonomyVersion", "tags", "relationTypes"],
+  "additionalProperties": false,
+  "properties": {
+    "taxonomyVersion": { "const": 1 },
+    "tags": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/tag" },
+      "minItems": 1
+    },
+    "relationTypes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relationType" },
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "tagName": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*:[a-z0-9-]+$"
+    },
+    "tag": {
+      "type": "object",
+      "required": ["tag", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "tag": { "$ref": "#/$defs/tagName" },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "relationType": {
+      "type": "object",
+      "required": ["type", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

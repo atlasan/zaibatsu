@@ -40,15 +40,17 @@ export interface BlockRecord {
 }
 export interface GeometryTransform { offsetX: number; offsetY: number; scale: number; }
 export interface GeometryOverride { assetId: string; layoutId: typeof STANDARD_BLOCK_LAYOUT_ID; note: string; transform: GeometryTransform; }
+export interface KnowledgeRelationHint { type: string; toEntryId: string; note?: string; }
+export interface KnowledgeHints { tags?: string[]; relationHints?: KnowledgeRelationHint[]; }
 export interface BlockDocument {
   id: string; resourceType: "block"; title: string; status: "draft" | "review" | "verified";
   source: { assetId: string }; block: BlockRecord;
   provenance: { primaryArtifactId: string; page: number; locator: string; notes?: string };
-  annotations: string[]; geometryOverride?: GeometryOverride;
+  annotations: string[]; knowledge?: KnowledgeHints; geometryOverride?: GeometryOverride;
 }
 
 export interface ActionCardRecord { id: string; name: string; expansion: Expansion; copies: number; summary?: string; movement?: number; activates?: Array<"search" | "delete" | "reboot" | "icebreaker">; attach?: { as?: "pawn" | "enemy" | "block"; slot?: string; class?: string[]; cost?: number }; assetRefs: string[]; provisional: boolean; }
-export interface ActionCardDocument { id: string; resourceType: "action-card"; title: string; status: "draft" | "review" | "verified"; source: { assetId: string }; actionCard: ActionCardRecord; transcription: { printedText: string; reviewerConfirmed: boolean; duplicateGroupConfirmed: boolean; vision?: { confidence: number; reviewRequired: boolean; reasons: string[] } }; provenance: { primaryArtifactId: string; page: number; locator: string; notes?: string }; annotations: string[]; }
+export interface ActionCardDocument { id: string; resourceType: "action-card"; title: string; status: "draft" | "review" | "verified"; source: { assetId: string }; actionCard: ActionCardRecord; transcription: { printedText: string; reviewerConfirmed: boolean; duplicateGroupConfirmed: boolean; vision?: { confidence: number; reviewRequired: boolean; reasons: string[] } }; provenance: { primaryArtifactId: string; page: number; locator: string; notes?: string }; annotations: string[]; knowledge?: KnowledgeHints; }
 export type EditorDocument = BlockDocument | ActionCardDocument;
 export interface EditorSession { sessionVersion: 1 | 2 | 3; projectId: string; assetManifestPath: "spec/assets/manifest.json"; documents: EditorDocument[]; history: Array<{ at: string; operation: "create" | "update" | "validate" | "export"; documentId: string; summary?: string }>; }
 
@@ -73,8 +75,12 @@ export function actionCardDraftForAsset(asset: AssetRecord, vision?: { confidenc
 export function documentForAsset(asset: AssetRecord, vision?: { confidence: number; reviewRequired: boolean; reasons: string[]; printedTextCandidate?: string }): EditorDocument { return asset.kind === "action-card" ? actionCardDraftForAsset(asset, vision) : draftForAsset(asset); }
 
 function validId(value: string): boolean { return /^[a-z0-9-]+$/.test(value); }
+function validKnowledgeTag(value: string): boolean { return /^[a-z][a-z0-9-]*:[a-z0-9-]+$/.test(value); }
+function validEntryId(value: string): boolean { return /^[a-z0-9./-]+$/.test(value); }
 export function validateDocument(document: EditorDocument, assets: AssetRecord[], layout?: BlockLayout): string[] {
   const errors: string[] = [];
+  if (document.knowledge?.tags && (!Array.isArray(document.knowledge.tags) || new Set(document.knowledge.tags).size !== document.knowledge.tags.length || document.knowledge.tags.some((tag) => !validKnowledgeTag(tag)))) errors.push("Knowledge tags must use the canonical namespace:value format.");
+  if (document.knowledge?.relationHints && (!Array.isArray(document.knowledge.relationHints) || document.knowledge.relationHints.some((hint) => !/^[a-z][a-z0-9-]*$/.test(hint.type) || !validEntryId(hint.toEntryId)))) errors.push("Knowledge relation hints must declare a relation type and a canonical entry id.");
   if (document.resourceType === "action-card") {
     const card = document.actionCard; const cardAssets = assets.filter((asset) => asset.kind === "action-card"); const ids = new Set(cardAssets.map((asset) => asset.assetId));
     if (!validId(document.id) || !validId(card.id)) errors.push("Draft and card ids must use lowercase letters, digits, and hyphens.");
@@ -126,8 +132,8 @@ export function normalizeBlockDocument(document: BlockDocument, layout: BlockLay
 
 export function sessionFromDocuments(documents: EditorDocument[], prior?: EditorSession): EditorSession { return { sessionVersion: 3, projectId: "zaibatsu-data-editor", assetManifestPath: "spec/assets/manifest.json", documents, history: [...(prior?.history ?? []), { at: new Date().toISOString(), operation: "update", documentId: documents.at(-1)?.id ?? "none", summary: "Saved from editor" }] }; }
 export function sha256(value: string | Uint8Array): string { return createHash("sha256").update(value).digest("hex"); }
-export function buildPatch(document: BlockDocument, baseDataSha256: string) { return { format: "zaibatsu-editor-patch/v3", resourceType: "block", targetPath: `spec/data/${document.block.expansion}/blocks.json`, baseDataSha256, operations: [{ op: "add", path: "/blocks/-", value: document.block, sourceAssetId: document.source.assetId, provenance: document.provenance }] }; }
-export function buildActionCardPatch(document: ActionCardDocument, baseDataSha256: string | null) { return { format: "zaibatsu-editor-patch/v2", resourceType: "action-card", targetPath: `spec/data/${document.actionCard.expansion}/action-cards.json`, baseDataSha256, targetAbsent: baseDataSha256 === null, operations: [{ op: "add", path: "/cards/-", value: document.actionCard, sourceAssetId: document.source.assetId, provenance: document.provenance }] }; }
+export function buildPatch(document: BlockDocument, baseDataSha256: string) { return { format: "zaibatsu-editor-patch/v3", resourceType: "block", targetPath: `spec/data/${document.block.expansion}/blocks.json`, baseDataSha256, operations: [{ op: "add", path: "/blocks/-", value: document.block, sourceAssetId: document.source.assetId, provenance: document.provenance, ...(document.knowledge ? { knowledge: document.knowledge } : {}) }] }; }
+export function buildActionCardPatch(document: ActionCardDocument, baseDataSha256: string | null) { return { format: "zaibatsu-editor-patch/v2", resourceType: "action-card", targetPath: `spec/data/${document.actionCard.expansion}/action-cards.json`, baseDataSha256, targetAbsent: baseDataSha256 === null, operations: [{ op: "add", path: "/cards/-", value: document.actionCard, sourceAssetId: document.source.assetId, provenance: document.provenance, ...(document.knowledge ? { knowledge: document.knowledge } : {}) }] }; }
 export function migrateSession(raw: EditorSession, layout?: BlockLayout): EditorSession {
   const migrated = { ...raw, sessionVersion: 3 as const, projectId: "zaibatsu-data-editor" };
   if (!layout) return migrated;

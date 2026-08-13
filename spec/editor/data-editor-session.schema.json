@@ -29,7 +29,28 @@
         "status": { "enum": ["draft", "review", "verified"] },
         "source": { "type": "object", "required": ["assetId"], "properties": { "assetId": { "type": "string" } } },
         "provenance": { "type": "object", "required": ["primaryArtifactId", "page", "locator"], "properties": { "primaryArtifactId": { "type": "string" }, "page": { "type": "integer", "minimum": 1 }, "locator": { "type": "string", "minLength": 1 } } },
-        "annotations": { "type": "array", "items": { "type": "string" } }
+        "annotations": { "type": "array", "items": { "type": "string" } },
+        "knowledge": { "$ref": "#/$defs/knowledgeHints" }
+      }
+    },
+    "knowledgeHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tags": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*:[a-z0-9-]+$" }, "uniqueItems": true },
+        "relationHints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "toEntryId"],
+            "additionalProperties": false,
+            "properties": {
+              "type": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+              "toEntryId": { "type": "string", "pattern": "^[a-z0-9./-]+$" },
+              "note": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "blockDocument": { "allOf": [{ "$ref": "#/$defs/base" }, { "type": "object", "required": ["block"], "properties": { "resourceType": { "const": "block" }, "block": { "$ref": "../schema/block.schema.json" } } }] },
