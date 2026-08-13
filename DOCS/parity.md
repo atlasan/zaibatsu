@@ -30,7 +30,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Block | `domain.Block` | `Block` |
 | Block visual layout | `Block.LayoutID`, `Block.BoundarySpaces`, `Block.BonusCorners`, `Block.AssetRefs` | `Block.layoutId`, `Block.boundarySpaces`, `Block.bonusCorners`, `Block.assetRefs` |
 | Space visual location | `Space.Location` | `Space.location` |
-| Space visual footprint | `Space.Footprint` / `SpaceGridCell` | `Space.footprint` / `SpaceGridCell` |
+| Seven-zone space geometry | `Space.ZoneIDs`, `Space.Capacity`, `Space.Neighbors` | `Space.zoneIds`, `Space.capacity`, `Space.neighbors` |
 | Pawn | `domain.Pawn` | `Pawn` |
 | Action card | `domain.ActionCard` | `ActionCard` |
 | Phase enum | `domain.Phase*` | `Phase` |
@@ -51,7 +51,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Place a block | `engine.PlaceBlock(...)` | `placeBlock(...)` |
 | Enumerate placements | `engine.ValidPlacements(...)` | `validPlacements(...)` |
 | Pawn on board | `domain.PawnOnBoard` | `PawnOnBoard` |
-| Space capacity | `domain.SpaceCapacity(type)` / `domain.Unlimited` | `spaceCapacity(type)` / `UNLIMITED` |
+| Space capacity | `domain.SpaceCapacityFor(space)` / `domain.Unlimited` | `spaceCapacityFor(space)` / `UNLIMITED` |
 | Step budget | `engine.ResolveSteps(m,rng,extra)` | `resolveSteps(m,rng,extra)` |
 | Movement gating | `engine.CanActivateMovement(p,pawn)` | `canActivateMovement(p,pawn)` |
 | End-on capacity check | `engine.CanEndOn(...)` | `canEndOn(...)` |
@@ -121,7 +121,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Win detection | ✅ | ✅ | |
 | Seeded RNG + shuffle | ✅ | ✅ | LCG, Fisher–Yates |
 | Hex model + tile placement | ✅ | ✅ | axial coords; edge-connectivity + valid-orientation (Search) |
-| Pawn positions + occupancy | ✅ | ✅ | pawns on core at setup; capacity by space type |
+| Pawn positions + occupancy | ✅ | ✅ | pawns on core at setup; explicit capacity with legacy type fallback |
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |

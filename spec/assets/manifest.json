@@ -1399,7 +1399,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c01.webp"
       },
       "page": 1,
-      "pngSha256": "8b5dfe73299a7f4b7aeb4991d080b1178a697ee2e47eb2e1052686544b9fbb38",
+      "pngSha256": "c036dcd7bf52969b0f0852f033453350ddf9d88cfa9c76a02446ce3e3789836a",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1453,7 +1453,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c02.webp"
       },
       "page": 1,
-      "pngSha256": "405f1e71f863d4c7dd3e2f3592c87f0e31d5df93428754d0542e7193b30f204a",
+      "pngSha256": "0a8f12e13c44f7fc3d8afec28b2cf191c3037adfb3befce3c254f43b52dca99e",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1507,7 +1507,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p01-c03.webp"
       },
       "page": 1,
-      "pngSha256": "5f1c977ea8f6f25a125f0a3a7ab30032cf19961ccc2311e4467f1e6542a4a3b2",
+      "pngSha256": "7d19b9020df2b1642007d124f8541949792a1ae900614f86098dac1b40dc1b26",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1561,7 +1561,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c01.webp"
       },
       "page": 2,
-      "pngSha256": "e88a09b0fbd33a2036f6c20a8f09e65f141454c2b0398a07d0b579c8896a9a39",
+      "pngSha256": "2d7c9f749d98f5e03b681414ee71c2b0d59f9cded99b15281224f612bdedba76",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1615,7 +1615,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c02.webp"
       },
       "page": 2,
-      "pngSha256": "8f3e5fe0547e0d781f3336a0238c0c5518872dcbf3a107a639b0d40947e53a40",
+      "pngSha256": "e08a0a886c60b380cb47975e9ceda2d717135e2a841759bb7b272644c252c569",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1669,7 +1669,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p02-c03.webp"
       },
       "page": 2,
-      "pngSha256": "f0beb46c8f4c6bc984ff02e37f1644d69072f47b83ee9595fc3a63b900d5c662",
+      "pngSha256": "6320746dceb051bc9db5620041a6b0f927dbc9448c5eedc624b9824f73b8df90",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1723,7 +1723,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c01.webp"
       },
       "page": 3,
-      "pngSha256": "18b4dc70c40b1781d9c9d3f7312a49cfafcf71f268791a3f059ed5393466c239",
+      "pngSha256": "01c589712fe1e506b360ce46056e522ed9a284f8612ec82a7895d96e79353c5d",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1777,7 +1777,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c02.webp"
       },
       "page": 3,
-      "pngSha256": "b23c92394fbf25afc8d69d97700d6d6b08b4f083f5af4b5b33a0c287143e94f2",
+      "pngSha256": "336c03fc1ce80630b8dc4af799fffc6e58f8c6a6a2cfcbf505e828001df53a38",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1831,7 +1831,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p03-c03.webp"
       },
       "page": 3,
-      "pngSha256": "1374f19f5a79a426168732799e9cc15507bac9aa4a69fbed24d48e551fa3d9bd",
+      "pngSha256": "b46125bfa93ef17652fc136347d3f9333a446f542e18995a80b317f8a54bccec",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1885,7 +1885,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c01.webp"
       },
       "page": 4,
-      "pngSha256": "614a3be96f94029c84fd49387171f8d703f0415714bafe0c0ed019368555fdf7",
+      "pngSha256": "cebfa9d6c993ae72422c0b53fd71f905b877b95429a08216517915ef86b5cbe9",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1939,7 +1939,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c02.webp"
       },
       "page": 4,
-      "pngSha256": "159b75de1b33f9c229516773b9eeff8720070db31bd349da3f2d5e0140873c37",
+      "pngSha256": "06e779c7fec0c69eddd7915d68785521305a4f18de9474ef82ee53a52502a0f4",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -1993,7 +1993,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p04-c03.webp"
       },
       "page": 4,
-      "pngSha256": "1973ab222cb4cc9e3b7e32b2f3347fafb6112e878cdd8acd5aa3e5e2efd29bf4",
+      "pngSha256": "e42be0b27f36512e20b7e0899564c948a34369e261312ffe7d551f0bff6ae2cf",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2047,7 +2047,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c01.webp"
       },
       "page": 5,
-      "pngSha256": "1642abef6a292fd37a0beb39c0460b371d690da6197b5669ac3f16c1e366af32",
+      "pngSha256": "a4d0d7f54fbe3e16183c8e8eba62aac07731b29fe3606c52c1c83717562e2dc5",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2101,7 +2101,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c02.webp"
       },
       "page": 5,
-      "pngSha256": "c5ea2e3d8fe66931c29d95284f2cc6d6638303405294e5e263104728eccf1839",
+      "pngSha256": "8e7a70ca9cc90b88fbe19a18822f363a8b5bee4f4b5ddb49bdd8d60c9abd7f36",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2155,7 +2155,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p05-c03.webp"
       },
       "page": 5,
-      "pngSha256": "35f4eee66776e13f05122858cec684e5e2ab995c2be4c496b2d3e98c4d20e399",
+      "pngSha256": "11014f0397500007565f5a5fb37e2da43d29eec1340f86421e8b52b3b7165102",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2209,7 +2209,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c01.webp"
       },
       "page": 6,
-      "pngSha256": "f147bfe190aa4c6936c57f10de15fc3b863a990f26546864fcd473124a1ad0d6",
+      "pngSha256": "6a5bcccb71893748f317079d7578a0fc0b9d15d6d66ffdb08762072983cd3b5e",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2263,7 +2263,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c02.webp"
       },
       "page": 6,
-      "pngSha256": "f425b23f3c309d876a42cfd0a5d939a83470209e4a1fb2ad5301215dc5111687",
+      "pngSha256": "66a7e61e85700d17da2d2ea0042671624f69b6a1e81848136eb7cd4d39148082",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2317,7 +2317,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p06-c03.webp"
       },
       "page": 6,
-      "pngSha256": "8a436e0efe21f6ef0068bde33bac05381cc22b9bb199ac838c2d8fe5c7377e00",
+      "pngSha256": "994b13af6a63e2a36251dc4604adbafc88336c429d2987eb79b91f5db17a8d6f",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2371,7 +2371,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c01.webp"
       },
       "page": 7,
-      "pngSha256": "68825d39d489e0e9585237f8069ed56abe9bf1a4611d2dcf5dce1e408851d40b",
+      "pngSha256": "621ba62a244abf76a01c6c41f86ef8b01e9f1c0c093d0dc9a383141274cb5f8a",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2425,7 +2425,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c02.webp"
       },
       "page": 7,
-      "pngSha256": "80025ef75cf5e50cb1556cb171fef480499904536347fe69ebaf8cb2789e585e",
+      "pngSha256": "2b170a84ed3241388a71a1d26ad19ba94f5c3f8798ba5e89492838d3845e4bb2",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2479,7 +2479,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p07-c03.webp"
       },
       "page": 7,
-      "pngSha256": "74dadf3951314e3dad00b5c0d9e142f0ab66dfa6155bf81ac0eb948372d2b2c1",
+      "pngSha256": "fb5b7ffab1c2666f615cc2a04272a99ca82cb8852c8da29a5177ea5c3904843f",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2533,7 +2533,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c01.webp"
       },
       "page": 8,
-      "pngSha256": "ca674cd7c5182b027ea700ed100dc08666484565f0a94b3efad896b0e24c8150",
+      "pngSha256": "990fb793834b4e2bed9781fd3c2fb9aee9529e2a840cc1f788a5cbf33a381329",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2587,7 +2587,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c02.webp"
       },
       "page": 8,
-      "pngSha256": "1714809516ce26aeee3381b0df15c3a30593205d75c2c6fbc99202889ac1fae9",
+      "pngSha256": "6264f27796ba279a0351dd7cea3f43aaa0fe00173b41552ffed05ff6816d3818",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2641,7 +2641,7 @@
         "webp": "tmp/artifacts/build/sh-en-blocks-a4/webp/sh-en-blocks-a4-p08-c03.webp"
       },
       "page": 8,
-      "pngSha256": "25a79bae31bfc5635f13fefbe8597d0ea1db694273df0b09196c601a861c0699",
+      "pngSha256": "254ca905f860b3a6c7a6fc57731a9ad4d046e15f924422ae89fa7809c5c0fe0e",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
@@ -2666,7 +2666,7 @@
         "webp": "tmp/artifacts/build/sh-en-markers/webp/sh-en-markers-p01-sheet.webp"
       },
       "page": 1,
-      "pngSha256": "5e6d67d6e4253ee354e41504505fcc80adeb83cf77f00792fbfb9e858d57a79e",
+      "pngSha256": "c94cc21dc11b521a0ab76f2a03a2a774bb67b05ff40d99cfa2c2d94827e80da1",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa"
@@ -2675,7 +2675,7 @@
       "artifactId": "sh-en-markers",
       "assetId": "sh-en-markers-p02-sheet",
       "crop": {
-        "confidence": 0.909,
+        "confidence": 0.908,
         "height": 2291,
         "width": 1993,
         "x": 348,
@@ -2691,7 +2691,7 @@
         "webp": "tmp/artifacts/build/sh-en-markers/webp/sh-en-markers-p02-sheet.webp"
       },
       "page": 2,
-      "pngSha256": "eea5497db37c213ad9387dcdc1c9339db1a73f2ed4af047adff4b37e0005a2e9",
+      "pngSha256": "2a0e910077c5dd16c2ebc7e3c2eba56cbccceaecd034467f8c540839ace33f53",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa"
@@ -2716,7 +2716,7 @@
         "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p01-sheet.webp"
       },
       "page": 1,
-      "pngSha256": "cbb1d3d5579f41d70f1c17f16baa02aeccbddc50b27e6c8bdfc467e34ea66304",
+      "pngSha256": "9263fe6f3a20c4c633a38d34fa7c4b9772253a17516193bd6aca0ed68e6611ec",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
@@ -2741,7 +2741,7 @@
         "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p02-sheet.webp"
       },
       "page": 2,
-      "pngSha256": "67a19855e73d04b47c67cf009dde582a6d6b96398b142fd1595d7694459e2db4",
+      "pngSha256": "c9944a76cb411d57e4e93c6a1c7d478e7368de4a4b822df98518e5bf51ad4f49",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
@@ -2766,7 +2766,7 @@
         "webp": "tmp/artifacts/build/sh-en-pawns/webp/sh-en-pawns-p03-sheet.webp"
       },
       "page": 3,
-      "pngSha256": "3cdf2d0323040250e0133d37c9284137f15c3531eac613caa7b5fa63a158e6b1",
+      "pngSha256": "7e2dd6625aac8c173b9f8470de519b1067ae9ad11be5fbc70d260bf2204453ed",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf"
@@ -4170,7 +4170,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c01.webp"
       },
       "page": 1,
-      "pngSha256": "b631e73c9faee7c08b59433d977f1761d5819e737d77d03a23a43917781ce9cb",
+      "pngSha256": "be739c07ba4049e0afceef664987cffda9897946fbbd2a51b9300afd853e1894",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4224,7 +4224,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c02.webp"
       },
       "page": 1,
-      "pngSha256": "8e26d17284bd70ddc895163d89ca8b6367cd2d6534e0f050d50e26f20fecb9a0",
+      "pngSha256": "8a32029331c578f16a7c2c54e4a973024c754f42f44df6e9a048f82784f6e6f2",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4278,7 +4278,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c03.webp"
       },
       "page": 1,
-      "pngSha256": "fdf1c75b5604599fda20ad17077a007e5bbab083b5c4c2a6dabdebbda2098f40",
+      "pngSha256": "ff3e86f76a31b2b539fbce56ff9252f2d754ba26bd88e389f84a77a8a654bb69",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4332,7 +4332,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c01.webp"
       },
       "page": 2,
-      "pngSha256": "306112f7598151bf9b4c66142dbb905bcc3773cf7b831638e0116074a020e17f",
+      "pngSha256": "5e43ee51c512102933535a8e9c429ed7360364604aeacc4aa7b5aded5c6f6612",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4386,7 +4386,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c02.webp"
       },
       "page": 2,
-      "pngSha256": "2007a947fbcb06aa03b12ae4167fd696c73390442c01c650f121b28058c22582",
+      "pngSha256": "5e9388256e81f33a25857d8189b8b2768f27de6ab72ba0f1425689a68dafda46",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4440,7 +4440,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p02-c03.webp"
       },
       "page": 2,
-      "pngSha256": "29f8c923ea6f85958d5a972d900f5699840a647098f24126c05e282e76f3260b",
+      "pngSha256": "14d4473324755641c5896a492be845af58e2ae85b19f7065e0d01cf83d49ba25",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4494,7 +4494,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c01.webp"
       },
       "page": 3,
-      "pngSha256": "328998d3900c97569bca0dc3deb3b5d0a57b6ea32cc02d3e25e65f33381a3b04",
+      "pngSha256": "fb2d69b92e78d3a7b517a2c8fea15a2432dfc28686f0399239af1ba94130fdbe",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4548,7 +4548,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c02.webp"
       },
       "page": 3,
-      "pngSha256": "04bc6470958e76009fb8b68b680336abdbe3d1451c9f7ea17d826293ac089acc",
+      "pngSha256": "de66870c855c81fe691f1cf33cdb871381dd1be47969349ea75b92101a52210f",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4602,7 +4602,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p03-c03.webp"
       },
       "page": 3,
-      "pngSha256": "44ae4c553fb07b9c3c57f9c06f841712970254614c96447fbb9193472f81d4f7",
+      "pngSha256": "dffa884b97b34323076a2d2845b8b7911e42d057e244d0971bcee4130a321e36",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4656,7 +4656,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c01.webp"
       },
       "page": 4,
-      "pngSha256": "14ed836a2c7749beb92967e281f46ac39eb5b422bc0237589258924a39d2bf77",
+      "pngSha256": "1100f341abda7e21dc237024cbfcd4205c8997a25e8d76dccf84b169db838c62",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4710,7 +4710,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c02.webp"
       },
       "page": 4,
-      "pngSha256": "10855389ea085b0ef4b292d7774e20e69dd9ecded9d516c5f2de4a6e128e2ac9",
+      "pngSha256": "c1e831e9a0cbfe83d35e296685ba84d8b69b0dc30bd7db971d95a902aff3e87a",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4764,7 +4764,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p04-c03.webp"
       },
       "page": 4,
-      "pngSha256": "ea1fc8757ef4a179e7a961cc0895497d7888a91ab0d8617855948fc21023c597",
+      "pngSha256": "e8f1ed631acb18b23eb37810f038430014a5baa252b796b3a9e7f09307c8636d",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4818,7 +4818,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c01.webp"
       },
       "page": 5,
-      "pngSha256": "03ba06b367acf4c402d3e6d683be59d7d8d4f2fadfb1ce8cef323733f4088137",
+      "pngSha256": "76df8729f521dfd297cac1c5ddd1d4c8de5680b5ec6ed029f6a44993a8305a78",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4872,7 +4872,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c02.webp"
       },
       "page": 5,
-      "pngSha256": "648763976c839352864890137ff58495b9f43f55c6b27d61b29beb2f3246eaf6",
+      "pngSha256": "43aa3a783240dafca8b2fcc07ad0c005184e4b71151b705297beae71e236780c",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4926,7 +4926,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p05-c03.webp"
       },
       "page": 5,
-      "pngSha256": "7f1ad4466eea08fd3b33d9dfe7af91c2277a8c163ec431d3b856d2577a56b40a",
+      "pngSha256": "9b679d321f7934bfab0735827ed9a5f8dc400f514df617a64eff3e39676db043",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -4980,7 +4980,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c01.webp"
       },
       "page": 6,
-      "pngSha256": "5840c3deceed4deae2bf69771e05c6589057b8ce24776fcc646049bf2cb253c7",
+      "pngSha256": "20296c36b6a753c2d904a5b4c687628ee4306301b5f797cf4ff0225257623f1b",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5034,7 +5034,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c02.webp"
       },
       "page": 6,
-      "pngSha256": "93ba6d3d36f9dbb3f769c633eb7853caadd56bfb460a7f99dcc539be8afd53f6",
+      "pngSha256": "586c213308c94f9bb5b5c6503d1010c38d41f4ab82304f604c1f2be2bd700eba",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5088,7 +5088,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p06-c03.webp"
       },
       "page": 6,
-      "pngSha256": "df598f9fd8269beaafb93e7851f80ca5e14e1baca151bbe9a65415016c9d5ae3",
+      "pngSha256": "1b5143f8375328646632642040df99c5b6d5a321ab5065c0dd3aba2e3dada371",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5142,7 +5142,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c01.webp"
       },
       "page": 7,
-      "pngSha256": "332ef755aa6bc86e0e63e7e5e9b868eedbcad2e02a166cf2ab09b2350070ea53",
+      "pngSha256": "16aac6ee0e5a6d7c4e463d964db40f2847d269bee62a32e1372138847aeaa454",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5196,7 +5196,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c02.webp"
       },
       "page": 7,
-      "pngSha256": "487ed7797a33dd2fe3f6b1b4547946980815a112f9c64195de2960478cf84bb9",
+      "pngSha256": "2cbdf322914c6fe63fd92f3a4736f9b9c955659ebef4a9e43c332907e4446203",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5250,7 +5250,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p07-c03.webp"
       },
       "page": 7,
-      "pngSha256": "eea6460ec672a74c105a372bc5e18dac5f106a44e2fe5a445c16d9c68472349a",
+      "pngSha256": "c8435b779e942f086983b8f6a0271b6e536eb21f2f53b5661059bc801e4ccec7",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5304,7 +5304,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c01.webp"
       },
       "page": 8,
-      "pngSha256": "e7c7cfb7b545767bacc0b7fb70c99cfed456e8e484770c15f3029d5b8cbce078",
+      "pngSha256": "6c96ae913165a477ad3d00222588398739533956773c533d5731b433e74abb8e",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5358,7 +5358,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c02.webp"
       },
       "page": 8,
-      "pngSha256": "9d1c9ee1cdec4f6229b2d39de9bbe14aefb38cbce5090f0eaad9d0ea2394b7a0",
+      "pngSha256": "7d521ebb99359e8a4d885b458698f6736de127394988e3a858868f398e5566bb",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5412,7 +5412,7 @@
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p08-c03.webp"
       },
       "page": 8,
-      "pngSha256": "25fd3d43db62e84b5f6f1ef68b2b98890e2d07e27bdcfc37268d58bfde324f81",
+      "pngSha256": "b9c513ce5d7a9d6fc7f1c70744f11bbf9c8e084dbab81743f099054a12203a47",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
@@ -5437,7 +5437,7 @@
         "webp": "tmp/artifacts/build/sp-en-markers/webp/sp-en-markers-p01-sheet.webp"
       },
       "page": 1,
-      "pngSha256": "1fd9dfe374f4d82d49c777725ee9a4d1f5cd1b349757d7365a092704993c5e49",
+      "pngSha256": "9bf64c06bec997792c6c45497cf56b2d08b6369a292882c3e55f73d28f1900af",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66"
@@ -5462,7 +5462,7 @@
         "webp": "tmp/artifacts/build/sp-en-markers/webp/sp-en-markers-p02-sheet.webp"
       },
       "page": 2,
-      "pngSha256": "1031116a60bb540a7a1ffb6e2b3975c3aa037bb2788df5e1476bba1fb483ba9f",
+      "pngSha256": "a554fbf84352be7291803d1c77dc4c06e4a66f35b2be6dff4d18316db7a6cce4",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66"
@@ -5487,7 +5487,7 @@
         "webp": "tmp/artifacts/build/sp-en-pawns/webp/sp-en-pawns-p01-sheet.webp"
       },
       "page": 1,
-      "pngSha256": "9ba85fd509d940afccd7917004f1d7bf5cf7653d955a384d8daa9cb222c6cee9",
+      "pngSha256": "4a84de2f76799b918e219ae71540823cbf94433e0dbc272898481c10c2e25c2e",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753"
@@ -5512,7 +5512,7 @@
         "webp": "tmp/artifacts/build/sp-en-pawns/webp/sp-en-pawns-p02-sheet.webp"
       },
       "page": 2,
-      "pngSha256": "537714c361b7ccf351fff09b6fd78f89945630e11393a0fd2e726e5b22dfbd27",
+      "pngSha256": "fb7d143d12b77265491dd25ba5407fc9959243d01e0038e80a9ca042243bac44",
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753"

@@ -3,6 +3,11 @@
 // DOCS/parity.md.
 package domain
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // Expansion identifies which component set an entity belongs to.
 type Expansion string
 
@@ -63,15 +68,47 @@ type SpaceFootprint struct {
 	Cells []SpaceGridCell `json:"cells"`
 }
 
-// Space is a cell on a block that pawns occupy.
+// SpaceCapacity is an explicit finite capacity or UnlimitedCapacity. Zero means legacy/unset.
+type ExplicitSpaceCapacity int
+
+const UnlimitedCapacity ExplicitSpaceCapacity = -1
+
+func (c *ExplicitSpaceCapacity) UnmarshalJSON(data []byte) error {
+	if string(data) == `"unlimited"` {
+		*c = UnlimitedCapacity
+		return nil
+	}
+	var value int
+	if err := json.Unmarshal(data, &value); err != nil || value < 1 {
+		return fmt.Errorf("space capacity must be a positive integer or unlimited")
+	}
+	*c = ExplicitSpaceCapacity(value)
+	return nil
+}
+func (c ExplicitSpaceCapacity) MarshalJSON() ([]byte, error) {
+	if c == UnlimitedCapacity {
+		return []byte(`"unlimited"`), nil
+	}
+	if c < 1 {
+		return []byte("null"), nil
+	}
+	return json.Marshal(int(c))
+}
+
+// Space is a gameplay location on a block. ZoneIDs are physical source geometry;
+// neighbors are inferred candidates for future step movement.
 type Space struct {
-	ID        string          `json:"id"`
-	Type      string          `json:"type"`
-	PawnID    string          `json:"pawnId,omitempty"`
-	EffectID  string          `json:"effectId,omitempty"`
-	Location  *SpaceLocation  `json:"location,omitempty"`
-	Footprint *SpaceFootprint `json:"footprint,omitempty"`
-	Modifier  *SpaceModifier  `json:"modifier,omitempty"`
+	ID           string                `json:"id"`
+	Type         string                `json:"type"`
+	ZoneIDs      []string              `json:"zoneIds,omitempty"`
+	Capacity     ExplicitSpaceCapacity `json:"capacity,omitempty"`
+	CapacityNote string                `json:"capacityNote,omitempty"`
+	Neighbors    []string              `json:"neighbors,omitempty"`
+	PawnID       string                `json:"pawnId,omitempty"`
+	EffectID     string                `json:"effectId,omitempty"`
+	Location     *SpaceLocation        `json:"location,omitempty"`
+	Footprint    *SpaceFootprint       `json:"footprint,omitempty"`
+	Modifier     *SpaceModifier        `json:"modifier,omitempty"`
 }
 
 // BlockEffects holds effect ids fired at placement / on gaining control.

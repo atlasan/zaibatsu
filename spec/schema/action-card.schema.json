@@ -15,6 +15,10 @@
       "default": 1,
       "description": "How many identical copies of this card are in the deck."
     },
+    "summary": {
+      "type": "string",
+      "description": "Concise source-reviewed gameplay paraphrase; not a full printed-card transcription."
+    },
     "movement": {
       "type": "integer",
       "minimum": 1,

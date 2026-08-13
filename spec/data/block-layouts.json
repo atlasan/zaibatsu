@@ -1,19 +1,36 @@
 {
   "$schema": "../schema/block-layout.schema.json",
-  "layoutVersion": 1,
+  "layoutVersion": 2,
   "layouts": [
     {
       "id": "standard-seven-small-hex-grid",
-      "name": "Standard seven small hex positions",
+      "name": "Standard seven physical small-hex zones",
       "smallHexCount": 7,
-      "cells": [
-        { "id": "h1", "q": 0, "r": 0 },
-        { "id": "h2", "q": 0, "r": -1 },
-        { "id": "h3", "q": 1, "r": -1 },
-        { "id": "h4", "q": 1, "r": 0 },
-        { "id": "h5", "q": 0, "r": 1 },
-        { "id": "h6", "q": -1, "r": 1 },
-        { "id": "h7", "q": -1, "r": 0 }
+      "outerHex": {
+        "vertices": [
+          { "id": "v1", "x": 50, "y": 4 }, { "id": "v2", "x": 92, "y": 27 },
+          { "id": "v3", "x": 92, "y": 73 }, { "id": "v4", "x": 50, "y": 96 },
+          { "id": "v5", "x": 8, "y": 73 }, { "id": "v6", "x": 8, "y": 27 }
+        ]
+      },
+      "corners": [
+        { "id": "v1", "x": 50, "y": 4 }, { "id": "v2", "x": 92, "y": 27 },
+        { "id": "v3", "x": 92, "y": 73 }, { "id": "v4", "x": 50, "y": 96 },
+        { "id": "v5", "x": 8, "y": 73 }, { "id": "v6", "x": 8, "y": 27 }
+      ],
+      "edges": [
+        { "id": "e1", "x": 71, "y": 15.5 }, { "id": "e2", "x": 92, "y": 50 }, { "id": "e3", "x": 71, "y": 84.5 },
+        { "id": "e4", "x": 29, "y": 84.5 }, { "id": "e5", "x": 8, "y": 50 }, { "id": "e6", "x": 29, "y": 15.5 }
+      ],
+      "zoneShape": { "width": 25, "height": 22 },
+      "zones": [
+        { "id": "h1", "q": 0, "r": 0, "x": 50, "y": 50, "touches": ["h2", "h3", "h4", "h5", "h6", "h7"] },
+        { "id": "h2", "q": 0, "r": -1, "x": 50, "y": 28, "touches": ["h1", "h3", "h7"] },
+        { "id": "h3", "q": 1, "r": -1, "x": 68.75, "y": 39, "touches": ["h1", "h2", "h4"] },
+        { "id": "h4", "q": 1, "r": 0, "x": 68.75, "y": 61, "touches": ["h1", "h3", "h5"] },
+        { "id": "h5", "q": 0, "r": 1, "x": 50, "y": 72, "touches": ["h1", "h4", "h6"] },
+        { "id": "h6", "q": -1, "r": 1, "x": 31.25, "y": 61, "touches": ["h1", "h5", "h7"] },
+        { "id": "h7", "q": -1, "r": 0, "x": 31.25, "y": 39, "touches": ["h1", "h2", "h6"] }
       ]
     }
   ]

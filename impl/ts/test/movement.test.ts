@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { loadDefault } from "../src/data/index.ts";
 import { blockById, type GameData } from "../src/domain/types.ts";
 import { neighbor, opposite, type Coord } from "../src/domain/hex.ts";
-import { UNLIMITED, spaceCapacity } from "../src/domain/pawn_board.ts";
+import { UNLIMITED, spaceCapacity, spaceCapacityFor } from "../src/domain/pawn_board.ts";
 import { newRng } from "../src/domain/rng.ts";
 import {
   canActivateMovement,
@@ -51,6 +51,8 @@ describe("space capacity", () => {
     expect(spaceCapacity("double")).toBe(2);
     expect(spaceCapacity("special")).toBe(UNLIMITED);
     expect(spaceCapacity("pawn")).toBe(UNLIMITED);
+    expect(spaceCapacityFor({ id: "wide", type: "normal", capacity: 3 })).toBe(3);
+    expect(spaceCapacityFor({ id: "open", type: "normal", capacity: "unlimited" })).toBe(UNLIMITED);
   });
 });
 

@@ -14,7 +14,7 @@
 // budget resolves, but only hex movement executes on the board.
 
 import { neighbor, type Coord, type Cybernet } from "../domain/hex.ts";
-import { UNLIMITED, blockSpace, spaceCapacity, type PawnOnBoard } from "../domain/pawn_board.ts";
+import { UNLIMITED, blockSpace, spaceCapacityFor, type PawnOnBoard } from "../domain/pawn_board.ts";
 import {
   blockById,
   pawnById,
@@ -86,7 +86,7 @@ export function spaceCapacityAt(
   if (!block) throw new Error(`unknown block "${pb.blockId}"`);
   const sp = blockSpace(block, spaceId);
   if (!sp) throw new Error(`block "${pb.blockId}" has no space "${spaceId}"`);
-  return spaceCapacity(sp.type);
+  return spaceCapacityFor(sp);
 }
 
 /**

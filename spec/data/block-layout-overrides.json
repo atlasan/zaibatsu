@@ -1,0 +1,4 @@
+{
+  "$schema": "../schema/block-layout-override.schema.json",
+  "overrides": []
+}

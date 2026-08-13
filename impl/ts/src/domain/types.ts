@@ -48,9 +48,18 @@ export interface SpaceFootprint {
   cells: SpaceGridCell[];
 }
 
+/** Explicit finite capacity or unlimited; absent values are legacy type-derived data. */
+export type ExplicitSpaceCapacity = number | "unlimited";
+
 export interface Space {
   id: string;
+  /** `double` remains readable for legacy data only; new canonical data uses explicit capacity. */
   type: SpaceType;
+  zoneIds?: ("h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7")[];
+  capacity?: ExplicitSpaceCapacity;
+  capacityNote?: string;
+  /** Inferred from touching selected zones; not yet executed as step movement. */
+  neighbors?: string[];
   pawnId?: string;
   effectId?: string;
   location?: SpaceLocation;

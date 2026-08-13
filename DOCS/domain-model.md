@@ -62,9 +62,11 @@ A cell on a block.
 - `effectId?` — for `effect` spaces, optional activatable effect
 - `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.
 - `layoutId: standard-seven-small-hex-grid` - every information block has the same seven printed small hexes: one centre plus six adjacent positions. The canonical coordinates live in `spec/data/block-layouts.json`.
-- `footprint?: { shape, cells }` - source-layout-only coverage of those seven named positions. `hex` is one printed cell; `pill` is exactly two adjacent cells; `large` is one or more connected cells. It does **not** create movement links or override capacity.
+- `zoneIds: ZoneId[]` - one or more of the seven physical printed zones (`h1` centre, then `h2`–`h7` clockwise); a zone has one gameplay-space owner.
+- `capacity: positive int | unlimited` - explicit occupancy. The editor defaults finite capacity to selected-zone count; a different value needs `capacityNote` evidence. `special` and pawn-home spaces default to `unlimited`.
+- `neighbors: SpaceId[]` - symmetric candidate links inferred from touching selected zones and loaded by both mirrors. They are data available for future step movement, not an executable traversal yet.
 
-The rule type remains authoritative for occupancy: `normal` and `effect` hold one pawn; `double` holds two and must use a two-hex `pill`; `special` is the large/unlimited space and may use a connected one-or-more-hex `large` footprint; a `pawn` home is unlimited and uses one visual hex. The footprint records what is printed on the tile, not a second board grid.
+`double` remains readable only for legacy saves. Newly authored canonical data expresses a two-capacity location as a normal/effect space selecting zones with explicit capacity `2`; physical zone geometry never silently creates an engine movement rule.
 ### Pawn _(slice: identity/defense/movement/abilities/class/slots; effects planned)_
 An agent, represented by a piece (position) + control card (attributes).
 - `id`, `name`, `expansion`, `class: Class[]`
@@ -125,7 +127,7 @@ enumerates every legal `(dir, rotation)`.
 
 **Pawns on the board:** a `PawnOnBoard` is `{ pawnId, ownerId, coord, spaceId }`.
 Each player's starting pawn is placed on the Central Core at setup. A space's pawn
-capacity is by type: normal/effect = 1, double = 2, special/pawn = unlimited
+capacity prefers explicit source-reviewed `Space.capacity`; legacy data falls back to type (normal/effect = 1, double = 2, special/pawn = unlimited)
 (`SpaceCapacity`). `CanEndOn` enforces capacity (a moving pawn doesn't count
 against itself).
 

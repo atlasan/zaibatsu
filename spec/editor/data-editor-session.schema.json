@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://zaibatsu/spec/editor/data-editor-session.schema.json",
-  "title": "Zaibatsu data editor session v2",
+  "title": "Zaibatsu data editor session v3",
   "description": "Local review state for blocks and action cards; it is not canonical game data.",
   "type": "object",
   "required": ["sessionVersion", "projectId", "assetManifestPath", "documents"],
   "additionalProperties": false,
   "properties": {
-    "sessionVersion": { "const": 2 },
+    "sessionVersion": { "const": 3 },
     "projectId": { "const": "zaibatsu-data-editor" },
     "assetManifestPath": { "const": "spec/assets/manifest.json" },
     "documents": { "type": "array", "items": { "$ref": "#/$defs/document" } },

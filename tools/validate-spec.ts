@@ -26,13 +26,13 @@ const assetIds = new Set(strings((assetManifest.assets as Json[] | undefined)?.m
 const inventory = readJson(join(root, "spec/inventory.json"));
 const blockLayoutData = readJson(join(root, "spec/data/block-layouts.json"));
 const standardBlockLayout = (blockLayoutData.layouts as Json[] | undefined)?.find((layout) => layout.id === "standard-seven-small-hex-grid");
-const standardCellKeys = new Set(["0,0", "0,-1", "1,-1", "1,0", "0,1", "-1,1", "-1,0"]);
-if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.isArray(standardBlockLayout.cells) || standardBlockLayout.cells.length !== 7) {
-  fail("block-layouts.json must declare the standard seven-small-hex layout");
+const standardZoneIds = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);
+if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.isArray(standardBlockLayout.zones) || standardBlockLayout.zones.length !== 7 || !Array.isArray(standardBlockLayout.corners) || standardBlockLayout.corners.length !== 6 || !Array.isArray(standardBlockLayout.edges) || standardBlockLayout.edges.length !== 6) {
+  fail("block-layouts.json must declare calibrated seven-zone block geometry");
 } else {
-  const cells = standardBlockLayout.cells as Json[];
-  const keys = new Set(cells.map((cell) => `${String(cell.q)},${String(cell.r)}`));
-  if (keys.size !== 7 || [...standardCellKeys].some((key) => !keys.has(key))) fail("standard seven-small-hex layout must contain its exact centre-and-ring positions");
+  const zones = standardBlockLayout.zones as Json[];
+  const ids = new Set(zones.map((zone) => String(zone.id)));
+  if (ids.size !== 7 || [...standardZoneIds].some((id) => !ids.has(id)) || zones.some((zone) => !Number.isFinite(zone.x) || !Number.isFinite(zone.y) || !Array.isArray(zone.touches))) fail("standard seven-zone layout must contain exact named zones with coordinates and adjacency");
 }
 const externalCatalog = readJson(join(root, "DOCS/artifacts/external-sources.json"));
 const externalIds = new Set<string>();
@@ -92,63 +92,26 @@ for (const mode of (inventory.modes as Json[] | undefined) ?? []) {
   }
 }
 
-// The editor example is non-canonical, but it must remain usable against the
-// source-backed asset contract and the block record shape it is intended to edit.
+// The editor example is non-canonical, but must use the source-backed seven-zone model.
 const editorSession = readJson(join(root, "spec/editor/block-editor-session.example.json"));
-if (editorSession.sessionVersion !== 1 || editorSession.assetManifestPath !== "spec/assets/manifest.json") {
-  fail("block editor example must declare sessionVersion 1 and the canonical asset manifest");
-}
+const zoneIds = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);
+if (editorSession.sessionVersion !== 3 || editorSession.assetManifestPath !== "spec/assets/manifest.json") fail("block editor example must declare sessionVersion 3 and the canonical asset manifest");
 for (const document of (editorSession.documents as Json[] | undefined) ?? []) {
-  const source = document.source as Json | undefined;
-  const block = document.block as Json | undefined;
-  const provenance = document.provenance as Json | undefined;
-  if (document.resourceType !== "block" || !validId(document.id) || !assetIds.has(String(source?.assetId))) {
-    fail(`block editor document ${String(document.id)} has an invalid source asset`);
+  const source = document.source as Json | undefined; const block = document.block as Json | undefined; const provenance = document.provenance as Json | undefined;
+  if (document.resourceType !== "block" || !validId(document.id) || !assetIds.has(String(source?.assetId))) fail(`block editor document ${String(document.id)} has an invalid source asset`);
+  if (block?.layoutId !== "standard-seven-small-hex-grid") fail(`block editor document ${String(document.id)} must use the standard seven-zone layout`);
+  if (!Array.isArray(block?.edges) || block.edges.length !== 6 || !Array.isArray(block?.boundarySpaces) || block.boundarySpaces.length !== 6 || !Array.isArray(block?.bonusCorners) || block.bonusCorners.length !== 6) fail(`block editor document ${String(document.id)} must define six edges, boundary lists, and corners`);
+  const owners = new Set<string>(); const spaces = (block?.spaces as Json[] | undefined) ?? []; const spaceIds = new Set(spaces.map((space) => String(space.id)));
+  for (const space of spaces) {
+    const selected = space.zoneIds as Json[] | undefined; const capacity = space.capacity;
+    if (!validId(space.id) || !Array.isArray(selected) || !selected.length || new Set(selected.map(String)).size !== selected.length || selected.some((id) => !zoneIds.has(String(id)))) fail(`block editor document ${String(document.id)} has invalid selected zones`);
+    for (const id of selected ?? []) { if (owners.has(String(id))) fail(`block editor document ${String(document.id)} has duplicate zone ownership ${String(id)}`); owners.add(String(id)); }
+    if (!(capacity === "unlimited" || (Number.isInteger(capacity) && (capacity as number) > 0))) fail(`block editor document ${String(document.id)} has invalid explicit capacity`);
+    if (!Array.isArray(space.neighbors) || space.neighbors.some((id) => !spaceIds.has(String(id)))) fail(`block editor document ${String(document.id)} has invalid inferred neighbours`);
   }
-  if (block?.layoutId !== "standard-seven-small-hex-grid") fail(`block editor document ${String(document.id)} must use the standard seven-small-hex layout`);
-  if (!validId(block?.id) || typeof block?.name !== "string" || !["speedrunners", "shadowraiders"].includes(String(block?.expansion))) {
-    fail(`block editor document ${String(document.id)} has an invalid block draft`);
-  }
-  if (!Array.isArray(block?.edges) || block.edges.length !== 6 || !Array.isArray(block?.boundarySpaces) || block.boundarySpaces.length !== 6) {
-    fail(`block editor document ${String(document.id)} must define six edges and six boundary-space lists`);
-  }
-  if (!Array.isArray(block?.bonusCorners) || block.bonusCorners.length !== 6 || block.bonusCorners.filter((corner) => corner === true).length !== block.bonusFragments) {
-    fail(`block editor document ${String(document.id)} must keep bonus fragments aligned with six bonus corners`);
-  }
-  for (const space of (block?.spaces as Json[] | undefined) ?? []) {
-    const location = space.location as Json | undefined;
-    if (location && (!Number.isFinite(location.x) || !Number.isFinite(location.y) || (location.x as number) < 0 || (location.x as number) > 100 || (location.y as number) < 0 || (location.y as number) > 100)) {
-      fail(`block editor document ${String(document.id)} has an invalid visual space location`);
-    }
-    const footprint = space.footprint as Json | undefined;
-    const cells = footprint?.cells as Json[] | undefined;
-    const cellKey = (cell: Json) => `${String(cell.q)},${String(cell.r)}`;
-    const distance = (a: Json, b: Json) => Math.max(Math.abs((a.q as number) - (b.q as number)), Math.abs((a.r as number) - (b.r as number)), Math.abs(-((a.q as number) + (a.r as number)) + (b.q as number) + (b.r as number)));
-    const inGrid = (cell: Json) => Number.isInteger(cell.q) && Number.isInteger(cell.r) && Math.max(Math.abs(cell.q as number), Math.abs(cell.r as number), Math.abs(-((cell.q as number) + (cell.r as number)))) <= 2;
-    if (!footprint || !["hex", "pill", "large"].includes(String(footprint.shape)) || !Array.isArray(cells) || !cells.length || !cells.every(inGrid) || new Set(cells.map(cellKey)).size !== cells.length) {
-      fail(`block editor document ${String(document.id)} has an invalid hex-grid space footprint`);
-      continue;
-    }
-    if (space.type === "double" && (footprint.shape !== "pill" || cells.length !== 2 || distance(cells[0]!, cells[1]!) !== 1)) {
-      fail(`block editor document ${String(document.id)} has a double space without a two-hex pill`);
-    }
-    const connected = new Set([cellKey(cells[0]!)]); const queue = [cells[0]!];
-    while (queue.length) { const current = queue.shift()!; for (const candidate of cells) if (!connected.has(cellKey(candidate)) && distance(current, candidate) === 1) { connected.add(cellKey(candidate)); queue.push(candidate); } }
-    if (space.type === "special" && (footprint.shape !== "large" || connected.size !== cells.length)) {
-      fail(`block editor document ${String(document.id)} has a large space without a connected footprint`);
-    }
-    if (["normal", "effect", "pawn"].includes(String(space.type)) && (footprint.shape !== "hex" || cells.length !== 1)) {
-      fail(`block editor document ${String(document.id)} has a single-hex space with an invalid footprint`);
-    }
-  }
-  if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) {
-    fail(`block editor document ${String(document.id)} must retain its selected asset reference`);
-  }
-  if (!artifactIds.has(String(provenance?.primaryArtifactId)) || !Number.isInteger(provenance?.page) || typeof provenance?.locator !== "string") {
-    fail(`block editor document ${String(document.id)} lacks primary provenance`);
-  }
+  if (typeof source?.assetId === "string" && !strings(block?.assetRefs).includes(source.assetId)) fail(`block editor document ${String(document.id)} must retain its selected asset reference`);
+  if (!artifactIds.has(String(provenance?.primaryArtifactId)) || !Number.isInteger(provenance?.page) || typeof provenance?.locator !== "string") fail(`block editor document ${String(document.id)} lacks primary provenance`);
 }
-
 // Prevent the runtime seed from being misrepresented as source-verified content.
 for (const expansion of ["speedrunners", "shadowraiders"]) {
   const dataDir = join(root, "spec/data", expansion);

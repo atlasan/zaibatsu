@@ -42,12 +42,24 @@ func SpaceCapacity(spaceType string) int {
 	case "normal", "effect":
 		return 1
 	case "double":
-		return 2
+		return 2 // legacy data only
 	case "special", "pawn":
 		return Unlimited
 	default:
 		return 1
 	}
+}
+
+// SpaceCapacityFor prefers source-reviewed explicit capacity and falls back to
+// the legacy type mapping so older saved games remain readable.
+func SpaceCapacityFor(space *Space) int {
+	if space != nil && space.Capacity != 0 {
+		return int(space.Capacity)
+	}
+	if space == nil {
+		return 0
+	}
+	return SpaceCapacity(space.Type)
 }
 
 // Space returns the space definition with the given id on this block, or nil.

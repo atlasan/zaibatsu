@@ -115,30 +115,33 @@ def _edge_mid_normal(center, verts, i):
 
 
 def detect_edges(bgr: np.ndarray, center, verts, inr: int) -> list[bool]:
-    """An edge is a PASSAGE where a space opens onto the middle of the edge; it is
-    a WALL where a solid dark frame blocks it. Sample only the middle stretch of
-    the edge (a space touches the edge near its midpoint) just inside the tile."""
-    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
-    h, w = gray.shape
+    """An edge is a PASSAGE where the white hex-grid line reaches a cell outline
+    and crosses the black wall out to the edge. So: scan the middle of each edge
+    and look for a white line that SPANS the wall band (present both at the inner
+    cell-outline radius and out at the tile boundary). Otherwise it's a wall."""
+    white = _white_mask(bgr)
+    h, w = white.shape
     cx, cy = center
     out = []
     for i in range(6):
         ax, ay = verts[i]
         bx, by = verts[(i + 1) % 6]
-        light = black = n = 0
-        for t in np.linspace(0.32, 0.68, 13):  # middle ~36% of the edge
+        passage = False
+        for t in np.linspace(0.28, 0.72, 23):  # scan the middle of the edge
             ex, ey = ax + (bx - ax) * t, ay + (by - ay) * t
-            px = int(cx + (ex - cx) * 0.88)
-            py = int(cy + (ey - cy) * 0.88)
-            if 0 <= px < w and 0 <= py < h:
-                g = int(gray[py, px])
-                n += 1
-                light += g > 120
-                black += g < 60
-        if n == 0:
-            out.append(False)
-            continue
-        out.append(bool(light / n >= 0.30 and black / n < 0.55))
+            inner = outer = False
+            for f in np.linspace(0.84, 1.0, 10):  # across the wall band
+                px = int(cx + (ex - cx) * f)
+                py = int(cy + (ey - cy) * f)
+                if 0 <= px < w and 0 <= py < h and white[py, px] > 0:
+                    if f < 0.92:
+                        inner = True
+                    if f >= 0.95:
+                        outer = True
+            if inner and outer:  # a white line spans the wall here => entrance
+                passage = True
+                break
+        out.append(passage)
     return out
 
 

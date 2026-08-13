@@ -2,7 +2,7 @@
 // impl/go/internal/domain/pawn_board.go. See DOCS/domain-model.md and
 // DOCS/rules/speedrunners.md ("Spaces", "Movement").
 
-import type { Block } from "./types.ts";
+import type { Block, Space } from "./types.ts";
 import type { Coord } from "./hex.ts";
 
 /**
@@ -36,17 +36,17 @@ export const UNLIMITED = -1;
 /** How many pawns a space of the given type may hold. -1 (UNLIMITED) = no limit. */
 export function spaceCapacity(spaceType: string): number {
   switch (spaceType) {
-    case "normal":
-    case "effect":
-      return 1;
-    case "double":
-      return 2;
-    case "special":
-    case "pawn":
-      return UNLIMITED;
-    default:
-      return 1;
+    case "normal": case "effect": return 1;
+    case "double": return 2; // legacy data only
+    case "special": case "pawn": return UNLIMITED;
+    default: return 1;
   }
+}
+
+/** Explicit source-reviewed capacity takes precedence over legacy type defaults. */
+export function spaceCapacityFor(space: Space): number {
+  if (space.capacity !== undefined) return space.capacity === "unlimited" ? UNLIMITED : space.capacity;
+  return spaceCapacity(space.type);
 }
 
 /** The space definition with the given id on a block, or undefined. */

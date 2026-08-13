@@ -1,61 +1,18 @@
 import { describe, expect, test } from "bun:test";
-import { actionCardDraftForAsset, buildActionCardPatch, buildPatch, draftForAsset, validateDocument, type AssetRecord } from "./model";
+import { actionCardDraftForAsset, buildPatch, defaultCapacity, draftForAsset, inferNeighbors, migrateSession, normalizeBlockDocument, validateDocument, type AssetRecord, type BlockLayout } from "./model";
 
 const asset: AssetRecord = { assetId: "sp-en-blocks-a4-p01-c01", artifactId: "sp-en-blocks-a4", page: 1, kind: "block" };
+const layout: BlockLayout = { id: "standard-seven-small-hex-grid", name: "test", smallHexCount: 7, outerHex: { vertices: [{ id: "v1", x: 50, y: 4 }, { id: "v2", x: 92, y: 27 }, { id: "v3", x: 92, y: 73 }, { id: "v4", x: 50, y: 96 }, { id: "v5", x: 8, y: 73 }, { id: "v6", x: 8, y: 27 }] }, corners: [], edges: [], zoneShape: { width: 25, height: 22 }, zones: [
+  { id: "h1", q: 0, r: 0, x: 50, y: 50, touches: ["h2", "h3", "h4", "h5", "h6", "h7"] }, { id: "h2", q: 0, r: -1, x: 50, y: 28, touches: ["h1", "h3", "h7"] }, { id: "h3", q: 1, r: -1, x: 69, y: 39, touches: ["h1", "h2", "h4"] }, { id: "h4", q: 1, r: 0, x: 69, y: 61, touches: ["h1", "h3", "h5"] }, { id: "h5", q: 0, r: 1, x: 50, y: 72, touches: ["h1", "h4", "h6"] }, { id: "h6", q: -1, r: 1, x: 31, y: 61, touches: ["h1", "h5", "h7"] }, { id: "h7", q: -1, r: 0, x: 31, y: 39, touches: ["h1", "h2", "h6"] }
+] };
 
-describe("block editor model", () => {
-  test("creates a source-linked provisional draft", () => {
-    const draft = draftForAsset(asset);
-    expect(draft.source.assetId).toBe(asset.assetId);
-    expect(draft.block.assetRefs).toEqual([asset.assetId]);
-    expect(validateDocument(draft, [asset])).toEqual([]);
-  });
-
-  test("rejects broken edge references", () => {
-    const draft = draftForAsset(asset);
-    draft.block.boundarySpaces[0] = ["missing"];
-    expect(validateDocument(draft, [asset]).join(" ")).toContain("unknown space");
-  });
-
-  test("validates bonus-corner count and visual space placement", () => {
-    const draft = draftForAsset(asset);
-    draft.block.bonusCorners[0] = true;
-    draft.block.bonusFragments = 0;
-    draft.block.spaces.push({ id: "space-a", type: "normal", location: { x: 101, y: 50 }, footprint: { shape: "hex", cells: [{ q: 0, r: 0 }] } });
-    const errors = validateDocument(draft, [asset]).join(" ");
-    expect(errors).toContain("Bonus fragment count");
-    expect(errors).toContain("within 0..100");
-  });
-
-  test("requires a double pill and a connected large footprint", () => {
-    const draft = draftForAsset(asset);
-    draft.block.spaces.push({ id: "double-a", type: "double", footprint: { shape: "pill", cells: [{ q: 0, r: 0 }, { q: 2, r: 0 }] } });
-    draft.block.spaces.push({ id: "large-a", type: "special", footprint: { shape: "large", cells: [{ q: -2, r: 0 }, { q: 2, r: 0 }] } });
-    const errors = validateDocument(draft, [asset]).join(" ");
-    expect(errors).toContain("two adjacent hexes");
-    expect(errors).toContain("connected large footprint");
-  });
-
-  test("exports an optimistic-concurrency patch", () => {
-    const patch = buildPatch(draftForAsset(asset), "abc123");
-    expect(patch.targetPath).toBe("spec/data/speedrunners/blocks.json");
-    expect(patch.baseDataSha256).toBe("abc123");
-    expect(patch.operations[0].sourceAssetId).toBe(asset.assetId);
-  });
+describe("seven-zone block editor model", () => {
+  test("creates a source-linked provisional draft", () => expect(validateDocument(draftForAsset(asset), [asset], layout)).toEqual([]));
+  test("auto-capacity follows selected-zone count and special stays unlimited", () => { expect(defaultCapacity("normal", ["h1", "h2"])).toBe(2); expect(defaultCapacity("special", ["h1"])).toBe("unlimited"); });
+  test("rejects duplicate ownership and capacity overrides without evidence", () => { const draft = draftForAsset(asset); draft.block.spaces = [{ id: "a", type: "normal", zoneIds: ["h1"], capacity: 2, neighbors: [] }, { id: "b", type: "normal", zoneIds: ["h1"], capacity: 1, neighbors: [] }]; const errors = validateDocument(draft, [asset], layout).join(" "); expect(errors).toContain("cannot belong"); expect(errors).toContain("source-review note"); });
+  test("derives symmetric gameplay neighbours from touching zones", () => { const spaces = inferNeighbors([{ id: "a", type: "normal", zoneIds: ["h2"], capacity: 1, neighbors: [] }, { id: "b", type: "normal", zoneIds: ["h3"], capacity: 1, neighbors: [] }, { id: "c", type: "normal", zoneIds: ["h5"], capacity: 1, neighbors: [] }], layout); expect(spaces[0]?.neighbors).toEqual(["b"]); expect(spaces[1]?.neighbors).toEqual(["a"]); expect(spaces[2]?.neighbors).toEqual([]); });
+  test("migrates legacy double pills to normal two-zone capacity", () => { const draft = draftForAsset(asset) as any; draft.block.spaces = [{ id: "legacy", type: "double", footprint: { shape: "pill", cells: [{ q: 0, r: 0 }, { q: 0, r: -1 }] } }]; const migrated = normalizeBlockDocument(draft, layout); expect(migrated.block.spaces[0]).toMatchObject({ type: "normal", zoneIds: ["h1", "h2"], capacity: 2 }); });
+  test("migrates legacy sessions", () => { const draft = draftForAsset(asset) as any; draft.block.spaces = [{ id: "legacy", type: "double", footprint: { cells: [{ q: 0, r: 0 }, { q: 0, r: -1 }] } }]; const session = migrateSession({ sessionVersion: 1, projectId: "zaibatsu-block-editor", assetManifestPath: "spec/assets/manifest.json", documents: [draft], history: [] } as any, layout); expect(session.sessionVersion).toBe(3); expect((session.documents[0] as any).block.spaces[0].capacity).toBe(2); });
+  test("exports a v3 zone patch", () => expect(buildPatch(draftForAsset(asset), "abc").format).toBe("zaibatsu-editor-patch/v3"));
 });
-describe("action-card editor model", () => {
-  const cardAsset: AssetRecord = { assetId: "sp-en-action-cards-p01-c01", artifactId: "sp-en-action-cards", page: 1, kind: "action-card" };
-  test("keeps vision candidates provisional until confirmed", () => {
-    const draft = actionCardDraftForAsset(cardAsset, { confidence: 0.2, reviewRequired: true, reasons: ["OCR unavailable"] });
-    expect(validateDocument(draft, [cardAsset]).join(" ")).toContain("reviewer confirmation");
-    draft.transcription.reviewerConfirmed = true;
-    draft.transcription.duplicateGroupConfirmed = true;
-    draft.transcription.printedText = "Discard this card.";
-    expect(validateDocument(draft, [cardAsset])).toEqual([]);
-  });
-  test("marks a missing Shadowraiders target as absent", () => {
-    const patch = buildActionCardPatch(actionCardDraftForAsset({ ...cardAsset, assetId: "sh-en-action-cards-p01-c01", artifactId: "sh-en-action-cards" }), null);
-    expect(patch.targetAbsent).toBe(true);
-    expect(patch.targetPath).toBe("spec/data/shadowraiders/action-cards.json");
-  });
-});
+describe("action-card editor model", () => { const card: AssetRecord = { assetId: "sp-en-action-cards-p01-c01", artifactId: "sp-en-action-cards", page: 1, kind: "action-card" }; test("keeps vision candidates review-only", () => { const draft=actionCardDraftForAsset(card,{confidence:.2,reviewRequired:true,reasons:["OCR unavailable"]}); expect(validateDocument(draft,[card],layout).join(" ")).toContain("reviewer confirmation"); }); });

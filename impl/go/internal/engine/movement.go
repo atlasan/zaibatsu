@@ -80,7 +80,7 @@ func SpaceCapacityAt(gd *domain.GameData, coord domain.Coord, spaceID string, cy
 	if sp == nil {
 		return 0, fmt.Errorf("block %q has no space %q", pb.BlockID, spaceID)
 	}
-	return domain.SpaceCapacity(sp.Type), nil
+	return domain.SpaceCapacityFor(sp), nil
 }
 
 // CanEndOn reports whether movingPawnID may finish a move on the given space
