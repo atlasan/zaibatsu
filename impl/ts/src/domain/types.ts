@@ -86,6 +86,7 @@ export interface Block {
   isCentralCore?: boolean;
   iceValue?: IceValue;
   edges?: boolean[];
+  /** Derived from each open entrance's mapped ring zone; it is not hand-authored. */
   boundarySpaces?: string[][];
   bonusFragments?: number;
   bonusCorners?: boolean[];

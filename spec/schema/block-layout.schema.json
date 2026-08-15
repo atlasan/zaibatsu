@@ -8,13 +8,14 @@
   "properties": { "layoutVersion": { "const": 3 }, "layouts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/layout" } } },
   "$defs": {
     "anchor": { "type": "object", "required": ["id", "x", "y"], "additionalProperties": false, "properties": { "id": { "type": "string" }, "x": { "type": "number", "minimum": 0, "maximum": 100 }, "y": { "type": "number", "minimum": 0, "maximum": 100 } } },
+    "edgeAnchor": { "type": "object", "required": ["id", "x", "y", "zoneId"], "additionalProperties": false, "properties": { "id": { "type": "string" }, "x": { "type": "number", "minimum": 0, "maximum": 100 }, "y": { "type": "number", "minimum": 0, "maximum": 100 }, "zoneId": { "enum": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"] } } },
     "layout": {
       "type": "object", "required": ["id", "name", "smallHexCount", "outerHex", "corners", "edges", "zoneShape", "zones"], "additionalProperties": false,
       "properties": {
         "id": { "const": "standard-seven-zone-2-3-2-pointy" }, "name": { "type": "string" }, "smallHexCount": { "const": 7 },
         "outerHex": { "type": "object", "required": ["vertices"], "additionalProperties": false, "properties": { "vertices": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/anchor" } } } },
         "corners": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/anchor" } },
-        "edges": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/anchor" } },
+        "edges": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/edgeAnchor" } },
         "zoneShape": { "type": "object", "required": ["width", "height"], "additionalProperties": false, "properties": { "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }, "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 } } },
         "zones": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "type": "object", "required": ["id", "q", "r", "x", "y", "touches"], "additionalProperties": false, "properties": { "id": { "enum": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"] }, "q": { "type": "integer" }, "r": { "type": "integer" }, "x": { "type": "number", "minimum": 0, "maximum": 100 }, "y": { "type": "number", "minimum": 0, "maximum": 100 }, "touches": { "type": "array", "uniqueItems": true, "items": { "enum": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"] } } } } }
       }

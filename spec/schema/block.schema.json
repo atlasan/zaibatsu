@@ -10,7 +10,7 @@
     "layoutId": { "const": "standard-seven-zone-2-3-2-pointy", "default": "standard-seven-zone-2-3-2-pointy" }, "isCentralCore": { "type": "boolean", "default": false },
     "iceValue": { "enum": ["none", "low", "medium", "high", "black"], "default": "none" },
     "edges": { "type": "array", "items": { "type": "boolean" }, "minItems": 6, "maxItems": 6 },
-    "boundarySpaces": { "type": "array", "items": { "type": "array", "items": { "type": "string" } }, "minItems": 6, "maxItems": 6 },
+    "boundarySpaces": { "type": "array", "items": { "type": "array", "items": { "type": "string" } }, "minItems": 6, "maxItems": 6, "description": "Derived boundary-space ids: E1→h3, E2→h4, E3→h5, E4→h6, E5→h7, E6→h2 when the corresponding entrance is open." },
     "bonusFragments": { "type": "integer", "minimum": 0, "maximum": 6, "default": 0 },
     "bonusCorners": { "type": "array", "items": { "type": "boolean" }, "minItems": 6, "maxItems": 6 },
     "spaces": { "type": "array", "items": { "$ref": "#/$defs/space" } },

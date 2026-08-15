@@ -50,6 +50,8 @@ if (!standardBlockLayout || standardBlockLayout.smallHexCount !== 7 || !Array.is
   const zones = standardBlockLayout.zones as Json[];
   const ids = new Set(zones.map((zone) => String(zone.id)));
   if (ids.size !== 7 || [...standardZoneIds].some((id) => !ids.has(id)) || zones.some((zone) => !Number.isFinite(zone.x) || !Number.isFinite(zone.y) || !Array.isArray(zone.touches))) fail("standard seven-zone layout must contain exact named zones with coordinates and adjacency");
+  const entranceZoneIds = (standardBlockLayout.edges as Json[]).map((edge) => String(edge.zoneId));
+  if (JSON.stringify(entranceZoneIds) !== JSON.stringify(["h3", "h4", "h5", "h6", "h7", "h2"])) fail("each clockwise entrance must map to its matching standardized ring hex");
   const shape = standardBlockLayout.zoneShape as Json | undefined;
   const width = shape?.width as number | undefined; const height = shape?.height as number | undefined;
   if (!Number.isFinite(width) || !Number.isFinite(height) || width! <= 0 || height! <= 0) fail("standard seven-zone layout must declare positive zone dimensions");

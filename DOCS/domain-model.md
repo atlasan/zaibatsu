@@ -45,8 +45,8 @@ A hexagonal tile forming the Cybernet.
 - `isCentralCore: bool` — the Central Core (and Shadowraiders' Central Core 02)
 - `iceValue: IceValue` — defense vs Icebreaker; `none` means uncontrollable
 - `spaces: Space[]` — the cells pawns occupy
-- `edges: bool[6]` — which of the 6 hex sides expose a connecting space (drives
-  legal tile placement/orientation) _(planned use)_
+- `edges: bool[6]` — which of the 6 outer entrances are open. Each has one standardized target hex in clockwise order: `E1→h3`, `E2→h4`, `E3→h5`, `E4→h6`, `E5→h7`, `E6→h2`.
+- `boundarySpaces: SpaceId[][6]` — derived from each open entrance's target hex and its current gameplay-space owner; authors do not hand-enter it.
 - `bonusFragments: int` — count of one-third bonus-icon corners (0..6) _(planned use)_
 - `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. This is visual/reference data, not an effect resolver.
 - `assetRefs?: assetId[]` — source-linked physical assets resolved from the asset manifest.
@@ -56,7 +56,7 @@ A hexagonal tile forming the Cybernet.
 ### Space
 A cell on a block.
 - `id`, `type: SpaceType`
-- `capacity` — derived from type (normal 1, double 2, special/pawn ∞)
+- `capacity` — explicit occupancy; finite values default to selected-zone count, while special/pawn spaces default to unlimited
 - `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }`
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect

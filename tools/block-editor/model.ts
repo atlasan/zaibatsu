@@ -60,7 +60,9 @@ export type EditorDocument = BlockDocument | ActionCardDocument;
 export interface EditorSession { sessionVersion: 1 | 2 | 3 | 4; projectId: string; assetManifestPath: "spec/assets/manifest.json"; documents: EditorDocument[]; history: Array<{ at: string; operation: "create" | "update" | "validate" | "export"; documentId: string; summary?: string }>; }
 
 export interface BlockLayoutZone { id: ZoneId; q: number; r: number; x: number; y: number; touches: ZoneId[]; }
-export interface BlockLayout { id: typeof STANDARD_BLOCK_LAYOUT_ID; name: string; smallHexCount: 7; outerHex: { vertices: Array<{ id: string; x: number; y: number }> }; corners: Array<{ id: string; x: number; y: number }>; edges: Array<{ id: string; x: number; y: number }>; zoneShape: { width: number; height: number }; zones: BlockLayoutZone[]; }
+/** Each outer entrance targets its nearest standardized ring placement hex. */
+export interface BlockLayoutEdge { id: string; x: number; y: number; zoneId: ZoneId; }
+export interface BlockLayout { id: typeof STANDARD_BLOCK_LAYOUT_ID; name: string; smallHexCount: 7; outerHex: { vertices: Array<{ id: string; x: number; y: number }> }; corners: Array<{ id: string; x: number; y: number }>; edges: BlockLayoutEdge[]; zoneShape: { width: number; height: number }; zones: BlockLayoutZone[]; }
 
 export function defaultCapacity(type: EditorSpaceType, zoneIds: ZoneId[]): SpaceCapacity { return (type === "special" || type === "pawn") ? "unlimited" : Math.max(1, zoneIds.length); }
 export function zonesTouch(layout: BlockLayout, left: ZoneId, right: ZoneId): boolean { return layout.zones.find((zone) => zone.id === left)?.touches.includes(right) ?? false; }
@@ -79,6 +81,14 @@ export function inferNeighbors(spaces: EditorSpace[], layout: BlockLayout): Edit
   return spaces.map((space) => ({ ...space, neighbors: spaces.filter((other) => other.id !== space.id && space.zoneIds.some((left) => other.zoneIds.some((right) => zonesTouch(layout, left, right)))).map((other) => other.id).sort() }));
 }
 export function isCapacityOverride(space: EditorSpace): boolean { return space.capacity !== defaultCapacity(space.type, space.zoneIds); }
+/** Boundary-space links are derived: entrance E1..E6 follows the layout edge's zoneId. */
+export function deriveBoundarySpaces(block: Pick<BlockRecord, "edges" | "spaces">, layout: BlockLayout): BoundarySpaces {
+  return layout.edges.map((edge, index) => {
+    if (!block.edges[index]) return [];
+    const owner = block.spaces.find((space) => space.zoneIds.includes(edge.zoneId));
+    return owner ? [owner.id] : [];
+  }) as BoundarySpaces;
+}
 
 export function draftForAsset(asset: AssetRecord): BlockDocument {
   const expansion: Expansion = asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners";
@@ -113,7 +123,8 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
   if (!validId(document.id) || !validId(block.id)) errors.push("Draft and block ids must use lowercase letters, digits, and hyphens.");
   if (!block.name.trim()) errors.push("Block name is required."); if (!blockAssets.has(document.source.assetId) || !block.assetRefs.includes(document.source.assetId)) errors.push("Block assetRefs must include the selected block asset.");
   if (block.edges.length !== 6 || block.boundarySpaces.length !== 6 || block.bonusCorners.length !== 6) errors.push("Blocks need exactly six edges, boundary lists, and bonus-corner flags.");
-  if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.push("Bonus fragment count must equal marked bonus corners.");
+if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.push("Bonus fragment count must equal marked bonus corners.");
+  if (layout && JSON.stringify(block.boundarySpaces) !== JSON.stringify(deriveBoundarySpaces(block, layout))) errors.push("Boundary spaces are derived from each active entrance's mapped placement hex.");
   if (block.layoutId !== STANDARD_BLOCK_LAYOUT_ID) errors.push("Blocks must use the standard 2-3-2 seven-zone layout.");
   if (document.geometryReviewRequired && document.status !== "draft") errors.push("Migrated geometry must be reviewed before a block can leave draft status.");
   const zoneOwner = new Map<ZoneId, string>(); const ids = new Set<string>();
@@ -145,7 +156,8 @@ export function normalizeBlockDocument(document: BlockDocument, layout: BlockLay
     return { id: raw.id, type, zoneIds, capacity, displayShape, ...(raw.capacityNote ? { capacityNote: raw.capacityNote } : {}), neighbors: [], ...(raw.pawnId ? { pawnId: raw.pawnId } : {}), ...(raw.effectId ? { effectId: raw.effectId } : {}), ...(raw.modifier ? { modifier: raw.modifier } : {}) };
   });
   const annotations = requiresGeometryReview && !document.annotations.includes("Review 2-3-2 geometry before export.") ? [...document.annotations, "Review 2-3-2 geometry before export."] : document.annotations;
-  return { ...document, status: requiresGeometryReview ? "draft" : document.status, geometryReviewRequired: document.geometryReviewRequired || requiresGeometryReview || undefined, annotations, block: { ...document.block, layoutId: STANDARD_BLOCK_LAYOUT_ID, spaces: inferNeighbors(spaces, layout) } };
+const normalizedBlock = { ...document.block, layoutId: STANDARD_BLOCK_LAYOUT_ID, spaces: inferNeighbors(spaces, layout) };
+  return { ...document, status: requiresGeometryReview ? "draft" : document.status, geometryReviewRequired: document.geometryReviewRequired || requiresGeometryReview || undefined, annotations, block: { ...normalizedBlock, boundarySpaces: deriveBoundarySpaces(normalizedBlock, layout) } };
 }
 
 export function sessionFromDocuments(documents: EditorDocument[], prior?: EditorSession): EditorSession { return { sessionVersion: 4, projectId: "zaibatsu-data-editor", assetManifestPath: "spec/assets/manifest.json", documents, history: [...(prior?.history ?? []), { at: new Date().toISOString(), operation: "update", documentId: documents.at(-1)?.id ?? "none", summary: "Saved from editor" }] }; }

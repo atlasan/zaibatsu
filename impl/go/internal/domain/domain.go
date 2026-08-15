@@ -121,13 +121,14 @@ type BlockEffects struct {
 
 // Block is a hexagonal Cybernet tile.
 type Block struct {
-	ID             string       `json:"id"`
-	Name           string       `json:"name"`
-	Expansion      Expansion    `json:"expansion"`
-	LayoutID       string       `json:"layoutId,omitempty"`
-	IsCentralCore  bool         `json:"isCentralCore,omitempty"`
-	IceValue       IceValue     `json:"iceValue,omitempty"`
-	Edges          []bool       `json:"edges,omitempty"`
+	ID            string    `json:"id"`
+	Name          string    `json:"name"`
+	Expansion     Expansion `json:"expansion"`
+	LayoutID      string    `json:"layoutId,omitempty"`
+	IsCentralCore bool      `json:"isCentralCore,omitempty"`
+	IceValue      IceValue  `json:"iceValue,omitempty"`
+	Edges         []bool    `json:"edges,omitempty"`
+	// BoundarySpaces is derived from each open entrance's mapped ring zone; it is not hand-authored.
 	BoundarySpaces [][]string   `json:"boundarySpaces,omitempty"`
 	BonusFragments int          `json:"bonusFragments,omitempty"`
 	BonusCorners   []bool       `json:"bonusCorners,omitempty"`
