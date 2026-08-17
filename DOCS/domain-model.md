@@ -59,7 +59,7 @@ A cell on a block.
 - `id`, `type: SpaceType`
 - `capacity` — explicit occupancy; finite values default to selected-zone count, while special/pawn spaces default to unlimited
 - `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }` — `kind ∈ defense|hand-size|attack|ice` (`ice` modifies a target's ICE)
-- `direction?: int` — directional restriction (printed arrow): a pawn may only exit toward this edge (0=top, clockwise) _(enforcement planned)_
+- `direction?: int` — directional restriction (printed arrow): a pawn may only exit the space toward this local edge (0=top, clockwise). Enforced by `StepTargets`/`MoveStep` for cross-edge hops.
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect
 - `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.

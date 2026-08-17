@@ -70,6 +70,8 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | ICE faces (authored override) | `engine.iceFacesFor(faces, ice)` | `iceFacesFor(faces, ice)` — prefers `block.iceFaces`, else the category |
 | Black ICE elimination | `resolveBlackIceFailure(isBlack, …)` (`iceValue==black \|\| block.blackIce`) | `resolveBlackIceFailure(isBlack, …)` |
 | Effective ability (attach grants/removes) | `engine.effectiveAbility(gd, pawn, atts, name)` | `effectiveAbility(gd, pawn, atts, name)` — removes win, else innate, else a granted card-activated ability |
+| Space adjacency graph | `engine.StepTargets(gd, cy, coord, spaceID)` | `stepTargets(gd, cy, coord, spaceId)` — intra-block neighbours + cross-edge boundary hops (rotation- and direction-aware) |
+| One validated step | `engine.MoveStep(s, gd, pawnID, coord, spaceID)` | `moveStep(s, gd, pawnId, coord, spaceId)` — reachability + capacity checked |
 | Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
 | Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
 | Search ability | `engine.Search(...)` | `search(...)` |

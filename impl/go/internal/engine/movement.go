@@ -16,10 +16,12 @@ import (
 // hex movement (one whole block, ignoring spaces & space modifiers — the one
 // movement type the current data can resolve correctly).
 //
-// DEFERRED: space-to-space stepping for steps/d6/2d6 execution needs an
-// intra-block + cross-edge SPACE-ADJACENCY graph the provisional data does not
-// yet encode. That is a schema extension tracked in tasks/BACKLOG.md. Until then
-// the step budget resolves, but only hex movement executes on the board.
+// Space-to-space stepping is provided by StepTargets (the space-adjacency graph:
+// intra-block space.neighbors + cross-edge boundarySpaces, respecting open edges,
+// rotation, and a space's direction restriction) and MoveStep (one validated,
+// capacity-checked hop). Cross-edge hops activate once blocks encode
+// boundarySpaces; intra-block stepping works on the current neighbours data.
+// Chaining MoveStep under the resolved step budget is the remaining wiring.
 
 // movementUsedKey namespaces a pawn's once-per-turn movement marker.
 func movementUsedKey(pawnID string) string { return "move:" + pawnID }
@@ -122,6 +124,103 @@ func firstOpenSpace(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord
 		}
 	}
 	return ""
+}
+
+// SpaceRef names a gameplay space: the block cell it sits in plus the space id.
+type SpaceRef struct {
+	Coord   domain.Coord
+	SpaceID string
+}
+
+func sliceHas(xs []string, s string) bool {
+	for _, x := range xs {
+		if x == s {
+			return true
+		}
+	}
+	return false
+}
+
+// StepTargets lists the spaces a pawn on (coord, spaceID) may step to in one
+// step: intra-block neighbours (from space.neighbors), plus cross-edge boundary
+// hops into an adjacent block when both blocks encode boundarySpaces and the edge
+// is open. A space's `direction`, when set, restricts its cross-edge exit to that
+// single edge (the printed direction arrow). Order is deterministic.
+func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, spaceID string) []SpaceRef {
+	pb := cy.At(coord)
+	if pb == nil {
+		return nil
+	}
+	block, ok := gd.BlockByID(pb.BlockID)
+	if !ok {
+		return nil
+	}
+	sp := block.Space(spaceID)
+	if sp == nil {
+		return nil
+	}
+	var out []SpaceRef
+	for _, nb := range sp.Neighbors {
+		if block.Space(nb) != nil {
+			out = append(out, SpaceRef{coord, nb})
+		}
+	}
+	// Cross-edge hops. boundarySpaces and space.direction are indexed by the
+	// block's LOCAL edge; a local edge e faces grid direction (e + rotation) % 6.
+	if len(block.BoundarySpaces) == 6 && len(block.Edges) == 6 {
+		for e := 0; e < 6; e++ {
+			if !block.Edges[e] || !sliceHas(block.BoundarySpaces[e], spaceID) {
+				continue
+			}
+			if sp.Direction != nil && *sp.Direction != e {
+				continue // the printed arrow restricts exit to this local edge only
+			}
+			gridDir := (e + pb.Rotation) % 6
+			ncoord := coord.Neighbor(gridDir)
+			npb := cy.At(ncoord)
+			if npb == nil {
+				continue
+			}
+			nblock, ok := gd.BlockByID(npb.BlockID)
+			if !ok || len(nblock.BoundarySpaces) != 6 || len(nblock.Edges) != 6 {
+				continue
+			}
+			ne := ((domain.Opposite(gridDir)-npb.Rotation)%6 + 6) % 6 // neighbour's local edge facing back
+			if !nblock.Edges[ne] {
+				continue
+			}
+			for _, nsid := range nblock.BoundarySpaces[ne] {
+				out = append(out, SpaceRef{ncoord, nsid})
+			}
+		}
+	}
+	return out
+}
+
+// MoveStep moves a pawn one step to an adjacent space, validating that the target
+// is reachable (StepTargets) and has capacity (CanEndOn). It is the primitive the
+// step/d6/2d6 budget layer chains; it does no activation gating itself.
+func MoveStep(s *domain.GameState, gd *domain.GameData, pawnID string, target domain.Coord, targetSpaceID string) (*domain.PawnOnBoard, error) {
+	pob := s.Cybernet.PawnByID(pawnID)
+	if pob == nil {
+		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
+	}
+	reachable := false
+	for _, t := range StepTargets(gd, s.Cybernet, pob.Coord, pob.SpaceID) {
+		if t.Coord == target && t.SpaceID == targetSpaceID {
+			reachable = true
+			break
+		}
+	}
+	if !reachable {
+		return nil, fmt.Errorf("space %q at %v is not adjacent to pawn %q's space", targetSpaceID, target, pawnID)
+	}
+	if err := CanEndOn(gd, s.Cybernet, target, targetSpaceID, pawnID); err != nil {
+		return nil, err
+	}
+	pob.Coord = target
+	pob.SpaceID = targetSpaceID
+	return pob, nil
 }
 
 // MoveHex executes one block of hex movement for the pawn in grid direction dir.

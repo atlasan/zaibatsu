@@ -46,7 +46,7 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 | `modifier.kind = hand-size` (± max hand size) | ✅ | |
 | `modifier.kind = attack` (modify a Delete attack) | ✅ | |
 | **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ⛔(engine) | user-flagged; `ice` added to `space.modifier.kind`. Engine consumption is the paused follow-up. |
-| **`space.direction`** (a space allows movement only one way) | ✅(schema) / ⛔(engine, detect) | the printed direction arrow → `space.direction` (edge index 0–5) added to schema. No arrows on the base tiles, so detection is deferred; engine restriction is the paused follow-up. |
+| **`space.direction`** (a space allows movement only one way) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `StepTargets` restricts a space's **cross-edge** exit to the single local edge named by `direction` (tested). No arrows on the base tiles, so detection stays manual. |
 
 ### Board topology
 | Field | Status | Notes |
@@ -161,10 +161,17 @@ ability enables a pawn that lacks it and a removed one disables an innate abilit
 Reboot stays innate-only by design — its actor is eliminated, so its attachments
 are already discarded.
 
+**Intra-block step movement — landed (Go + TS, tested):** `StepTargets` builds the
+space-adjacency graph (intra-block `space.neighbors` + cross-edge `boundarySpaces`,
+honouring open `edges`, block `rotation`, and a space's `direction`); `MoveStep`
+executes one validated, capacity-checked hop. This is the foundation that lets a
+pawn be *on* a space — the prerequisite for space modifiers. (Cross-edge hops
+activate once blocks encode `boundarySpaces`; intra-block stepping works today.)
+
 **Remaining engine logic (not yet wired):**
-- `space.modifier.kind = ice`, `space.direction` enforcement, typed
-  `effects.underControl` dispatch, and `attach.effectText` are **loaded but not yet
-  applied** by engine rules. Next engine slice.
+- `space.modifier.kind = ice` (now *unblocked* — a pawn can be on a space — but its
+  ICE-adjust rule isn't applied yet), chaining `MoveStep` under the resolved step
+  budget, typed `effects.underControl` dispatch, and `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

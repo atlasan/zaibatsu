@@ -13,7 +13,7 @@
 // yet encode (schema extension tracked in tasks/BACKLOG.md). Until then the step
 // budget resolves, but only hex movement executes on the board.
 
-import { neighbor, type Coord, type Cybernet } from "../domain/hex.ts";
+import { neighbor, opposite, type Coord, type Cybernet } from "../domain/hex.ts";
 import { UNLIMITED, blockSpace, spaceCapacityFor, type PawnOnBoard } from "../domain/pawn_board.ts";
 import {
   blockById,
@@ -126,6 +126,85 @@ function firstOpenSpace(
     if (canEndOn(gd, cy, coord, sp.id, movingPawnId) === undefined) return sp.id;
   }
   return undefined;
+}
+
+/** A gameplay space: the block cell it sits in plus the space id. */
+export interface SpaceRef {
+  coord: Coord;
+  spaceId: string;
+}
+
+/**
+ * The spaces a pawn on (coord, spaceId) may step to in one step: intra-block
+ * neighbours (space.neighbors) plus cross-edge boundary hops into an adjacent
+ * block when both blocks encode boundarySpaces and the edge is open. A space's
+ * `direction`, when set, restricts its cross-edge exit to that single edge.
+ * boundarySpaces and direction are indexed by the block's LOCAL edge; a local
+ * edge e faces grid direction (e + rotation) % 6. Mirrors movement.go.
+ */
+export function stepTargets(
+  gd: GameData,
+  cy: Cybernet,
+  coord: Coord,
+  spaceId: string,
+): SpaceRef[] {
+  const pb = cy.at(coord);
+  if (!pb) return [];
+  const block = blockById(gd, pb.blockId);
+  if (!block) return [];
+  const sp = blockSpace(block, spaceId);
+  if (!sp) return [];
+  const out: SpaceRef[] = [];
+  for (const nb of sp.neighbors ?? []) {
+    if (blockSpace(block, nb)) out.push({ coord, spaceId: nb });
+  }
+  const edges = block.edges;
+  const bounds = block.boundarySpaces;
+  if (bounds && bounds.length === 6 && edges && edges.length === 6) {
+    for (let e = 0; e < 6; e++) {
+      if (!edges[e] || !(bounds[e] ?? []).includes(spaceId)) continue;
+      if (sp.direction !== undefined && sp.direction !== e) continue; // arrow restricts exit edge
+      const gridDir = (e + pb.rotation) % 6;
+      const ncoord = neighbor(coord, gridDir);
+      const npb = cy.at(ncoord);
+      if (!npb) continue;
+      const nblock = blockById(gd, npb.blockId);
+      if (!nblock?.boundarySpaces || nblock.boundarySpaces.length !== 6 || !nblock.edges || nblock.edges.length !== 6) {
+        continue;
+      }
+      const ne = ((opposite(gridDir) - npb.rotation) % 6 + 6) % 6; // neighbour's local edge facing back
+      if (!nblock.edges[ne]) continue;
+      for (const nsid of nblock.boundarySpaces[ne] ?? []) out.push({ coord: ncoord, spaceId: nsid });
+    }
+  }
+  return out;
+}
+
+/**
+ * Moves a pawn one step to an adjacent space, validating reachability
+ * (stepTargets) and capacity (canEndOn). The primitive the step/d6/2d6 budget
+ * chains; it does no activation gating. Throws on an illegal step.
+ */
+export function moveStep(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  target: Coord,
+  targetSpaceId: string,
+): PawnOnBoard {
+  const pob = s.cybernet.pawnById(pawnId);
+  if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
+  const reachable = stepTargets(gd, s.cybernet, pob.coord, pob.spaceId).some(
+    (t) => t.coord.q === target.q && t.coord.r === target.r && t.spaceId === targetSpaceId,
+  );
+  if (!reachable) {
+    throw new Error(`space "${targetSpaceId}" at (${target.q},${target.r}) is not adjacent to pawn "${pawnId}"'s space`);
+  }
+  const full = canEndOn(gd, s.cybernet, target, targetSpaceId, pawnId);
+  if (full) throw new Error(full);
+  pob.coord = target;
+  pob.spaceId = targetSpaceId;
+  return pob;
 }
 
 /**

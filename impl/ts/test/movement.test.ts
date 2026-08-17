@@ -9,9 +9,11 @@ import {
   canEndOn,
   movementUsedKey,
   moveHex,
+  moveStep,
   newGame,
   placeBlock,
   resolveSteps,
+  stepTargets,
 } from "../src/engine/index.ts";
 import type { Player, Pawn } from "../src/domain/types.ts";
 
@@ -166,5 +168,47 @@ describe("canEndOn", () => {
     expect(canEndOn(data, s.cybernet, target, "a", "ghost")).toBeUndefined();
     s.cybernet.placePawn({ pawnId: "g2", ownerId: "p2", coord: target, spaceId: "b" });
     expect(canEndOn(data, s.cybernet, target, "b", "newcomer")).toBeUndefined();
+  });
+});
+
+describe("moveStep (intra-block + capacity)", () => {
+  test("steps between neighbouring spaces; rejects non-adjacent and full", () => {
+    const s = game(1);
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, data, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+
+    moveStep(s, data, "speedrunner-red", coord, "b");
+    expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+    expect(() => moveStep(s, data, "speedrunner-red", coord, "zzz")).toThrow();
+
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord, spaceId: "a" });
+    expect(() => moveStep(s, data, "speedrunner-red", coord, "a")).toThrow();
+  });
+});
+
+describe("stepTargets (cross-edge + direction)", () => {
+  test("cross-edge hop respects rotation and a direction restriction", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    const dh = blockById(d, "data-haven")!;
+    dh.boundarySpaces = [["b"], [], [], [], [], []]; // local edge 0 -> space b
+    const c0: Coord = { q: 0, r: 0 };
+    const c1 = neighbor(c0, 0);
+    s.cybernet.blocks = [
+      { blockId: "data-haven", rotation: 0, coord: c0 },
+      { blockId: "data-haven", rotation: 3, coord: c1 },
+    ];
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: c0, spaceId: "b" });
+
+    const has = (c: Coord, id: string) =>
+      stepTargets(d, s.cybernet, c0, "b").some((t) => t.coord.q === c.q && t.coord.r === c.r && t.spaceId === id);
+    expect(has(c1, "b")).toBe(true);
+
+    dh.spaces!.find((sp) => sp.id === "b")!.direction = 2; // restrict exit to edge 2
+    expect(has(c1, "b")).toBe(false);
   });
 });

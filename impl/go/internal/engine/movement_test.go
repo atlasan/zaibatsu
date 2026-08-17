@@ -209,3 +209,68 @@ func TestCanEndOnCapacity(t *testing.T) {
 		t.Errorf("double space with one occupant should accept a newcomer: %v", err)
 	}
 }
+
+func TestMoveStepIntraBlockAndCapacity(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, gd, "data-haven", rotFacing(t, gd, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+
+	// a -> b is an intra-block neighbour step.
+	if _, err := MoveStep(s, gd, "speedrunner-red", coord, "b"); err != nil {
+		t.Fatalf("step a->b should succeed: %v", err)
+	}
+	if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
+		t.Errorf("pawn on %q, want b", got)
+	}
+	// stepping to a non-adjacent / unknown space is rejected.
+	if _, err := MoveStep(s, gd, "speedrunner-red", coord, "zzz"); err == nil {
+		t.Error("step to a non-adjacent space should fail")
+	}
+	// capacity: space a (cap 1) is now filled; stepping b->a is blocked.
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: coord, SpaceID: "a"})
+	if _, err := MoveStep(s, gd, "speedrunner-red", coord, "a"); err == nil {
+		t.Error("stepping onto a full space should fail")
+	}
+}
+
+func TestStepTargetsCrossEdgeAndDirection(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	dh, _ := gd.BlockByID("data-haven")
+	dh.BoundarySpaces = [][]string{{"b"}, {}, {}, {}, {}, {}} // local edge 0 -> space b
+	c0 := domain.Coord{Q: 0, R: 0}
+	c1 := c0.Neighbor(0)
+	// block1 rot 0 (local edge 0 faces grid dir 0); block2 rot 3 (its local edge 0
+	// faces grid dir 3 = Opposite(0), so the two boundary spaces meet).
+	s.Cybernet.Blocks = []*domain.PlacedBlock{
+		{BlockID: "data-haven", Rotation: 0, Coord: c0},
+		{BlockID: "data-haven", Rotation: 3, Coord: c1},
+	}
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: c0, SpaceID: "b"})
+
+	has := func(targets []SpaceRef, c domain.Coord, id string) bool {
+		for _, tt := range targets {
+			if tt.Coord == c && tt.SpaceID == id {
+				return true
+			}
+		}
+		return false
+	}
+	if !has(StepTargets(gd, s.Cybernet, c0, "b"), c1, "b") {
+		t.Fatal("expected cross-edge step c0.b -> c1.b")
+	}
+	// A direction arrow restricting exit to local edge 2 blocks the edge-0 hop.
+	two := 2
+	dh.Space("b").Direction = &two
+	if has(StepTargets(gd, s.Cybernet, c0, "b"), c1, "b") {
+		t.Error("direction restriction should block the cross-edge hop via edge 0")
+	}
+}
