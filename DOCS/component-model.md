@@ -168,10 +168,15 @@ executes one validated, capacity-checked hop. This is the foundation that lets a
 pawn be *on* a space — the prerequisite for space modifiers. (Cross-edge hops
 activate once blocks encode `boundarySpaces`; intra-block stepping works today.)
 
+Step-budget movement now **executes** on the board: `MoveSteps` (action
+`move-steps`) walks a declared path under the resolved `steps`/`d6`/`2d6` budget,
+passing occupied spaces and ending only where capacity permits (unused steps lost,
+SR-MOVE-002). Previously only whole-block `hex` movement executed.
+
 **Remaining engine logic (not yet wired):**
 - `space.modifier.kind = ice` (now *unblocked* — a pawn can be on a space — but its
-  ICE-adjust rule isn't applied yet), chaining `MoveStep` under the resolved step
-  budget, typed `effects.underControl` dispatch, and `attach.effectText`.
+  ICE-adjust rule isn't applied yet), typed `effects.underControl` dispatch, and
+  `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

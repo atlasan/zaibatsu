@@ -5,11 +5,13 @@ import { neighbor, opposite, type Coord } from "../src/domain/hex.ts";
 import { UNLIMITED, spaceCapacity, spaceCapacityFor } from "../src/domain/pawn_board.ts";
 import { newRng } from "../src/domain/rng.ts";
 import {
+  applyAction,
   canActivateMovement,
   canEndOn,
   movementUsedKey,
   moveHex,
   moveStep,
+  moveSteps,
   newGame,
   placeBlock,
   resolveSteps,
@@ -210,5 +212,39 @@ describe("stepTargets (cross-edge + direction)", () => {
 
     dh.spaces!.find((sp) => sp.id === "b")!.direction = 2; // restrict exit to edge 2
     expect(has(c1, "b")).toBe(false);
+  });
+});
+
+describe("moveSteps (budget + pass-through)", () => {
+  test("passes a full intermediate space, ends where capacity permits, respects budget", () => {
+    const s = game(1);
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, data, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "b" });
+    const pawn = data.pawns.find((p) => p.id === "speedrunner-red")!;
+    pawn.movement = { type: "steps", steps: 2, activation: "card" };
+
+    // A blocker fills space a (cap 1); the pawn passes through a and ends on b.
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord, spaceId: "a" });
+    moveSteps(s, data, "speedrunner-red", [{ coord, spaceId: "a" }, { coord, spaceId: "b" }]);
+    expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+
+    // A path longer than the budget is rejected.
+    pawn.movement.steps = 1;
+    expect(() => moveSteps(s, data, "speedrunner-red", [{ coord, spaceId: "a" }, { coord, spaceId: "b" }])).toThrow();
+  });
+
+  test("via the action reducer", () => {
+    const s = game(1);
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, data, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    data.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 1, activation: "card" };
+    applyAction(s, data, { type: "move-steps", pawnId: "speedrunner-red", path: [{ coord, spaceId: "b" }] });
+    expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
   });
 });

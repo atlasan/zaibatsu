@@ -274,3 +274,53 @@ func TestStepTargetsCrossEdgeAndDirection(t *testing.T) {
 		t.Error("direction restriction should block the cross-edge hop via edge 0")
 	}
 }
+
+func TestMoveStepsBudgetAndPassThrough(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, gd, "data-haven", rotFacing(t, gd, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "b"})
+	pawn, _ := gd.PawnByID("speedrunner-red")
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 2, Activation: "card"}
+
+	// A blocker fills space a (cap 1); the pawn PASSES THROUGH a and ends on b.
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: coord, SpaceID: "a"})
+	if _, err := MoveSteps(s, gd, "speedrunner-red", []SpaceRef{{coord, "a"}, {coord, "b"}}); err != nil {
+		t.Fatalf("passing a full intermediate and ending on b should succeed: %v", err)
+	}
+	if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
+		t.Errorf("pawn should end on b, got %q", got)
+	}
+	// A path longer than the budget is rejected.
+	pawn.Movement.Steps = 1
+	if _, err := MoveSteps(s, gd, "speedrunner-red", []SpaceRef{{coord, "a"}, {coord, "b"}}); err == nil {
+		t.Error("a path exceeding the movement budget should be rejected")
+	}
+}
+
+func TestMoveStepsViaActionReducer(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, gd, "data-haven", rotFacing(t, gd, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	pawn, _ := gd.PawnByID("speedrunner-red")
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 1, Activation: "card"}
+	if err := Apply(s, gd, Action{Type: ActMoveSteps, PawnID: "speedrunner-red", Path: []SpaceRef{{coord, "b"}}}); err != nil {
+		t.Fatalf("ActMoveSteps: %v", err)
+	}
+	if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
+		t.Errorf("pawn should be on b after the action, got %q", got)
+	}
+}

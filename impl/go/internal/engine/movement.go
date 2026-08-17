@@ -16,12 +16,13 @@ import (
 // hex movement (one whole block, ignoring spaces & space modifiers — the one
 // movement type the current data can resolve correctly).
 //
-// Space-to-space stepping is provided by StepTargets (the space-adjacency graph:
-// intra-block space.neighbors + cross-edge boundarySpaces, respecting open edges,
-// rotation, and a space's direction restriction) and MoveStep (one validated,
-// capacity-checked hop). Cross-edge hops activate once blocks encode
-// boundarySpaces; intra-block stepping works on the current neighbours data.
-// Chaining MoveStep under the resolved step budget is the remaining wiring.
+// Space-to-space stepping: StepTargets is the space-adjacency graph (intra-block
+// space.neighbors + cross-edge boundarySpaces, respecting open edges, rotation,
+// and a space's direction restriction); MoveStep is one validated, capacity-
+// checked hop; MoveSteps walks a declared path under the resolved step budget
+// (SR-MOVE-002: pass occupied spaces, end only where capacity permits, unused
+// steps lost). Cross-edge hops activate once blocks encode boundarySpaces;
+// intra-block stepping works on the current neighbours data.
 
 // movementUsedKey namespaces a pawn's once-per-turn movement marker.
 func movementUsedKey(pawnID string) string { return "move:" + pawnID }
@@ -220,6 +221,66 @@ func MoveStep(s *domain.GameState, gd *domain.GameData, pawnID string, target do
 	}
 	pob.Coord = target
 	pob.SpaceID = targetSpaceID
+	return pob, nil
+}
+
+// MoveSteps walks a pawn along a declared path of adjacent spaces, one space per
+// step, under its resolved step budget. Per SR-MOVE-002 a pawn MAY PASS occupied
+// spaces but MAY END only where capacity permits, and UNUSED STEPS ARE LOST — so
+// the path may be shorter than the budget but not longer, each hop must be
+// adjacent, and only the final space is capacity-checked. Gates activation and
+// records the once-per-turn marker. Hex movement uses MoveHex instead.
+func MoveSteps(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef) (*domain.PawnOnBoard, error) {
+	pob := s.Cybernet.PawnByID(pawnID)
+	if pob == nil {
+		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
+	}
+	pawn, ok := gd.PawnByID(pawnID)
+	if !ok {
+		return nil, fmt.Errorf("unknown pawn %q", pawnID)
+	}
+	if pawn.Movement.Type == "hex" {
+		return nil, fmt.Errorf("pawn %q has hex movement; use MoveHex", pawnID)
+	}
+	if len(path) == 0 {
+		return nil, fmt.Errorf("empty movement path")
+	}
+	owner := s.PlayerByID(pob.OwnerID)
+	if owner == nil {
+		return nil, fmt.Errorf("pawn %q has no controlling player", pawnID)
+	}
+	if err := CanActivateMovement(owner, pawn); err != nil {
+		return nil, err
+	}
+	// Validate the walk first (no RNG, no mutation): each hop adjacent, only the
+	// final space capacity-checked (may pass occupied spaces).
+	curCoord, curSpace := pob.Coord, pob.SpaceID
+	for i, step := range path {
+		reachable := false
+		for _, t := range StepTargets(gd, s.Cybernet, curCoord, curSpace) {
+			if t.Coord == step.Coord && t.SpaceID == step.SpaceID {
+				reachable = true
+				break
+			}
+		}
+		if !reachable {
+			return nil, fmt.Errorf("step %d to space %q is not adjacent", i+1, step.SpaceID)
+		}
+		if i == len(path)-1 {
+			if err := CanEndOn(gd, s.Cybernet, step.Coord, step.SpaceID, pawnID); err != nil {
+				return nil, err
+			}
+		}
+		curCoord, curSpace = step.Coord, step.SpaceID
+	}
+	// Then resolve the budget (d6/2d6 draw the RNG) and require the path to fit.
+	if budget := ResolveSteps(pawn.Movement, s.RNG, 0); len(path) > budget {
+		return nil, fmt.Errorf("path of %d steps exceeds the movement budget of %d", len(path), budget)
+	}
+	pob.Coord, pob.SpaceID = curCoord, curSpace
+	if pawn.Movement.Activation == "once-per-turn" {
+		owner.OncePerTurnUsed[movementUsedKey(pawnID)] = true
+	}
 	return pob, nil
 }
 

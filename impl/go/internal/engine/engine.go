@@ -24,6 +24,7 @@ const (
 	ActPass         ActionType = "pass"
 	ActPlaceMarker  ActionType = "place-marker" // direct marker placement (utility)
 	ActMoveHex      ActionType = "move-hex"
+	ActMoveSteps    ActionType = "move-steps"
 	ActDelete       ActionType = "delete"
 	ActDeleteMulti  ActionType = "delete-multi"
 	ActIcebreakBlk  ActionType = "icebreak-block"
@@ -50,6 +51,7 @@ type Action struct {
 	CardID        string        `json:"cardId,omitempty"`
 	CardIDs       []string      `json:"cardIds,omitempty"`
 	PawnID        string        `json:"pawnId,omitempty"` // acting pawn (attacker/actor/searcher/rebooted)
+	Path          []SpaceRef    `json:"path,omitempty"`   // declared space-to-space movement path
 	TargetID      string        `json:"targetId,omitempty"`
 	TargetIDs     []string      `json:"targetIds,omitempty"`
 	Coord         *domain.Coord `json:"coord,omitempty"`
@@ -304,6 +306,9 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 		return nil, nil
 	case ActMoveHex:
 		result, err := MoveHex(s, gd, a.PawnID, a.Dir)
+		return result, err
+	case ActMoveSteps:
+		result, err := MoveSteps(s, gd, a.PawnID, a.Path)
 		return result, err
 	case ActDelete:
 		result, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)

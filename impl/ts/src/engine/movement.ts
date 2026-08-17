@@ -208,6 +208,60 @@ export function moveStep(
 }
 
 /**
+ * Walks a pawn along a declared path of adjacent spaces under its resolved step
+ * budget. Per SR-MOVE-002 a pawn MAY PASS occupied spaces but MAY END only where
+ * capacity permits, and UNUSED STEPS ARE LOST: the path may be shorter than the
+ * budget but not longer, each hop must be adjacent, and only the final space is
+ * capacity-checked. Gates activation, records the once-per-turn marker. Hex
+ * movement uses moveHex. Throws on an illegal move. Mirrors movement.go.
+ */
+export function moveSteps(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  path: SpaceRef[],
+): PawnOnBoard {
+  const pob = s.cybernet.pawnById(pawnId);
+  if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
+  const pawn = pawnById(gd, pawnId);
+  if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
+  if (pawn.movement.type === "hex") throw new Error(`pawn "${pawnId}" has hex movement; use moveHex`);
+  if (path.length === 0) throw new Error("empty movement path");
+  const owner = playerById(s, pob.ownerId);
+  if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
+  const gate = canActivateMovement(owner, pawn);
+  if (gate) throw new Error(gate);
+  // Validate the walk first (no RNG, no mutation): each hop adjacent, only the
+  // final space capacity-checked (may pass occupied spaces).
+  let curCoord = pob.coord;
+  let curSpace = pob.spaceId;
+  for (let i = 0; i < path.length; i++) {
+    const step = path[i];
+    const reachable = stepTargets(gd, s.cybernet, curCoord, curSpace).some(
+      (t) => t.coord.q === step.coord.q && t.coord.r === step.coord.r && t.spaceId === step.spaceId,
+    );
+    if (!reachable) throw new Error(`step ${i + 1} to space "${step.spaceId}" is not adjacent`);
+    if (i === path.length - 1) {
+      const full = canEndOn(gd, s.cybernet, step.coord, step.spaceId, pawnId);
+      if (full) throw new Error(full);
+    }
+    curCoord = step.coord;
+    curSpace = step.spaceId;
+  }
+  // Then resolve the budget (d6/2d6 draw the RNG) and require the path to fit.
+  const budget = resolveSteps(pawn.movement, s.rng, 0);
+  if (path.length > budget) {
+    throw new Error(`path of ${path.length} steps exceeds the movement budget of ${budget}`);
+  }
+  pob.coord = curCoord;
+  pob.spaceId = curSpace;
+  if (pawn.movement.activation === "once-per-turn") {
+    owner.oncePerTurnUsed[movementUsedKey(pawnId)] = true;
+  }
+  return pob;
+}
+
+/**
  * Executes one block of hex movement for the pawn in grid direction dir. Hex
  * movement ignores spaces and space modifiers, so it does not require a
  * spaced-edge connection — only that a placed block exists in the target cell

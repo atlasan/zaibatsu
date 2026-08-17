@@ -16,7 +16,7 @@ import {
 } from "../domain/types.ts";
 
 import { checkWin } from "./win.ts";
-import { moveHex } from "./movement.ts";
+import { moveHex, moveSteps, type SpaceRef } from "./movement.ts";
 import { deleteAbility, deleteMulti } from "./combat.ts";
 import { icebreakBlock, icebreakPawn } from "./icebreaker.ts";
 import { reboot, search } from "./abilities.ts";
@@ -43,6 +43,7 @@ export type ActionType =
   | "pass"
   | "place-marker"
   | "move-hex"
+  | "move-steps"
   | "delete"
   | "delete-multi"
   | "icebreak-block"
@@ -69,6 +70,7 @@ export interface Action {
   cardId?: string;
   cardIds?: string[];
   pawnId?: string; // acting pawn (attacker/actor/searcher/rebooted)
+  path?: SpaceRef[]; // declared space-to-space movement path
   targetId?: string;
   targetIds?: string[];
   coord?: Coord;
@@ -275,6 +277,9 @@ function executeAction(s: GameState, gd: GameData, a: Action): unknown {
     }
     case "move-hex":
       moveHex(s, gd, a.pawnId!, a.dir ?? 0);
+      return;
+    case "move-steps":
+      moveSteps(s, gd, a.pawnId!, a.path ?? []);
       return;
     case "delete":
       deleteAbility(s, gd, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);

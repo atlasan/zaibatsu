@@ -72,6 +72,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Effective ability (attach grants/removes) | `engine.effectiveAbility(gd, pawn, atts, name)` | `effectiveAbility(gd, pawn, atts, name)` — removes win, else innate, else a granted card-activated ability |
 | Space adjacency graph | `engine.StepTargets(gd, cy, coord, spaceID)` | `stepTargets(gd, cy, coord, spaceId)` — intra-block neighbours + cross-edge boundary hops (rotation- and direction-aware) |
 | One validated step | `engine.MoveStep(s, gd, pawnID, coord, spaceID)` | `moveStep(s, gd, pawnId, coord, spaceId)` — reachability + capacity checked |
+| Path move under budget | `engine.MoveSteps(s, gd, pawnID, path)` / action `move-steps` | `moveSteps(s, gd, pawnId, path)` / action `"move-steps"` — pass occupied, end where capacity permits, unused steps lost |
 | Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
 | Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
 | Search ability | `engine.Search(...)` | `search(...)` |
