@@ -70,11 +70,29 @@ export interface Space {
   location?: SpaceLocation;
   footprint?: SpaceFootprint;
   modifier?: SpaceModifier;
+  /** Directional restriction: a pawn may only exit toward this edge (0=top, clockwise). */
+  direction?: number;
 }
 
+/** A block effect: a bare source effect-id (legacy) or a typed action. */
+export type BlockEffect =
+  | string
+  | {
+    kind:
+      | "gain-control-card"
+      | "place-pawn"
+      | "area-attack"
+      | "all-players"
+      | "modify-ice"
+      | "custom";
+    amount?: number;
+    target?: string;
+    text?: string;
+  };
+
 export interface BlockEffects {
-  inCybernet?: string;
-  underControl?: string;
+  inCybernet?: BlockEffect;
+  underControl?: BlockEffect;
 }
 
 export interface Block {
@@ -85,6 +103,10 @@ export interface Block {
   layoutId?: "standard-seven-zone-2-3-2-pointy";
   isCentralCore?: boolean;
   iceValue?: IceValue;
+  /** Specific 1-6 die faces a successful Icebreak must match; overrides iceValue derivation. */
+  iceFaces?: number[];
+  /** A failed Icebreak against a Black-ICE block eliminates the attacker. */
+  blackIce?: boolean;
   edges?: boolean[];
   /** Derived from each open entrance's mapped ring zone; it is not hand-authored. */
   boundarySpaces?: string[][];
@@ -127,7 +149,14 @@ export interface Pawn {
 export interface Attach {
   as: "pawn" | "enemy" | "block";
   slot?: SlotType;
+  /** Target class restriction: the classes this card may attach to. */
   class?: string[];
+  /** Abilities this attachment gives its target. */
+  grants?: AbilityName[];
+  /** Abilities this attachment strips from its target (the cross-marked badge). */
+  removes?: AbilityName[];
+  /** Special on-attach effect text, e.g. "Gain control of this pawn." */
+  effectText?: string;
   cost?: number;
 }
 

@@ -39,6 +39,15 @@ func IceFaces(ice domain.IceValue) []int {
 	}
 }
 
+// iceFacesFor prefers the target's authored exact faces; it falls back to the
+// canonical category faces when no exact faces are present.
+func iceFacesFor(faces []int, ice domain.IceValue) []int {
+	if len(faces) > 0 {
+		return faces
+	}
+	return IceFaces(ice)
+}
+
 // IcebreakResult reports the outcome of an Icebreak attempt.
 type IcebreakResult struct {
 	Roll               []int `json:"roll"`
@@ -106,8 +115,8 @@ func markIcebreakerUsed(gd *domain.GameData, owner *domain.Player, attackerID st
 
 // resolveBlackIceFailure eliminates the attacker if the target had Black ICE and
 // the attempt failed. Returns whether the attacker was eliminated.
-func resolveBlackIceFailure(s *domain.GameState, ice domain.IceValue, attackerID string, success bool) bool {
-	if !success && ice == domain.IceBlack {
+func resolveBlackIceFailure(s *domain.GameState, isBlack bool, attackerID string, success bool) bool {
+	if !success && isBlack {
 		eliminatePawn(s, attackerID)
 		return true
 	}
@@ -132,7 +141,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 	if !ok {
 		return res, fmt.Errorf("unknown block %q", pb.BlockID)
 	}
-	faces := IceFaces(blockDef.IceValue)
+	faces := iceFacesFor(blockDef.IceFaces, blockDef.IceValue)
 	if len(faces) == 0 {
 		return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
 	}
@@ -157,7 +166,8 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 		owner.ControlMarkersPlaced++
 		checkWin(s)
 	} else {
-		res.AttackerEliminated = resolveBlackIceFailure(s, blockDef.IceValue, attackerID, res.Success)
+		isBlack := blockDef.IceValue == domain.IceBlack || blockDef.BlackIce
+		res.AttackerEliminated = resolveBlackIceFailure(s, isBlack, attackerID, res.Success)
 	}
 
 	markIcebreakerUsed(gd, owner, attackerID)
@@ -202,7 +212,7 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 		discardAttachments(s, tgtPob)
 		tgtPob.OwnerID = owner.ID
 	} else {
-		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue, attackerID, res.Success)
+		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue == domain.IceBlack, attackerID, res.Success)
 	}
 
 	markIcebreakerUsed(gd, owner, attackerID)

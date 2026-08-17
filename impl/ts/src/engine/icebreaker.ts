@@ -44,6 +44,11 @@ export function iceFaces(ice: IceValue | undefined): number[] {
   }
 }
 
+/** Prefers the target's authored exact faces; falls back to the category faces. */
+function iceFacesFor(faces: number[] | undefined, ice: IceValue | undefined): number[] {
+  return faces && faces.length > 0 ? faces : iceFaces(ice);
+}
+
 export interface IcebreakResult {
   roll: number[];
   success: boolean;
@@ -96,11 +101,11 @@ function markIcebreakerUsed(gd: GameData, owner: Player, attackerId: string): vo
 
 function resolveBlackIceFailure(
   s: GameState,
-  ice: IceValue | undefined,
+  isBlack: boolean,
   attackerId: string,
   success: boolean,
 ): boolean {
-  if (!success && ice === "black") {
+  if (!success && isBlack) {
     eliminatePawn(s, attackerId);
     return true;
   }
@@ -123,7 +128,7 @@ export function icebreakBlock(
   if (!pb) throw new Error(`no block at (${coord.q},${coord.r})`);
   const blockDef = blockById(gd, pb.blockId);
   if (!blockDef) throw new Error(`unknown block "${pb.blockId}"`);
-  const faces = iceFaces(blockDef.iceValue);
+  const faces = iceFacesFor(blockDef.iceFaces, blockDef.iceValue);
   if (faces.length === 0) {
     throw new Error(`block "${pb.blockId}" has no ICE value and cannot be controlled`);
   }
@@ -147,7 +152,8 @@ export function icebreakBlock(
     owner.controlMarkersPlaced++;
     checkWin(s);
   } else {
-    attackerEliminated = resolveBlackIceFailure(s, blockDef.iceValue, attackerId, success);
+    const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true;
+    attackerEliminated = resolveBlackIceFailure(s, isBlack, attackerId, success);
   }
 
   markIcebreakerUsed(gd, owner, attackerId);
@@ -189,7 +195,7 @@ export function icebreakPawn(
     discardAttachments(s, tgtPob);
     tgtPob.ownerId = owner.id;
   } else {
-    attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue, attackerId, success);
+    attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue === "black", attackerId, success);
   }
 
   markIcebreakerUsed(gd, owner, attackerId);

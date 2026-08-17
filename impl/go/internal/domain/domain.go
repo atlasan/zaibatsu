@@ -4,6 +4,7 @@
 package domain
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -111,12 +112,43 @@ type Space struct {
 	Location     *SpaceLocation  `json:"location,omitempty"`
 	Footprint    *SpaceFootprint `json:"footprint,omitempty"`
 	Modifier     *SpaceModifier  `json:"modifier,omitempty"`
+	// Direction restricts pawn exit to a single edge (0=top, clockwise); nil = unrestricted.
+	Direction *int `json:"direction,omitempty"`
 }
 
-// BlockEffects holds effect ids fired at placement / on gaining control.
+// BlockEffect is a block effect: a bare source effect-id (legacy string form) or
+// a typed action (kind + optional amount/target/text). It round-trips back to a
+// bare string when only the id is set, keeping existing data byte-identical.
+type BlockEffect struct {
+	ID     string `json:"-"`
+	Kind   string `json:"kind,omitempty"`
+	Amount int    `json:"amount,omitempty"`
+	Target string `json:"target,omitempty"`
+	Text   string `json:"text,omitempty"`
+}
+
+func (e *BlockEffect) UnmarshalJSON(b []byte) error {
+	b = bytes.TrimSpace(b)
+	if len(b) > 0 && b[0] == '"' {
+		return json.Unmarshal(b, &e.ID)
+	}
+	type raw BlockEffect
+	return json.Unmarshal(b, (*raw)(e))
+}
+
+func (e BlockEffect) MarshalJSON() ([]byte, error) {
+	if e.Kind == "" {
+		return json.Marshal(e.ID)
+	}
+	type raw BlockEffect
+	return json.Marshal(raw(e))
+}
+
+// BlockEffects holds effects fired at placement / on gaining control. Each is a
+// legacy effect-id string or a typed BlockEffect.
 type BlockEffects struct {
-	InCybernet   string `json:"inCybernet,omitempty"`
-	UnderControl string `json:"underControl,omitempty"`
+	InCybernet   *BlockEffect `json:"inCybernet,omitempty"`
+	UnderControl *BlockEffect `json:"underControl,omitempty"`
 }
 
 // Block is a hexagonal Cybernet tile.
@@ -127,7 +159,12 @@ type Block struct {
 	LayoutID      string    `json:"layoutId,omitempty"`
 	IsCentralCore bool      `json:"isCentralCore,omitempty"`
 	IceValue      IceValue  `json:"iceValue,omitempty"`
-	Edges         []bool    `json:"edges,omitempty"`
+	// IceFaces are the specific 1-6 die faces a successful Icebreak must match.
+	// When present the engine uses these instead of deriving from IceValue.
+	IceFaces []int `json:"iceFaces,omitempty"`
+	// BlackIce marks a block whose failed Icebreak eliminates the attacker.
+	BlackIce bool   `json:"blackIce,omitempty"`
+	Edges    []bool `json:"edges,omitempty"`
 	// BoundarySpaces is derived from each open entrance's mapped ring zone; it is not hand-authored.
 	BoundarySpaces [][]string   `json:"boundarySpaces,omitempty"`
 	BonusFragments int          `json:"bonusFragments,omitempty"`
@@ -170,12 +207,16 @@ type Pawn struct {
 	Provisional bool         `json:"provisional,omitempty"`
 }
 
-// Attach describes how an action card may attach to a game element.
+// Attach describes how an action card may attach to a game element, and what it
+// confers on the target (grants/removes abilities, plus a special effect text).
 type Attach struct {
-	As    string   `json:"as"`
-	Slot  string   `json:"slot,omitempty"`
-	Class []string `json:"class,omitempty"`
-	Cost  int      `json:"cost,omitempty"`
+	As         string   `json:"as"`
+	Slot       string   `json:"slot,omitempty"`
+	Class      []string `json:"class,omitempty"`
+	Grants     []string `json:"grants,omitempty"`
+	Removes    []string `json:"removes,omitempty"`
+	EffectText string   `json:"effectText,omitempty"`
+	Cost       int      `json:"cost,omitempty"`
 }
 
 // ActionCard is a multi-use card from the shared action deck.
