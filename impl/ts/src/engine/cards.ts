@@ -1,6 +1,6 @@
 // Action-card use resolution: playing cards from hand to drive the core
 // abilities. Mirrors impl/go/internal/engine/cards.go. See
-// DOCS/rules/speedrunners.md ("Action cards — ways to use an action card").
+// DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-CARD-001").
 //
 // An action card is multi-use; one use is chosen per play. This layer covers the
 // ability-activation uses:

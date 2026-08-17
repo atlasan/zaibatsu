@@ -1,6 +1,6 @@
 // The remaining two core abilities: Search (place a block from the pile) and
 // Reboot (re-enter an eliminated pawn at the Central Core). Mirrors
-// impl/go/internal/engine/abilities.go. See DOCS/rules/speedrunners.md ("Search
+// impl/go/internal/engine/abilities.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // ability", "Reboot ability"). Backlog: T-104.
 //
 // Search draws the TOP of the block pile (the player chooses only where/

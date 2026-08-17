@@ -2,12 +2,11 @@
 
 ## Outcome
 
-Build a local-first editor for Zaibatsu source-derived game data. The first
-usable slice is a **block editor**: it opens a selected cut block sprite beside
-its structured record, supports guided transcription and geometry annotation,
-validates the draft, and exports an explicit JSON patch for review. It must run
-without either engine and never mutate canonical game data without an explicit
-export action.
+Build a local-first editor for Zaibatsu source-derived game data. The implemented
+surfaces are a **block editor** and an **action-card editor**: each opens a
+selected source crop beside a structured draft, validates it, and exports an
+explicit review patch. They run without either engine and never mutate canonical
+game data without an explicit export action.
 
 The same workspace later manages action/control cards, pawns, markers, threats,
 missions, Chaos material, and modes.
@@ -91,7 +90,7 @@ session; export a JSON patch only after validation.
 | 1 - block MVP | Standalone local UI, asset browser, form editor, session save | **Implemented:** a block draft can be created, reopened, validated and exported |
 | 2 - block geometry | Hex canvas, six entrances, bonus corners, and source-positioned spaces | **Implemented for print layout:** a source-aligned, scrollable pointy-hex canvas renders the standardized 2-3-2 internal placement hexes, entrance/corner order, 1-N space-to-zone assignments, source-facing display shapes, and inferred candidate space adjacency. Runtime step movement remains a source-transcription and engine follow-up. |
 | 3 - source workflow | Provenance locator forms, review report, draft/verified gating | Reviewer can trace every exported field to source evidence |
-| 4 - generic resources | Card/pawn/marker schemas and list/canvas plug-ins | One shared editor shell manages all core resource types |
+| 4 - generic resources | **Action-card MVP implemented**; add pawn/marker schemas and shared plug-ins | One shared editor shell manages all core resource types |
 | 5 - import helpers | Optional OCR/image-assisted suggestions | Suggestions remain draft-only and require confirmation |
 
 ## Export contract
@@ -120,9 +119,13 @@ transcription.
 - Exports a stable patch/report and detects changed target data.
 - Has keyboard-first save/validate/export controls and clear validation
   messages; image-only editing is never the sole source of game data.
+- The action-card surface browses both English decks, creates source-linked card
+  drafts, validates them independently of blocks, and exports review-only
+  patches/reports.
 
 ## Delivery order
 
-Start with Phase 0, then implement Phase 1 as a self-contained tool branch.
-Do not add block records to the Go/TypeScript engines until the exported data
-has passed the existing source/provenance review.
+The block and action-card MVPs are complete. Next, finish source-review gates,
+add pawn/marker resource plug-ins, and keep exported patches review-only. Do
+not add records to the Go/TypeScript engines until exported data has passed the
+existing source/provenance review.

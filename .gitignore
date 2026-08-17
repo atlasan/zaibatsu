@@ -15,6 +15,10 @@ Desktop.ini
 SortMe/
 ShadowRaiders/
 SpeedRunners/
+!DOCS/rules/shadowraiders/
+!DOCS/rules/shadowraiders/**
+!DOCS/rules/speedrunners/
+!DOCS/rules/speedrunners/**
 *.rar
 *.pdf
 

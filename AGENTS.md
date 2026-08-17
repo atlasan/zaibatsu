@@ -1,56 +1,51 @@
 # Working in the Zaibatsu repo
 
-Instructions for humans and agents contributing here. Read this before touching
-code. It is deliberately short; the detail lives in `DOCS/`.
+Read this before touching code. Detailed design and documentation policy live in
+`DOCS/`.
 
-## The prime directive: the two implementations mirror each other
+## The prime directive: two mirror implementations
 
-`impl/go/` and `impl/ts/` are **the same engine in two languages**. A change to
-one is incomplete until the other matches. "Match" means: same domain concepts,
-same engine phases, same behavior, same test intent — expressed idiomatically
-(PascalCase exported identifiers in Go; camelCase in TS). The mapping is the
-[parity contract](DOCS/parity.md); update it when you add a concept.
-
-Never let the two drift silently. If you must land them separately, record the
-gap in `tasks/BACKLOG.md` and mark the lagging side in `DOCS/parity.md`.
+`impl/go/` and `impl/ts/` are the same engine in two languages. A change to one
+is incomplete until the other matches in domain concepts, engine phases,
+behavior, and test intent. Use idiomatic identifiers, keep the mapping current
+in [the parity contract](DOCS/parity.md), and record an exceptional temporary
+gap in both `tasks/BACKLOG.md` and `DOCS/parity.md`.
 
 ## Rules live as data, not code
 
-Game content — blocks, pawns, action cards, missions, threats — is **data** in
-`spec/data/`, validated by JSON Schema in `spec/schema/`. Both implementations
-load the *same* files. When you encode new game content:
+Game content belongs in `spec/data/`, validated by `spec/schema/`; both mirrors
+load the same files. For new content: extend the schema, update data, update
+both loaders/domain models, then update `DOCS/domain-model.md` and
+`DOCS/parity.md`. Provisional data is marked `"provisional": true` and tracked
+in `tasks/BACKLOG.md`.
 
-1. Extend the schema first (`spec/schema/*.schema.json`).
-2. Add/adjust the data (`spec/data/**`).
-3. Update the loader + domain types in **both** impls.
-4. Update `DOCS/domain-model.md` and `DOCS/parity.md`.
+## Rule authority
 
-Provisional data (not yet transcribed exactly from the PDFs) is marked with
-`"provisional": true` and must be flagged in `tasks/BACKLOG.md`.
-
-## Source of truth for rules
-
-The rulebooks are the authority. Digests live in `DOCS/rules/speedrunners.md`
-and `DOCS/rules/shadowraiders.md`. When a rule is ambiguous in the PDF, write
-down the interpretation you chose and *why* in the digest — don't bury it in
-code.
+Primary rulebooks are authoritative. Stable game landing pages live at
+`DOCS/rules/speedrunners.md` and `DOCS/rules/shadowraiders.md`; their topic
+modules carry stable rule IDs, source locators, and maturity. Document an
+ambiguous interpretation and its rationale in the relevant module, never only
+in code. `DOCS/governance.md` defines authority and required updates.
 
 ## Workflow
 
-- **Docs**: design decisions → `DOCS/`. Keep `DOCS/domain-model.md` the single
-  canonical description of the model both impls follow.
-- **Memory**: durable project decisions/context → a file in `MEMORIES/`, indexed
-  in `MEMORIES/INDEX.md`. One fact per file. See `MEMORIES/INDEX.md` for format.
-- **Tasks**: `tasks/BACKLOG.md` is the ordered work list. Pull from the top;
-  add discovered work at the right priority.
-- **Tests**: every engine behavior has a test in *both* languages. `go test ./...`
-  and `bun test` must both stay green.
+- **Docs:** design decisions and canonical explanations live in `DOCS/`. Keep
+  `DOCS/domain-model.md` as the shared model description. Register new authored
+  docs in `DOCS/registry.json`; ADRs and generated transcripts retain their own
+  established formats.
+- **Memory:** durable operating facts live one-per-file in `MEMORIES/` and are
+  indexed by `MEMORIES/INDEX.md`.
+- **Tasks:** `tasks/BACKLOG.md` is the ordered live work list.
+- **Tests:** every engine behavior has a test in both mirrors. Run `go test
+  ./...` and `bun test`, plus `bun tools/validate-docs.ts`, `bun
+  tools/verify-artifacts.ts`, and `bun tools/validate-spec.ts` for applicable
+  documentation, source, schema, or content changes.
 
 ## Conventions
 
-- Go module: see `impl/go/go.mod`. Package layout under `internal/`.
-- TS: Bun runtime, ESM, strict TypeScript, no runtime dependencies in `core`.
-- No external runtime dependencies in the core engine on either side — the core
-  must stay portable to future targets (web, native, WASM, simulation).
-- Determinism: all randomness (dice, shuffles) goes through an injectable RNG so
-  games are reproducible from a seed. Never call a global random source directly.
+- Go module: see `impl/go/go.mod`; packages live under `internal/`.
+- TypeScript: Bun, ESM, strict TypeScript, and no runtime dependencies in core.
+- The core engine has no external runtime dependencies so it remains portable to
+  web, native, WASM, and simulation targets.
+- All randomness uses the injectable seeded RNG. Never call a global random
+  source directly.

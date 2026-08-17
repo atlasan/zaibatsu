@@ -3,12 +3,12 @@
 import { createHash } from "node:crypto";
 import {
   existsSync,
-  lstatSync,
   readFileSync,
   readdirSync,
   statSync,
 } from "node:fs";
-import { dirname, extname, join, relative, resolve } from "node:path";
+import { extname, join, relative, resolve } from "node:path";
+import { markdownFiles, validateMarkdownLinks } from "./docs-lib.ts";
 
 interface SourceAsset {
   id: string;
@@ -56,27 +56,9 @@ function toRepoPath(path: string): string {
 }
 
 function checkMarkdownLinks(): void {
-  const roots = ["README.md", "AGENTS.md", "DOCS", "MEMORIES", "spec", "tasks"];
-  const files = roots.flatMap((item) => {
-    const path = join(root, item);
-    if (!existsSync(path)) return [];
-    return lstatSync(path).isDirectory() ? walk(path) : [path];
-  }).filter((path) => path.endsWith(".md") && !toRepoPath(path).startsWith("DOCS/Original/"));
-
-  const pattern = /\[[^\]]+\]\(([^)\s]+)(?:\s+["'][^)]*["'])?\)/g;
-  for (const file of files) {
-    const text = readFileSync(file, "utf8");
-    for (const match of text.matchAll(pattern)) {
-      const raw = match[1]!;
-      if (raw.startsWith("#") || raw.startsWith("http:") || raw.startsWith("https:")
-        || raw.startsWith("mailto:")) continue;
-      const target = raw.split("#", 1)[0]!;
-      const resolved = resolve(dirname(file), target);
-      if (!existsSync(resolved)) {
-        fail(`${toRepoPath(file)} links to missing ${raw}`);
-      }
-    }
-  }
+  const files = markdownFiles(root, ["README.md", "AGENTS.md", "DOCS", "MEMORIES", "spec", "tasks"])
+    .filter((path) => !toRepoPath(path).startsWith("DOCS/Original/"));
+  for (const error of validateMarkdownLinks(root, files)) fail(error);
 }
 
 function checkCatalog(): void {

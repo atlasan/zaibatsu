@@ -13,6 +13,7 @@ original source -> transcript / rules digest / ADR -> schema -> data + provenanc
 
 | Artifact | Owner / location | Required before it advances |
 |----------|------------------|-----------------------------|
+| Documentation policy | `DOCS/governance.md`, `DOCS/registry.json` | registered class/owner/authority; structural validation passes |
 | Original source | ignored `DOCS/Original/`; cataloged in `DOCS/artifacts/` | catalog id, SHA-256, edition/language, authority and role |
 | Transcript derivative | `DOCS/rules/transcripts/` | cataloged source artifact, page identity, reviewer-visible extracted text |
 | Rule fact or ambiguity | `DOCS/rules/` | source id + locator; interpretations state rationale |
@@ -45,6 +46,9 @@ original source -> transcript / rules digest / ADR -> schema -> data + provenanc
 7. Close a task only when its linked source, docs, schema/data, knowledge
    catalog, both mirrors,
    and tests are current. Update its status in the same commit.
+8. Register new authored documentation in `DOCS/registry.json`; rule modules
+   require stable IDs, source locators, applicability, and maturity. Run
+   `bun tools/validate-docs.ts` before review.
 
 ## Decision and memory policy
 
@@ -52,6 +56,13 @@ An ADR is the canonical record for a material, durable architectural decision.
 Use a new ADR for decisions that constrain future design, data shape, behavior,
 or delivery. A memory is a short operational fact for people and agents;
 decision memories link to their ADR and do not replace it.
+
+## Documentation ownership
+
+`DOCS/roadmap.md` owns phase outcomes, `tasks/BACKLOG.md` owns ordered live
+status, `DOCS/parity.md` owns mirror evidence, and workstream plans own detailed
+implementation gates only. See `DOCS/governance.md` for the full precedence and
+review policy; do not duplicate live task status into a design document.
 
 ## Source handling
 

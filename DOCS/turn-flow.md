@@ -59,9 +59,15 @@ A pawn may pass through occupied spaces but may only *end* on a space with free
 capacity (double/special/pawn spaces allow sharing). Steps not used are lost;
 no other action may interleave between steps of one movement.
 
-## Bootstrap slice note
+## Current implementation boundary
 
-The current engine implements the phase machine, start-of-turn marker clearing,
-hand refill, control-marker placement, and win detection. Full resolution of
-Search/Delete/Reboot/Icebreaker, card-use choice, and tile placement/adjacency
-is scaffolded and tracked in `tasks/BACKLOG.md`.
+Both mirrors implement the phase machine, marker clearing, hand refill,
+control-marker placement and win detection, along with legal block placement,
+Search/Delete/Reboot/Icebreaker resolution, attachment targets, and the unified
+action reducer. Step budgets and whole-hex movement also resolve
+deterministically.
+
+Space-to-space step traversal, bonus-icon economy, applied attachment effects,
+exact per-component ICE faces, and the Shadowraiders rules remain incomplete.
+Their live status and dependencies belong in `tasks/BACKLOG.md` and
+`DOCS/parity.md`.

@@ -164,7 +164,7 @@ _Planned:_ attached cards and placed counters on the board.
 - Default max hand size: **5**.
 - Opening hand deal is asymmetric (starting player gets fewer). The exact table
   is transcribed provisionally as p1→3, p2→4, p3→5, p4→6; see
-  `DOCS/rules/speedrunners.md`. After turn 1 everyone draws to max normally.
+  `DOCS/rules/speedrunners/setup-and-victory.md` (`SR-SETUP-003`). After turn 1 everyone draws to max normally.
 
 ## Win condition
 

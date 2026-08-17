@@ -1,6 +1,6 @@
 // Movement resolution: step budgets, activation gating, occupancy, and hex
 // (block-to-block) execution. Mirrors impl/go/internal/engine/movement.go. See
-// DOCS/rules/speedrunners.md ("Movement") and DOCS/domain-model.md.
+// DOCS/rules/speedrunners/board-and-movement.md ("SR-MOVE-001") and DOCS/domain-model.md.
 //
 // SCOPE (Phase 1): pawn positions, space occupancy, the numeric step budget for
 // every movement type (fixed / d6 / 2d6 / hex) including modifiers, activation

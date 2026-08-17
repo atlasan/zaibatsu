@@ -7,7 +7,7 @@ import (
 )
 
 // Icebreaker: gain control of a block or pawn that has an ICE value. Mirrors
-// impl/ts/src/engine/icebreaker.ts. See DOCS/rules/speedrunners.md ("Icebreaker
+// impl/ts/src/engine/icebreaker.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // ability", "Black ICE"). Backlog: T-104.
 //
 // Roll a d6 (plus any roll-modifier dice); if any die matches one of the target's

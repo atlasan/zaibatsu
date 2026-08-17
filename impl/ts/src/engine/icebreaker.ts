@@ -1,5 +1,5 @@
 // Icebreaker: gain control of a block or pawn that has an ICE value. Mirrors
-// impl/go/internal/engine/icebreaker.go. See DOCS/rules/speedrunners.md
+// impl/go/internal/engine/icebreaker.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Icebreaker ability", "Black ICE"). Backlog: T-104.
 //
 // Roll a d6 (plus any roll-modifier dice); if any die matches one of the target's

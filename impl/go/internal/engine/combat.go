@@ -7,7 +7,7 @@ import (
 )
 
 // Combat: attack rolls, the Delete ability, and pawn elimination. Mirrors
-// impl/ts/src/engine/combat.ts. See DOCS/rules/speedrunners.md ("Attacking a
+// impl/ts/src/engine/combat.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // pawn", "Delete ability", "Eliminating a pawn"). Backlog: T-104.
 //
 // SCOPE: single-target Delete. A pawn's Delete rolls one d6 per skull; if any die

@@ -7,7 +7,7 @@ import (
 )
 
 // Block placement in the Cybernet (the Search ability's effect). Mirrors
-// impl/ts/src/engine/placement.ts. See DOCS/rules/speedrunners.md ("Placing a
+// impl/ts/src/engine/placement.ts. See DOCS/rules/speedrunners/board-and-movement.md ("SR-BOARD-002
 // block") and DOCS/domain-model.md.
 //
 // Placement rules (Speedrunners p.15), applied relative to a reference block

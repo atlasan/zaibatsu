@@ -1,13 +1,13 @@
 // Pawn positions and space occupancy on the Cybernet. Mirrors
 // impl/go/internal/domain/pawn_board.go. See DOCS/domain-model.md and
-// DOCS/rules/speedrunners.md ("Spaces", "Movement").
+// DOCS/rules/speedrunners/board-and-movement.md ("SR-BOARD-001", "SR-MOVE-002").
 
 import type { Block, Space } from "./types.ts";
 import type { Coord } from "./hex.ts";
 
 /**
  * An action card attached to a pawn or block, occupying a slot and optionally
- * holding bonus counters paid to attach it. See DOCS/rules/speedrunners.md
+ * holding bonus counters paid to attach it. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
  * ("Attaching cards").
  */
 export interface Attachment {

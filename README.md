@@ -1,55 +1,38 @@
 # ZAIBATSU
 
-A digital, data-driven re-implementation of **Zaibatsu** — the print-and-play
-cyberpunk board game by Froylan Rutiaga (art by KoTdeSigN & Froylan Rutiaga),
-originally released under the Creative Commons Attribution-NonCommercial 2.5
-Mexico license.
+Zaibatsu is a digital, data-driven re-implementation of the print-and-play
+cyberpunk board game by Froylan Rutiaga. Players are rival megacorporations
+building the Cybernet, controlling pawns, and racing to place their control
+markers. The original game remains under its CC BY-NC 2.5 MX license.
 
-Zaibatsu is a tile-laying / area-control game set on the **Cybernet**: players
-are rival megacorporations ("Zaibatsu") deploying pawns to explore a growing
-hex board of **information blocks** and race to plant all their **control
-markers**. This repository turns that tabletop system into a reusable software
-engine, plus its expansions and game modes.
-
-> **Upstream games** (the source of truth for rules and components):
-> - **Zaibatsu Speedrunners** — the base game / core engine.
-> - **Zaibatsu Shadowraiders** — expansion adding threats, missions, medals,
->   stealth, and four new game modes (Shadowraiders, Chaos, Outbreak, Total War).
-
----
+Speedrunners is the base game. Shadowraiders extends it with threats, missions,
+medals, stealth, and additional modes.
 
 ## Repository shape
 
-This is an umbrella workspace with **one language-neutral specification** and
-**two mirror implementations** that are kept in structural lockstep.
+This workspace has one language-neutral specification and two independently
+implemented, behaviorally mirrored engines.
 
-| Path         | What it is |
-|--------------|------------|
-| `spec/`      | **Single source of truth.** JSON Schemas (`spec/schema/`) + shared game data (`spec/data/`) consumed by *both* implementations. Rules live here as data, not code. |
-| `spec/knowledge/` | Machine-readable catalog joining data, provenance, assets, docs, tags, and relations. |
-| `impl/go/`   | Go mirror of the engine. |
-| `impl/ts/`   | TypeScript / Bun mirror of the engine. |
-| `DOCS/`      | Design docs: architecture, domain model, turn flow, glossary, parity contract, roadmap, and per-game rules digests. |
-| `MEMORIES/`  | Project memory — durable decisions and context, indexed by `MEMORIES/INDEX.md`. |
-| `tasks/`     | Prioritized work backlog (`tasks/BACKLOG.md`). |
-| `AGENTS.md`  | Instructions for humans and agents working in this repo. |
+| Path | What it is |
+|---|---|
+| `spec/` | Shared JSON Schema, game data, provenance, assets, and knowledge catalog. |
+| `impl/go/` | Go mirror of the engine. |
+| `impl/ts/` | TypeScript/Bun mirror of the engine. |
+| `DOCS/` | Governed design record. Start at [DOCS/INDEX.md](DOCS/INDEX.md). |
+| `MEMORIES/` | Durable project context, indexed by `MEMORIES/INDEX.md`. |
+| `tasks/` | Ordered live delivery backlog. |
+| `AGENTS.md` | Contributor and agent rules. |
 
-The two implementations are **mirrors**: same domain model, same engine phases,
-same test intent, expressed idiomatically in each language. The
-[parity contract](DOCS/parity.md) is what keeps them honest.
+The mirrors share `spec/`, not code. The [parity contract](DOCS/parity.md)
+records their required structural and behavioral equivalence.
 
-The original PDFs and print archives (`ShadowRaiders/`, `SpeedRunners/`,
-`SortMe/`) are kept locally for reference but are **not** tracked in git — their
-*transcribed* content lives under `spec/`.
-
-For a repo-wide content view, start with `spec/knowledge/` for machine-readable
-catalog data and `DOCS/knowledge/` for the human guide to that catalog.
-
----
+Original PDFs and print archives are local reference material and are not
+committed. Their identities, checksums, transcripts, and source links are
+tracked through the documentation and provenance workflow.
 
 ## Quick start
 
-**Go:**
+**Go**
 
 ```bash
 cd impl/go
@@ -57,7 +40,7 @@ go test ./...
 go run ./cmd/zaibatsu
 ```
 
-**TypeScript (Bun):**
+**TypeScript**
 
 ```bash
 cd impl/ts
@@ -66,22 +49,27 @@ bun test
 bun run src/index.ts
 ```
 
-Both entry points run a demo Speedrunners game to completion using the shared
-data in `spec/data/`.
+## Documentation and verification
 
----
+For implementation, rules transcription, and content tooling, start from
+[the documentation index](DOCS/INDEX.md). The Speedrunners provisional core is
+implemented in both mirrors: setup, turn phases, placement, core abilities,
+control changes, attachments, snapshots, and golden scenarios. Source-backed
+component transcription, space-to-space movement, applied attachment effects,
+bonus economy, and Shadowraiders remain in progress.
 
-## Status
+Use [the parity contract](DOCS/parity.md) for mirror evidence and
+[the backlog](tasks/BACKLOG.md) for live delivery status. For relevant changes,
+run:
 
-Bootstrap: **core slice.** Domain types, a shared-data loader, and a working
-turn loop (setup → begin/action/recycle/end phases → win detection) exist and
-are tested in both languages. Card/block/pawn *effect resolution* and the
-Shadowraiders expansion are scaffolded but not yet implemented — see
-[`DOCS/roadmap.md`](DOCS/roadmap.md) and [`tasks/BACKLOG.md`](tasks/BACKLOG.md).
+```bash
+bun tools/validate-docs.ts
+bun tools/verify-artifacts.ts
+bun tools/validate-spec.ts
+```
 
 ## License
 
-Engine code in this repository: see `LICENSE` (TBD). The underlying Zaibatsu
-game, its rules, names, and artwork remain the property of their creators under
-the original CC BY-NC 2.5 MX license; this project is a non-commercial
-re-implementation and pays that forward.
+Engine-code licensing is tracked in `tasks/BACKLOG.md`. The underlying game,
+rules, names, and artwork remain the property of their creators under the
+original CC BY-NC 2.5 MX license.

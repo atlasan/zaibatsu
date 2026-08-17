@@ -19,3 +19,4 @@ immutable once accepted except for status and links to a superseding ADR.
 | [0001](0001-mirror-implementations.md) | accepted | Go and TypeScript are independent mirrors over one shared specification |
 | [0002](0002-data-driven-game-rules.md) | accepted | Game content is declarative shared data, not engine code |
 | [0003](0003-seeded-determinism.md) | accepted | All game randomness uses the shared seeded RNG protocol |
+| [0004](0004-documentation-governance.md) | accepted | Govern documentation through a registry and structured ruleset |

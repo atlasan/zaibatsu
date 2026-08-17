@@ -1,5 +1,5 @@
 // Block placement in the Cybernet (the Search ability's effect). Mirrors
-// impl/go/internal/engine/placement.go. See DOCS/rules/speedrunners.md ("Placing
+// impl/go/internal/engine/placement.go. See DOCS/rules/speedrunners/board-and-movement.md ("SR-BOARD-002
 // a block") and DOCS/domain-model.md.
 //
 // Placement rules (Speedrunners p.15), applied relative to a reference block

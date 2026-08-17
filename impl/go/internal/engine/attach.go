@@ -7,7 +7,7 @@ import (
 )
 
 // Card attachment: attaching action cards to pawns, enemy pawns, and blocks.
-// Mirrors impl/ts/src/engine/attach.ts. See DOCS/rules/speedrunners.md
+// Mirrors impl/ts/src/engine/attach.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Attaching cards", "Pawn attachment cards"). Backlog: card attachment.
 //
 // A card with an `attach` spec attaches to the element kind it names

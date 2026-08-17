@@ -26,6 +26,10 @@ interface CatalogEntry {
   };
 }
 interface Relation { type: string; from: string; to: string; locator?: string; note?: string; }
+interface DocumentationRegistry {
+  registryVersion: number;
+  documents: Array<{ path: string; title: string; class: string }>;
+}
 
 const root = resolve(import.meta.dir, "..");
 const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
@@ -41,6 +45,13 @@ const entryId = (kind: string, localId: string): string => `${kind}/${localId.to
 const taxonomy = readJson<TaxonomyFile>(join(root, "spec/knowledge/taxonomy.json"));
 const allowedTags = new Set(taxonomy.tags.map((item) => item.tag));
 const allowedRelations = new Set(taxonomy.relationTypes.map((item) => item.type));
+const documentationRegistry = readJson<DocumentationRegistry>(join(root, "DOCS/registry.json"));
+if (documentationRegistry.registryVersion !== 1) throw new Error("DOCS/registry.json must declare registryVersion 1");
+const registeredDocs = documentationRegistry.documents;
+const ruleDocs = {
+  speedrunners: registeredDocs.filter((document) => document.path.startsWith("DOCS/rules/speedrunners/")).map((document) => document.path),
+  shadowraiders: registeredDocs.filter((document) => document.path.startsWith("DOCS/rules/shadowraiders/")).map((document) => document.path),
+};
 
 const transcriptPaths = [
   "DOCS/rules/transcripts/README.md",
@@ -52,20 +63,6 @@ const transcriptPaths = [
   "DOCS/rules/transcripts/speedrunners-components.es.md",
   "DOCS/rules/transcripts/shadowraiders-components.en.md",
   "DOCS/rules/transcripts/shadowraiders-components.es.md",
-];
-
-const docPaths = [
-  "README.md",
-  "DOCS/knowledge/INDEX.md",
-  "DOCS/knowledge/catalog.md",
-  "DOCS/domain-model.md",
-  "DOCS/lifecycle.md",
-  "DOCS/artifacts/README.md",
-  "DOCS/artifacts/toolset.md",
-  "DOCS/rules/speedrunners.md",
-  "DOCS/rules/shadowraiders.md",
-  "DOCS/block-editor-plan.md",
-  ...transcriptPaths,
 ];
 
 const inventory = readJson<Json>(join(root, "spec/inventory.json"));
@@ -147,8 +144,8 @@ function sourceDocs(artifactId: string, role: string): string[] {
 
 function contentDocs(kind: string, expansion: "speedrunners" | "shadowraiders" | "shared"): string[] {
   const docs = ["README.md", "DOCS/knowledge/INDEX.md", "DOCS/knowledge/catalog.md", "DOCS/domain-model.md"];
-  if (expansion === "speedrunners") docs.push("DOCS/rules/speedrunners.md");
-  if (expansion === "shadowraiders") docs.push("DOCS/rules/shadowraiders.md");
+  if (expansion === "speedrunners") docs.push("DOCS/rules/speedrunners.md", ...ruleDocs.speedrunners);
+  if (expansion === "shadowraiders") docs.push("DOCS/rules/shadowraiders.md", ...ruleDocs.shadowraiders);
   if (expansion === "speedrunners") docs.push("DOCS/rules/transcripts/speedrunners-rulebook.en.md", "DOCS/rules/transcripts/speedrunners-rulebook.es.md", "DOCS/rules/transcripts/speedrunners-components.en.md", "DOCS/rules/transcripts/speedrunners-components.es.md");
   if (expansion === "shadowraiders") docs.push("DOCS/rules/transcripts/shadowraiders-rulebook.en.md", "DOCS/rules/transcripts/shadowraiders-rulebook.es.md", "DOCS/rules/transcripts/shadowraiders-components.en.md", "DOCS/rules/transcripts/shadowraiders-components.es.md");
   if (kind === "block" || kind === "action-card") docs.push("DOCS/block-editor-plan.md");
@@ -169,14 +166,7 @@ function resourceTag(kind: string): string {
 
 for (const [path, title] of [
   ["README.md", "Repository overview"],
-  ["DOCS/knowledge/INDEX.md", "Knowledge base index"],
-  ["DOCS/knowledge/catalog.md", "Component and mode catalog"],
-  ["DOCS/domain-model.md", "Domain model"],
-  ["DOCS/lifecycle.md", "Artifact lifecycle"],
-  ["DOCS/artifacts/README.md", "Source and rights policy"],
-  ["DOCS/artifacts/toolset.md", "Artifact toolset"],
-  ["DOCS/rules/speedrunners.md", "Speedrunners rules digest"],
-  ["DOCS/rules/shadowraiders.md", "Shadowraiders rules digest"],
+  ...registeredDocs.map((document) => [document.path, document.title] as const),
   ["DOCS/rules/transcripts/README.md", "Rule transcript guide"],
   ["DOCS/rules/transcripts/speedrunners-rulebook.en.md", "Speedrunners English rulebook transcript"],
   ["DOCS/rules/transcripts/speedrunners-rulebook.es.md", "Speedrunners Spanish rulebook transcript"],
@@ -186,7 +176,6 @@ for (const [path, title] of [
   ["DOCS/rules/transcripts/speedrunners-components.es.md", "Speedrunners Spanish component transcript"],
   ["DOCS/rules/transcripts/shadowraiders-components.en.md", "Shadowraiders English component transcript"],
   ["DOCS/rules/transcripts/shadowraiders-components.es.md", "Shadowraiders Spanish component transcript"],
-  ["DOCS/block-editor-plan.md", "Block and card editor plan"],
 ] as const) {
   addDocEntry(path, title);
 }

@@ -7,7 +7,7 @@ import (
 )
 
 // Action-card use resolution: playing cards from hand to drive the core
-// abilities. Mirrors impl/ts/src/engine/cards.ts. See DOCS/rules/speedrunners.md
+// abilities. Mirrors impl/ts/src/engine/cards.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Action cards — ways to use an action card"). Backlog: card-use resolution.
 //
 // An action card is multi-use; one use is chosen per play. This layer covers the

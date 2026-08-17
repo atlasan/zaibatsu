@@ -1461,6 +1461,26 @@
     {
       "type": "documented-by",
       "from": "action-card/accela-accelerator",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accela-accelerator",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1511,6 +1531,26 @@
     {
       "type": "documented-by",
       "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/accelerator-transgenic-therapy",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1561,6 +1601,26 @@
     {
       "type": "documented-by",
       "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/add-on-accelerator",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1611,6 +1671,26 @@
     {
       "type": "documented-by",
       "from": "action-card/armor-brainchip",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/armor-brainchip",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1661,6 +1741,26 @@
     {
       "type": "documented-by",
       "from": "action-card/biochip",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/biochip",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1711,6 +1811,26 @@
     {
       "type": "documented-by",
       "from": "action-card/cracker",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/cracker",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1761,6 +1881,26 @@
     {
       "type": "documented-by",
       "from": "action-card/dj",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dj",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1811,6 +1951,26 @@
     {
       "type": "documented-by",
       "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/e-synapse-neural-interface",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1861,6 +2021,26 @@
     {
       "type": "documented-by",
       "from": "action-card/enemy-malware",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/enemy-malware",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1911,6 +2091,26 @@
     {
       "type": "documented-by",
       "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hyper-accelerator",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -1961,6 +2161,26 @@
     {
       "type": "documented-by",
       "from": "action-card/move-1",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-1",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -2011,6 +2231,26 @@
     {
       "type": "documented-by",
       "from": "action-card/move-2",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-2",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -2061,6 +2301,26 @@
     {
       "type": "documented-by",
       "from": "action-card/move-3",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/move-3",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -2111,6 +2371,26 @@
     {
       "type": "documented-by",
       "from": "action-card/octagon-dex",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/octagon-dex",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -2161,6 +2441,26 @@
     {
       "type": "documented-by",
       "from": "action-card/simstim-record",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/simstim-record",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -2207,6 +2507,26 @@
       "type": "documented-by",
       "from": "action-card/weapon-gunhed",
       "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/weapon-gunhed",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
     },
     {
       "type": "documented-by",
@@ -3911,6 +4231,26 @@
     {
       "type": "documented-by",
       "from": "block/black-market",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-market",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -3961,6 +4301,26 @@
     {
       "type": "documented-by",
       "from": "block/central-core",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/central-core",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4011,6 +4371,26 @@
     {
       "type": "documented-by",
       "from": "block/chiba-city",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/chiba-city",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4061,6 +4441,26 @@
     {
       "type": "documented-by",
       "from": "block/data-haven",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/data-haven",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4111,6 +4511,26 @@
     {
       "type": "documented-by",
       "from": "block/firewall-node",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/firewall-node",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4161,6 +4581,26 @@
     {
       "type": "documented-by",
       "from": "block/hacktivism",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/hacktivism",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4211,6 +4651,26 @@
     {
       "type": "documented-by",
       "from": "block/idoru",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/idoru",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4261,6 +4721,26 @@
     {
       "type": "documented-by",
       "from": "block/server-farm",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/server-farm",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4306,6 +4786,26 @@
     {
       "type": "documented-by",
       "from": "mode/speedrunners",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4351,6 +4851,26 @@
     {
       "type": "documented-by",
       "from": "pawn/drone-turret",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-turret",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4396,6 +4916,26 @@
     {
       "type": "documented-by",
       "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/merc-cyberninja",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4441,6 +4981,26 @@
     {
       "type": "documented-by",
       "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-blue",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4486,6 +5046,26 @@
     {
       "type": "documented-by",
       "from": "pawn/speedrunner-green",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-green",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4531,6 +5111,26 @@
     {
       "type": "documented-by",
       "from": "pawn/speedrunner-red",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-red",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
@@ -4572,6 +5172,26 @@
       "type": "documented-by",
       "from": "pawn/speedrunner-yellow",
       "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/speedrunner-yellow",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
     },
     {
       "type": "documented-by",

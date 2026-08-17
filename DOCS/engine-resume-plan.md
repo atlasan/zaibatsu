@@ -72,5 +72,7 @@ before committing (the usual cross-check).
   golden/demo parity on every change.
 
 ## State at pause
-- Commits through `fbb3433` (golden-game harness). Working tree clean, all green.
-- Backlog: [`tasks/BACKLOG.md`](../tasks/BACKLOG.md). Parity: [`parity.md`](parity.md).
+
+This is a workstream guide, not a live status record. Check
+[`tasks/BACKLOG.md`](../tasks/BACKLOG.md) for ordered work and
+[`parity.md`](parity.md) for current mirror coverage before resuming an item.

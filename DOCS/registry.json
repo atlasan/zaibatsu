@@ -1,0 +1,36 @@
+{
+  "registryVersion": 1,
+  "exemptPrefixes": [
+    "DOCS/adr/",
+    "DOCS/rules/transcripts/"
+  ],
+  "documents": [
+    {"id":"docs-index","path":"DOCS/INDEX.md","title":"Documentation index","class":"index","canonical":true,"owner":"documentation","authority":"policy","relatedArtifacts":["DOCS/governance.md"]},
+    {"id":"docs-governance","path":"DOCS/governance.md","title":"Documentation governance","class":"governance","canonical":true,"owner":"documentation","authority":"policy","relatedArtifacts":["DOCS/registry.json","tools/validate-docs.ts"]},
+    {"id":"architecture","path":"DOCS/architecture.md","title":"Architecture","class":"architecture","canonical":true,"owner":"engine","authority":"derived","relatedArtifacts":["DOCS/domain-model.md","DOCS/parity.md"]},
+    {"id":"domain-model","path":"DOCS/domain-model.md","title":"Domain model","class":"model","canonical":true,"owner":"engine","authority":"derived","relatedArtifacts":["spec/schema","spec/data","DOCS/parity.md"]},
+    {"id":"turn-flow","path":"DOCS/turn-flow.md","title":"Turn flow","class":"model","canonical":true,"owner":"engine","authority":"derived","relatedArtifacts":["DOCS/rules/speedrunners.md","DOCS/parity.md"]},
+    {"id":"glossary","path":"DOCS/glossary.md","title":"Glossary","class":"model","canonical":true,"owner":"engine","authority":"derived","relatedArtifacts":["DOCS/domain-model.md"]},
+    {"id":"parity","path":"DOCS/parity.md","title":"Parity contract","class":"contract","canonical":true,"owner":"engine","authority":"derived","relatedArtifacts":["impl/go","impl/ts","golden"]},
+    {"id":"lifecycle","path":"DOCS/lifecycle.md","title":"Development artifact lifecycle","class":"workflow","canonical":true,"owner":"delivery","authority":"policy","relatedArtifacts":["tasks/BACKLOG.md","DOCS/governance.md"]},
+    {"id":"roadmap","path":"DOCS/roadmap.md","title":"Roadmap","class":"plan","canonical":true,"owner":"delivery","authority":"derived","relatedArtifacts":["tasks/BACKLOG.md"]},
+    {"id":"engine-resume","path":"DOCS/engine-resume-plan.md","title":"Engine resume plan (paused pending Phase-2 content)","class":"workstream","canonical":false,"owner":"engine","authority":"derived","relatedArtifacts":["tasks/BACKLOG.md","DOCS/parity.md"]},
+    {"id":"block-editor-plan","path":"DOCS/block-editor-plan.md","title":"Standalone game-data editor plan","class":"workstream","canonical":false,"owner":"content-tool","authority":"derived","relatedArtifacts":["tools/block-editor","spec/editor"]},
+    {"id":"knowledge-index","path":"DOCS/knowledge/INDEX.md","title":"Zaibatsu knowledge base","class":"catalog","canonical":true,"owner":"sources","authority":"derived","relatedArtifacts":["spec/knowledge"]},
+    {"id":"knowledge-catalog","path":"DOCS/knowledge/catalog.md","title":"Component and mode catalog","class":"catalog","canonical":true,"owner":"sources","authority":"derived","relatedArtifacts":["spec/knowledge/catalog.json","spec/knowledge/relations.json"]},
+    {"id":"artifacts-readme","path":"DOCS/artifacts/README.md","title":"Source artifacts","class":"source-guide","canonical":true,"owner":"sources","authority":"derived","relatedArtifacts":["DOCS/artifacts/source-catalog.json"]},
+    {"id":"artifacts-coverage","path":"DOCS/artifacts/coverage.md","title":"Source coverage assessment","class":"source-guide","canonical":false,"owner":"sources","authority":"derived","relatedArtifacts":["DOCS/artifacts/source-catalog.json"]},
+    {"id":"artifacts-toolset","path":"DOCS/artifacts/toolset.md","title":"Artifact toolset","class":"source-guide","canonical":true,"owner":"sources","authority":"derived","relatedArtifacts":["tools/artifacts","tools/ruletext"]},
+    {"id":"artifacts-traceability","path":"DOCS/artifacts/traceability.md","title":"Initial traceability matrix","class":"workflow","canonical":false,"owner":"delivery","authority":"derived","relatedArtifacts":["tasks/BACKLOG.md","DOCS/lifecycle.md"]},
+    {"id":"rules-index","path":"DOCS/rules/README.md","title":"Structured rulesets","class":"ruleset","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["DOCS/governance.md","DOCS/artifacts/source-catalog.json"]},
+    {"id":"rules-speedrunners","path":"DOCS/rules/speedrunners.md","title":"Rules digest — Zaibatsu Speedrunners (base game)","class":"ruleset","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["DOCS/rules/speedrunners","spec/provenance/speedrunners.json"]},
+    {"id":"rules-speedrunners-setup","path":"DOCS/rules/speedrunners/setup-and-victory.md","title":"Speedrunners rules — setup and victory","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sp-en-rulebook","spec/data/speedrunners/mode.json"]},
+    {"id":"rules-speedrunners-turns","path":"DOCS/rules/speedrunners/turns-and-actions.md","title":"Speedrunners rules — turns and actions","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sp-en-rulebook","DOCS/turn-flow.md"]},
+    {"id":"rules-speedrunners-board","path":"DOCS/rules/speedrunners/board-and-movement.md","title":"Speedrunners rules — board and movement","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sp-en-rulebook","DOCS/domain-model.md"]},
+    {"id":"rules-speedrunners-pawns","path":"DOCS/rules/speedrunners/pawns-abilities-and-cards.md","title":"Speedrunners rules — pawns, abilities, and cards","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sp-en-rulebook","DOCS/domain-model.md"]},
+    {"id":"rules-shadowraiders","path":"DOCS/rules/shadowraiders.md","title":"Rules digest — Zaibatsu Shadowraiders (expansion)","class":"ruleset","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["DOCS/rules/shadowraiders","spec/provenance/shadowraiders.json"]},
+    {"id":"rules-shadowraiders-setup","path":"DOCS/rules/shadowraiders/setup-and-components.md","title":"Shadowraiders rules — setup and components","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sh-en-rulebook","spec/provenance/shadowraiders.json"]},
+    {"id":"rules-shadowraiders-threats","path":"DOCS/rules/shadowraiders/pawns-threats-and-combat.md","title":"Shadowraiders rules — pawns, threats, and combat","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sh-en-rulebook","tasks/BACKLOG.md"]},
+    {"id":"rules-shadowraiders-missions","path":"DOCS/rules/shadowraiders/missions-modes-and-symbology.md","title":"Shadowraiders rules — missions, modes, and symbology","class":"rule-module","canonical":true,"owner":"rules","authority":"derived","relatedArtifacts":["sh-en-rulebook","spec/data/shadowraiders"]}
+  ]
+}

@@ -1,36 +1,56 @@
 # Documentation index
 
-This directory is the maintained design record for the engine. Read this index
-before changing a cross-cutting rule or artifact.
+`DOCS/` is Zaibatsu's maintained design record. Start from the path that matches
+your work, then update the canonical artifact that owns the fact rather than
+copying status into a second document.
 
-| Area | Canonical artifact | Purpose |
-|------|--------------------|---------|
-| Architecture | [architecture.md](architecture.md) | Layering and dependency direction |
-| Domain | [domain-model.md](domain-model.md), [glossary.md](glossary.md) | Shared engine language and model |
-| Rules | [rules/](rules/), [rules/transcripts/](rules/transcripts/) | Implementable digests plus tracked rule/component transcripts |
-| Mirror contract | [parity.md](parity.md) | Go/TypeScript structural and behavioral parity |
-| Delivery plan | [roadmap.md](roadmap.md), [../tasks/BACKLOG.md](../tasks/BACKLOG.md) | Phases and ordered work |
-| Lifecycle | [lifecycle.md](lifecycle.md) | Required evidence from source to shipped behavior |
-| Decisions | [adr/](adr/) | Long-lived architecture decisions |
-| Sources and audit | [artifacts/](artifacts/) | Ignored-original catalog and coverage record |
-| Content editor | [block-editor-plan.md](block-editor-plan.md) | Standalone source-linked content-authoring plan |
+## Start by role
 
-The local upstream assets live under `DOCS/Original/`. They are deliberately
-ignored by Git; their identities and checksums are recorded in
-[artifacts/source-catalog.json](artifacts/source-catalog.json), not the assets
-themselves.
+| If you are… | Start here | Then use |
+|---|---|---|
+| Contributing to the engine | [architecture](architecture.md) and [domain model](domain-model.md) | [parity contract](parity.md), [turn flow](turn-flow.md), and [governance](governance.md) |
+| Transcribing or interpreting rules | [structured rulesets](rules/README.md) | the game landing page, transcripts, provenance, and [lifecycle](lifecycle.md) |
+| Implementing a Go/TS mirror change | [parity contract](parity.md) | the affected rules module, `spec/`, and `tasks/BACKLOG.md` |
+| Maintaining content tools | [block-editor plan](block-editor-plan.md) | [artifacts](artifacts/README.md), [knowledge guide](knowledge/INDEX.md), and [governance](governance.md) |
 
-Tracked transcript derivatives live under
-[rules/transcripts/](rules/transcripts/). They remain source-linked review
-artifacts, not canonical gameplay data.
+## Canonical document map
 
-## Status vocabulary
+| Area | Owner | Canonical artifact | Purpose |
+|---|---|---|---|
+| Documentation policy | documentation | [governance.md](governance.md) | classes, authority, ownership, and required updates |
+| Architecture | engine | [architecture.md](architecture.md) | layers and dependency direction |
+| Domain | engine | [domain-model.md](domain-model.md), [glossary.md](glossary.md) | shared engine language and model |
+| Rules | rules | [rules/](rules/) | sourced, topic-based implementable rules |
+| Mirror contract | engine | [parity.md](parity.md) | Go/TypeScript structural and behavioral parity |
+| Delivery | delivery | [roadmap.md](roadmap.md), [../tasks/BACKLOG.md](../tasks/BACKLOG.md) | phase outcomes and ordered live work |
+| Lifecycle | delivery | [lifecycle.md](lifecycle.md) | required evidence from source to shipped behavior |
+| Decisions | engine | [adr/](adr/) | accepted, durable architecture and delivery decisions |
+| Sources and audit | sources | [artifacts/](artifacts/) | source catalog, rights, and artifact workflow |
+| Knowledge catalog | sources | [knowledge/](knowledge/) | human guide to machine-readable cross-references |
 
-- **authoritative** — primary upstream evidence, usually a rulebook or component sheet.
-- **derived** — a digest, schema, data record, or behavior based on evidence.
-- **provisional** — intentionally incomplete or inferred; never treat as canonical.
-- **implemented** — represented and tested in both mirrors.
-- **verified** — checked against its linked source and recorded evidence.
+## Precedence and status
 
-See [lifecycle.md](lifecycle.md) for the required transitions and review
-checklists.
+The source of truth order is primary source, accepted ADR, verified `spec/`
+content shape, canonical document, then a workstream plan/backlog item. Only a
+primary source or accepted ADR establishes a new rule or durable decision.
+
+- **authoritative** — primary upstream evidence.
+- **derived** — documentation, schema, data, or behavior based on evidence.
+- **provisional** — incomplete or inferred; never canonical gameplay content.
+- **source-verified** — checked against a cited primary source.
+- **implemented** — present and tested in both mirrors.
+- **partial** / **planned** — incomplete engine coverage; consult parity and backlog.
+
+Full definitions and review obligations are in [governance.md](governance.md).
+
+## Workstream context
+
+These are useful detailed guides, but do not own live project status:
+
+- [Engine resume plan](engine-resume-plan.md)
+- [Standalone game-data editor plan](block-editor-plan.md)
+
+Original upstream assets are ignored under `DOCS/Original/`; their identities
+and checksums are cataloged in
+[artifacts/source-catalog.json](artifacts/source-catalog.json). Tracked
+transcripts are review artifacts, not canonical gameplay data.

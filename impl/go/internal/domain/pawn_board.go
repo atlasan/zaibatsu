@@ -2,10 +2,10 @@ package domain
 
 // Pawn positions and space occupancy on the Cybernet. Mirrors
 // impl/ts/src/domain/pawn_board.ts. See DOCS/domain-model.md and
-// DOCS/rules/speedrunners.md ("Spaces", "Movement").
+// DOCS/rules/speedrunners/board-and-movement.md ("SR-BOARD-001", "SR-MOVE-002").
 
 // Attachment is an action card attached to a pawn or block, occupying a slot and
-// optionally holding bonus counters paid to attach it. See DOCS/rules/speedrunners.md
+// optionally holding bonus counters paid to attach it. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Attaching cards").
 type Attachment struct {
 	CardID    string `json:"cardId"`
