@@ -265,6 +265,30 @@ def detect_spaces(bgr: np.ndarray, alpha, center, inr: int) -> list[Space]:
         kept.append(normalized)
         if len(kept) >= 7:
             break
+    # The centre zone (h1) is usually the block name / effect text, not a cell.
+    # Only keep an h1-only space when it is backed by a strong, near-complete
+    # white ring — this removes the common centre false positive.
+    kept = [s for s in kept if s.suggestedZoneIds != ["h1"]
+            or _ring_whiteness(white, cx + s.x * inr, cy + s.y * inr, s.r * inr) >= 0.62]
+    # Completion pass: an outer ring zone with a clear white cell outline that
+    # Hough missed is recovered here (the outer ring is usually a full cell ring).
+    covered = {z for s in kept for z in s.suggestedZoneIds}
+    for zid in ("h2", "h3", "h4", "h5", "h6", "h7"):
+        if zid in covered:
+            continue
+        nx, ny = STANDARD_ZONE_ANCHORS[zid]
+        ax, ay = cx + nx * inr, cy + ny * inr
+        best, best_r = 0.0, inr * 0.25
+        for ox in (-0.10, 0.0, 0.10):
+            for oy in (-0.10, 0.0, 0.10):
+                for rr in np.linspace(0.16, 0.38, 6) * inr:
+                    wr = _ring_whiteness(white, ax + ox * inr, ay + oy * inr, rr)
+                    if wr > best:
+                        best, best_r = wr, rr
+        if best >= 0.5:
+            sp = Space(x=nx, y=ny, r=round(best_r / inr, 4), kind="space")
+            sp.suggestedZoneIds, sp.suggestionConfidence = [zid], round(best, 3)
+            kept.append(sp)
     return kept
 
 
