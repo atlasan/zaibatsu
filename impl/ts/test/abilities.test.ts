@@ -102,3 +102,16 @@ describe("reboot", () => {
     expect(() => reboot(s, data, "drone-turret", "p1")).toThrow();
   });
 });
+
+describe("ability removal via attachment", () => {
+  test("an attachment that removes Search blocks it", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.blockPile = ["data-haven"];
+    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["search"] };
+    s.cybernet.pawnById("speedrunner-red")!.attachments = [{ cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 }];
+    expect(() => search(s, d, "speedrunner-red", 2, rotFacing("data-haven", 2))).toThrow();
+  });
+});

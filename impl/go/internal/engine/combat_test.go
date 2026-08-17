@@ -156,3 +156,16 @@ func TestDeleteDeterministicRoll(t *testing.T) {
 		}
 	}
 }
+
+func TestDeleteRemovedByAttachment(t *testing.T) {
+	// drone-turret has innate Delete; an attachment that removes it blocks Delete.
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 3})
+	origin := domain.Coord{Q: 0, R: 0}
+	placeTwoPawns(s, origin, "drone-turret", "speedrunner-yellow", "p1")
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", Removes: []string{"delete"}}
+	s.Cybernet.PawnByID("drone-turret").Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if _, err := Delete(s, gd, "drone-turret", "speedrunner-yellow", 0); err == nil {
+		t.Error("an attachment that removes Delete should block the attack")
+	}
+}

@@ -12,7 +12,7 @@
 import { type Coord, type PlacedBlock } from "../domain/hex.ts";
 import { blockById, pawnById, type GameData, type GameState } from "../domain/types.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
-import { abilityUsedKey, findAbility } from "./combat.ts";
+import { abilityUsedKey, effectiveAbility, findAbility } from "./combat.ts";
 import { canPlace, placeBlock, validPlacements, type Placement } from "./placement.ts";
 
 /** The id of the block currently on top of the pile, or undefined. */
@@ -50,7 +50,7 @@ export function search(
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
   const actor = pawnById(gd, pawnId);
   if (!actor) throw new Error(`unknown pawn "${pawnId}"`);
-  const ability = findAbility(actor, "search");
+  const ability = effectiveAbility(gd, actor, pob.attachments, "search");
   if (!ability || ability.activation === "none") {
     throw new Error(`pawn "${pawnId}" cannot activate Search`);
   }
@@ -98,6 +98,8 @@ export function reboot(
   if (idx < 0) throw new Error(`pawn "${pawnId}" is not eliminated`);
   const actor = pawnById(gd, pawnId);
   if (!actor) throw new Error(`unknown pawn "${pawnId}"`);
+  // Innate only: the pawn is eliminated, so its attachments were already
+  // discarded and cannot grant Reboot.
   const ability = findAbility(actor, "reboot");
   if (!ability || ability.activation === "none") {
     throw new Error(`pawn "${pawnId}" cannot activate Reboot`);

@@ -125,7 +125,7 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
 	}
 
-	ability := findAbility(atk, "delete")
+	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
 	if ability == nil || ability.Activation == "none" {
 		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
 	}
@@ -203,7 +203,7 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 	if !ok {
 		return res, fmt.Errorf("unknown attacker pawn %q", attackerID)
 	}
-	ability := findAbility(atk, "delete")
+	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
 	if ability == nil || ability.Activation == "none" {
 		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
 	}

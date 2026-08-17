@@ -107,7 +107,7 @@ export function deleteAbility(
   const tgt = pawnById(gd, targetId);
   if (!tgt) throw new Error(`unknown target pawn "${targetId}"`);
 
-  const ability = findAbility(atk, "delete");
+  const ability = effectiveAbility(gd, atk, atkPob.attachments, "delete");
   if (!ability || ability.activation === "none") {
     throw new Error(`pawn "${attackerId}" cannot activate Delete`);
   }
@@ -174,7 +174,7 @@ export function deleteMulti(
   if (!atkPob) throw new Error(`attacker "${attackerId}" is not on the board`);
   const atk = pawnById(gd, attackerId);
   if (!atk) throw new Error(`unknown attacker pawn "${attackerId}"`);
-  const ability = findAbility(atk, "delete");
+  const ability = effectiveAbility(gd, atk, atkPob.attachments, "delete");
   if (!ability || ability.activation === "none") {
     throw new Error(`pawn "${attackerId}" cannot activate Delete`);
   }

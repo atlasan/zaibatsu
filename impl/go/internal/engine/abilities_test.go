@@ -139,3 +139,13 @@ func TestRebootRequiresRebootAbility(t *testing.T) {
 		t.Error("expected error: drone-turret cannot Reboot")
 	}
 }
+
+func TestSearchRemovedByAttachment(t *testing.T) {
+	// speedrunner-red has innate Search; an attachment that removes it blocks Search.
+	s, gd := searchGame(t, "data-haven")
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", Removes: []string{"search"}}
+	s.Cybernet.PawnByID("speedrunner-red").Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if _, err := Search(s, gd, "speedrunner-red", 2, rotFacing(t, gd, "data-haven", 2)); err == nil {
+		t.Error("an attachment that removes Search should block it")
+	}
+}

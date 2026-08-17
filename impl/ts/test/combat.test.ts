@@ -113,3 +113,16 @@ describe("deleteAbility", () => {
     expect(run()).toEqual(run());
   });
 });
+
+describe("ability removal via attachment", () => {
+  test("an attachment that removes Delete blocks the attack", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 3 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["delete"] };
+    s.cybernet.pawnById("drone-turret")!.attachments = [{ cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 }];
+    expect(() => deleteAbility(s, d, "drone-turret", "speedrunner-yellow", 0)).toThrow();
+  });
+});

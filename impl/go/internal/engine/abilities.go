@@ -52,7 +52,7 @@ func Search(s *domain.GameState, gd *domain.GameData, pawnID string, dir, rot in
 	if !ok {
 		return nil, fmt.Errorf("unknown pawn %q", pawnID)
 	}
-	ability := findAbility(actor, "search")
+	ability := effectiveAbility(gd, actor, pob.Attachments, "search")
 	if ability == nil || ability.Activation == "none" {
 		return nil, fmt.Errorf("pawn %q cannot activate Search", pawnID)
 	}
@@ -116,6 +116,8 @@ func Reboot(s *domain.GameState, gd *domain.GameData, pawnID, playerID string) (
 	if !ok {
 		return nil, fmt.Errorf("unknown pawn %q", pawnID)
 	}
+	// Innate only: the pawn is eliminated, so its attachments were already
+	// discarded and cannot grant Reboot.
 	ability := findAbility(actor, "reboot")
 	if ability == nil || ability.Activation == "none" {
 		return nil, fmt.Errorf("pawn %q cannot activate Reboot", pawnID)

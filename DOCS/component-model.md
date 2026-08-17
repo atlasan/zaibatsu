@@ -155,15 +155,16 @@ icon regions.
 **Ability grant/remove — landed (Go + TS, tested):** `attach.grants` / `attach.removes`
 are applied by `effectiveAbility(gd, pawn, attachments, name)` (combat.go / combat.ts):
 an add-on/weapon that grants an ability makes it card-activated on its target, and
-one that removes an ability strips it even when innate. The Icebreaker now resolves
-through this, so a granted Icebreaker enables a non-Icebreaker pawn and a removed
-one disables it.
+one that removes an ability strips it even when innate. **Icebreaker, Delete, and
+Search** all resolve through it (tested each way in both mirrors), so a granted
+ability enables a pawn that lacks it and a removed one disables an innate ability.
+Reboot stays innate-only by design — its actor is eliminated, so its attachments
+are already discarded.
 
 **Remaining engine logic (not yet wired):**
 - `space.modifier.kind = ice`, `space.direction` enforcement, typed
   `effects.underControl` dispatch, and `attach.effectText` are **loaded but not yet
-  applied** by engine rules. Next engine slice. (Grant/remove now wired; delete/
-  search/reboot grants ride the same `effectiveAbility` path when authored.)
+  applied** by engine rules. Next engine slice.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).
