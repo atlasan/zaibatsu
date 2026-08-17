@@ -223,3 +223,63 @@ func TestIcebreakDeterministicRoll(t *testing.T) {
 		t.Fatalf("Icebreak roll not deterministic: %v vs %v", a, b)
 	}
 }
+
+func TestIceFacesFor(t *testing.T) {
+	// Authored exact faces win over the category derivation...
+	if got := iceFacesFor([]int{2, 3}, domain.IceLow); len(got) != 2 || got[0] != 2 || got[1] != 3 {
+		t.Errorf("authored faces should win, got %v", got)
+	}
+	// ...and empty faces fall back to the category.
+	if got := iceFacesFor(nil, domain.IceHigh); len(got) != 1 || got[0] != 6 {
+		t.Errorf("nil faces should fall back to category, got %v", got)
+	}
+	if got := iceFacesFor([]int{}, domain.IceNone); got != nil {
+		t.Errorf("empty faces + none should be nil, got %v", got)
+	}
+}
+
+func TestIcebreakUsesAuthoredIceFaces(t *testing.T) {
+	// A block with no category but explicit all-hitting faces always breaks,
+	// proving IcebreakBlock reads the authored faces rather than the category.
+	s, gd, attacker, coord := icebreakScenario(t, "data-haven")
+	bd, _ := gd.BlockByID(s.Cybernet.At(coord).BlockID)
+	bd.IceValue = domain.IceNone
+	bd.IceFaces = []int{1, 2, 3, 4, 5, 6}
+	res, err := IcebreakBlock(s, gd, attacker, coord, 0)
+	if err != nil {
+		t.Fatalf("IcebreakBlock: %v", err)
+	}
+	if !res.Success {
+		t.Errorf("authored all-faces ICE should always succeed, roll=%v", res.Roll)
+	}
+}
+
+func TestIcebreakBlackIceEliminatesAttacker(t *testing.T) {
+	// Find a seed whose roll fails against high ICE (faces [6]); with BlackIce set
+	// the failed attempt must eliminate the attacker.
+	for seed := uint64(1); seed <= 60; seed++ {
+		gd := loadOrSkip(t)
+		s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: seed})
+		origin := domain.Coord{Q: 0, R: 0}
+		if _, err := PlaceBlock(s, origin, 0, gd, "data-haven", rotFacing(t, gd, "data-haven", 0)); err != nil {
+			t.Fatalf("place: %v", err)
+		}
+		coord := origin.Neighbor(0)
+		s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+		s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+		bd, _ := gd.BlockByID("data-haven")
+		bd.IceValue = domain.IceHigh
+		bd.BlackIce = true
+		res, err := IcebreakBlock(s, gd, "speedrunner-red", coord, 0)
+		if err != nil {
+			t.Fatalf("IcebreakBlock: %v", err)
+		}
+		if !res.Success {
+			if !res.AttackerEliminated {
+				t.Fatalf("failed Icebreak vs Black ICE must eliminate the attacker (seed %d)", seed)
+			}
+			return
+		}
+	}
+	t.Skip("no failing seed found in range")
+}

@@ -31,8 +31,8 @@ indexed on the 6 outer edges/vertices.
 | Field | Status | Notes |
 |---|---|---|
 | `iceValue` (`none`/`low`/`medium`/`high`/`black`) | ✅ | category: low=3 dice, medium=2, high=1, black=1 black die. |
-| **`iceFaces`** (the specific 1–6 die faces) | ✅(schema) / ✅(detect) / ⛔(engine) | schema field added (`block.schema.json`). `tools/hexvision/detect.py` **reads the flat die faces** from the tile (bold dark outline + pips; the decorative 3-D dice are skipped) → `iceDiceCandidates`, review-required. Engine still *derives* `IceFaces` from the category — reading the real field is the paused-engine follow-up. |
-| **`blackIce`** (bool) | ✅(schema) / ⛔(engine) | schema field added; failing an Icebreak vs Black ICE eliminates the attacker. Engine still folds it into the `black` category. |
+| **`iceFaces`** (the specific 1–6 die faces) | ✅(schema) / ✅(detect) / ✅(engine) | schema + both engine mirrors: `iceFacesFor` prefers the authored faces over the category derivation (Go + TS, tested). `tools/hexvision/detect.py` **reads the flat die faces** from the tile → `iceDiceCandidates`, review-required. |
+| **`blackIce`** (bool) | ✅(schema) / ✅(engine) | schema + both mirrors: a failed Icebreak against a `blackIce` block eliminates the attacker (independent of the `black` category; tested). |
 
 ### Spaces (per gameplay cell) — SR-BOARD "Spaces"
 Each space: `id`, `type` (`normal`/`special`/`pawn`/`effect`), `zoneIds` (1+ of
@@ -146,10 +146,16 @@ Everything stays `reviewRequired` for human confirmation.
 (`iceDiceCandidates`); card OCR + two-part proposals (`activates` vs `attach`) +
 icon regions.
 
-**Remaining (paused-engine follow-up, `DOCS/engine-resume-plan.md`):**
-- Engine mirrors (Go `internal/domain` + TS `src/domain`) + loaders read the new
-  fields; `IceFaces` reads real faces; typed effect dispatch; keep `DOCS/parity.md`
-  and both golden snapshots in step. Deferred while the engine is paused.
+**Engine mirrors — landed (Go + TS, `go test`/`bun test` green, parity held):**
+- All new fields are in both domain models + loaders. `iceFaces` (authored faces
+  override the category) and `blackIce` are **consumed** by the Icebreaker (tested
+  in both mirrors). Golden fixtures regenerated (they were stale from the content
+  expansion, not from these changes); Go and TS produce byte-identical snapshots.
+
+**Remaining engine logic (not yet wired):**
+- `space.modifier.kind = ice`, `space.direction` enforcement, typed
+  `effects.underControl` dispatch, and card `attach.grants/removes/effectText`
+  are **loaded but not yet applied** by engine rules. Next engine slice.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

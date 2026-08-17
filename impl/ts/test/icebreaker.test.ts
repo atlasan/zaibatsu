@@ -137,3 +137,38 @@ describe("icebreakPawn", () => {
     expect(() => icebreakPawn(s, data, "speedrunner-red", "speedrunner-red", 0)).toThrow();
   });
 });
+
+describe("authored ICE faces + Black ICE (field-driven)", () => {
+  test("icebreakBlock uses authored iceFaces over the category", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    const bd = blockById(d, "data-haven")!;
+    bd.iceValue = "none";
+    bd.iceFaces = [1, 2, 3, 4, 5, 6]; // always hits
+    expect(icebreakBlock(s, d, "speedrunner-red", coord, 0).success).toBe(true);
+  });
+
+  test("failed Icebreak vs blackIce field eliminates the attacker", () => {
+    for (let seed = 1; seed <= 60; seed++) {
+      const d = loadDefault("speedrunners");
+      const s = newGame({ data: d, playerNames: ["A", "B"], seed });
+      placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+      const coord = neighbor(ORIGIN, 0);
+      s.cybernet.pawns = [];
+      s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+      const bd = blockById(d, "data-haven")!;
+      bd.iceValue = "high"; // faces [6]
+      bd.blackIce = true;
+      const res = icebreakBlock(s, d, "speedrunner-red", coord, 0);
+      if (!res.success) {
+        expect(res.attackerEliminated).toBe(true);
+        return;
+      }
+    }
+    throw new Error("no failing seed found in range");
+  });
+});

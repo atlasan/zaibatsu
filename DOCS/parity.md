@@ -66,7 +66,9 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Eliminate a pawn | `engine.` (internal `eliminatePawn`) | `eliminatePawn(...)` |
 | Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
 | Block controller | `domain.PlacedBlock.OwnerID` | `PlacedBlock.ownerId` |
-| ICE faces (provisional) | `engine.IceFaces(ice)` | `iceFaces(ice)` |
+| ICE faces (category derivation) | `engine.IceFaces(ice)` | `iceFaces(ice)` |
+| ICE faces (authored override) | `engine.iceFacesFor(faces, ice)` | `iceFacesFor(faces, ice)` — prefers `block.iceFaces`, else the category |
+| Black ICE elimination | `resolveBlackIceFailure(isBlack, …)` (`iceValue==black \|\| block.blackIce`) | `resolveBlackIceFailure(isBlack, …)` |
 | Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
 | Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
 | Search ability | `engine.Search(...)` | `search(...)` |

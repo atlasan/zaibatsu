@@ -44,20 +44,22 @@ A hexagonal tile forming the Cybernet.
 - `id`, `name`, `expansion`
 - `isCentralCore: bool` — the Central Core (and Shadowraiders' Central Core 02)
 - `iceValue: IceValue` — defense vs Icebreaker; `none` means uncontrollable
+- `iceFaces?: int[]` — the specific 1–6 die faces a successful Icebreak must match. When present the engine uses these instead of deriving from `iceValue`.
+- `blackIce?: bool` — a failed Icebreak against this block eliminates the attacker.
 - `spaces: Space[]` — the cells pawns occupy
 - `edges: bool[6]` — which of the 6 outer entrances are open. Each has one standardized target hex in clockwise order: `E1→h3`, `E2→h4`, `E3→h5`, `E4→h6`, `E5→h7`, `E6→h2`.
 - `boundarySpaces: SpaceId[][6]` — derived from each open entrance's target hex and its current gameplay-space owner; authors do not hand-enter it.
 - `bonusFragments: int` — count of one-third bonus-icon corners (0..6) _(planned use)_
 - `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. This is visual/reference data, not an effect resolver.
 - `assetRefs?: assetId[]` — source-linked physical assets resolved from the asset manifest.
-- `effects: { inCybernet?, underControl? }` — effect ids fired on placement /
-  on gaining control _(planned resolution)_
+- `effects: { inCybernet?, underControl? }` — each is a legacy effect-id string **or** a typed effect `{ kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|custom, amount?, target?, text? }`, fired on placement / on gaining control _(typed dispatch planned)_
 
 ### Space
 A cell on a block.
 - `id`, `type: SpaceType`
 - `capacity` — explicit occupancy; finite values default to selected-zone count, while special/pawn spaces default to unlimited
-- `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }`
+- `modifier?: { kind: SpaceModifier, dice?: DefenseDie[], amount?: int }` — `kind ∈ defense|hand-size|attack|ice` (`ice` modifies a target's ICE)
+- `direction?: int` — directional restriction (printed arrow): a pawn may only exit toward this edge (0=top, clockwise) _(enforcement planned)_
 - `pawnId?` — for `pawn` spaces, the pawn that belongs there
 - `effectId?` — for `effect` spaces, optional activatable effect
 - `location?: { x, y }` — normalized 0..100 source-layout position used by content tools; it is **not** a movement coordinate.
@@ -85,7 +87,7 @@ chooses exactly one use; the others are void.
 - `id`, `name`
 - `movement?: int` — steps it can grant when used for movement
 - `activates?: Ability[]` — abilities it can activate when played
-- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[], grants?: {…}, cost?: int }`
+- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability[], removes?: Ability[], effectText?: string, cost?: int }` — `activates` is the card's action-part; `attach.grants`/`removes` are the abilities it confers/strips on the target when attached
 
 ### MissionCard _(shadowraiders, planned)_
 Attached to a pawn's mission slot; tracks state via tags (mark/cargo/counter);
