@@ -70,30 +70,62 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 
 ## Action card
 
-A multi-use card; one use is chosen per play. Content is largely printed text +
-symbols, so **OCR + icon detection** drive the prefill (see
-`tools/hexvision/cards.py`).
+A **multi-use** card with **two independent parts** (user-flagged); **one use is
+chosen per play** (SR-CARD-001), the rest void:
 
+1. **Action part** — a small, **reversed** strip (usually the bottom edge): the
+   generic action *any* card can be spent on — **move / icebreaker / delete /
+   search / reboot**. This is `movement` + `activates[]`. Present on every card.
+2. **Card part** — the whole main (upright) face: the card's *actual* use, e.g.
+   **attach** as an add-on/weapon/armor/… to a pawn/enemy/block, conferring
+   `attach.grants[]` / `attach.removes[]` and an `attach.effectText` on the target.
+
+Both coexist — the action strip and the card use are **not** alternatives to
+discriminate by slot; they are two regions of the same card. Detection must
+therefore partition by region (bottom reversed strip vs. main face). Content is
+largely printed text + symbols, so **OCR + icon detection** drive the prefill
+(see `tools/hexvision/cards.py`).
+
+### Identity
 | Field | Status | Notes |
 |---|---|---|
 | `id`, `name` | ✅ | printed title. |
+| **`class` / type** (the card's *own* class, e.g. Malware/Virus) | ⛔ **gap** | the card's own class-tag, printed by the title. **Distinct** from the attach *class restriction* below — flat class matching conflates them. |
 | `copies` | ✅ | identical copies in the 54-card deck (dedup via perceptual hash). |
 | `summary` | ✅ | source-reviewed gameplay paraphrase. |
-| `movement` (steps granted) | ✅(schema) / ⛔(detect) | printed as step/dice glyphs. |
-| `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | abilities the card/add-on **grants**; printed as **ability icons**; detection reads these (OCR + yellow-badge count). |
-| **`removesAbilities[]`** (abilities an add-on **strips** from its pawn) | ⛔ **gap** | user-flagged: an add-on badge marked with an **✕** is an ability *removed* from the attached pawn (e.g. an ICEBREAKER add-on that removes SEARCH), **not** a card action. Distinct from `activates`. Detection: a second ability badge bearing a cross. |
-| `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed as the attach-target symbol. |
-| `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot icon. |
-| `attach.class[]` (operative, drone, …) | ✅ / ⛔(detect) | printed class tags. |
-| `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
 | `assetRefs` | ✅ | physical asset ids. |
 | transcription (`printedText`, `reviewerConfirmed`, `duplicateGroupConfirmed`, `vision.confidence`) | ✏️ editor | review workflow. |
 
+### Action part (bottom reversed strip — every card)
+| Field | Status | Notes |
+|---|---|---|
+| `movement` (steps) | ✅(schema) / ⛔(detect) | printed as step/dice glyphs in the action strip. |
+| `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | the action(s) this card can be spent on. Independent of the card use; OCR keyword-matched today (from the bottom-strip badges/labels). |
+
+### Card part — attachment use (`attach{}`), what it confers on the target
+| Field | Status | Notes |
+|---|---|---|
+| `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed attach-target symbol (bottom badge: PAWN / ENEMY ADD-ON / …). |
+| `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot banner (yellow, top/bottom edge). Its presence is what marks the card as an attachment. |
+| **`attach.grants[]`** (abilities the attachment **gives** the target) | ⛔ **gap** | user-flagged: an add-on/weapon/… confers abilities/effects on its target when attached. These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
+| **`attach.removes[]`** (abilities the attachment **strips**) | ⛔ **gap** | a main-face ability badge marked with an **✕** is *removed* from the target (e.g. an add-on that removes SEARCH). Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
+| **`attach.classRestriction[]`** (only attach to these target classes) | ⛔ **gap** | e.g. "can only be attached to **Cleaner** pawns" — the *target's* required class, printed in the rules text. Distinct from the card's own `class`. |
+| `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
+| **`attach.effectText`** (special on-attach effect) | ⛔ **gap** | e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
+
+**Detection partition.** The two parts are read from different **regions**, not
+by an either/or rule: the bottom **reversed strip** → the action part
+(`activates`/`movement`); the **main face** → the card use (slot, target, and the
+grant/remove/effect the attachment confers). `tools/hexvision/cards.py` reads the
+action `activates` from OCR keywords and the `slot`/`as` from the banners, and
+flags the main-face grants/removes/effect for the human (curved main-badge text
+and the ✕ marker are not yet read).
+
 **Card detection targets** (user-requested "zone/icons/effects/actions"):
-1. **OCR** the title + body (needs Tesseract installed locally — currently
-   disabled). 2. **Icons**: ability icons (activates), attach-slot icon, cost,
-   class tags. 3. **Zones/regions**: title / art / rules-text / cost bands.
-4. **Effects/actions**: map icons+text → `activates`/`attach`/`movement`.
+1. **OCR** the title + body — ✅ working (local Tesseract). 2. **Icons**: ability
+badges, slot banner, attach badge — ✅ region-classified; specific ability glyph +
+✕-marker pending. 3. **Zones/regions**: title / art / rules-text / cost bands —
+pending. 4. **Effects/actions**: map icons+text → the discriminated buckets above.
 Everything stays `reviewRequired` for human confirmation.
 
 ---

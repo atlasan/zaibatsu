@@ -183,31 +183,46 @@ def _looks_like_name(word: str) -> bool:
 def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) -> dict:
     """Derive structured action-card fields from OCR text (review-required).
 
-    OCR carries the field values; the detected icon regions cross-check them.
-    An ability badge is not necessarily a card *action*: an add-on can **grant**
-    one ability (e.g. ICEBREAKER) and **remove** another from the pawn it attaches
-    to (a badge marked with an ✕, e.g. SEARCH). So when more ability badges are
-    detected than OCR named as granted, a review note asks the human to classify
-    each badge as granted vs removed rather than assuming a missed action."""
+    Every card has **two independent parts**:
+    - the **action** part (a small, reversed strip, usually along the bottom): the
+      generic action any card can be spent on - move / icebreaker / delete /
+      search / reboot -> `activates` (+ `movement`);
+    - the **card** part (the whole main face): its actual use, e.g. attach as an
+      add-on/weapon/armor with a slot, target, class restriction, and abilities it
+      **grants** / **removes** on the target (a ✕-marked badge is removed).
+
+    Both coexist. OCR keywords feed the action `activates`; the detected slot marks
+    the card's attach use; the main-face grants/removes need the human (curved
+    badge text / the ✕ marker are not read reliably yet). All hints, review-only."""
     words = [r["text"] for r in text_regions]
     # name candidate (review-required hint): the longest confident word that
     # looks like a name. Sparse-OCR box geometry is too noisy to rank titles by
     # font size, so length is the most robust signal we have here.
     strong = [r["text"] for r in text_regions if r.get("confidence", 0) >= 0.6]
     name = max((w for w in strong if _looks_like_name(w)), key=len, default="")
-    activates = _match_vocab(words, _ACTIVATES)
-    notes: list[str] = []
+    slot = _match_vocab(words, _ATTACH_SLOTS)
     badges = sum(1 for i in (icons or []) if i["kind"] == "ability-badge")
-    if badges > len(activates):
-        notes.append(f"{badges} ability badge(s) detected, {len(activates)} named as granted; classify each badge as granted vs removed (an add-on can strip an ability from its pawn - the removed one is marked with an cross).")
-    return {
+    notes: list[str] = []
+    proposal = {
         "nameCandidate": name,
-        "activates": activates,
-        "attachAs": _match_vocab(words, _ATTACH_AS),
-        "attachSlot": _match_vocab(words, _ATTACH_SLOTS),
+        # class tokens seen; may be the card's OWN class or a target-class
+        # restriction ("only attach to Cleaner pawns") - the human separates them.
         "classes": _match_vocab(words, _CLASSES),
-        "reviewNotes": notes,
+        # the action part - available on every card, independent of the card use.
+        "activates": _match_vocab(words, _ACTIVATES),
+        "attach": {},
     }
+    if slot:  # the card's main use is an attachment
+        proposal["attach"] = {
+            "slot": slot,
+            "as": _match_vocab(words, _ATTACH_AS),
+            "grants": [],   # abilities/effects given to the target (human-filled)
+            "removes": [],  # ✕-marked badges stripped from the target (human-filled)
+        }
+        if badges > len(proposal["activates"]):
+            notes.append(f"{badges} ability badge(s) detected; besides the action abilities, the main face may GRANT or REMOVE (cross-marked) abilities on the target - classify these.")
+    proposal["reviewNotes"] = notes
+    return proposal
 
 
 def perceptual_hash(image: np.ndarray) -> str:
