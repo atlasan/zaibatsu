@@ -80,7 +80,8 @@ symbols, so **OCR + icon detection** drive the prefill (see
 | `copies` | ✅ | identical copies in the 54-card deck (dedup via perceptual hash). |
 | `summary` | ✅ | source-reviewed gameplay paraphrase. |
 | `movement` (steps granted) | ✅(schema) / ⛔(detect) | printed as step/dice glyphs. |
-| `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | printed as **ability icons**; detection should read these. |
+| `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | abilities the card/add-on **grants**; printed as **ability icons**; detection reads these (OCR + yellow-badge count). |
+| **`removesAbilities[]`** (abilities an add-on **strips** from its pawn) | ⛔ **gap** | user-flagged: an add-on badge marked with an **✕** is an ability *removed* from the attached pawn (e.g. an ICEBREAKER add-on that removes SEARCH), **not** a card action. Distinct from `activates`. Detection: a second ability badge bearing a cross. |
 | `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed as the attach-target symbol. |
 | `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot icon. |
 | `attach.class[]` (operative, drone, …) | ✅ / ⛔(detect) | printed class tags. |
@@ -106,6 +107,9 @@ Everything stays `reviewRequired` for human confirmation.
 - **Block under-control effects**: type `effects.underControl` (gain-control-card
   / place-pawn / area-attack / …) rather than a bare id.
 - **Card detection**: OCR (Tesseract) + ability/attach/cost/class icon reading.
+  OCR + keyword proposals + yellow-badge/attach-badge regions land today
+  (`tools/hexvision/cards.py`); still open: reading the specific ability glyph and
+  the **grant-vs-remove ✕ marker** (`removesAbilities`).
 
 These are the items behind the paused engine's data-gated work
 (`DOCS/engine-resume-plan.md`) and the editor's remaining fields. Schema/engine

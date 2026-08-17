@@ -114,16 +114,40 @@ def ocr_regions(image: np.ndarray) -> list[TextRegion]:
 
 
 def _icon_candidates(image: np.ndarray) -> list[dict]:
+    """Locate the printed accent markers. Zaibatsu action cards use a small,
+    consistent visual vocabulary: a wide **yellow banner** at the top/bottom edge
+    is the attach *slot* (ADD-ON/GADGET/…); compact **yellow badges** in the
+    corners are the *ability* icons (ICEBREAKER/SEARCH/…) with their name printed
+    curving around them (which OCR often misses); a small **white circular badge**
+    is the attach-*as* target (PAWN/ENEMY/BLOCK). Region kinds only — the specific
+    ability is left to OCR + human review. The card background is teal, so cyan is
+    deliberately not treated as signal."""
+    h, w = image.shape[:2]
+    page = float(h * w)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    masks = {"yellow": cv2.inRange(hsv, (20, 100, 120), (40, 255, 255)), "cyan": cv2.inRange(hsv, (75, 80, 80), (105, 255, 255))}
-    found = []
-    for label, mask in masks.items():
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        for contour in contours:
-            x, y, w, h = cv2.boundingRect(contour)
-            area = w * h
-            if area >= image.shape[0] * image.shape[1] * 0.006:
-                found.append({"kind": label, "box": [x, y, w, h], "confidence": round(min(0.9, area / (image.shape[0] * image.shape[1]) * 15), 3)})
+    found: list[dict] = []
+    yellow = cv2.inRange(hsv, (20, 100, 120), (40, 255, 255))
+    contours, _ = cv2.findContours(yellow, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+        x, y, cw, ch = cv2.boundingRect(contour)
+        area = cw * ch
+        if area < page * 0.004:
+            continue
+        aspect = cw / max(1, ch)
+        near_edge = y < h * 0.12 or (y + ch) > h * 0.88
+        kind = "slot-banner" if aspect >= 2.2 and near_edge else "ability-badge"
+        found.append({"kind": kind, "box": [x, y, cw, ch], "confidence": round(min(0.9, area / page * 15), 3)})
+    # white circular attach-target badge (bright, near-round, corner-sized)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    white = cv2.inRange(gray, 200, 255)
+    contours, _ = cv2.findContours(white, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+        x, y, cw, ch = cv2.boundingRect(contour)
+        area = cw * ch
+        if not (page * 0.004 <= area <= page * 0.05):
+            continue
+        if 0.7 <= cw / max(1, ch) <= 1.4 and cv2.contourArea(contour) / area >= 0.7:
+            found.append({"kind": "attach-badge", "box": [x, y, cw, ch], "confidence": round(min(0.8, area / page * 12), 3)})
     return sorted(found, key=lambda item: (item["kind"], item["box"]))
 
 
@@ -156,20 +180,33 @@ def _looks_like_name(word: str) -> bool:
     return w.lower() not in _ATTACH_SLOTS + _ATTACH_AS + _ACTIVATES + _CLASSES
 
 
-def card_proposals(text_regions: list[dict]) -> dict:
-    """Derive structured action-card fields from OCR text (review-required)."""
+def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) -> dict:
+    """Derive structured action-card fields from OCR text (review-required).
+
+    OCR carries the field values; the detected icon regions cross-check them.
+    An ability badge is not necessarily a card *action*: an add-on can **grant**
+    one ability (e.g. ICEBREAKER) and **remove** another from the pawn it attaches
+    to (a badge marked with an ✕, e.g. SEARCH). So when more ability badges are
+    detected than OCR named as granted, a review note asks the human to classify
+    each badge as granted vs removed rather than assuming a missed action."""
     words = [r["text"] for r in text_regions]
     # name candidate (review-required hint): the longest confident word that
     # looks like a name. Sparse-OCR box geometry is too noisy to rank titles by
     # font size, so length is the most robust signal we have here.
     strong = [r["text"] for r in text_regions if r.get("confidence", 0) >= 0.6]
     name = max((w for w in strong if _looks_like_name(w)), key=len, default="")
+    activates = _match_vocab(words, _ACTIVATES)
+    notes: list[str] = []
+    badges = sum(1 for i in (icons or []) if i["kind"] == "ability-badge")
+    if badges > len(activates):
+        notes.append(f"{badges} ability badge(s) detected, {len(activates)} named as granted; classify each badge as granted vs removed (an add-on can strip an ability from its pawn - the removed one is marked with an cross).")
     return {
         "nameCandidate": name,
-        "activates": _match_vocab(words, _ACTIVATES),
+        "activates": activates,
         "attachAs": _match_vocab(words, _ATTACH_AS),
         "attachSlot": _match_vocab(words, _ATTACH_SLOTS),
         "classes": _match_vocab(words, _CLASSES),
+        "reviewNotes": notes,
     }
 
 
@@ -192,7 +229,8 @@ def extract_card(path: str, asset: str) -> dict:
         reasons.append("local OCR unavailable; manually transcribe printed text")
     if confidence < 0.75:
         reasons.append("OCR confidence below review threshold")
-    return {"asset": asset, "kind": "action-card", "orientation": rotation, "printedTextCandidate": words, "textRegions": regions, "iconCandidates": _icon_candidates(upright), "proposals": card_proposals(regions), "perceptualHash": perceptual_hash(upright), "confidence": confidence, "reviewRequired": True, "reasons": reasons}
+    icons = _icon_candidates(upright)
+    return {"asset": asset, "kind": "action-card", "orientation": rotation, "printedTextCandidate": words, "textRegions": regions, "iconCandidates": icons, "proposals": card_proposals(regions, icons), "perceptualHash": perceptual_hash(upright), "confidence": confidence, "reviewRequired": True, "reasons": reasons}
 
 
 def overlay(image: np.ndarray, card: dict) -> np.ndarray:
