@@ -97,6 +97,8 @@ def evaluate(build_dir: str = DEFAULT_BUILD, session_path: str = GROUND_TRUTH) -
             "cornerAcc": bool_accuracy(expected["bonusCorners"], tile.whiteCorners),
             "spaceCountExpected": expected["spaceCount"],
             "spaceCountDetected": len(tile.spaces),
+            "iceValueExpected": expected["iceValue"],
+            "iceDiceDetected": [d["face"] for d in tile.iceDiceCandidates],
         })
     def _avg(key):
         vals = [r[key] for r in rows if r.get(key) is not None]
@@ -118,7 +120,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     for r in report["rows"]:
         print(f"{r['asset']}: zoneF1={r['zoneF1']} edges={r['edgeAcc']} corners={r['cornerAcc']} "
-              f"spaces={r['spaceCountDetected']}/{r['spaceCountExpected']}")
+              f"spaces={r['spaceCountDetected']}/{r['spaceCountExpected']} "
+              f"iceDice={r['iceDiceDetected']} (iceValue={r['iceValueExpected']})")
         print(f"    zones exp={r['zonesExpected']} det={r['zonesDetected']}")
     print(f"AGGREGATE ({report['tiles']} tiles): zoneF1={report['zoneF1']} "
           f"edgeAcc={report['edgeAcc']} cornerAcc={report['cornerAcc']}")

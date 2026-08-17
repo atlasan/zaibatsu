@@ -9,7 +9,9 @@ is precise and only the interior features are inferred.
 Per tile it detects:
   * passages   — which of the 6 edges expose a connecting space (block.edges[6]);
   * placements — the circular space slots inside;
-  * white corners — which of the 6 corners are white (bonus zone = 3 aligned).
+  * white corners — which of the 6 corners are white (bonus zone = 3 aligned);
+  * ICE dice   — the flat die faces printed on the tile (the ICE value), read from
+                 their bold dark outline + pips; the decorative 3-D dice are skipped.
 
 The art is stylised, so passage/placement/bonus detection is DELIBERATELY
 provisional and assistive: every run also writes a verification overlay so a
@@ -49,6 +51,9 @@ class Tile:
     edges: list[bool]  # [6] passage per edge
     whiteCorners: list[bool]  # [6] white corner per vertex (bonus zone = 3 aligned)
     spaces: list[Space] = field(default_factory=list)
+    # Flat ICE dice read from the tile: [{face:1..6, box:[x,y,w,h], side}]. The
+    # ICE value is printed as die faces; which cluster is ICE is left to review.
+    iceDiceCandidates: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -292,6 +297,63 @@ def detect_spaces(bgr: np.ndarray, alpha, center, inr: int) -> list[Space]:
     return kept
 
 
+def _die_face(gray: np.ndarray, x: int, y: int, w: int, h: int, side: float) -> int:
+    """Count the dark pips on a flat die face; 0 if not a plausible face (1..6)."""
+    m = int(side * 0.18)
+    roi = gray[y + m:y + h - m, x + m:x + w - m]
+    if roi.size == 0 or float(roi.mean()) < 180:  # interior must be a white face
+        return 0
+    pips_mask = cv2.threshold(roi, 110, 255, cv2.THRESH_BINARY_INV)[1]
+    pips_mask = cv2.morphologyEx(pips_mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    contours, _ = cv2.findContours(pips_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    pips = 0
+    for c in contours:
+        area = cv2.contourArea(c)
+        if (side * 0.05) ** 2 <= area <= (side * 0.28) ** 2:
+            bw, bh = cv2.boundingRect(c)[2:]
+            if 0.5 <= bw / max(1, bh) <= 2.0:  # round-ish pip
+                pips += 1
+    return pips if 1 <= pips <= 6 else 0
+
+
+def detect_ice_dice(bgr: np.ndarray, alpha: np.ndarray) -> list[dict]:
+    """Read the block's flat ICE dice. Each die prints a bold black rounded-square
+    outline over a white face with 1-6 black pips; that outline is a strong,
+    isolated signal (unlike the decorative 3-D dice, which show several faces at
+    once and are intentionally skipped). Review-required: several dice can appear
+    and only some are the ICE value."""
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    h, w = gray.shape
+    inside = cv2.erode((alpha > 10).astype(np.uint8) * 255, np.ones((5, 5), np.uint8), iterations=2)
+    dark = cv2.bitwise_and(cv2.inRange(gray, 0, 80), inside)
+    dark = cv2.morphologyEx(dark, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    contours, _ = cv2.findContours(dark, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    lo, hi = min(h, w) * 0.07, min(h, w) * 0.22
+    dice: list[dict] = []
+    for c in contours:
+        x, y, cw, ch = cv2.boundingRect(c)
+        if not 0.8 <= cw / max(1, ch) <= 1.25:  # square
+            continue
+        side = (cw + ch) / 2
+        if not lo <= side <= hi:
+            continue
+        # a real die has a continuous dark outline: a thin border band must carry
+        # enough dark ink all the way round (rejects white art blobs that merely
+        # fit a square bounding box, e.g. the whale illustration - ~0.11 vs the
+        # 0.24-0.47 of real dice outlines).
+        band = max(2, int(side * 0.045))
+        sub = (gray[y:y + ch, x:x + cw] < 90).astype(np.uint8)
+        frame = sub.copy()
+        frame[band:-band, band:-band] = 0
+        frame_area = sub.shape[0] * sub.shape[1] - max(0, sub.shape[0] - 2 * band) * max(0, sub.shape[1] - 2 * band)
+        if not frame_area or frame.sum() / frame_area < 0.2:
+            continue
+        face = _die_face(gray, x, y, cw, ch, side)
+        if face:
+            dice.append({"face": face, "box": [x, y, cw, ch], "side": round(side)})
+    return sorted(dice, key=lambda d: (d["box"][1], d["box"][0]))
+
+
 def extract_tile(path: str, asset: str) -> Tile:
     bgr, alpha = load_tile(path)
     center, verts, inr = hexagon(alpha)
@@ -303,6 +365,7 @@ def extract_tile(path: str, asset: str) -> Tile:
         edges=detect_edges(bgr, alpha, center, verts, inr),
         whiteCorners=detect_white_corners(bgr, alpha, center, verts),
         spaces=detect_spaces(bgr, alpha, center, inr),
+        iceDiceCandidates=detect_ice_dice(bgr, alpha),
     )
 
 
@@ -331,4 +394,8 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
         cv2.circle(ov, (sx, sy), int(s.r * tile.inradius), (255, 120, 0), 3)
         label = "/".join(s.suggestedZoneIds) if s.suggestedZoneIds else "?"
         cv2.putText(ov, label, (sx - 22, sy - int(s.r * tile.inradius) - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 220, 80), 2)
+    for die in tile.iceDiceCandidates:
+        x, y, w, h = die["box"]
+        cv2.rectangle(ov, (x, y), (x + w, y + h), (200, 0, 200), 4)
+        cv2.putText(ov, f"ICE?{die['face']}", (x, max(24, y - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200, 0, 200), 2)
     return ov

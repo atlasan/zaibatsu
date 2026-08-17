@@ -21,7 +21,7 @@ indexed on the 6 outer edges/vertices.
 ### Identity & classification
 | Field | Status | Notes |
 |---|---|---|
-| `id`, `name`, `expansion` | ✅ | name is the printed title (OCR-able). |
+| `id`, `name`, `expansion` | ✅ | name is the printed title; it is large stylised **diagonal** art text, which local OCR does *not* read reliably (it returns body text, not the title), so `name` stays a manual/review field. |
 | `layoutId` | ✅ | always the standard 7-zone layout. |
 | `isCentralCore` | ✅ | the core tile; all pawns start here. |
 | `assetRefs` | ✅ | physical asset ids (`spec/assets/manifest.json`). |
@@ -31,7 +31,7 @@ indexed on the 6 outer edges/vertices.
 | Field | Status | Notes |
 |---|---|---|
 | `iceValue` (`none`/`low`/`medium`/`high`/`black`) | ✅ | category: low=3 dice, medium=2, high=1, black=1 black die. |
-| **`iceFaces`** (the specific 1–6 die faces) | ⛔ **gap** | the Icebreak roll matches these exact faces; today `IceFaces` is *derived* from the category (top-N). Needed for exact ICE-value-modifier redundancy. |
+| **`iceFaces`** (the specific 1–6 die faces) | ⛔(schema) / ✅(detect) | the Icebreak roll matches these exact faces; today `IceFaces` is *derived* from the category (top-N). `tools/hexvision/detect.py` now **reads the flat die faces** from the tile (bold dark outline + pips; the decorative 3-D dice are skipped) → `iceDiceCandidates`, review-required. Schema field still to add. |
 | **`blackIce`** (bool) | ⛔ **gap** | failing an Icebreak vs Black ICE eliminates the attacker; currently folded into the `black` category only. |
 
 ### Spaces (per gameplay cell) — SR-BOARD "Spaces"
