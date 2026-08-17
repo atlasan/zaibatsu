@@ -9,17 +9,20 @@
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "name": { "type": "string" }, "expansion": { "enum": ["speedrunners", "shadowraiders"] },
     "layoutId": { "const": "standard-seven-zone-2-3-2-pointy", "default": "standard-seven-zone-2-3-2-pointy" }, "isCentralCore": { "type": "boolean", "default": false },
     "iceValue": { "enum": ["none", "low", "medium", "high", "black"], "default": "none" },
+    "iceFaces": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 6 }, "maxItems": 6, "uniqueItems": false, "description": "The specific 1-6 die faces the Icebreak roll must match. When present the engine uses these exact faces instead of deriving them from iceValue." },
+    "blackIce": { "type": "boolean", "default": false, "description": "Black ICE: a failed Icebreak against this block eliminates the attacker." },
     "edges": { "type": "array", "items": { "type": "boolean" }, "minItems": 6, "maxItems": 6 },
     "boundarySpaces": { "type": "array", "items": { "type": "array", "items": { "type": "string" } }, "minItems": 6, "maxItems": 6, "description": "Derived boundary-space ids: E1→h3, E2→h4, E3→h5, E4→h6, E5→h7, E6→h2 when the corresponding entrance is open." },
     "bonusFragments": { "type": "integer", "minimum": 0, "maximum": 6, "default": 0 },
     "bonusCorners": { "type": "array", "items": { "type": "boolean" }, "minItems": 6, "maxItems": 6 },
     "spaces": { "type": "array", "items": { "$ref": "#/$defs/space" } },
-    "effects": { "type": "object", "additionalProperties": false, "properties": { "inCybernet": { "type": "string" }, "underControl": { "type": "string" } } },
+    "effects": { "type": "object", "additionalProperties": false, "properties": { "inCybernet": { "$ref": "#/$defs/effect" }, "underControl": { "$ref": "#/$defs/effect" } } },
     "assetRefs": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "uniqueItems": true }, "provisional": { "type": "boolean", "default": false }
   },
   "$defs": {
     "zoneId": { "enum": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"] },
     "capacity": { "oneOf": [{ "type": "integer", "minimum": 1 }, { "const": "unlimited" }] },
+    "effect": { "description": "A block effect: a bare source effect-id (legacy) or a typed action.", "oneOf": [ { "type": "string" }, { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "enum": ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "custom"] }, "amount": { "type": "integer" }, "target": { "type": "string" }, "text": { "type": "string", "description": "Printed effect text; required when kind is custom." } } } ] },
     "space": {
       "type": "object", "required": ["id", "type", "zoneIds", "capacity", "neighbors"], "additionalProperties": false,
       "properties": {
@@ -28,7 +31,8 @@
         "capacity": { "$ref": "#/$defs/capacity" }, "displayShape": { "enum": ["auto", "circle", "capsule", "compound"], "default": "auto", "description": "Source-facing editor rendering only; it never changes gameplay capacity or movement." }, "capacityNote": { "type": "string", "minLength": 1, "description": "Required source-review explanation when capacity differs from the default for selected zones." },
         "neighbors": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "description": "Derived gameplay-space links from touching selected zones; not yet executable step movement." },
         "pawnId": { "type": "string" }, "effectId": { "type": "string" },
-        "modifier": { "type": "object", "additionalProperties": false, "properties": { "kind": { "enum": ["defense", "hand-size", "attack"] }, "amount": { "type": "integer" } } }
+        "direction": { "type": "integer", "minimum": 0, "maximum": 5, "description": "Directional restriction (printed arrow): a pawn may only leave this space toward this edge index (0=top, then clockwise)." },
+        "modifier": { "type": "object", "additionalProperties": false, "properties": { "kind": { "enum": ["defense", "hand-size", "attack", "ice"] }, "amount": { "type": "integer" } } }
       }
     }
   }

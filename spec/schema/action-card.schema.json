@@ -27,15 +27,19 @@
     "activates": {
       "type": "array",
       "items": { "enum": ["search", "delete", "reboot", "icebreaker"] },
-      "description": "Abilities this card can activate when played."
+      "description": "The card's ACTION part (the small reversed strip): abilities the card can be spent on when played directly. Independent of the attach use below."
     },
     "attach": {
       "type": "object",
       "additionalProperties": false,
+      "description": "The card's main use: attaching to a target, and what it confers there.",
       "properties": {
         "as": { "enum": ["pawn", "enemy", "block"] },
         "slot": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] },
-        "class": { "type": "array", "items": { "type": "string" } },
+        "class": { "type": "array", "items": { "type": "string" }, "description": "Target class restriction: the classes this card may attach to (e.g. Cleaner pawns)." },
+        "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete)." },
+        "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
+        "effectText": { "type": "string", "description": "Special on-attach effect text, e.g. \"Gain control of this pawn.\"" },
         "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach." }
       }
     },

@@ -31,8 +31,8 @@ indexed on the 6 outer edges/vertices.
 | Field | Status | Notes |
 |---|---|---|
 | `iceValue` (`none`/`low`/`medium`/`high`/`black`) | ✅ | category: low=3 dice, medium=2, high=1, black=1 black die. |
-| **`iceFaces`** (the specific 1–6 die faces) | ⛔(schema) / ✅(detect) | the Icebreak roll matches these exact faces; today `IceFaces` is *derived* from the category (top-N). `tools/hexvision/detect.py` now **reads the flat die faces** from the tile (bold dark outline + pips; the decorative 3-D dice are skipped) → `iceDiceCandidates`, review-required. Schema field still to add. |
-| **`blackIce`** (bool) | ⛔ **gap** | failing an Icebreak vs Black ICE eliminates the attacker; currently folded into the `black` category only. |
+| **`iceFaces`** (the specific 1–6 die faces) | ✅(schema) / ✅(detect) / ⛔(engine) | schema field added (`block.schema.json`). `tools/hexvision/detect.py` **reads the flat die faces** from the tile (bold dark outline + pips; the decorative 3-D dice are skipped) → `iceDiceCandidates`, review-required. Engine still *derives* `IceFaces` from the category — reading the real field is the paused-engine follow-up. |
+| **`blackIce`** (bool) | ✅(schema) / ⛔(engine) | schema field added; failing an Icebreak vs Black ICE eliminates the attacker. Engine still folds it into the `black` category. |
 
 ### Spaces (per gameplay cell) — SR-BOARD "Spaces"
 Each space: `id`, `type` (`normal`/`special`/`pawn`/`effect`), `zoneIds` (1+ of
@@ -45,8 +45,8 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 | `modifier.kind = defense` (± shielded/unshielded defense dice) | ✅ | |
 | `modifier.kind = hand-size` (± max hand size) | ✅ | |
 | `modifier.kind = attack` (modify a Delete attack) | ✅ | |
-| **`modifier.kind = ice`** (space modifies a target's ICE) | ⛔ **gap** | user-flagged: some spaces modify ICE. |
-| **direction restriction** (a space/edge allows movement only one way) | ⛔ **gap** | the printed direction arrow; restricts pawn exit direction. |
+| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ⛔(engine) | user-flagged; `ice` added to `space.modifier.kind`. Engine consumption is the paused follow-up. |
+| **`space.direction`** (a space allows movement only one way) | ✅(schema) / ⛔(engine, detect) | the printed direction arrow → `space.direction` (edge index 0–5) added to schema. No arrows on the base tiles, so detection is deferred; engine restriction is the paused follow-up. |
 
 ### Board topology
 | Field | Status | Notes |
@@ -63,8 +63,8 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 ### Effects — SR-BOARD "Block effects"
 | Field | Status | Notes |
 |---|---|---|
-| `effects.inCybernet` (fires on placement) | ✅(id) | today a bare effect-id string. |
-| `effects.underControl` (fires on a successful Icebreaker / change of control) | ⛔ **gap (typing)** | user-flagged: needs a typed effect — e.g. `gain-control-card`, `place-pawn`, `area-attack`, `all-players-…`. The printed text is the source (`inCybernet`/`underControl` bodies). |
+| `effects.inCybernet` (fires on placement) | ✅ | accepts a bare effect-id string **or** a typed effect (below). |
+| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ⛔(engine) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Engine dispatch is the paused follow-up. |
 
 ---
 
@@ -107,11 +107,11 @@ largely printed text + symbols, so **OCR + icon detection** drive the prefill
 |---|---|---|
 | `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed attach-target symbol (bottom badge: PAWN / ENEMY ADD-ON / …). |
 | `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot banner (yellow, top/bottom edge). Its presence is what marks the card as an attachment. |
-| **`attach.grants[]`** (abilities the attachment **gives** the target) | ⛔ **gap** | user-flagged: an add-on/weapon/… confers abilities/effects on its target when attached. These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
-| **`attach.removes[]`** (abilities the attachment **strips**) | ⛔ **gap** | a main-face ability badge marked with an **✕** is *removed* from the target (e.g. an add-on that removes SEARCH). Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
-| **`attach.classRestriction[]`** (only attach to these target classes) | ⛔ **gap** | e.g. "can only be attached to **Cleaner** pawns" — the *target's* required class, printed in the rules text. Distinct from the card's own `class`. |
+| **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ⛔(detect) | user-flagged; added to `action-card.schema.json`. An add-on/weapon/… confers abilities on its target when attached. These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
+| **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ⛔(detect) | added to schema; a main-face ability badge marked with an **✕** is *removed* from the target (e.g. an add-on that removes SEARCH). Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
+| `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
 | `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
-| **`attach.effectText`** (special on-attach effect) | ⛔ **gap** | e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
+| **`attach.effectText`** (special on-attach effect) | ✅(schema) / ⛔(detect) | added to schema; e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
 
 **Detection partition.** The two parts are read from different **regions**, not
 by an either/or rule: the bottom **reversed strip** → the action part
@@ -130,20 +130,26 @@ Everything stays `reviewRequired` for human confirmation.
 
 ---
 
-## Gap summary (what to add so the model covers all Zaibatsu data)
+## Gap summary — status
 
-- **ICE**: `iceFaces` (specific die faces) + `blackIce` bool — block schema + Go/TS
-  domain + loaders; engine `IceFaces` reads real faces when present.
-- **Space modifiers**: add `ice` to `modifier.kind`; add a **direction**
-  restriction (per space or per edge).
-- **Block under-control effects**: type `effects.underControl` (gain-control-card
-  / place-pawn / area-attack / …) rather than a bare id.
-- **Card detection**: OCR (Tesseract) + ability/attach/cost/class icon reading.
-  OCR + keyword proposals + yellow-badge/attach-badge regions land today
-  (`tools/hexvision/cards.py`); still open: reading the specific ability glyph and
-  the **grant-vs-remove ✕ marker** (`removesAbilities`).
+**Schema landed** (`spec/schema/*`, additive & backward-compatible — all 8 blocks
++ 16 cards still validate; `bun tools/validate-spec.ts` green):
+- **ICE**: `block.iceFaces` (specific 1–6 die faces) + `block.blackIce` bool.
+- **Space**: `ice` added to `modifier.kind`; `space.direction` (edge 0–5) restriction.
+- **Block effects**: `effects.inCybernet`/`underControl` now typed — a legacy
+  string **or** `{kind ∈ gain-control-card|place-pawn|area-attack|all-players|
+  modify-ice|custom, amount?, target?, text?}`.
+- **Card**: `attach.grants[]` / `attach.removes[]` (abilities conferred/stripped),
+  `attach.effectText`, and clarified `attach.class[]` = target-class restriction.
 
-These are the items behind the paused engine's data-gated work
-(`DOCS/engine-resume-plan.md`) and the editor's remaining fields. Schema/engine
-changes are coordinated with the parallel workstream; keep both mirrors and
-`DOCS/parity.md` in step.
+**Detection landed** (`tools/hexvision/*`): block ICE die faces
+(`iceDiceCandidates`); card OCR + two-part proposals (`activates` vs `attach`) +
+icon regions.
+
+**Remaining (paused-engine follow-up, `DOCS/engine-resume-plan.md`):**
+- Engine mirrors (Go `internal/domain` + TS `src/domain`) + loaders read the new
+  fields; `IceFaces` reads real faces; typed effect dispatch; keep `DOCS/parity.md`
+  and both golden snapshots in step. Deferred while the engine is paused.
+- Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
+  card cost/movement glyphs; block name (stylised diagonal — manual) and direction
+  arrows (absent on base tiles).
