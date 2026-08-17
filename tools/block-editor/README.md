@@ -4,6 +4,10 @@ A standalone, local-first editor for source-linked Zaibatsu content. The MVP
 currently edits **information blocks**; its shell and session contract are
 intentionally reusable for cards, pawns, markers, threats, missions, and modes.
 
+It also serves a local-only Speedrunners rules sandbox at `/play/`. Sandbox
+state is held in memory, uses the TypeScript engine on the local server, and
+never writes canonical `spec/` data.
+
 ## Run it
 
 First ensure the local block images exist:
@@ -20,6 +24,10 @@ bun run dev
 ```
 
 Open `http://localhost:4173`.
+
+From the repository root on Windows, `run-editor.bat` is the same command.
+Use `run-sandbox.bat` to start this host for the Speedrunners sandbox and open
+`http://localhost:4173/play/`.
 
 ## What it does now
 

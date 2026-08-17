@@ -60,7 +60,11 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (go/ts) Solo AIs: Chaos and Outbreak turn logic.
 
 ## Later (Phase 5 — targets)
-- [ ] (ts) Web target: render the Cybernet, drive the engine via actions.
+- [~] (tools/ts) Local Speedrunners rules sandbox: `/play/` is served by the
+  block-editor host with isolated replayable sessions, CSS Cybernet projection,
+  optional local artwork, live phase controls, and trace import/export. Close
+  only after supported-action coverage, accepted source/data readiness, and
+  both golden suites are green; see `DOCS/web-sandbox-plan.md`.
 - [ ] (go) Headless engine host / server + simulation harness.
 - [ ] (go/ts) Bot players + batch self-play for balance analysis.
 - [ ] (both) Grow the CLI demos into playable hotseat clients.

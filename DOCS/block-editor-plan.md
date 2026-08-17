@@ -44,11 +44,14 @@ local source PDFs / ignored extracted images
        spec/data/** + provenance (human-reviewed commit)
 ```
 
-Use a small TypeScript/Bun web application under `tools/block-editor/` with no
-engine imports. The app reads files through a deliberately narrow local bridge:
-asset manifest, session document, source catalog, and chosen data bundle. The
-bridge writes only the user-selected session/export path. This keeps it usable
-as a desktop-local tool now and portable to a browser-hosted shell later.
+Use a small TypeScript/Bun web application under `tools/block-editor/`. The
+authoring surfaces have no engine imports and read files only through a
+deliberately narrow local bridge: asset manifest, session document, source
+catalog, and chosen data bundle. The same host also serves the separate
+`/play/` rules sandbox; only its in-memory server module imports the TypeScript
+engine, and it never writes canonical data. Editor writes remain limited to the
+user-selected session/export path. This keeps the tools desktop-local and
+portable to a browser-hosted shell later.
 
 ## First-screen layout
 

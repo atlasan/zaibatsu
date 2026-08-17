@@ -49,7 +49,7 @@ type Action struct {
 	PlayerID      string        `json:"playerId,omitempty"`
 	CardID        string        `json:"cardId,omitempty"`
 	CardIDs       []string      `json:"cardIds,omitempty"`
-	PawnID        string        `json:"pawnId,omitempty"`  // acting pawn (attacker/actor/searcher/rebooted)
+	PawnID        string        `json:"pawnId,omitempty"` // acting pawn (attacker/actor/searcher/rebooted)
 	TargetID      string        `json:"targetId,omitempty"`
 	TargetIDs     []string      `json:"targetIds,omitempty"`
 	Coord         *domain.Coord `json:"coord,omitempty"`
@@ -57,6 +57,47 @@ type Action struct {
 	Rotation      int           `json:"rotation,omitempty"`
 	ExtraSkulls   int           `json:"extraSkulls,omitempty"`
 	ExtraRollDice int           `json:"extraRollDice,omitempty"`
+}
+
+// EventType identifies a presentation-free engine event for local clients.
+// It mirrors impl/ts/src/engine/index.ts.
+type EventType string
+
+const (
+	EventPhaseAdvanced  EventType = "phase-advanced"
+	EventActionAccepted EventType = "action-accepted"
+	EventRoll           EventType = "roll"
+	EventDraw           EventType = "draw"
+	EventElimination    EventType = "elimination"
+	EventControlChanged EventType = "control-changed"
+	EventValidationFail EventType = "validation-failed"
+	EventWinnerDeclared EventType = "winner-declared"
+)
+
+// EngineEvent is structured output from phase transitions and accepted actions.
+// It contains no display text and is safe for a local client to render directly.
+type EngineEvent struct {
+	Type        EventType    `json:"type"`
+	PlayerID    string       `json:"playerId,omitempty"`
+	ActionType  ActionType   `json:"actionType,omitempty"`
+	FromPhase   domain.Phase `json:"fromPhase,omitempty"`
+	ToPhase     domain.Phase `json:"toPhase,omitempty"`
+	Roll        []int        `json:"roll,omitempty"`
+	PawnID      string       `json:"pawnId,omitempty"`
+	Element     string       `json:"element,omitempty"`
+	ElementID   string       `json:"elementId,omitempty"`
+	FromOwnerID string       `json:"fromOwnerId,omitempty"`
+	ToOwnerID   string       `json:"toOwnerId,omitempty"`
+	CardID      string       `json:"cardId,omitempty"`
+	Message     string       `json:"message,omitempty"`
+}
+
+// TransitionResult reports whether a phase advance or action was accepted.
+type TransitionResult struct {
+	Accepted bool          `json:"accepted"`
+	Phase    domain.Phase  `json:"phase"`
+	Events   []EngineEvent `json:"events"`
+	Error    string        `json:"error,omitempty"`
 }
 
 var colors = []string{"red", "blue", "green", "yellow", "cyan", "magenta", "orange", "white"}
@@ -235,7 +276,7 @@ func draw(s *domain.GameState) (string, bool) {
 // Apply validates and applies a single action, dispatching on its Type to the
 // matching resolver. PlayerID defaults to the current player when empty. This is
 // the engine's single reducer entry point (state × action → state).
-func Apply(s *domain.GameState, gd *domain.GameData, a Action) error {
+func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error) {
 	pid := a.PlayerID
 	if pid == "" {
 		pid = s.CurrentPlayerPtr().ID
@@ -249,86 +290,231 @@ func Apply(s *domain.GameState, gd *domain.GameData, a Action) error {
 
 	switch a.Type {
 	case ActPass:
-		return nil
+		return nil, nil
 	case ActPlaceMarker:
 		p := s.PlayerByID(pid)
 		if p == nil {
-			return fmt.Errorf("unknown player %q", pid)
+			return nil, fmt.Errorf("unknown player %q", pid)
 		}
 		if p.MarkersRemaining() <= 0 {
-			return fmt.Errorf("player %s has no control markers left", p.ID)
+			return nil, fmt.Errorf("player %s has no control markers left", p.ID)
 		}
 		p.ControlMarkersPlaced++
 		checkWin(s)
-		return nil
+		return nil, nil
 	case ActMoveHex:
-		_, err := MoveHex(s, gd, a.PawnID, a.Dir)
-		return err
+		result, err := MoveHex(s, gd, a.PawnID, a.Dir)
+		return result, err
 	case ActDelete:
-		_, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)
-		return err
+		result, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return result, err
 	case ActDeleteMulti:
-		_, err := DeleteMulti(s, gd, a.PawnID, a.TargetIDs, a.ExtraSkulls)
-		return err
+		result, err := DeleteMulti(s, gd, a.PawnID, a.TargetIDs, a.ExtraSkulls)
+		return result, err
 	case ActIcebreakBlk:
 		c, err := coord()
 		if err != nil {
-			return err
+			return nil, err
 		}
-		_, err = IcebreakBlock(s, gd, a.PawnID, c, a.ExtraRollDice)
-		return err
+		result, err := IcebreakBlock(s, gd, a.PawnID, c, a.ExtraRollDice)
+		return result, err
 	case ActIcebreakPawn:
-		_, err := IcebreakPawn(s, gd, a.PawnID, a.TargetID, a.ExtraRollDice)
-		return err
+		result, err := IcebreakPawn(s, gd, a.PawnID, a.TargetID, a.ExtraRollDice)
+		return result, err
 	case ActSearch:
-		_, err := Search(s, gd, a.PawnID, a.Dir, a.Rotation)
-		return err
+		result, err := Search(s, gd, a.PawnID, a.Dir, a.Rotation)
+		return result, err
 	case ActReboot:
-		_, err := Reboot(s, gd, a.PawnID, pid)
-		return err
+		result, err := Reboot(s, gd, a.PawnID, pid)
+		return result, err
 	case ActPlayDelete:
-		_, err := PlayDelete(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraSkulls)
-		return err
+		result, err := PlayDelete(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return result, err
 	case ActPlayIcebreakBlk:
 		c, err := coord()
 		if err != nil {
-			return err
+			return nil, err
 		}
-		_, err = PlayIcebreakBlock(s, gd, pid, a.CardID, a.PawnID, c, a.ExtraRollDice)
-		return err
+		result, err := PlayIcebreakBlock(s, gd, pid, a.CardID, a.PawnID, c, a.ExtraRollDice)
+		return result, err
 	case ActPlayIcebreakPawn:
-		_, err := PlayIcebreakPawn(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraRollDice)
-		return err
+		result, err := PlayIcebreakPawn(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraRollDice)
+		return result, err
 	case ActPlaySearch:
-		_, err := PlaySearch(s, gd, pid, a.CardID, a.PawnID, a.Dir, a.Rotation)
-		return err
+		result, err := PlaySearch(s, gd, pid, a.CardID, a.PawnID, a.Dir, a.Rotation)
+		return result, err
 	case ActPlayReboot:
-		_, err := PlayReboot(s, gd, pid, a.CardIDs, a.PawnID)
-		return err
+		result, err := PlayReboot(s, gd, pid, a.CardIDs, a.PawnID)
+		return result, err
 	case ActAttachPawn:
-		return AttachToPawn(s, gd, pid, a.CardID, a.TargetID)
+		return nil, AttachToPawn(s, gd, pid, a.CardID, a.TargetID)
 	case ActAttachEnemy:
-		return AttachToEnemy(s, gd, pid, a.CardID, a.PawnID, a.TargetID)
+		return nil, AttachToEnemy(s, gd, pid, a.CardID, a.PawnID, a.TargetID)
 	case ActAttachBlock:
 		c, err := coord()
 		if err != nil {
-			return err
+			return nil, err
 		}
-		return AttachToBlock(s, gd, pid, a.CardID, a.PawnID, c)
+		return nil, AttachToBlock(s, gd, pid, a.CardID, a.PawnID, c)
 	default:
-		return fmt.Errorf("unknown action %q", a.Type)
+		return nil, fmt.Errorf("unknown action %q", a.Type)
 	}
+}
+
+// Apply is the compatibility reducer entry point. It deliberately does not
+// impose a phase; callers using live turns should use ApplyWithEvents instead.
+func Apply(s *domain.GameState, gd *domain.GameData, a Action) error {
+	_, err := applyResult(s, gd, a)
+	return err
+}
+
+type stateWatch struct {
+	hands       map[string][]string
+	markers     map[string]int
+	pawnOwners  map[string]string
+	blockOwners map[string]string
+	eliminated  map[string]bool
+	winnerID    string
+}
+
+func watchState(s *domain.GameState) stateWatch {
+	w := stateWatch{hands: map[string][]string{}, markers: map[string]int{}, pawnOwners: map[string]string{}, blockOwners: map[string]string{}, eliminated: map[string]bool{}, winnerID: s.WinnerID}
+	for _, p := range s.Players {
+		w.hands[p.ID] = append([]string{}, p.Hand...)
+		w.markers[p.ID] = p.ControlMarkersPlaced
+	}
+	for _, pawn := range s.Cybernet.Pawns {
+		w.pawnOwners[pawn.PawnID] = pawn.OwnerID
+	}
+	for _, block := range s.Cybernet.Blocks {
+		w.blockOwners[fmt.Sprintf("%d,%d", block.Coord.Q, block.Coord.R)] = block.OwnerID
+	}
+	for _, pawnID := range s.Eliminated {
+		w.eliminated[pawnID] = true
+	}
+	return w
+}
+
+func addedCards(before, after []string) []string {
+	counts := map[string]int{}
+	for _, card := range before {
+		counts[card]++
+	}
+	out := []string{}
+	for _, card := range after {
+		if counts[card] > 0 {
+			counts[card]--
+			continue
+		}
+		out = append(out, card)
+	}
+	return out
+}
+
+func deltaEvents(s *domain.GameState, before stateWatch) []EngineEvent {
+	events := []EngineEvent{}
+	for _, player := range s.Players {
+		for _, cardID := range addedCards(before.hands[player.ID], player.Hand) {
+			events = append(events, EngineEvent{Type: EventDraw, PlayerID: player.ID, CardID: cardID})
+		}
+		if before.markers[player.ID] != player.ControlMarkersPlaced {
+			events = append(events, EngineEvent{Type: EventControlChanged, PlayerID: player.ID, Element: "block", ElementID: "markers", ToOwnerID: fmt.Sprintf("%d", player.ControlMarkersPlaced)})
+		}
+	}
+	for _, pawn := range s.Cybernet.Pawns {
+		if old, ok := before.pawnOwners[pawn.PawnID]; ok && old != pawn.OwnerID {
+			events = append(events, EngineEvent{Type: EventControlChanged, Element: "pawn", ElementID: pawn.PawnID, FromOwnerID: old, ToOwnerID: pawn.OwnerID})
+		}
+	}
+	for _, block := range s.Cybernet.Blocks {
+		key := fmt.Sprintf("%d,%d", block.Coord.Q, block.Coord.R)
+		if old, ok := before.blockOwners[key]; ok && old != block.OwnerID {
+			events = append(events, EngineEvent{Type: EventControlChanged, Element: "block", ElementID: key, FromOwnerID: old, ToOwnerID: block.OwnerID})
+		}
+	}
+	for _, pawnID := range s.Eliminated {
+		if !before.eliminated[pawnID] {
+			events = append(events, EngineEvent{Type: EventElimination, PawnID: pawnID})
+		}
+	}
+	if before.winnerID == "" && s.WinnerID != "" {
+		events = append(events, EngineEvent{Type: EventWinnerDeclared, PlayerID: s.WinnerID})
+	}
+	return events
+}
+
+func rollFrom(result any) []int {
+	switch value := result.(type) {
+	case DeleteResult:
+		return value.Roll
+	case DeleteMultiResult:
+		return value.Roll
+	case IcebreakResult:
+		return value.Roll
+	default:
+		return nil
+	}
+}
+
+// ApplyWithEvents applies an action only during the action phase and returns
+// structured, client-safe output instead of display text.
+func ApplyWithEvents(s *domain.GameState, gd *domain.GameData, a Action) TransitionResult {
+	playerID := a.PlayerID
+	if playerID == "" {
+		playerID = s.CurrentPlayerPtr().ID
+	}
+	if s.Phase != domain.PhaseAction {
+		message := fmt.Sprintf("actions are only accepted during the action phase (current: %s)", s.Phase)
+		return TransitionResult{Phase: s.Phase, Error: message, Events: []EngineEvent{{Type: EventValidationFail, PlayerID: playerID, ActionType: a.Type, Message: message}}}
+	}
+	if playerID != s.CurrentPlayerPtr().ID {
+		message := "only the active player may act"
+		return TransitionResult{Phase: s.Phase, Error: message, Events: []EngineEvent{{Type: EventValidationFail, PlayerID: playerID, ActionType: a.Type, Message: message}}}
+	}
+	before := watchState(s)
+	result, err := applyResult(s, gd, a)
+	if err != nil {
+		return TransitionResult{Phase: s.Phase, Error: err.Error(), Events: []EngineEvent{{Type: EventValidationFail, PlayerID: playerID, ActionType: a.Type, Message: err.Error()}}}
+	}
+	events := []EngineEvent{{Type: EventActionAccepted, PlayerID: playerID, ActionType: a.Type}}
+	if roll := rollFrom(result); len(roll) > 0 {
+		events = append(events, EngineEvent{Type: EventRoll, PlayerID: playerID, ActionType: a.Type, Roll: roll})
+	}
+	events = append(events, deltaEvents(s, before)...)
+	return TransitionResult{Accepted: true, Phase: s.Phase, Events: events}
+}
+
+// AdvancePhase advances exactly one live turn phase and runs mandatory phase work.
+func AdvancePhase(s *domain.GameState, _ *domain.GameData) TransitionResult {
+	before, from := watchState(s), s.Phase
+	switch s.Phase {
+	case domain.PhaseBeginning:
+		s.CurrentPlayerPtr().OncePerTurnUsed = map[string]bool{}
+		s.Phase = domain.PhaseAction
+	case domain.PhaseAction:
+		s.Phase = domain.PhaseRecycle
+		recycle(s, s.CurrentPlayerPtr())
+	case domain.PhaseRecycle:
+		s.Phase = domain.PhaseEnd
+		checkWin(s)
+	case domain.PhaseEnd:
+		if s.WinnerID == "" {
+			s.CurrentPlayer = (s.CurrentPlayer + 1) % len(s.Players)
+			s.Turn++
+			s.Phase = domain.PhaseBeginning
+		}
+	}
+	events := []EngineEvent{{Type: EventPhaseAdvanced, PlayerID: s.CurrentPlayerPtr().ID, FromPhase: from, ToPhase: s.Phase}}
+	events = append(events, deltaEvents(s, before)...)
+	return TransitionResult{Accepted: true, Phase: s.Phase, Events: events}
 }
 
 // RunTurn executes the four phases of the current player's turn, applying the
 // given action-phase actions in order, then advances to the next player.
 func RunTurn(s *domain.GameState, gd *domain.GameData, actions []Action) error {
-	// 1. Beginning: clear once-per-turn markers; (begin-of-turn effects: planned).
+	// Preserve the old convenience API while delegating to the live phase API.
 	s.Phase = domain.PhaseBeginning
-	s.CurrentPlayerPtr().OncePerTurnUsed = map[string]bool{}
-
-	// 2. Action.
-	s.Phase = domain.PhaseAction
+	AdvancePhase(s, gd)
 	for _, a := range actions {
 		if s.WinnerID != "" {
 			break
@@ -338,18 +524,9 @@ func RunTurn(s *domain.GameState, gd *domain.GameData, actions []Action) error {
 		}
 	}
 
-	// 3. Recycle: refill/trim hand to max hand size.
-	s.Phase = domain.PhaseRecycle
-	recycle(s, s.CurrentPlayerPtr())
-
-	// 4. End: check win, advance.
-	s.Phase = domain.PhaseEnd
-	checkWin(s)
-	if s.WinnerID == "" {
-		s.CurrentPlayer = (s.CurrentPlayer + 1) % len(s.Players)
-		s.Turn++
-		s.Phase = domain.PhaseBeginning
-	}
+	AdvancePhase(s, gd)
+	AdvancePhase(s, gd)
+	AdvancePhase(s, gd)
 	return nil
 }
 

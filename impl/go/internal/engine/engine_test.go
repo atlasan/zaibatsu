@@ -138,3 +138,60 @@ func TestCannotOverplaceMarkers(t *testing.T) {
 		t.Errorf("expected error placing marker with none remaining")
 	}
 }
+
+func TestLivePhaseAPI(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 41})
+	if got := AdvancePhase(s, gd).Phase; got != domain.PhaseAction {
+		t.Fatalf("beginning advance = %s", got)
+	}
+	recycle := AdvancePhase(s, gd)
+	if recycle.Phase != domain.PhaseRecycle {
+		t.Fatalf("action advance = %s", recycle.Phase)
+	}
+	foundDraw := false
+	for _, event := range recycle.Events {
+		if event.Type == EventDraw {
+			foundDraw = true
+		}
+	}
+	if !foundDraw {
+		t.Error("recycle did not report a draw")
+	}
+	if got := AdvancePhase(s, gd).Phase; got != domain.PhaseEnd {
+		t.Fatalf("recycle advance = %s", got)
+	}
+	if got := AdvancePhase(s, gd).Phase; got != domain.PhaseBeginning {
+		t.Fatalf("end advance = %s", got)
+	}
+	if s.CurrentPlayer != 1 {
+		t.Errorf("current player = %d, want 1", s.CurrentPlayer)
+	}
+}
+
+func TestApplyWithEventsRejectsIllegalPhaseAndReportsControl(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 42})
+	blocked := ApplyWithEvents(s, gd, Action{Type: ActPlaceMarker})
+	if blocked.Accepted || blocked.Events[0].Type != EventValidationFail {
+		t.Fatalf("expected validation failure, got %#v", blocked)
+	}
+	AdvancePhase(s, gd)
+	accepted := ApplyWithEvents(s, gd, Action{Type: ActPlaceMarker})
+	if !accepted.Accepted {
+		t.Fatalf("expected accepted action: %#v", accepted)
+	}
+	found := false
+	for _, event := range accepted.Events {
+		if event.Type == EventControlChanged {
+			found = true
+		}
+	}
+	if !found {
+		t.Error("accepted marker placement did not report control change")
+	}
+	wrong := ApplyWithEvents(s, gd, Action{Type: ActPass, PlayerID: "p2"})
+	if wrong.Error != "only the active player may act" {
+		t.Errorf("wrong-player error = %q", wrong.Error)
+	}
+}

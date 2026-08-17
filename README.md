@@ -32,6 +32,20 @@ tracked through the documentation and provenance workflow.
 
 ## Quick start
 
+**Windows shortcuts**
+
+From the repository root, double-click or run these commands from `cmd.exe`:
+
+| Command | Purpose |
+|---|---|
+| `run-sandbox.bat` | Start the local Speedrunners sandbox at `http://localhost:4173/play/`. |
+| `run-editor.bat` | Start the local game-data editor at `http://localhost:4173/`. |
+| `check-docs.bat` | Validate governed docs, rebuild knowledge, and validate specs/artifacts. |
+| `test-engines.bat` | Run the Bun and Go regression suites. |
+
+The two launchers run the same local host; use only one at a time. They keep
+the terminal open while the server is running. Press `Ctrl+C` to stop it.
+
 **Go**
 
 ```bash

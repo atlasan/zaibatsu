@@ -49,6 +49,10 @@ original source -> transcript / rules digest / ADR -> schema -> data + provenanc
 8. Register new authored documentation in `DOCS/registry.json`; rule modules
    require stable IDs, source locators, applicability, and maturity. Run
    `bun tools/validate-docs.ts` before review.
+9. A local client or tool session must keep canonical data read-only, use an
+   engine-owned transition/snapshot contract, and record a reproducible trace
+   checksum when it supports replay or import/export. Update its workstream
+   plan and parity evidence with the server/client boundary.
 
 ## Decision and memory policy
 

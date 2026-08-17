@@ -4,6 +4,8 @@ import {
   controlMarkersFor,
   newGame,
   applyAction,
+  advancePhase,
+  applyActionWithEvents,
   runTurn,
   winner,
   type Config,
@@ -63,6 +65,40 @@ describe("turn loop", () => {
     runTurn(s, data);
     runTurn(s, data);
     expect(s.currentPlayer).toBe(0);
+  });
+});
+
+describe("live phase API", () => {
+  test("advances through phases and reports recycle draws", () => {
+    const s = game(["A", "B"], 41);
+    expect(advancePhase(s, data).phase).toBe("action");
+    const recycle = advancePhase(s, data);
+    expect(recycle.phase).toBe("recycle");
+    expect(recycle.events.some((event) => event.type === "draw")).toBe(true);
+    expect(advancePhase(s, data).phase).toBe("end");
+    expect(advancePhase(s, data).phase).toBe("beginning");
+    expect(s.currentPlayer).toBe(1);
+  });
+
+  test("rejects illegal-phase and non-active-player actions without mutation", () => {
+    const s = game(["A", "B"], 42);
+    const before = s.players[0]!.controlMarkersPlaced;
+    const blocked = applyActionWithEvents(s, data, { type: "place-marker" });
+    expect(blocked.accepted).toBe(false);
+    expect(blocked.events[0]!.type).toBe("validation-failed");
+    expect(s.players[0]!.controlMarkersPlaced).toBe(before);
+    advancePhase(s, data);
+    const wrongPlayer = applyActionWithEvents(s, data, { type: "pass", playerId: "p2" });
+    expect(wrongPlayer.error).toBe("only the active player may act");
+  });
+
+  test("reports accepted actions and state changes", () => {
+    const s = game(["A", "B"], 43);
+    advancePhase(s, data);
+    const result = applyActionWithEvents(s, data, { type: "place-marker" });
+    expect(result.accepted).toBe(true);
+    expect(result.events.some((event) => event.type === "action-accepted")).toBe(true);
+    expect(result.events.some((event) => event.type === "control-changed")).toBe(true);
   });
 });
 

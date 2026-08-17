@@ -43,7 +43,9 @@ Speedrunners, Shadowraiders (2–4p), Chaos (solo), Outbreak (solo), Total War
 ## Phase 5 — Targets
 - CLI player (both langs) — already the demo entry point; grow into a playable
   hotseat.
-- Web target (TS): render the Cybernet, drive the engine via actions.
+- Local web sandbox (TS): render the Cybernet, drive live engine phases via
+  structured actions/events, and replay checksum-pinned traces. See
+  [the sandbox workstream](web-sandbox-plan.md); public hosting remains later.
 - Server/native/WASM (Go): headless engine host, bots, and simulation harness.
 - Bots & simulation: AI players + batch self-play for balance analysis.
 

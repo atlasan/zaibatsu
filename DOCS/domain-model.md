@@ -156,6 +156,26 @@ _Planned:_ attached cards and placed counters on the board.
 - `common` (uncontrolled control cards), `reserve` (unused pieces)
 - `rng` (seeded), `winnerId?`
 
+### Live transition and trace interfaces
+
+`AdvancePhase` / `advancePhase` advances exactly one phase: `beginning` clears
+the active player's start-of-turn markers and enters `action`; `action` enters
+`recycle` and refills/trims the hand; `recycle` enters `end` and checks victory;
+`end` advances the player and turn, returning to `beginning` when no player won.
+`RunTurn` / `runTurn` remains the compatibility convenience API.
+
+`ApplyWithEvents` / `applyActionWithEvents` accepts actions only in `action`
+for the active player. A `TransitionResult` is `{ accepted, phase, events,
+error? }`. Events are structured records, not display strings: phase advance,
+accepted action, roll, draw, elimination, control change, winner declaration,
+or validation failure. The local sandbox uses these events and the canonical
+snapshot; it does not add web-only state to `GameState`.
+
+A local play trace is `{ format, setup: { playerNames, seed }, dataChecksum,
+commands }`, where commands are accepted `{ kind: 'phase' }` or `{ kind:
+'action', action }` inputs. The checksum binds a trace to the exact local data
+inputs; it is a local tooling format rather than shared runtime game data.
+
 ---
 
 ## Setup constants (Speedrunners)

@@ -49,6 +49,15 @@ These are useful detailed guides, but do not own live project status:
 
 - [Engine resume plan](engine-resume-plan.md)
 - [Standalone game-data editor plan](block-editor-plan.md)
+- [Local Speedrunners rules sandbox](web-sandbox-plan.md)
+
+## Local command shortcuts
+
+Windows contributors can use the root launchers documented in
+[the repository README](../README.md#quick-start): `run-sandbox.bat`,
+`run-editor.bat`, `check-docs.bat`, and `test-engines.bat`. The launchers are
+convenience wrappers only; they do not change the documentation, engine, or
+source-data obligations above.
 
 Original upstream assets are ignored under `DOCS/Original/`; their identities
 and checksums are cataloged in

@@ -6329,6 +6329,30 @@
       }
     },
     {
+      "entryId": "doc/docs/component-model.md",
+      "kind": "doc",
+      "localId": "docs/component-model.md",
+      "title": "Component data model — what's inside a block and a card",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/component-model.md"
+        ],
+        "docPaths": [
+          "DOCS/component-model.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
       "entryId": "doc/docs/domain-model.md",
       "kind": "doc",
       "localId": "docs/domain-model.md",
@@ -7043,6 +7067,30 @@
         ],
         "docPaths": [
           "DOCS/turn-flow.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
+      "entryId": "doc/docs/web-sandbox-plan.md",
+      "kind": "doc",
+      "localId": "docs/web-sandbox-plan.md",
+      "title": "Local Speedrunners rules sandbox",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/web-sandbox-plan.md"
+        ],
+        "docPaths": [
+          "DOCS/web-sandbox-plan.md"
         ],
         "assetIds": [],
         "sourceIds": []

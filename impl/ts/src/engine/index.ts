@@ -78,6 +78,40 @@ export interface Action {
   extraRollDice?: number;
 }
 
+/** Structured engine output for local clients. It is intentionally presentation-free. */
+export type EngineEventType =
+  | "phase-advanced"
+  | "action-accepted"
+  | "roll"
+  | "draw"
+  | "elimination"
+  | "control-changed"
+  | "winner-declared"
+  | "validation-failed";
+
+export interface EngineEvent {
+  type: EngineEventType;
+  playerId?: string;
+  actionType?: ActionType;
+  fromPhase?: import("../domain/types.ts").Phase;
+  toPhase?: import("../domain/types.ts").Phase;
+  roll?: number[];
+  pawnId?: string;
+  element?: "pawn" | "block";
+  elementId?: string;
+  fromOwnerId?: string;
+  toOwnerId?: string;
+  cardId?: string;
+  message?: string;
+}
+
+export interface TransitionResult {
+  accepted: boolean;
+  phase: import("../domain/types.ts").Phase;
+  events: EngineEvent[];
+  error?: string;
+}
+
 const COLORS = [
   "red",
   "blue",
@@ -221,7 +255,7 @@ function draw(s: GameState): string | undefined {
  * resolver. `playerId` defaults to the current player when omitted. The engine's
  * single reducer entry point (state × action → state).
  */
-export function applyAction(s: GameState, gd: GameData, a: Action): void {
+function executeAction(s: GameState, gd: GameData, a: Action): unknown {
   const pid = a.playerId ?? currentPlayer(s).id;
   const coord = (): Coord => {
     if (!a.coord) throw new Error(`action "${a.type}" requires a coord`);
@@ -289,34 +323,149 @@ export function applyAction(s: GameState, gd: GameData, a: Action): void {
   }
 }
 
+/** Compatibility reducer entry point. It deliberately does not impose a phase. */
+export function applyAction(s: GameState, gd: GameData, a: Action): void {
+  executeAction(s, gd, a);
+}
+
+interface StateWatch {
+  hands: Map<string, string[]>;
+  markers: Map<string, number>;
+  pawnOwners: Map<string, string>;
+  blockOwners: Map<string, string>;
+  eliminated: Set<string>;
+  winnerId?: string;
+}
+
+function watchState(s: GameState): StateWatch {
+  return {
+    hands: new Map(s.players.map((p) => [p.id, [...p.hand]])),
+    markers: new Map(s.players.map((p) => [p.id, p.controlMarkersPlaced])),
+    pawnOwners: new Map(s.cybernet.pawns.map((p) => [p.pawnId, p.ownerId])),
+    blockOwners: new Map(s.cybernet.blocks.map((b) => [`${b.coord.q},${b.coord.r}`, b.ownerId ?? ""])),
+    eliminated: new Set(s.eliminated),
+    winnerId: s.winnerId,
+  };
+}
+
+function addedCards(before: string[], after: string[]): string[] {
+  const counts = new Map<string, number>();
+  for (const card of before) counts.set(card, (counts.get(card) ?? 0) + 1);
+  return after.filter((card) => {
+    const count = counts.get(card) ?? 0;
+    if (count > 0) {
+      counts.set(card, count - 1);
+      return false;
+    }
+    return true;
+  });
+}
+
+function deltaEvents(s: GameState, before: StateWatch): EngineEvent[] {
+  const events: EngineEvent[] = [];
+  for (const player of s.players) {
+    for (const cardId of addedCards(before.hands.get(player.id) ?? [], player.hand)) {
+      events.push({ type: "draw", playerId: player.id, cardId });
+    }
+    if ((before.markers.get(player.id) ?? 0) !== player.controlMarkersPlaced) {
+      events.push({ type: "control-changed", playerId: player.id, element: "block", elementId: "markers", toOwnerId: String(player.controlMarkersPlaced) });
+    }
+  }
+  for (const pawn of s.cybernet.pawns) {
+    const fromOwnerId = before.pawnOwners.get(pawn.pawnId);
+    if (fromOwnerId !== undefined && fromOwnerId !== pawn.ownerId) {
+      events.push({ type: "control-changed", element: "pawn", elementId: pawn.pawnId, fromOwnerId, toOwnerId: pawn.ownerId });
+    }
+  }
+  for (const block of s.cybernet.blocks) {
+    const elementId = `${block.coord.q},${block.coord.r}`;
+    const fromOwnerId = before.blockOwners.get(elementId);
+    const toOwnerId = block.ownerId ?? "";
+    if (fromOwnerId !== undefined && fromOwnerId !== toOwnerId) {
+      events.push({ type: "control-changed", element: "block", elementId, fromOwnerId, toOwnerId });
+    }
+  }
+  for (const pawnId of s.eliminated) {
+    if (!before.eliminated.has(pawnId)) events.push({ type: "elimination", pawnId });
+  }
+  if (!before.winnerId && s.winnerId) events.push({ type: "winner-declared", playerId: s.winnerId });
+  return events;
+}
+
+function rollFrom(result: unknown): number[] | undefined {
+  if (typeof result === "object" && result !== null && "roll" in result) {
+    const roll = (result as { roll?: unknown }).roll;
+    if (Array.isArray(roll) && roll.every((die) => typeof die === "number")) return roll;
+  }
+  return undefined;
+}
+
+/** Applies an action only during the action phase and returns client-safe events. */
+export function applyActionWithEvents(s: GameState, gd: GameData, a: Action): TransitionResult {
+  const playerId = a.playerId ?? currentPlayer(s).id;
+  if (s.phase !== "action") {
+    return { accepted: false, phase: s.phase, error: `actions are only accepted during the action phase (current: ${s.phase})`, events: [{ type: "validation-failed", playerId, actionType: a.type, message: `actions are only accepted during the action phase (current: ${s.phase})` }] };
+  }
+  if (playerId !== currentPlayer(s).id) {
+    return { accepted: false, phase: s.phase, error: "only the active player may act", events: [{ type: "validation-failed", playerId, actionType: a.type, message: "only the active player may act" }] };
+  }
+  const before = watchState(s);
+  try {
+    const result = executeAction(s, gd, a);
+    const events: EngineEvent[] = [{ type: "action-accepted", playerId, actionType: a.type }];
+    const roll = rollFrom(result);
+    if (roll) events.push({ type: "roll", playerId, actionType: a.type, roll });
+    events.push(...deltaEvents(s, before));
+    return { accepted: true, phase: s.phase, events };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "invalid action";
+    return { accepted: false, phase: s.phase, error: message, events: [{ type: "validation-failed", playerId, actionType: a.type, message }] };
+  }
+}
+
+/** Advances one live turn phase and executes that phase's mandatory bookkeeping. */
+export function advancePhase(s: GameState, _gd: GameData): TransitionResult {
+  const before = watchState(s);
+  const fromPhase = s.phase;
+  switch (s.phase) {
+    case "beginning":
+      currentPlayer(s).oncePerTurnUsed = {};
+      s.phase = "action";
+      break;
+    case "action":
+      s.phase = "recycle";
+      recycle(s, currentPlayer(s));
+      break;
+    case "recycle":
+      s.phase = "end";
+      checkWin(s);
+      break;
+    case "end":
+      if (!s.winnerId) {
+        s.currentPlayer = (s.currentPlayer + 1) % s.players.length;
+        s.turn++;
+        s.phase = "beginning";
+      }
+      break;
+  }
+  return { accepted: true, phase: s.phase, events: [{ type: "phase-advanced", playerId: currentPlayer(s).id, fromPhase, toPhase: s.phase }, ...deltaEvents(s, before)] };
+}
+
 /**
  * Executes the four phases of the current player's turn, applying the given
  * action-phase actions in order, then advances to the next player.
  */
 export function runTurn(s: GameState, gd: GameData, actions: Action[] = []): void {
-  // 1. Beginning: clear once-per-turn markers; (begin-of-turn effects: planned).
+  // Preserve the old convenience API while delegating to the live phase API.
   s.phase = "beginning";
-  currentPlayer(s).oncePerTurnUsed = {};
-
-  // 2. Action.
-  s.phase = "action";
+  advancePhase(s, gd);
   for (const a of actions) {
     if (s.winnerId) break;
     applyAction(s, gd, a);
   }
-
-  // 3. Recycle: refill/trim hand to max hand size.
-  s.phase = "recycle";
-  recycle(s, currentPlayer(s));
-
-  // 4. End: check win, advance.
-  s.phase = "end";
-  checkWin(s);
-  if (!s.winnerId) {
-    s.currentPlayer = (s.currentPlayer + 1) % s.players.length;
-    s.turn++;
-    s.phase = "beginning";
-  }
+  advancePhase(s, gd);
+  advancePhase(s, gd);
+  advancePhase(s, gd);
 }
 
 /** Brings a player's hand to exactly maxHandSize (draw up / discard down). */

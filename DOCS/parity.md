@@ -38,6 +38,9 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Load game data | `data.Load(dir)` | `loadGameData(dir)` |
 | New game | `engine.NewGame(cfg)` | `newGame(cfg)` |
 | Apply action (reducer) | `engine.Apply(state, gd, action)` | `applyAction(state, gd, action)` |
+| Apply live action + events | `engine.ApplyWithEvents(state, gd, action)` | `applyActionWithEvents(state, gd, action)` |
+| Advance one live phase | `engine.AdvancePhase(state, gd)` | `advancePhase(state, gd)` |
+| Transition contract | `engine.TransitionResult` / `engine.EngineEvent` | `TransitionResult` / `EngineEvent` |
 | Advance one full turn | `engine.RunTurn(state, gd, actions)` | `runTurn(state, gd, actions)` |
 | Action (tagged union) | `engine.Action{Type,…}` | `Action {type,…}` |
 | Control markers by player count | `engine.ControlMarkersFor(n)` | `controlMarkersFor(n)` |
@@ -116,6 +119,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Data loader | ✅ | ✅ | reads `spec/data/speedrunners` |
 | Setup + marker counts | ✅ | ✅ | |
 | Turn loop + phases | ✅ | ✅ | |
+| Live phase transitions + structured events | ✅ | ✅ | action-phase gate; rolls, draws, eliminations, control changes, winners, and validation failures are structured |
 | Unified action reducer | ✅ | ✅ | `Apply` dispatches every ability/card/attach action; `RunTurn` drives a turn; identical (seed 123 delete) |
 | Canonical snapshot + golden games | ✅ | ✅ | byte-identical snapshots; both mirrors assert the SAME `golden/*.snap` fixtures (whole-game + combat scenario) |
 | Win detection | ✅ | ✅ | |

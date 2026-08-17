@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
 import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession } from "./model";
+import { createPlaySession, exportPlayTrace, getPlaySession, importPlayTrace, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
 const editorRoot = import.meta.dir;
 const repoRoot = resolve(editorRoot, "../..");
@@ -43,6 +44,26 @@ const server = Bun.serve({
     const url = new URL(request.url);
     try {
       if (url.pathname === "/api/assets") return json({ assets: assetRecords() });
+      // Play sessions are intentionally in-memory. These routes never write
+      // canonical spec data or editor drafts.
+      if (url.pathname === "/api/play/sessions" && request.method === "POST") {
+        try { return json(createPlaySession(await body<PlaySetup>(request)), 201); } catch (error) { return json({ error: error instanceof Error ? error.message : "Invalid play setup" }, 400); }
+      }
+      if (url.pathname === "/api/play/traces/import" && request.method === "POST") {
+        try { return json(importPlayTrace(await body<PlayTrace>(request)), 201); } catch (error) { return json({ error: error instanceof Error ? error.message : "Invalid play trace" }, 400); }
+      }
+      if (url.pathname.startsWith("/api/play/sessions/")) {
+        const suffix = url.pathname.slice("/api/play/sessions/".length).split("/");
+        const id = safeName(suffix[0]);
+        if (!id) return json({ error: "Invalid play session id" }, 400);
+        try {
+          if (suffix.length === 1 && request.method === "GET") return json(getPlaySession(id));
+          if (suffix[1] === "command" && request.method === "POST") return json(submitPlayCommand(id, await body<PlayCommand>(request)));
+          if (suffix[1] === "undo" && request.method === "POST") return json(undoPlayCommand(id));
+          if (suffix[1] === "reset" && request.method === "POST") return json(resetPlaySession(id, await body<PlaySetup>(request)));
+          if (suffix[1] === "trace" && request.method === "GET") return json(exportPlayTrace(id));
+        } catch (error) { return json({ error: error instanceof Error ? error.message : "Play session error" }, 400); }
+      }
       if (url.pathname === "/api/block-assets") return json({ assets: blockAssets() });
       if (url.pathname === "/api/action-card-assets") return json({ assets: actionCardAssets() });
       if (url.pathname === "/api/block-layouts") return json(blockLayouts());
@@ -61,7 +82,7 @@ const server = Bun.serve({
         await Bun.write(join(exportsRoot, `${name}.patch.json`), `${JSON.stringify(patch, null, 2)}\n`); await Bun.write(join(exportsRoot, `${name}.report.json`), `${JSON.stringify(report, null, 2)}\n`); return json({ ok: true, patch: `tools/block-editor/exports/${name}.patch.json`, report: `tools/block-editor/exports/${name}.report.json` });
       }
       if (url.pathname.startsWith("/api/artifact/")) { const assetId = decodeURIComponent(url.pathname.slice("/api/artifact/".length)); const asset = assetRecords().find((record) => record.assetId === assetId); const output = asset?.outputs?.png ? resolve(repoRoot, asset.outputs.png) : null; if (!asset || !output || !output.startsWith(repoRoot) || !existsSync(output)) return json({ error: "Local extracted image is unavailable. Run the artifact refresh first." }, 404); return new Response(Bun.file(output), { headers: { "Content-Type": contentType(output), "Cache-Control": "no-store" } }); }
-      const requested = url.pathname === "/" ? "index.html" : url.pathname === "/action-cards" || url.pathname === "/action-cards/" ? "action-cards/index.html" : url.pathname.slice(1); const file = resolve(publicRoot, requested); if (!file.startsWith(publicRoot) || !existsSync(file)) return new Response("Not found", { status: 404 }); return new Response(Bun.file(file), { headers: { "Content-Type": contentType(file) } });
+      const requested = url.pathname === "/" ? "index.html" : url.pathname === "/action-cards" || url.pathname === "/action-cards/" ? "action-cards/index.html" : url.pathname === "/play" || url.pathname === "/play/" ? "play/index.html" : url.pathname.slice(1); const file = resolve(publicRoot, requested); if (!file.startsWith(publicRoot) || !existsSync(file)) return new Response("Not found", { status: 404 }); return new Response(Bun.file(file), { headers: { "Content-Type": contentType(file) } });
     } catch (error) { return json({ error: error instanceof Error ? error.message : "Unexpected editor error" }, 500); }
   },
 });
