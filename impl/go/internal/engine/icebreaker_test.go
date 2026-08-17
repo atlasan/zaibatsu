@@ -283,3 +283,29 @@ func TestIcebreakBlackIceEliminatesAttacker(t *testing.T) {
 	}
 	t.Skip("no failing seed found in range")
 }
+
+func TestIcebreakGrantedByAttachment(t *testing.T) {
+	// A pawn with no innate Icebreaker gains it from an attached add-on, so the
+	// Icebreak is allowed (err nil regardless of the roll outcome).
+	s, gd, atk, coord := icebreakScenario(t, "data-haven")
+	pawn, _ := gd.PawnByID(atk)
+	pawn.Abilities = nil // strip innate abilities
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", Grants: []string{"icebreaker"}}
+	pob := s.Cybernet.PawnByID(atk)
+	pob.Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if _, err := IcebreakBlock(s, gd, atk, coord, 0); err != nil {
+		t.Fatalf("granted Icebreaker should let the pawn Icebreak, got: %v", err)
+	}
+}
+
+func TestIcebreakRemovedByAttachment(t *testing.T) {
+	// A pawn with innate Icebreaker (speedrunner) loses it to an add-on that
+	// removes it, so the Icebreak is rejected.
+	s, gd, atk, coord := icebreakScenario(t, "data-haven")
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", Removes: []string{"icebreaker"}}
+	pob := s.Cybernet.PawnByID(atk)
+	pob.Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if _, err := IcebreakBlock(s, gd, atk, coord, 0); err == nil {
+		t.Fatal("removed Icebreaker should prevent the Icebreak")
+	}
+}

@@ -90,7 +90,7 @@ func checkIcebreaker(s *domain.GameState, gd *domain.GameData, attackerID string
 	if !ok {
 		return nil, nil, fmt.Errorf("unknown attacker pawn %q", attackerID)
 	}
-	ability := findAbility(atk, "icebreaker")
+	ability := effectiveAbility(gd, atk, atkPob.Attachments, "icebreaker")
 	if ability == nil || ability.Activation == "none" {
 		return nil, nil, fmt.Errorf("pawn %q cannot activate Icebreaker", attackerID)
 	}
@@ -105,9 +105,9 @@ func checkIcebreaker(s *domain.GameState, gd *domain.GameData, attackerID string
 }
 
 // markIcebreakerUsed records the once-per-turn marker if applicable.
-func markIcebreakerUsed(gd *domain.GameData, owner *domain.Player, attackerID string) {
+func markIcebreakerUsed(gd *domain.GameData, owner *domain.Player, attackerID string, atts []domain.Attachment) {
 	if atk, ok := gd.PawnByID(attackerID); ok {
-		if ab := findAbility(atk, "icebreaker"); ab != nil && ab.Activation == "once-per-turn" {
+		if ab := effectiveAbility(gd, atk, atts, "icebreaker"); ab != nil && ab.Activation == "once-per-turn" {
 			owner.OncePerTurnUsed[abilityUsedKey("icebreaker", attackerID)] = true
 		}
 	}
@@ -170,7 +170,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 		res.AttackerEliminated = resolveBlackIceFailure(s, isBlack, attackerID, res.Success)
 	}
 
-	markIcebreakerUsed(gd, owner, attackerID)
+	markIcebreakerUsed(gd, owner, attackerID, atkPob.Attachments)
 	return res, nil
 }
 
@@ -215,6 +215,6 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue == domain.IceBlack, attackerID, res.Success)
 	}
 
-	markIcebreakerUsed(gd, owner, attackerID)
+	markIcebreakerUsed(gd, owner, attackerID, atkPob.Attachments)
 	return res, nil
 }

@@ -24,7 +24,7 @@ import {
   type Player,
 } from "../domain/types.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
-import { abilityUsedKey, eliminatePawn, findAbility } from "./combat.ts";
+import { abilityUsedKey, effectiveAbility, eliminatePawn } from "./combat.ts";
 import { discardAttachments } from "./attach.ts";
 import { checkWin } from "./win.ts";
 
@@ -76,7 +76,7 @@ function checkIcebreaker(
   if (!atkPob) throw new Error(`attacker "${attackerId}" is not on the board`);
   const atk = pawnById(gd, attackerId);
   if (!atk) throw new Error(`unknown attacker pawn "${attackerId}"`);
-  const ability = findAbility(atk, "icebreaker");
+  const ability = effectiveAbility(gd, atk, atkPob.attachments, "icebreaker");
   if (!ability || ability.activation === "none") {
     throw new Error(`pawn "${attackerId}" cannot activate Icebreaker`);
   }
@@ -91,9 +91,14 @@ function checkIcebreaker(
   return { owner, atkPob };
 }
 
-function markIcebreakerUsed(gd: GameData, owner: Player, attackerId: string): void {
+function markIcebreakerUsed(
+  gd: GameData,
+  owner: Player,
+  attackerId: string,
+  atts: { cardId: string }[],
+): void {
   const atk = pawnById(gd, attackerId);
-  const ability = atk && findAbility(atk, "icebreaker");
+  const ability = atk && effectiveAbility(gd, atk, atts, "icebreaker");
   if (ability && ability.activation === "once-per-turn") {
     owner.oncePerTurnUsed[abilityUsedKey("icebreaker", attackerId)] = true;
   }
@@ -156,7 +161,7 @@ export function icebreakBlock(
     attackerEliminated = resolveBlackIceFailure(s, isBlack, attackerId, success);
   }
 
-  markIcebreakerUsed(gd, owner, attackerId);
+  markIcebreakerUsed(gd, owner, attackerId, atkPob.attachments);
   return { roll, success, attackerEliminated };
 }
 
@@ -198,6 +203,6 @@ export function icebreakPawn(
     attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue === "black", attackerId, success);
   }
 
-  markIcebreakerUsed(gd, owner, attackerId);
+  markIcebreakerUsed(gd, owner, attackerId, atkPob.attachments);
   return { roll, success, attackerEliminated };
 }

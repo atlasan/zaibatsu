@@ -29,6 +29,34 @@ export function findAbility(pawn: Pawn, name: string): Ability | undefined {
   return pawn.abilities?.find((a) => a.ability === name);
 }
 
+/**
+ * Resolves a pawn's ability after applying its attachments' grants and removes
+ * (SR-CARD: an add-on/weapon can grant or strip an ability on its target). A
+ * removed ability is unavailable even if innate; an ability the pawn lacks but an
+ * attachment grants becomes card-activated. Mirrors combat.go.
+ */
+export function effectiveAbility(
+  gd: GameData,
+  pawn: Pawn,
+  atts: { cardId: string }[] | undefined,
+  name: string,
+): Ability | undefined {
+  const attached = atts ?? [];
+  for (const a of attached) {
+    if (gd.cards.find((c) => c.id === a.cardId)?.attach?.removes?.includes(name as Ability["ability"])) {
+      return undefined;
+    }
+  }
+  const innate = findAbility(pawn, name);
+  if (innate) return innate;
+  for (const a of attached) {
+    if (gd.cards.find((c) => c.id === a.cardId)?.attach?.grants?.includes(name as Ability["ability"])) {
+      return { ability: name as Ability["ability"], activation: "card" };
+    }
+  }
+  return undefined;
+}
+
 /** Rolls one d6 per skull via the seeded RNG. skulls is clamped to at least 1. */
 export function attackRoll(rng: Rng, skulls: number): number[] {
   const n = skulls < 1 ? 1 : skulls;

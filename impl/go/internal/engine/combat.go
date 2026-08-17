@@ -30,6 +30,36 @@ func findAbility(pawn *domain.Pawn, name string) *domain.Ability {
 	return nil
 }
 
+func abilityListHas(list []string, name string) bool {
+	for _, a := range list {
+		if a == name {
+			return true
+		}
+	}
+	return false
+}
+
+// effectiveAbility resolves a pawn's ability after applying its attachments'
+// grants and removes (SR-CARD: an add-on/weapon can grant or strip an ability on
+// its target). A removed ability is unavailable even if innate; an ability the
+// pawn lacks but an attachment grants becomes card-activated. Mirrors combat.ts.
+func effectiveAbility(gd *domain.GameData, pawn *domain.Pawn, atts []domain.Attachment, name string) *domain.Ability {
+	for _, a := range atts {
+		if card := cardByID(gd, a.CardID); card != nil && card.Attach != nil && abilityListHas(card.Attach.Removes, name) {
+			return nil
+		}
+	}
+	if ab := findAbility(pawn, name); ab != nil {
+		return ab
+	}
+	for _, a := range atts {
+		if card := cardByID(gd, a.CardID); card != nil && card.Attach != nil && abilityListHas(card.Attach.Grants, name) {
+			return &domain.Ability{Ability: name, Activation: "card"}
+		}
+	}
+	return nil
+}
+
 // AttackRoll rolls one d6 per skull via the seeded RNG (deterministic,
 // parity-matched). skulls is clamped to at least 1.
 func AttackRoll(rng *domain.RNG, skulls int) []int {

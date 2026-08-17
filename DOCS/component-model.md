@@ -107,8 +107,8 @@ largely printed text + symbols, so **OCR + icon detection** drive the prefill
 |---|---|---|
 | `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed attach-target symbol (bottom badge: PAWN / ENEMY ADD-ON / …). |
 | `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot banner (yellow, top/bottom edge). Its presence is what marks the card as an attachment. |
-| **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ⛔(detect) | user-flagged; added to `action-card.schema.json`. An add-on/weapon/… confers abilities on its target when attached. These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
-| **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ⛔(detect) | added to schema; a main-face ability badge marked with an **✕** is *removed* from the target (e.g. an add-on that removes SEARCH). Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
+| **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
+| **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). A main-face ability badge marked with an **✕** is *removed* from the target. Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
 | `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
 | **`attach.effectText`** (special on-attach effect) | ✅(schema) / ⛔(detect) | added to schema; e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
@@ -152,10 +152,18 @@ icon regions.
   in both mirrors). Golden fixtures regenerated (they were stale from the content
   expansion, not from these changes); Go and TS produce byte-identical snapshots.
 
+**Ability grant/remove — landed (Go + TS, tested):** `attach.grants` / `attach.removes`
+are applied by `effectiveAbility(gd, pawn, attachments, name)` (combat.go / combat.ts):
+an add-on/weapon that grants an ability makes it card-activated on its target, and
+one that removes an ability strips it even when innate. The Icebreaker now resolves
+through this, so a granted Icebreaker enables a non-Icebreaker pawn and a removed
+one disables it.
+
 **Remaining engine logic (not yet wired):**
 - `space.modifier.kind = ice`, `space.direction` enforcement, typed
-  `effects.underControl` dispatch, and card `attach.grants/removes/effectText`
-  are **loaded but not yet applied** by engine rules. Next engine slice.
+  `effects.underControl` dispatch, and `attach.effectText` are **loaded but not yet
+  applied** by engine rules. Next engine slice. (Grant/remove now wired; delete/
+  search/reboot grants ride the same `effectiveAbility` path when authored.)
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

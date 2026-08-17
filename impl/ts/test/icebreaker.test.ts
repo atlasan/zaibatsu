@@ -9,7 +9,7 @@ import {
   newGame,
   placeBlock,
 } from "../src/engine/index.ts";
-import { blockById } from "../src/domain/types.ts";
+import { blockById, pawnById } from "../src/domain/types.ts";
 
 const data: GameData = loadDefault("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
@@ -170,5 +170,36 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
       }
     }
     throw new Error("no failing seed found in range");
+  });
+});
+
+describe("ability grant/remove via attachment", () => {
+  test("an add-on that grants Icebreaker lets a non-Icebreaker pawn Icebreak", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    pawnById(d, "speedrunner-red")!.abilities = []; // strip innate Icebreaker
+    d.cards[0].attach = { as: "pawn", slot: "add-on", grants: ["icebreaker"] };
+    s.cybernet.pawnById("speedrunner-red")!.attachments = [
+      { cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 },
+    ];
+    expect(() => icebreakBlock(s, d, "speedrunner-red", coord, 0)).not.toThrow();
+  });
+
+  test("an add-on that removes Icebreaker prevents the Icebreak", () => {
+    const d = loadDefault("speedrunners");
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["icebreaker"] };
+    s.cybernet.pawnById("speedrunner-red")!.attachments = [
+      { cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 },
+    ];
+    expect(() => icebreakBlock(s, d, "speedrunner-red", coord, 0)).toThrow();
   });
 });
