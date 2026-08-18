@@ -108,7 +108,7 @@ largely printed text + symbols, so **OCR + icon detection** drive the prefill
 | `attach.as` (`pawn`/`enemy`/`block`) | ✅(schema) / ⛔(detect) | printed attach-target symbol (bottom badge: PAWN / ENEMY ADD-ON / …). |
 | `attach.slot` (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`) | ✅ / ⛔(detect) | printed slot banner (yellow, top/bottom edge). Its presence is what marks the card as an attachment. |
 | **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
-| **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). A main-face ability badge marked with an **✕** is *removed* from the target. Distinct from `grants`. Detection: a main-face badge bearing a cross (pending). |
+| **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ✅(detect-marker) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). Detection: `cards.py` now flags the **✕ remove-marker** on main-face ability badges (`icon.removed`, `proposals.attach.removesCount`); the human still names *which* ability (the badge glyph isn't read). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
 | `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
 | **`attach.effectText`** (special on-attach effect) | ✅(schema) / ⛔(detect) | added to schema; e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
@@ -123,8 +123,9 @@ and the ✕ marker are not yet read).
 
 **Card detection targets** (user-requested "zone/icons/effects/actions"):
 1. **OCR** the title + body — ✅ working (local Tesseract). 2. **Icons**: ability
-badges, slot banner, attach badge — ✅ region-classified; specific ability glyph +
-✕-marker pending. 3. **Zones/regions**: title / art / rules-text / cost bands —
+badges, slot banner, attach badge — ✅ region-classified; **✕ remove-marker ✅
+detected** (`icon.removed`); the specific ability *glyph* is still unread. 3.
+**Zones/regions**: title / art / rules-text / cost bands —
 pending. 4. **Effects/actions**: map icons+text → the discriminated buckets above.
 Everything stays `reviewRequired` for human confirmation.
 

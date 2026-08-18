@@ -113,6 +113,39 @@ def ocr_regions(image: np.ndarray) -> list[TextRegion]:
     return unique
 
 
+def _has_cross_marker(gray: np.ndarray, box: list[int]) -> bool:
+    """Detect the small black ✕ that marks an ability an attachment REMOVES from
+    its target (vs. grants). The ✕ sits just off a badge on the light main face, so
+    it reads as a small, square, low-fill (thin-stroke) dark mark with ink on both
+    diagonals — unlike a solid glyph or an action-strip badge on the dark strip."""
+    h_img, w_img = gray.shape
+    x, y, w, h = box
+    side = (w + h) / 2.0
+    pad = int(side * 0.45)
+    x0, y0 = max(0, x - pad), max(0, y - pad)
+    x1, y1 = min(w_img, x + w + pad), min(h_img, y + h + pad)
+    if x1 <= x0 or y1 <= y0:
+        return False
+    dark = cv2.morphologyEx((gray[y0:y1, x0:x1] < 80).astype(np.uint8), cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+    contours, _ = cv2.findContours(dark, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
+        bx, by, bw, bh = cv2.boundingRect(c)
+        area = bw * bh
+        if not area or not 0.10 * side <= (bw + bh) / 2.0 <= 0.34 * side:
+            continue
+        if not 0.55 <= bw / max(1, bh) <= 1.8 or not 0.22 <= cv2.contourArea(c) / area <= 0.58:
+            continue
+        sub = dark[by:by + bh, bx:bx + bw]
+        n = min(bw, bh)
+        if n <= 0:
+            continue
+        d1 = sum(int(sub[int(i * bh / n), int(i * bw / n)]) for i in range(n)) / n
+        d2 = sum(int(sub[int(i * bh / n), int(bw - 1 - i * bw / n)]) for i in range(n)) / n
+        if d1 >= 0.4 and d2 >= 0.4:  # ink on both diagonals -> an X
+            return True
+    return False
+
+
 def _icon_candidates(image: np.ndarray) -> list[dict]:
     """Locate the printed accent markers. Zaibatsu action cards use a small,
     consistent visual vocabulary: a wide **yellow banner** at the top/bottom edge
@@ -125,6 +158,7 @@ def _icon_candidates(image: np.ndarray) -> list[dict]:
     h, w = image.shape[:2]
     page = float(h * w)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    gray_full = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     found: list[dict] = []
     yellow = cv2.inRange(hsv, (20, 100, 120), (40, 255, 255))
     contours, _ = cv2.findContours(yellow, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -136,10 +170,13 @@ def _icon_candidates(image: np.ndarray) -> list[dict]:
         aspect = cw / max(1, ch)
         near_edge = y < h * 0.12 or (y + ch) > h * 0.88
         kind = "slot-banner" if aspect >= 2.2 and near_edge else "ability-badge"
-        found.append({"kind": kind, "box": [x, y, cw, ch], "confidence": round(min(0.9, area / page * 15), 3)})
+        icon = {"kind": kind, "box": [x, y, cw, ch], "confidence": round(min(0.9, area / page * 15), 3)}
+        if kind == "ability-badge":
+            # a ✕ next to the badge means the ability is REMOVED, not granted
+            icon["removed"] = _has_cross_marker(gray_full, [x, y, cw, ch])
+        found.append(icon)
     # white circular attach-target badge (bright, near-round, corner-sized)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    white = cv2.inRange(gray, 200, 255)
+    white = cv2.inRange(gray_full, 200, 255)
     contours, _ = cv2.findContours(white, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for contour in contours:
         x, y, cw, ch = cv2.boundingRect(contour)
@@ -201,7 +238,8 @@ def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) ->
     strong = [r["text"] for r in text_regions if r.get("confidence", 0) >= 0.6]
     name = max((w for w in strong if _looks_like_name(w)), key=len, default="")
     slot = _match_vocab(words, _ATTACH_SLOTS)
-    badges = sum(1 for i in (icons or []) if i["kind"] == "ability-badge")
+    ability_badges = [i for i in (icons or []) if i["kind"] == "ability-badge"]
+    crossed = sum(1 for i in ability_badges if i.get("removed"))
     notes: list[str] = []
     proposal = {
         "nameCandidate": name,
@@ -217,10 +255,14 @@ def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) ->
             "slot": slot,
             "as": _match_vocab(words, _ATTACH_AS),
             "grants": [],   # abilities/effects given to the target (human-filled)
-            "removes": [],  # ✕-marked badges stripped from the target (human-filled)
+            # count of ✕-marked badges detected; the human names which ability
+            "removesCount": crossed,
+            "removes": [],
         }
-        if badges > len(proposal["activates"]):
-            notes.append(f"{badges} ability badge(s) detected; besides the action abilities, the main face may GRANT or REMOVE (cross-marked) abilities on the target - classify these.")
+        if crossed:
+            notes.append(f"{crossed} ability badge(s) bear a REMOVE (cross) marker - the marked ability is stripped from the target, not granted; name it in removes.")
+        elif len(ability_badges) > len(proposal["activates"]):
+            notes.append(f"{len(ability_badges)} ability badge(s) detected; the main face may GRANT abilities on the target beyond the action abilities - classify these.")
     proposal["reviewNotes"] = notes
     return proposal
 
