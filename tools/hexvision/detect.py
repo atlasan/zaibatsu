@@ -55,6 +55,10 @@ class Tile:
     # Flat ICE dice read from the tile: [{face:1..6, box:[x,y,w,h], side}]. The
     # ICE value is printed as die faces; which cluster is ICE is left to review.
     iceDiceCandidates: list[dict] = field(default_factory=list)
+    # The ICE-difficulty corner: {corner:0-5, dice:1-3, black:bool} or None. The
+    # printed ICE is an isometric-dice cluster at a hex corner (dice count ->
+    # low/medium/high; a black die -> Black ICE). Review-required.
+    iceCorner: dict | None = None
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -355,6 +359,53 @@ def detect_ice_dice(bgr: np.ndarray, alpha: np.ndarray) -> list[dict]:
     return sorted(dice, key=lambda d: (d["box"][1], d["box"][0]))
 
 
+def detect_ice_corner(bgr: np.ndarray, alpha, center, verts, inr: int) -> dict | None:
+    """Locate the ICE-difficulty corner: the printed ICE is an isometric-dice
+    cluster at a hex corner (1-3 dice -> high/medium/low; a black die -> Black ICE).
+    A die is drawn as a small cube whose pips are the distinctive mark - dark pips
+    on white dice, light pips on a black die. Score each corner by the largest
+    COMPACT cluster of pip-sized round blobs (dice pips cluster tightly; scattered
+    text dots do not), and report the best corner with its dominant polarity and a
+    rough die count. Review-required: exact corner can miss on busy art."""
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    h, w = gray.shape
+    cx, cy = center
+    inside = cv2.erode((alpha > 10).astype(np.uint8) * 255, np.ones((5, 5), np.uint8), iterations=2)
+    best = None
+    for i, (vx, vy) in enumerate(verts):
+        rx = int(vx + (cx - vx) * 0.26)
+        ry = int(vy + (cy - vy) * 0.26)
+        s = int(inr * 0.32)
+        y0, y1 = max(0, ry - s), min(h, ry + s)
+        x0, x1 = max(0, rx - s), min(w, rx + s)
+        region_gray = gray[y0:y1, x0:x1]
+        region_in = inside[y0:y1, x0:x1]
+        if region_gray.size == 0:
+            continue
+        for kind, mask in (("white", cv2.inRange(region_gray, 0, 70)), ("black", cv2.inRange(region_gray, 190, 255))):
+            mask = cv2.morphologyEx(cv2.bitwise_and(mask, region_in), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            pts = []
+            for c in contours:
+                area = cv2.contourArea(c)
+                if (inr * 0.012) ** 2 * math.pi <= area <= (inr * 0.055) ** 2 * math.pi:
+                    bx, by, bw, bh = cv2.boundingRect(c)
+                    if bw and bh and 0.5 <= bw / bh <= 2.0 and area / (bw * bh) >= 0.5:
+                        pts.append((bx + bw / 2, by + bh / 2))
+            if len(pts) < 3:
+                continue
+            arr = np.array(pts)
+            radius = inr * 0.24
+            tightest = max(int(np.sum(np.hypot(arr[:, 0] - p[0], arr[:, 1] - p[1]) <= radius)) for p in arr)
+            if best is None or tightest > best[0]:
+                # rough die count: ~1 die per 3.5 pips (avg face ~3.5), clamped 1..3
+                dice = max(1, min(3, round(tightest / 3.5)))
+                best = (tightest, {"corner": i, "dice": dice, "black": kind == "black"})
+    if best and best[0] >= 3:  # a real cluster; keeps ICE-less tiles (e.g. Central Core) empty
+        return best[1]
+    return None
+
+
 def extract_tile(path: str, asset: str) -> Tile:
     bgr, alpha = load_tile(path)
     center, verts, inr = hexagon(alpha)
@@ -367,6 +418,7 @@ def extract_tile(path: str, asset: str) -> Tile:
         whiteCorners=detect_white_corners(bgr, alpha, center, verts),
         spaces=detect_spaces(bgr, alpha, center, inr),
         iceDiceCandidates=detect_ice_dice(bgr, alpha),
+        iceCorner=detect_ice_corner(bgr, alpha, center, verts, inr),
     )
 
 
@@ -399,4 +451,9 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
         x, y, w, h = die["box"]
         cv2.rectangle(ov, (x, y), (x + w, y + h), (200, 0, 200), 4)
         cv2.putText(ov, f"ICE?{die['face']}", (x, max(24, y - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200, 0, 200), 2)
+    if tile.iceCorner is not None:
+        vx, vy = tile.vertices[tile.iceCorner["corner"]]
+        label = f"ICE x{tile.iceCorner['dice']}" + (" BLACK" if tile.iceCorner["black"] else "")
+        cv2.circle(ov, (vx, vy), 34, (0, 0, 255), 4)
+        cv2.putText(ov, label, (vx - 40, vy + 54), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
     return ov
