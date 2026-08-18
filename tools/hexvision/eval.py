@@ -42,7 +42,7 @@ def evaluate_truth(build_dir: str = DEFAULT_BUILD, truth_path: str = BLOCKS_TRUT
             "asset": asset,
             "name": exp.get("name"),
             "edgesOpen": [sum(1 for e in tile.edges if e), exp.get("edgesOpen")],
-            "bonusCorners": [sum(1 for c in tile.whiteCorners if c), exp.get("bonusCorners")],
+            "bonusCorners": [sum(1 for c in tile.bonusCorners if c), exp.get("bonusCorners")],
             "spaces": [len(tile.spaces), len(exp["spaces"]) if "spaces" in exp else "?"],
             "iceDice": [d["face"] for d in tile.iceDiceCandidates],
             "iceValue": exp.get("iceValue"),

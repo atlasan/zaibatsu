@@ -50,7 +50,10 @@ class Tile:
     inradius: int
     vertices: list[tuple[int, int]]  # 6, ordered from top clockwise
     edges: list[bool]  # [6] passage per edge
-    whiteCorners: list[bool]  # [6] white corner per vertex (bonus zone = 3 aligned)
+    whiteCorners: list[bool]  # [6] white corner per vertex (raw white signal)
+    # [6] bonus corners = white corners MINUS the ICE-difficulty corner (which is
+    # also white but is not a bonus corner). Set in extract_tile once ICE is known.
+    bonusCorners: list[bool] = field(default_factory=list)
     spaces: list[Space] = field(default_factory=list)
     # Flat ICE dice read from the tile: [{face:1..6, box:[x,y,w,h], side}]. The
     # ICE value is printed as die faces; which cluster is ICE is left to review.
@@ -409,16 +412,21 @@ def detect_ice_corner(bgr: np.ndarray, alpha, center, verts, inr: int) -> dict |
 def extract_tile(path: str, asset: str) -> Tile:
     bgr, alpha = load_tile(path)
     center, verts, inr = hexagon(alpha)
+    white_corners = detect_white_corners(bgr, alpha, center, verts)
+    ice_corner = detect_ice_corner(bgr, alpha, center, verts, inr)
+    ice_idx = ice_corner["corner"] if ice_corner else None
+    bonus = [w and i != ice_idx for i, w in enumerate(white_corners)]
     return Tile(
         asset=asset,
         center=center,
         inradius=inr,
         vertices=verts,
         edges=detect_edges(bgr, alpha, center, verts, inr),
-        whiteCorners=detect_white_corners(bgr, alpha, center, verts),
+        whiteCorners=white_corners,
+        bonusCorners=bonus,
         spaces=detect_spaces(bgr, alpha, center, inr),
         iceDiceCandidates=detect_ice_dice(bgr, alpha),
-        iceCorner=detect_ice_corner(bgr, alpha, center, verts, inr),
+        iceCorner=ice_corner,
     )
 
 
