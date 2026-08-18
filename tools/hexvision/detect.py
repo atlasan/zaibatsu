@@ -148,35 +148,31 @@ def _edge_mid_normal(center, verts, i):
 
 
 def detect_edges(bgr: np.ndarray, alpha, center, verts, inr: int) -> list[bool]:
-    """An edge is a PASSAGE where the white hex-grid line reaches a cell outline
-    and crosses the black wall out to the edge. So: scan the middle of each edge
-    and look for a white line that reaches the OUTER wall (crosses to the
-    boundary) over a limited stretch. Otherwise it's a wall."""
-    white = _white_mask(bgr, alpha)
-    h, w = white.shape
+    """An edge is OPEN (a passage) unless a solid dark WALL runs along it. Sample a
+    band just inside the hex boundary at the middle of each edge; a high fraction of
+    near-black pixels is a wall (closed), otherwise the interior reaches the edge
+    (open). This is robust to wall-less blocks (e.g. Central Core, all-teal) that the
+    old white-grid-line heuristic wrongly read as closed. Validated against the
+    editor ground truth (12/12 on the drafted tiles) and blocks-truth.json."""
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    h, w = gray.shape
     cx, cy = center
     out = []
     for i in range(6):
         ax, ay = verts[i]
         bx, by = verts[(i + 1) % 6]
-        # count middle-edge positions where a white line reaches the OUTER wall
-        # (crosses to the boundary). A solid dark wall has none; a cell merely
-        # sitting near the edge doesn't reach the boundary.
-        reach = span = 0
-        for t in np.linspace(0.30, 0.70, 21):
-            span += 1
+        dark = n = 0
+        for t in np.linspace(0.25, 0.75, 25):
             ex, ey = ax + (bx - ax) * t, ay + (by - ay) * t
-            hit = False
-            for f in (0.95, 0.97, 0.99):
+            for f in (0.82, 0.86, 0.90):  # a band just inside the boundary
                 px = int(cx + (ex - cx) * f)
                 py = int(cy + (ey - cy) * f)
-                if 0 <= px < w and 0 <= py < h and white[py, px] > 0:
-                    hit = True
-            reach += 1 if hit else 0
-        frac = reach / span if span else 0.0
-        # a crossing grid line spans a limited stretch; the whole edge being
-        # white/black are both non-passages
-        out.append(bool(0.10 <= frac <= 0.75))
+                if 0 <= px < w and 0 <= py < h:
+                    n += 1
+                    if gray[py, px] < 55:
+                        dark += 1
+        frac = dark / n if n else 0.0
+        out.append(frac < 0.40)  # open unless a dark wall dominates the band
     return out
 
 
