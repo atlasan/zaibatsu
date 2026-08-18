@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
 import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession } from "./model";
-import { createPlaySession, exportPlayTrace, getPlaySession, importPlayTrace, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
+import { createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
 const editorRoot = import.meta.dir;
 const repoRoot = resolve(editorRoot, "../..");
@@ -59,6 +59,10 @@ const server = Bun.serve({
         try {
           if (suffix.length === 1 && request.method === "GET") return json(getPlaySession(id));
           if (suffix[1] === "command" && request.method === "POST") return json(submitPlayCommand(id, await body<PlayCommand>(request)));
+          if (suffix[1] === "movement-options" && request.method === "POST") {
+            const payload = await body<{ pawnId: string; path: unknown; cardId?: string }>(request);
+            return json(getMovementOptions(id, payload.pawnId, payload.path, payload.cardId));
+          }
           if (suffix[1] === "undo" && request.method === "POST") return json(undoPlayCommand(id));
           if (suffix[1] === "reset" && request.method === "POST") return json(resetPlaySession(id, await body<PlaySetup>(request)));
           if (suffix[1] === "trace" && request.method === "GET") return json(exportPlayTrace(id));

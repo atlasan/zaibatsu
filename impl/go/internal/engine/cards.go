@@ -16,7 +16,7 @@ import (
 //   - Search: discard ONE card (any card).
 //   - Reboot: discard FOUR cards (any cards).
 // The remaining two uses — activate card movement, and attach to an element — are
-// deferred (they depend on space-to-space movement and the attach system).
+// now covered by PlayMove and the attachment resolvers below this layer.
 //
 // Consumed cards move to the discard pile. Illegal plays are rejected WITHOUT
 // consuming a card; a legal play (including a Delete/Icebreak that rolls a miss)
@@ -95,6 +95,31 @@ func requireOwnedActor(s *domain.GameState, playerID, pawnID string) error {
 		return fmt.Errorf("pawn %q is not controlled by %s", pawnID, playerID)
 	}
 	return nil
+}
+
+// PlayMove plays a movement-valued action card and consumes it after a legal
+// path. Its explicit card budget does not consume the pawn's once-per-turn move.
+func PlayMove(s *domain.GameState, gd *domain.GameData, playerID, cardID, pawnID string, path []SpaceRef) (*domain.PawnOnBoard, error) {
+	player := s.PlayerByID(playerID)
+	if player == nil {
+		return nil, fmt.Errorf("unknown player %q", playerID)
+	}
+	if !cardInHand(player, cardID) {
+		return nil, fmt.Errorf("card %q is not in %s's hand", cardID, playerID)
+	}
+	card := cardByID(gd, cardID)
+	if card == nil || card.Movement <= 0 {
+		return nil, fmt.Errorf("card %q has no movement value", cardID)
+	}
+	if err := requireOwnedActor(s, playerID, pawnID); err != nil {
+		return nil, err
+	}
+	pob, err := MovePathWithBudget(s, gd, pawnID, path, card.Movement)
+	if err != nil {
+		return nil, err
+	}
+	_ = consumeCard(s, player, cardID)
+	return pob, nil
 }
 
 // PlayDelete plays a Delete-capable card to activate the attacker's Delete

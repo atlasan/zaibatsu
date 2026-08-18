@@ -118,6 +118,46 @@ func TestPlaySearchDiscardsCardAndPlaces(t *testing.T) {
 	}
 }
 
+func TestPlayMoveUsesCardBudgetAndConsumesCard(t *testing.T) {
+	s, gd := cardGame(t, 1)
+	coord := domain.Coord{Q: 0, R: -1}
+	s.Cybernet.Blocks = append(s.Cybernet.Blocks, &domain.PlacedBlock{BlockID: "data-haven", Rotation: 0, Coord: coord})
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	p1 := s.PlayerByID("p1")
+	p1.Hand = []string{"move-1"}
+	moved, err := PlayMove(s, gd, "p1", "move-1", "speedrunner-red", []SpaceRef{{Coord: coord, SpaceID: "b"}})
+	if err != nil {
+		t.Fatalf("PlayMove: %v", err)
+	}
+	if moved.SpaceID != "b" {
+		t.Errorf("moved to %q, want b", moved.SpaceID)
+	}
+	if len(p1.Hand) != 0 || len(s.Discard) == 0 || s.Discard[len(s.Discard)-1] != "move-1" {
+		t.Errorf("card was not consumed: hand=%v discard=%v", p1.Hand, s.Discard)
+	}
+	if p1.OncePerTurnUsed[movementUsedKey("speedrunner-red")] {
+		t.Error("card movement must not spend the pawn's once-per-turn movement")
+	}
+}
+
+func TestPlayMoveRejectsOverBudgetWithoutConsumingCard(t *testing.T) {
+	s, gd := cardGame(t, 1)
+	coord := domain.Coord{Q: 0, R: -1}
+	s.Cybernet.Blocks = append(s.Cybernet.Blocks, &domain.PlacedBlock{BlockID: "data-haven", Rotation: 0, Coord: coord})
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	p1 := s.PlayerByID("p1")
+	p1.Hand = []string{"move-1"}
+	_, err := PlayMove(s, gd, "p1", "move-1", "speedrunner-red", []SpaceRef{{Coord: coord, SpaceID: "b"}, {Coord: coord, SpaceID: "a"}})
+	if err == nil {
+		t.Fatal("expected over-budget PlayMove rejection")
+	}
+	if len(p1.Hand) != 1 || p1.Hand[0] != "move-1" {
+		t.Errorf("illegal move consumed card: %v", p1.Hand)
+	}
+}
+
 func TestPlayRebootRequiresFourCards(t *testing.T) {
 	s, gd := cardGame(t, 1)
 	s.Eliminated = []string{"speedrunner-red"}

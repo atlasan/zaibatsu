@@ -27,7 +27,8 @@ Open `http://localhost:4173`.
 
 From the repository root on Windows, `run-editor.bat` is the same command.
 Use `run-sandbox.bat` to start this host for the Speedrunners sandbox and open
-`http://localhost:4173/play/`.
+`http://localhost:4173/play/`. Both launchers restart the local listener on
+port `4173`; use `stop-local-server.bat` to stop it without starting another.
 
 ## What it does now
 

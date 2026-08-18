@@ -67,7 +67,7 @@ A cell on a block.
 - `zoneIds: ZoneId[]` - one or more standardized placement hexes; a zone has one gameplay-space owner. Verified blocks account for all seven exactly once.
 - `displayShape?: auto | circle | capsule | compound` - source-facing editor metadata derived from the mapping unless reviewed otherwise; it has no engine behaviour.
 - `capacity: positive int | unlimited` - explicit occupancy. The editor defaults finite capacity to selected-zone count; a different value needs `capacityNote` evidence. `special` and pawn-home spaces default to `unlimited`.
-- `neighbors: SpaceId[]` - symmetric candidate links inferred from touching selected zones and loaded by both mirrors. They are data available for future step movement, not an executable traversal yet.
+- `neighbors: SpaceId[]` - symmetric gameplay-space links inferred from touching selected zones and loaded by both mirrors. `StepTargets` traverses them for executable intra-block movement; source transcription still reviews each record before it becomes non-provisional.
 
 `double` remains readable only for legacy saves. Newly authored canonical data expresses a two-capacity location as a normal/effect space selecting zones with explicit capacity `2`; physical zone geometry never silently creates an engine movement rule.
 ### Pawn _(slice: identity/defense/movement/abilities/class/slots; effects planned)_
@@ -85,7 +85,8 @@ An agent, represented by a piece (position) + control card (attributes).
 A card from the shared action deck. **Multi-use**: when played, the controller
 chooses exactly one use; the others are void.
 - `id`, `name`
-- `movement?: int` — steps it can grant when used for movement
+- `movement?: int` — steps it grants through the card-consuming `play-move`
+  action, independent of the pawn's once-per-turn movement
 - `activates?: Ability[]` — abilities it can activate when played
 - `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability[], removes?: Ability[], effectText?: string, cost?: int }` — `activates` is the card's action-part; `attach.grants`/`removes` are the abilities it confers/strips on the target when attached
 
@@ -137,11 +138,16 @@ against itself).
 **Movement:** `ResolveSteps` yields an activation's step budget — fixed `steps`,
 `d6`, `2d6` (seeded RNG), or `hex` (1 block) — plus cumulative modifiers, clamped
 at zero. `CanActivateMovement` gates on the activation mode (`card` /
-`once-per-turn` with a start-of-turn marker / `none`). **`MoveHex`** executes one
+`once-per-turn` with a start-of-turn marker / `none`). A movement-valued action
+card executes the same path rules with its printed budget, consumes that card,
+and does not spend the pawn's once-per-turn movement. **`MoveHex`** executes one
 block of hex movement (ignores spaces/modifiers; needs only a placed block with
-room to land). _Space-to-space stepping for `steps`/`d6`/`2d6` execution is
-deferred_ — it needs a space-adjacency graph the provisional data doesn't yet
-encode (tracked in `tasks/BACKLOG.md`); the step budget already resolves.
+room to land). **`StepTargets`**, **`MoveStep`**, and **`MoveSteps`** execute
+`steps`/`d6`/`2d6` paths through intra-block neighbours and rotation-aware
+cross-edge boundary spaces. A path may pass occupied spaces but must finish at
+a space with capacity; it is validated before the seeded movement roll, and
+unused budget is lost. The engine is live; individual provisional adjacency
+records still require source review.
 
 _Planned:_ attached cards and placed counters on the board.
 

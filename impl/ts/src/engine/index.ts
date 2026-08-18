@@ -20,7 +20,7 @@ import { moveHex, moveSteps, type SpaceRef } from "./movement.ts";
 import { deleteAbility, deleteMulti } from "./combat.ts";
 import { icebreakBlock, icebreakPawn } from "./icebreaker.ts";
 import { reboot, search } from "./abilities.ts";
-import { playDelete, playIcebreakBlock, playIcebreakPawn, playReboot, playSearch } from "./cards.ts";
+import { playDelete, playIcebreakBlock, playIcebreakPawn, playMove, playReboot, playSearch } from "./cards.ts";
 import { attachToBlock, attachToEnemy, attachToPawn } from "./attach.ts";
 
 export * from "./placement.ts";
@@ -51,6 +51,7 @@ export type ActionType =
   | "search"
   | "reboot"
   | "play-delete"
+  | "play-move"
   | "play-icebreak-block"
   | "play-icebreak-pawn"
   | "play-search"
@@ -301,6 +302,9 @@ function executeAction(s: GameState, gd: GameData, a: Action): unknown {
       return;
     case "play-delete":
       playDelete(s, gd, pid, a.cardId!, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);
+      return;
+    case "play-move":
+      playMove(s, gd, pid, a.cardId!, a.pawnId!, a.path ?? []);
       return;
     case "play-icebreak-block":
       playIcebreakBlock(s, gd, pid, a.cardId!, a.pawnId!, coord(), a.extraRollDice ?? 0);

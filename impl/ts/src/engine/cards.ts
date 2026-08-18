@@ -7,8 +7,8 @@
 //   - Delete / Icebreaker: play ONE card whose `activates` lists the ability.
 //   - Search: discard ONE card (any card).
 //   - Reboot: discard FOUR cards (any cards).
-// The remaining uses — activate card movement, and attach to an element — are
-// deferred (they depend on space-to-space movement and the attach system).
+// Card movement uses PlayMove and attachment actions live in attach.ts; attached
+// effect grants/removals remain a separate resolver concern.
 //
 // Consumed cards move to the discard pile. Illegal plays are rejected WITHOUT
 // consuming a card; a legal play (including a Delete/Icebreak that misses)
@@ -21,6 +21,7 @@ import { deleteAbility, type DeleteResult } from "./combat.ts";
 import { icebreakBlock, icebreakPawn, type IcebreakResult } from "./icebreaker.ts";
 import { search } from "./abilities.ts";
 import { reboot } from "./abilities.ts";
+import { movePathWithBudget, type SpaceRef } from "./movement.ts";
 
 function cardById(gd: GameData, id: string) {
   return gd.cards.find((c) => c.id === id);
@@ -65,6 +66,25 @@ function player(s: GameState, playerId: string): Player {
   const p = s.players.find((pl) => pl.id === playerId);
   if (!p) throw new Error(`unknown player "${playerId}"`);
   return p;
+}
+
+/** Plays a movement-valued action card and consumes it after a legal path. */
+export function playMove(
+  s: GameState,
+  gd: GameData,
+  playerId: string,
+  cardId: string,
+  pawnId: string,
+  path: SpaceRef[],
+): PawnOnBoard {
+  const p = player(s, playerId);
+  if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
+  const movement = cardById(gd, cardId)?.movement;
+  if (!Number.isInteger(movement) || movement! <= 0) throw new Error(`card "${cardId}" has no movement value`);
+  requireOwnedActor(s, playerId, pawnId);
+  const moved = movePathWithBudget(s, gd, pawnId, path, movement!);
+  consumeCard(s, p, cardId);
+  return moved;
 }
 
 /** Plays a Delete-capable card to activate the attacker's Delete ability. */

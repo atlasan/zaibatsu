@@ -63,7 +63,7 @@ export interface Space {
   capacityNote?: string;
   /** Source-facing rendering only; zoneIds and capacity remain authoritative. */
   displayShape?: SpaceDisplayShape;
-  /** Inferred from touching selected zones; not yet executed as step movement. */
+  /** Gameplay-space links used by executable space-to-space movement. */
   neighbors?: string[];
   pawnId?: string;
   effectId?: string;

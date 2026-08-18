@@ -33,8 +33,8 @@
 - **Maturity:** partial.
 - **Rule:** Movement is card-activated or once per turn, uses fixed steps, one
   die, two dice, or one whole hex, and combines applicable modifiers. Card
-  movement consumes the selected card use; once-per-turn movement uses a spent
-  marker.
+  movement uses the printed card budget and consumes the selected card use;
+  once-per-turn movement uses a spent marker.
 
 ## SR-MOVE-002 — Movement execution
 
@@ -43,5 +43,7 @@
 - **Maturity:** partial.
 - **Rule:** A pawn may pass occupied spaces but may end only where capacity
   permits; unused steps are lost and no other action interleaves with a move.
-  Hex movement moves one whole block and ignores space modifiers. Exact
-  space-to-space traversal remains pending source-verified adjacency data.
+  Hex movement moves one whole block and ignores space modifiers. The engine
+  executes `steps`/`d6`/`2d6` paths through encoded intra-block links and
+  rotation-aware boundary-space hops; each provisional adjacency record remains
+  subject to source review.

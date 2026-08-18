@@ -4,14 +4,9 @@
 //
 // SCOPE (Phase 1): pawn positions, space occupancy, the numeric step budget for
 // every movement type (fixed / d6 / 2d6 / hex) including modifiers, activation
-// gating (card / once-per-turn / none), and EXECUTION of hex movement (one whole
-// block, ignoring spaces & space modifiers — the one movement type the current
-// data can resolve correctly).
-//
-// DEFERRED: space-to-space stepping for steps/d6/2d6 execution needs an
-// intra-block + cross-edge SPACE-ADJACENCY graph the provisional data does not
-// yet encode (schema extension tracked in tasks/BACKLOG.md). Until then the step
-// budget resolves, but only hex movement executes on the board.
+// gating (card / once-per-turn / none), and execution of both space paths and
+// whole-block hex movement. Individual source records remain provisional until
+// transcribed, but the shared adjacency contract is live and mirror-tested.
 
 import { neighbor, opposite, type Coord, type Cybernet } from "../domain/hex.ts";
 import { UNLIMITED, blockSpace, spaceCapacityFor, type PawnOnBoard } from "../domain/pawn_board.ts";
@@ -207,6 +202,59 @@ export function moveStep(
   return pob;
 }
 
+interface ValidatedPath {
+  pawn: PawnOnBoard;
+  coord: Coord;
+  spaceId: string;
+}
+
+/** Validates a whole path without consuming RNG or changing the board. */
+function validatePath(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  path: SpaceRef[],
+): ValidatedPath {
+  const pob = s.cybernet.pawnById(pawnId);
+  if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
+  if (path.length === 0) throw new Error("empty movement path");
+  let coord = pob.coord;
+  let spaceId = pob.spaceId;
+  for (let i = 0; i < path.length; i++) {
+    const step = path[i]!;
+    const reachable = stepTargets(gd, s.cybernet, coord, spaceId).some(
+      (target) => target.coord.q === step.coord.q && target.coord.r === step.coord.r && target.spaceId === step.spaceId,
+    );
+    if (!reachable) throw new Error(`step ${i + 1} to space "${step.spaceId}" is not adjacent`);
+    if (i === path.length - 1) {
+      const full = canEndOn(gd, s.cybernet, step.coord, step.spaceId, pawnId);
+      if (full) throw new Error(full);
+    }
+    coord = step.coord;
+    spaceId = step.spaceId;
+  }
+  return { pawn: pob, coord, spaceId };
+}
+
+/**
+ * Moves along a path using an explicit, already-authorized budget. It does not
+ * gate pawn activation or use RNG, so card movement can consume its own card
+ * action without borrowing the pawn's once-per-turn movement.
+ */
+export function movePathWithBudget(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  path: SpaceRef[],
+  budget: number,
+): PawnOnBoard {
+  const result = validatePath(s, gd, pawnId, path);
+  if (path.length > budget) throw new Error(`path of ${path.length} steps exceeds the movement budget of ${budget}`);
+  result.pawn.coord = result.coord;
+  result.pawn.spaceId = result.spaceId;
+  return result.pawn;
+}
+
 /**
  * Walks a pawn along a declared path of adjacent spaces under its resolved step
  * budget. Per SR-MOVE-002 a pawn MAY PASS occupied spaces but MAY END only where
@@ -226,35 +274,15 @@ export function moveSteps(
   const pawn = pawnById(gd, pawnId);
   if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
   if (pawn.movement.type === "hex") throw new Error(`pawn "${pawnId}" has hex movement; use moveHex`);
-  if (path.length === 0) throw new Error("empty movement path");
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
   const gate = canActivateMovement(owner, pawn);
   if (gate) throw new Error(gate);
-  // Validate the walk first (no RNG, no mutation): each hop adjacent, only the
-  // final space capacity-checked (may pass occupied spaces).
-  let curCoord = pob.coord;
-  let curSpace = pob.spaceId;
-  for (let i = 0; i < path.length; i++) {
-    const step = path[i];
-    const reachable = stepTargets(gd, s.cybernet, curCoord, curSpace).some(
-      (t) => t.coord.q === step.coord.q && t.coord.r === step.coord.r && t.spaceId === step.spaceId,
-    );
-    if (!reachable) throw new Error(`step ${i + 1} to space "${step.spaceId}" is not adjacent`);
-    if (i === path.length - 1) {
-      const full = canEndOn(gd, s.cybernet, step.coord, step.spaceId, pawnId);
-      if (full) throw new Error(full);
-    }
-    curCoord = step.coord;
-    curSpace = step.spaceId;
-  }
-  // Then resolve the budget (d6/2d6 draw the RNG) and require the path to fit.
+  // Validate before resolving dice, so an illegal path never consumes RNG.
+  validatePath(s, gd, pawnId, path);
+  // Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
   const budget = resolveSteps(pawn.movement, s.rng, 0);
-  if (path.length > budget) {
-    throw new Error(`path of ${path.length} steps exceeds the movement budget of ${budget}`);
-  }
-  pob.coord = curCoord;
-  pob.spaceId = curSpace;
+  movePathWithBudget(s, gd, pawnId, path, budget);
   if (pawn.movement.activation === "once-per-turn") {
     owner.oncePerTurnUsed[movementUsedKey(pawnId)] = true;
   }

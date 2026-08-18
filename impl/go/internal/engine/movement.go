@@ -224,6 +224,59 @@ func MoveStep(s *domain.GameState, gd *domain.GameData, pawnID string, target do
 	return pob, nil
 }
 
+type validatedPath struct {
+	pawn    *domain.PawnOnBoard
+	coord   domain.Coord
+	spaceID string
+}
+
+// validatePath checks a whole path without consuming RNG or changing the board.
+func validatePath(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef) (validatedPath, error) {
+	pob := s.Cybernet.PawnByID(pawnID)
+	if pob == nil {
+		return validatedPath{}, fmt.Errorf("pawn %q is not on the board", pawnID)
+	}
+	if len(path) == 0 {
+		return validatedPath{}, fmt.Errorf("empty movement path")
+	}
+	coord, spaceID := pob.Coord, pob.SpaceID
+	for i, step := range path {
+		reachable := false
+		for _, target := range StepTargets(gd, s.Cybernet, coord, spaceID) {
+			if target.Coord == step.Coord && target.SpaceID == step.SpaceID {
+				reachable = true
+				break
+			}
+		}
+		if !reachable {
+			return validatedPath{}, fmt.Errorf("step %d to space %q is not adjacent", i+1, step.SpaceID)
+		}
+		if i == len(path)-1 {
+			if err := CanEndOn(gd, s.Cybernet, step.Coord, step.SpaceID, pawnID); err != nil {
+				return validatedPath{}, err
+			}
+		}
+		coord, spaceID = step.Coord, step.SpaceID
+	}
+	return validatedPath{pawn: pob, coord: coord, spaceID: spaceID}, nil
+}
+
+// MovePathWithBudget moves through a declared path using an explicit, already
+// authorized budget. It does not gate pawn activation or use RNG, allowing a
+// movement-valued action card to consume its own action rather than the pawn's
+// once-per-turn movement.
+func MovePathWithBudget(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef, budget int) (*domain.PawnOnBoard, error) {
+	result, err := validatePath(s, gd, pawnID, path)
+	if err != nil {
+		return nil, err
+	}
+	if len(path) > budget {
+		return nil, fmt.Errorf("path of %d steps exceeds the movement budget of %d", len(path), budget)
+	}
+	result.pawn.Coord, result.pawn.SpaceID = result.coord, result.spaceID
+	return result.pawn, nil
+}
+
 // MoveSteps walks a pawn along a declared path of adjacent spaces, one space per
 // step, under its resolved step budget. Per SR-MOVE-002 a pawn MAY PASS occupied
 // spaces but MAY END only where capacity permits, and UNUSED STEPS ARE LOST — so
@@ -242,9 +295,6 @@ func MoveSteps(s *domain.GameState, gd *domain.GameData, pawnID string, path []S
 	if pawn.Movement.Type == "hex" {
 		return nil, fmt.Errorf("pawn %q has hex movement; use MoveHex", pawnID)
 	}
-	if len(path) == 0 {
-		return nil, fmt.Errorf("empty movement path")
-	}
 	owner := s.PlayerByID(pob.OwnerID)
 	if owner == nil {
 		return nil, fmt.Errorf("pawn %q has no controlling player", pawnID)
@@ -252,32 +302,15 @@ func MoveSteps(s *domain.GameState, gd *domain.GameData, pawnID string, path []S
 	if err := CanActivateMovement(owner, pawn); err != nil {
 		return nil, err
 	}
-	// Validate the walk first (no RNG, no mutation): each hop adjacent, only the
-	// final space capacity-checked (may pass occupied spaces).
-	curCoord, curSpace := pob.Coord, pob.SpaceID
-	for i, step := range path {
-		reachable := false
-		for _, t := range StepTargets(gd, s.Cybernet, curCoord, curSpace) {
-			if t.Coord == step.Coord && t.SpaceID == step.SpaceID {
-				reachable = true
-				break
-			}
-		}
-		if !reachable {
-			return nil, fmt.Errorf("step %d to space %q is not adjacent", i+1, step.SpaceID)
-		}
-		if i == len(path)-1 {
-			if err := CanEndOn(gd, s.Cybernet, step.Coord, step.SpaceID, pawnID); err != nil {
-				return nil, err
-			}
-		}
-		curCoord, curSpace = step.Coord, step.SpaceID
+	// Validate before resolving dice, so an illegal path never consumes RNG.
+	if _, err := validatePath(s, gd, pawnID, path); err != nil {
+		return nil, err
 	}
-	// Then resolve the budget (d6/2d6 draw the RNG) and require the path to fit.
-	if budget := ResolveSteps(pawn.Movement, s.RNG, 0); len(path) > budget {
-		return nil, fmt.Errorf("path of %d steps exceeds the movement budget of %d", len(path), budget)
+	// Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
+	pob, err := MovePathWithBudget(s, gd, pawnID, path, ResolveSteps(pawn.Movement, s.RNG, 0))
+	if err != nil {
+		return nil, err
 	}
-	pob.Coord, pob.SpaceID = curCoord, curSpace
 	if pawn.Movement.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[movementUsedKey(pawnID)] = true
 	}

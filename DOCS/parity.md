@@ -74,6 +74,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Space adjacency graph | `engine.StepTargets(gd, cy, coord, spaceID)` | `stepTargets(gd, cy, coord, spaceId)` — intra-block neighbours + cross-edge boundary hops (rotation- and direction-aware) |
 | One validated step | `engine.MoveStep(s, gd, pawnID, coord, spaceID)` | `moveStep(s, gd, pawnId, coord, spaceId)` — reachability + capacity checked |
 | Path move under budget | `engine.MoveSteps(s, gd, pawnID, path)` / action `move-steps` | `moveSteps(s, gd, pawnId, path)` / action `"move-steps"` — pass occupied, end where capacity permits, unused steps lost |
+| Card movement path | `engine.PlayMove(...)` / action `play-move` | `playMove(...)` / action `"play-move"` — uses printed card budget, consumes the card only after a legal path, leaves once-per-turn pawn movement available |
 | Icebreak a block | `engine.IcebreakBlock(...)` | `icebreakBlock(...)` |
 | Icebreak a pawn | `engine.IcebreakPawn(...)` | `icebreakPawn(...)` |
 | Search ability | `engine.Search(...)` | `search(...)` |
@@ -144,7 +145,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
 | Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-aligned 2–3–2 point-up placement layout; displayShape renders circle/capsule/compound source coverage only, with no effect or movement resolution |
 | Space-to-space movement | ✅ | ✅ | intra-block neighbours + rotation-aware cross-edge boundary hops; path/capacity/budget behavior is mirror-tested, while provisional data records still need source review |
-| Card-use: move / attach | ⛔ / ✅ | ⛔ / ✅ | attachment actions are live; card-activated movement remains unimplemented because the reducer does not yet consume the chosen movement card |
+| Card-use: move / attach | ✅ | ✅ | card movement consumes its printed-budget card; attachment actions are live; attached effect grants/removals remain a separate gap |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
 
 ## Content-catalog parity

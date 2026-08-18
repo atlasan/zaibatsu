@@ -27,7 +27,7 @@ export interface EditorSpace {
   /** Positive finite capacity, or unlimited. New finite spaces default to zoneIds.length. */
   capacity: SpaceCapacity;
   capacityNote?: string;
-  /** Derived candidate links only; runtime step movement remains deferred. */
+  /** Gameplay-space links used by runtime step movement; source review still governs maturity. */
   neighbors: string[];
   displayShape?: SpaceDisplayShape;
   pawnId?: string;

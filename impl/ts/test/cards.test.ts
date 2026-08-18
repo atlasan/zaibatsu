@@ -5,6 +5,7 @@ import { opposite, type Coord } from "../src/domain/hex.ts";
 import {
   newGame,
   playDelete,
+  playMove,
   playReboot,
   playSearch,
 } from "../src/engine/index.ts";
@@ -88,6 +89,37 @@ describe("playSearch", () => {
     expect(pb.blockId).toBe("data-haven");
     expect(p1.hand.includes("move-1")).toBe(false);
     expect(s.blockPile.length).toBe(0);
+  });
+});
+
+describe("playMove", () => {
+  test("uses the card's movement value, consumes the card, and leaves pawn movement available", () => {
+    const s = game(1);
+    const dir = 2;
+    const placed = { q: 0, r: -1 };
+    // Place a two-space block and put an owned pawn on its first space.
+    s.cybernet.blocks.push({ blockId: "data-haven", rotation: rotFacing("data-haven", dir), coord: placed });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: placed, spaceId: "a" });
+    const p1 = s.players.find((p) => p.id === "p1")!;
+    p1.hand = ["move-1"];
+    const moved = playMove(s, data, "p1", "move-1", "speedrunner-red", [{ coord: placed, spaceId: "b" }]);
+    expect(moved.spaceId).toBe("b");
+    expect(p1.hand).toEqual([]);
+    expect(s.discard.at(-1)).toBe("move-1");
+    expect(p1.oncePerTurnUsed["move:speedrunner-red"]).toBeUndefined();
+  });
+
+  test("does not consume a card when the path exceeds its printed value", () => {
+    const s = game(1);
+    const placed = { q: 0, r: -1 };
+    s.cybernet.blocks.push({ blockId: "data-haven", rotation: 0, coord: placed });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: placed, spaceId: "a" });
+    const p1 = s.players.find((p) => p.id === "p1")!;
+    p1.hand = ["move-1"];
+    expect(() => playMove(s, data, "p1", "move-1", "speedrunner-red", [{ coord: placed, spaceId: "b" }, { coord: placed, spaceId: "a" }])).toThrow("exceeds");
+    expect(p1.hand).toEqual(["move-1"]);
   });
 });
 

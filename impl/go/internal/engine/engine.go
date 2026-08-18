@@ -33,6 +33,7 @@ const (
 	ActReboot       ActionType = "reboot"
 	// Card-driven variants (consume cards from hand).
 	ActPlayDelete       ActionType = "play-delete"
+	ActPlayMove         ActionType = "play-move"
 	ActPlayIcebreakBlk  ActionType = "play-icebreak-block"
 	ActPlayIcebreakPawn ActionType = "play-icebreak-pawn"
 	ActPlaySearch       ActionType = "play-search"
@@ -334,6 +335,9 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 		return result, err
 	case ActPlayDelete:
 		result, err := PlayDelete(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return result, err
+	case ActPlayMove:
+		result, err := PlayMove(s, gd, pid, a.CardID, a.PawnID, a.Path)
 		return result, err
 	case ActPlayIcebreakBlk:
 		c, err := coord()

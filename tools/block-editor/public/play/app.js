@@ -3,6 +3,8 @@ let session = null;
 let selected = null;
 let view = { x: 0, y: 0, zoom: 1 };
 let error = "";
+let selectedActionIndex = 0;
+let movementPath = [];
 
 const api = async (path, options = {}) => {
   const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
@@ -10,15 +12,19 @@ const api = async (path, options = {}) => {
   if (!response.ok) throw new Error(payload.error || "Local server request failed");
   return payload;
 };
-const el = (tag, attrs = {}, text = "") => {
+const el = (tag, attrs = {}, ...children) => {
   const node = document.createElement(tag);
   for (const [key, value] of Object.entries(attrs)) {
     if (key === "class") node.className = value;
     else if (key === "style") Object.assign(node.style, value);
-    else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+    else if (key.startsWith("on")) node.addEventListener(key.slice(2).toLowerCase(), value);
+    else if (typeof value === "boolean") node.toggleAttribute(key, value);
     else node.setAttribute(key, value);
   }
-  if (text) node.textContent = text;
+  for (const child of children) {
+    if (child instanceof Node) node.append(child);
+    else if (child !== undefined && child !== null && child !== "") node.append(String(child));
+  }
   return node;
 };
 const blockData = (id) => session.data.blocks.find((block) => block.id === id);
@@ -39,7 +45,7 @@ function setupScreen() {
     event.preventDefault();
     try {
       session = await api("/api/play/sessions", { method: "POST", body: JSON.stringify({ playerNames: names.value.split(","), seed: Number(seed.value) }) });
-      error = ""; selected = null; gameScreen();
+      error = ""; selected = null; selectedActionIndex = 0; gameScreen();
     } catch (cause) { message.textContent = cause.message; }
   });
   app.append(form);
@@ -65,9 +71,15 @@ function phasePanel() {
   const panel = el("section", { class: "panel phase" });
   const active = player(session.state.players[session.state.currentPlayer].id);
   panel.append(el("h2", {}, "Live phase"), el("div", { class: "phase-state" }, "TURN", el("strong", {}, String(session.state.turn))), el("div", { class: "phase-state" }, "PHASE", el("strong", {}, session.state.phase.toUpperCase())), el("p", { class: "hint" }, `Active player: ${active.name}`));
-  const advance = el("button", { class: "primary", disabled: Boolean(session.state.winnerId) }, `Advance from ${session.state.phase}`);
+  const phaseLabel = { beginning: "Start action phase", action: "Finish action (draw cards)", recycle: "Resolve end phase", end: "Next player's turn" }[session.state.phase];
+  const advance = el("button", { class: "primary", type: "button", disabled: Boolean(session.state.winnerId) }, phaseLabel);
   advance.addEventListener("click", () => command({ kind: "phase" }));
   panel.append(advance);
+  if (session.state.phase === "action") {
+    const pass = el("button", { type: "button" }, "Pass & end turn");
+    pass.addEventListener("click", passAndEndTurn);
+    panel.append(pass);
+  }
   if (session.state.winnerId) panel.append(el("p", { class: "hint" }, `${player(session.state.winnerId).name} has won.`));
   return panel;
 }
@@ -78,30 +90,88 @@ function actionPanel() {
   if (session.state.phase !== "action") { panel.append(el("p", { class: "empty" }, "Advance to the action phase to submit an action.")); return panel; }
   const select = el("select", { "aria-label": "Action" });
   options.forEach((option, index) => select.append(el("option", { value: String(index) }, option.label)));
+  const suggested = selectedActionIndex === 0 && options[0]?.type === "pass" ? options.findIndex((option) => option.type === "play-search" || option.type === "move-hex" || option.type === "place-marker") : selectedActionIndex;
+  select.value = String(Math.min(suggested >= 0 ? suggested : 0, Math.max(0, options.length - 1)));
   const fields = el("div", { class: "action-fields" });
-  const renderFields = () => {
+  const renderFields = async () => {
     fields.replaceChildren(); const option = options[Number(select.value)] || {};
     if (option.pawnId) fields.append(field("Pawn", "pawnId", option.pawnId, [option.pawnId]));
-    if (option.targetIds?.length) fields.append(field("Target", "targetId", option.targetIds[0], option.targetIds));
+    if (option.type === "move-steps" || option.type === "play-move") {
+      if (option.cardId) fields.append(field("Card", "cardId", option.cardId, [option.cardId]));
+      await renderMovementFields(fields, option);
+      return;
+    }
+    if (option.targetIds?.length && option.type !== "delete-multi") fields.append(field("Target", "targetId", option.targetIds[0], option.targetIds));
+    if (option.type === "delete-multi") fields.append(multiField(`Targets (up to ${option.maxTargets})`, "targetIds", option.targetIds));
     if (option.directions) fields.append(field("Direction", "dir", "0", option.directions));
     if (option.placements?.length) {
       const values = option.placements.map((item) => `${item.dir},${item.rotation}`);
       fields.append(field("Placement", "placement", values[0], values));
     }
     const cards = session.legalOptions.cardsInHand || [];
-    if (cards.length && ["play-delete", "play-icebreak-block", "play-icebreak-pawn", "play-search", "attach-pawn", "attach-enemy", "attach-block"].includes(option.type)) fields.append(field("Card", "cardId", cards[0], cards));
+    if (cards.length && ["play-delete", "play-icebreak-block", "play-icebreak-pawn", "play-search", "attach-pawn", "attach-enemy", "attach-block"].includes(option.type)) fields.append(field("Card", "cardId", option.cardId ?? cards[0], option.cardId ? [option.cardId] : cards));
     if (option.type === "play-reboot") fields.append(multiField("Four cards to discard", "cardIds", cards));
   };
-  select.addEventListener("change", renderFields); renderFields();
-  const submit = el("button", { class: "primary" }, "Submit action");
+  select.addEventListener("change", () => { selectedActionIndex = Number(select.value); movementPath = []; void renderFields(); }); void renderFields();
+  const submit = el("button", { class: "primary", type: "button" }, "Execute selected action");
   submit.addEventListener("click", () => {
     const option = options[Number(select.value)] || {}; const action = { type: option.type };
-    fields.querySelectorAll("select").forEach((input) => { if (input.name === "dir") action.dir = Number(input.value); else if (input.name === "placement") { const [dir, rotation] = input.value.split(",").map(Number); action.dir = dir; action.rotation = rotation; } else if (input.name === "cardIds") action.cardIds = [...input.selectedOptions].map((choice) => choice.value); else action[input.name] = input.value; });
+    fields.querySelectorAll("select").forEach((input) => { if (input.name === "movementTarget") return; if (input.name === "dir") action.dir = Number(input.value); else if (input.name === "placement") { const [dir, rotation] = input.value.split(",").map(Number); action.dir = dir; action.rotation = rotation; } else if (input.name === "cardIds" || input.name === "targetIds") action[input.name] = [...input.selectedOptions].map((choice) => choice.value); else action[input.name] = input.value; });
     if (option.coord) action.coord = option.coord;
-    command({ kind: "action", action });
+    if (option.type === "pass") passAndEndTurn();
+    else {
+      if (option.type === "move-steps" || option.type === "play-move") {
+        if (!movementPath.length) { error = "Choose at least one adjacent space."; gameScreen(); return; }
+        action.path = movementPath;
+        movementPath = [];
+      }
+      command({ kind: "action", action });
+    }
   });
-  panel.append(select, fields, submit); if (error) panel.append(el("p", { class: "error" }, error)); return panel;
+  panel.append(el("p", { class: "hint" }, "Choose an engine-legal action, then choose its targets or placement."), select, fields, submit); if (error) panel.append(el("p", { class: "error" }, error)); return panel;
 }
+
+async function renderMovementFields(fields, option) {
+  const detail = el("div", { class: "movement-path" });
+  const status = el("p", { class: "hint" });
+  const list = el("ol", { class: "path-list" });
+  const render = (preview) => {
+    list.replaceChildren();
+    if (!movementPath.length) list.append(el("li", { class: "empty" }, "Start: current space"));
+    movementPath.forEach((step) => list.append(el("li", {}, formatStep(step))));
+    const limit = preview.maxSelectableSteps;
+    status.textContent = preview.exactBudgetKnown
+      ? `${movementPath.length}/${limit} fixed steps selected.`
+      : `${movementPath.length}/${limit} steps selected. The seeded die roll is made on execution; a path beyond that roll is rejected without moving.`;
+    const choices = preview.nextTargets || [];
+    if (choices.length) {
+      const target = field("Next adjacent space", "movementTarget", JSON.stringify(choices[0]), choices.map((item) => JSON.stringify(item)));
+      const select = target.querySelector("select");
+      [...select.options].forEach((choice) => { choice.textContent = formatStep(JSON.parse(choice.value)); });
+      const add = el("button", { type: "button" }, "Add step");
+      add.addEventListener("click", async () => {
+        try {
+          movementPath.push(JSON.parse(select.value));
+          await refresh();
+        } catch (cause) { error = cause.message; gameScreen(); }
+      });
+      detail.append(target, add);
+    }
+    if (movementPath.length) {
+      const remove = el("button", { type: "button" }, "Remove last step");
+      remove.addEventListener("click", async () => { movementPath.pop(); await refresh(); });
+      detail.append(remove);
+    }
+  };
+  const refresh = async () => {
+    const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId }) });
+    detail.replaceChildren(); render(preview); gameScreen();
+  };
+  const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId }) });
+  fields.append(status, list, detail); render(preview);
+}
+
+function formatStep(step) { return `(${step.coord.q}, ${step.coord.r}) · ${step.spaceId}`; }
 
 function field(label, name, value, values) { const select = el("select", { name, "aria-label": label }); values.forEach((item) => select.append(el("option", { value: String(item), selected: String(item) === String(value) ? "selected" : "" }, String(item)))); const wrap = el("label", {}, label); wrap.append(select); return wrap; }
 function multiField(label, name, values) { const select = el("select", { name, multiple: "multiple", size: "4", "aria-label": label }); values.forEach((item) => select.append(el("option", { value: String(item) }, String(item)))); const wrap = el("label", {}, label); wrap.append(select, el("span", { class: "hint" }, "Choose exactly four cards.")); return wrap; }
@@ -123,7 +193,7 @@ function tile(placed) {
   button.append(el("span", { class: "tile-shade" }), el("span", { class: "tile-name" }, definition?.name || placed.blockId), el("span", { class: "ice" }, definition?.iceValue || "—"));
   const positions = [[50,50],[33,25],[67,25],[83,50],[67,75],[33,75],[17,50]];
   positions.forEach(([left, top], index) => button.append(el("span", { class: "zone", style: { left: `${left}%`, top: `${top}%` } }, `h${index + 1}`)));
-  (definition?.edges || []).forEach((open, index) => { const pos = [[50,8],[89,29],[89,71],[50,92],[11,71],[11,29]][index]; button.append(el("span", { class: `edge ${open ? "" : "closed"}`, style: { left: `${pos[0]}%`, top: `${pos[1]}%` }, open ? "" : "×")); });
+  (definition?.edges || []).forEach((open, index) => { const pos = [[50,8],[89,29],[89,71],[50,92],[11,71],[11,29]][index]; button.append(el("span", { class: `edge ${open ? "" : "closed"}`, style: { left: `${pos[0]}%`, top: `${pos[1]}%` } }, open ? "" : "×")); });
   if (placed.ownerId) button.append(el("span", { class: "control" }, `${player(placed.ownerId)?.name || placed.ownerId} control`));
   session.state.pawns.filter((pawn) => pawn.q === placed.q && pawn.r === placed.r).forEach((pawn, index) => { const owner = player(pawn.ownerId); const token = el("button", { class: "pawn", style: { left: `${41 + index * 18}%`, top: "53%", "--pawn-color": owner?.color || "#aaa" }, "aria-label": `Pawn ${pawnData(pawn.pawnId)?.name || pawn.pawnId}` }, (pawnData(pawn.pawnId)?.name || pawn.pawnId).slice(0, 2).toUpperCase()); token.addEventListener("click", (event) => { event.stopPropagation(); selected = { kind: "pawn", id: pawn.pawnId }; gameScreen(); }); button.append(token); });
   return button;
@@ -134,6 +204,7 @@ function installPanZoom(viewport, board) { let drag = null; viewport.addEventLis
 function inspectorPanel() { const panel = el("section", { class: "panel inspector" }); panel.append(el("h2", {}, "Inspector")); if (!selected) { panel.append(el("p", { class: "empty" }, "Select a block or pawn on the Cybernet.")); return panel; } const data = selected.kind === "pawn" ? pawnData(selected.id) : (() => { const [q, r] = selected.id.split(",").map(Number); return blockData(session.state.blocks.find((item) => item.q === q && item.r === r)?.blockId); })(); const details = el("dl"); Object.entries(data || {}).filter(([key]) => ["id", "name", "iceValue", "movement", "abilities", "spaces", "assetRefs"].includes(key)).forEach(([key, value]) => { details.append(el("dt", {}, key), el("dd", {}, typeof value === "object" ? JSON.stringify(value) : String(value))); }); panel.append(details); return panel; }
 function eventPanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Event / action log")); const list = el("div", { class: "list" }); (session.events?.length ? session.events : [{ type: "ready", message: "Session created." }]).slice().reverse().forEach((event) => list.append(el("div", { class: `log-item ${event.type}` }, `${event.type}${event.message ? ` — ${event.message}` : ""}${event.roll ? ` [${event.roll.join(", ")}]` : ""}`))); panel.append(list); return panel; }
 function snapshotPanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Canonical snapshot"), el("pre", { class: "snapshot" }, JSON.stringify(session.state))); return panel; }
-function tracePanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Trace")); const download = el("button", {}, "Export trace"); download.addEventListener("click", async () => { const trace = await api(`/api/play/sessions/${session.id}/trace`); const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([JSON.stringify(trace, null, 2)], { type: "application/json" })); link.download = "speedrunners-trace.json"; link.click(); URL.revokeObjectURL(link.href); }); const file = el("input", { class: "trace-input", type: "file", accept: "application/json" }); const upload = el("button", {}, "Import trace"); upload.addEventListener("click", () => file.click()); file.addEventListener("change", async () => { try { session = await api("/api/play/traces/import", { method: "POST", body: await file.files[0].text() }); error = ""; selected = null; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }); const reset = el("button", {}, "Reset"); reset.addEventListener("click", async () => { session = await api(`/api/play/sessions/${session.id}/reset`, { method: "POST", body: JSON.stringify(session.setup) }); error = ""; selected = null; gameScreen(); }); panel.append(el("div", { class: "button-row" }, ""), file); panel.querySelector(".button-row").append(download, upload, reset); return panel; }
+function tracePanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Trace")); const download = el("button", { type: "button" }, "Export trace"); download.addEventListener("click", async () => { const trace = await api(`/api/play/sessions/${session.id}/trace`); const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([JSON.stringify(trace, null, 2)], { type: "application/json" })); link.download = "speedrunners-trace.json"; link.click(); URL.revokeObjectURL(link.href); }); const file = el("input", { class: "trace-input", type: "file", accept: "application/json" }); const upload = el("button", { type: "button" }, "Import trace"); upload.addEventListener("click", () => file.click()); file.addEventListener("change", async () => { try { session = await api("/api/play/traces/import", { method: "POST", body: await file.files[0].text() }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }); const reset = el("button", { type: "button" }, "Reset"); reset.addEventListener("click", async () => { session = await api(`/api/play/sessions/${session.id}/reset`, { method: "POST", body: JSON.stringify(session.setup) }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); }); panel.append(el("div", { class: "button-row" }), file); panel.querySelector(".button-row").append(download, upload, reset); return panel; }
 async function command(body) { try { const result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify(body) }); session = result; error = result.result?.error || ""; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }
+async function passAndEndTurn() { try { let result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify({ kind: "action", action: { type: "pass" } }) }); if (!result.result?.accepted) throw new Error(result.result?.error || "Pass was rejected"); for (let phase = 0; phase < 3; phase++) { result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify({ kind: "phase" }) }); if (!result.result?.accepted) throw new Error(result.result?.error || "Phase transition was rejected"); } session = result; error = ""; selectedActionIndex = 0; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }
 setupScreen();

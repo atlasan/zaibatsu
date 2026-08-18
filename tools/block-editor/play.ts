@@ -7,6 +7,8 @@ import { validSearchPlacements } from "../../impl/ts/src/engine/abilities.ts";
 import { advancePhase, applyActionWithEvents, newGame, type Action, type TransitionResult } from "../../impl/ts/src/engine/index.ts";
 import { snapshot } from "../../impl/ts/src/engine/snapshot.ts";
 import { currentPlayer, pawnById, type GameData, type GameState } from "../../impl/ts/src/domain/types.ts";
+import { neighbor } from "../../impl/ts/src/domain/hex.ts";
+import { stepTargets, type SpaceRef } from "../../impl/ts/src/engine/movement.ts";
 import { sha256 } from "./model.ts";
 
 export type PlayCommand = { kind: "phase" } | { kind: "action"; action: Action };
@@ -69,18 +71,37 @@ function legalOptions(state: GameState) {
   if (player.controlMarkersPlaced < player.controlMarkersTotal) actions.push({ type: "place-marker", label: "Place a control marker" });
   for (const pawn of owned) {
     const pawnDef = pawnById(data, pawn.pawnId);
-    if (pawnDef?.movement.type === "hex" && pawnDef.movement.activation === "once-per-turn") actions.push({ type: "move-hex", label: `Move ${pawnDef.name}`, pawnId: pawn.pawnId, directions: [0, 1, 2, 3, 4, 5] });
+    if (pawnDef && pawnDef.movement.type !== "hex" && pawnDef.movement.activation === "once-per-turn") {
+      const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
+      if (targets.length) {
+        actions.push({
+          type: "move-steps",
+          label: `Move ${pawnDef.name}`,
+          pawnId: pawn.pawnId,
+          movement: pawnDef.movement,
+          maxSelectableSteps: maxSelectableSteps(pawnDef.movement.type, pawnDef.movement.steps),
+          targets,
+        });
+      }
+    }
+    if (pawnDef?.movement.type === "hex" && pawnDef.movement.activation === "once-per-turn") {
+      const directions = [0, 1, 2, 3, 4, 5].filter((dir) => state.cybernet.at(neighbor(pawn.coord, dir)));
+      if (directions.length) actions.push({ type: "move-hex", label: `Move ${pawnDef.name}`, pawnId: pawn.pawnId, directions });
+    }
     const abilities = pawnDef?.abilities ?? [];
     if (abilities.some((ability) => ability.ability === "search" && ability.activation === "once-per-turn")) {
       try { actions.push({ type: "search", label: `Search with ${pawnDef?.name}`, pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement is simply not an option */ }
     }
     const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
     if (colocated.length && abilities.some((ability) => ability.ability === "delete" && ability.activation === "once-per-turn")) actions.push({ type: "delete", label: `Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
+    const deleteAbility = abilities.find((ability) => ability.ability === "delete" && ability.activation === "once-per-turn");
+    const skulls = Math.max(1, deleteAbility?.skulls ?? 1);
+    if (colocated.length > 1 && skulls > 1) actions.push({ type: "delete-multi", label: `Split Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
     if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-pawn", label: `Icebreak with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
     const block = state.cybernet.at(pawn.coord);
     if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none" && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-block", label: `Icebreak ${block.blockId}`, pawnId: pawn.pawnId, coord: pawn.coord });
   }
-  for (const cardId of player.hand) {
+  for (const cardId of new Set(player.hand)) {
     const card = data.cards.find((item) => item.id === cardId);
     if (!card) continue;
     for (const pawn of owned) {
@@ -88,6 +109,10 @@ function legalOptions(state: GameState) {
       const abilities = pawnDef?.abilities ?? [];
       const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
       if (card.activates?.includes("delete") && abilities.some((ability) => ability.ability === "delete" && ability.activation === "card") && colocated.length) actions.push({ type: "play-delete", label: `Play ${card.name}: Delete`, cardId, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
+      if (typeof card.movement === "number" && card.movement > 0) {
+        const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
+        if (targets.length) actions.push({ type: "play-move", label: `Play ${card.name}: Move ${card.movement}`, cardId, pawnId: pawn.pawnId, movement: { type: "steps", steps: card.movement, activation: "card" }, maxSelectableSteps: card.movement, targets });
+      }
       if (card.activates?.includes("icebreaker") && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "card")) {
         const enemies = colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId);
         if (enemies.length) actions.push({ type: "play-icebreak-pawn", label: `Play ${card.name}: Icebreak pawn`, cardId, pawnId: pawn.pawnId, targetIds: enemies });
@@ -104,9 +129,83 @@ function legalOptions(state: GameState) {
   }
   for (const pawnId of state.eliminated) {
     const pawnDef = pawnById(data, pawnId);
+    if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "once-per-turn")) actions.push({ type: "reboot", label: `Reboot ${pawnDef.name}`, pawnId });
     if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "card") && player.hand.length >= 4) actions.push({ type: "play-reboot", label: `Play 4 cards: Reboot ${pawnDef.name}`, pawnId, cardIds: player.hand });
   }
   return { phase: state.phase, activePlayerId: player.id, actions, cardsInHand: player.hand };
+}
+
+function maxSelectableSteps(type: string, steps?: number): number {
+  switch (type) {
+    case "steps": return Math.max(0, steps ?? 0);
+    case "d6": return 6;
+    case "2d6": return 12;
+    default: return 0;
+  }
+}
+
+function cleanPath(path: unknown): SpaceRef[] {
+  if (!Array.isArray(path)) throw new Error("movement path must be an array");
+  return path.map((step) => {
+    if (!step || typeof step !== "object") throw new Error("each movement step must name a space");
+    const candidate = step as { coord?: { q?: unknown; r?: unknown }; spaceId?: unknown };
+    if (!Number.isSafeInteger(candidate.coord?.q) || !Number.isSafeInteger(candidate.coord?.r) || typeof candidate.spaceId !== "string") {
+      throw new Error("each movement step needs integer q/r coordinates and a space id");
+    }
+    return { coord: { q: candidate.coord.q, r: candidate.coord.r }, spaceId: candidate.spaceId };
+  });
+}
+
+/**
+ * Projects the next guided step without resolving dice or mutating a session.
+ * Dice movement exposes its maximum selectable path; the actual seeded roll is
+ * still made only when the accepted move action reaches the engine.
+ */
+export function getMovementOptions(id: string, pawnId: string, rawPath: unknown, cardId?: string) {
+  const session = get(id);
+  if (session.state.phase !== "action") throw new Error("movement is available only during the action phase");
+  const player = currentPlayer(session.state);
+  const pawn = session.state.cybernet.pawnById(pawnId);
+  if (!pawn || pawn.ownerId !== player.id) throw new Error("choose an active player's pawn");
+  const definition = pawnById(data, pawnId);
+  if (!definition) throw new Error("unknown pawn");
+  let maximum: number;
+  let movement: { type: string; steps?: number; activation: string };
+  if (cardId) {
+    const card = data.cards.find((item) => item.id === cardId);
+    if (!player.hand.includes(cardId) || !card || !Number.isInteger(card.movement) || card.movement! <= 0) {
+      throw new Error("choose a movement-valued card in the active player's hand");
+    }
+    maximum = card.movement!;
+    movement = { type: "steps", steps: maximum, activation: "card" };
+  } else {
+    if (definition.movement.type === "hex" || definition.movement.activation !== "once-per-turn") {
+      throw new Error("this pawn does not have guided once-per-turn space movement");
+    }
+    if (player.oncePerTurnUsed[`move:${pawnId}`]) throw new Error("this pawn already moved this turn");
+    maximum = maxSelectableSteps(definition.movement.type, definition.movement.steps);
+    movement = definition.movement;
+  }
+  const path = cleanPath(rawPath);
+  if (path.length > maximum) throw new Error(`path exceeds the selectable maximum of ${maximum} steps`);
+  let coord = pawn.coord;
+  let spaceId = pawn.spaceId;
+  for (const [index, step] of path.entries()) {
+    const reachable = stepTargets(data, session.state.cybernet, coord, spaceId);
+    if (!reachable.some((target) => target.coord.q === step.coord.q && target.coord.r === step.coord.r && target.spaceId === step.spaceId)) {
+      throw new Error(`step ${index + 1} is not adjacent to the preceding space`);
+    }
+    coord = step.coord;
+    spaceId = step.spaceId;
+  }
+  return {
+    pawnId,
+    movement,
+    maxSelectableSteps: maximum,
+    exactBudgetKnown: movement.type === "steps",
+    path,
+    nextTargets: path.length < maximum ? stepTargets(data, session.state.cybernet, coord, spaceId) : [],
+  };
 }
 
 function blockDataFor(id: string) { return data.blocks.find((block) => block.id === id); }

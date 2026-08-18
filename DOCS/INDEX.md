@@ -55,9 +55,10 @@ These are useful detailed guides, but do not own live project status:
 
 Windows contributors can use the root launchers documented in
 [the repository README](../README.md#quick-start): `run-sandbox.bat`,
-`run-editor.bat`, `check-docs.bat`, and `test-engines.bat`. The launchers are
-convenience wrappers only; they do not change the documentation, engine, or
-source-data obligations above.
+`run-editor.bat`, `stop-local-server.bat`, `check-docs.bat`, and
+`test-engines.bat`. The two start commands restart only the local process
+listening on port `4173`. They are convenience wrappers only; they do not
+change the documentation, engine, or source-data obligations above.
 
 Original upstream assets are ignored under `DOCS/Original/`; their identities
 and checksums are cataloged in
