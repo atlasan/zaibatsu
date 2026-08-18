@@ -273,6 +273,10 @@ def perceptual_hash(image: np.ndarray) -> str:
 
 
 def extract_card(path: str, asset: str) -> dict:
+    """Extract review-required card data. NOTE: detection runs on the *upright*
+    frame, so every box in `textRegions` and `iconCandidates` is in coordinates
+    rotated by `orientation` from the source PNG. Consumers that crop the original
+    image must rotate by `orientation` first (or crop the upright frame)."""
     image = cv2.imread(path, cv2.IMREAD_COLOR)
     if image is None:
         raise FileNotFoundError(path)
