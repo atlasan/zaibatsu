@@ -62,7 +62,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 ## Later (Phase 5 — targets)
 - [~] (tools/ts) Local Speedrunners rules sandbox: `/play/` is served by the
   block-editor host with isolated replayable sessions, CSS Cybernet projection,
-  optional local artwork, live phase controls, and trace import/export. Close
+  optional local artwork, live phase controls, standard seeded free play, a
+  deterministic Test Lab, v1/v2 trace replay, and Playwright browser coverage.
+  Close
   only after supported-action coverage, accepted source/data readiness, and
   both golden suites are green; see `DOCS/web-sandbox-plan.md`.
 - [ ] (go) Headless engine host / server + simulation harness.

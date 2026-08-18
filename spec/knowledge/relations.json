@@ -7460,61 +7460,6 @@
       "to": "source/sp-es-rulebook"
     },
     {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c01",
-      "to": "action-card/octagon-dex"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c02",
-      "to": "action-card/simstim-record"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c03",
-      "to": "action-card/dj"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c04",
-      "to": "action-card/accelerator-transgenic-therapy"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c05",
-      "to": "action-card/hyper-accelerator"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c06",
-      "to": "action-card/accela-accelerator"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c07",
-      "to": "action-card/biochip"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c08",
-      "to": "action-card/e-synapse-neural-interface"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-action-cards-p01-c09",
-      "to": "action-card/cracker"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-blocks-a4-p01-c01",
-      "to": "block/idoru"
-    },
-    {
-      "type": "implemented-by-data-record",
-      "from": "asset/sp-en-blocks-a4-p01-c02",
-      "to": "block/hacktivism"
-    },
-    {
       "type": "verified-by-provenance",
       "from": "action-card/accela-accelerator",
       "to": "workflow-step/provenance-review",

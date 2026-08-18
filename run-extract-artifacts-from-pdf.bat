@@ -1,0 +1,1 @@
+.\tools\refresh-artifacts.ps1 -Pdftoppm "C:\Program Files\Calibre2\app\bin\pdftoppm.exe"

@@ -26,11 +26,27 @@
     "sp-en-blocks-a4-p07-c03": {
       "name": "Cleaner",
       "directionArrows": 2,
-      "spaces": [
-        { "modifier": { "kind": "ice" }, "note": "one zone carries an ICE modifier (a flat die on the zone)" }
-      ],
+      "iceModifierZone": true,
+      "_spacesNote": "full space layout not enumerated in source review; one zone carries an ICE modifier (a flat die on the zone)",
       "bonusCorners": 4,
       "iceDifficultyCorner": true
+    },
+    "sp-en-blocks-a4-p02-c02": {
+      "name": "Electromagnetic Pulse",
+      "edgesOpen": 6,
+      "spaces": [
+        { "shape": "hex", "zoneCount": 1 },
+        { "shape": "hex", "zoneCount": 1 },
+        { "shape": "hex", "zoneCount": 1 },
+        { "shape": "hex", "zoneCount": 1 },
+        { "shape": "hex", "zoneCount": 1 },
+        { "shape": "hex", "zoneCount": 1 }
+      ],
+      "bonusCorners": 5,
+      "iceDifficultyCorner": true,
+      "iceValue": "low",
+      "iceFaces": [4, 5, 6],
+      "_iceNote": "3 dice showing 4, 5, 6 at the difficulty corner (3 dice = low ICE)"
     },
     "sp-en-blocks-a4-p08-c01": {
       "name": "Freeside",

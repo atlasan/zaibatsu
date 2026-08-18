@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
 import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession } from "./model";
-import { createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
+import { createPlayScenario, createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, listPlayScenarios, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
 const editorRoot = import.meta.dir;
 const repoRoot = resolve(editorRoot, "../..");
@@ -48,6 +48,12 @@ const server = Bun.serve({
       // canonical spec data or editor drafts.
       if (url.pathname === "/api/play/sessions" && request.method === "POST") {
         try { return json(createPlaySession(await body<PlaySetup>(request)), 201); } catch (error) { return json({ error: error instanceof Error ? error.message : "Invalid play setup" }, 400); }
+      }
+      if (url.pathname === "/api/play/scenarios" && request.method === "GET") return json({ scenarios: listPlayScenarios() });
+      if (url.pathname.startsWith("/api/play/scenarios/") && request.method === "POST") {
+        const id = safeName(url.pathname.slice("/api/play/scenarios/".length));
+        if (!id) return json({ error: "Invalid Test Lab scenario id" }, 400);
+        try { const payload = await body<PlaySetup>(request); return json(createPlayScenario(id, payload), 201); } catch (error) { return json({ error: error instanceof Error ? error.message : "Invalid Test Lab scenario" }, 400); }
       }
       if (url.pathname === "/api/play/traces/import" && request.method === "POST") {
         try { return json(importPlayTrace(await body<PlayTrace>(request)), 201); } catch (error) { return json({ error: error instanceof Error ? error.message : "Invalid play trace" }, 400); }

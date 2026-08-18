@@ -12,13 +12,23 @@ This is not a hotseat client, a network service, or a production asset
 distribution channel. Shadowraiders, accounts, persistence, multiplayer, and
 public hosting remain outside this workstream.
 
+## Test Lab
+
+The setup screen offers both standard seeded sessions and clearly labeled Test
+Lab fixtures. Fixtures arrange deterministic legal reducer state only so a user
+can immediately exercise current actions: search/movement, combat/control,
+attachments, and reboot/turn flow. They never write `spec/` and do not claim
+that provisional Speedrunners content is source-complete.
+
 ## Contract
 
 - A session is `{ playerNames, seed, accepted commands }`; it can be reset,
   replayed, undone, exported, and imported deterministically.
-- A trace includes its setup, accepted phase/action command log, and a checksum
-  over the local Speedrunners data inputs. An import with a different checksum
-  is rejected before replay.
+- A standard trace remains `zaibatsu-speedrunners-trace/v1`: setup, accepted
+  phase/action command log, and a checksum over local Speedrunners data inputs.
+  A Test Lab trace is `zaibatsu-speedrunners-trace/v2` and additionally carries its scenario id so import
+  reconstructs the same fixture before replay. An import with a different
+  checksum, unknown fixture, or stale command is rejected before replay.
 - Engine transitions return structured events (`phase-advanced`, accepted
   action, roll, draw, elimination, control change, winner, or validation
   failure). UI text is presentation only; it never parses engine messages.
@@ -53,7 +63,9 @@ implemented action subset; it must not imply source-complete gameplay.
 
 Before closing the workstream, run `bun tools/validate-docs.ts`,
 `bun tools/verify-artifacts.ts`, `bun tools/validate-spec.ts`, the Bun suites,
-and the Go suites. Keep the transition/event API and its tests mirrored; see
+the Go suites, and `cd tools/block-editor; bun run test:play`. Install the local
+browser once with `bun run install:playwright`. Keep the transition/event API
+and its tests mirrored; see
 [the parity contract](parity.md) and [the lifecycle](lifecycle.md).
 
 ## Interface ownership

@@ -2790,7 +2790,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c01.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c01.webp"
       },
-      "gameplayRef": "action-card/octagon-dex",
       "page": 1,
       "pngSha256": "fa649cfe28535ab9d292751cfce0134b9e5d4a94e9d857791910d900adba2f86",
       "renderDpi": 300,
@@ -2816,7 +2815,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c02.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c02.webp"
       },
-      "gameplayRef": "action-card/simstim-record",
       "page": 1,
       "pngSha256": "8cb810d4bb17416026b15fb51ee59b2f6062787a07d2946e6b21622665401b9e",
       "renderDpi": 300,
@@ -2842,7 +2840,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c03.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c03.webp"
       },
-      "gameplayRef": "action-card/dj",
       "page": 1,
       "pngSha256": "c64b7a4ea73e911649a7afb2df25c67204f95936042c7d6cf08a0f0bdacebada",
       "renderDpi": 300,
@@ -2868,7 +2865,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c04.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c04.webp"
       },
-      "gameplayRef": "action-card/accelerator-transgenic-therapy",
       "page": 1,
       "pngSha256": "3932dc900dedf3c223ab3c781f98cd0cab0631753a83bf02775d8b8ce4d68f44",
       "renderDpi": 300,
@@ -2894,7 +2890,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c05.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c05.webp"
       },
-      "gameplayRef": "action-card/hyper-accelerator",
       "page": 1,
       "pngSha256": "e50c1be29c6fce8af945f4d7fa91a4229ba683c94eb96732439de6ec32314428",
       "renderDpi": 300,
@@ -2920,7 +2915,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c06.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c06.webp"
       },
-      "gameplayRef": "action-card/accela-accelerator",
       "page": 1,
       "pngSha256": "80dc14ceafc3c9cb6f4674531fbb0f814a04e8cca2cb6ae4d841ea8d3b736fc9",
       "renderDpi": 300,
@@ -2946,7 +2940,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c07.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c07.webp"
       },
-      "gameplayRef": "action-card/biochip",
       "page": 1,
       "pngSha256": "18368666af9f914dfbb130d4ed36558af41b427242ce1b69281e6a97f729c996",
       "renderDpi": 300,
@@ -2972,7 +2965,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c08.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c08.webp"
       },
-      "gameplayRef": "action-card/e-synapse-neural-interface",
       "page": 1,
       "pngSha256": "9b28b4f94029e636716c1ebc8bae3a47f77a181a5a17142bb876f0bac6f2b9a8",
       "renderDpi": 300,
@@ -2998,7 +2990,6 @@
         "png": "tmp/artifacts/build/sp-en-action-cards/png/sp-en-action-cards-p01-c09.png",
         "webp": "tmp/artifacts/build/sp-en-action-cards/webp/sp-en-action-cards-p01-c09.webp"
       },
-      "gameplayRef": "action-card/cracker",
       "page": 1,
       "pngSha256": "9d8be9510be01a0bd92b0cf07aff4073d993da2cfa44a82e8e0fecb22d6083a2",
       "renderDpi": 300,
@@ -4178,7 +4169,6 @@
         "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-c01.png",
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c01.webp"
       },
-      "gameplayRef": "block/idoru",
       "page": 1,
       "pngSha256": "be739c07ba4049e0afceef664987cffda9897946fbbd2a51b9300afd853e1894",
       "renderDpi": 300,
@@ -4233,7 +4223,6 @@
         "png": "tmp/artifacts/build/sp-en-blocks-a4/png/sp-en-blocks-a4-p01-c02.png",
         "webp": "tmp/artifacts/build/sp-en-blocks-a4/webp/sp-en-blocks-a4-p01-c02.webp"
       },
-      "gameplayRef": "block/hacktivism",
       "page": 1,
       "pngSha256": "8a32029331c578f16a7c2c54e4a973024c754f42f44df6e9a048f82784f6e6f2",
       "renderDpi": 300,

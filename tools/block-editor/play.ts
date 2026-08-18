@@ -13,9 +13,18 @@ import { sha256 } from "./model.ts";
 
 export type PlayCommand = { kind: "phase" } | { kind: "action"; action: Action };
 export interface PlaySetup { playerNames: string[]; seed: number; }
-export interface PlayTrace { format: "zaibatsu-speedrunners-trace/v1"; setup: PlaySetup; dataChecksum: string; commands: PlayCommand[]; }
+export interface StandardPlayTrace { format: "zaibatsu-speedrunners-trace/v1"; setup: PlaySetup; dataChecksum: string; commands: PlayCommand[]; }
+export interface FixturePlayTrace { format: "zaibatsu-speedrunners-trace/v2"; setup: PlaySetup; scenarioId: string; dataChecksum: string; commands: PlayCommand[]; }
+export type PlayTrace = StandardPlayTrace | FixturePlayTrace;
 
-interface PlaySession { id: string; setup: PlaySetup; commands: PlayCommand[]; state: GameState; events: TransitionResult["events"]; }
+export interface PlayScenario {
+  id: string;
+  title: string;
+  description: string;
+  checkpoints: string[];
+}
+
+interface PlaySession { id: string; setup: PlaySetup; scenarioId?: string; commands: PlayCommand[]; state: GameState; events: TransitionResult["events"]; }
 
 const repoRoot = resolve(import.meta.dir, "../..");
 const data = loadDefault("speedrunners");
@@ -38,8 +47,68 @@ function cleanSetup(setup: PlaySetup): PlaySetup {
   return { playerNames: cleanNames(setup.playerNames), seed: setup.seed };
 }
 
-function replay(setup: PlaySetup, commands: PlayCommand[]): { state: GameState; events: TransitionResult["events"] } {
+const scenarios: PlayScenario[] = [
+  { id: "search-and-move", title: "Search and movement", description: "Place the next block, then test fixed/card movement across the Central Core boundary.", checkpoints: ["Play Search and place the top block.", "Move the Red Speedrunner into that block.", "Use Undo to confirm deterministic replay."] },
+  { id: "combat-and-control", title: "Combat and control", description: "A co-located combat fixture with a controllable ICE block and an ICE-bearing pawn.", checkpoints: ["Use a card to Delete a target.", "Use the Cyberninja for a Test Lab Split Delete.", "Icebreak the Cyberninja or the Hacktivism block.", "Inspect rolls, eliminations, and control events."] },
+  { id: "attachments", title: "Attachments", description: "Attach a card to your pawn or an enemy in the same block.", checkpoints: ["Attach Accelerator to your Red Speedrunner.", "Attach Malware to the enemy Speedrunner.", "Inspect slots and attached-card state."] },
+  { id: "reboot-and-turn", title: "Reboot and turn flow", description: "Reboot an eliminated pawn with four cards, then exercise pass, recycle, end, and reset.", checkpoints: ["Play four cards to Reboot the eliminated Red Speedrunner.", "Pass and end the turn.", "Reset the fixture and compare its trace."] },
+];
+
+export function listPlayScenarios(): PlayScenario[] { return scenarios.map((scenario) => ({ ...scenario, checkpoints: [...scenario.checkpoints] })); }
+
+function scenarioById(id: string): PlayScenario {
+  const scenario = scenarios.find((item) => item.id === id);
+  if (!scenario) throw new Error(`Unknown Test Lab scenario "${id}"`);
+  return scenario;
+}
+
+function fixtureState(id: string, setup: PlaySetup): GameState {
+  scenarioById(id);
   const state = newGame({ data, ...setup });
+  state.currentPlayer = 0;
+  state.turn = 1;
+  state.phase = "action";
+  state.deck = ["move-3", "move-2", "move-1", "enemy-malware", "add-on-accelerator"];
+  state.discard = [];
+  state.blockPile = ["data-haven", "hacktivism"];
+  state.eliminated = [];
+  const p1 = state.players[0]!;
+  const p2 = state.players[1]!;
+  p1.oncePerTurnUsed = {}; p2.oncePerTurnUsed = {};
+  const core = state.cybernet.blocks[0]!;
+  state.cybernet.blocks = [core];
+  state.cybernet.pawns = [];
+
+  if (id === "search-and-move") {
+    p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-blue";
+    p1.hand = ["move-1", "move-2"]; p2.hand = ["move-1"];
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+  } else if (id === "combat-and-control") {
+    p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-yellow";
+    p1.hand = ["move-1", "move-2", "move-3"]; p2.hand = [];
+    state.cybernet.blocks.push({ blockId: "hacktivism", rotation: 4, coord: { q: 0, r: 1 } });
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "h7" });
+    state.cybernet.placePawn({ pawnId: "merc-cyberninja", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "h1" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p2.id, coord: { q: 0, r: 1 }, spaceId: "h2" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: p2.id, coord: { q: 0, r: 1 }, spaceId: "h3" });
+  } else if (id === "attachments") {
+    p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-yellow";
+    p1.hand = ["add-on-accelerator", "enemy-malware"]; p2.hand = [];
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+  } else if (id === "reboot-and-turn") {
+    p1.pawnId = "speedrunner-green"; p2.pawnId = "speedrunner-blue";
+    p1.hand = ["move-1", "move-2", "move-3", "enemy-malware", "add-on-accelerator"]; p2.hand = [];
+    state.eliminated = ["speedrunner-red"];
+    state.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+  }
+  return state;
+}
+
+function replay(setup: PlaySetup, commands: PlayCommand[], scenarioId?: string): { state: GameState; events: TransitionResult["events"] } {
+  const state = scenarioId ? fixtureState(scenarioId, setup) : newGame({ data, ...setup });
   let events: TransitionResult["events"] = [];
   for (const command of commands) {
     const result = command.kind === "phase" ? advancePhase(state, data) : applyActionWithEvents(state, data, command.action);
@@ -64,7 +133,7 @@ function readableData(gd: GameData) {
   };
 }
 
-function legalOptions(state: GameState) {
+function legalOptions(state: GameState, scenarioId?: string) {
   const player = currentPlayer(state);
   const owned = state.cybernet.pawns.filter((pawn) => pawn.ownerId === player.id);
   const actions: Array<Record<string, unknown>> = [{ type: "pass", label: "Pass" }];
@@ -94,9 +163,9 @@ function legalOptions(state: GameState) {
     }
     const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
     if (colocated.length && abilities.some((ability) => ability.ability === "delete" && ability.activation === "once-per-turn")) actions.push({ type: "delete", label: `Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
-    const deleteAbility = abilities.find((ability) => ability.ability === "delete" && ability.activation === "once-per-turn");
+    const deleteAbility = abilities.find((ability) => ability.ability === "delete" && ability.activation !== "none");
     const skulls = Math.max(1, deleteAbility?.skulls ?? 1);
-    if (colocated.length > 1 && skulls > 1) actions.push({ type: "delete-multi", label: `Split Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
+    if (scenarioId === "combat-and-control" && colocated.length > 1 && skulls > 1) actions.push({ type: "delete-multi", label: `Test Lab: Split Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
     if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-pawn", label: `Icebreak with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
     const block = state.cybernet.at(pawn.coord);
     if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none" && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-block", label: `Icebreak ${block.blockId}`, pawnId: pawn.pawnId, coord: pawn.coord });
@@ -211,17 +280,33 @@ export function getMovementOptions(id: string, pawnId: string, rawPath: unknown,
 function blockDataFor(id: string) { return data.blocks.find((block) => block.id === id); }
 
 function view(session: PlaySession) {
+  const state = JSON.parse(snapshot(session.state));
+  const scenario = session.scenarioId ? scenarioById(session.scenarioId) : undefined;
   return {
     id: session.id,
     setup: session.setup,
+    scenario: scenario ? { ...scenario, checkpoints: scenario.checkpoints.map((label, index) => ({ id: `${scenario.id}-${index + 1}`, label, complete: scenarioCheckpoint(session, index) })) } : null,
     dataChecksum,
-    state: JSON.parse(snapshot(session.state)),
+    state,
+    players: session.state.players.map((player) => ({ id: player.id, name: player.name, color: player.color, pawnId: player.pawnId, markersTotal: player.controlMarkersTotal, markersPlaced: player.controlMarkersPlaced, bonus: player.bonusCounters, hand: player.hand.map((id) => ({ id, name: data.cards.find((card) => card.id === id)?.name ?? id })) })),
+    activePlayer: session.state.players[session.state.currentPlayer] ? { id: session.state.players[session.state.currentPlayer]!.id, name: session.state.players[session.state.currentPlayer]!.name, color: session.state.players[session.state.currentPlayer]!.color } : null,
+    counts: { deck: session.state.deck.length, discard: session.state.discard.length, blockPile: session.state.blockPile.length, eliminated: session.state.eliminated.length },
     data: readableData(data),
     layout,
-    legalOptions: legalOptions(session.state),
+    legalOptions: legalOptions(session.state, session.scenarioId),
     events: session.events,
     commandCount: session.commands.length,
   };
+}
+
+function scenarioCheckpoint(session: PlaySession, index: number): boolean {
+  switch (session.scenarioId) {
+    case "search-and-move": return index === 0 ? session.state.cybernet.blocks.length > 1 : index === 1 ? session.state.cybernet.pawns.some((pawn) => pawn.pawnId === "speedrunner-red" && (pawn.coord.q !== 0 || pawn.coord.r !== 0)) : session.commands.length > 2;
+    case "combat-and-control": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "play-delete") : index === 1 ? session.commands.some((command) => command.kind === "action" && command.action.type === "delete-multi") : index === 2 ? session.commands.some((command) => command.kind === "action" && command.action.type.startsWith("play-icebreak")) : session.events.some((event) => event.type === "roll");
+    case "attachments": return index === 0 ? Boolean(session.state.cybernet.pawnById("speedrunner-red")?.attachments?.length) : index === 1 ? Boolean(session.state.cybernet.pawnById("speedrunner-yellow")?.attachments?.length) : session.state.cybernet.pawns.some((pawn) => (pawn.attachments?.length ?? 0) > 0);
+    case "reboot-and-turn": return index === 0 ? !session.state.eliminated.includes("speedrunner-red") : index === 1 ? session.state.turn > 1 : session.commands.length > 0;
+    default: return false;
+  }
 }
 
 export function createPlaySession(setup: PlaySetup) {
@@ -232,11 +317,19 @@ export function createPlaySession(setup: PlaySetup) {
   return view(session);
 }
 
+export function createPlayScenario(id: string, setup: PlaySetup = { playerNames: ["Ada", "Bea"], seed: 5 }) {
+  const normalized = cleanSetup(setup);
+  const state = fixtureState(id, normalized);
+  const session: PlaySession = { id: `play-${nextSessionID++}`, setup: normalized, scenarioId: id, commands: [], state, events: [] };
+  sessions.set(session.id, session);
+  return view(session);
+}
+
 export function resetPlaySession(id: string, setup?: PlaySetup) {
   const session = get(id);
   session.setup = cleanSetup(setup ?? session.setup);
   session.commands = [];
-  const replayed = replay(session.setup, []);
+  const replayed = replay(session.setup, [], session.scenarioId);
   session.state = replayed.state;
   session.events = [];
   return view(session);
@@ -255,7 +348,7 @@ export function submitPlayCommand(id: string, command: PlayCommand) {
 export function undoPlayCommand(id: string) {
   const session = get(id);
   session.commands.pop();
-  const replayed = replay(session.setup, session.commands);
+  const replayed = replay(session.setup, session.commands, session.scenarioId);
   session.state = replayed.state;
   session.events = replayed.events;
   return view(session);
@@ -263,16 +356,20 @@ export function undoPlayCommand(id: string) {
 
 export function exportPlayTrace(id: string): PlayTrace {
   const session = get(id);
-  return { format: "zaibatsu-speedrunners-trace/v1", setup: session.setup, dataChecksum, commands: session.commands };
+  return session.scenarioId
+    ? { format: "zaibatsu-speedrunners-trace/v2", setup: session.setup, scenarioId: session.scenarioId, dataChecksum, commands: session.commands }
+    : { format: "zaibatsu-speedrunners-trace/v1", setup: session.setup, dataChecksum, commands: session.commands };
 }
 
 export function importPlayTrace(trace: PlayTrace) {
-  if (trace?.format !== "zaibatsu-speedrunners-trace/v1") throw new Error("Unsupported play trace format");
+  if (trace?.format !== "zaibatsu-speedrunners-trace/v1" && trace?.format !== "zaibatsu-speedrunners-trace/v2") throw new Error("Unsupported play trace format");
   if (trace.dataChecksum !== dataChecksum) throw new Error("Trace data checksum does not match local Speedrunners data");
   const setup = cleanSetup(trace.setup);
   if (!Array.isArray(trace.commands)) throw new Error("Trace commands must be an array");
-  const replayed = replay(setup, trace.commands);
-  const session: PlaySession = { id: `play-${nextSessionID++}`, setup, commands: trace.commands, state: replayed.state, events: replayed.events };
+  const scenarioId = trace.format === "zaibatsu-speedrunners-trace/v2" ? trace.scenarioId : undefined;
+  if (scenarioId) scenarioById(scenarioId);
+  const replayed = replay(setup, trace.commands, scenarioId);
+  const session: PlaySession = { id: `play-${nextSessionID++}`, setup, scenarioId, commands: trace.commands, state: replayed.state, events: replayed.events };
   sessions.set(session.id, session);
   return view(session);
 }

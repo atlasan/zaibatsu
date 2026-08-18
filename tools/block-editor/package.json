@@ -5,6 +5,12 @@
   "scripts": {
     "dev": "bun run server.ts",
     "start": "bun run server.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "test:play": "playwright test",
+    "test:play:headed": "playwright test --headed",
+    "install:playwright": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
   }
 }

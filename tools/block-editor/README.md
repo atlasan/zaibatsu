@@ -30,6 +30,18 @@ Use `run-sandbox.bat` to start this host for the Speedrunners sandbox and open
 `http://localhost:4173/play/`. Both launchers restart the local listener on
 port `4173`; use `stop-local-server.bat` to stop it without starting another.
 
+The sandbox setup screen includes standard seeded play plus a **Test Lab** of
+clearly labeled deterministic fixtures. Fixtures are local reducer tests, not
+source-complete games; their v2 traces recreate the same fixture on import.
+
+For browser regression coverage, install Chromium once and run:
+
+```powershell
+cd tools/block-editor
+bun run install:playwright
+bun run test:play
+```
+
 ## What it does now
 
 - Browses all 48 individually cut English blocks: 24 Speedrunners and 24

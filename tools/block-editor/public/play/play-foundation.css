@@ -1,0 +1,6 @@
+.setup-lab{width:min(780px,calc(100% - 32px));margin:0 auto 40px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.scenario-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.scenario-card{display:grid;gap:7px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#101824}.scenario-button{text-align:left}
+.players{display:grid;gap:7px}.player-row{display:grid;grid-template-columns:auto 1fr;column-gap:7px;align-items:center;padding:7px;border-radius:8px}.player-row.active{background:#17344a}.player-row .hint{grid-column:2}.player-dot{width:11px;height:11px;border-radius:50%;grid-row:1/3}
+.hand{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.card-chip{padding:3px 6px;border-radius:999px;background:#24384f;border:1px solid #45647e;font-size:11px}.test-lab{display:grid;gap:8px}.checkpoint-list{display:grid;gap:6px;margin:0;padding-left:20px}.checkpoint-list .complete{color:var(--cyan)}
+.movement-path{display:flex;flex-wrap:wrap;gap:8px;align-items:end}.path-list{margin:0;padding-left:20px}.path-list li{font-size:13px}
+@media(max-width:720px){.scenario-list{grid-template-columns:1fr}.setup-lab{width:calc(100% - 32px)}}

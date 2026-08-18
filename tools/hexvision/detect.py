@@ -8,7 +8,8 @@ is precise and only the interior features are inferred.
 
 Per tile it detects:
   * passages   — which of the 6 edges expose a connecting space (block.edges[6]);
-  * placements — the circular space slots inside;
+  * placements — the gameplay spaces, by partitioning the standard 7-hex grid on
+                 the printed white grid lines (merged zones = pills/large areas);
   * white corners — which of the 6 corners are white (bonus zone = 3 aligned);
   * ICE dice   — the flat die faces printed on the tile (the ICE value), read from
                  their bold dark outline + pips; the decorative 3-D dice are skipped.
@@ -228,69 +229,73 @@ def _ring_whiteness(white: np.ndarray, x: float, y: float, r: float) -> float:
     return hits / tot if tot else 0.0
 
 
+_RING = ("h2", "h3", "h4", "h5", "h6", "h7")
+_RING_ADJ = (("h2", "h3"), ("h3", "h4"), ("h4", "h5"), ("h5", "h6"), ("h6", "h7"), ("h7", "h2"))
+_ZONE_ORDER = ("h1", "h2", "h3", "h4", "h5", "h6", "h7")
+
+
+def _boundary_line_white(white: np.ndarray, center, inr: int, a: str, b: str) -> float:
+    """Fraction of the shared edge between zones a and b that carries a WHITE grid
+    line. High => a printed line separates the two cells; low => no line, so the
+    two zones are one merged space (a pill / large area)."""
+    h, w = white.shape
+    cx, cy = center
+    ax, ay = STANDARD_ZONE_ANCHORS[a]
+    bx, by = STANDARD_ZONE_ANCHORS[b]
+    mx, my = (ax + bx) / 2, (ay + by) / 2
+    dx, dy = bx - ax, by - ay
+    length = math.hypot(dx, dy) or 1.0
+    px, py = -dy / length, dx / length  # unit perpendicular = along the shared edge
+    hit = n = 0
+    for s in np.linspace(-0.28, 0.28, 29):
+        gx = int(cx + (mx + px * s) * inr)
+        gy = int(cy + (my + py * s) * inr)
+        if 0 <= gx < w and 0 <= gy < h:
+            n += 1
+            if white[gy, gx] > 0:
+                hit += 1
+    return hit / n if n else 0.0
+
+
 def detect_spaces(bgr: np.ndarray, alpha, center, inr: int) -> list[Space]:
-    """Cells are outlined by WHITE lines (a hex grid marks the spaces). Detect
-    circles on the white mask, then keep only those whose circumference actually
-    lies on a white ring — this rejects decorative art that isn't a cell. Strong
-    non-max-suppression avoids overlap; pills are approximated by a circle.
-    Assistive; verify via overlay."""
+    """Partition the standard 7-hex grid into spaces using the printed WHITE grid
+    lines, rather than hunting free-form circles (which over-segmented big areas).
+    Two adjacent ring zones with NO white line on their shared edge merge into one
+    space; a line keeps them separate. The centre h1 is folded into the largest
+    space (it is the art/name hub, rarely its own cell). `kind` carries the
+    displayShape: circle (1 zone) / capsule (2) / compound (3+). Assistive —
+    verify via overlay; irregular art (e.g. Freeside) can still over-split."""
     cx, cy = center
     white = _white_mask(bgr, alpha)
-    c = cv2.HoughCircles(
-        white, cv2.HOUGH_GRADIENT, dp=1.0, minDist=int(inr * 0.4),
-        param1=100, param2=40, minRadius=int(inr * 0.13), maxRadius=int(inr * 0.62),
-    )
-    scored: list[tuple] = []
-    if c is not None:
-        for x, y, r in c[0]:
-            if (x - cx) ** 2 + (y - cy) ** 2 > (inr * 0.9) ** 2:
-                continue
-            wr = max(_ring_whiteness(white, x, y, rr) for rr in (r - 7, r, r + 7))
-            if wr < 0.30:  # must be backed by a white cell outline
-                continue
-            scored.append((float(x), float(y), float(r)))
-    scored.sort(key=lambda t: -t[2])  # keep the larger of overlapping detections
-    kept: list[Space] = []
-    picks: list[tuple] = []
-    for x, y, r in scored:
-        if any(math.hypot(x - px, y - py) < 0.7 * max(r, pr) for px, py, pr in picks):
-            continue
-        picks.append((x, y, r))
-        normalized = Space(
-            x=round((x - cx) / inr, 4),
-            y=round((y - cy) / inr, 4),
-            r=round(r / inr, 4),
-            kind="space",
-        )
-        normalized.suggestedZoneIds, normalized.suggestionConfidence = suggest_zone_ids(normalized)
-        kept.append(normalized)
-        if len(kept) >= 7:
-            break
-    # The centre zone (h1) is usually the block name / effect text, not a cell.
-    # Only keep an h1-only space when it is backed by a strong, near-complete
-    # white ring — this removes the common centre false positive.
-    kept = [s for s in kept if s.suggestedZoneIds != ["h1"]
-            or _ring_whiteness(white, cx + s.x * inr, cy + s.y * inr, s.r * inr) >= 0.62]
-    # Completion pass: an outer ring zone with a clear white cell outline that
-    # Hough missed is recovered here (the outer ring is usually a full cell ring).
-    covered = {z for s in kept for z in s.suggestedZoneIds}
-    for zid in ("h2", "h3", "h4", "h5", "h6", "h7"):
-        if zid in covered:
-            continue
-        nx, ny = STANDARD_ZONE_ANCHORS[zid]
-        ax, ay = cx + nx * inr, cy + ny * inr
-        best, best_r = 0.0, inr * 0.25
-        for ox in (-0.10, 0.0, 0.10):
-            for oy in (-0.10, 0.0, 0.10):
-                for rr in np.linspace(0.16, 0.38, 6) * inr:
-                    wr = _ring_whiteness(white, ax + ox * inr, ay + oy * inr, rr)
-                    if wr > best:
-                        best, best_r = wr, rr
-        if best >= 0.5:
-            sp = Space(x=nx, y=ny, r=round(best_r / inr, 4), kind="space")
-            sp.suggestedZoneIds, sp.suggestionConfidence = [zid], round(best, 3)
-            kept.append(sp)
-    return kept
+    parent = {z: z for z in _RING}
+
+    def find(x: str) -> str:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for a, b in _RING_ADJ:
+        if _boundary_line_white(white, center, inr, a, b) < 0.45:
+            parent[find(a)] = find(b)  # no grid line on the shared edge -> merged
+    groups: dict[str, list[str]] = {}
+    for z in _RING:
+        groups.setdefault(find(z), []).append(z)
+    ordered = sorted((sorted(g, key=_ZONE_ORDER.index) for g in groups.values()), key=len, reverse=True)
+    ordered[0].append("h1")  # the centre joins the biggest space
+    spaces: list[Space] = []
+    for g in ordered:
+        g = sorted(g, key=_ZONE_ORDER.index)
+        xs = [STANDARD_ZONE_ANCHORS[z][0] for z in g]
+        ys = [STANDARD_ZONE_ANCHORS[z][1] for z in g]
+        mx, my = sum(xs) / len(g), sum(ys) / len(g)
+        reach = max((math.hypot(STANDARD_ZONE_ANCHORS[z][0] - mx, STANDARD_ZONE_ANCHORS[z][1] - my) for z in g), default=0.0)
+        shape = "circle" if len(g) == 1 else ("capsule" if len(g) == 2 else "compound")
+        sp = Space(x=round(mx, 4), y=round(my, 4), r=round(reach + 0.34, 4), kind=shape)
+        sp.suggestedZoneIds = g
+        sp.suggestionConfidence = 1.0
+        spaces.append(sp)
+    return spaces
 
 
 def _die_face(gray: np.ndarray, x: int, y: int, w: int, h: int, side: float) -> int:

@@ -3296,12 +3296,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c01",
       "title": "sp-en-action-cards-p01-c01",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3327,12 +3327,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c02",
       "title": "sp-en-action-cards-p01-c02",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3358,12 +3358,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c03",
       "title": "sp-en-action-cards-p01-c03",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3389,12 +3389,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c04",
       "title": "sp-en-action-cards-p01-c04",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3420,12 +3420,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c05",
       "title": "sp-en-action-cards-p01-c05",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3451,12 +3451,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c06",
       "title": "sp-en-action-cards-p01-c06",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3482,12 +3482,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c07",
       "title": "sp-en-action-cards-p01-c07",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3513,12 +3513,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c08",
       "title": "sp-en-action-cards-p01-c08",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -3544,12 +3544,12 @@
       "kind": "asset",
       "localId": "sp-en-action-cards-p01-c09",
       "title": "sp-en-action-cards-p01-c09",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "action-card page 1",
@@ -4970,12 +4970,12 @@
       "kind": "asset",
       "localId": "sp-en-blocks-a4-p01-c01",
       "title": "sp-en-blocks-a4-p01-c01",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "block page 1",
@@ -5001,12 +5001,12 @@
       "kind": "asset",
       "localId": "sp-en-blocks-a4-p01-c02",
       "title": "sp-en-blocks-a4-p01-c02",
-      "status": "verified",
+      "status": "cataloged",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:asset",
-        "status:verified",
+        "status:cataloged",
         "workflow:canonical-data"
       ],
       "summary": "block page 1",
