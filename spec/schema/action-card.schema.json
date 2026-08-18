@@ -37,10 +37,44 @@
         "as": { "enum": ["pawn", "enemy", "block"] },
         "slot": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] },
         "class": { "type": "array", "items": { "type": "string" }, "description": "Target class restriction: the classes this card may attach to (e.g. Cleaner pawns)." },
-        "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete)." },
-        "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
+        "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete). May include move." },
+        "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
+        "abilityUses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ability"],
+            "properties": {
+              "ability": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] },
+              "perTurn": { "type": "integer", "minimum": 1, "description": "A fixed number of uses per turn." },
+              "dice": { "const": "d6", "description": "Uses per turn are a d6 roll instead of a fixed count." },
+              "activation": { "enum": ["card", "once-per-turn"], "description": "Or the granted ability is card-activated / once-per-turn." }
+            }
+          },
+          "description": "How a granted ability may be used: a fixed perTurn count, a d6 roll, or card/once-per-turn activation."
+        },
+        "iceModifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "faces": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 6 }, "maxItems": 6, "description": "Specific die faces this attachment grants to the target's ICE." },
+            "deltaDice": { "type": "integer", "description": "Change to the number of ICE dice (+/-)." },
+            "black": { "type": "boolean", "description": "Adds/uses a black ICE die: a failed Icebreak against it eliminates the attacking pawn." }
+          },
+          "description": "Modifies the target's ICE: specific faces granted, more/fewer dice, and/or a black die."
+        },
+        "drawModifier": { "type": "integer", "description": "Change to the number of cards drawn per turn (+/-)." },
+        "handModifier": { "type": "integer", "description": "Change to the target's max hand size (+/-)." },
+        "blockSpace": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "shape": { "enum": ["circle", "hex"] } },
+          "description": "When as=block, the card becomes a single-space mini-block on a block side; this is its printed shape."
+        },
         "effectText": { "type": "string", "description": "Special on-attach effect text, e.g. \"Gain control of this pawn.\"" },
-        "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach." }
+        "effectTrigger": { "enum": ["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"], "description": "When effectText fires; defaults to on-attach." },
+        "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach (bonus icons, 1+)." }
       }
     },
     "assetRefs": {

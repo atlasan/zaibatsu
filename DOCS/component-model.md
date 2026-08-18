@@ -119,8 +119,12 @@ largely printed text + symbols, so **OCR + icon detection** drive the prefill
 | **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
 | **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ✅(detect-marker) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). Detection: `cards.py` now flags the **✕ remove-marker** on main-face ability badges (`icon.removed`, `proposals.attach.removesCount`); the human still names *which* ability (the badge glyph isn't read). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
-| `attach.cost` (bonus counters) | ✅ / ⛔(detect) | printed cost glyph. |
-| **`attach.effectText`** (special on-attach effect) | ✅(schema) / ⛔(detect) | added to schema; e.g. "Gain control of this pawn." / "This pawn ignores direction arrows." — free-text effect, from the main rules box. |
+| **`attach.abilityUses[]`** (how a granted ability is used) | ✅(schema) / ⛔(engine, detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. `grants`/`removes` now also include `move`. |
+| **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). The card analogue of `space.modifier.kind=ice`. |
+| **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ⛔(engine, detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Card analogue of the space `hand-size` modifier. |
+| **`attach.blockSpace`** (`{shape: circle\|hex}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: a few cards attach **as a block** (`as=block`) — a single-space mini-block placed on a block side. |
+| `attach.cost` (bonus counters, 1+) | ✅ / ⛔(detect) | printed cost glyph (bonus icons). |
+| **`attach.effectText`** + **`attach.effectTrigger`** (special effect + timing) | ✅(schema) / ⛔(engine, detect) | free-text effect (e.g. "Gain control of this pawn.") and **when** it fires: `on-attach` (default) / `begin-turn` / `end-turn` / `on-control` / `on-icebreak` / `continuous`. |
 
 **Detection partition.** The two parts are read from different **regions**, not
 by an either/or rule: the bottom **reversed strip** → the action part
