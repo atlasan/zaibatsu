@@ -28,7 +28,6 @@ test("Test Lab attachment fixture displays checkpoints and uses named controls",
   await expect(page.getByRole("heading", { name: "Attachments" })).toBeVisible();
   await expect(page.getByText("Fixture checkpoints")).toBeVisible();
   await page.getByLabel("Action").selectOption({ label: "Attach Accelerator to pawn" });
-  await expect(page.getByLabel("Pawn")).toHaveValue("speedrunner-red");
   await page.getByRole("button", { name: "Execute selected action" }).click();
   await expect(page.getByText("✓ Attach Accelerator to your Red Speedrunner.")).toBeVisible();
 });

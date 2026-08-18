@@ -154,7 +154,9 @@ Everything stays `reviewRequired` for human confirmation.
 
 **Detection landed** (`tools/hexvision/*`): block ICE die faces
 (`iceDiceCandidates`); card OCR + two-part proposals (`activates` vs `attach`) +
-icon regions.
+icon regions. The block editor can optionally apply existing per-tile HexVision
+results to one draft or create missing drafts in bulk; geometry is used to align
+the source overlay, while inferred gameplay content remains review-required.
 
 **Engine mirrors — landed (Go + TS, `go test`/`bun test` green, parity held):**
 - All new fields are in both domain models + loaders. `iceFaces` (authored faces

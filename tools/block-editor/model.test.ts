@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { actionCardDraftForAsset, buildPatch, defaultCapacity, deriveBoundarySpaces, derivedDisplayShape, draftForAsset, inferNeighbors, isConnectedZoneSet, migrateSession, normalizeBlockDocument, validateDocument, type AssetRecord, type BlockLayout } from "./model";
+import { actionCardDraftForAsset, applyVisionPrefill, buildPatch, clearBlockContent, defaultCapacity, deriveBoundarySpaces, derivedDisplayShape, derivedIceValue, draftForAsset, inferNeighbors, isConnectedZoneSet, migrateSession, normalizeBlockDocument, prefillSevenZones, validateDocument, type AssetRecord, type BlockLayout } from "./model";
 
 const asset: AssetRecord = { assetId: "sp-en-blocks-a4-p01-c01", artifactId: "sp-en-blocks-a4", page: 1, kind: "block" };
 const layout: BlockLayout = { id: "standard-seven-zone-2-3-2-pointy", name: "test", smallHexCount: 7, outerHex: { vertices: [{ id: "v1", x: 50, y: 0 }, { id: "v2", x: 93, y: 25 }, { id: "v3", x: 93, y: 75 }, { id: "v4", x: 50, y: 100 }, { id: "v5", x: 7, y: 75 }, { id: "v6", x: 7, y: 25 }] }, corners: [], edges: [{ id: "e1", x: 71.5, y: 12.5, zoneId: "h3" }, { id: "e2", x: 93, y: 50, zoneId: "h4" }, { id: "e3", x: 71.5, y: 87.5, zoneId: "h5" }, { id: "e4", x: 28.5, y: 87.5, zoneId: "h6" }, { id: "e5", x: 7, y: 50, zoneId: "h7" }, { id: "e6", x: 28.5, y: 12.5, zoneId: "h2" }], zoneShape: { width: 33.3333, height: 33.3333 }, zones: [
@@ -38,5 +38,29 @@ describe("source-aligned 2-3-2 block editor model", () => {
   test("migrates legacy double pills and marks old geometry for review", () => { const draft = draftForAsset(asset) as any; draft.block.layoutId = "standard-seven-small-hex-grid"; draft.status = "review"; draft.block.spaces = [{ id: "legacy", type: "double", footprint: { shape: "pill", cells: [{ q: 0, r: 0 }, { q: 0, r: -1 }] } }]; const migrated = normalizeBlockDocument(draft, layout); expect(migrated.block.spaces[0]).toMatchObject({ type: "normal", zoneIds: ["h1", "h2"], capacity: 2, displayShape: "auto" }); expect(migrated.geometryReviewRequired).toBe(true); expect(migrated.status).toBe("draft"); });
   test("migrates legacy sessions to v4", () => { const draft = draftForAsset(asset) as any; draft.block.layoutId = "standard-seven-small-hex-grid"; const session = migrateSession({ sessionVersion: 1, projectId: "zaibatsu-block-editor", assetManifestPath: "spec/assets/manifest.json", documents: [draft], history: [] } as any, layout); expect(session.sessionVersion).toBe(4); expect((session.documents[0] as any).geometryReviewRequired).toBe(true); });
   test("exports a v4 zone patch", () => expect(buildPatch(draftForAsset(asset), "abc").format).toBe("zaibatsu-editor-patch/v4"));
+  test("authors exact ICE faces while retaining a derived legacy category", () => {
+    expect(derivedIceValue([4, 5, 6])).toBe("low");
+    expect(derivedIceValue([1, 6], true)).toBe("black");
+    const draft = draftForAsset(asset); draft.block.iceFaces = [1, 6]; draft.block.iceValue = "medium"; draft.block.blackIce = false;
+    expect(validateDocument(draft, [asset], layout)).toEqual([]);
+  });
+  test("preserves current schema fields through normalization", () => {
+    const draft = draftForAsset(asset); draft.block.iceFaces = [2, 5]; draft.block.iceValue = "medium"; draft.block.blackIce = true; draft.block.isCentralCore = true;
+    draft.block.effects = { underControl: { kind: "modify-ice", amount: -1, target: "block" } };
+    draft.block.spaces = [{ id: "a", type: "normal", zoneIds: ["h1"], capacity: 1, displayShape: "auto", neighbors: [], direction: 2, modifier: { kind: "ice", amount: 1 } }];
+    expect(normalizeBlockDocument(draft, layout).block).toMatchObject({ iceFaces: [2, 5], blackIce: true, isCentralCore: true, effects: draft.block.effects, spaces: [{ direction: 2, modifier: { kind: "ice", amount: 1 } }] });
+  });
+  test("prefills one gameplay space per zone and clears only editable content", () => {
+    const filled = prefillSevenZones(draftForAsset(asset), layout);
+    expect(filled.block.spaces.map((space) => space.zoneIds[0])).toEqual(["h1", "h2", "h3", "h4", "h5", "h6", "h7"]);
+    filled.block.iceFaces = [6]; filled.block.blackIce = true; filled.block.isCentralCore = true; filled.block.effects = { inCybernet: "sp-example" };
+    const cleared = clearBlockContent(filled, layout);
+    expect(cleared.source.assetId).toBe(asset.assetId); expect(cleared.block.isCentralCore).toBe(true); expect(cleared.block.spaces).toEqual([]); expect(cleared.block.iceFaces).toEqual([]); expect(cleared.block.effects).toBeUndefined();
+  });
+  test("applies non-overlapping HexVision suggestions and leaves conflicts unresolved", () => {
+    const result = applyVisionPrefill(draftForAsset(asset), layout, { asset: asset.assetId, center: [650, 749], inradius: 643, vertices: [[650, 6], [1294, 378], [1294, 1121], [650, 1493], [6, 1121], [6, 378]], edges: [true, false, true, false, false, false], whiteCorners: [true, false, false, false, false, false], spaces: [{ kind: "circle", suggestedZoneIds: ["h1"] }, { kind: "circle", suggestedZoneIds: ["h1"] }, { kind: "capsule", suggestedZoneIds: ["h2", "h3"] }], iceDiceCandidates: [{ face: 2 }, { face: 6 }] });
+    expect(result.block.spaces.map((space) => space.zoneIds)).toEqual([["h1"], ["h2", "h3"]]);
+    expect(result.block.edges).toEqual([true, false, true, false, false, false]); expect(result.block.iceFaces).toEqual([2, 6]);
+  });
 });
 describe("action-card editor model", () => { const card: AssetRecord = { assetId: "sp-en-action-cards-p01-c01", artifactId: "sp-en-action-cards", page: 1, kind: "action-card" }; test("keeps vision candidates review-only", () => { const draft=actionCardDraftForAsset(card,{confidence:.2,reviewRequired:true,reasons:["OCR unavailable"]}); expect(validateDocument(draft,[card],layout).join(" ")).toContain("reviewer confirmation"); }); });

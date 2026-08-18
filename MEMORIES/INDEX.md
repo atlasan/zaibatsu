@@ -20,4 +20,4 @@ type: decision | domain | constraint | reference
 - [determinism-seeded-rng.md](determinism-seeded-rng.md) — constraint: all randomness via a seeded LCG shared across mirrors.
 - [game-identity.md](game-identity.md) — domain: what Zaibatsu is (Speedrunners core + Shadowraiders expansion).
 - [provisional-seed-data.md](provisional-seed-data.md) — constraint: current spec/data is provisional; real content must be transcribed from the PDFs.
-- [verified-inventory-baseline.md](verified-inventory-baseline.md) - reference: source-verified 2017 release inventory and mode register; component records remain separate.
+- [verified-inventory-baseline.md](verified-inventory-baseline.md) — reference: source-verified 2017 release inventory and mode register; component records remain separate.

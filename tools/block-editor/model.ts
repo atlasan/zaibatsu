@@ -19,6 +19,9 @@ export interface GridCell { q: number; r: number; }
 /** Legacy session-only source layout; migrated to zoneIds when a session is read. */
 export interface LegacyFootprint { shape?: "hex" | "pill" | "large"; cells?: GridCell[]; }
 
+export type SpaceModifierKind = "defense" | "hand-size" | "attack" | "ice";
+export type BlockEffectKind = "gain-control-card" | "place-pawn" | "area-attack" | "all-players" | "modify-ice" | "custom";
+export type BlockEffect = string | { kind: BlockEffectKind; amount?: number; target?: string; text?: string };
 export interface EditorSpace {
   id: string;
   type: EditorSpaceType;
@@ -32,14 +35,20 @@ export interface EditorSpace {
   displayShape?: SpaceDisplayShape;
   pawnId?: string;
   effectId?: string;
-  modifier?: { kind: "defense" | "hand-size" | "attack"; amount?: number };
+  /** Cross-edge exit restriction; 0 is top, then clockwise. */
+  direction?: number;
+  modifier?: { kind: SpaceModifierKind; amount?: number };
 }
 
 export interface BlockRecord {
   id: string; name: string; expansion: Expansion; layoutId: typeof STANDARD_BLOCK_LAYOUT_ID;
+  /** Legacy engine fallback, derived from authored faces by the editor. */
   iceValue?: "none" | "low" | "medium" | "high" | "black";
+  iceFaces?: number[];
+  blackIce?: boolean;
+  isCentralCore?: boolean;
   bonusFragments: number; bonusCorners: EdgeList; edges: EdgeList; boundarySpaces: BoundarySpaces;
-  spaces: EditorSpace[]; assetRefs: string[]; provisional: boolean;
+  spaces: EditorSpace[]; effects?: { inCybernet?: BlockEffect; underControl?: BlockEffect }; assetRefs: string[]; provisional: boolean;
 }
 export interface GeometryTransform { offsetX: number; offsetY: number; scale: number; }
 export interface GeometryOverride { assetId: string; layoutId: typeof STANDARD_BLOCK_LAYOUT_ID; note: string; transform: GeometryTransform; }
@@ -63,8 +72,18 @@ export interface BlockLayoutZone { id: ZoneId; q: number; r: number; x: number; 
 /** Each outer entrance targets its nearest standardized ring placement hex. */
 export interface BlockLayoutEdge { id: string; x: number; y: number; zoneId: ZoneId; }
 export interface BlockLayout { id: typeof STANDARD_BLOCK_LAYOUT_ID; name: string; smallHexCount: 7; outerHex: { vertices: Array<{ id: string; x: number; y: number }> }; corners: Array<{ id: string; x: number; y: number }>; edges: BlockLayoutEdge[]; zoneShape: { width: number; height: number }; zones: BlockLayoutZone[]; }
+export interface HexVisionSpace { kind?: string; suggestedZoneIds?: ZoneId[]; suggestionConfidence?: number; }
+export interface HexVisionTile { asset: string; center: [number, number]; inradius: number; vertices: Array<[number, number]>; edges?: boolean[]; whiteCorners?: boolean[]; spaces?: HexVisionSpace[]; iceDiceCandidates?: Array<{ face: number }>; }
 
 export function defaultCapacity(type: EditorSpaceType, zoneIds: ZoneId[]): SpaceCapacity { return (type === "special" || type === "pawn") ? "unlimited" : Math.max(1, zoneIds.length); }
+export function derivedIceValue(iceFaces: number[] | undefined, blackIce = false): BlockRecord["iceValue"] {
+  if (blackIce) return "black";
+  const count = iceFaces?.length ?? 0;
+  return count === 0 ? "none" : count === 1 ? "high" : count === 2 ? "medium" : "low";
+}
+export function legacyIceFaces(iceValue: BlockRecord["iceValue"]): number[] {
+  return iceValue === "low" ? [4, 5, 6] : iceValue === "medium" ? [5, 6] : iceValue === "high" || iceValue === "black" ? [6] : [];
+}
 export function zonesTouch(layout: BlockLayout, left: ZoneId, right: ZoneId): boolean { return layout.zones.find((zone) => zone.id === left)?.touches.includes(right) ?? false; }
 export function isConnectedZoneSet(zoneIds: ZoneId[], layout: BlockLayout): boolean {
   if (zoneIds.length < 2) return true;
@@ -90,9 +109,49 @@ export function deriveBoundarySpaces(block: Pick<BlockRecord, "edges" | "spaces"
   }) as BoundarySpaces;
 }
 
+/** Deterministic manual starting point: one ordinary gameplay space per placement hex. */
+export function prefillSevenZones(document: BlockDocument, layout: BlockLayout): BlockDocument {
+  const spaces = STANDARD_ZONE_IDS.map((zoneId) => ({ id: zoneId, type: "normal" as const, zoneIds: [zoneId], capacity: 1, displayShape: "auto" as const, neighbors: [] }));
+  const block = { ...document.block, spaces: inferNeighbors(spaces, layout) };
+  return { ...document, block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
+}
+
+/**
+ * Applies only internally consistent HexVision candidates. Incomplete/overlapping
+ * suggestions are intentionally left out for the author to resolve manually.
+ */
+export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout, vision: HexVisionTile): BlockDocument {
+  const claimed = new Set<ZoneId>();
+  const spaces: EditorSpace[] = [];
+  for (const [index, candidate] of (vision.spaces ?? []).entries()) {
+    const zoneIds = (candidate.suggestedZoneIds ?? []).filter((zoneId, position, values) => STANDARD_ZONE_IDS.includes(zoneId) && values.indexOf(zoneId) === position);
+    if (!zoneIds.length || zoneIds.some((zoneId) => claimed.has(zoneId))) continue;
+    zoneIds.forEach((zoneId) => claimed.add(zoneId));
+    const displayShape: SpaceDisplayShape = ["circle", "capsule", "compound"].includes(candidate.kind ?? "") ? candidate.kind as SpaceDisplayShape : "auto";
+    spaces.push({ id: `vision-space-${index + 1}`, type: "normal", zoneIds, capacity: defaultCapacity("normal", zoneIds), displayShape, neighbors: [] });
+  }
+  const iceFaces = (vision.iceDiceCandidates ?? []).map((candidate) => candidate.face).filter((face) => Number.isInteger(face) && face >= 1 && face <= 6);
+  const block = {
+    ...document.block,
+    edges: vision.edges?.length === 6 ? vision.edges as EdgeList : document.block.edges,
+    bonusCorners: vision.whiteCorners?.length === 6 ? vision.whiteCorners as EdgeList : document.block.bonusCorners,
+    bonusFragments: vision.whiteCorners?.filter(Boolean).length === 6 ? vision.whiteCorners.filter(Boolean).length : document.block.bonusFragments,
+    spaces: inferNeighbors(spaces, layout),
+    iceFaces,
+    iceValue: derivedIceValue(iceFaces, document.block.blackIce),
+  };
+  return { ...document, annotations: [...new Set([...document.annotations, "HexVision suggestions applied; review all detected gameplay data against the source."])], block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
+}
+
+/** Clear editable gameplay fields without deleting the source-linked draft itself. */
+export function clearBlockContent(document: BlockDocument, layout: BlockLayout): BlockDocument {
+  const block = { ...document.block, iceFaces: [], iceValue: "none" as const, blackIce: false, edges: [false, false, false, false, false, false] as EdgeList, bonusCorners: [false, false, false, false, false, false] as EdgeList, bonusFragments: 0, spaces: [], effects: undefined };
+  return { ...document, block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
+}
+
 export function draftForAsset(asset: AssetRecord): BlockDocument {
   const expansion: Expansion = asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners";
-  return { id: `${asset.assetId}-draft`, resourceType: "block", title: `${expansion === "speedrunners" ? "Speedrunners" : "Shadowraiders"} ${asset.assetId.split("-").slice(-2).join(" ")}`, status: "draft", source: { assetId: asset.assetId }, block: { id: `${expansion}-draft-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed block", expansion, layoutId: STANDARD_BLOCK_LAYOUT_ID, iceValue: "none", bonusFragments: 0, bonusCorners: [false, false, false, false, false, false], edges: [false, false, false, false, false, false], boundarySpaces: [[], [], [], [], [], []], spaces: [], assetRefs: [asset.assetId], provisional: true }, provenance: { primaryArtifactId: asset.artifactId, page: asset.page, locator: `cut block ${asset.assetId.split("-").at(-1)}` }, annotations: [] };
+  return { id: `${asset.assetId}-draft`, resourceType: "block", title: `${expansion === "speedrunners" ? "Speedrunners" : "Shadowraiders"} ${asset.assetId.split("-").slice(-2).join(" ")}`, status: "draft", source: { assetId: asset.assetId }, block: { id: `${expansion}-draft-${asset.assetId.split("-").slice(-2).join("-")}`, name: "Untranscribed block", expansion, layoutId: STANDARD_BLOCK_LAYOUT_ID, iceValue: "none", iceFaces: [], blackIce: false, bonusFragments: 0, bonusCorners: [false, false, false, false, false, false], edges: [false, false, false, false, false, false], boundarySpaces: [[], [], [], [], [], []], spaces: [], assetRefs: [asset.assetId], provisional: true }, provenance: { primaryArtifactId: asset.artifactId, page: asset.page, locator: `cut block ${asset.assetId.split("-").at(-1)}` }, annotations: [] };
 }
 export function actionCardDraftForAsset(asset: AssetRecord, vision?: { confidence: number; reviewRequired: boolean; reasons: string[]; printedTextCandidate?: string }): ActionCardDocument {
   const expansion: Expansion = asset.assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners";
@@ -123,7 +182,9 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
   if (!validId(document.id) || !validId(block.id)) errors.push("Draft and block ids must use lowercase letters, digits, and hyphens.");
   if (!block.name.trim()) errors.push("Block name is required."); if (!blockAssets.has(document.source.assetId) || !block.assetRefs.includes(document.source.assetId)) errors.push("Block assetRefs must include the selected block asset.");
   if (block.edges.length !== 6 || block.boundarySpaces.length !== 6 || block.bonusCorners.length !== 6) errors.push("Blocks need exactly six edges, boundary lists, and bonus-corner flags.");
-if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.push("Bonus fragment count must equal marked bonus corners.");
+  if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.push("Bonus fragment count must equal marked bonus corners.");
+  if (block.iceFaces && (block.iceFaces.length > 6 || block.iceFaces.some((face) => !Number.isInteger(face) || face < 1 || face > 6))) errors.push("ICE faces must be die values from 1 to 6.");
+  if (block.iceFaces !== undefined && block.iceValue !== derivedIceValue(block.iceFaces, block.blackIce)) errors.push("ICE category must match the authored faces and Black ICE setting.");
   if (layout && JSON.stringify(block.boundarySpaces) !== JSON.stringify(deriveBoundarySpaces(block, layout))) errors.push("Boundary spaces are derived from each active entrance's mapped placement hex.");
   if (block.layoutId !== STANDARD_BLOCK_LAYOUT_ID) errors.push("Blocks must use the standard 2-3-2 seven-zone layout.");
   if (document.geometryReviewRequired && document.status !== "draft") errors.push("Migrated geometry must be reviewed before a block can leave draft status.");
@@ -134,6 +195,8 @@ if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.p
     for (const zoneId of space.zoneIds) { const owner = zoneOwner.get(zoneId); if (owner) errors.push(`Zones ${zoneId} cannot belong to both ${owner} and ${space.id}.`); else zoneOwner.set(zoneId, space.id); }
     if (space.capacity !== "unlimited" && (!Number.isInteger(space.capacity) || space.capacity < 1)) errors.push(`Space ${space.id} capacity must be a positive whole number or unlimited.`);
     if (isCapacityOverride(space) && !space.capacityNote?.trim()) errors.push(`Space ${space.id} needs a source-review note for its capacity override.`);
+    if (space.direction !== undefined && (!Number.isInteger(space.direction) || space.direction < 0 || space.direction > 5)) errors.push(`Space ${space.id} direction must be an edge index from 0 to 5.`);
+    if (space.modifier && (!["defense", "hand-size", "attack", "ice"].includes(space.modifier.kind) || (space.modifier.amount !== undefined && !Number.isInteger(space.modifier.amount)))) errors.push(`Space ${space.id} has an invalid modifier.`);
   }
   const inferred = layout ? inferNeighbors(block.spaces, layout) : block.spaces;
   for (const space of inferred) { const supplied = [...(block.spaces.find((candidate) => candidate.id === space.id)?.neighbors ?? [])].sort(); if (JSON.stringify(supplied) !== JSON.stringify(space.neighbors)) errors.push(`Space ${space.id} neighbours must match touching selected zones.`); }
@@ -153,10 +216,12 @@ export function normalizeBlockDocument(document: BlockDocument, layout: BlockLay
     const type: EditorSpaceType = raw.type === "double" ? "normal" : (["normal", "special", "pawn", "effect"].includes(raw.type ?? "") ? raw.type as EditorSpaceType : "normal");
     const capacity = raw.capacity ?? (raw.type === "double" ? 2 : defaultCapacity(type, zoneIds));
     const displayShape = ["auto", "circle", "capsule", "compound"].includes(raw.displayShape ?? "") ? raw.displayShape as SpaceDisplayShape : "auto";
-    return { id: raw.id, type, zoneIds, capacity, displayShape, ...(raw.capacityNote ? { capacityNote: raw.capacityNote } : {}), neighbors: [], ...(raw.pawnId ? { pawnId: raw.pawnId } : {}), ...(raw.effectId ? { effectId: raw.effectId } : {}), ...(raw.modifier ? { modifier: raw.modifier } : {}) };
+    return { id: raw.id, type, zoneIds, capacity, displayShape, ...(raw.capacityNote ? { capacityNote: raw.capacityNote } : {}), neighbors: [], ...(raw.pawnId ? { pawnId: raw.pawnId } : {}), ...(raw.effectId ? { effectId: raw.effectId } : {}), ...(Number.isInteger(raw.direction) ? { direction: raw.direction } : {}), ...(raw.modifier ? { modifier: raw.modifier } : {}) };
   });
   const annotations = requiresGeometryReview && !document.annotations.includes("Review 2-3-2 geometry before export.") ? [...document.annotations, "Review 2-3-2 geometry before export."] : document.annotations;
-const normalizedBlock = { ...document.block, layoutId: STANDARD_BLOCK_LAYOUT_ID, spaces: inferNeighbors(spaces, layout) };
+const authoredFaces = document.block.iceFaces === undefined ? legacyIceFaces(document.block.iceValue) : document.block.iceFaces;
+const normalizedBlock = { ...document.block, layoutId: STANDARD_BLOCK_LAYOUT_ID, iceFaces: authoredFaces.filter((face) => Number.isInteger(face) && face >= 1 && face <= 6), blackIce: document.block.blackIce || document.block.iceValue === "black", spaces: inferNeighbors(spaces, layout) };
+  normalizedBlock.iceValue = derivedIceValue(normalizedBlock.iceFaces, normalizedBlock.blackIce);
   return { ...document, status: requiresGeometryReview ? "draft" : document.status, geometryReviewRequired: document.geometryReviewRequired || requiresGeometryReview || undefined, annotations, block: { ...normalizedBlock, boundarySpaces: deriveBoundarySpaces(normalizedBlock, layout) } };
 }
 

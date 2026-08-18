@@ -47,11 +47,14 @@ bun run test:play
 - Browses all 48 individually cut English blocks: 24 Speedrunners and 24
   Shadowraiders.
 - Shows the extracted source image alongside the selected asset/source IDs.
-- Creates and edits a source-linked block draft: identity, expansion, ICE,
-  source-aligned entrances, six bonus corners, calibrated seven-zone gameplay-space selection, and provenance.
-- Renders each source block at an inspectable size in a vertically scrollable canvas.
-  Each block uses seven standardized point-up placement hexes in a source-aligned 2-3-2 arrangement (`h2 h3 / h7 h1 h4 / h6 h5`). A gameplay space selects one or more zones; finite capacity defaults to selected-zone count, while special/pawn spaces default to unlimited. Source circles, capsules, and large locations are display metadata, not new gameplay types.
-  pill; `large / special` is unlimited and grows across one or more connected hexes.
+- Creates and edits a source-linked block draft with the current block contract:
+  exact ICE faces and Black ICE, central-core status, typed block effects,
+  directional and modifier-bearing spaces, source-aligned entrances, bonus
+  corners, calibrated seven-zone gameplay-space selection, and provenance.
+- Fits each source block and its overlay into the available work area without
+  nested scrollbars. HexVision geometry drives its six source vertices, corners,
+  and entrance controls when available; the canonical layout is the fallback.
+  Each block uses seven standardized point-up placement hexes in a source-aligned 2-3-2 arrangement (`h2 h3 / h7 h1 h4 / h6 h5`). A gameplay space selects one or more zones; finite capacity defaults to selected-zone count, while special/pawn spaces default to unlimited. Source circles, capsules, pills, and large locations are display metadata, not new gameplay types. A `circle` defaults to one zone; a `capsule` spans two contiguous zones like a pill; `large / special` is unlimited and grows across one or more connected hexes.
 - Validates draft structure and cross-references before saving or export.
 - Saves editable sessions under ignored `.sessions/` and exports ignored
   `exports/*.patch.json` + `*.report.json` files.
@@ -60,6 +63,10 @@ bun run test:play
 - Carries optional session-only knowledge hints (tags / relation hints) through
   export metadata so review can promote them into `spec/knowledge/` without
   leaking them into runtime records by accident.
+- Offers a deterministic **Prefill 7 zones** starting point, **Clear all** for
+  editable block content, and review-required HexVision application for the
+  selected source or all sources. Bulk HexVision creates drafts only where one
+  does not already exist and reports skipped/unavailable assets.
 
 The editor never writes `spec/data` itself. Review and apply exported patches
 through the normal source/provenance workflow. Canonical status, source links,
@@ -75,6 +82,7 @@ bun test
 
 See [the editor plan](../../DOCS/block-editor-plan.md) for the next phases,
 including richer space topology and resource-type plug-ins.
+
 ## Action-card workflow
 
 The editor now also browses source-linked `action-card` assets for both English
@@ -84,6 +92,7 @@ suggestions only: confirm both the transcription and copy grouping before
 export. Card exports target `action-cards.json`; a missing Shadowraiders target
 is represented by an explicit `targetAbsent` precondition in the review patch.
 Existing v1 block sessions are accepted and saved as v2 data-editor sessions.
+
 ## Separate authoring surfaces
 
 Run the shared local server once:

@@ -63,7 +63,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Defense-hit test | `engine.Defeats(roll,def)` | `defeats(roll,def)` |
 | Delete ability | `engine.Delete(...)` | `deleteAbility(...)` ¹ |
 | Multi-target Delete | `engine.DeleteMulti(...)` | `deleteMulti(...)` |
-| Eliminate a pawn | `engine.` (internal `eliminatePawn`) | `eliminatePawn(...)` |
+| Eliminate a pawn | `engine` (internal `eliminatePawn`) | `eliminatePawn(...)` |
 | Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
 | Block controller | `domain.PlacedBlock.OwnerID` | `PlacedBlock.ownerId` |
 | ICE faces (category derivation) | `engine.IceFaces(ice)` | `iceFaces(ice)` |

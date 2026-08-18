@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
-import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession } from "./model";
+import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession, type HexVisionTile } from "./model";
 import { createPlayScenario, createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, listPlayScenarios, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
 const editorRoot = import.meta.dir;
@@ -24,19 +24,50 @@ const blockLayouts = () => readJson<{ layouts: BlockLayout[] }>(layoutFile);
 type GeometryOverride = { assetId: string; layoutId: string; note: string; transform: { offsetX: number; offsetY: number; scale: number } };
 const blockLayoutOverrides = () => readJson<{ overrides: GeometryOverride[] }>(overrideFile);
 function transformPoint(point: { x: number; y: number }, transform: GeometryOverride["transform"]) { return { ...point, x: 50 + (point.x - 50) * transform.scale + transform.offsetX, y: 50 + (point.y - 50) * transform.scale + transform.offsetY }; }
+const sourceZoneAnchors: Record<string, [number, number]> = { h1: [0, 0], h2: [-0.337, -0.583], h3: [0.337, -0.583], h4: [0.674, 0], h5: [0.337, 0.583], h6: [-0.337, 0.583], h7: [-0.674, 0] };
+function pngSize(asset: AssetRecord): { width: number; height: number } | null {
+  const path = asset.outputs?.png ? resolve(repoRoot, asset.outputs.png) : null;
+  if (!path || !existsSync(path)) return null;
+  const data = readFileSync(path);
+  return data.length >= 24 && data.subarray(1, 4).toString("ascii") === "PNG" ? { width: data.readUInt32BE(16), height: data.readUInt32BE(20) } : null;
+}
+function sourceAlignedLayout(layout: BlockLayout, asset: AssetRecord, vision: HexVisionTile | null): BlockLayout {
+  const size = pngSize(asset);
+  if (!vision || !size || vision.vertices?.length !== 6 || !Array.isArray(vision.center) || !Number.isFinite(vision.inradius)) return layout;
+  const [centerX, centerY] = vision.center;
+  const normalize = ([x, y]: [number, number]) => ({ x: x / size.width * 100, y: y / size.height * 100 });
+  const vertices = vision.vertices.map((point, index) => ({ id: `v${index + 1}`, ...normalize(point) }));
+  const pointTowardCenter = (point: [number, number], factor: number): [number, number] => [centerX + (point[0] - centerX) * factor, centerY + (point[1] - centerY) * factor];
+  const edges = vision.vertices.map((vertex, index) => {
+    const next = vision.vertices[(index + 1) % vision.vertices.length]!;
+    const midpoint: [number, number] = [(vertex[0] + next[0]) / 2, (vertex[1] + next[1]) / 2];
+    return { id: `e${index + 1}`, ...normalize(pointTowardCenter(midpoint, 0.88)), zoneId: layout.edges[index]!.zoneId };
+  });
+  const zones = layout.zones.map((zone) => {
+    const [x, y] = sourceZoneAnchors[zone.id]!;
+    return { ...zone, x: (centerX + x * vision.inradius) / size.width * 100, y: (centerY + y * vision.inradius) / size.height * 100 };
+  });
+  return { ...layout, outerHex: { vertices }, corners: vertices, edges, zoneShape: { width: 2 * .337 * vision.inradius / size.width * 100, height: 2 * .389 * vision.inradius / size.height * 100 }, zones };
+}
 function layoutForAsset(assetId: string) {
   const layout = blockLayouts().layouts.find((item) => item.id === "standard-seven-zone-2-3-2-pointy");
   if (!layout) throw new Error("Canonical seven-zone block layout is missing.");
+  const asset = assetRecords().find((item) => item.assetId === assetId);
+  if (!asset) throw new Error("Unknown block asset.");
+  const imageSize = pngSize(asset);
+  const vision = visionFor(asset) as HexVisionTile | null;
   const override = blockLayoutOverrides().overrides.find((item) => item.assetId === assetId);
-  if (!override) return { layout, override: null, vision: visionFor(assetRecords().find((asset) => asset.assetId === assetId)!) };
+  const aligned = sourceAlignedLayout(layout, asset, vision);
+  if (!override) return { layout: aligned, override: null, vision, imageSize };
   const transform = override.transform;
-  return { layout: { ...layout, outerHex: { vertices: layout.outerHex.vertices.map((point) => transformPoint(point, transform)) }, corners: layout.corners.map((point) => transformPoint(point, transform)), edges: layout.edges.map((point) => transformPoint(point, transform)), zoneShape: { width: layout.zoneShape.width * transform.scale, height: layout.zoneShape.height * transform.scale }, zones: layout.zones.map((zone) => ({ ...zone, ...transformPoint(zone, transform) })) }, override, vision: visionFor(assetRecords().find((asset) => asset.assetId === assetId)!) };
+  return { layout: { ...aligned, outerHex: { vertices: aligned.outerHex.vertices.map((point) => transformPoint(point, transform)) }, corners: aligned.corners.map((point) => transformPoint(point, transform)), edges: aligned.edges.map((point) => transformPoint(point, transform)), zoneShape: { width: aligned.zoneShape.width * transform.scale, height: aligned.zoneShape.height * transform.scale }, zones: aligned.zones.map((zone) => ({ ...zone, ...transformPoint(zone, transform) })) }, override, vision, imageSize };
 }
 function sessionPath(name: string) { return join(sessionsRoot, `${name}.editor.json`); }
 function sessionNames() { return readdirSync(sessionsRoot).filter((name) => name.endsWith(".editor.json")).map((name) => basename(name, ".editor.json")); }
 function contentType(path: string) { return ({ ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".png": "image/png", ".webp": "image/webp" } as Record<string, string>)[extname(path)] ?? "application/octet-stream"; }
 async function body<T>(request: Request): Promise<T> { return await request.json() as T; }
-function visionFor(asset: AssetRecord) { const candidates = [join(repoRoot, "tmp", "artifacts", "build", asset.artifactId, "hexvision", `${asset.artifactId}.vision.json`), join(repoRoot, "tools", "hexvision", "out", `${asset.artifactId}.vision.json`)]; const file = candidates.find(existsSync); if (!file) return null; const document = readJson<{ tiles?: Array<{ asset: string }> }>(file); return document.tiles?.find((tile) => tile.asset === asset.assetId) ?? null; }
+function visionFor(asset: AssetRecord) { const candidates = [join(repoRoot, "tmp", "artifacts", "build", asset.artifactId, "hexvision", `${asset.artifactId}.vision.json`), join(repoRoot, "tools", "hexvision", "out", `${asset.artifactId}.vision.json`)]; const file = candidates.find(existsSync); if (!file) return null; const document = readJson<{ tiles?: HexVisionTile[] }>(file); return document.tiles?.find((tile) => tile.asset === asset.assetId) ?? null; }
+function visionsForAssets() { return Object.fromEntries(blockAssets().flatMap((asset) => { const vision = visionFor(asset); return vision ? [[asset.assetId, vision]] : []; })); }
 
 const server = Bun.serve({
   port: Number(process.env.BLOCK_EDITOR_PORT ?? 4173),
@@ -78,6 +109,7 @@ const server = Bun.serve({
       if (url.pathname === "/api/action-card-assets") return json({ assets: actionCardAssets() });
       if (url.pathname === "/api/block-layouts") return json(blockLayouts());
       if (url.pathname.startsWith("/api/block-layout/")) return json(layoutForAsset(decodeURIComponent(url.pathname.slice("/api/block-layout/".length))));
+      if (url.pathname === "/api/block-visions") return json({ visions: visionsForAssets() });
       if (url.pathname === "/api/block-layout-overrides" && request.method === "POST") { const payload = await body<{ override: GeometryOverride }>(request); const override = payload.override; if (!safeName(override?.assetId) || override.layoutId !== "standard-seven-zone-2-3-2-pointy" || !override.note?.trim() || !Number.isFinite(override.transform?.offsetX) || !Number.isFinite(override.transform?.offsetY) || !Number.isFinite(override.transform?.scale) || override.transform.scale <= 0.25 || override.transform.scale > 2) return json({ error: "Override needs a known asset, a review note, and a safe transform." }, 400); const file = blockLayoutOverrides(); const overrides = file.overrides.filter((item) => item.assetId !== override.assetId); overrides.push(override); await Bun.write(overrideFile, `${JSON.stringify({ ...file, overrides }, null, 2)}\n`); return json({ ok: true, override }); }
       if (url.pathname.startsWith("/api/vision/")) { const asset = assetRecords().find((item) => item.assetId === decodeURIComponent(url.pathname.slice(12))); return json({ vision: asset ? visionFor(asset) : null }); }
       if (url.pathname === "/api/sessions" && request.method === "GET") return json({ sessions: sessionNames() });

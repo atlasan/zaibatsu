@@ -91,10 +91,10 @@ session; export a JSON patch only after validation.
 |---|---|---|
 | 0 - contracts | Session schema, example draft, UX/design record | Data lifecycle and acceptance tests agreed |
 | 1 - block MVP | Standalone local UI, asset browser, form editor, session save | **Implemented:** a block draft can be created, reopened, validated and exported |
-| 2 - block geometry | Hex canvas, six entrances, bonus corners, and source-positioned spaces | **Implemented for print layout:** a source-aligned, scrollable pointy-hex canvas renders the standardized 2-3-2 internal placement hexes, entrance/corner order, 1-N space-to-zone assignments, source-facing display shapes, and inferred candidate space adjacency. Runtime step movement remains a source-transcription and engine follow-up. |
+| 2 - block geometry | Hex canvas, six entrances, bonus corners, and source-positioned spaces | **Implemented for print layout:** a fitted source-aligned pointy-hex canvas renders without nested scrolling. HexVision geometry aligns tile vertices, entrances, and corners; the standardized 2-3-2 lattice supplies gameplay zones, 1-N mappings, display shapes, and inferred candidate adjacency. Runtime step movement remains a source-transcription and engine follow-up. |
 | 3 - source workflow | Provenance locator forms, review report, draft/verified gating | Reviewer can trace every exported field to source evidence |
 | 4 - generic resources | **Action-card MVP implemented**; add pawn/marker schemas and shared plug-ins | One shared editor shell manages all core resource types |
-| 5 - import helpers | Optional OCR/image-assisted suggestions | Suggestions remain draft-only and require confirmation |
+| 5 - import helpers | Optional OCR/image-assisted suggestions | **Implemented for blocks:** selected/all HexVision suggestions can prefill review-only drafts; bulk work skips existing drafts and never promotes data automatically. |
 
 ## Export contract
 
