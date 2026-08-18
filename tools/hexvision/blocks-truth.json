@@ -1,0 +1,65 @@
+{
+  "_note": "Human-authored ground truth for the printed Speedrunners block tiles (sp-en-blocks-a4), from source review. It is authoritative for detection targets and data authoring; exact zone ids (h1..h7 per space) are left to the editor, while space SHAPES/COUNTS, open-edge counts, bonus corners, ICE, direction arrows, and ICE modifiers are source-verified. Keyed by asset id.",
+  "_iceModel": "ICE has two distinct printed forms: (1) ICE DIFFICULTY sits at a hex CORNER (a die / 3-D dice showing the value; a BLACK die means Black ICE) and sets the block's iceValue/iceFaces/blackIce; (2) an ICE MODIFIER sits INSIDE a space/zone (a flat die on that zone) and is a space.modifier{kind:ice, amount}. Detection must not conflate the two.",
+  "blocks": {
+    "sp-en-blocks-a4-p03-c02": {
+      "name": "Central Core",
+      "isCentralCore": true,
+      "edgesOpen": 6,
+      "spaces": [
+        { "shape": "circle", "zoneCount": 7, "note": "a single huge area covering the whole tile; the only space this large in the set" }
+      ],
+      "bonusCorners": 0,
+      "iceDifficultyCorner": false
+    },
+    "sp-en-blocks-a4-p03-c03": {
+      "name": "Pink District",
+      "edgesOpen": 6,
+      "spaces": [
+        { "shape": "capsule", "zoneCount": 2 },
+        { "shape": "capsule", "zoneCount": 2 },
+        { "shape": "circle", "zoneCount": 2 }
+      ],
+      "bonusCorners": 2,
+      "iceDifficultyCorner": true
+    },
+    "sp-en-blocks-a4-p07-c03": {
+      "name": "Cleaner",
+      "directionArrows": 2,
+      "spaces": [
+        { "modifier": { "kind": "ice" }, "note": "one zone carries an ICE modifier (a flat die on the zone)" }
+      ],
+      "bonusCorners": 4,
+      "iceDifficultyCorner": true
+    },
+    "sp-en-blocks-a4-p08-c01": {
+      "name": "Freeside",
+      "edgesOpen": 4,
+      "spaces": [
+        { "shape": "circle", "note": "one big circle" },
+        { "shape": "capsule", "zoneCount": 2 },
+        { "shape": "hex", "zoneCount": 1, "note": "one normal single-hex space" }
+      ],
+      "bonusCorners": 2,
+      "iceDifficultyCorner": true,
+      "iceValue": "black"
+    }
+  },
+  "assetNames": {
+    "sp-en-blocks-a4-p01-c01": "Toyeku (Idoru)",
+    "sp-en-blocks-a4-p01-c02": "Hacktivism",
+    "sp-en-blocks-a4-p02-c01": "Antro",
+    "sp-en-blocks-a4-p02-c03": "Eiko",
+    "sp-en-blocks-a4-p03-c01": "Clandestine Broadcast",
+    "sp-en-blocks-a4-p03-c02": "Central Core",
+    "sp-en-blocks-a4-p03-c03": "Pink District",
+    "sp-en-blocks-a4-p04-c01": "Yakuza",
+    "sp-en-blocks-a4-p04-c02": "Portal Scandal",
+    "sp-en-blocks-a4-p04-c03": "Black Clinic",
+    "sp-en-blocks-a4-p05-c01": "Engineering War",
+    "sp-en-blocks-a4-p07-c01": "Armament Research",
+    "sp-en-blocks-a4-p07-c03": "Cleaner",
+    "sp-en-blocks-a4-p08-c01": "Freeside",
+    "sp-en-blocks-a4-p08-c02": "Deus Ex Machina"
+  }
+}

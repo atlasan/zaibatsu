@@ -28,6 +28,15 @@ indexed on the 6 outer edges/vertices.
 | `provisional` | ✅ | true until source-verified. |
 
 ### ICE (defense vs Icebreaker) — SR-BOARD "ICE value"
+
+**Printed form (source-confirmed):** the block's ICE **difficulty** sits at a hex
+**corner** — a die or 3-D dice showing the value; a **black die** = Black ICE
+(e.g. Freeside). This is separate from an **ICE modifier** printed as a flat die
+*inside a space* (`space.modifier.kind = ice`). Detection must key ICE difficulty
+to a corner and not confuse it with an in-zone modifier die. Human ground truth
+for four blocks (Central Core, Pink District, Cleaner, Freeside) is captured in
+`tools/hexvision/blocks-truth.json`.
+
 | Field | Status | Notes |
 |---|---|---|
 | `iceValue` (`none`/`low`/`medium`/`high`/`black`) | ✅ | category: low=3 dice, medium=2, high=1, black=1 black die. |
@@ -45,7 +54,7 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 | `modifier.kind = defense` (± shielded/unshielded defense dice) | ✅ | |
 | `modifier.kind = hand-size` (± max hand size) | ✅ | |
 | `modifier.kind = attack` (modify a Delete attack) | ✅ | |
-| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ⛔(engine) | user-flagged; `ice` added to `space.modifier.kind`. Engine consumption is the paused follow-up. |
+| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ⛔(engine) | source-confirmed: printed as a **flat die on a zone** (e.g. Cleaner). Distinct from the block's ICE *difficulty*, which sits at a **corner** (see ICE section). `ice` added to `space.modifier.kind`; engine consumption pending. |
 | **`space.direction`** (a space allows movement only one way) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `StepTargets` restricts a space's **cross-edge** exit to the single local edge named by `direction` (tested). No arrows on the base tiles, so detection stays manual. |
 
 ### Board topology

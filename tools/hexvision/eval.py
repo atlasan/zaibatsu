@@ -21,6 +21,33 @@ DEFAULT_BUILD = os.path.join(REPO, "tmp", "artifacts", "build")
 GROUND_TRUTH = os.path.join(
     REPO, "tools", "block-editor", ".sessions", "block-zone-drafts.editor.json"
 )
+BLOCKS_TRUTH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "blocks-truth.json")
+
+
+def evaluate_truth(build_dir: str = DEFAULT_BUILD, truth_path: str = BLOCKS_TRUTH) -> list[dict]:
+    """Compare detection against the source-verified block ground truth
+    (`blocks-truth.json`): open-edge count, bonus corners, space count, ICE dice.
+    Counts, not per-position — the ground truth authors shapes/counts, not zone ids."""
+    if not os.path.exists(truth_path):
+        return []
+    with open(truth_path, encoding="utf-8") as f:
+        truth = json.load(f)
+    rows: list[dict] = []
+    for asset, exp in truth.get("blocks", {}).items():
+        png = os.path.join(build_dir, _asset_group(asset), "png", f"{asset}.png")
+        if not os.path.exists(png):
+            continue
+        tile = detect.extract_tile(png, asset)
+        rows.append({
+            "asset": asset,
+            "name": exp.get("name"),
+            "edgesOpen": [sum(1 for e in tile.edges if e), exp.get("edgesOpen")],
+            "bonusCorners": [sum(1 for c in tile.whiteCorners if c), exp.get("bonusCorners")],
+            "spaces": [len(tile.spaces), len(exp.get("spaces", []))],
+            "iceDice": [d["face"] for d in tile.iceDiceCandidates],
+            "iceValue": exp.get("iceValue"),
+        })
+    return rows
 
 
 def load_ground_truth(session_path: str) -> dict[str, dict]:
@@ -125,6 +152,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"    zones exp={r['zonesExpected']} det={r['zonesDetected']}")
     print(f"AGGREGATE ({report['tiles']} tiles): zoneF1={report['zoneF1']} "
           f"edgeAcc={report['edgeAcc']} cornerAcc={report['cornerAcc']}")
+    truth = evaluate_truth(build)
+    if truth:
+        print("\nvs source ground truth (detected/expected):")
+        for r in truth:
+            print(f"  {r['name']}: edgesOpen={r['edgesOpen'][0]}/{r['edgesOpen'][1]} "
+                  f"bonusCorners={r['bonusCorners'][0]}/{r['bonusCorners'][1]} "
+                  f"spaces={r['spaces'][0]}/{r['spaces'][1]} "
+                  f"iceDice={r['iceDice']} (iceValue={r['iceValue']})")
     return 0
 
 
