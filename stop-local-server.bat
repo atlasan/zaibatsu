@@ -23,3 +23,4 @@ if not errorlevel 1 (
   echo Close the process shown above or approve the administrator prompt, then run this command again.
   exit /b 1
 )
+exit /b 0
