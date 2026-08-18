@@ -248,3 +248,12 @@ describe("moveSteps (budget + pass-through)", () => {
     expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
   });
 });
+
+describe("boundarySpaces derivation", () => {
+  test("derived on load from open edges + zoneIds", () => {
+    const d = loadDefault("speedrunners");
+    const b = blockById(d, "data-haven")!;
+    // edges [T,F,T,T,F,T]; space b owns h2,h3 -> boundary on edge 0 (h3) and 5 (h2).
+    expect(b.boundarySpaces).toEqual([["b"], [], [], [], [], ["b"]]);
+  });
+});

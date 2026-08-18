@@ -62,6 +62,36 @@ func SpaceCapacityFor(space *Space) int {
 	return SpaceCapacity(space.Type)
 }
 
+// standardEdgeZone maps a block's local edge (0..5) to the ring zone a pawn
+// crosses when leaving through it: E1->h3, E2->h4, E3->h5, E4->h6, E5->h7, E6->h2.
+var standardEdgeZone = [6]string{"h3", "h4", "h5", "h6", "h7", "h2"}
+
+// DeriveBoundarySpaces fills BoundarySpaces (indexed by local edge) from the open
+// edges and each space's zoneIds via the standard entrance->zone mapping. A closed
+// edge yields an empty list. No-op when BoundarySpaces is already the full 6.
+func (b *Block) DeriveBoundarySpaces() {
+	if len(b.BoundarySpaces) == 6 {
+		return
+	}
+	out := make([][]string, 6)
+	for e := 0; e < 6; e++ {
+		out[e] = []string{}
+		if e >= len(b.Edges) || !b.Edges[e] {
+			continue
+		}
+		zone := standardEdgeZone[e]
+		for i := range b.Spaces {
+			for _, z := range b.Spaces[i].ZoneIDs {
+				if z == zone {
+					out[e] = append(out[e], b.Spaces[i].ID)
+					break
+				}
+			}
+		}
+	}
+	b.BoundarySpaces = out
+}
+
 // Space returns the space definition with the given id on this block, or nil.
 func (b *Block) Space(id string) *Space {
 	for i := range b.Spaces {

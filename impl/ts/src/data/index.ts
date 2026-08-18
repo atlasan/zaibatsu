@@ -13,6 +13,7 @@ import type {
   Threat,
   MissionCard,
 } from "../domain/types.ts";
+import { deriveBoundarySpaces } from "../domain/pawn_board.ts";
 
 /**
  * Walks up from a starting directory to locate the repo's spec/data directory,
@@ -56,6 +57,7 @@ export function loadGameData(specDataDir: string, expansion: string): GameData {
   const base = join(specDataDir, expansion);
 
   const blocks = readJson<{ blocks: Block[] }>(join(base, "blocks.json")).blocks;
+  blocks.forEach(deriveBoundarySpaces); // fill the derived cross-edge boundary map
   const pawns = readJson<{ pawns: Pawn[] }>(join(base, "pawns.json")).pawns;
   const cards = readJson<{ cards: ActionCard[] }>(
     join(base, "action-cards.json"),

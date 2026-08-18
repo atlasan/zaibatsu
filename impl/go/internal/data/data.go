@@ -83,6 +83,9 @@ func Load(specDataDir, expansion string) (*domain.GameData, error) {
 	if err := loadOptionalContent(base, gd); err != nil {
 		return nil, err
 	}
+	for i := range gd.Blocks {
+		gd.Blocks[i].DeriveBoundarySpaces() // fill the derived cross-edge boundary map
+	}
 	if err := validate(gd); err != nil {
 		return nil, err
 	}

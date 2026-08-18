@@ -53,3 +53,29 @@ export function spaceCapacityFor(space: Space): number {
 export function blockSpace(block: Block, id: string) {
   return block.spaces?.find((s) => s.id === id);
 }
+
+/** A block's local edge (0..5) -> the ring zone crossed leaving through it:
+ *  E1->h3, E2->h4, E3->h5, E4->h6, E5->h7, E6->h2. */
+const STANDARD_EDGE_ZONE = ["h3", "h4", "h5", "h6", "h7", "h2"];
+
+/**
+ * Fills block.boundarySpaces (indexed by local edge) from the open edges and each
+ * space's zoneIds via the standard entrance->zone mapping. A closed edge yields an
+ * empty list. No-op when boundarySpaces is already the full 6. Mirrors
+ * Block.DeriveBoundarySpaces in Go.
+ */
+export function deriveBoundarySpaces(block: Block): void {
+  if (block.boundarySpaces && block.boundarySpaces.length === 6) return;
+  const out: string[][] = [];
+  for (let e = 0; e < 6; e++) {
+    const list: string[] = [];
+    if (block.edges && block.edges.length > e && block.edges[e]) {
+      const zone = STANDARD_EDGE_ZONE[e];
+      for (const sp of block.spaces ?? []) {
+        if ((sp.zoneIds ?? []).some((z) => z === zone)) list.push(sp.id);
+      }
+    }
+    out.push(list);
+  }
+  block.boundarySpaces = out;
+}

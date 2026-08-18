@@ -52,7 +52,7 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 | Field | Status | Notes |
 |---|---|---|
 | `edges[6]` (which sides expose a connecting space) | ✅ | drives legal placement + passages. |
-| `boundarySpaces[6]` (edge → boundary zone: E1→h3 … E6→h2) | ✅ | which space each open edge connects through. |
+| `boundarySpaces[6]` (edge → boundary zone: E1→h3 … E6→h2) | ✅(derived) | **derived on load** (`DeriveBoundarySpaces` / `deriveBoundarySpaces`) from open `edges` + each space's `zoneIds`; drives cross-edge step movement on real block data (tested). Kept runtime — the data file stays edges+zoneIds as the single source. |
 
 ### Bonus zone — SR-BOARD "Bonus fragments/icons"
 | Field | Status | Notes |

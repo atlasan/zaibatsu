@@ -70,6 +70,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | ICE faces (authored override) | `engine.iceFacesFor(faces, ice)` | `iceFacesFor(faces, ice)` — prefers `block.iceFaces`, else the category |
 | Black ICE elimination | `resolveBlackIceFailure(isBlack, …)` (`iceValue==black \|\| block.blackIce`) | `resolveBlackIceFailure(isBlack, …)` |
 | Effective ability (attach grants/removes) | `engine.effectiveAbility(gd, pawn, atts, name)` | `effectiveAbility(gd, pawn, atts, name)` — removes win, else innate, else a granted card-activated ability |
+| Boundary-space derivation | `domain.(*Block).DeriveBoundarySpaces()` (at load) | `deriveBoundarySpaces(block)` (at load) — E1→h3 … E6→h2 from open edges + zoneIds |
 | Space adjacency graph | `engine.StepTargets(gd, cy, coord, spaceID)` | `stepTargets(gd, cy, coord, spaceId)` — intra-block neighbours + cross-edge boundary hops (rotation- and direction-aware) |
 | One validated step | `engine.MoveStep(s, gd, pawnID, coord, spaceID)` | `moveStep(s, gd, pawnId, coord, spaceId)` — reachability + capacity checked |
 | Path move under budget | `engine.MoveSteps(s, gd, pawnID, path)` / action `move-steps` | `moveSteps(s, gd, pawnId, path)` / action `"move-steps"` — pass occupied, end where capacity permits, unused steps lost |
@@ -142,8 +143,8 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
 | Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
 | Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-aligned 2–3–2 point-up placement layout; displayShape renders circle/capsule/compound source coverage only, with no effect or movement resolution |
-| Space-to-space movement | blocked | blocked | backlog - needs source-verified space-adjacency data |
-| Card-use: move / attach | ⛔ | ⛔ | backlog — needs space movement / attach system |
+| Space-to-space movement | ✅ | ✅ | intra-block neighbours + rotation-aware cross-edge boundary hops; path/capacity/budget behavior is mirror-tested, while provisional data records still need source review |
+| Card-use: move / attach | ⛔ / ✅ | ⛔ / ✅ | attachment actions are live; card-activated movement remains unimplemented because the reducer does not yet consume the chosen movement card |
 | Shadowraiders expansion | ⛔ | ⛔ | backlog |
 
 ## Content-catalog parity

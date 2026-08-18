@@ -324,3 +324,19 @@ func TestMoveStepsViaActionReducer(t *testing.T) {
 		t.Errorf("pawn should be on b after the action, got %q", got)
 	}
 }
+
+func TestBoundarySpacesDerivedOnLoad(t *testing.T) {
+	gd := loadOrSkip(t)
+	b, _ := gd.BlockByID("data-haven")
+	// edges [T,F,T,T,F,T]; space b owns h2,h3 -> boundary on edge 0 (h3) and 5 (h2).
+	want := [][]string{{"b"}, {}, {}, {}, {}, {"b"}}
+	if len(b.BoundarySpaces) != 6 {
+		t.Fatalf("boundarySpaces not derived: %v", b.BoundarySpaces)
+	}
+	for e := 0; e < 6; e++ {
+		got := b.BoundarySpaces[e]
+		if len(got) != len(want[e]) || (len(got) == 1 && got[0] != want[e][0]) {
+			t.Errorf("edge %d: got %v, want %v", e, got, want[e])
+		}
+	}
+}
