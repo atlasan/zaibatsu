@@ -362,6 +362,25 @@ def detect_ice_dice(bgr: np.ndarray, alpha: np.ndarray) -> list[dict]:
     return sorted(dice, key=lambda d: (d["box"][1], d["box"][0]))
 
 
+def classify_ice_dice(dice: list[dict], center, verts, inr: int) -> list[dict]:
+    """Tag each flat die with its role: 'difficulty' when it sits near a hex CORNER
+    (it is the block's ICE value) or 'modifier' when it sits INSIDE a zone (a
+    space.modifier.kind=ice on that space, with the nearest zone recorded). This
+    separates the two printed ICE forms the source uses."""
+    cx, cy = center
+    for d in dice:
+        x, y, w, h = d["box"]
+        nx, ny = (x + w / 2 - cx) / inr, (y + h / 2 - cy) / inr
+        dist_corner = min(math.hypot((vx - cx) / inr - nx, (vy - cy) / inr - ny) for vx, vy in verts)
+        if dist_corner < 0.55:
+            d["role"] = "difficulty"
+        else:
+            _, zone = min((math.hypot(ax - nx, ay - ny), z) for z, (ax, ay) in STANDARD_ZONE_ANCHORS.items())
+            d["role"] = "modifier"
+            d["zone"] = zone
+    return dice
+
+
 def detect_ice_corner(bgr: np.ndarray, alpha, center, verts, inr: int) -> dict | None:
     """Locate the ICE-difficulty corner: the printed ICE is an isometric-dice
     cluster at a hex corner (1-3 dice -> high/medium/low; a black die -> Black ICE).
@@ -425,7 +444,7 @@ def extract_tile(path: str, asset: str) -> Tile:
         whiteCorners=white_corners,
         bonusCorners=bonus,
         spaces=detect_spaces(bgr, alpha, center, inr),
-        iceDiceCandidates=detect_ice_dice(bgr, alpha),
+        iceDiceCandidates=classify_ice_dice(detect_ice_dice(bgr, alpha), center, verts, inr),
         iceCorner=ice_corner,
     )
 
@@ -457,8 +476,11 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
         cv2.putText(ov, label, (sx - 22, sy - int(s.r * tile.inradius) - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 220, 80), 2)
     for die in tile.iceDiceCandidates:
         x, y, w, h = die["box"]
-        cv2.rectangle(ov, (x, y), (x + w, y + h), (200, 0, 200), 4)
-        cv2.putText(ov, f"ICE?{die['face']}", (x, max(24, y - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200, 0, 200), 2)
+        modifier = die.get("role") == "modifier"
+        color = (0, 165, 255) if modifier else (200, 0, 200)  # orange modifier / magenta difficulty
+        label = f"ICEmod {die.get('zone', '?')}?{die['face']}" if modifier else f"ICE?{die['face']}"
+        cv2.rectangle(ov, (x, y), (x + w, y + h), color, 4)
+        cv2.putText(ov, label, (x, max(24, y - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
     if tile.iceCorner is not None:
         vx, vy = tile.vertices[tile.iceCorner["corner"]]
         label = f"ICE x{tile.iceCorner['dice']}" + (" BLACK" if tile.iceCorner["black"] else "")

@@ -47,6 +47,7 @@ def evaluate_truth(build_dir: str = DEFAULT_BUILD, truth_path: str = BLOCKS_TRUT
             "iceDice": [d["face"] for d in tile.iceDiceCandidates],
             "iceValue": exp.get("iceValue"),
             "iceCorner": tile.iceCorner,
+            "iceModZones": [(d["zone"], d["face"]) for d in tile.iceDiceCandidates if d.get("role") == "modifier"],
         })
     return rows
 
@@ -160,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {r['name']}: edgesOpen={r['edgesOpen'][0]}/{r['edgesOpen'][1]} "
                   f"bonusCorners={r['bonusCorners'][0]}/{r['bonusCorners'][1]} "
                   f"spaces={r['spaces'][0]}/{r['spaces'][1]} "
-                  f"iceDice={r['iceDice']} (iceValue={r['iceValue']}) iceCorner={r['iceCorner']}")
+                  f"iceDice={r['iceDice']} (iceValue={r['iceValue']}) iceCorner={r['iceCorner']} iceMod={r['iceModZones']}")
     return 0
 
 
