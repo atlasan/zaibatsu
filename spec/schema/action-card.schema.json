@@ -36,6 +36,11 @@
       "items": { "enum": ["search", "delete", "reboot", "icebreaker"] },
       "description": "The card's ACTION part: the ability actions the card can be spent on when played directly (0+, normally one). Independent of the attach use below."
     },
+    "effects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/cardEffect" },
+      "description": "Typed operations the card performs when PLAYED directly (not via attach), each with a trigger. For attach-time effects use attach.effectText / attach.effectTrigger."
+    },
     "attach": {
       "type": "object",
       "additionalProperties": false,
@@ -96,6 +101,18 @@
     "provisional": { "type": "boolean", "default": false }
   },
   "$defs": {
+    "cardEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"], "description": "The operation; `custom` carries free text." },
+        "amount": { "type": "integer", "description": "A quantity for the operation (cards drawn, bonus gained, dice, …)." },
+        "target": { "type": "string", "description": "Optional operation target." },
+        "text": { "type": "string", "description": "Printed effect text; required when kind is custom." },
+        "trigger": { "enum": ["on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"], "description": "When the operation fires; defaults to on-play." }
+      }
+    },
     "movementValue": {
       "type": "object",
       "additionalProperties": false,

@@ -113,6 +113,7 @@ use is chosen per play (SR-CARD-001).
 |---|---|---|
 | **`movements[]`** (`{type: fixed\|d6\|2d6\|hex, amount?, stealth?}`) | ✅(schema) / ⛔(detect) | 0+ movement options: **fixed steps / one die / two dice / one whole hex** (SR-MOVE-001), optionally **stealth** (Shadowraiders: normal budget, no threat wake — SH-PAWN-001). Legacy `movement:int` = one `{fixed}`. |
 | `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | the action(s) this card can be spent on. Independent of the card use; OCR keyword-matched today (from the bottom-strip badges/labels). |
+| **`effects[]`** (typed **operations** the card performs when **played**) | ✅(schema) / ⛔(engine, detect) | `{kind ∈ gain-control-card\|place-pawn\|area-attack\|all-players\|modify-ice\|draw-cards\|gain-bonus\|sacrifice-pawn\|custom, amount?, target?, text?, trigger?}`. For a directly-played one-time effect (not an attach-time effect). Card analogue of the block `effects`. |
 
 ### Card part — attachment use (`attach{}`), what it confers on the target
 | Field | Status | Notes |
