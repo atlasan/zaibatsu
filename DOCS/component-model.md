@@ -145,9 +145,12 @@ and the ✕ marker are not yet read).
 1. **OCR** the title + body — ✅ working (local Tesseract). 2. **Icons**: ability
 badges, slot banner, attach badge — ✅ region-classified; **✕ remove-marker ✅
 detected** (`icon.removed`); the specific ability *glyph* is still unread. 3.
-**Zones/regions**: title / art / rules-text / cost bands —
-pending. 4. **Effects/actions**: map icons+text → the discriminated buckets above.
-Everything stays `reviewRequired` for human confirmation.
+**Zones/regions**: title, slot/type banner, action strip, attachment, main face,
+and rule text — ✅ normalized review regions with per-candidate confidence and
+rationale. 4. **Effects/actions**: conservative OCR proposals cover typed action,
+movement (including stealth), cost, attach target/slot, and custom text; unknown
+icons/text stay as labeled evidence rather than being guessed. Everything stays
+`reviewRequired` for human confirmation.
 
 ---
 
@@ -164,10 +167,12 @@ Everything stays `reviewRequired` for human confirmation.
   `attach.effectText`, and clarified `attach.class[]` = target-class restriction.
 
 **Detection landed** (`tools/hexvision/*`): block ICE die faces
-(`iceDiceCandidates`); card OCR + two-part proposals (`activates` vs `attach`) +
-icon regions. The block editor can optionally apply existing per-tile HexVision
-results to one draft or create missing drafts in bulk; geometry is used to align
-the source overlay, while inferred gameplay content remains review-required.
+(`iceDiceCandidates`); action-card OCR + stable zone-attributed proposals
+(`title`, `subtitle`, `activates`, movement/stealth, cost, attach, badge counts,
+and custom text) plus icon regions. The editors load only fresh, session-local
+review drafts in bulk; individual Vision fields and suggested copy groups require
+explicit author decisions. Geometry is used to align the block source overlay,
+while inferred gameplay content remains review-required.
 
 **Engine mirrors — landed (Go + TS, `go test`/`bun test` green, parity held):**
 - All new fields are in both domain models + loaders. `iceFaces` (authored faces

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import difflib
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -217,6 +218,71 @@ def _looks_like_name(word: str) -> bool:
     return w.lower() not in _ATTACH_SLOTS + _ATTACH_AS + _ACTIVATES + _CLASSES
 
 
+def _card_zone(box: list[int], width: int, height: int) -> str:
+    """Stable normalized card zones. They are deliberately broad: OCR is still
+    noisy, but a zone tells the reviewer *where* a candidate came from."""
+    x, y, w, h = box
+    cx, cy = (x + w / 2) / width, (y + h / 2) / height
+    if cy < .20 and cx < .58:
+        return "title"
+    if cy > .80:
+        return "action-strip"
+    if cx > .56:
+        return "attachment"
+    return "main-text"
+
+
+# These normalized regions are a stable *review vocabulary*, not a claim that
+# every card uses every zone.  They let the editor show why a candidate exists
+# even on a rotated or unusually composed source.
+CARD_ZONES = {
+    "title": [0.00, 0.00, 0.58, 0.20],
+    "slot-type-banner": [0.56, 0.00, 0.44, 0.22],
+    "action-strip": [0.00, 0.80, 1.00, 0.20],
+    "attachment": [0.56, 0.20, 0.44, 0.60],
+    "main-face": [0.00, 0.20, 0.56, 0.60],
+    "rule-text": [0.00, 0.20, 1.00, 0.60],
+}
+
+
+def _zone_confidence(regions: list[dict], zone: str) -> float:
+    values = [float(region.get("confidence", 0)) for region in regions if region.get("zone") == zone]
+    return round(float(np.mean(values)) if values else 0.0, 3)
+
+
+def _candidate(field: str, value: object, zone: str, confidence: float, reason: str) -> dict | None:
+    if value in (None, "", [], {}):
+        return None
+    return {"field": field, "value": value, "zone": zone, "confidence": confidence, "reason": reason}
+
+
+def _movement_candidates(regions: list[dict]) -> list[dict]:
+    """Conservative OCR-only movement proposals. Dice pips are not converted to
+    values: decorative dice are common, so only printed movement text is used."""
+    found: list[dict] = []
+    for region in regions:
+        for match in re.finditer(r"(?:\+\s*)?(?:(\d+)\s+)?(2d6|d6|hex|move(?:ment)?s?)\s*(stealth)?", region["text"].lower()):
+            value, kind, stealth = match.groups()
+            if kind in ("d6", "2d6", "hex"):
+                item = {"type": kind}
+                if value:
+                    item["amount"] = int(value)
+            elif value:
+                item = {"type": "fixed", "amount": int(value)}
+            else:
+                continue
+            if stealth:
+                item["stealth"] = True
+            found.append(item)
+    return [item for index, item in enumerate(found) if item not in found[:index]]
+
+
+def _cost_candidate(regions: list[dict]) -> int | None:
+    text = " ".join(r["text"] for r in regions).lower()
+    match = re.search(r"(?:cost|bonus(?:es| tokens?)?)\s*[:+-]?\s*(\d+)", text)
+    return int(match.group(1)) if match else None
+
+
 def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) -> dict:
     """Derive structured action-card fields from OCR text (review-required).
 
@@ -236,25 +302,33 @@ def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) ->
     # looks like a name. Sparse-OCR box geometry is too noisy to rank titles by
     # font size, so length is the most robust signal we have here.
     strong = [r["text"] for r in text_regions if r.get("confidence", 0) >= 0.6]
+    title_words = [r["text"] for r in text_regions if r.get("zone") == "title" and r.get("confidence", 0) >= .45]
     name = max((w for w in strong if _looks_like_name(w)), key=len, default="")
     slot = _match_vocab(words, _ATTACH_SLOTS)
     ability_badges = [i for i in (icons or []) if i["kind"] == "ability-badge"]
     crossed = sum(1 for i in ability_badges if i.get("removed"))
     notes: list[str] = []
     proposal = {
-        "nameCandidate": name,
+        "nameCandidate": " ".join(title_words) or name,
+        "titleCandidate": " ".join(title_words),
+        "subtitleCandidate": " ".join(title_words[1:]),
         # class tokens seen; may be the card's OWN class or a target-class
         # restriction ("only attach to Cleaner pawns") - the human separates them.
         "classes": _match_vocab(words, _CLASSES),
         # the action part - available on every card, independent of the card use.
         "activates": _match_vocab(words, _ACTIVATES),
+        "movements": _movement_candidates(text_regions),
+        "costCandidate": _cost_candidate(text_regions),
+        "customTextCandidate": " ".join(r["text"] for r in text_regions if r.get("zone") == "main-text" and r.get("confidence", 0) >= .45),
         "attach": {},
     }
     if slot:  # the card's main use is an attachment
         proposal["attach"] = {
             "slot": slot,
+            "type": slot[0],
             "as": _match_vocab(words, _ATTACH_AS),
-            "grants": [],   # abilities/effects given to the target (human-filled)
+            "grants": [],   # ability text remains review-only until classified
+            "grantsCount": max(0, len(ability_badges) - crossed),
             # count of ✕-marked badges detected; the human names which ability
             "removesCount": crossed,
             "removes": [],
@@ -264,6 +338,19 @@ def card_proposals(text_regions: list[dict], icons: list[dict] | None = None) ->
         elif len(ability_badges) > len(proposal["activates"]):
             notes.append(f"{len(ability_badges)} ability badge(s) detected; the main face may GRANT abilities on the target beyond the action abilities - classify these.")
     proposal["reviewNotes"] = notes
+    title_confidence = _zone_confidence(text_regions, "title")
+    main_confidence = _zone_confidence(text_regions, "main-text")
+    attachment_confidence = max(_zone_confidence(text_regions, "attachment"), max((float(icon.get("confidence", 0)) for icon in icons or []), default=0.0))
+    candidates = [
+        _candidate("name", proposal["titleCandidate"] or proposal["nameCandidate"], "title", title_confidence, "OCR text from the title zone"),
+        _candidate("class", proposal["classes"], "main-face", main_confidence, "OCR vocabulary in the main-face zone"),
+        _candidate("activates", proposal["activates"], "action-strip", _zone_confidence(text_regions, "action-strip"), "OCR action vocabulary on the action strip"),
+        _candidate("movements", proposal["movements"], "rule-text", main_confidence, "Printed movement expression; dice pips are intentionally not inferred"),
+        _candidate("cost", proposal["costCandidate"], "attachment", attachment_confidence, "Printed cost/bonus expression near the attachment zone"),
+        _candidate("attach", proposal["attach"], "slot-type-banner", attachment_confidence, "Slot banner and adjacent target/icon evidence"),
+        _candidate("custom-text", proposal["customTextCandidate"], "rule-text", main_confidence, "OCR rule text retained as review evidence"),
+    ]
+    proposal["candidates"] = [candidate for candidate in candidates if candidate]
     return proposal
 
 
@@ -282,7 +369,7 @@ def extract_card(path: str, asset: str) -> dict:
         raise FileNotFoundError(path)
     rotation, upright = orientation(image)
     text = ocr_regions(upright)
-    regions = [asdict(item) for item in text]
+    regions = [{**asdict(item), "zone": _card_zone(item.box, upright.shape[1], upright.shape[0])} for item in text]
     words = " ".join(item.text for item in text if item.confidence >= 0.55)
     confidence = round(float(np.mean([item.confidence for item in text])) if text else 0.0, 3)
     reasons = []
@@ -290,8 +377,8 @@ def extract_card(path: str, asset: str) -> dict:
         reasons.append("local OCR unavailable; manually transcribe printed text")
     if confidence < 0.75:
         reasons.append("OCR confidence below review threshold")
-    icons = _icon_candidates(upright)
-    return {"asset": asset, "kind": "action-card", "orientation": rotation, "printedTextCandidate": words, "textRegions": regions, "iconCandidates": icons, "proposals": card_proposals(regions, icons), "perceptualHash": perceptual_hash(upright), "confidence": confidence, "reviewRequired": True, "reasons": reasons}
+    icons = [{**icon, "zone": _card_zone(icon["box"], upright.shape[1], upright.shape[0])} for icon in _icon_candidates(upright)]
+    return {"asset": asset, "kind": "action-card", "orientation": rotation, "zones": CARD_ZONES, "printedTextCandidate": words, "textRegions": regions, "iconCandidates": icons, "proposals": card_proposals(regions, icons), "perceptualHash": perceptual_hash(upright), "confidence": confidence, "reviewRequired": True, "reasons": reasons}
 
 
 def overlay(image: np.ndarray, card: dict) -> np.ndarray:

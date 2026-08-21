@@ -86,12 +86,19 @@ including richer space topology and resource-type plug-ins.
 ## Action-card workflow
 
 The editor now also browses source-linked `action-card` assets for both English
-editions. A card draft stores the printed transcription and vision evidence
-outside canonical game data. OCR, icon candidates, and duplicate groups are
-suggestions only: confirm both the transcription and copy grouping before
-export. Card exports target `action-cards.json`; a missing Shadowraiders target
-is represented by an explicit `targetAbsent` precondition in the review patch.
-Existing v1 block sessions are accepted and saved as v2 data-editor sessions.
+editions. It loads HexVision as **zone-attributed review evidence**: title,
+slot/type banner, action strip, attachment, main-face badges, and rule text
+produce confidence-tagged candidates. Each candidate must be individually
+accepted or rejected; direct manual fields remain available for every supported
+movement, effect, attachment, grant/remove, modifier, trigger, and custom text.
+Bulk Vision creates fresh review drafts only and never overwrites an existing
+draft. Perceptual/OCR similarity can suggest physical copy groups, but only an
+author confirmation derives `copies` from source asset IDs. Deck checks catch
+duplicate IDs, cross-game groups, duplicate source ownership, missing
+provenance, unresolved review data, and unconfirmed groups before the editor
+exports one review patch/report per expansion. Shadowraiders retains explicit
+`targetAbsent` handling until its canonical target exists. Existing v1 block
+sessions are accepted and saved as v4 data-editor sessions.
 
 ## Separate authoring surfaces
 

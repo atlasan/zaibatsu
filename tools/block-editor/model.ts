@@ -63,8 +63,28 @@ export interface BlockDocument {
   geometryReviewRequired?: boolean;
 }
 
-export interface ActionCardRecord { id: string; name: string; expansion: Expansion; copies: number; summary?: string; movement?: number; activates?: Array<"search" | "delete" | "reboot" | "icebreaker">; attach?: { as?: "pawn" | "enemy" | "block"; slot?: string; class?: string[]; cost?: number }; assetRefs: string[]; provisional: boolean; }
-export interface ActionCardDocument { id: string; resourceType: "action-card"; title: string; status: "draft" | "review" | "verified"; source: { assetId: string }; actionCard: ActionCardRecord; transcription: { printedText: string; reviewerConfirmed: boolean; duplicateGroupConfirmed: boolean; vision?: { confidence: number; reviewRequired: boolean; reasons: string[] } }; provenance: { primaryArtifactId: string; page: number; locator: string; notes?: string }; annotations: string[]; knowledge?: KnowledgeHints; }
+export type CardAbility = "search" | "delete" | "reboot" | "icebreaker";
+export type GrantableAbility = CardAbility | "move";
+export type CardSlot = "add-on" | "gadget" | "weapon" | "armor" | "module" | "mission";
+export interface MovementValue { type: "fixed" | "d6" | "2d6" | "hex"; amount?: number; stealth?: boolean; }
+export interface AbilityUse { ability: GrantableAbility; perTurn?: number; dice?: "d6"; activation?: "card" | "once-per-turn"; }
+export type CardEffectKind = "gain-control-card" | "place-pawn" | "area-attack" | "all-players" | "modify-ice" | "draw-cards" | "gain-bonus" | "sacrifice-pawn" | "custom";
+export interface CardEffect { kind: CardEffectKind; amount?: number; target?: string; text?: string; trigger?: "on-play" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; }
+export interface CardAttach {
+  as?: "pawn" | "enemy" | "block"; slot?: CardSlot; class?: string[];
+  grants?: GrantableAbility[]; removes?: GrantableAbility[]; grantsMovement?: MovementValue[]; grantsStealth?: boolean; grantsSlot?: CardSlot[];
+  abilityUses?: AbilityUse[]; iceModifier?: { faces?: number[]; deltaDice?: number; black?: boolean };
+  drawModifier?: number; handModifier?: number; blockSpace?: { shape?: "circle" | "hex" };
+  effectText?: string; effectTrigger?: "on-attach" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; cost?: number;
+}
+export interface ActionCardRecord {
+  id: string; name: string; type?: CardSlot | "action" | "movement" | "event"; class?: string[];
+  expansion: Expansion; copies: number; summary?: string;
+  movement?: number; movements?: MovementValue[]; activates?: CardAbility[]; effects?: CardEffect[]; attach?: CardAttach;
+  assetRefs: string[]; provisional: boolean;
+}
+export interface CardVisionReview { confidence: number; reviewRequired: boolean; reasons: string[]; proposals?: Record<string, unknown>; acceptedFields?: string[]; rejectedFields?: string[]; copyGroupCandidates?: string[]; }
+export interface ActionCardDocument { id: string; resourceType: "action-card"; title: string; status: "draft" | "review" | "verified"; source: { assetId: string }; actionCard: ActionCardRecord; transcription: { printedText: string; reviewerConfirmed: boolean; duplicateGroupConfirmed: boolean; vision?: CardVisionReview }; provenance: { primaryArtifactId: string; page: number; locator: string; notes?: string }; annotations: string[]; knowledge?: KnowledgeHints; }
 export type EditorDocument = BlockDocument | ActionCardDocument;
 export interface EditorSession { sessionVersion: 1 | 2 | 3 | 4; projectId: string; assetManifestPath: "spec/assets/manifest.json"; documents: EditorDocument[]; history: Array<{ at: string; operation: "create" | "update" | "validate" | "export"; documentId: string; summary?: string }>; }
 
@@ -123,9 +143,10 @@ export function prefillSevenZones(document: BlockDocument, layout: BlockLayout):
 export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout, vision: HexVisionTile): BlockDocument {
   const claimed = new Set<ZoneId>();
   const spaces: EditorSpace[] = [];
+  let unresolved = 0;
   for (const [index, candidate] of (vision.spaces ?? []).entries()) {
     const zoneIds = (candidate.suggestedZoneIds ?? []).filter((zoneId, position, values) => STANDARD_ZONE_IDS.includes(zoneId) && values.indexOf(zoneId) === position);
-    if (!zoneIds.length || zoneIds.some((zoneId) => claimed.has(zoneId))) continue;
+    if (!zoneIds.length || zoneIds.some((zoneId) => claimed.has(zoneId))) { unresolved++; continue; }
     zoneIds.forEach((zoneId) => claimed.add(zoneId));
     const displayShape: SpaceDisplayShape = ["circle", "capsule", "compound"].includes(candidate.kind ?? "") ? candidate.kind as SpaceDisplayShape : "auto";
     spaces.push({ id: `vision-space-${index + 1}`, type: "normal", zoneIds, capacity: defaultCapacity("normal", zoneIds), displayShape, neighbors: [] });
@@ -140,7 +161,9 @@ export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout,
     iceFaces,
     iceValue: derivedIceValue(iceFaces, document.block.blackIce),
   };
-  return { ...document, annotations: [...new Set([...document.annotations, "HexVision suggestions applied; review all detected gameplay data against the source."])], block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
+  const annotations = ["HexVision suggestions applied; review all detected gameplay data against the source."];
+  if (unresolved) annotations.push(`HexVision left ${unresolved} conflicting or incomplete zone proposal${unresolved === 1 ? "" : "s"} unresolved.`);
+  return { ...document, annotations: [...new Set([...document.annotations, ...annotations])], block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
 }
 
 /** Clear editable gameplay fields without deleting the source-linked draft itself. */
@@ -162,6 +185,34 @@ export function documentForAsset(asset: AssetRecord, vision?: { confidence: numb
 function validId(value: string): boolean { return /^[a-z0-9-]+$/.test(value); }
 function validKnowledgeTag(value: string): boolean { return /^[a-z][a-z0-9-]*:[a-z0-9-]+$/.test(value); }
 function validEntryId(value: string): boolean { return /^[a-z0-9./-]+$/.test(value); }
+function validBlockEffect(effect: BlockEffect | undefined): boolean {
+  if (effect === undefined || typeof effect === "string") return true;
+  if (!["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "custom"].includes(effect.kind)) return false;
+  if (effect.amount !== undefined && !Number.isInteger(effect.amount)) return false;
+  if (effect.target !== undefined && typeof effect.target !== "string") return false;
+  return effect.text === undefined || typeof effect.text === "string";
+}
+function object(value: unknown): value is Record<string, unknown> { return typeof value === "object" && value !== null && !Array.isArray(value); }
+function validMovement(value: unknown): boolean { return object(value) && Object.keys(value).every((key) => ["type", "amount", "stealth"].includes(key)) && ["fixed", "d6", "2d6", "hex"].includes(String(value.type)) && (value.amount === undefined || (Number.isInteger(value.amount) && Number(value.amount) >= 1)) && (value.stealth === undefined || typeof value.stealth === "boolean"); }
+function validCardEffect(value: unknown): boolean { return object(value) && Object.keys(value).every((key) => ["kind", "amount", "target", "text", "trigger"].includes(key)) && ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"].includes(String(value.kind)) && (value.amount === undefined || Number.isInteger(value.amount)) && (value.target === undefined || typeof value.target === "string") && (value.text === undefined || typeof value.text === "string") && (value.trigger === undefined || ["on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(String(value.trigger))); }
+function validActionCard(card: ActionCardRecord): boolean {
+  const abilities = ["search", "delete", "reboot", "icebreaker", "move"], slots = ["add-on", "gadget", "weapon", "armor", "module", "mission"];
+  if (card.type !== undefined && ![...slots, "action", "movement", "event"].includes(card.type)) return false;
+  if (card.class && (!Array.isArray(card.class) || card.class.some((item) => typeof item !== "string") || new Set(card.class).size !== card.class.length)) return false;
+  if (card.movements && (!Array.isArray(card.movements) || card.movements.some((movement) => !validMovement(movement)))) return false;
+  if (card.effects && (!Array.isArray(card.effects) || card.effects.some((effect) => !validCardEffect(effect)))) return false;
+  const attach = card.attach; if (!attach) return true;
+  if (Object.keys(attach).some((key) => !["as", "slot", "class", "grants", "removes", "grantsMovement", "grantsStealth", "grantsSlot", "abilityUses", "iceModifier", "drawModifier", "handModifier", "blockSpace", "effectText", "effectTrigger", "cost"].includes(key))) return false;
+  if (attach.as !== undefined && !["pawn", "enemy", "block"].includes(attach.as)) return false;
+  if (attach.slot !== undefined && !slots.includes(attach.slot)) return false;
+  if ([attach.class, attach.grants, attach.removes, attach.grantsSlot].some((items) => items !== undefined && (!Array.isArray(items) || items.some((item) => typeof item !== "string")))) return false;
+  if (attach.grants?.some((item) => !abilities.includes(item)) || attach.removes?.some((item) => !abilities.includes(item)) || attach.grantsSlot?.some((item) => !slots.includes(item))) return false;
+  if (attach.grantsMovement && (!Array.isArray(attach.grantsMovement) || attach.grantsMovement.some((movement) => !validMovement(movement)))) return false;
+  if (attach.abilityUses && (!Array.isArray(attach.abilityUses) || attach.abilityUses.some((use) => !object(use) || Object.keys(use).some((key) => !["ability", "perTurn", "dice", "activation"].includes(key)) || !abilities.includes(String(use.ability)) || (use.perTurn !== undefined && (!Number.isInteger(use.perTurn) || Number(use.perTurn) < 1)) || (use.dice !== undefined && use.dice !== "d6") || (use.activation !== undefined && !["card", "once-per-turn"].includes(String(use.activation)))))) return false;
+  const ice = attach.iceModifier; if (ice && (!object(ice) || Object.keys(ice).some((key) => !["faces", "deltaDice", "black"].includes(key)) || (ice.faces !== undefined && (!Array.isArray(ice.faces) || ice.faces.some((face) => !Number.isInteger(face) || Number(face) < 1 || Number(face) > 6))) || (ice.deltaDice !== undefined && !Number.isInteger(ice.deltaDice)) || (ice.black !== undefined && typeof ice.black !== "boolean"))) return false;
+  if ((attach.drawModifier !== undefined && !Number.isInteger(attach.drawModifier)) || (attach.handModifier !== undefined && !Number.isInteger(attach.handModifier)) || (attach.cost !== undefined && (!Number.isInteger(attach.cost) || attach.cost < 0)) || (attach.grantsStealth !== undefined && typeof attach.grantsStealth !== "boolean") || (attach.effectText !== undefined && typeof attach.effectText !== "string") || (attach.effectTrigger !== undefined && !["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(attach.effectTrigger))) return false;
+  return attach.blockSpace === undefined || (object(attach.blockSpace) && Object.keys(attach.blockSpace).every((key) => key === "shape") && (attach.blockSpace.shape === undefined || ["circle", "hex"].includes(attach.blockSpace.shape)));
+}
 export function validateDocument(document: EditorDocument, assets: AssetRecord[], layout?: BlockLayout): string[] {
   const errors: string[] = [];
   if (document.knowledge?.tags && (!Array.isArray(document.knowledge.tags) || new Set(document.knowledge.tags).size !== document.knowledge.tags.length || document.knowledge.tags.some((tag) => !validKnowledgeTag(tag)))) errors.push("Knowledge tags must use the canonical namespace:value format.");
@@ -169,6 +220,7 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
   if (document.resourceType === "action-card") {
     const card = document.actionCard; const cardAssets = assets.filter((asset) => asset.kind === "action-card"); const ids = new Set(cardAssets.map((asset) => asset.assetId));
     if (!validId(document.id) || !validId(card.id)) errors.push("Draft and card ids must use lowercase letters, digits, and hyphens.");
+    if (!validActionCard(card)) errors.push("Card movement, effects, and attachment fields must use supported structured values.");
     if (!card.name.trim()) errors.push("Card name is required."); if ((document.status === "review" || document.status === "verified") && !card.summary?.trim()) errors.push("Reviewed cards require a concise gameplay summary.");
     if (!ids.has(document.source.assetId) || !card.assetRefs.includes(document.source.assetId)) errors.push("Action-card assetRefs must include the selected action-card asset.");
     if (new Set(card.assetRefs).size !== card.assetRefs.length || card.assetRefs.some((assetId) => !ids.has(assetId))) errors.push("Action-card copy groups must contain unique action-card asset ids.");
@@ -185,6 +237,7 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
   if (block.bonusCorners.filter(Boolean).length !== block.bonusFragments) errors.push("Bonus fragment count must equal marked bonus corners.");
   if (block.iceFaces && (block.iceFaces.length > 6 || block.iceFaces.some((face) => !Number.isInteger(face) || face < 1 || face > 6))) errors.push("ICE faces must be die values from 1 to 6.");
   if (block.iceFaces !== undefined && block.iceValue !== derivedIceValue(block.iceFaces, block.blackIce)) errors.push("ICE category must match the authored faces and Black ICE setting.");
+  if (!validBlockEffect(block.effects?.inCybernet) || !validBlockEffect(block.effects?.underControl)) errors.push("Block effects must use a supported typed effect with valid fields.");
   if (layout && JSON.stringify(block.boundarySpaces) !== JSON.stringify(deriveBoundarySpaces(block, layout))) errors.push("Boundary spaces are derived from each active entrance's mapped placement hex.");
   if (block.layoutId !== STANDARD_BLOCK_LAYOUT_ID) errors.push("Blocks must use the standard 2-3-2 seven-zone layout.");
   if (document.geometryReviewRequired && document.status !== "draft") errors.push("Migrated geometry must be reviewed before a block can leave draft status.");
@@ -205,6 +258,19 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
   if (document.status === "verified" && block.provisional) errors.push("A verified draft cannot remain provisional.");
   if (document.status === "verified" && zoneOwner.size !== STANDARD_ZONE_IDS.length) errors.push("A verified block must account for all seven placement hexes.");
   return errors;
+}
+
+/** Deck-only checks are deliberately separate from a single-card export so an
+ * author can repair a record without having to invent unrelated source data. */
+export function validateActionDeck(documents: ActionCardDocument[], assets: AssetRecord[]): string[] {
+  const errors: string[] = [], cardIds = new Map<string, string>(), assetOwners = new Map<string, string>();
+  for (const document of documents) {
+    for (const error of validateDocument(document, assets)) errors.push(`${document.source.assetId}: ${error}`);
+    const card = document.actionCard, prior = cardIds.get(card.id); if (prior) errors.push(`Card id '${card.id}' is duplicated by ${prior} and ${document.source.assetId}.`); else cardIds.set(card.id, document.source.assetId);
+    for (const assetId of card.assetRefs) { const owner = assetOwners.get(assetId); if (owner) errors.push(`Source asset ${assetId} belongs to both ${owner} and ${document.source.assetId}.`); else assetOwners.set(assetId, document.source.assetId); if ((assetId.startsWith("sh-") ? "shadowraiders" : "speedrunners") !== card.expansion) errors.push(`Source asset ${assetId} cannot be grouped into a ${card.expansion} deck.`); }
+    if (card.assetRefs.length > 1 && !document.transcription.duplicateGroupConfirmed) errors.push(`${document.source.assetId}: multi-copy group requires confirmation.`);
+  }
+  return [...new Set(errors)];
 }
 
 export function normalizeBlockDocument(document: BlockDocument, layout: BlockLayout): BlockDocument {

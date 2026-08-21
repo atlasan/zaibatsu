@@ -7,6 +7,11 @@ test("block editor fits the source, projects HexVision geometry, and keeps zone 
   await page.getByRole("button", { name: "Create draft" }).click();
   await page.getByRole("button", { name: "Prefill 7 zones" }).click();
   await expect(page.locator(".zone-space")).toHaveCount(7);
+  await page.locator(".inspector").evaluate((element) => { element.scrollTop = 160; });
+  const inspectorBefore = await page.locator(".inspector").evaluate((element) => element.scrollTop);
+  await page.locator(".zone-space").nth(3).evaluate((element: HTMLButtonElement) => element.click());
+  await page.waitForTimeout(50);
+  await expect.poll(() => page.locator(".inspector").evaluate((element, before) => Math.abs(element.scrollTop - before) <= 16, inspectorBefore)).toBe(true);
   const before = await page.locator(".hex-stage").evaluate((element) => ({ scrollTop: element.scrollTop, overflow: getComputedStyle(element).overflow, appScroll: document.querySelector("#app")?.scrollTop }));
   await page.getByLabel("h1 placement hex").click();
   const after = await page.locator(".hex-stage").evaluate((element) => { const commandbar = document.querySelector(".commandbar")!.getBoundingClientRect(); return { scrollTop: element.scrollTop, scrollWidth: element.scrollWidth, clientWidth: element.clientWidth, overflow: getComputedStyle(element).overflow, appScroll: document.querySelector("#app")?.scrollTop, documentHeight: document.documentElement.scrollHeight, viewportHeight: innerHeight, commandbarBottom: commandbar.bottom }; });
@@ -26,5 +31,16 @@ test("bulk HexVision action reports existing draft skips", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Create draft" }).click();
   await page.getByRole("button", { name: "Apply HexVision to all" }).click();
+  await expect(page.locator(".status")).toContainText("existing drafts skipped");
+});
+
+test("action-card Vision stays review-only until an author accepts a field", async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 720 });
+  await page.goto("/action-cards/");
+  await page.getByRole("button", { name: "Create card" }).click();
+  await page.getByRole("button", { name: "Apply HexVision", exact: true }).click();
+  await expect(page.getByText("Vision candidate review")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Accept candidate" }).first()).toBeVisible();
+  await page.getByRole("button", { name: "Apply HexVision to fresh" }).click();
   await expect(page.locator(".status")).toContainText("existing drafts skipped");
 });
