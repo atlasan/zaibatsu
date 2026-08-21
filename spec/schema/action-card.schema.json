@@ -10,6 +10,7 @@
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "name": { "type": "string", "description": "The printed title." },
     "type": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission", "action", "movement", "event"], "description": "The card's printed type/category. For an attachment card this matches attach.slot." },
+    "class": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "The card's OWN class tag(s), e.g. accelerator / e-synapse / cyborg / brainchip. Distinct from attach.class (the TARGET class restriction)." },
     "copies": {
       "type": "integer",
       "minimum": 1,
@@ -46,6 +47,8 @@
         "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete). May include move." },
         "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
         "grantsMovement": { "type": "array", "items": { "$ref": "#/$defs/movementValue" }, "description": "Movement options this attachment GIVES its target (fixed / d6 / 2d6 / hex, optionally stealth). Frequency (per-turn / d6 / card) is carried by abilityUses with ability=move." },
+        "grantsStealth": { "type": "boolean", "description": "The target may move with STEALTH (its normal movement becomes stealth-capable — Shadowraiders), without granting a specific number of stealth moves. E.g. INVISIBLE SERUM \"+Stealth\"." },
+        "grantsSlot": { "type": "array", "items": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] }, "uniqueItems": true, "description": "Additional attachment slot(s) this card gives its target, e.g. FLATLINE \"allow gadget attachment\"." },
         "abilityUses": {
           "type": "array",
           "items": {

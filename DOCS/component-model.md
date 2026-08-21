@@ -100,7 +100,7 @@ largely printed text + symbols, so **OCR + icon detection** drive the prefill
 |---|---|---|
 | `id`, `name` (title) | ✅ | printed title. |
 | **`type`** (`add-on`/`gadget`/`weapon`/`armor`/`module`/`mission`/`action`/`movement`/`event`) | ✅(schema) / ⛔(detect) | the card's printed type/category; for an attachment card it matches `attach.slot`. |
-| **`class`** (the card's *own* class, e.g. Malware/Virus) | ⛔ **gap** | the card's own class-tag, printed by the title. **Distinct** from the attach *class restriction* below — flat class matching conflates them. |
+| **`class[]`** (the card's *own* class, e.g. Accelerator / E-Synapse / Cyborg / Brainchip / Malware) | ✅(schema) / ⛔(detect) | the card's own class-tag(s), printed by the title (confirmed by the human drafts). **Distinct** from the attach *class restriction* below — flat class matching conflates them. |
 | `copies` | ✅ | identical copies in the 54-card deck (dedup via perceptual hash). |
 | `summary` | ✅ | source-reviewed gameplay paraphrase. |
 | `assetRefs` | ✅ | physical asset ids. |
@@ -122,7 +122,9 @@ use is chosen per play (SR-CARD-001).
 | **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
 | **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ✅(detect-marker) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). Detection: `cards.py` now flags the **✕ remove-marker** on main-face ability badges (`icon.removed`, `proposals.attach.removesCount`); the human still names *which* ability (the badge glyph isn't read). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
-| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ⛔(engine, detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). |
+| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ⛔(engine, detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). E.g. STEALTH CAMO "+3 stealth" / CYBER WINGS "+1d6 stealth". |
+| **`attach.grantsStealth`** (bool) | ✅(schema) / ⛔(engine, detect) | grants the **stealth capability** (the target's own movement becomes stealth-capable) without a specific count. E.g. INVISIBLE SERUM "+Stealth". Revealed by the human drafts. |
+| **`attach.grantsSlot[]`** (slot types) | ✅(schema) / ⛔(engine, detect) | gives the target an additional attachment **slot**. E.g. FLATLINE "allow gadget attachment". Revealed by the human drafts. |
 | **`attach.abilityUses[]`** (how a granted ability/move is used) | ✅(schema) / ⛔(engine, detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. `grants`/`removes` now also include `move`. |
 | **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). The card analogue of `space.modifier.kind=ice`. |
 | **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ⛔(engine, detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Card analogue of the space `hand-size` modifier. |

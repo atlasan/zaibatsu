@@ -21,7 +21,49 @@ DEFAULT_BUILD = os.path.join(REPO, "tmp", "artifacts", "build")
 GROUND_TRUTH = os.path.join(
     REPO, "tools", "block-editor", ".sessions", "block-zone-drafts.editor.json"
 )
+CARD_DRAFTS = os.path.join(
+    REPO, "tools", "block-editor", ".sessions", "action-card-drafts.editor.json"
+)
 BLOCKS_TRUTH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "blocks-truth.json")
+
+
+def evaluate_card_drafts(build_dir: str = DEFAULT_BUILD, session_path: str = CARD_DRAFTS) -> list[dict]:
+    """Score card-vision proposals against the human-reviewed card drafts (the
+    analog of the block ground truth). Only cards marked review/verified are scored.
+    Fields scored: activates (recall), attach.slot, and whether the title appears in
+    the OCR text. OCR-bound, so a few cards at a time."""
+    if not os.path.exists(session_path):
+        return []
+    from . import cards
+    with open(session_path, encoding="utf-8") as f:
+        doc = json.load(f)
+    rows: list[dict] = []
+    for entry in doc.get("documents", []):
+        if entry.get("resourceType") != "action-card" or entry.get("status") not in ("review", "verified"):
+            continue
+        card = entry.get("actionCard", {})
+        asset = entry.get("source", {}).get("assetId")
+        group = asset.rsplit("-p", 1)[0] if asset else ""
+        png = os.path.join(build_dir, group, "png", f"{asset}.png")
+        if not asset or not os.path.exists(png):
+            continue
+        got = cards.extract_card(png, asset)
+        p = got["proposals"]
+        exp_act = set(card.get("activates", []))
+        got_act = set(p.get("activates", []))
+        exp_slot = (card.get("attach") or {}).get("slot")
+        got_slot = (p.get("attach") or {}).get("slot", []) or []
+        text = got.get("printedTextCandidate", "").lower()
+        name = card.get("name", "")
+        name_hit = any(w.lower() in text for w in name.split() if len(w) > 3)
+        rows.append({
+            "name": name,
+            "asset": asset,
+            "activates": [sorted(exp_act), sorted(got_act), exp_act.issubset(got_act)],
+            "slot": [exp_slot, got_slot, exp_slot in got_slot if exp_slot else None],
+            "titleInOCR": name_hit,
+        })
+    return rows
 
 
 def evaluate_truth(build_dir: str = DEFAULT_BUILD, truth_path: str = BLOCKS_TRUTH) -> list[dict]:
@@ -157,6 +199,13 @@ def main(argv: list[str] | None = None) -> int:
     truth = evaluate_truth(build)
     if truth:
         print("\nvs source ground truth (detected/expected):")
+        cards = evaluate_card_drafts(build)
+        if cards:
+            print("\ncard vision vs human drafts (expected -> detected):")
+            for c in cards:
+                print(f"  {c['name']}: activates {c['activates'][0]}->{c['activates'][1]} ({'ok' if c['activates'][2] else 'MISS'}) "
+                      f"slot {c['slot'][0]}->{c['slot'][1]} ({'ok' if c['slot'][2] else 'miss' if c['slot'][2] is False else '-'}) "
+                      f"titleInOCR={c['titleInOCR']}")
         for r in truth:
             print(f"  {r['name']}: edgesOpen={r['edgesOpen'][0]}/{r['edgesOpen'][1]} "
                   f"bonusCorners={r['bonusCorners'][0]}/{r['bonusCorners'][1]} "
