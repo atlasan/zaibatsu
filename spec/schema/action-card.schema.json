@@ -8,7 +8,8 @@
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-    "name": { "type": "string" },
+    "name": { "type": "string", "description": "The printed title." },
+    "type": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission", "action", "movement", "event"], "description": "The card's printed type/category. For an attachment card this matches attach.slot." },
     "copies": {
       "type": "integer",
       "minimum": 1,
@@ -22,12 +23,17 @@
     "movement": {
       "type": "integer",
       "minimum": 1,
-      "description": "Steps granted when the card is used for movement."
+      "description": "Legacy simple form: fixed steps granted when used for movement. Prefer `movements` for new data (fixed / d6 / 2d6 / hex, and Shadowraiders stealth)."
+    },
+    "movements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/movementValue" },
+      "description": "The card's ACTION-part movement options (0+): each is fixed steps / one die / two dice / one whole hex, optionally stealth (Shadowraiders). One is chosen when the card is spent on movement."
     },
     "activates": {
       "type": "array",
       "items": { "enum": ["search", "delete", "reboot", "icebreaker"] },
-      "description": "The card's ACTION part (the small reversed strip): abilities the card can be spent on when played directly. Independent of the attach use below."
+      "description": "The card's ACTION part: the ability actions the card can be spent on when played directly (0+, normally one). Independent of the attach use below."
     },
     "attach": {
       "type": "object",
@@ -39,6 +45,7 @@
         "class": { "type": "array", "items": { "type": "string" }, "description": "Target class restriction: the classes this card may attach to (e.g. Cleaner pawns)." },
         "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete). May include move." },
         "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
+        "grantsMovement": { "type": "array", "items": { "$ref": "#/$defs/movementValue" }, "description": "Movement options this attachment GIVES its target (fixed / d6 / 2d6 / hex, optionally stealth). Frequency (per-turn / d6 / card) is carried by abilityUses with ability=move." },
         "abilityUses": {
           "type": "array",
           "items": {
@@ -84,5 +91,17 @@
       "description": "Physical asset ids resolved through spec/assets/manifest.json."
     },
     "provisional": { "type": "boolean", "default": false }
+  },
+  "$defs": {
+    "movementValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["fixed", "d6", "2d6", "hex"], "description": "fixed steps / one die / two dice / one whole hex (SR-MOVE-001)." },
+        "amount": { "type": "integer", "minimum": 1, "description": "Step count for `fixed` (or a bonus added to a dice roll)." },
+        "stealth": { "type": "boolean", "default": false, "description": "Shadowraiders stealth movement: normal step budget but does not wake threats (SH-PAWN-001)." }
+      }
+    }
   }
 }
