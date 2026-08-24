@@ -63,8 +63,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [~] (tools/ts) Local Speedrunners rules sandbox: `/play/` is served by the
   block-editor host with isolated replayable sessions, CSS Cybernet projection,
   optional local artwork, live phase controls, standard seeded free play, a
-  deterministic Test Lab, v1/v2 trace replay, and Playwright browser coverage.
-  Close
+  deterministic Test Lab (including a game-basics fixture), grouped guided
+  action families, v1/v2 trace replay, and Playwright browser coverage. Close
   only after supported-action coverage, accepted source/data readiness, and
   both golden suites are green; see `DOCS/web-sandbox-plan.md`.
 - [ ] (go) Headless engine host / server + simulation harness.
@@ -82,4 +82,5 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] Decide and add `LICENSE` for engine code (game remains CC BY-NC 2.5 MX).
 - [ ] Consider a JSON snapshot format for `GameState` to diff Go vs TS states directly.
 - [x] (tools/spec/docs) Source-linked action-card automation: both English 54-card decks are cropped into the manifest; local review-only vision emits OCR/icon/duplicate candidates; the data editor supports v2 action-card drafts and provenance reports. No candidate directly changes canonical data or engine effects.
+- [x] (tools/spec/docs) Structured action-card authoring: the editor now exposes the current `ActionCardRecord` fields directly through typed controls for action-part movement/options, direct effects, attachment structure, modifiers, and review workflow. The visible JSON is derived preview only.
 - [x] (tools/docs/spec) Tracked transcript corpus: rulebook and component-sheet transcripts for both games are generated from cataloged source PDFs under `DOCS/rules/transcripts/`, with raw extractor output kept in `tmp/ruletext/`.

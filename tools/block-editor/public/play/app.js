@@ -6,6 +6,16 @@ let error = "";
 let selectedActionIndex = 0;
 let movementPath = [];
 let scenarios = [];
+const FAMILY_ORDER = ["basics", "movement", "search", "combat", "icebreaker", "attachments", "reboot"];
+const FAMILY_LABELS = {
+  basics: "Basics / turn flow",
+  movement: "Movement",
+  search: "Search / placement",
+  combat: "Combat",
+  icebreaker: "Icebreaker / control",
+  attachments: "Attachments",
+  reboot: "Reboot",
+};
 
 const api = async (path, options = {}) => {
   const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
@@ -37,7 +47,7 @@ const pawnLabel = (id) => pawnData(id)?.name || id;
 function setupScreen() {
   app.replaceChildren();
   const form = el("form", { class: "setup" });
-  form.append(el("div", { class: "eyebrow" }, "LOCAL ENGINE SANDBOX"), el("h1", {}, "Zaibatsu Speedrunners"), el("p", { class: "subtle" }, "Create an in-memory rules session. The server executes the mirrored TypeScript engine; no game data is changed."));
+  form.append(el("div", { class: "eyebrow" }, "LOCAL ENGINE SANDBOX"), el("h1", {}, "Zaibatsu Speedrunners"), el("p", { class: "subtle" }, "Create an in-memory rules session. The server executes the mirrored TypeScript engine; no game data is changed. This tester covers the current implemented subset, not a full shipped client."));
   const grid = el("div", { class: "form-grid" });
   const names = el("input", { id: "names", value: "Ada, Bea", autocomplete: "off" });
   const seed = el("input", { id: "seed", value: "1", type: "number", step: "1" });
@@ -129,13 +139,21 @@ function actionPanel() {
   const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Guided action"));
   const options = session.legalOptions.actions || [];
   if (session.state.phase !== "action") { panel.append(el("p", { class: "empty" }, "Advance to the action phase to submit an action.")); return panel; }
+  if (!options.length) { panel.append(el("p", { class: "empty" }, "No reducer-legal actions are available in this state.")); return panel; }
   const select = el("select", { "aria-label": "Action" });
-  options.forEach((option, index) => select.append(el("option", { value: String(index) }, option.label)));
+  FAMILY_ORDER.forEach((family) => {
+    const familyOptions = options.map((option, index) => ({ option, index })).filter(({ option }) => (option.family || "basics") === family);
+    if (!familyOptions.length) return;
+    const group = el("optgroup", { label: FAMILY_LABELS[family] || family });
+    familyOptions.forEach(({ option, index }) => group.append(el("option", { value: String(index) }, option.label)));
+    select.append(group);
+  });
   const suggested = selectedActionIndex === 0 && options[0]?.type === "pass" ? options.findIndex((option) => option.type === "play-search" || option.type === "move-hex" || option.type === "place-marker") : selectedActionIndex;
   select.value = String(Math.min(suggested >= 0 ? suggested : 0, Math.max(0, options.length - 1)));
   const fields = el("div", { class: "action-fields" });
   const renderFields = async () => {
     fields.replaceChildren(); const option = options[Number(select.value)] || {};
+    fields.append(el("p", { class: "hint" }, `Family: ${FAMILY_LABELS[option.family || "basics"] || option.family || "basics"}`));
     if (option.pawnId) fields.append(field("Pawn", "pawnId", option.pawnId, [option.pawnId], pawnLabel));
     if (option.type === "move-steps" || option.type === "play-move") {
       if (option.cardId) fields.append(field("Card", "cardId", option.cardId, [option.cardId], cardLabel));
@@ -169,7 +187,7 @@ function actionPanel() {
       command({ kind: "action", action });
     }
   });
-  panel.append(el("p", { class: "hint" }, "Choose an engine-legal action, then choose its targets or placement."), select, fields, submit); if (error) panel.append(el("p", { class: "error" }, error)); return panel;
+  panel.append(el("p", { class: "hint" }, "Choose an engine-legal action by family, then choose its targets or placement. The browser never resolves rules locally; it only submits reducer-backed commands."), select, fields, submit); if (error) panel.append(el("p", { class: "error" }, error)); return panel;
 }
 
 async function renderMovementFields(fields, option) {

@@ -1,8 +1,9 @@
 # Zaibatsu Game Data Editor
 
-A standalone, local-first editor for source-linked Zaibatsu content. The MVP
-currently edits **information blocks**; its shell and session contract are
-intentionally reusable for cards, pawns, markers, threats, missions, and modes.
+A standalone, local-first editor for source-linked Zaibatsu content. The
+current shipped surfaces are the **block editor** and the **action-card
+editor**; their shell and session contract remain intentionally reusable for
+cards, pawns, markers, threats, missions, and modes later.
 
 It also serves a local-only Speedrunners rules sandbox at `/play/`. Sandbox
 state is held in memory, uses the TypeScript engine on the local server, and
@@ -33,6 +34,8 @@ port `4173`; use `stop-local-server.bat` to stop it without starting another.
 The sandbox setup screen includes standard seeded play plus a **Test Lab** of
 clearly labeled deterministic fixtures. Fixtures are local reducer tests, not
 source-complete games; their v2 traces recreate the same fixture on import.
+Current fixture coverage includes game basics, search/movement, combat/control,
+attachments, and reboot/turn flow.
 
 For browser regression coverage, install Chromium once and run:
 
@@ -89,8 +92,10 @@ The editor now also browses source-linked `action-card` assets for both English
 editions. It loads HexVision as **zone-attributed review evidence**: title,
 slot/type banner, action strip, attachment, main-face badges, and rule text
 produce confidence-tagged candidates. Each candidate must be individually
-accepted or rejected; direct manual fields remain available for every supported
-movement, effect, attachment, grant/remove, modifier, trigger, and custom text.
+accepted or rejected; the structured authoring UI directly covers identity,
+action-part movement/options, direct card effects, attachment fields, grants /
+removes, granted movement, granted slot/stealth, ICE modifiers, draw/hand
+modifiers, block-space shape, triggers, and custom text.
 Bulk Vision creates fresh review drafts only and never overwrites an existing
 draft. Perceptual/OCR similarity can suggest physical copy groups, but only an
 author confirmation derives `copies` from source asset IDs. Deck checks catch
@@ -116,7 +121,17 @@ The block editor receives only `kind: "block"` manifest entries and retains the
 `kind: "action-card"` entries. It records a physical-copy group as explicit
 asset IDs, derives `copies` from that group, stores source transcription only
 in the local review session, and exports normalized gameplay fields plus a
-concise source-reviewed summary. Both interfaces serve UTF-8 HTML/JSON and
-never promote an OCR/vision suggestion without reviewer confirmation.
+concise source-reviewed summary. The structured preview shown in the inspector
+is derived/read-only; normal authoring happens through direct controls, not raw
+JSON editing. Both interfaces serve UTF-8 HTML/JSON and never promote an
+OCR/vision suggestion without reviewer confirmation.
 
 The block authoring screen exposes an explicit **1–N space → zone mapping**: h1–h7 each map to one gameplay space, while a gameplay space may own one or more physical zones. The seven calibrated zone anchors follow the source circles; outer tile points, entrances, corners, and artwork remain independent geometry.
+
+## Speedrunners tester
+
+`/play/` is a local reducer-backed tester for the current implemented
+Speedrunners subset. It groups guided actions by basics/turn flow, movement,
+search/placement, combat, icebreaker/control, attachments, and reboot. It is
+intended for rules debugging and acceptance coverage, not as a source-complete
+or production game client.

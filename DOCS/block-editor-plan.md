@@ -93,7 +93,7 @@ session; export a JSON patch only after validation.
 | 1 - block MVP | Standalone local UI, asset browser, form editor, session save | **Implemented:** a block draft can be created, reopened, validated and exported |
 | 2 - block geometry | Hex canvas, six entrances, bonus corners, and source-positioned spaces | **Implemented for print layout:** a fitted source-aligned pointy-hex canvas renders without nested scrolling. HexVision geometry aligns tile vertices, entrances, and corners; the standardized 2-3-2 lattice supplies gameplay zones, 1-N mappings, display shapes, and inferred candidate adjacency. Runtime step movement remains a source-transcription and engine follow-up. |
 | 3 - source workflow | Provenance locator forms, review report, draft/verified gating | Reviewer can trace every exported field to source evidence |
-| 4 - generic resources | **Action-card MVP implemented**; add pawn/marker schemas and shared plug-ins | One shared editor shell manages all core resource types |
+| 4 - generic resources | **Structured action-card authoring implemented**; add pawn/marker schemas and shared plug-ins | One shared editor shell manages all core resource types |
 | 5 - import helpers | Optional OCR/image-assisted suggestions | **Implemented for blocks:** selected/all HexVision suggestions can prefill review-only drafts; bulk work skips existing drafts and never promotes data automatically. |
 
 ## Export contract
@@ -123,12 +123,13 @@ transcription.
 - Has keyboard-first save/validate/export controls and clear validation
   messages; image-only editing is never the sole source of game data.
 - The action-card surface browses both English decks, creates source-linked card
-  drafts, validates them independently of blocks, and exports review-only
+  drafts, exposes the current structured card fields directly through authored
+  controls, validates them independently of blocks, and exports review-only
   patches/reports.
 
 ## Delivery order
 
-The block and action-card MVPs are complete. Next, finish source-review gates,
-add pawn/marker resource plug-ins, and keep exported patches review-only. Do
-not add records to the Go/TypeScript engines until exported data has passed the
-existing source/provenance review.
+The block and action-card vertical slice is complete. Next, finish
+source-review gates, add pawn/marker resource plug-ins, and keep exported
+patches review-only. Do not add records to the Go/TypeScript engines until
+exported data has passed the existing source/provenance review.

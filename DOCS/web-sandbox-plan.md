@@ -16,9 +16,10 @@ public hosting remain outside this workstream.
 
 The setup screen offers both standard seeded sessions and clearly labeled Test
 Lab fixtures. Fixtures arrange deterministic legal reducer state only so a user
-can immediately exercise current actions: search/movement, combat/control,
-attachments, and reboot/turn flow. They never write `spec/` and do not claim
-that provisional Speedrunners content is source-complete.
+can immediately exercise current implemented action families: game basics,
+search/movement, combat/control, attachments, and reboot/turn flow. They never
+write `spec/` and do not claim that provisional Speedrunners content is
+source-complete.
 
 ## Contract
 
@@ -39,13 +40,19 @@ that provisional Speedrunners content is source-complete.
 ## Local play flow
 
 1. Create a seeded 2–4 player session and click **Start action phase**.
-2. The guided-action selector prefers a legal Search when the active hand can
-   pay for it. Choose its shown direction/rotation, then execute it to add the
-   top block from the pile to the Cybernet.
-3. **Pass & end turn** records a pass, runs recycle (drawing to the hand limit),
+2. The guided-action selector groups reducer-legal choices by family: basics /
+   turn flow, movement, search / placement, combat, icebreaker / control,
+   attachments, and reboot.
+3. The selector prefers a legal Search when the active hand can pay for it.
+   Choose its shown direction/rotation, then execute it to add the top block
+   from the pile to the Cybernet.
+4. The **Game basics** fixture lets a reviewer exercise control-marker
+   placement, winner declaration, reset, and the event log without building a
+   longer scenario first.
+5. **Pass & end turn** records a pass, runs recycle (drawing to the hand limit),
    resolves end, and starts the next player. The individual phase button remains
    available for rules debugging.
-4. A hex-moving pawn (currently the Yellow Speedrunner in the base data) gets
+6. A hex-moving pawn (currently the Yellow Speedrunner in the base data) gets
    only directions that contain a placed neighboring block. Once-per-turn
    `steps`/`d6`/`2d6` pawns receive a guided path builder backed by the
    server's non-mutating adjacency projection. Fixed paths show their exact
@@ -56,10 +63,10 @@ that provisional Speedrunners content is source-complete.
 
 ## Acceptance gate
 
-The full sandbox acceptance claim is allowed only when Speedrunners has complete
-supported-action coverage, accepted source/data readiness, and green Go/TS
-golden fixtures. Until then this route is an engineering/debug surface for the
-implemented action subset; it must not imply source-complete gameplay.
+The full sandbox acceptance claim is allowed only when Speedrunners has
+complete supported-action coverage, accepted source/data readiness, and green
+Go/TS golden fixtures. Until then this route is an engineering/debug surface
+for the current implemented subset; it must not imply source-complete gameplay.
 
 Before closing the workstream, run `bun tools/validate-docs.ts`,
 `bun tools/verify-artifacts.ts`, `bun tools/validate-spec.ts`, the Bun suites,

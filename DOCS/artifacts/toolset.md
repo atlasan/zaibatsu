@@ -13,9 +13,9 @@ text derivatives.
 
 Use a virtual environment, then install the development-only dependencies:
 
-```bash
+```powershell
 python -m pip install -r tools/artifacts/requirements.txt
-python -m tools.artifacts render --artifact sp-en-action-cards --pdftoppm /path/to/pdftoppm
+python -m tools.artifacts render --artifact sp-en-action-cards --pdftoppm C:\path\to\pdftoppm.exe
 python -m tools.artifacts detect --artifact sp-en-action-cards --page 1
 python -m tools.artifacts extract --artifact sp-en-action-cards --page 1
 python -m tools.artifacts atlas --artifact sp-en-action-cards
@@ -54,8 +54,9 @@ command directly on non-Windows systems.
 ## Outputs and attribution
 
 The tool emits 300-DPI PNG masters, lossless WebP derivatives, a 2048px atlas,
-and deterministic per-source-page 2048px atlas metadata. Asset IDs are stable source-page/cell IDs until a verified
-gameplay record supplies a `gameplayRef`.
+and deterministic per-source-page 2048px atlas metadata.
+Asset IDs are stable source-page/cell IDs until a verified gameplay record
+supplies a `gameplayRef`.
 
 Use `fetch-web --source <official-source-id>` only for explicitly registered
 official sources. It never accepts BoardGameGeek/community sources and writes

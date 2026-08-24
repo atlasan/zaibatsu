@@ -38,8 +38,8 @@ From the repository root, double-click or run these commands from `cmd.exe`:
 
 | Command | Purpose |
 |---|---|
-| `run-sandbox.bat` | Start the local Speedrunners sandbox at `http://localhost:4173/play/`. |
-| `run-editor.bat` | Start the local game-data editor at `http://localhost:4173/`. |
+| `run-sandbox.bat` | Start the local Speedrunners tester at `http://localhost:4173/play/`. |
+| `run-editor.bat` | Start the local game-data editor at `http://localhost:4173/` (`/action-cards/` shares the same host). |
 | `stop-local-server.bat` | Stop the local tool process listening on port `4173`. |
 | `check-docs.bat` | Validate governed docs, rebuild knowledge, and validate specs/artifacts. |
 | `test-engines.bat` | Run the Bun and Go regression suites. |
@@ -76,6 +76,14 @@ implemented in both mirrors: setup, turn phases, placement, core abilities,
 control changes, attachments, snapshots, and golden scenarios. Source-backed
 component transcription, space-to-space movement, applied attachment effects,
 bonus economy, and Shadowraiders remain in progress.
+
+For local tools:
+
+- `http://localhost:4173/` is the block editor.
+- `http://localhost:4173/action-cards/` is the action-card editor.
+- `http://localhost:4173/play/` is a local reducer-backed Speedrunners tester
+  for the current implemented subset and named Test Lab fixtures, not a full
+  shipped game client.
 
 Use [the parity contract](DOCS/parity.md) for mirror evidence and
 [the backlog](tasks/BACKLOG.md) for live delivery status. For relevant changes,

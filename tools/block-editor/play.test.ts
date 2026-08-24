@@ -93,7 +93,7 @@ test("guided card movement exposes its printed budget and discards only after ac
 });
 
 test("Test Lab scenarios are deterministic, named, and retain their fixture in v2 traces", () => {
-  expect(listPlayScenarios().map((scenario) => scenario.id)).toEqual(["search-and-move", "combat-and-control", "attachments", "reboot-and-turn"]);
+  expect(listPlayScenarios().map((scenario) => scenario.id)).toEqual(["game-basics", "search-and-move", "combat-and-control", "attachments", "reboot-and-turn"]);
   const created = createPlayScenario("attachments", { playerNames: ["Ada", "Bea"], seed: 9 });
   expect(created.scenario?.title).toBe("Attachments");
   expect(created.activePlayer?.name).toBe("Ada");
@@ -120,10 +120,21 @@ test("Test Lab fixture actions remain reducer-validated and reset to their fixtu
 
 test("Test Lab fixtures expose immediate reducer actions for the supported action families", () => {
   const actions = (scenarioId: string) => createPlayScenario(scenarioId).legalOptions.actions.map((action) => action.type);
+  expect(actions("game-basics")).toContain("place-marker");
   expect(actions("search-and-move")).toContain("play-search");
   expect(actions("combat-and-control")).toEqual(expect.arrayContaining(["play-delete", "delete-multi", "play-icebreak-pawn", "play-icebreak-block"]));
   expect(actions("attachments")).toEqual(expect.arrayContaining(["attach-pawn", "attach-enemy"]));
   expect(actions("reboot-and-turn")).toContain("play-reboot");
+});
+
+test("game basics fixture can place the last marker and declare a winner", () => {
+  const created = createPlayScenario("game-basics");
+  const marker = created.legalOptions.actions.find((action) => action.type === "place-marker");
+  expect(marker).toBeDefined();
+  const applied = submitPlayCommand(created.id, { kind: "action", action: { type: "place-marker" } });
+  expect(applied.result.accepted).toBe(true);
+  expect(applied.state.winnerId).toBe(applied.activePlayer?.id);
+  expect(applied.scenario?.checkpoints.every((checkpoint) => checkpoint.complete)).toBe(true);
 });
 
 test("Test Lab Split Delete is an explicit reducer-validated fixture action", () => {

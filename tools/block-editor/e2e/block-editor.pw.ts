@@ -38,6 +38,12 @@ test("action-card Vision stays review-only until an author accepts a field", asy
   await page.setViewportSize({ width: 1024, height: 720 });
   await page.goto("/action-cards/");
   await page.getByRole("button", { name: "Create card" }).click();
+  await expect(page.locator('textarea[name="card-structure-json"]')).toHaveCount(0);
+  await page.getByLabel("Card type").selectOption("add-on");
+  await page.getByLabel("Card classes").fill("cyborg");
+  await page.locator('[data-row-type="movement:0"]').selectOption("fixed");
+  await page.locator('[data-row-amount="movement:0"]').fill("3");
+  await page.locator('[data-activate="search"]').check();
   await page.getByRole("button", { name: "Apply HexVision", exact: true }).click();
   await expect(page.getByText("Vision candidate review")).toBeVisible();
   await expect(page.getByRole("button", { name: "Accept candidate" }).first()).toBeVisible();

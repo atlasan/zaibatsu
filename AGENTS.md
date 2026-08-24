@@ -33,6 +33,10 @@ in code. `DOCS/governance.md` defines authority and required updates.
   `DOCS/domain-model.md` as the shared model description. Register new authored
   docs in `DOCS/registry.json`; ADRs and generated transcripts retain their own
   established formats.
+- **Editor / tester changes:** when `tools/block-editor/` behavior changes,
+  update the matching operator docs in `tools/block-editor/README.md`, the
+  relevant workstream doc in `DOCS/`, and `tasks/BACKLOG.md`. If actual engine
+  behavior changes, also update the canonical rule/domain/parity owners.
 - **Memory:** durable operating facts live one-per-file in `MEMORIES/` and are
   indexed by `MEMORIES/INDEX.md`.
 - **Tasks:** `tasks/BACKLOG.md` is the ordered live work list.

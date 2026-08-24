@@ -6377,6 +6377,30 @@
       }
     },
     {
+      "entryId": "doc/docs/editor-card-record.md",
+      "kind": "doc",
+      "localId": "docs/editor-card-record.md",
+      "title": "Editor handoff — ActionCardRecord fields",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/editor-card-record.md"
+        ],
+        "docPaths": [
+          "DOCS/editor-card-record.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
       "entryId": "doc/docs/engine-resume-plan.md",
       "kind": "doc",
       "localId": "docs/engine-resume-plan.md",

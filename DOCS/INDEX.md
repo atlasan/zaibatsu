@@ -12,6 +12,7 @@ copying status into a second document.
 | Transcribing or interpreting rules | [structured rulesets](rules/README.md) | the game landing page, transcripts, provenance, and [lifecycle](lifecycle.md) |
 | Implementing a Go/TS mirror change | [parity contract](parity.md) | the affected rules module, `spec/`, and `tasks/BACKLOG.md` |
 | Maintaining content tools | [block-editor plan](block-editor-plan.md) | [artifacts](artifacts/README.md), [knowledge guide](knowledge/INDEX.md), and [governance](governance.md) |
+| Maintaining the local tester | [web-sandbox-plan](web-sandbox-plan.md) | [turn flow](turn-flow.md), [parity contract](parity.md), and `tools/block-editor/README.md` |
 
 ## Canonical document map
 
@@ -50,6 +51,9 @@ These are useful detailed guides, but do not own live project status:
 - [Engine resume plan](engine-resume-plan.md)
 - [Standalone game-data editor plan](block-editor-plan.md)
 - [Local Speedrunners rules sandbox](web-sandbox-plan.md)
+
+For the local tools, use the repo README for launch commands, the tool README
+for operator-facing behavior, and the workstream plan for scope/boundaries.
 
 ## Local command shortcuts
 

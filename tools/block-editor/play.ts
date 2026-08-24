@@ -48,6 +48,7 @@ function cleanSetup(setup: PlaySetup): PlaySetup {
 }
 
 const scenarios: PlayScenario[] = [
+  { id: "game-basics", title: "Game basics", description: "A short basics fixture for control-marker placement, victory, and reset.", checkpoints: ["Place your last control marker.", "Confirm the winner event, then reset the fixture."] },
   { id: "search-and-move", title: "Search and movement", description: "Place the next block, then test fixed/card movement across the Central Core boundary.", checkpoints: ["Play Search and place the top block.", "Move the Red Speedrunner into that block.", "Use Undo to confirm deterministic replay."] },
   { id: "combat-and-control", title: "Combat and control", description: "A co-located combat fixture with a controllable ICE block and an ICE-bearing pawn.", checkpoints: ["Use a card to Delete a target.", "Use the Cyberninja for a Test Lab Split Delete.", "Icebreak the Cyberninja or the Hacktivism block.", "Inspect rolls, eliminations, and control events."] },
   { id: "attachments", title: "Attachments", description: "Attach a card to your pawn or an enemy in the same block.", checkpoints: ["Attach Accelerator to your Red Speedrunner.", "Attach Malware to the enemy Speedrunner.", "Inspect slots and attached-card state."] },
@@ -79,7 +80,13 @@ function fixtureState(id: string, setup: PlaySetup): GameState {
   state.cybernet.blocks = [core];
   state.cybernet.pawns = [];
 
-  if (id === "search-and-move") {
+  if (id === "game-basics") {
+    p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-blue";
+    p1.controlMarkersPlaced = Math.max(0, p1.controlMarkersTotal - 1);
+    p1.hand = ["move-1"]; p2.hand = [];
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+  } else if (id === "search-and-move") {
     p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-blue";
     p1.hand = ["move-1", "move-2"]; p2.hand = ["move-1"];
     state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
@@ -136,16 +143,33 @@ function readableData(gd: GameData) {
 function legalOptions(state: GameState, scenarioId?: string) {
   const player = currentPlayer(state);
   const owned = state.cybernet.pawns.filter((pawn) => pawn.ownerId === player.id);
-  const actions: Array<Record<string, unknown>> = [{ type: "pass", label: "Pass" }];
-  if (player.controlMarkersPlaced < player.controlMarkersTotal) actions.push({ type: "place-marker", label: "Place a control marker" });
+  const actions: Array<Record<string, unknown>> = [];
+  const addAction = (type: string, label: string, extra: Record<string, unknown> = {}) => {
+    const family = type === "pass" || type === "place-marker"
+      ? "basics"
+      : type.includes("move")
+        ? "movement"
+        : type.includes("search")
+          ? "search"
+          : type.includes("delete")
+            ? "combat"
+            : type.includes("icebreak")
+              ? "icebreaker"
+              : type.includes("attach")
+                ? "attachments"
+                : type.includes("reboot")
+                  ? "reboot"
+                  : "basics";
+    actions.push({ type, label, family, ...extra });
+  };
+  addAction("pass", "Pass");
+  if (player.controlMarkersPlaced < player.controlMarkersTotal) addAction("place-marker", "Place a control marker");
   for (const pawn of owned) {
     const pawnDef = pawnById(data, pawn.pawnId);
     if (pawnDef && pawnDef.movement.type !== "hex" && pawnDef.movement.activation === "once-per-turn") {
       const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
       if (targets.length) {
-        actions.push({
-          type: "move-steps",
-          label: `Move ${pawnDef.name}`,
+        addAction("move-steps", `Move ${pawnDef.name}`, {
           pawnId: pawn.pawnId,
           movement: pawnDef.movement,
           maxSelectableSteps: maxSelectableSteps(pawnDef.movement.type, pawnDef.movement.steps),
@@ -155,20 +179,20 @@ function legalOptions(state: GameState, scenarioId?: string) {
     }
     if (pawnDef?.movement.type === "hex" && pawnDef.movement.activation === "once-per-turn") {
       const directions = [0, 1, 2, 3, 4, 5].filter((dir) => state.cybernet.at(neighbor(pawn.coord, dir)));
-      if (directions.length) actions.push({ type: "move-hex", label: `Move ${pawnDef.name}`, pawnId: pawn.pawnId, directions });
+      if (directions.length) addAction("move-hex", `Move ${pawnDef.name}`, { pawnId: pawn.pawnId, directions });
     }
     const abilities = pawnDef?.abilities ?? [];
     if (abilities.some((ability) => ability.ability === "search" && ability.activation === "once-per-turn")) {
-      try { actions.push({ type: "search", label: `Search with ${pawnDef?.name}`, pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement is simply not an option */ }
+      try { addAction("search", `Search with ${pawnDef?.name}`, { pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement is simply not an option */ }
     }
     const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
-    if (colocated.length && abilities.some((ability) => ability.ability === "delete" && ability.activation === "once-per-turn")) actions.push({ type: "delete", label: `Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
+    if (colocated.length && abilities.some((ability) => ability.ability === "delete" && ability.activation === "once-per-turn")) addAction("delete", `Delete with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
     const deleteAbility = abilities.find((ability) => ability.ability === "delete" && ability.activation !== "none");
     const skulls = Math.max(1, deleteAbility?.skulls ?? 1);
-    if (scenarioId === "combat-and-control" && colocated.length > 1 && skulls > 1) actions.push({ type: "delete-multi", label: `Test Lab: Split Delete with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
-    if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-pawn", label: `Icebreak with ${pawnDef?.name}`, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
+    if (scenarioId === "combat-and-control" && colocated.length > 1 && skulls > 1) addAction("delete-multi", `Test Lab: Split Delete with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
+    if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) addAction("icebreak-pawn", `Icebreak with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
     const block = state.cybernet.at(pawn.coord);
-    if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none" && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) actions.push({ type: "icebreak-block", label: `Icebreak ${block.blockId}`, pawnId: pawn.pawnId, coord: pawn.coord });
+    if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none" && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) addAction("icebreak-block", `Icebreak ${block.blockId}`, { pawnId: pawn.pawnId, coord: pawn.coord });
   }
   for (const cardId of new Set(player.hand)) {
     const card = data.cards.find((item) => item.id === cardId);
@@ -177,29 +201,29 @@ function legalOptions(state: GameState, scenarioId?: string) {
       const pawnDef = pawnById(data, pawn.pawnId);
       const abilities = pawnDef?.abilities ?? [];
       const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
-      if (card.activates?.includes("delete") && abilities.some((ability) => ability.ability === "delete" && ability.activation === "card") && colocated.length) actions.push({ type: "play-delete", label: `Play ${card.name}: Delete`, cardId, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
+      if (card.activates?.includes("delete") && abilities.some((ability) => ability.ability === "delete" && ability.activation === "card") && colocated.length) addAction("play-delete", `Play ${card.name}: Delete`, { cardId, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
       if (typeof card.movement === "number" && card.movement > 0) {
         const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
-        if (targets.length) actions.push({ type: "play-move", label: `Play ${card.name}: Move ${card.movement}`, cardId, pawnId: pawn.pawnId, movement: { type: "steps", steps: card.movement, activation: "card" }, maxSelectableSteps: card.movement, targets });
+        if (targets.length) addAction("play-move", `Play ${card.name}: Move ${card.movement}`, { cardId, pawnId: pawn.pawnId, movement: { type: "steps", steps: card.movement, activation: "card" }, maxSelectableSteps: card.movement, targets });
       }
       if (card.activates?.includes("icebreaker") && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "card")) {
         const enemies = colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId);
-        if (enemies.length) actions.push({ type: "play-icebreak-pawn", label: `Play ${card.name}: Icebreak pawn`, cardId, pawnId: pawn.pawnId, targetIds: enemies });
+        if (enemies.length) addAction("play-icebreak-pawn", `Play ${card.name}: Icebreak pawn`, { cardId, pawnId: pawn.pawnId, targetIds: enemies });
         const block = state.cybernet.at(pawn.coord);
-        if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none") actions.push({ type: "play-icebreak-block", label: `Play ${card.name}: Icebreak block`, cardId, pawnId: pawn.pawnId, coord: pawn.coord });
+        if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none") addAction("play-icebreak-block", `Play ${card.name}: Icebreak block`, { cardId, pawnId: pawn.pawnId, coord: pawn.coord });
       }
       if (abilities.some((ability) => ability.ability === "search" && ability.activation === "card")) {
-        try { actions.push({ type: "play-search", label: `Play ${card.name}: Search`, cardId, pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement */ }
+        try { addAction("play-search", `Play ${card.name}: Search`, { cardId, pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement */ }
       }
-      if (card.attach?.as === "enemy" && colocated.some((other) => other.ownerId !== player.id)) actions.push({ type: "attach-enemy", label: `Attach ${card.name} to enemy`, cardId, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
-      if (card.attach?.as === "block") actions.push({ type: "attach-block", label: `Attach ${card.name} to block`, cardId, pawnId: pawn.pawnId, coord: pawn.coord });
+      if (card.attach?.as === "enemy" && colocated.some((other) => other.ownerId !== player.id)) addAction("attach-enemy", `Attach ${card.name} to enemy`, { cardId, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
+      if (card.attach?.as === "block") addAction("attach-block", `Attach ${card.name} to block`, { cardId, pawnId: pawn.pawnId, coord: pawn.coord });
     }
-    if (card.attach?.as === "pawn" && owned.length) actions.push({ type: "attach-pawn", label: `Attach ${card.name} to pawn`, cardId, targetIds: owned.map((pawn) => pawn.pawnId) });
+    if (card.attach?.as === "pawn" && owned.length) addAction("attach-pawn", `Attach ${card.name} to pawn`, { cardId, targetIds: owned.map((pawn) => pawn.pawnId) });
   }
   for (const pawnId of state.eliminated) {
     const pawnDef = pawnById(data, pawnId);
-    if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "once-per-turn")) actions.push({ type: "reboot", label: `Reboot ${pawnDef.name}`, pawnId });
-    if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "card") && player.hand.length >= 4) actions.push({ type: "play-reboot", label: `Play 4 cards: Reboot ${pawnDef.name}`, pawnId, cardIds: player.hand });
+    if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "once-per-turn")) addAction("reboot", `Reboot ${pawnDef.name}`, { pawnId });
+    if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "card") && player.hand.length >= 4) addAction("play-reboot", `Play 4 cards: Reboot ${pawnDef.name}`, { pawnId, cardIds: player.hand });
   }
   return { phase: state.phase, activePlayerId: player.id, actions, cardsInHand: player.hand };
 }
@@ -301,6 +325,7 @@ function view(session: PlaySession) {
 
 function scenarioCheckpoint(session: PlaySession, index: number): boolean {
   switch (session.scenarioId) {
+    case "game-basics": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "place-marker") : Boolean(session.state.winnerId);
     case "search-and-move": return index === 0 ? session.state.cybernet.blocks.length > 1 : index === 1 ? session.state.cybernet.pawns.some((pawn) => pawn.pawnId === "speedrunner-red" && (pawn.coord.q !== 0 || pawn.coord.r !== 0)) : session.commands.length > 2;
     case "combat-and-control": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "play-delete") : index === 1 ? session.commands.some((command) => command.kind === "action" && command.action.type === "delete-multi") : index === 2 ? session.commands.some((command) => command.kind === "action" && command.action.type.startsWith("play-icebreak")) : session.events.some((event) => event.type === "roll");
     case "attachments": return index === 0 ? Boolean(session.state.cybernet.pawnById("speedrunner-red")?.attachments?.length) : index === 1 ? Boolean(session.state.cybernet.pawnById("speedrunner-yellow")?.attachments?.length) : session.state.cybernet.pawns.some((pawn) => (pawn.attachments?.length ?? 0) > 0);

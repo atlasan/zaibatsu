@@ -61,8 +61,8 @@ together. It's **git-ignored** (regenerate any time); the JSON is marked
 
 ## Tests
 
-```bash
-cd tools/hexvision && python -m pytest
+```powershell
+cd tools/hexvision ; python -m pytest
 ```
 
 Synthetic tests are self-contained; the real-tile test runs only if the
@@ -79,4 +79,7 @@ rule transcription.
 
 ## Seven-hex mapping
 
-The standard block model is h2 h3 / h7 h1 h4 / h6 h5. Hexvision renders those anchors and emits suggestedZoneIds plus confidence for every detected circle. These are editor review hints only; they never promote block data automatically.
+The standard block model is h2 h3 / h7 h1 h4 / h6 h5.
+Hexvision renders those anchors and emits suggestedZoneIds plus confidence
+for every detected circle. These are editor review hints only; they never
+promote block data automatically.

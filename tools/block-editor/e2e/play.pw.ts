@@ -32,6 +32,15 @@ test("Test Lab attachment fixture displays checkpoints and uses named controls",
   await expect(page.getByText("✓ Attach Accelerator to your Red Speedrunner.")).toBeVisible();
 });
 
+test("game basics fixture exposes marker placement and winner feedback", async ({ page }) => {
+  await page.goto("/play/");
+  await page.getByTestId("scenario-game-basics").click();
+  await expect(page.getByRole("heading", { name: "Game basics" })).toBeVisible();
+  await page.getByLabel("Action").selectOption({ label: "Place a control marker" });
+  await page.getByRole("button", { name: "Execute selected action" }).click();
+  await expect(page.getByText("wins.")).toBeVisible();
+});
+
 test("fixture traces report an actionable checksum failure", async ({ page }) => {
   await page.goto("/play/");
   await page.getByTestId("scenario-reboot-and-turn").click();

@@ -8,6 +8,9 @@ references point at `DOCS/rules/speedrunners/*` and the transcripts.
 
 Source of truth for the shape: `spec/schema/block.schema.json`,
 `spec/schema/action-card.schema.json`, and `tools/block-editor/model.ts`.
+The current editor surfaces directly author the shipped block and action-card
+fields through structured controls; the displayed JSON preview is derived
+evidence, not the primary authoring path.
 
 ---
 

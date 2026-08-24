@@ -61,6 +61,9 @@ Notes for the editor UI:
 - **Two-part authoring:** the *action part* (`movements`, `activates`) and the
   *card part* (`attach`) are independent — a card usually has both. See the
   "two independent parts" section in `DOCS/component-model.md`.
+- The current action-card editor exposes every field above through structured
+  controls. Its JSON preview is derived/read-only and exists only to show the
+  normalized record that validation/export will use.
 - The vision prefill (`tools/hexvision/cards.py` → `proposals`) already suggests
   `activates`, `attach.slot`/`as`/`class`, and flags `removes` via the ✕ marker;
   the rest (movements, iceModifier, effect timing, …) are human-entered.
