@@ -284,6 +284,56 @@ func TestIcebreakBlackIceEliminatesAttacker(t *testing.T) {
 	t.Skip("no failing seed found in range")
 }
 
+func TestBlockAttachmentAddsIceFaces(t *testing.T) {
+	gd := loadOrSkip(t)
+	gd.Cards = append(gd.Cards, domain.ActionCard{ID: "block-ice-mod", Name: "Block ICE Mod", Attach: &domain.Attach{As: "block", IceModifier: &domain.IceModifier{Faces: []int{1, 2, 3, 4, 5, 6}}}})
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	if _, err := PlaceBlock(s, origin, 0, gd, "data-haven", rotFacing(t, gd, "data-haven", 0)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(0)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	bd, _ := gd.BlockByID("data-haven")
+	bd.IceValue = domain.IceNone
+	s.Cybernet.At(coord).Attachments = []domain.Attachment{{CardID: "block-ice-mod"}}
+	res, err := IcebreakBlock(s, gd, "speedrunner-red", coord, 0)
+	if err != nil {
+		t.Fatalf("IcebreakBlock: %v", err)
+	}
+	if !res.Success {
+		t.Fatalf("attachment-added ICE faces should allow success, roll=%v", res.Roll)
+	}
+}
+
+func TestPawnAttachmentAddsBlackIce(t *testing.T) {
+	for seed := uint64(1); seed <= 60; seed++ {
+		gd := loadOrSkip(t)
+		gd.Cards = append(gd.Cards, domain.ActionCard{ID: "pawn-black-ice", Name: "Pawn Black ICE", Attach: &domain.Attach{As: "enemy", Slot: "add-on", IceModifier: &domain.IceModifier{Black: true}}})
+		s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: seed})
+		origin := domain.Coord{Q: 0, R: 0}
+		s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+		s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+		s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p2", Coord: origin, SpaceID: "core",
+			Attachments: []domain.Attachment{{CardID: "pawn-black-ice", Slot: "add-on"}}})
+		res, err := IcebreakPawn(s, gd, "speedrunner-red", "drone-turret", 0)
+		if err != nil {
+			t.Fatalf("IcebreakPawn: %v", err)
+		}
+		if !res.Success {
+			if !res.AttackerEliminated {
+				t.Fatalf("failed Icebreak vs attachment-added Black ICE must eliminate attacker (seed %d)", seed)
+			}
+			if s.Cybernet.PawnByID("speedrunner-red") != nil {
+				t.Fatalf("attacker should be eliminated after failed Black ICE attempt (seed %d)", seed)
+			}
+			return
+		}
+	}
+	t.Fatal("no failing seed found in range")
+}
+
 func TestIcebreakGrantedByAttachment(t *testing.T) {
 	// A pawn with no innate Icebreaker gains it from an attached add-on, so the
 	// Icebreak is allowed (err nil regardless of the roll outcome).

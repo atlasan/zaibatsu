@@ -19,6 +19,7 @@ export type MovementType = "steps" | "d6" | "2d6" | "hex";
 export type Activation = "card" | "once-per-turn" | "none";
 
 export type AbilityName = "search" | "delete" | "reboot" | "icebreaker";
+export type GrantedAbilityName = AbilityName | "move";
 
 export interface DefenseDie {
   value: number;
@@ -130,6 +131,25 @@ export interface Ability {
   skulls?: number;
 }
 
+export interface MovementGrant {
+  type: "fixed" | "d6" | "2d6" | "hex";
+  amount?: number;
+  stealth?: boolean;
+}
+
+export interface AbilityUse {
+  ability: GrantedAbilityName;
+  perTurn?: number;
+  dice?: "d6";
+  activation?: "card" | "once-per-turn";
+}
+
+export interface IceModifier {
+  faces?: number[];
+  deltaDice?: number;
+  black?: boolean;
+}
+
 export interface Pawn {
   id: string;
   name: string;
@@ -152,11 +172,28 @@ export interface Attach {
   /** Target class restriction: the classes this card may attach to. */
   class?: string[];
   /** Abilities this attachment gives its target. */
-  grants?: AbilityName[];
+  grants?: GrantedAbilityName[];
   /** Abilities this attachment strips from its target (the cross-marked badge). */
-  removes?: AbilityName[];
+  removes?: GrantedAbilityName[];
+  /** Movement options this attachment gives its target. */
+  grantsMovement?: MovementGrant[];
+  /** The attachment grants stealth-capable movement to its target. */
+  grantsStealth?: boolean;
+  /** Extra attachment slots this attachment grants to its target. */
+  grantsSlot?: SlotType[];
+  /** How the granted abilities may be used. */
+  abilityUses?: AbilityUse[];
+  /** Modifies the target's ICE faces, dice count, and black-ICE status. */
+  iceModifier?: IceModifier;
+  /** Change to the number of cards drawn during recycle. */
+  drawModifier?: number;
+  /** Change to the controller's maximum hand size while attached. */
+  handModifier?: number;
+  /** Mini-block metadata for block attachments. */
+  blockSpace?: { shape: "circle" | "hex" };
   /** Special on-attach effect text, e.g. "Gain control of this pawn." */
   effectText?: string;
+  effectTrigger?: "on-attach" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous";
   cost?: number;
 }
 

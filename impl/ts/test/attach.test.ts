@@ -68,6 +68,21 @@ describe("attachToPawn", () => {
     s.players.find((p) => p.id === "p1")!.hand = ["armor-brainchip"];
     expect(() => attachToPawn(s, data, "p1", "armor-brainchip", "drone-turret")).toThrow();
   });
+
+  test("granted slots allow a follow-up attachment", () => {
+    const data = freshData();
+    data.cards.push(
+      { id: "grant-gadget-slot", name: "Grant Gadget Slot", attach: { as: "pawn", slot: "module", grantsSlot: ["gadget"] } },
+      { id: "follow-up-gadget", name: "Follow Up Gadget", attach: { as: "pawn", slot: "gadget" } },
+    );
+    const s = game(data);
+    s.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    const p1 = s.players.find((p) => p.id === "p1")!;
+    p1.hand = ["grant-gadget-slot", "follow-up-gadget"];
+    attachToPawn(s, data, "p1", "grant-gadget-slot", "drone-turret");
+    attachToPawn(s, data, "p1", "follow-up-gadget", "drone-turret");
+    expect(slotFilled(s.cybernet.pawnById("drone-turret")!, "gadget")).toBe(true);
+  });
 });
 
 describe("attachToEnemy", () => {

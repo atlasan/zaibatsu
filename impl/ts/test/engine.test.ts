@@ -57,6 +57,17 @@ describe("turn loop", () => {
     expect(s.players[0]!.hand.length).toBe(s.players[0]!.maxHandSize);
   });
 
+  test("recycle applies attachment-driven draw and hand modifiers", () => {
+    const d = loadDefault("speedrunners");
+    d.cards[0]!.attach = { as: "pawn", slot: "add-on", drawModifier: -1, handModifier: -2 };
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 11 });
+    const p1 = s.players[0]!;
+    p1.hand = [];
+    s.cybernet.pawnById(p1.pawnId)!.attachments = [{ cardId: d.cards[0]!.id, slot: "add-on", bonusPaid: 0 }];
+    runTurn(s, d, [{ type: "pass" }]);
+    expect(s.players[0]!.hand.length).toBe(2);
+  });
+
   test("turns advance and wrap", () => {
     const s = game(["A", "B", "C"], 3);
     expect(s.currentPlayer).toBe(0);

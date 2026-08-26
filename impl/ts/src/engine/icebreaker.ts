@@ -49,6 +49,22 @@ function iceFacesFor(faces: number[] | undefined, ice: IceValue | undefined): nu
   return faces && faces.length > 0 ? faces : iceFaces(ice);
 }
 
+function attachmentIceModifierFaces(
+  gd: GameData,
+  atts: { cardId: string }[] | undefined,
+): { faces: number[]; black: boolean } {
+  const faces: number[] = [];
+  let black = false;
+  for (const att of atts ?? []) {
+    const modifier = gd.cards.find((card) => card.id === att.cardId)?.attach?.iceModifier;
+    for (const face of modifier?.faces ?? []) {
+      if (!faces.includes(face)) faces.push(face);
+    }
+    if (modifier?.black) black = true;
+  }
+  return { faces, black };
+}
+
 export interface IcebreakResult {
   roll: number[];
   success: boolean;
@@ -133,7 +149,11 @@ export function icebreakBlock(
   if (!pb) throw new Error(`no block at (${coord.q},${coord.r})`);
   const blockDef = blockById(gd, pb.blockId);
   if (!blockDef) throw new Error(`unknown block "${pb.blockId}"`);
-  const faces = iceFacesFor(blockDef.iceFaces, blockDef.iceValue);
+  const attachmentModifier = attachmentIceModifierFaces(gd, pb.attachments);
+  const faces = [...new Set([
+    ...iceFacesFor(blockDef.iceFaces, blockDef.iceValue),
+    ...attachmentModifier.faces,
+  ])];
   if (faces.length === 0) {
     throw new Error(`block "${pb.blockId}" has no ICE value and cannot be controlled`);
   }
@@ -157,7 +177,7 @@ export function icebreakBlock(
     owner.controlMarkersPlaced++;
     checkWin(s);
   } else {
-    const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true;
+    const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true || attachmentModifier.black;
     attackerEliminated = resolveBlackIceFailure(s, isBlack, attackerId, success);
   }
 
@@ -185,7 +205,11 @@ export function icebreakPawn(
   }
   const tgt = pawnById(gd, targetId);
   if (!tgt) throw new Error(`unknown target pawn "${targetId}"`);
-  const faces = iceFaces(tgt.iceValue);
+  const attachmentModifier = attachmentIceModifierFaces(gd, tgtPob.attachments);
+  const faces = [...new Set([
+    ...iceFaces(tgt.iceValue),
+    ...attachmentModifier.faces,
+  ])];
   if (faces.length === 0) {
     throw new Error(`pawn "${targetId}" has no ICE value and cannot be controlled`);
   }
@@ -200,7 +224,7 @@ export function icebreakPawn(
     discardAttachments(s, tgtPob);
     tgtPob.ownerId = owner.id;
   } else {
-    attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue === "black", attackerId, success);
+    attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue === "black" || attachmentModifier.black, attackerId, success);
   }
 
   markIcebreakerUsed(gd, owner, attackerId, atkPob.attachments);

@@ -12,9 +12,9 @@
 // and becomes part of the element — it is not discarded until elimination /
 // takeover (see discardAttachments).
 //
-// DEFERRED: applying attached effects during resolution (armor replacing defense
-// dice, weapon/gadget/ability/movement grants). Stored + cleaned up here; wiring
-// their effects into combat/movement is a later task.
+// PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots,
+// recycle draw/hand modifiers, and ICE-face/Black-ICE modifiers are now wired.
+// Armor-style defense replacement and movement-grant execution remain later work.
 
 import { type Coord } from "../domain/hex.ts";
 import { slotFilled, type Attachment, type PawnOnBoard } from "../domain/pawn_board.ts";
@@ -29,6 +29,12 @@ function player(s: GameState, playerId: string): Player {
 
 function cardById(gd: GameData, id: string): ActionCard | undefined {
   return gd.cards.find((c) => c.id === id);
+}
+
+function attachmentCards(gd: GameData, atts: Attachment[] | undefined): ActionCard[] {
+  return (atts ?? [])
+    .map((att) => cardById(gd, att.cardId))
+    .filter((card): card is ActionCard => !!card);
 }
 
 /** Removes one copy of cardId from the hand without discarding it. */
@@ -67,14 +73,48 @@ function payAttachCost(p: Player, cost: number): number {
   return cost;
 }
 
-function hasSlot(gd: GameData, pawnId: string, slot: string): boolean {
-  return pawnById(gd, pawnId)?.slots?.includes(slot as never) ?? false;
+export function effectivePawnSlots(gd: GameData, pob: PawnOnBoard): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  const add = (slot: string | undefined) => {
+    if (slot && !seen.has(slot)) {
+      seen.add(slot);
+      out.push(slot);
+    }
+  };
+  for (const slot of pawnById(gd, pob.pawnId)?.slots ?? []) add(slot);
+  for (const card of attachmentCards(gd, pob.attachments)) {
+    for (const slot of card.attach?.grantsSlot ?? []) add(slot);
+  }
+  return out;
+}
+
+export function playerAttachmentModifiers(
+  s: GameState,
+  gd: GameData,
+  playerId: string,
+): { drawModifier: number; handModifier: number } {
+  let drawModifier = 0;
+  let handModifier = 0;
+  for (const pawn of s.cybernet.pawns.filter((p) => p.ownerId === playerId)) {
+    for (const card of attachmentCards(gd, pawn.attachments)) {
+      drawModifier += card.attach?.drawModifier ?? 0;
+      handModifier += card.attach?.handModifier ?? 0;
+    }
+  }
+  for (const block of s.cybernet.blocks.filter((b) => b.ownerId === playerId)) {
+    for (const card of attachmentCards(gd, block.attachments)) {
+      drawModifier += card.attach?.drawModifier ?? 0;
+      handModifier += card.attach?.handModifier ?? 0;
+    }
+  }
+  return { drawModifier, handModifier };
 }
 
 function attachToPawnElement(s: GameState, gd: GameData, p: Player, card: ActionCard, tgt: PawnOnBoard): void {
   const slot = card.attach?.slot;
   if (!slot) throw new Error(`card "${card.id}" has no slot to attach into`);
-  if (!hasSlot(gd, tgt.pawnId, slot)) throw new Error(`pawn "${tgt.pawnId}" has no ${slot} slot`);
+  if (!effectivePawnSlots(gd, tgt).includes(slot)) throw new Error(`pawn "${tgt.pawnId}" has no ${slot} slot`);
   if (slotFilled(tgt, slot)) throw new Error(`pawn "${tgt.pawnId}" already has its ${slot} slot filled`);
   const paid = payAttachCost(p, card.attach?.cost ?? 0);
   try {

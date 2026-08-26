@@ -7,6 +7,7 @@ It contains no executable game behavior.
 |----------|------|
 | `schema/` | JSON Schema definitions for individual content records |
 | `data/<expansion>/` | Shared mode and game-content JSON |
+| `validation/manifest.json` | Generated checksum gate proving `tools/validate-spec.ts` last approved the executable data bundle |
 | `provenance/<expansion>.json` | Source evidence for canonical transcriptions |
 
 ## Content workflow
@@ -22,9 +23,15 @@ It contains no executable game behavior.
 
 ## Validation status
 
-The schemas state the intended structural contract. Current Go and TypeScript
-loaders only perform light structural checks after JSON parsing; they do **not**
-yet evaluate JSON Schema. Full JSON-Schema validation is tracked as `T-101`.
+`bun tools/validate-spec.ts` is the schema authority for the executable shared
+bundle. It validates the current Speedrunners loader inputs against the tracked
+JSON Schemas, then writes `spec/validation/manifest.json` with the approved
+file checksums.
+
+Both Go and TypeScript loaders require that manifest and verify every listed
+hash before loading `spec/data`. A data or schema edit therefore fails loudly
+until the validation step is rerun. The loaders still keep their light
+post-parse structural checks as a final engine-facing guard.
 
 ## Provisional data
 

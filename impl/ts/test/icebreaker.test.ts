@@ -171,6 +171,44 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
     }
     throw new Error("no failing seed found in range");
   });
+
+  test("block attachments can add ICE faces", () => {
+    const d = loadDefault("speedrunners");
+    d.cards.push({ id: "block-ice-mod", name: "Block ICE Mod", attach: { as: "block", iceModifier: { faces: [1, 2, 3, 4, 5, 6] } } });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    const bd = blockById(d, "data-haven")!;
+    bd.iceValue = "none";
+    s.cybernet.at(coord)!.attachments = [{ cardId: "block-ice-mod", bonusPaid: 0 }];
+    expect(icebreakBlock(s, d, "speedrunner-red", coord, 0).success).toBe(true);
+  });
+
+  test("pawn attachments can add Black ICE", () => {
+    for (let seed = 1; seed <= 60; seed++) {
+      const d = loadDefault("speedrunners");
+      d.cards.push({ id: "pawn-black-ice", name: "Pawn Black ICE", attach: { as: "enemy", slot: "add-on", iceModifier: { black: true } } });
+      const s = newGame({ data: d, playerNames: ["A", "B"], seed });
+      s.cybernet.pawns = [];
+      s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: ORIGIN, spaceId: "core" });
+      s.cybernet.placePawn({
+        pawnId: "drone-turret",
+        ownerId: "p2",
+        coord: ORIGIN,
+        spaceId: "core",
+        attachments: [{ cardId: "pawn-black-ice", slot: "add-on", bonusPaid: 0 }],
+      });
+      const res = icebreakPawn(s, d, "speedrunner-red", "drone-turret", 0);
+      if (!res.success) {
+        expect(res.attackerEliminated).toBe(true);
+        expect(s.cybernet.pawnById("speedrunner-red")).toBeUndefined();
+        return;
+      }
+    }
+    throw new Error("no failing seed found in range");
+  });
 });
 
 describe("ability grant/remove via attachment", () => {

@@ -81,14 +81,20 @@ An agent, represented by a piece (position) + control card (attributes).
 - `special?: string` — free-text special ability (resolved case-by-case)
 - _(shadowraiders)_ `blackIce?: bool`, `mercCost?: int`, `missionSlot?: bool`
 
-### ActionCard _(slice: identity + attach metadata; use-resolution planned)_
+### ActionCard _(slice: identity + attach metadata; use-resolution partially live)_
 A card from the shared action deck. **Multi-use**: when played, the controller
 chooses exactly one use; the others are void.
 - `id`, `name`
 - `movement?: int` — steps it grants through the card-consuming `play-move`
   action, independent of the pawn's once-per-turn movement
 - `activates?: Ability[]` — abilities it can activate when played
-- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability[], removes?: Ability[], effectText?: string, cost?: int }` — `activates` is the card's action-part; `attach.grants`/`removes` are the abilities it confers/strips on the target when attached
+- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability|move[], removes?: Ability|move[], grantsSlot?: SlotType[], grantsMovement?: MovementGrant[], grantsStealth?: bool, abilityUses?: AbilityUse[], iceModifier?: { faces?: int[], deltaDice?: int, black?: bool }, drawModifier?: int, handModifier?: int, effectText?: string, effectTrigger?: ... , cost?: int }`
+- Live resolution currently uses:
+  - `grants` / `removes` for ability availability;
+  - `grantsSlot` when checking whether a follow-up attachment may be equipped;
+  - `iceModifier.faces` / `iceModifier.black` when resolving Icebreaker against the target;
+  - `drawModifier` / `handModifier` during recycle for the controller of the attached target.
+- `grantsMovement`, `grantsStealth`, `abilityUses`, armor-style defense replacement, and ICE-dice-count changes remain modeled data with later engine work pending.
 
 ### MissionCard _(shadowraiders, planned)_
 Attached to a pawn's mission slot; tracks state via tags (mark/cargo/counter);
@@ -168,7 +174,7 @@ _Planned:_ attached cards and placed counters on the board.
 
 `AdvancePhase` / `advancePhase` advances exactly one phase: `beginning` clears
 the active player's start-of-turn markers and enters `action`; `action` enters
-`recycle` and refills/trims the hand; `recycle` enters `end` and checks victory;
+`recycle` and applies attachment-driven draw/hand modifiers before refilling or trimming the hand; `recycle` enters `end` and checks victory;
 `end` advances the player and turn, returning to `beginning` when no player won.
 `RunTurn` / `runTurn` remains the compatibility convenience API.
 

@@ -1,0 +1,43 @@
+{
+  "manifestVersion": 1,
+  "generatedBy": "tools/validate-spec.ts",
+  "entries": [
+    {
+      "expansion": "speedrunners",
+      "files": [
+        {
+          "path": "spec/data/speedrunners/action-cards.json",
+          "sha256": "762bc796f278792ec5f68f1f4bf7b839628302c9bb10d63691dedb973cf78025"
+        },
+        {
+          "path": "spec/data/speedrunners/blocks.json",
+          "sha256": "f369eaccc4ad12891dc0a2dcb8ae577447c4f784135521dc04d0e9cb2ddf1816"
+        },
+        {
+          "path": "spec/data/speedrunners/mode.json",
+          "sha256": "72e92397f1553b2e6196e6be9980b267e9094bb818e69846f4da25cdc6a0f54f"
+        },
+        {
+          "path": "spec/data/speedrunners/pawns.json",
+          "sha256": "5a81dcf99205314276101ff24070ea3368bad2aa8a09a23dd033220040f4a785"
+        },
+        {
+          "path": "spec/schema/action-card.schema.json",
+          "sha256": "b7f0889bbe88e67fa0ca448d329e25317bee1c0ceb3978032b0e079a27c9a7b3"
+        },
+        {
+          "path": "spec/schema/block.schema.json",
+          "sha256": "07d2e3386ad4ca43a5c6446ca2950dbe300553e60269d0af80fc9ece0867bd66"
+        },
+        {
+          "path": "spec/schema/mode.schema.json",
+          "sha256": "713a589f5887de87a708d0baa3678054027326881e99e677de6e71e8370b86aa"
+        },
+        {
+          "path": "spec/schema/pawn.schema.json",
+          "sha256": "cb5be0001a719e22862fc0bd423edce74f4505fae8e1de2407f7ad29a9a114c2"
+        }
+      ]
+    }
+  ]
+}

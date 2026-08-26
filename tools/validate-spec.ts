@@ -2,22 +2,180 @@
 
 // Validates the tracked knowledge baseline without requiring ignored source PDFs.
 // Full source checksum verification remains tools/verify-artifacts.ts.
-import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { join, relative, resolve } from "node:path";
 
 type Json = Record<string, unknown>;
 const root = resolve(import.meta.dir, "..");
 const failures: string[] = [];
+const validationManifestPath = join(root, "spec/validation/manifest.json");
 
 function fail(message: string): void { failures.push(message); }
 function readJson(path: string): Json {
   try { return JSON.parse(readFileSync(path, "utf8")) as Json; }
   catch (error) { fail(`cannot parse ${path}: ${(error as Error).message}`); return {}; }
 }
+function sha256File(path: string): string {
+  return createHash("sha256").update(readFileSync(path)).digest("hex");
+}
 function strings(value: unknown): string[] {
   return Array.isArray(value) && value.every((v) => typeof v === "string") ? value : [];
 }
 function validId(value: unknown): value is string { return typeof value === "string" && /^[a-z0-9-]+$/.test(value); }
+function isObject(value: unknown): value is Json { return typeof value === "object" && value !== null && !Array.isArray(value); }
+function rel(path: string): string { return relative(root, path).replaceAll("\\", "/"); }
+
+type Schema = Json;
+type ManifestEntry = { expansion: string; files: Array<{ path: string; sha256: string }> };
+
+function schemaAt(rootSchema: Schema, ref: string): unknown {
+  if (!ref.startsWith("#/")) throw new Error(`unsupported schema ref ${ref}`);
+  let current: unknown = rootSchema;
+  for (const part of ref.slice(2).split("/")) {
+    if (!isObject(current) || !(part in current)) throw new Error(`cannot resolve schema ref ${ref}`);
+    current = current[part];
+  }
+  return current;
+}
+
+function addSchemaError(errors: string[], path: string, message: string): void {
+  errors.push(`${path} ${message}`.trim());
+}
+
+function schemaRoot(schema: unknown, fallback: Schema): Schema {
+  return isObject(schema) && isObject(schema.$defs) ? schema : fallback;
+}
+
+function validateSchemaValue(
+  value: unknown,
+  schema: unknown,
+  rootSchema: Schema,
+  path: string,
+  errors: string[],
+): void {
+  if (!isObject(schema)) return;
+  if (typeof schema.$ref === "string") {
+    validateSchemaValue(value, schemaAt(rootSchema, schema.$ref), rootSchema, path, errors);
+    return;
+  }
+  if (Array.isArray(schema.oneOf)) {
+    const matches = schema.oneOf.filter((option) => {
+      const optionErrors: string[] = [];
+      validateSchemaValue(value, option, schemaRoot(option, rootSchema), path, optionErrors);
+      return optionErrors.length === 0;
+    });
+    if (matches.length !== 1) addSchemaError(errors, path, `must match exactly one schema variant (matched ${matches.length})`);
+    return;
+  }
+  if (schema.const !== undefined && value !== schema.const) addSchemaError(errors, path, `must equal ${JSON.stringify(schema.const)}`);
+  if (Array.isArray(schema.enum) && !schema.enum.includes(value)) addSchemaError(errors, path, `must be one of ${schema.enum.map((item) => JSON.stringify(item)).join(", ")}`);
+  if (schema.type === "object") {
+    if (!isObject(value)) {
+      addSchemaError(errors, path, "must be an object");
+      return;
+    }
+    const properties = isObject(schema.properties) ? schema.properties : {};
+    for (const key of Array.isArray(schema.required) ? schema.required.filter((item): item is string => typeof item === "string") : []) {
+      if (!(key in value)) addSchemaError(errors, `${path}.${key}`, "is required");
+    }
+    if (schema.additionalProperties === false) {
+      for (const key of Object.keys(value)) {
+        if (!(key in properties)) addSchemaError(errors, `${path}.${key}`, "is not allowed");
+      }
+    }
+    for (const [key, propertySchema] of Object.entries(properties)) {
+      if (key in value) validateSchemaValue(value[key], propertySchema, schemaRoot(propertySchema, rootSchema), `${path}.${key}`, errors);
+    }
+    return;
+  }
+  if (schema.type === "array") {
+    if (!Array.isArray(value)) {
+      addSchemaError(errors, path, "must be an array");
+      return;
+    }
+    if (typeof schema.minItems === "number" && value.length < schema.minItems) addSchemaError(errors, path, `must have at least ${schema.minItems} item(s)`);
+    if (typeof schema.maxItems === "number" && value.length > schema.maxItems) addSchemaError(errors, path, `must have at most ${schema.maxItems} item(s)`);
+    if (schema.uniqueItems === true) {
+      const seen = new Set<string>();
+      for (const item of value) {
+        const key = JSON.stringify(item);
+        if (seen.has(key)) addSchemaError(errors, path, "must not contain duplicate items");
+        seen.add(key);
+      }
+    }
+    value.forEach((item, index) => validateSchemaValue(item, schema.items, schemaRoot(schema.items, rootSchema), `${path}[${index}]`, errors));
+    return;
+  }
+  if (schema.type === "string") {
+    if (typeof value !== "string") {
+      addSchemaError(errors, path, "must be a string");
+      return;
+    }
+    if (typeof schema.minLength === "number" && value.length < schema.minLength) addSchemaError(errors, path, `must be at least ${schema.minLength} character(s)`);
+    if (typeof schema.pattern === "string" && !(new RegExp(schema.pattern).test(value))) addSchemaError(errors, path, `must match ${schema.pattern}`);
+    return;
+  }
+  if (schema.type === "integer") {
+    if (!Number.isInteger(value)) {
+      addSchemaError(errors, path, "must be an integer");
+      return;
+    }
+    if (typeof schema.minimum === "number" && value < schema.minimum) addSchemaError(errors, path, `must be >= ${schema.minimum}`);
+    if (typeof schema.maximum === "number" && value > schema.maximum) addSchemaError(errors, path, `must be <= ${schema.maximum}`);
+    return;
+  }
+  if (schema.type === "boolean" && typeof value !== "boolean") {
+    addSchemaError(errors, path, "must be a boolean");
+  }
+}
+
+function collectionSchema(key: string, itemSchema: Schema): Schema {
+  return {
+    type: "object",
+    required: [key],
+    additionalProperties: false,
+    properties: {
+      $comment: { type: "string" },
+      [key]: { type: "array", items: itemSchema },
+    },
+  };
+}
+
+function allowComment(schema: Schema): Schema {
+  return {
+    ...schema,
+    properties: {
+      ...(isObject(schema.properties) ? schema.properties : {}),
+      $comment: { type: "string" },
+    },
+  };
+}
+
+function validateFileAgainstSchema(path: string, schema: Schema, label: string): void {
+  const data = readJson(path);
+  const errors: string[] = [];
+  validateSchemaValue(data, schema, schema, "$", errors);
+  for (const message of errors) fail(`${label}: ${message}`);
+}
+
+function buildValidationManifestEntry(expansion: string, files: string[]): ManifestEntry {
+  return {
+    expansion,
+    files: files
+      .map((path) => ({ path: rel(path), sha256: sha256File(path) }))
+      .sort((a, b) => a.path.localeCompare(b.path)),
+  };
+}
+
+function writeValidationManifest(entries: ManifestEntry[]): void {
+  mkdirSync(join(root, "spec/validation"), { recursive: true });
+  writeFileSync(validationManifestPath, `${JSON.stringify({
+    manifestVersion: 1,
+    generatedBy: "tools/validate-spec.ts",
+    entries,
+  }, null, 2)}\n`);
+}
 
 const artifactCatalog = readJson(join(root, "DOCS/artifacts/source-catalog.json"));
 const artifactIds = new Set(strings((artifactCatalog.assets as Json[] | undefined)?.map((asset) => asset.id)));
@@ -26,6 +184,13 @@ const assetIds = new Set(strings((assetManifest.assets as Json[] | undefined)?.m
 const knowledgeTaxonomy = readJson(join(root, "spec/knowledge/taxonomy.json"));
 const knowledgeCatalog = readJson(join(root, "spec/knowledge/catalog.json"));
 const knowledgeRelations = readJson(join(root, "spec/knowledge/relations.json"));
+const blockSchema = readJson(join(root, "spec/schema/block.schema.json"));
+const pawnSchema = readJson(join(root, "spec/schema/pawn.schema.json"));
+const actionCardSchema = readJson(join(root, "spec/schema/action-card.schema.json"));
+const modeSchema = readJson(join(root, "spec/schema/mode.schema.json"));
+const controlCardSchema = readJson(join(root, "spec/schema/control-card.schema.json"));
+const threatSchema = readJson(join(root, "spec/schema/threat.schema.json"));
+const missionCardSchema = readJson(join(root, "spec/schema/mission-card.schema.json"));
 const inventory = readJson(join(root, "spec/inventory.json"));
 const transcriptPaths = [
   "DOCS/rules/transcripts/README.md",
@@ -160,6 +325,14 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
   }
 }
 
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/blocks.json"), collectionSchema("blocks", blockSchema), "speedrunners/blocks.json");
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/pawns.json"), collectionSchema("pawns", pawnSchema), "speedrunners/pawns.json");
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/action-cards.json"), collectionSchema("cards", actionCardSchema), "speedrunners/action-cards.json");
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/mode.json"), allowComment(modeSchema), "speedrunners/mode.json");
+validateFileAgainstSchema(join(root, "spec/data/shadowraiders/control-cards.json"), collectionSchema("controlCards", controlCardSchema), "shadowraiders/control-cards.json");
+validateFileAgainstSchema(join(root, "spec/data/shadowraiders/threats.json"), collectionSchema("threats", threatSchema), "shadowraiders/threats.json");
+validateFileAgainstSchema(join(root, "spec/data/shadowraiders/missions.json"), collectionSchema("missions", missionCardSchema), "shadowraiders/missions.json");
+
 // The knowledge layer is the canonical cross-reference index across sources, assets, data, and docs.
 if (knowledgeTaxonomy.taxonomyVersion !== 1) fail("spec/knowledge/taxonomy.json must declare taxonomyVersion 1");
 const allowedKnowledgeTags = new Set<string>();
@@ -235,8 +408,24 @@ for (const asset of (assetManifest.assets as Json[] | undefined) ?? []) {
   if (target.status !== "verified") fail(`asset ${String(asset.assetId)} gameplayRef must point to a verified knowledge entry`);
 }
 
+const validationManifestEntries: ManifestEntry[] = [];
+const speedrunnersLoaderFiles = [
+  join(root, "spec/data/speedrunners/blocks.json"),
+  join(root, "spec/data/speedrunners/pawns.json"),
+  join(root, "spec/data/speedrunners/action-cards.json"),
+  join(root, "spec/data/speedrunners/mode.json"),
+  join(root, "spec/schema/block.schema.json"),
+  join(root, "spec/schema/pawn.schema.json"),
+  join(root, "spec/schema/action-card.schema.json"),
+  join(root, "spec/schema/mode.schema.json"),
+];
+if (speedrunnersLoaderFiles.every((path) => existsSync(path))) {
+  validationManifestEntries.push(buildValidationManifestEntry("speedrunners", speedrunnersLoaderFiles));
+}
+
 if (failures.length) {
   for (const message of failures) console.error(`error: ${message}`);
   process.exit(1);
 }
-console.log(`spec validation passed: ${productIds.size} products, ${modeIds.size} modes, ${artifactIds.size} local source artifacts, ${knowledgeEntries.size} knowledge entries`);
+writeValidationManifest(validationManifestEntries);
+console.log(`spec validation passed: ${productIds.size} products, ${modeIds.size} modes, ${artifactIds.size} local source artifacts, ${knowledgeEntries.size} knowledge entries; wrote ${rel(validationManifestPath)}`);

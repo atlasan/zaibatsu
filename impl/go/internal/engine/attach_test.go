@@ -60,6 +60,27 @@ func TestAttachToPawnRejectsMissingSlot(t *testing.T) {
 	}
 }
 
+func TestGrantedSlotAllowsFollowUpAttachment(t *testing.T) {
+	s, gd := attachGame(t)
+	origin := domain.Coord{Q: 0, R: 0}
+	gd.Cards = append(gd.Cards,
+		domain.ActionCard{ID: "grant-gadget-slot", Name: "Grant Gadget Slot", Attach: &domain.Attach{As: "pawn", Slot: "module", GrantsSlot: []string{"gadget"}}},
+		domain.ActionCard{ID: "follow-up-gadget", Name: "Follow Up Gadget", Attach: &domain.Attach{As: "pawn", Slot: "gadget"}},
+	)
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	p1 := s.PlayerByID("p1")
+	p1.Hand = []string{"grant-gadget-slot", "follow-up-gadget"}
+	if err := AttachToPawn(s, gd, "p1", "grant-gadget-slot", "drone-turret"); err != nil {
+		t.Fatalf("grant slot attach: %v", err)
+	}
+	if err := AttachToPawn(s, gd, "p1", "follow-up-gadget", "drone-turret"); err != nil {
+		t.Fatalf("follow-up gadget attach: %v", err)
+	}
+	if !s.Cybernet.PawnByID("drone-turret").HasSlotFilled("gadget") {
+		t.Error("granted gadget slot should allow the second attachment")
+	}
+}
+
 func TestAttachToEnemySuccessAndRejectsOwn(t *testing.T) {
 	s, gd := attachGame(t)
 	origin := domain.Coord{Q: 0, R: 0}

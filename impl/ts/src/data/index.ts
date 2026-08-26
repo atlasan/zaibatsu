@@ -1,8 +1,9 @@
 // Loads the language-neutral game content from spec/data into domain types.
 // Mirrors impl/go/internal/data. See DOCS/architecture.md.
 
+import { createHash } from "node:crypto";
 import { existsSync, statSync, readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import type {
   GameData,
   Block,
@@ -14,6 +15,14 @@ import type {
   MissionCard,
 } from "../domain/types.ts";
 import { deriveBoundarySpaces } from "../domain/pawn_board.ts";
+
+type ValidationManifest = {
+  manifestVersion: number;
+  entries: Array<{
+    expansion: string;
+    files: Array<{ path: string; sha256: string }>;
+  }>;
+};
 
 /**
  * Walks up from a starting directory to locate the repo's spec/data directory,
@@ -52,8 +61,44 @@ function readOptionalJson<T>(path: string, fallback: T): T {
   return existsSync(path) ? readJson<T>(path) : fallback;
 }
 
+function sha256File(path: string): string {
+  return createHash("sha256").update(readFileSync(path)).digest("hex");
+}
+
+function repoRootFromSpecDataDir(specDataDir: string): string {
+  return dirname(dirname(resolve(specDataDir)));
+}
+
+function assertValidatedSpecData(specDataDir: string, expansion: string): void {
+  const repoRoot = repoRootFromSpecDataDir(specDataDir);
+  const manifestPath = join(repoRoot, "spec", "validation", "manifest.json");
+  const hint = "run `bun tools/validate-spec.ts` from the repo root";
+  if (!existsSync(manifestPath)) {
+    throw new Error(`spec validation manifest is missing at ${manifestPath}; ${hint}`);
+  }
+  const manifest = readJson<ValidationManifest>(manifestPath);
+  if (manifest.manifestVersion !== 1) {
+    throw new Error(`unsupported spec validation manifest version ${String(manifest.manifestVersion)}; ${hint}`);
+  }
+  const entry = manifest.entries.find((item) => item.expansion === expansion);
+  if (!entry) {
+    throw new Error(`spec validation manifest has no entry for expansion ${expansion}; ${hint}`);
+  }
+  for (const file of entry.files) {
+    const path = join(repoRoot, ...file.path.split("/"));
+    if (!existsSync(path)) {
+      throw new Error(`validated spec file is missing: ${file.path}; ${hint}`);
+    }
+    const actual = sha256File(path);
+    if (actual !== file.sha256) {
+      throw new Error(`spec validation manifest is stale for ${file.path}; expected ${file.sha256}, found ${actual}; ${hint}`);
+    }
+  }
+}
+
 /** Loads game data for the given expansion from the given spec/data directory. */
 export function loadGameData(specDataDir: string, expansion: string): GameData {
+  assertValidatedSpecData(specDataDir, expansion);
   const base = join(specDataDir, expansion);
 
   const blocks = readJson<{ blocks: Block[] }>(join(base, "blocks.json")).blocks;

@@ -23,9 +23,9 @@ import (
 // The attached card leaves the hand and becomes part of the element (it is NOT
 // discarded). Discard happens on elimination / takeover (see discardAttachments).
 //
-// DEFERRED: applying attached effects during resolution (armor replacing defense
-// dice, weapon/gadget/ability grants, movement grants). Attachments are stored
-// and cleaned up; wiring their effects into combat/movement is a later task.
+// PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots, recycle
+// draw/hand modifiers, and ICE-face/Black-ICE modifiers are now wired. Armor-
+// style defense replacement and movement-grant execution remain later work.
 
 // removeCardFromHand removes one copy of cardID from the hand without discarding it.
 func removeCardFromHand(p *domain.Player, cardID string) error {
@@ -129,11 +129,10 @@ func attachToPawnElement(s *domain.GameState, gd *domain.GameData, player *domai
 	if slot == "" {
 		return fmt.Errorf("card %q has no slot to attach into", card.ID)
 	}
-	def, ok := gd.PawnByID(tgt.PawnID)
-	if !ok {
+	if _, ok := gd.PawnByID(tgt.PawnID); !ok {
 		return fmt.Errorf("unknown pawn %q", tgt.PawnID)
 	}
-	if !hasSlot(def, slot) {
+	if !containsString(EffectivePawnSlots(gd, tgt), slot) {
 		return fmt.Errorf("pawn %q has no %s slot", tgt.PawnID, slot)
 	}
 	if tgt.HasSlotFilled(slot) {
@@ -194,14 +193,23 @@ func AttachToBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, a
 	return nil
 }
 
-// hasSlot reports whether a pawn definition exposes the given slot type.
-func hasSlot(p *domain.Pawn, slot string) bool {
-	for _, s := range p.Slots {
-		if s == slot {
+func containsString(items []string, want string) bool {
+	for _, item := range items {
+		if item == want {
 			return true
 		}
 	}
 	return false
+}
+
+func attachmentCards(gd *domain.GameData, atts []domain.Attachment) []*domain.ActionCard {
+	out := make([]*domain.ActionCard, 0, len(atts))
+	for _, att := range atts {
+		if card := cardByID(gd, att.CardID); card != nil {
+			out = append(out, card)
+		}
+	}
+	return out
 }
 
 // EffectivePawnClasses returns the pawn's base classes plus any granted by
@@ -228,4 +236,61 @@ func EffectivePawnClasses(gd *domain.GameData, pob *domain.PawnOnBoard) []string
 		}
 	}
 	return out
+}
+
+// EffectivePawnSlots returns the pawn's printed slots plus any additional slots
+// granted by its attachments.
+func EffectivePawnSlots(gd *domain.GameData, pob *domain.PawnOnBoard) []string {
+	seen := map[string]bool{}
+	out := []string{}
+	add := func(slot string) {
+		if slot != "" && !seen[slot] {
+			seen[slot] = true
+			out = append(out, slot)
+		}
+	}
+	if def, ok := gd.PawnByID(pob.PawnID); ok {
+		for _, slot := range def.Slots {
+			add(slot)
+		}
+	}
+	for _, card := range attachmentCards(gd, pob.Attachments) {
+		if card.Attach == nil {
+			continue
+		}
+		for _, slot := range card.Attach.GrantsSlot {
+			add(slot)
+		}
+	}
+	return out
+}
+
+// PlayerAttachmentModifiers sums the player's current attachment-driven recycle
+// modifiers across all controlled pawns and blocks.
+func PlayerAttachmentModifiers(s *domain.GameState, gd *domain.GameData, playerID string) (drawModifier int, handModifier int) {
+	for _, pawn := range s.Cybernet.Pawns {
+		if pawn.OwnerID != playerID {
+			continue
+		}
+		for _, card := range attachmentCards(gd, pawn.Attachments) {
+			if card.Attach == nil {
+				continue
+			}
+			drawModifier += card.Attach.DrawModifier
+			handModifier += card.Attach.HandModifier
+		}
+	}
+	for _, block := range s.Cybernet.Blocks {
+		if block.OwnerID != playerID {
+			continue
+		}
+		for _, card := range attachmentCards(gd, block.Attachments) {
+			if card.Attach == nil {
+				continue
+			}
+			drawModifier += card.Attach.DrawModifier
+			handModifier += card.Attach.HandModifier
+		}
+	}
+	return drawModifier, handModifier
 }

@@ -88,6 +88,21 @@ func TestRecycleRefillsHand(t *testing.T) {
 	}
 }
 
+func TestRecycleAppliesAttachmentModifiers(t *testing.T) {
+	gd := loadOrSkip(t)
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", DrawModifier: -1, HandModifier: -2}
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 11})
+	p1 := s.Players[0]
+	p1.Hand = []string{}
+	s.Cybernet.PawnByID(p1.PawnID).Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if err := RunTurn(s, gd, []Action{{Type: ActPass}}); err != nil {
+		t.Fatalf("RunTurn: %v", err)
+	}
+	if got := len(s.Players[0].Hand); got != 2 {
+		t.Errorf("p1 hand after modified recycle = %d, want 2", got)
+	}
+}
+
 func TestTurnAdvances(t *testing.T) {
 	gd := loadOrSkip(t)
 	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B", "C"}, Seed: 3})

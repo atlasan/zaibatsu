@@ -21,7 +21,7 @@ import { deleteAbility, deleteMulti } from "./combat.ts";
 import { icebreakBlock, icebreakPawn } from "./icebreaker.ts";
 import { reboot, search } from "./abilities.ts";
 import { playDelete, playIcebreakBlock, playIcebreakPawn, playMove, playReboot, playSearch } from "./cards.ts";
-import { attachToBlock, attachToEnemy, attachToPawn } from "./attach.ts";
+import { attachToBlock, attachToEnemy, attachToPawn, playerAttachmentModifiers } from "./attach.ts";
 
 export * from "./placement.ts";
 export * from "./movement.ts";
@@ -433,7 +433,7 @@ export function applyActionWithEvents(s: GameState, gd: GameData, a: Action): Tr
 }
 
 /** Advances one live turn phase and executes that phase's mandatory bookkeeping. */
-export function advancePhase(s: GameState, _gd: GameData): TransitionResult {
+export function advancePhase(s: GameState, gd: GameData): TransitionResult {
   const before = watchState(s);
   const fromPhase = s.phase;
   switch (s.phase) {
@@ -443,7 +443,7 @@ export function advancePhase(s: GameState, _gd: GameData): TransitionResult {
       break;
     case "action":
       s.phase = "recycle";
-      recycle(s, currentPlayer(s));
+      recycle(s, gd, currentPlayer(s));
       break;
     case "recycle":
       s.phase = "end";
@@ -478,13 +478,16 @@ export function runTurn(s: GameState, gd: GameData, actions: Action[] = []): voi
 }
 
 /** Brings a player's hand to exactly maxHandSize (draw up / discard down). */
-function recycle(s: GameState, p: Player): void {
-  while (p.hand.length < p.maxHandSize) {
+function recycle(s: GameState, gd: GameData, p: Player): void {
+  const modifiers = playerAttachmentModifiers(s, gd, p.id);
+  const maxHandSize = Math.max(0, p.maxHandSize + modifiers.handModifier);
+  const draws = Math.max(0, maxHandSize - p.hand.length + modifiers.drawModifier);
+  for (let i = 0; i < draws; i++) {
     const card = draw(s);
     if (card === undefined) break;
     p.hand.push(card);
   }
-  while (p.hand.length > p.maxHandSize) {
+  while (p.hand.length > maxHandSize) {
     s.discard.push(p.hand.pop()!);
   }
 }

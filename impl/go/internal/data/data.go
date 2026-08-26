@@ -3,6 +3,8 @@
 package data
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -41,6 +43,17 @@ type cardsFile struct {
 	Cards []domain.ActionCard `json:"cards"`
 }
 
+type validationManifest struct {
+	ManifestVersion int `json:"manifestVersion"`
+	Entries         []struct {
+		Expansion string `json:"expansion"`
+		Files     []struct {
+			Path   string `json:"path"`
+			SHA256 string `json:"sha256"`
+		} `json:"files"`
+	} `json:"entries"`
+}
+
 func readJSON(path string, v any) error {
 	b, err := os.ReadFile(path)
 	if err != nil {
@@ -52,9 +65,77 @@ func readJSON(path string, v any) error {
 	return nil
 }
 
+func sha256File(path string) (string, error) {
+	content, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	digest := sha256.Sum256(content)
+	return hex.EncodeToString(digest[:]), nil
+}
+
+func repoRootFromSpecDataDir(specDataDir string) string {
+	return filepath.Dir(filepath.Dir(filepath.Clean(specDataDir)))
+}
+
+func validateManifest(specDataDir, expansion string) error {
+	repoRoot := repoRootFromSpecDataDir(specDataDir)
+	manifestPath := filepath.Join(repoRoot, "spec", "validation", "manifest.json")
+	hint := "run `bun tools/validate-spec.ts` from the repo root"
+	if _, err := os.Stat(manifestPath); err != nil {
+		if os.IsNotExist(err) {
+			return fmt.Errorf("spec validation manifest is missing at %s; %s", manifestPath, hint)
+		}
+		return fmt.Errorf("stat %s: %w", manifestPath, err)
+	}
+	var manifest validationManifest
+	if err := readJSON(manifestPath, &manifest); err != nil {
+		return err
+	}
+	if manifest.ManifestVersion != 1 {
+		return fmt.Errorf("unsupported spec validation manifest version %d; %s", manifest.ManifestVersion, hint)
+	}
+	var entry *struct {
+		Expansion string `json:"expansion"`
+		Files     []struct {
+			Path   string `json:"path"`
+			SHA256 string `json:"sha256"`
+		} `json:"files"`
+	}
+	for i := range manifest.Entries {
+		if manifest.Entries[i].Expansion == expansion {
+			entry = &manifest.Entries[i]
+			break
+		}
+	}
+	if entry == nil {
+		return fmt.Errorf("spec validation manifest has no entry for expansion %s; %s", expansion, hint)
+	}
+	for _, file := range entry.Files {
+		target := filepath.Join(repoRoot, filepath.FromSlash(file.Path))
+		if _, err := os.Stat(target); err != nil {
+			if os.IsNotExist(err) {
+				return fmt.Errorf("validated spec file is missing: %s; %s", file.Path, hint)
+			}
+			return fmt.Errorf("stat %s: %w", target, err)
+		}
+		actual, err := sha256File(target)
+		if err != nil {
+			return fmt.Errorf("hash %s: %w", target, err)
+		}
+		if actual != file.SHA256 {
+			return fmt.Errorf("spec validation manifest is stale for %s; expected %s, found %s; %s", file.Path, file.SHA256, actual, hint)
+		}
+	}
+	return nil
+}
+
 // Load reads the game data for the given expansion (e.g. "speedrunners") from
 // the given spec/data directory.
 func Load(specDataDir, expansion string) (*domain.GameData, error) {
+	if err := validateManifest(specDataDir, expansion); err != nil {
+		return nil, err
+	}
 	base := filepath.Join(specDataDir, expansion)
 
 	var bf blocksFile

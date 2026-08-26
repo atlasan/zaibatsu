@@ -494,7 +494,7 @@ func ApplyWithEvents(s *domain.GameState, gd *domain.GameData, a Action) Transit
 }
 
 // AdvancePhase advances exactly one live turn phase and runs mandatory phase work.
-func AdvancePhase(s *domain.GameState, _ *domain.GameData) TransitionResult {
+func AdvancePhase(s *domain.GameState, gd *domain.GameData) TransitionResult {
 	before, from := watchState(s), s.Phase
 	switch s.Phase {
 	case domain.PhaseBeginning:
@@ -502,7 +502,7 @@ func AdvancePhase(s *domain.GameState, _ *domain.GameData) TransitionResult {
 		s.Phase = domain.PhaseAction
 	case domain.PhaseAction:
 		s.Phase = domain.PhaseRecycle
-		recycle(s, s.CurrentPlayerPtr())
+		recycle(s, gd, s.CurrentPlayerPtr())
 	case domain.PhaseRecycle:
 		s.Phase = domain.PhaseEnd
 		checkWin(s)
@@ -540,15 +540,24 @@ func RunTurn(s *domain.GameState, gd *domain.GameData, actions []Action) error {
 }
 
 // recycle brings a player's hand to exactly MaxHandSize (draw up / discard down).
-func recycle(s *domain.GameState, p *domain.Player) {
-	for len(p.Hand) < p.MaxHandSize {
+func recycle(s *domain.GameState, gd *domain.GameData, p *domain.Player) {
+	drawModifier, handModifier := PlayerAttachmentModifiers(s, gd, p.ID)
+	maxHandSize := p.MaxHandSize + handModifier
+	if maxHandSize < 0 {
+		maxHandSize = 0
+	}
+	draws := maxHandSize - len(p.Hand) + drawModifier
+	if draws < 0 {
+		draws = 0
+	}
+	for i := 0; i < draws; i++ {
 		card, ok := draw(s)
 		if !ok {
 			break
 		}
 		p.Hand = append(p.Hand, card)
 	}
-	for len(p.Hand) > p.MaxHandSize {
+	for len(p.Hand) > maxHandSize {
 		last := len(p.Hand) - 1
 		s.Discard = append(s.Discard, p.Hand[last])
 		p.Hand = p.Hand[:last]

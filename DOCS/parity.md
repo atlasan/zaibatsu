@@ -91,6 +91,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Attach to enemy pawn | `engine.AttachToEnemy(...)` | `attachToEnemy(...)` |
 | Attach to block | `engine.AttachToBlock(...)` | `attachToBlock(...)` |
 | Effective classes | `engine.EffectivePawnClasses(...)` | `effectivePawnClasses(...)` |
+| Effective slots | `engine.EffectivePawnSlots(...)` | `effectivePawnSlots(...)` |
 | Canonical state snapshot | `engine.Snapshot(state)` | `snapshot(state)` |
 | Win check / winner | `engine` (internal `checkWin`) / `engine.Winner` | `win.ts` `checkWin` / `winner` ² |
 
@@ -105,8 +106,10 @@ both sides).
 
 ## Shared, not mirrored
 
-`spec/schema/` and `spec/data/` are **shared** — both impls read the same files.
-A data change is a single edit; a *schema* change requires updating both loaders.
+`spec/schema/`, `spec/data/`, and `spec/validation/manifest.json` are
+**shared**. A data or schema change is a single edit in the shared contract,
+then `bun tools/validate-spec.ts` refreshes the validation manifest both
+loaders require before they will read the bundle.
 
 ## Determinism contract
 
@@ -124,7 +127,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Feature | Go | TS | Notes |
 |---------|----|----|-------|
 | Domain types (slice) | ✅ | ✅ | |
-| Data loader | ✅ | ✅ | reads `spec/data/speedrunners` |
+| Data loader | ✅ | ✅ | reads `spec/data/speedrunners`; rejects missing, stale, or unvalidated `spec/validation/manifest.json` entries before parsing |
 | Setup + marker counts | ✅ | ✅ | |
 | Turn loop + phases | ✅ | ✅ | |
 | Live phase transitions + structured events | ✅ | ✅ | action-phase gate; rolls, draws, eliminations, control changes, winners, and validation failures are structured |
@@ -142,7 +145,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
-| Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; state identical |
+| Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; granted slots, recycle draw/hand modifiers, and ICE-face/Black-ICE modifiers now resolve identically |
 | Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-aligned 2–3–2 point-up placement layout; displayShape renders circle/capsule/compound source coverage only, with no effect or movement resolution |
 | Space-to-space movement | ✅ | ✅ | intra-block neighbours + rotation-aware cross-edge boundary hops; path/capacity/budget behavior is mirror-tested, while provisional data records still need source review |
 | Card-use: move / attach | ✅ | ✅ | card movement consumes its printed-budget card; attachment actions are live; attached effect grants/removals remain a separate gap |

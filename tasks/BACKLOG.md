@@ -17,7 +17,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [x] (go/ts) Cybernet model: place blocks with hex adjacency + edge/space connectivity + valid orientation (Search). *Axial coords, `PlaceBlock`/`CanPlace`/`ValidPlacements`, Central Core seeded at origin; mirrored + tested.*
 - [x] (go/ts) Pawn positions on the board + occupancy + movement budget + hex movement. *`PawnOnBoard` on Cybernet, pawns start on core, space capacity by type, `ResolveSteps` (fixed/d6/2d6/hex+modifiers, seeded), `CanActivateMovement`, `CanEndOn`, `MoveHex`; d6 sequence verified identical across mirrors (seed 99).*
 - [x] (spec + go/ts) **Space-adjacency schema + space-to-space movement.** Blocks encode intra-block neighbors and edge boundary spaces; both mirrors execute `steps`/`d6`/`2d6` paths with pass-through, end-on capacity, unused-budget, and no-interleaving rules. The Central Core's all-edge boundary mapping is retained as provisional inferred data until directly transcribed.
-- [ ] (spec) Add JSON-Schema validation to the loaders (or a `spec/validate` step) so bad data fails loudly, not silently.
+- [x] (spec) Add JSON-Schema validation to the loaders (or a `spec/validate` step) so bad data fails loudly, not silently. *`bun tools/validate-spec.ts` now evaluates the executable Speedrunners data files against the tracked JSON Schemas, writes `spec/validation/manifest.json`, and both loaders reject stale or unvalidated content before loading the engine bundle.*
 - [x] (go/ts) Action-card **use choice** (move / activate / attach / discard-to-search / discard-4-to-reboot).
   - [x] Activate abilities: `PlayDelete`, `PlayIcebreakBlock`/`PlayIcebreakPawn` (play a matching card), `PlaySearch` (discard 1), `PlayReboot` (discard 4). Card consumed→discard; illegal plays don't consume; verified identical across mirrors (seed 123).
   - [x] Activate movement by card: `PlayMove` / `playMove` uses the printed card budget, consumes only after a legal path, and leaves once-per-turn pawn movement available.
@@ -34,7 +34,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
 - [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
   - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.
-  - [ ] Apply attached effects in resolution: armor replaces defense dice & nullifies ICE; weapon/gadget/ability/movement grants; hand-size modifiers.
+  - [~] Apply attached effects in resolution: granted slots, recycle draw/hand modifiers, and ICE-face/Black-ICE modifiers now resolve in both mirrors. Armor replacing defense dice/nullifying ICE, plus movement-grant and ability-use execution, remain pending.
 - [x] (go/ts) Unified action interface: `Action` tagged union + `Apply(state, gd, action)` reducer dispatching every ability/card/attach action; `RunTurn` drives a turn through it. `playerId` defaults to the current player. Verified identical across mirrors. *Connective tissue for UI / bots / golden-game harness.*
 - [ ] (docs) Update domain-model + parity as each lands.
 

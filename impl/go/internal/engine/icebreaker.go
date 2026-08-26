@@ -48,6 +48,28 @@ func iceFacesFor(faces []int, ice domain.IceValue) []int {
 	return IceFaces(ice)
 }
 
+func attachmentIceModifier(gd *domain.GameData, atts []domain.Attachment) ([]int, bool) {
+	faces := []int{}
+	black := false
+	seen := map[int]bool{}
+	for _, att := range atts {
+		card := cardByID(gd, att.CardID)
+		if card == nil || card.Attach == nil || card.Attach.IceModifier == nil {
+			continue
+		}
+		for _, face := range card.Attach.IceModifier.Faces {
+			if !seen[face] {
+				seen[face] = true
+				faces = append(faces, face)
+			}
+		}
+		if card.Attach.IceModifier.Black {
+			black = true
+		}
+	}
+	return faces, black
+}
+
 // IcebreakResult reports the outcome of an Icebreak attempt.
 type IcebreakResult struct {
 	Roll               []int `json:"roll"`
@@ -141,7 +163,20 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 	if !ok {
 		return res, fmt.Errorf("unknown block %q", pb.BlockID)
 	}
-	faces := iceFacesFor(blockDef.IceFaces, blockDef.IceValue)
+	modifierFaces, modifierBlack := attachmentIceModifier(gd, pb.Attachments)
+	faces := append([]int{}, iceFacesFor(blockDef.IceFaces, blockDef.IceValue)...)
+	for _, face := range modifierFaces {
+		duplicate := false
+		for _, existing := range faces {
+			if existing == face {
+				duplicate = true
+				break
+			}
+		}
+		if !duplicate {
+			faces = append(faces, face)
+		}
+	}
 	if len(faces) == 0 {
 		return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
 	}
@@ -166,7 +201,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 		owner.ControlMarkersPlaced++
 		checkWin(s)
 	} else {
-		isBlack := blockDef.IceValue == domain.IceBlack || blockDef.BlackIce
+		isBlack := blockDef.IceValue == domain.IceBlack || blockDef.BlackIce || modifierBlack
 		res.AttackerEliminated = resolveBlackIceFailure(s, isBlack, attackerID, res.Success)
 	}
 
@@ -198,7 +233,20 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 	if !ok {
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
 	}
-	faces := IceFaces(tgt.IceValue)
+	modifierFaces, modifierBlack := attachmentIceModifier(gd, tgtPob.Attachments)
+	faces := append([]int{}, IceFaces(tgt.IceValue)...)
+	for _, face := range modifierFaces {
+		duplicate := false
+		for _, existing := range faces {
+			if existing == face {
+				duplicate = true
+				break
+			}
+		}
+		if !duplicate {
+			faces = append(faces, face)
+		}
+	}
 	if len(faces) == 0 {
 		return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
 	}
@@ -212,7 +260,7 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 		discardAttachments(s, tgtPob)
 		tgtPob.OwnerID = owner.ID
 	} else {
-		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue == domain.IceBlack, attackerID, res.Success)
+		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue == domain.IceBlack || modifierBlack, attackerID, res.Success)
 	}
 
 	markIcebreakerUsed(gd, owner, attackerID, atkPob.Attachments)
