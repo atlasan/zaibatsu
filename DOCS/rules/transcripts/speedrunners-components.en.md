@@ -23,10 +23,13 @@ Grouped transcript of the English component sheets used to verify Speedrunners r
 - Language: `en`
 - Role: `blocks-a4`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-blocks-a4](../../../tmp/ruletext/pages/sp-en-blocks-a4)
 
 ### `sp-en-blocks-a4` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-001.png)
 
 ```text
 1
@@ -200,6 +203,8 @@ Idoru
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-002.png)
+
 ```text
 1
 
@@ -326,6 +331,8 @@ control, sacrifices one pawn.
 ### `sp-en-blocks-a4` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-003.png)
 
 ```text
 Bonus
@@ -553,6 +560,8 @@ en ra Co
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-004.png)
+
 ```text
 1
 
@@ -706,6 +715,8 @@ o
 ### `sp-en-blocks-a4` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-005.png)
 
 ```text
 1
@@ -974,6 +985,8 @@ e
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-006.png)
+
 ```text
 1
 
@@ -1210,6 +1223,8 @@ Bonus c un er
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-007.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-007.png)
+
 ```text
 Bonus
 
@@ -1428,6 +1443,8 @@ ini-hexag
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-008.png](../../../tmp/ruletext/pages/sp-en-blocks-a4/page-008.png)
+
 ```text
 Bonus
 
@@ -1631,10 +1648,13 @@ ini-hexag
 - Language: `en`
 - Role: `control-cards`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-control-cards](../../../tmp/ruletext/pages/sp-en-control-cards)
 
 ### `sp-en-control-cards` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-control-cards/page-001.png)
 
 ```text
 cleaner D
@@ -1720,6 +1740,8 @@ viral mutations.
 ### `sp-en-control-cards` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-control-cards/page-002.png)
 
 ```text
 Google
@@ -1894,10 +1916,13 @@ player's turn
 - Language: `en`
 - Role: `action-cards`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-action-cards](../../../tmp/ruletext/pages/sp-en-action-cards)
 
 ### `sp-en-action-cards` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-001.png)
 
 ```text
 biochip
@@ -2106,6 +2131,8 @@ add-on
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-002.png)
+
 ```text
 This pawn discards
 all attached cards.
@@ -2275,6 +2302,8 @@ add-on
 ### `sp-en-action-cards` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-003.png)
 
 ```text
 servocanon
@@ -2491,6 +2520,8 @@ beginning of your turn
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-004.png)
+
 ```text
 1
 
@@ -2617,6 +2648,8 @@ Icebreak ( )
 ### `sp-en-action-cards` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-005.png)
 
 ```text
 financial
@@ -2891,6 +2924,8 @@ this block with ( ).
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sp-en-action-cards/page-006.png)
+
 ```text
 10001101
 01100101
@@ -3084,10 +3119,13 @@ berserker
 - Language: `en`
 - Role: `pawns`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-pawns](../../../tmp/ruletext/pages/sp-en-pawns)
 
 ### `sp-en-pawns` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-pawns/page-001.png)
 
 ```text
 Cleaner d
@@ -3132,6 +3170,8 @@ speedrunner
 ### `sp-en-pawns` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-pawns/page-002.png)
 
 ```text
 idoru
@@ -3179,10 +3219,13 @@ drone probe
 - Language: `en`
 - Role: `markers`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-markers](../../../tmp/ruletext/pages/sp-en-markers)
 
 ### `sp-en-markers` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-markers/page-001.png)
 
 ```text
 01
@@ -3441,6 +3484,8 @@ control
 ### `sp-en-markers` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-markers/page-002.png)
 
 ```text
 2/2

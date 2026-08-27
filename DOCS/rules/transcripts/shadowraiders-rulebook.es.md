@@ -19,10 +19,13 @@ Spanish cross-check transcript for the Shadowraiders rulebook.
 - Language: `es`
 - Role: `rulebook`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-rulebook](../../../tmp/ruletext/pages/sh-es-rulebook)
 
 ### `sh-es-rulebook` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-001.png)
 
 ```text
 SHADOWRAIDERS
@@ -35,6 +38,8 @@ Arte por Kotdesign y Froylan Rutiaga
 ### `sh-es-rulebook` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-002.png)
 
 ```text
 02
@@ -75,6 +80,8 @@ Notas
 ### `sh-es-rulebook` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-003.png)
 
 ```text
 03
@@ -130,6 +137,8 @@ utiliza elementos de Zaibatsu Speedrunners y Zaibatsu Shadowraiders.
 ### `sh-es-rulebook` p. 4
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-004.png)
 
 ```text
 04
@@ -187,6 +196,8 @@ Otros elementos:
 ### `sh-es-rulebook` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-005.png)
 
 ```text
 05
@@ -256,6 +267,8 @@ de turno de Cybernet.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-006.png)
+
 ```text
 El juego se prepara tal como se menciona en el manual de Zaibatsu
 Speedrunners con las siguientes diferencias.
@@ -300,6 +313,8 @@ Preparar los contadores de hostil
 ### `sh-es-rulebook` p. 7
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-007.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-007.png)
 
 ```text
 1. Coloca el Central Core 02 en
@@ -360,6 +375,8 @@ siguientes reglas:
 ### `sh-es-rulebook` p. 8
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-008.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-008.png)
 
 ```text
 e
@@ -469,6 +486,8 @@ de peón
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-009.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-009.png)
+
 ```text
 09
 
@@ -555,6 +574,8 @@ Dados de dirección
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-010.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-010.png)
+
 ```text
 Operative
 
@@ -617,6 +638,8 @@ Valor de Black ICE de un peón
 ### `sh-es-rulebook` p. 11
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-011.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-011.png)
 
 ```text
 Algunos peones poseen un costo en contadores de bonificación ( ).
@@ -692,6 +715,8 @@ de valor de ICE
 ### `sh-es-rulebook` p. 12
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-012.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-012.png)
 
 ```text
 12
@@ -779,6 +804,8 @@ Activar movimiento Stealth utilizando cartas de acción
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-013.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-013.png)
+
 ```text
 En este otro ejemplo se
 muestra como al activarse un dado
@@ -837,6 +864,8 @@ movimiento Stealh
 ### `sh-es-rulebook` p. 14
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-014.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-014.png)
 
 ```text
 Las cartas
@@ -903,6 +932,8 @@ Costo
 ### `sh-es-rulebook` p. 15
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-015.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-015.png)
 
 ```text
 wetwork
@@ -1005,6 +1036,8 @@ Reward.
 ### `sh-es-rulebook` p. 16
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-016.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-016.png)
 
 ```text
 t
@@ -1142,6 +1175,8 @@ misma.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-017.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-017.png)
+
 ```text
 Strafing
 
@@ -1275,6 +1310,8 @@ del Mark
 ### `sh-es-rulebook` p. 18
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-018.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-018.png)
 
 ```text
 crud
@@ -1423,6 +1460,8 @@ expansión
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-019.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-019.png)
+
 ```text
 Tras cumplir los requisitos de una carta de Mission que te permita
 obtener medallas como Reward debes hacer lo siguiente:
@@ -1475,6 +1514,8 @@ Deviser B
 ### `sh-es-rulebook` p. 20
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-020.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-020.png)
 
 ```text
 Un hostil es un elemento en Cybernet con dado de
@@ -1543,6 +1584,8 @@ ARMOR
 ### `sh-es-rulebook` p. 21
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-021.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-021.png)
 
 ```text
 21
@@ -1656,6 +1699,8 @@ bonificación
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-022.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-022.png)
+
 ```text
 Operative
 
@@ -1746,6 +1791,8 @@ Shadowraider, este es eliminado.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-023.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-023.png)
+
 ```text
 23
 
@@ -1788,6 +1835,8 @@ tirada de ataque contra múltiples objetivos en un mismo bloque.
 ### `sh-es-rulebook` p. 24
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-024.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-024.png)
 
 ```text
 24
@@ -1845,6 +1894,8 @@ sobre un mismo bloque, puede hacer lo siguiente:
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-025.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-025.png)
+
 ```text
 25
 
@@ -1891,6 +1942,8 @@ el Deviser D es eliminado.
 ### `sh-es-rulebook` p. 26
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-026.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-026.png)
 
 ```text
 26
@@ -1959,6 +2012,8 @@ Jugadores
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-027.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-027.png)
+
 ```text
 27
 
@@ -2003,6 +2058,8 @@ Preparar el juego
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-028.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-028.png)
+
 ```text
 28
 
@@ -2035,6 +2092,8 @@ en modo Chaos
 ### `sh-es-rulebook` p. 29
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-029.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-029.png)
 
 ```text
 29
@@ -2115,6 +2174,8 @@ urno de Chaos
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-030.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-030.png)
+
 ```text
 Delete
 
@@ -2167,6 +2228,8 @@ Habilidad Icebreaker de Chaos
 ### `sh-es-rulebook` p. 31
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-031.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-031.png)
 
 ```text
 31
@@ -2229,6 +2292,8 @@ Fin de turno de Chaos
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-032.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-032.png)
+
 ```text
 32
 
@@ -2284,6 +2349,8 @@ peón de Chaos
 ### `sh-es-rulebook` p. 33
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-033.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-033.png)
 
 ```text
 C.h.a.o.s.
@@ -2379,6 +2446,8 @@ ataque
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-034.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-034.png)
+
 ```text
 34
 
@@ -2432,6 +2501,8 @@ Ataque general a Chaos
 ### `sh-es-rulebook` p. 35
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-035.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-035.png)
 
 ```text
 35
@@ -2507,6 +2578,8 @@ Shadowraiders:
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-036.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-036.png)
+
 ```text
 36
 
@@ -2558,6 +2631,8 @@ Preparar el juego
 ### `sh-es-rulebook` p. 37
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-037.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-037.png)
 
 ```text
 R
@@ -2635,6 +2710,8 @@ tiran tres dados.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-038.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-038.png)
+
 ```text
 38
 
@@ -2690,6 +2767,8 @@ bloque.
 ### `sh-es-rulebook` p. 39
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-039.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-039.png)
 
 ```text
 39
@@ -2770,6 +2849,8 @@ Fin del juego
 ### `sh-es-rulebook` p. 40
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-040.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-040.png)
 
 ```text
 3. Cada Zaibatsu toma contadores de control ( )
@@ -2876,6 +2957,8 @@ el juego
 ### `sh-es-rulebook` p. 41
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-041.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-041.png)
 
 ```text
 41
@@ -2992,6 +3075,8 @@ l
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-042.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-042.png)
+
 ```text
 42
 
@@ -3046,6 +3131,8 @@ otal War - Chaos
 ### `sh-es-rulebook` p. 43
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-043.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-043.png)
 
 ```text
 43
@@ -3227,6 +3314,8 @@ hostiles
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-044.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-044.png)
+
 ```text
 Este juego no habría sido posible sin la valiosa creatividad de artistas
 en todo el mundo que comparten su talento y su arte:
@@ -3273,6 +3362,8 @@ KOTDESIGN
 ### `sh-es-rulebook` p. 45
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-045.png](../../../tmp/ruletext/pages/sh-es-rulebook/page-045.png)
 
 ```text
 45

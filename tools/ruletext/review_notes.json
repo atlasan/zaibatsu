@@ -1,0 +1,30 @@
+{
+  "sp-en-rulebook": {
+    "29": [
+      "The page image confirms the ICE-value example order. The two worked examples should read as: \"With a modifier of 5 and ICE values 6, 4, and 3, you have four chances to succeed at an Icebreak attempt: 6, 5, 4, and 3.\" and \"But with the same modifier of 5 and ICE values of 6, 5, and 4, you only have three chances to succeed at an Icebreak attempt: 6, 5, and 4 because the 5 modifier is redundant.\"",
+      "Use the linked page image as the source of truth for the example layout and icon pairing."
+    ]
+  },
+  "sh-en-rulebook": {
+    "9": [
+      "The page image is clearer than the extracted reading order. Treat the visible layout as authoritative for the sections \"Drone Threat Spaces\", \"Event space\", \"Placing Threat Tokens in Event space\", \"Information block with threat tokens\", \"Controlling a Block\", and \"Direction dice\".",
+      "The extraction currently interleaves labels and body text; review against the linked page image before promoting these lines into rules digests or data notes."
+    ],
+    "10": [
+      "The page image establishes the intended order: \"New Pawn Attributes\", then the labeled card callouts, then \"Pawn Black ICE value\", \"Hand size modifiers\", and \"Mission Slots\".",
+      "Use the linked page image for the labeled control-card callouts; the extracted text loses the diagram structure."
+    ],
+    "11": [
+      "The second mercenary-control sequence visibly begins with \"1. Move a pawn under your control...\" on the page image. The extracted text drops that numbered line before step 2.",
+      "The bottom-of-page icon glossary is visually clear in the linked image: \"ICE value double-modifiers\" and \"Defense dice modifier\"."
+    ],
+    "12": [
+      "The page image preserves the two activation tables and modifier callouts much better than the flattened extraction.",
+      "Use the linked page image to confirm the distinction between card-activated movement, card-activated stealth movement, once-per-turn stealth movement, and the blocked-stealth symbol."
+    ],
+    "16": [
+      "The page image clearly shows the mission-tag tracking example with three numbered alignment states on the Terminator mission card.",
+      "Use the linked page image as the primary source for this example layout; it is suitable for later manual consolidation into cleaner prose."
+    ]
+  }
+}

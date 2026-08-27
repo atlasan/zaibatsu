@@ -19,10 +19,13 @@ Primary English rulebook transcript for Speedrunners.
 - Language: `en`
 - Role: `rulebook`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-en-rulebook](../../../tmp/ruletext/pages/sp-en-rulebook)
 
 ### `sp-en-rulebook` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-001.png)
 
 ```text
 SPEEDRUNNERS
@@ -37,6 +40,8 @@ Art by Kotdesign and Froylan Rutiaga
 ### `sp-en-rulebook` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-002.png)
 
 ```text
 This work is licensed under the Creative Commons Attribution-NonCommercial 2.5 Mexico License. To view a
@@ -77,6 +82,8 @@ Note
 ### `sp-en-rulebook` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-003.png)
 
 ```text
 03
@@ -137,6 +144,8 @@ Speedrunners Mode
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-004.png)
+
 ```text
 24 hexagonal tiles (23 blocks and one Central Core) that are placed on
 the table during play to form the Cybernet (p. 11).
@@ -188,6 +197,8 @@ been used (p.18).
 ### `sp-en-rulebook` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-005.png)
 
 ```text
 05
@@ -247,6 +258,8 @@ seated to the left of the starting player is the second player and so on.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-006.png)
+
 ```text
 Separate the Central Core from the rest of the information blocks.
 
@@ -300,6 +313,8 @@ Prepare the start-of-turn markers
 ### `sp-en-rulebook` p. 7
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-007.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-007.png)
 
 ```text
 Starting the game
@@ -376,6 +391,8 @@ Player four
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-008.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-008.png)
+
 ```text
 Phases of turn
 
@@ -430,6 +447,8 @@ Ends the player's turn. Play proceeds to the next player.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-009.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-009.png)
+
 ```text
 Zones of the game
 
@@ -476,6 +495,8 @@ blocks pile
 ### `sp-en-rulebook` p. 10
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-010.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-010.png)
 
 ```text
 The Cybernet represents the global information
@@ -556,6 +577,8 @@ Discard pile
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-011.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-011.png)
+
 ```text
 s
 
@@ -621,6 +644,8 @@ space
 ### `sp-en-rulebook` p. 12
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-012.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-012.png)
 
 ```text
 Block name
@@ -696,6 +721,8 @@ cards attached to that pawn.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-013.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-013.png)
+
 ```text
 Increases or decreases the defense of the pawn that is placed on this
 space. (p.21).
@@ -765,6 +792,8 @@ dice
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-014.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-014.png)
+
 ```text
 Direction arrow
 
@@ -815,6 +844,8 @@ Low ICE value
 ### `sp-en-rulebook` p. 15
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-015.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-015.png)
 
 ```text
 Placing blocks in the C
@@ -912,6 +943,8 @@ space
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-016.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-016.png)
+
 ```text
 16
 
@@ -969,6 +1002,8 @@ bonus counter ( ).
 ### `sp-en-rulebook` p. 17
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-017.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-017.png)
 
 ```text
 Block under control
@@ -1030,6 +1065,8 @@ as an effect of a block under your control
 ### `sp-en-rulebook` p. 18
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-018.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-018.png)
 
 ```text
 18
@@ -1093,6 +1130,8 @@ of an ability.
 ### `sp-en-rulebook` p. 19
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-019.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-019.png)
 
 ```text
 Operative
@@ -1177,6 +1216,8 @@ slot
 ### `sp-en-rulebook` p. 20
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-020.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-020.png)
 
 ```text
 May activate
@@ -1310,6 +1351,8 @@ cards.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-021.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-021.png)
+
 ```text
 Some pawns have ICE values over their defense
 dice.
@@ -1370,6 +1413,8 @@ ARMOR
 ### `sp-en-rulebook` p. 22
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-022.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-022.png)
 
 ```text
 T
@@ -1441,6 +1486,8 @@ weapon
 ### `sp-en-rulebook` p. 23
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-023.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-023.png)
 
 ```text
 1. Identify the target of the attack.
@@ -1520,6 +1567,8 @@ ARMOR
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-024.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-024.png)
+
 ```text
 During your action phase you may move any of the pawns you control
 in the Cybernet using their movement ability.
@@ -1588,6 +1637,8 @@ space
 ### `sp-en-rulebook` p. 25
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-025.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-025.png)
 
 ```text
 25
@@ -1681,6 +1732,8 @@ activated movement ability
 ### `sp-en-rulebook` p. 26
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-026.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-026.png)
 
 ```text
 26
@@ -1778,6 +1831,8 @@ Abilities
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-027.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-027.png)
+
 ```text
 Activating the
 Search ability
@@ -1860,6 +1915,8 @@ Reboot ability
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-028.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-028.png)
+
 ```text
 28
 
@@ -1930,6 +1987,14 @@ of a block
 ### `sp-en-rulebook` p. 29
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-029.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-029.png)
+
+
+#### Review Notes
+
+- The page image confirms the ICE-value example order. The two worked examples should read as: "With a modifier of 5 and ICE values 6, 4, and 3, you have four chances to succeed at an Icebreak attempt: 6, 5, 4, and 3." and "But with the same modifier of 5 and ICE values of 6, 5, and 4, you only have three chances to succeed at an Icebreak attempt: 6, 5, and 4 because the 5 modifier is redundant."
+- Use the linked page image as the source of truth for the example layout and icon pairing.
 
 ```text
 ICE value
@@ -2004,6 +2069,8 @@ target (p.28).
 ### `sp-en-rulebook` p. 30
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-030.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-030.png)
 
 ```text
 Action cards
@@ -2096,6 +2163,8 @@ Ways to use an action card
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-031.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-031.png)
+
 ```text
 block
 
@@ -2169,6 +2238,8 @@ to a game element
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-032.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-032.png)
+
 ```text
 32
 
@@ -2228,6 +2299,8 @@ an information block
 ### `sp-en-rulebook` p. 33
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-033.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-033.png)
 
 ```text
 Kamikaze
@@ -2306,6 +2379,8 @@ cards
 ### `sp-en-rulebook` p. 34
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-034.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-034.png)
 
 ```text
 ak-12Km
@@ -2405,6 +2480,8 @@ card to.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-035.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-035.png)
+
 ```text
 Armor defense dice
 
@@ -2468,6 +2545,8 @@ cost of a card, discard it.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-036.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-036.png)
+
 ```text
 Add-on cards
 
@@ -2514,6 +2593,8 @@ Are attached in the right side of the pawn card.
 ### `sp-en-rulebook` p. 37
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-037.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-037.png)
 
 ```text
 Can activate
@@ -2734,6 +2815,8 @@ and pawns.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-038.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-038.png)
+
 ```text
 Hand size modifiers (p. 31).
 
@@ -2834,6 +2917,8 @@ Card attachment requirements.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-039.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-039.png)
+
 ```text
 This game would not have been possible without the invaluable
 creativity of artists all over the world who shared their talent and artwork:
@@ -2891,6 +2976,8 @@ Http://digitalam.deviantart.com/
 ### `sp-en-rulebook` p. 40
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-040.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-040.png)
 
 ```text
 Speedrunners mode

@@ -31,7 +31,28 @@ python tools/ruletext/extract.py build --profile speedrunners-rulebook-en
 
 `build` also renders one PNG per source page under
 `tmp/ruletext/pages/<artifact-id>/page-###.png` so transcript cleanup can be
-checked against a stable local image artifact.
+checked against a stable local image artifact. Generated transcript pages now
+link those page images directly, and any saved review notes from
+`tools/ruletext/review_notes.json` are rendered into the matching page section.
+
+For focused review work, `snippets.py` can crop detail images or compose a
+small review sheet from those page renders:
+
+```powershell
+python tools/ruletext/snippets.py crop `
+  --input tmp/ruletext/pages/sp-en-rulebook/page-029.png `
+  --rect 420,710,1085,1110 `
+  --name sp-en-rulebook-p029-ice-example
+
+python tools/ruletext/snippets.py compose `
+  --input tmp/ruletext/pages/sp-en-rulebook/page-029.png `
+  --input tmp/ruletext/snippets/sp-en-rulebook-p029-ice-example.png `
+  --layout vertical `
+  --fit-width 900 `
+  --name sp-en-rulebook-p029-review-sheet
+```
+
+Crops and composites default to `tmp/ruletext/snippets/`.
 
 ## Built-in transcript outputs
 

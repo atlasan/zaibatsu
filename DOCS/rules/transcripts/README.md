@@ -32,9 +32,17 @@ The script regenerates:
 - ignored raw extraction output in `tmp/ruletext/`;
 - ignored single-page PNG renders in `tmp/ruletext/pages/<artifact-id>/`.
 
+For transcript cleanup passes, `python tools/ruletext/snippets.py` can also cut
+small review crops or compose a compact sheet from those page renders under
+`tmp/ruletext/snippets/`.
+
 Per page, the extractor prefers `pdftotext` when it is available, then
 PyMuPDF block extraction with duplicate-block cleanup, then `pypdf`, then OCR
 fallbacks for image-only pages.
+
+Generated transcript pages now include a direct link to the matching local page
+image under `tmp/ruletext/pages/`, and they can render saved review notes from
+`tools/ruletext/review_notes.json` next to the extracted page text.
 
 ## Interpretation Boundary
 

@@ -19,10 +19,13 @@ Spanish cross-check transcript for the Speedrunners rulebook.
 - Language: `es`
 - Role: `rulebook`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sp-es-rulebook](../../../tmp/ruletext/pages/sp-es-rulebook)
 
 ### `sp-es-rulebook` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-001.png)
 
 ```text
 SPEEDRUNNERS
@@ -34,6 +37,8 @@ Arte por Kotdesign y Froylan Rutiaga
 ### `sp-es-rulebook` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-002.png)
 
 ```text
 Esta obra está bajo una licencia Reconocimiento-No comercial 2.5 México de Creative Commons. Para ver una
@@ -74,6 +79,8 @@ Notas
 ### `sp-es-rulebook` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-003.png)
 
 ```text
 03
@@ -133,6 +140,8 @@ Modo Speedrunners
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-004.png)
+
 ```text
 Son 24 piezas hexagonales (23 bloques y 1 Central Core) que se van
 colocando en la mesa durante el transcurso del juego, para formar la
@@ -184,6 +193,8 @@ vez por turno ha sido utilizada (p.18).
 ### `sp-es-rulebook` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-005.png)
 
 ```text
 1. De las cartas de control separa las cuatro cartas de Speedrunner y
@@ -249,6 +260,8 @@ Zaibatsu en el juego
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-006.png)
+
 ```text
 De los bloques de información separa el Central Core.
 
@@ -299,6 +312,8 @@ Preparar los contadores de bonificación
 ### `sp-es-rulebook` p. 7
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-007.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-007.png)
 
 ```text
 Inicio del
@@ -391,6 +406,8 @@ Cuarto jugador
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-008.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-008.png)
+
 ```text
 Las fases
 del turno
@@ -447,6 +464,8 @@ Zaibatsu.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-009.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-009.png)
+
 ```text
 Las zonas
 del juego
@@ -496,6 +515,8 @@ de información
 ### `sp-es-rulebook` p. 10
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-010.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-010.png)
 
 ```text
 Representa la red mundial de información, inicia
@@ -580,6 +601,8 @@ Pila de descarte
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-011.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-011.png)
+
 ```text
 s
 
@@ -647,6 +670,8 @@ Doble
 ### `sp-es-rulebook` p. 12
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-012.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-012.png)
 
 ```text
 Nombre del bloque
@@ -720,6 +745,8 @@ cartas anexas.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-013.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-013.png)
+
 ```text
 Modifica el blindaje de los dados de defensa del peón que se sitúa sobre
 esta casilla. (p.21).
@@ -791,6 +818,8 @@ blindaje
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-014.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-014.png)
+
 ```text
 Flecha de dirección
 
@@ -837,6 +866,8 @@ Valor de ICE baja
 ### `sp-es-rulebook` p. 15
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-015.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-015.png)
 
 ```text
 Colocar un bloque en C
@@ -933,6 +964,8 @@ casilla
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-016.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-016.png)
+
 ```text
 Figura de bonificación
 
@@ -993,6 +1026,8 @@ Este peón se encuentra libre del control de los Zaibatsu.
 ### `sp-es-rulebook` p. 17
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-017.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-017.png)
 
 ```text
 Bloque bajo control
@@ -1057,6 +1092,8 @@ como efecto de bloque bajo control
 ### `sp-es-rulebook` p. 18
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-018.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-018.png)
 
 ```text
 Contadores
@@ -1123,6 +1160,8 @@ carta o el uso de una habilidad.
 ### `sp-es-rulebook` p. 19
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-019.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-019.png)
 
 ```text
 Operative
@@ -1205,6 +1244,8 @@ Modificador de habilidad
 ### `sp-es-rulebook` p. 20
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-020.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-020.png)
 
 ```text
 Drone turret
@@ -1343,6 +1384,8 @@ consultarse en la Simbología
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-021.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-021.png)
+
 ```text
 Algunos peones poseen valor de ICE sobre los
 dados de defensa.
@@ -1406,6 +1449,8 @@ ARMOR
 ### `sp-es-rulebook` p. 22
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-022.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-022.png)
 
 ```text
 weapon
@@ -1478,6 +1523,8 @@ control.
 ### `sp-es-rulebook` p. 23
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-023.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-023.png)
 
 ```text
 1. Se identifica el o los objetivos de la tirada de
@@ -1561,6 +1608,8 @@ ARMOR
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-024.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-024.png)
+
 ```text
 Durante tu fase de acción puedes mover los peones que controles a
 través de Cybernet por medio de su atributo de movimiento ( ).
@@ -1630,6 +1679,8 @@ casilla
 ### `sp-es-rulebook` p. 25
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-025.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-025.png)
 
 ```text
 Algunas cartas de acción permiten asignar mas de
@@ -1728,6 +1779,8 @@ atributo de movimiento.
 ### `sp-es-rulebook` p. 26
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-026.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-026.png)
 
 ```text
 Durante tu fase de acción puedes utilizar habilidades básicas de
@@ -1830,6 +1883,8 @@ vez por turno
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-027.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-027.png)
+
 ```text
 Activar la
 habilidad Search
@@ -1914,6 +1969,8 @@ habilidad Reboot
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-028.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-028.png)
+
 ```text
 Activar la
 habilidad Icebreaker
@@ -1991,6 +2048,8 @@ de un Bloque
 ### `sp-es-rulebook` p. 29
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-029.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-029.png)
 
 ```text
 Modificador de
@@ -2071,6 +2130,8 @@ objetivo (p.28).
 ### `sp-es-rulebook` p. 30
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-030.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-030.png)
 
 ```text
 armor
@@ -2165,6 +2226,8 @@ Maneras de utilizar las cartas de acción
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-031.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-031.png)
+
 ```text
 En este ejemplo el Zaibatsu ha utilizado tres cartas:
 
@@ -2241,6 +2304,8 @@ Block
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-032.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-032.png)
+
 ```text
 Anexar una carta a un elemento
 Block (Bloque de información)
@@ -2303,6 +2368,8 @@ de información
 ### `sp-es-rulebook` p. 33
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-033.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-033.png)
 
 ```text
 Kamikaze
@@ -2392,6 +2459,8 @@ anexada
 ### `sp-es-rulebook` p. 34
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-034.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-034.png)
 
 ```text
 ak-12Km
@@ -2497,6 +2566,8 @@ carta.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-035.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-035.png)
+
 ```text
 Dados de defensa de Armor
 
@@ -2564,6 +2635,8 @@ anexa se descarta.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-036.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-036.png)
+
 ```text
 Carta anexa Add-on
 
@@ -2611,6 +2684,8 @@ Se anexa en la parte Derecha de la carta de peón.
 ### `sp-es-rulebook` p. 37
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-037.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-037.png)
 
 ```text
 Puede activar
@@ -2829,6 +2904,8 @@ HEX
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-038.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-038.png)
+
 ```text
 Modificador de mano de cartas
 de acciones (p. 31).
@@ -2932,6 +3009,8 @@ Requisitos de carta anexa.
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-039.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-039.png)
+
 ```text
 Este juego no habría sido posible sin la valiosa creatividad de artistas
 en todo el mundo que comparten su talento y su arte:
@@ -2988,6 +3067,8 @@ http://wolfen-graphix.deviantart.com/
 ### `sp-es-rulebook` p. 40
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-040.png](../../../tmp/ruletext/pages/sp-es-rulebook/page-040.png)
 
 ```text
 Modo Speedrunners

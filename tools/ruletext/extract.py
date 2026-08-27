@@ -30,6 +30,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG_PATH = ROOT / "DOCS" / "artifacts" / "source-catalog.json"
+REVIEW_NOTES_PATH = ROOT / "tools" / "ruletext" / "review_notes.json"
 RAW_DIR = ROOT / "tmp" / "ruletext"
 RAW_PAGES_DIR = RAW_DIR / "pages"
 TRANSCRIPTS_DIR = ROOT / "DOCS" / "rules" / "transcripts"
@@ -107,6 +108,13 @@ PROFILES: dict[str, Profile] = {
 def load_catalog() -> dict[str, dict]:
     payload = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     return {asset["id"]: asset for asset in payload["assets"]}
+
+
+def load_review_notes() -> dict[str, dict[str, list[str]]]:
+    if not REVIEW_NOTES_PATH.exists():
+        return {}
+    payload = json.loads(REVIEW_NOTES_PATH.read_text(encoding="utf-8"))
+    return {str(artifact_id): {str(page): list(notes) for page, notes in pages.items()} for artifact_id, pages in payload.items()}
 
 
 def normalize_text(text: str) -> str:
@@ -269,7 +277,7 @@ def write_page_images(artifact_id: str, pdf_path: Path) -> None:
             pixmap.save(target_dir / f"page-{page_number:03d}.png")
 
 
-def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
+def build_markdown(profile: Profile, catalog: dict[str, dict], review_notes: dict[str, dict[str, list[str]]]) -> str:
     lines = [
         f"# {profile.title}",
         "",
@@ -301,6 +309,8 @@ def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
         pages = extract_pages(pdf_path)
         write_raw_text(artifact_id, pages)
         write_page_images(artifact_id, pdf_path)
+        artifact_notes = review_notes.get(artifact_id, {})
+        artifact_page_dir = Path("../../../tmp/ruletext/pages") / artifact_id
         lines.extend(
             [
                 f"## Artifact `{artifact_id}`",
@@ -309,16 +319,31 @@ def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
                 f"- Language: `{asset['language']}`",
                 f"- Role: `{asset['role']}`",
                 f"- Authority: `{asset['authority']}`",
+                f"- Page images: [{artifact_page_dir.as_posix()}]({artifact_page_dir.as_posix()})",
                 "",
             ]
         )
         for page in pages:
+            page_number = str(page["page"])
+            page_image = artifact_page_dir / f"page-{int(page['page']):03d}.png"
             lines.extend(
                 [
                     f"### `{artifact_id}` p. {page['page']}",
                     "",
                     f"_Extraction method: `{page['method']}`_",
                     "",
+                    f"- Page image: [{page_image.name}]({page_image.as_posix()})",
+                    "",
+                ]
+            )
+            page_notes = artifact_notes.get(page_number, [])
+            if page_notes:
+                lines.extend(["", "#### Review Notes", ""])
+                for note in page_notes:
+                    lines.append(f"- {note}")
+                lines.append("")
+            lines.extend(
+                [
                     "```text",
                     str(page["text"]),
                     "```",
@@ -330,10 +355,11 @@ def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
 
 def build_profiles(selected: list[str]) -> None:
     catalog = load_catalog()
+    review_notes = load_review_notes()
     for name in selected:
         profile = PROFILES[name]
         profile.output.parent.mkdir(parents=True, exist_ok=True)
-        profile.output.write_text(build_markdown(profile, catalog), encoding="utf-8")
+        profile.output.write_text(build_markdown(profile, catalog, review_notes), encoding="utf-8")
         print(f"wrote {profile.output.relative_to(ROOT)}")
 
 

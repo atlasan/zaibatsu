@@ -24,10 +24,13 @@ Grouped Spanish cross-check transcript of the Shadowraiders component sheets.
 - Language: `es`
 - Role: `blocks-a4`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-blocks-a4](../../../tmp/ruletext/pages/sh-es-blocks-a4)
 
 ### `sh-es-blocks-a4` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-001.png)
 
 ```text
 1
@@ -128,6 +131,8 @@ A
 ### `sh-es-blocks-a4` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-002.png)
 
 ```text
 1
@@ -237,6 +242,8 @@ A
 ### `sh-es-blocks-a4` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-003.png)
 
 ```text
 1
@@ -377,6 +384,8 @@ A
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-004.png)
+
 ```text
 1
 
@@ -494,6 +503,8 @@ r
 ### `sh-es-blocks-a4` p. 5
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-005.png)
 
 ```text
 1
@@ -673,6 +684,8 @@ de ICE
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-006.png)
+
 ```text
 1
 
@@ -815,6 +828,8 @@ S
 ### `sh-es-blocks-a4` p. 7
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-007.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-007.png)
 
 ```text
 1
@@ -969,6 +984,8 @@ na
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-008.png](../../../tmp/ruletext/pages/sh-es-blocks-a4/page-008.png)
+
 ```text
 1
 
@@ -1110,10 +1127,13 @@ d
 - Language: `es`
 - Role: `control-cards`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-control-cards](../../../tmp/ruletext/pages/sh-es-control-cards)
 
 ### `sh-es-control-cards` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-control-cards/page-001.png)
 
 ```text
 Merc A
@@ -1248,6 +1268,8 @@ mission
 ### `sh-es-control-cards` p. 2
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-control-cards/page-002.png)
 
 ```text
 C
@@ -1430,10 +1452,13 @@ weapon
 - Language: `es`
 - Role: `action-cards`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-action-cards](../../../tmp/ruletext/pages/sh-es-action-cards)
 
 ### `sh-es-action-cards` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-001.png)
 
 ```text
 Accelerator
@@ -1709,6 +1734,8 @@ pawn
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-002.png)
+
 ```text
 Sara Jane
 
@@ -1867,6 +1894,8 @@ KOTDESIGN
 ### `sh-es-action-cards` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-003.png)
 
 ```text
 show busineess
@@ -2174,6 +2203,8 @@ Cargo
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-004.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-004.png)
+
 ```text
 fragged
 
@@ -2473,6 +2504,8 @@ mark
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-005.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-005.png)
+
 ```text
 runner D
 
@@ -2693,6 +2726,8 @@ Cargo
 ### `sh-es-action-cards` p. 6
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-006.png](../../../tmp/ruletext/pages/sh-es-action-cards/page-006.png)
 
 ```text
 Bodyguard
@@ -2953,10 +2988,13 @@ pawn
 - Language: `es`
 - Role: `pawns`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-pawns](../../../tmp/ruletext/pages/sh-es-pawns)
 
 ### `sh-es-pawns` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-pawns/page-001.png)
 
 ```text
 shadowraider
@@ -3002,6 +3040,8 @@ Merc A
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-pawns/page-002.png)
+
 ```text
 bot-bomb B
 
@@ -3041,6 +3081,8 @@ deviser A
 ### `sh-es-pawns` p. 3
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-003.png](../../../tmp/ruletext/pages/sh-es-pawns/page-003.png)
 
 ```text
 Outbreak
@@ -3104,10 +3146,13 @@ C.H.A.O.S.
 - Language: `es`
 - Role: `markers`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-markers](../../../tmp/ruletext/pages/sh-es-markers)
 
 ### `sh-es-markers` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-markers/page-001.png)
 
 ```text
 01
@@ -3317,6 +3362,8 @@ control
 
 _Extraction method: `pymupdf`_
 
+- Page image: [page-002.png](../../../tmp/ruletext/pages/sh-es-markers/page-002.png)
+
 ```text
 2/2
 
@@ -3339,10 +3386,13 @@ or even colored buttons or seeds.
 - Language: `es`
 - Role: `chaos-card`
 - Authority: `primary`
+- Page images: [../../../tmp/ruletext/pages/sh-es-chaos-card](../../../tmp/ruletext/pages/sh-es-chaos-card)
 
 ### `sh-es-chaos-card` p. 1
 
 _Extraction method: `pymupdf`_
+
+- Page image: [page-001.png](../../../tmp/ruletext/pages/sh-es-chaos-card/page-001.png)
 
 ```text
 Carta de Chaos - Chaos card
