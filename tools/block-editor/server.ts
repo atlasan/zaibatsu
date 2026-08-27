@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
+import { editorCoverageCatalog } from "./coverage.ts";
 import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateActionDeck, validateDocument, type ActionCardDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession, type HexVisionTile } from "./model";
 import { createPlayScenario, createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, listPlayScenarios, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
@@ -109,6 +110,7 @@ const server = Bun.serve({
     const url = new URL(request.url);
     try {
       if (url.pathname === "/api/assets") return json({ assets: assetRecords() });
+      if (url.pathname === "/api/coverage") return json(editorCoverageCatalog());
       // Play sessions are intentionally in-memory. These routes never write
       // canonical spec data or editor drafts.
       if (url.pathname === "/api/play/sessions" && request.method === "POST") {

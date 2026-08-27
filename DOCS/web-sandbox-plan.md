@@ -19,7 +19,9 @@ Lab fixtures. Fixtures arrange deterministic legal reducer state only so a user
 can immediately exercise current implemented action families: game basics,
 search/movement, combat/control, attachments, and reboot/turn flow. They never
 write `spec/` and do not claim that provisional Speedrunners content is
-source-complete.
+source-complete. The host also serves a shared coverage map so `/play/` can say
+explicitly which slices are runnable now and which authored/modelled slices are
+still pending.
 
 ## Contract
 
@@ -60,6 +62,10 @@ source-complete.
    engine-authoritative on submission. A movement-valued card gets the same
    path builder with its printed fixed budget and is discarded only after the
    engine accepts the path.
+7. Coverage panels on the setup screen and in a live session keep the sandbox's
+   current runtime scope explicit: implemented action families and attachment
+   resolution are shown separately from pending bonus-counter, effect-registry,
+   armor, movement-grant, and ability-use work.
 
 ## Acceptance gate
 

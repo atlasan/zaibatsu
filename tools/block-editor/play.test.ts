@@ -32,6 +32,8 @@ test("play projection exposes guided options and does not write Speedrunners dat
   const source = join(resolve(import.meta.dir, "../.."), "spec/data/speedrunners/blocks.json");
   const before = readFileSync(source, "utf8");
   const created = createPlaySession({ playerNames: ["Ada", "Bea"], seed: 93 });
+  expect(created.coverage.id).toBe("play-workbench");
+  expect(created.coverage.status).toBe("partial");
   expect(created.legalOptions.actions.some((action) => action.type === "pass")).toBe(true);
   const phase = submitPlayCommand(created.id, { kind: "phase" });
   expect(phase.legalOptions.actions.some((action) => action.type === "place-marker")).toBe(true);

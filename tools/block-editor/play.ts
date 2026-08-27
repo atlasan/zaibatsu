@@ -9,6 +9,7 @@ import { snapshot } from "../../impl/ts/src/engine/snapshot.ts";
 import { currentPlayer, pawnById, type GameData, type GameState } from "../../impl/ts/src/domain/types.ts";
 import { neighbor } from "../../impl/ts/src/domain/hex.ts";
 import { stepTargets, type SpaceRef } from "../../impl/ts/src/engine/movement.ts";
+import { coverageSurface } from "./coverage.ts";
 import { sha256 } from "./model.ts";
 
 export type PlayCommand = { kind: "phase" } | { kind: "action"; action: Action };
@@ -317,6 +318,7 @@ function view(session: PlaySession) {
     counts: { deck: session.state.deck.length, discard: session.state.discard.length, blockPile: session.state.blockPile.length, eliminated: session.state.eliminated.length },
     data: readableData(data),
     layout,
+    coverage: coverageSurface("play-workbench"),
     legalOptions: legalOptions(session.state, session.scenarioId),
     events: session.events,
     commandCount: session.commands.length,

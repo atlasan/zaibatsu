@@ -93,6 +93,15 @@ legend { color:var(--muted); font-size:12px; }
 .diagnostics h3 { font-size:13px; }
 .diagnostics p,.diagnostics li { color:var(--muted); font-size:12px; margin:7px 0; }
 .diagnostics ul { padding-left:18px; color:var(--danger); }
+.coverage-panel { border-left-color:var(--yellow); }
+.coverage-list { display:grid; gap:8px; padding:0; margin:10px 0 0; }
+.coverage-list li,.coverage-item { display:grid; gap:3px; list-style:none; padding:8px; border:1px solid var(--line); border-radius:8px; background:#141b28; }
+.coverage-item strong,.coverage-list strong { color:var(--text); font-size:12px; }
+.coverage-item small,.coverage-list small { color:var(--muted); font-size:11px; }
+.coverage-status { display:inline-flex; width:max-content; align-items:center; gap:6px; margin-left:6px; padding:2px 7px; border-radius:999px; font:10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.08em; border:1px solid var(--line); color:var(--muted); }
+.coverage-status.ok { border-color:#2c8c6a; color:#95ffd2; }
+.coverage-status.warn { border-color:#8e7540; color:#ffe39a; }
+.coverage-status.todo { border-color:#6b4d74; color:#ffc0ea; }
 .empty { padding:80px 30px; color:var(--muted); text-align:center; }
 
 .commandbar { position:fixed; z-index:8; bottom:0; left:0; right:0; display:flex; justify-content:space-between; gap:12px; background:#111622ee; backdrop-filter:blur(12px); border-top:1px solid var(--line); padding:12px 20px; }

@@ -190,22 +190,22 @@ type Ability struct {
 }
 
 type MovementGrant struct {
-	Type    string `json:"type"`
-	Amount  int    `json:"amount,omitempty"`
-	Stealth bool   `json:"stealth,omitempty"`
+        Type    string `json:"type"`
+        Amount  int    `json:"amount,omitempty"`
+        Stealth bool   `json:"stealth,omitempty"`
 }
 
 type AbilityUse struct {
-	Ability    string `json:"ability"`
-	PerTurn    int    `json:"perTurn,omitempty"`
-	Dice       string `json:"dice,omitempty"`
-	Activation string `json:"activation,omitempty"`
+        Ability    string `json:"ability"`
+        PerTurn    int    `json:"perTurn,omitempty"`
+        Dice       string `json:"dice,omitempty"`
+        Activation string `json:"activation,omitempty"`
 }
 
 type IceModifier struct {
-	Faces     []int `json:"faces,omitempty"`
-	DeltaDice int   `json:"deltaDice,omitempty"`
-	Black     bool  `json:"black,omitempty"`
+        Faces     []int `json:"faces,omitempty"`
+        DeltaDice int   `json:"deltaDice,omitempty"`
+        Black     bool  `json:"black,omitempty"`
 }
 
 // Pawn is an agent: piece (position) + control card (attributes).
@@ -229,21 +229,21 @@ type Pawn struct {
 // Attach describes how an action card may attach to a game element, and what it
 // confers on the target (grants/removes abilities, plus a special effect text).
 type Attach struct {
-	As             string          `json:"as"`
-	Slot           string          `json:"slot,omitempty"`
-	Class          []string        `json:"class,omitempty"`
-	Grants         []string        `json:"grants,omitempty"`
-	Removes        []string        `json:"removes,omitempty"`
-	GrantsMovement []MovementGrant `json:"grantsMovement,omitempty"`
-	GrantsStealth  bool            `json:"grantsStealth,omitempty"`
-	GrantsSlot     []string        `json:"grantsSlot,omitempty"`
-	AbilityUses    []AbilityUse    `json:"abilityUses,omitempty"`
-	IceModifier    *IceModifier    `json:"iceModifier,omitempty"`
-	DrawModifier   int             `json:"drawModifier,omitempty"`
-	HandModifier   int             `json:"handModifier,omitempty"`
-	EffectText     string          `json:"effectText,omitempty"`
-	EffectTrigger  string          `json:"effectTrigger,omitempty"`
-	Cost           int             `json:"cost,omitempty"`
+        As             string          `json:"as"`
+        Slot           string          `json:"slot,omitempty"`
+        Class          []string        `json:"class,omitempty"`
+        Grants         []string        `json:"grants,omitempty"`
+        Removes        []string        `json:"removes,omitempty"`
+        GrantsMovement []MovementGrant `json:"grantsMovement,omitempty"`
+        GrantsStealth  bool            `json:"grantsStealth,omitempty"`
+        GrantsSlot     []string        `json:"grantsSlot,omitempty"`
+        AbilityUses    []AbilityUse    `json:"abilityUses,omitempty"`
+        IceModifier    *IceModifier    `json:"iceModifier,omitempty"`
+        DrawModifier   int             `json:"drawModifier,omitempty"`
+        HandModifier   int             `json:"handModifier,omitempty"`
+        EffectText     string          `json:"effectText,omitempty"`
+        EffectTrigger  string          `json:"effectTrigger,omitempty"`
+        Cost           int             `json:"cost,omitempty"`
 }
 
 // ActionCard is a multi-use card from the shared action deck.

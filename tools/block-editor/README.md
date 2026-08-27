@@ -8,6 +8,9 @@ cards, pawns, markers, threats, missions, and modes later.
 It also serves a local-only Speedrunners rules sandbox at `/play/`. Sandbox
 state is held in memory, uses the TypeScript engine on the local server, and
 never writes canonical `spec/` data.
+All three local surfaces now share an explicit coverage map from the host, so
+the block editor, action-card editor, and `/play/` describe the same authored
+and runnable scope instead of relying on implied support.
 
 ## Run it
 
@@ -66,6 +69,9 @@ bun run test:play
 - Carries optional session-only knowledge hints (tags / relation hints) through
   export metadata so review can promote them into `spec/knowledge/` without
   leaking them into runtime records by accident.
+- Shows the current block-editor coverage alongside the current `/play/`
+  runtime coverage so authored fields and runnable rule support stay visibly
+  aligned.
 - Offers a deterministic **Prefill 7 zones** starting point, **Clear all** for
   editable block content, and review-required HexVision application for the
   selected source or all sources. Bulk HexVision creates drafts only where one
@@ -104,6 +110,9 @@ provenance, unresolved review data, and unconfirmed groups before the editor
 exports one review patch/report per expansion. Shadowraiders retains explicit
 `targetAbsent` handling until its canonical target exists. Existing v1 block
 sessions are accepted and saved as v4 data-editor sessions.
+The action-card editor also shows the shared coverage map so the authored
+`ActionCardRecord` contract and the current `/play/` runtime subset are visible
+together.
 
 ## Separate authoring surfaces
 
@@ -134,4 +143,6 @@ The block authoring screen exposes an explicit **1–N space → zone mapping**:
 Speedrunners subset. It groups guided actions by basics/turn flow, movement,
 search/placement, combat, icebreaker/control, attachments, and reboot. It is
 intended for rules debugging and acceptance coverage, not as a source-complete
-or production game client.
+production game client. The setup screen and live session now surface an
+explicit shared coverage panel that distinguishes implemented runtime slices
+from modeled-but-still-pending work.

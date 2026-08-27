@@ -21,6 +21,7 @@ const state = {
   deckValidation: [],
   visions: {},
   copyGroupCandidates: {},
+  coverage: null,
 };
 
 const escape = (value = "") => String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
@@ -39,6 +40,15 @@ const api = async (path, options = {}) => {
   if (!response.ok) throw new Error(data.error ?? data.errors?.join(" ") ?? "Request failed");
   return data;
 };
+const coverageSurface = (id) => state.coverage?.surfaces?.find((surface) => surface.id === id);
+const statusClass = (status) => status === "implemented" ? "ok" : status === "partial" ? "warn" : "todo";
+const statusLabel = (status) => status === "implemented" ? "implemented" : status === "partial" ? "partial" : "planned";
+
+function coverageMarkup(id) {
+  const surface = coverageSurface(id);
+  if (!surface) return "";
+  return `<section class="diagnostics coverage-panel"><h3>${escape(surface.title)} <span class="coverage-status ${statusClass(surface.status)}">${statusLabel(surface.status)}</span></h3><p>${escape(surface.summary)}</p><ul class="coverage-list">${surface.items.map((item) => `<li><strong>${escape(item.label)}</strong><span class="coverage-status ${statusClass(item.status)}">${statusLabel(item.status)}</span><small>${escape(item.detail)}</small></li>`).join("")}</ul></section>`;
+}
 
 function blankDraft(asset) {
   const expansion = expansionFor(asset);
@@ -410,13 +420,13 @@ function renderInspector(draft) {
     </fieldset>
   </form>
   ${visionPreview(draft)}
-  <section class="diagnostics"><h3>Validation</h3>${state.validation.length ? `<ul>${state.validation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : "<p>Source text is review evidence. The gameplay record exports normalized fields plus the concise summary.</p>"}${state.deckValidation.length ? `<h3>Deck readiness</h3><ul>${state.deckValidation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : ""}</section>`;
+  <section class="diagnostics"><h3>Validation</h3>${state.validation.length ? `<ul>${state.validation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : "<p>Source text is review evidence. The gameplay record exports normalized fields plus the concise summary.</p>"}${state.deckValidation.length ? `<h3>Deck readiness</h3><ul>${state.deckValidation.map((error) => `<li>${escape(error)}</li>`).join("")}</ul>` : ""}</section>${coverageMarkup("action-card-editor")}${coverageMarkup("play-workbench")}`;
 }
 
 function render() {
   const asset = selectedAsset();
   const draft = selectedDraft();
-  app.innerHTML = `<header class="topbar"><div><span class="eyebrow">LOCAL CONTENT AUTHORING</span><h1>Zaibatsu <em>Action Card Editor</em></h1></div><div class="status"><span class="pulse"></span>${escape(state.notice)}</div><a class="editor-link" href="/">Block editor</a></header><section class="workspace card-workspace"><aside class="assets panel"><div class="panel-title"><h2>Action card sources</h2><span>${state.assets.length}</span></div><input id="asset-filter" aria-label="Filter action card assets" placeholder="Filter source cards"><div id="asset-list" class="asset-list">${assetGroups()}</div></aside><section class="canvas panel"><div class="canvas-title"><div><span class="eyebrow">${asset ? escape(asset.artifactId) : "no source"}</span><h2>${asset ? escape(titleFor(asset)) : "Select a card"}</h2></div><div class="canvas-actions"><button id="new-draft" class="secondary" ${asset ? "" : "disabled"}>${draft ? "Reset card" : "Create card"}</button><button id="apply-vision" class="secondary" ${draft && !draft.transcription.vision ? "" : "disabled"}>${draft?.transcription.vision ? "HexVision loaded" : "Apply HexVision"}</button></div></div>${asset ? `<div class="card-stage"><img src="/api/artifact/${encodeURIComponent(asset.assetId)}" alt="${escape(titleFor(asset))}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing-art',textContent:'Run the artifact refresh to load this local source image.'}))"></div><div class="asset-meta">assetId <code>${escape(asset.assetId)}</code> / source <code>${escape(asset.artifactId)}</code> / page ${asset.page}</div>` : ""}</section><section class="inspector panel">${draft ? renderInspector(draft) : "<div class=\"empty\"><h2>Start a card</h2><p>Select an action-card source and create a source-linked draft. Block placement tools are intentionally kept out of this editor.</p></div>"}</section></section><footer class="commandbar"><div><label>Session <input id="session-name" value="${escape(state.sessionName)}" aria-label="Session name"></label><button id="save">Save session</button><button id="load">Load session</button></div><div><button id="apply-vision-all" class="secondary">Apply HexVision to fresh</button><button id="validate" class="secondary">Validate</button><button id="validate-deck" class="secondary">Check deck</button><button id="export" class="accent">Export card patch + report</button><button id="export-deck" class="accent">Export deck review</button></div></footer>`;
+  app.innerHTML = `<header class="topbar"><div><span class="eyebrow">LOCAL CONTENT AUTHORING</span><h1>Zaibatsu <em>Action Card Editor</em></h1></div><div class="status"><span class="pulse"></span>${escape(state.notice)}</div><a class="editor-link" href="/">Block editor</a></header><section class="workspace card-workspace"><aside class="assets panel"><div class="panel-title"><h2>Action card sources</h2><span>${state.assets.length}</span></div><input id="asset-filter" aria-label="Filter action card assets" placeholder="Filter source cards"><div id="asset-list" class="asset-list">${assetGroups()}</div>${coverageMarkup("action-card-editor")}</aside><section class="canvas panel"><div class="canvas-title"><div><span class="eyebrow">${asset ? escape(asset.artifactId) : "no source"}</span><h2>${asset ? escape(titleFor(asset)) : "Select a card"}</h2></div><div class="canvas-actions"><button id="new-draft" class="secondary" ${asset ? "" : "disabled"}>${draft ? "Reset card" : "Create card"}</button><button id="apply-vision" class="secondary" ${draft && !draft.transcription.vision ? "" : "disabled"}>${draft?.transcription.vision ? "HexVision loaded" : "Apply HexVision"}</button></div></div>${asset ? `<div class="card-stage"><img src="/api/artifact/${encodeURIComponent(asset.assetId)}" alt="${escape(titleFor(asset))}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing-art',textContent:'Run the artifact refresh to load this local source image.'}))"></div><div class="asset-meta">assetId <code>${escape(asset.assetId)}</code> / source <code>${escape(asset.artifactId)}</code> / page ${asset.page}</div>` : ""}</section><section class="inspector panel">${draft ? renderInspector(draft) : "<div class=\"empty\"><h2>Start a card</h2><p>Select an action-card source and create a source-linked draft. Block placement tools are intentionally kept out of this editor.</p></div>"}</section></section><footer class="commandbar"><div><label>Session <input id="session-name" value="${escape(state.sessionName)}" aria-label="Session name"></label><button id="save">Save session</button><button id="load">Load session</button></div><div><button id="apply-vision-all" class="secondary">Apply HexVision to fresh</button><button id="validate" class="secondary">Validate</button><button id="validate-deck" class="secondary">Check deck</button><button id="export" class="accent">Export card patch + report</button><button id="export-deck" class="accent">Export deck review</button></div></footer>`;
   bind();
 }
 
@@ -702,10 +712,11 @@ function bind() {
 
 async function start() {
   try {
-    const [data, catalog] = await Promise.all([api("/api/action-card-assets"), api("/api/action-card-visions")]);
+    const [data, catalog, coverage] = await Promise.all([api("/api/action-card-assets"), api("/api/action-card-visions"), api("/api/coverage")]);
     state.assets = data.assets;
     state.visions = catalog.visions ?? {};
     state.copyGroupCandidates = catalog.copyGroupCandidates ?? {};
+    state.coverage = coverage;
     state.selectedAssetId = state.assets[0]?.assetId ?? null;
     state.notice = `${state.assets.length} individual action-card sources ready`;
   } catch (error) {

@@ -51,7 +51,9 @@ catalog, and chosen data bundle. The same host also serves the separate
 `/play/` rules sandbox; only its in-memory server module imports the TypeScript
 engine, and it never writes canonical data. Editor writes remain limited to the
 user-selected session/export path. This keeps the tools desktop-local and
-portable to a browser-hosted shell later.
+portable to a browser-hosted shell later. The host now also owns a shared
+coverage catalog so the block editor, action-card editor, and `/play/` surface
+the same current scope and pending gaps.
 
 ## First-screen layout
 
@@ -131,5 +133,6 @@ transcription.
 
 The block and action-card vertical slice is complete. Next, finish
 source-review gates, add pawn/marker resource plug-ins, and keep exported
-patches review-only. Do not add records to the Go/TypeScript engines until
-exported data has passed the existing source/provenance review.
+patches review-only. Keep the shared coverage catalog current whenever block,
+card, or `/play/` scope changes. Do not add records to the Go/TypeScript
+engines until exported data has passed the existing source/provenance review.

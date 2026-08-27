@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { coverageSurface, editorCoverageCatalog } from "./coverage";
 import { actionCardDraftForAsset, applyVisionPrefill, buildPatch, clearBlockContent, defaultCapacity, deriveBoundarySpaces, derivedDisplayShape, derivedIceValue, draftForAsset, inferNeighbors, isConnectedZoneSet, migrateSession, normalizeBlockDocument, prefillSevenZones, validateActionDeck, validateDocument, type AssetRecord, type BlockLayout } from "./model";
 
 const asset: AssetRecord = { assetId: "sp-en-blocks-a4-p01-c01", artifactId: "sp-en-blocks-a4", page: 1, kind: "block" };
@@ -65,3 +66,16 @@ describe("source-aligned 2-3-2 block editor model", () => {
   });
 });
 describe("action-card editor model", () => { const card: AssetRecord = { assetId: "sp-en-action-cards-p01-c01", artifactId: "sp-en-action-cards", page: 1, kind: "action-card" }; test("keeps vision candidates review-only", () => { const draft=actionCardDraftForAsset(card,{confidence:.2,reviewRequired:true,reasons:["OCR unavailable"]}); expect(validateDocument(draft,[card],layout).join(" ")).toContain("reviewer confirmation"); }); test("validates current structured card fields", () => { const draft=actionCardDraftForAsset(card); draft.actionCard.movements=[{type:"fixed",amount:3,stealth:true},{type:"d6"}]; draft.actionCard.effects=[{kind:"gain-bonus",amount:1,trigger:"on-play"},{kind:"custom",text:"Gain control of this pawn.",trigger:"on-control"}]; draft.actionCard.attach={as:"pawn",slot:"add-on",class:["cyborg"],grants:["icebreaker"],removes:["move","search","delete","icebreaker","reboot"],grantsMovement:[{type:"d6"}],grantsStealth:true,grantsSlot:["gadget"],abilityUses:[{ability:"move",dice:"d6"}],iceModifier:{faces:[1,6],deltaDice:1,black:true},drawModifier:1,handModifier:-1,blockSpace:{shape:"circle"},effectText:"Gain control of this pawn.",effectTrigger:"on-attach",cost:2}; expect(validateDocument(draft,[card],layout)).toEqual([]); draft.actionCard.effects=[{kind:"not-real"} as any]; expect(validateDocument(draft,[card],layout).join(" ")).toContain("supported structured values"); draft.actionCard.effects=[]; draft.actionCard.attach={unknown:true} as any; expect(validateDocument(draft,[card],layout).join(" ")).toContain("supported structured values"); }); test("detects duplicate records, source ownership, and unconfirmed groups", () => { const sibling: AssetRecord = { ...card, assetId: "sp-en-action-cards-p01-c02" }; const first = actionCardDraftForAsset(card); const second = actionCardDraftForAsset(sibling); second.actionCard.id = first.actionCard.id; first.actionCard.assetRefs.push(sibling.assetId); first.actionCard.copies = 2; expect(validateActionDeck([first, second], [card, sibling]).join(" ")).toContain("duplicated"); expect(validateActionDeck([first, second], [card, sibling]).join(" ")).toContain("belongs to both"); expect(validateActionDeck([first], [card, sibling]).join(" ")).toContain("requires confirmation"); }); });
+describe("coverage catalog", () => {
+  test("describes all three local surfaces and shared gaps", () => {
+    const catalog = editorCoverageCatalog();
+    expect(catalog.surfaces.map((surface) => surface.id)).toEqual(["block-editor", "action-card-editor", "play-workbench"]);
+    expect(catalog.sharedGaps.some((item) => item.label.includes("Bonus-counter economy"))).toBe(true);
+  });
+  test("marks the workbench as a partial runtime surface", () => {
+    const surface = coverageSurface("play-workbench");
+    expect(surface.status).toBe("partial");
+    expect(surface.items.some((item) => item.detail.includes("granted slots"))).toBe(true);
+    expect(surface.items.some((item) => item.status === "planned")).toBe(true);
+  });
+});

@@ -6,6 +6,7 @@ let error = "";
 let selectedActionIndex = 0;
 let movementPath = [];
 let scenarios = [];
+let coverage = null;
 const FAMILY_ORDER = ["basics", "movement", "search", "combat", "icebreaker", "attachments", "reboot"];
 const FAMILY_LABELS = {
   basics: "Basics / turn flow",
@@ -43,6 +44,42 @@ const pawnData = (id) => session.data.pawns.find((pawn) => pawn.id === id);
 const player = (id) => session.players.find((item) => item.id === id);
 const cardLabel = (id) => session.data.cards.find((card) => card.id === id)?.name || id;
 const pawnLabel = (id) => pawnData(id)?.name || id;
+const coverageSurface = (id) => coverage?.surfaces?.find((surface) => surface.id === id);
+const coverageTone = (status) => status === "implemented" ? "ok" : status === "partial" ? "warn" : "todo";
+const coverageLabel = (status) => status === "implemented" ? "implemented" : status === "partial" ? "partial" : "planned";
+
+function coveragePanel(surfaceId, title = "Coverage") {
+  const surface = coverageSurface(surfaceId);
+  if (!surface) return document.createDocumentFragment();
+  const panel = el("section", { class: "panel coverage" });
+  panel.append(el("h2", {}, title), el("p", { class: "hint" }, surface.summary));
+  const badge = el("span", { class: `coverage-pill ${coverageTone(surface.status)}` }, coverageLabel(surface.status));
+  panel.append(badge);
+  const list = el("div", { class: "coverage-list" });
+  surface.items.forEach((item) => {
+    const row = el("div", { class: "coverage-item" });
+    row.append(el("strong", {}, item.label), el("span", { class: `coverage-pill ${coverageTone(item.status)}` }, coverageLabel(item.status)), el("small", { class: "hint" }, item.detail));
+    list.append(row);
+  });
+  panel.append(list);
+  return panel;
+}
+
+function coverageOverview() {
+  if (!coverage?.surfaces?.length) return document.createDocumentFragment();
+  const panel = el("section", { class: "test-lab setup-lab coverage-overview", "aria-label": "Coverage overview" }, el("h2", {}, "Coverage overview"), el("p", { class: "hint" }, coverage.summary));
+  coverage.surfaces.forEach((surface) => {
+    const card = el("article", { class: "scenario-card coverage-card" });
+    card.append(el("strong", {}, surface.title), el("p", { class: "hint" }, surface.summary), el("span", { class: `coverage-pill ${coverageTone(surface.status)}` }, coverageLabel(surface.status)));
+    panel.append(card);
+  });
+  if (coverage.sharedGaps?.length) {
+    const gaps = el("div", { class: "coverage-list" });
+    coverage.sharedGaps.forEach((item) => gaps.append(el("div", { class: "coverage-item" }, el("strong", {}, item.label), el("span", { class: `coverage-pill ${coverageTone(item.status)}` }, coverageLabel(item.status)), el("small", { class: "hint" }, item.detail))));
+    panel.append(el("h2", {}, "Shared gaps"), gaps);
+  }
+  return panel;
+}
 
 function setupScreen() {
   app.replaceChildren();
@@ -78,7 +115,7 @@ function setupScreen() {
   };
   if (scenarios.length) renderScenarios();
   else api("/api/play/scenarios").then((response) => { scenarios = response.scenarios || []; renderScenarios(); }).catch((cause) => { lab.append(el("p", { class: "error" }, cause.message)); });
-  app.append(form, lab);
+  app.append(form, lab, coverageOverview());
 }
 
 function gameScreen() {
@@ -91,7 +128,7 @@ function gameScreen() {
   const left = el("aside", { class: "side-stack" });
   const center = el("section", { class: "panel board-panel" });
   const right = el("aside", { class: "side-stack right" });
-  left.append(playerPanel(), phasePanel(), actionPanel(), scenarioPanel(), tracePanel());
+  left.append(playerPanel(), phasePanel(), actionPanel(), scenarioPanel(), coveragePanel("play-workbench"), tracePanel());
   center.append(boardPanel());
   right.append(inspectorPanel(), eventPanel(), snapshotPanel());
   shell.append(left, center, right); app.append(header, shell);
@@ -267,4 +304,15 @@ function snapshotPanel() { const panel = el("section", { class: "panel" }); pane
 function tracePanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Trace")); const download = el("button", { type: "button" }, "Export trace"); download.addEventListener("click", async () => { const trace = await api(`/api/play/sessions/${session.id}/trace`); const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([JSON.stringify(trace, null, 2)], { type: "application/json" })); link.download = "speedrunners-trace.json"; link.click(); URL.revokeObjectURL(link.href); }); const file = el("input", { class: "trace-input", type: "file", accept: "application/json" }); const upload = el("button", { type: "button" }, "Import trace"); upload.addEventListener("click", () => file.click()); file.addEventListener("change", async () => { const selectedFile = file.files?.[0]; if (!selectedFile) return; try { session = await api("/api/play/traces/import", { method: "POST", body: await selectedFile.text() }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }); const reset = el("button", { type: "button" }, "Reset"); reset.addEventListener("click", async () => { session = await api(`/api/play/sessions/${session.id}/reset`, { method: "POST", body: JSON.stringify(session.setup) }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); }); panel.append(el("div", { class: "button-row" }), file); panel.querySelector(".button-row").append(download, upload, reset); return panel; }
 async function command(body) { try { const result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify(body) }); session = result; error = result.result?.error || ""; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }
 async function passAndEndTurn() { try { let result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify({ kind: "action", action: { type: "pass" } }) }); if (!result.result?.accepted) throw new Error(result.result?.error || "Pass was rejected"); for (let phase = 0; phase < 3; phase++) { result = await api(`/api/play/sessions/${session.id}/command`, { method: "POST", body: JSON.stringify({ kind: "phase" }) }); if (!result.result?.accepted) throw new Error(result.result?.error || "Phase transition was rejected"); } session = result; error = ""; selectedActionIndex = 0; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }
-setupScreen();
+async function start() {
+  try {
+    const [scenarioResponse, coverageResponse] = await Promise.all([api("/api/play/scenarios"), api("/api/coverage")]);
+    scenarios = scenarioResponse.scenarios || [];
+    coverage = coverageResponse;
+  } catch (cause) {
+    error = cause.message;
+  }
+  setupScreen();
+}
+
+start();

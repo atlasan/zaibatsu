@@ -64,9 +64,11 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
   block-editor host with isolated replayable sessions, CSS Cybernet projection,
   optional local artwork, live phase controls, standard seeded free play, a
   deterministic Test Lab (including a game-basics fixture), grouped guided
-  action families, v1/v2 trace replay, and Playwright browser coverage. Close
-  only after supported-action coverage, accepted source/data readiness, and
-  both golden suites are green; see `DOCS/web-sandbox-plan.md`.
+  action families, v1/v2 trace replay, Playwright browser coverage, and a
+  shared coverage map that makes authored-vs-runnable scope explicit across the
+  block editor, action-card editor, and `/play/`. Close only after
+  supported-action coverage, accepted source/data readiness, and both golden
+  suites are green; see `DOCS/web-sandbox-plan.md`.
 - [ ] (go) Headless engine host / server + simulation harness.
 - [ ] (go/ts) Bot players + batch self-play for balance analysis.
 - [ ] (both) Grow the CLI demos into playable hotseat clients.
