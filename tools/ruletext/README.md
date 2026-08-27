@@ -6,7 +6,8 @@ Zaibatsu source PDFs.
 It keeps three layers separate:
 
 1. `DOCS/Original/` - authoritative local source PDFs, ignored by Git.
-2. `tmp/ruletext/` - regenerated raw text extraction output, ignored by Git.
+2. `tmp/ruletext/` - regenerated raw text output and per-page PNG renders,
+   ignored by Git.
 3. `DOCS/rules/transcripts/` - tracked, cited transcript artifacts used by docs,
    provenance review, and canonical data transcription.
 
@@ -16,9 +17,9 @@ It keeps three layers separate:
 python -m pip install -r tools/ruletext/requirements.txt
 ```
 
-`pypdf` is the required extractor. If `pdftotext`, `pdftoppm`, and/or
-`tesseract` are available on PATH, the script uses them automatically when they
-improve extraction.
+`PyMuPDF` and `pypdf` are the required extractors. If `pdftotext`,
+`pdftoppm`, and/or `tesseract` are available on PATH, the script uses them
+automatically when they improve extraction.
 
 ## Usage
 
@@ -27,6 +28,10 @@ python tools/ruletext/extract.py list
 python tools/ruletext/extract.py build
 python tools/ruletext/extract.py build --profile speedrunners-rulebook-en
 ```
+
+`build` also renders one PNG per source page under
+`tmp/ruletext/pages/<artifact-id>/page-###.png` so transcript cleanup can be
+checked against a stable local image artifact.
 
 ## Built-in transcript outputs
 
@@ -44,8 +49,9 @@ python tools/ruletext/extract.py build --profile speedrunners-rulebook-en
 Per page, the tool tries:
 
 1. `pdftotext`
-2. `pypdf`
-3. `pdftoppm` + `tesseract`
+2. `PyMuPDF` block extraction with exact duplicate-block removal
+3. `pypdf`
+4. `pdftoppm` + `tesseract`
 
 If no text is available, the transcript keeps an explicit placeholder for that
 page instead of silently dropping it.

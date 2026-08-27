@@ -7,8 +7,9 @@ This tool keeps a strict split between:
 
 Extraction order per page:
 1. pdftotext (if available)
-2. pypdf text extraction
-3. pdftoppm + tesseract OCR (if both available and earlier methods are empty)
+2. PyMuPDF block extraction
+3. pypdf text extraction
+4. pdftoppm + tesseract OCR (if both available and earlier methods are empty)
 """
 
 from __future__ import annotations
@@ -23,12 +24,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+import fitz
 from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG_PATH = ROOT / "DOCS" / "artifacts" / "source-catalog.json"
 RAW_DIR = ROOT / "tmp" / "ruletext"
+RAW_PAGES_DIR = RAW_DIR / "pages"
 TRANSCRIPTS_DIR = ROOT / "DOCS" / "rules" / "transcripts"
 
 
@@ -124,6 +127,23 @@ def normalize_text(text: str) -> str:
     return text.strip()
 
 
+def dedupe_block_lines(text: str) -> str:
+    lines = [line.strip() for line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n")]
+    out: list[str] = []
+    previous = None
+    for line in lines:
+        if not line:
+            if previous != "":
+                out.append("")
+            previous = ""
+            continue
+        if line == previous:
+            continue
+        out.append(line)
+        previous = line
+    return "\n".join(out)
+
+
 def pdftotext_page(pdf_path: Path, page: int, executable: str | None) -> str:
     if not executable:
         return ""
@@ -143,6 +163,28 @@ def pdftotext_page(pdf_path: Path, page: int, executable: str | None) -> str:
     if completed.returncode != 0:
         return ""
     return normalize_text(completed.stdout)
+
+
+def pymupdf_page(doc: fitz.Document, page: int) -> str:
+    page_obj = doc[page - 1]
+    blocks = page_obj.get_text("blocks")
+    if not blocks:
+        return ""
+    seen: set[tuple[str, str]] = set()
+    parts: list[str] = []
+    for block in blocks:
+        raw = str(block[4] or "")
+        text = normalize_text(dedupe_block_lines(raw))
+        if not text:
+            continue
+        bbox = ",".join(str(int(round(value / 4) * 4)) for value in block[:4])
+        dedupe_scope = text if len(text) >= 80 else f"{bbox}|{text}"
+        key = (dedupe_scope, text)
+        if key in seen:
+            continue
+        seen.add(key)
+        parts.append(text)
+    return normalize_text("\n\n".join(parts))
 
 
 def pypdf_page(reader: PdfReader, page: int) -> str:
@@ -182,6 +224,7 @@ def ocr_page(pdf_path: Path, page: int, pdftoppm: str | None, tesseract: str | N
 
 def extract_pages(pdf_path: Path) -> list[dict[str, str | int]]:
     reader = PdfReader(str(pdf_path))
+    fitz_doc = fitz.open(pdf_path)
     pdftotext = shutil.which("pdftotext")
     pdftoppm = shutil.which("pdftoppm")
     tesseract = shutil.which("tesseract")
@@ -189,6 +232,9 @@ def extract_pages(pdf_path: Path) -> list[dict[str, str | int]]:
     for page in range(1, len(reader.pages) + 1):
         text = pdftotext_page(pdf_path, page, pdftotext)
         method = "pdftotext"
+        if not text:
+            text = pymupdf_page(fitz_doc, page)
+            method = "pymupdf"
         if not text:
             text = pypdf_page(reader, page)
             method = "pypdf"
@@ -209,6 +255,18 @@ def write_raw_text(artifact_id: str, pages: Iterable[dict[str, str | int]]) -> N
     for page in pages:
         chunks.append(f"===== {artifact_id} page {page['page']} ({page['method']}) =====\n{page['text']}\n")
     target.write_text("\n".join(chunks), encoding="utf-8")
+
+
+def write_page_images(artifact_id: str, pdf_path: Path) -> None:
+    target_dir = RAW_PAGES_DIR / artifact_id
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+    with fitz.open(pdf_path) as doc:
+        matrix = fitz.Matrix(2, 2)
+        for page_number, page in enumerate(doc, start=1):
+            pixmap = page.get_pixmap(matrix=matrix, alpha=False)
+            pixmap.save(target_dir / f"page-{page_number:03d}.png")
 
 
 def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
@@ -242,6 +300,7 @@ def build_markdown(profile: Profile, catalog: dict[str, dict]) -> str:
         pdf_path = ROOT / Path(asset["path"])
         pages = extract_pages(pdf_path)
         write_raw_text(artifact_id, pages)
+        write_page_images(artifact_id, pdf_path)
         lines.extend(
             [
                 f"## Artifact `{artifact_id}`",

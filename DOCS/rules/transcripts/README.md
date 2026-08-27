@@ -29,7 +29,12 @@ python tools/ruletext/extract.py build
 The script regenerates:
 
 - tracked transcript Markdown here;
-- ignored raw extraction output in `tmp/ruletext/`.
+- ignored raw extraction output in `tmp/ruletext/`;
+- ignored single-page PNG renders in `tmp/ruletext/pages/<artifact-id>/`.
+
+Per page, the extractor prefers `pdftotext` when it is available, then
+PyMuPDF block extraction with duplicate-block cleanup, then `pypdf`, then OCR
+fallbacks for image-only pages.
 
 ## Interpretation Boundary
 

@@ -27,42 +27,60 @@ Grouped Spanish cross-check transcript of the Shadowraiders component sheets.
 
 ### `sh-es-blocks-a4` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 Optimizada para formato de papel A4
 210 × 297 mm (8.27 × 11.69 pulgadas)
+
 1.Imprimir en cartulina o papel adhesivo
 y pegar sobre un soporte grueso.
+
 2.Cortar con cúter, exacto o tijeras.
-Optimizada para formato de papel A4
-210 × 297 mm (8.27 × 11.69 pulgadas)
-1.Imprimir en cartulina o papel adhesivo
-y pegar sobre un soporte grueso.
-2.Cortar con cúter, exacto o tijeras.
+
 1/8
+
 A4
-amt r
+
+a
+
+m
+
 t
-o
-in
-f
-g
-amt r
+
+r
+
 t
+
 o
-in
+
+i
+
+n
+
 f
+
 g
-Todos los peones deben
+
+T
+odos los peones deben
 descartar las cartas anexas.
+
 R
 s
 t
@@ -73,57 +91,80 @@ t
 e
 
 ibatsu
-Todos los Za
+T
+odos los Za
 c
 c n
 sa rifi a un
 .
+
 C ntador
 o
-o i i
-i n ( )
-de b nfcacó
 
-Todos los Zaibatsu
+o i i
+i n (
+)
+de b n f cac ó
+
+T
+odos los Zaibatsu
 toman dos cartas del
-. mazo de acciones
-nesakA
+.
+mazo de acciones
+
+n
+
+e
+
+s
+
+a
+
+k
+
+A
 ```
 
 ### `sh-es-blocks-a4` p. 2
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 2/8
+
 Coloca un
 en
 ada
 
 c
-en Cybernet que no
-posea u
-o.
+en C
+ybernet que no posea u o.
 
 n
-Cont
-do
 
+Cont do
 e hostil
 a
-r
-d
-Casila de eve
-to ( )
+r d
+Casi la de eve to ( )
 l
 n
+
 Zion
 s
 clu
@@ -131,177 +172,453 @@ ter
 s
 clu
 ter
+
 1
+
 a
+
 L
+
 n
-dfill
-a
-L
-n
-dfill
+
+d
+
+f
+
+i
+
+l
+
+l
+
 Coloca a los peones
-y sobre este bloque,
+y
+sobre este bloque,
 obtienes sus cartas de control.
+
 Bot-bomb A
 Bot-bomb B
-Coloca a los peones
-y sobre este bloque,
-obtienes sus cartas de control.
-Bot-bomb A
-Bot-bomb B
-Bot-bomb A
+
+B
+
+o
+
+t-
+
+b
+
+o
+
+m
+
+b
+
+B
+
+B
+
+o
+
+t
+
+-
+
+b
+
+o
+
+m
+
+b
+
+A
 ```
 
 ### `sh-es-blocks-a4` p. 3
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 3/8
+
 o
-los
-p
-on
-s
+los p on s
 Col ca todos
 
 e
-c
-s
+c s
 
-la
-e
-s
-b
+la e
+s b
 e
 l q
 .
-o
-re est
-bo
-ue
+o re est
+bo ue
+
 p
-tve
-(
-O
-era
-i
+t ve (
+O era i
 
 )
-enorD draug
-ne
-a
-c
+
+e
+
+n
+
+o
+
 r
-y
-em ne
-a
-c
+
+D
+
+d
+
 r
+
+a
+
+u
+
+g
+
+n
+
+e
+
+a
+
+c
+
+r
+
+r
+
 y
-em
+
+e
+
+m
+
 1
+
 Coloca al peón
 sobre este bloque.
+
 Merc B
-yranecre
+
+M
+
+e
+
+r
+
+c
+
+B
+
+y
+
+r
+
+a
+
+n
+
+e
+
+c
+
+r
+
+e
+
 m
-yranecre
-m
+
 Coloca al peón
 
 e
 t
 b
 sobr
-ese
+es e
 loque.
-eM
-rc A
-Merc A
+
+e
+M rc A
+
+M
+
+e
+
+r
+
+c
+
+A
 ```
 
 ### `sh-es-blocks-a4` p. 4
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 4/8
-yranec
-mre
-yranec
-mre
+
+y
+
+r
+
+a
+
+n
+
+e
+
+c
+
+m
+
+r
+
+e
+
 Coloca al peón
 sobre este bloque.
+
 Merc C
-en
-c
-a
-r
+
+M
+
 e
-y
-m
-en
-c
-a
+
 r
+
+c
+
+C
+
 e
+
+n
+
+c
+
+a
+
+r
+
+r
+
+e
+
 y
+
 m
+
 Coloca al peón
 sobre este bloque.
+
 Merc D
+
+M
+
+e
+
+r
+
+c
+
+D
+
 Los Zaibatsu con dos o más
-cartas de en su medallero
+cartas de
+en su medallero
 deben descartar su mano.
+
 Mission
+
 shooter
-enorD onihr
+
+e
+
+n
+
+o
+
+r
+
+D
+
+o
+
+n
+
+i
+
+h
+
+r
 ```
 
 ### `sh-es-blocks-a4` p. 5
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 5/8
-Radio
-Pirate
-Esta Esta casilla
-casilla cuenta
-cuenta com
+
+R
+
+a
+
+d
+
+i
+
 o
-com
+
+P
+
+i
+
+r
+
+a
+
+t
+
+e
+
+Es
+
+t
+
+a
+
+c
+
+as
+
+i
+
+ll
+
+a
+
+c
+
+u
+
+e
+
+n
+
+t
+
+a
+
+c
+
 o
-le
-lartneC
-. eroC
+
+m
+
+o
+
+l
+e
+
+l
+
+a
+
+r
+t
+
+n
+
+e
+
+C
+
+.
+
+e
+
+r
+
+o
+
+C
+
 M
-emory
-M
-emoryrekam
+
+e
+
+m
+
+o
+
+r
+
+y
+
+r
+
+e
+
+k
+
+a
+
+m
+
 D v se
 A
 e i
@@ -310,295 +627,481 @@ D v se
 A
 e i
 r
-ci
+
+c
+
+i
+
 s
+
 t
+
 y
+
 e
-nht
-ci
+
+n
+
+h
+
+t
+
+e
+
 s
-t
-y
-e
-nht
-esi
+
+i
+
 r
+
 n
-us
-esi
-r
-n
-us
-Todos los peones con
+
+u
+
+s
+
+T
+odos los peones con
 quedan libres del
 control de cualquier Zaibatsu.
+
 valor
 de ICE
 ```
 
 ### `sh-es-blocks-a4` p. 6
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 6/8
-enorD nehs iug
+
+e
+
+n
+
+o
+
+r
+
+D
+
+n
+
+e
+
+h
+
+s
+
+i
+
+u
+
+g
+
 Triad
+
 a
-Todos los peones b jo el
+T
+odos los peones b jo el
 
 s
 b
-conrol de l Zai atsu
+con rol de l
+Zai atsu
 t
 o
 n
 d
 so ataca os con ( ).
-Deviser B Deviser B
-enorD akhsup
-Todos los peones con cartas
+
+Deviser B
+
+e
+
+n
+
+o
+
+r
+
+D
+
+a
+
+k
+
+h
+
+s
+
+u
+
+p
+
+T
+odos los peones con cartas
 anexas son eliminados.
-H
-ot-Ze on
-H
-ot-Ze on
-a
-Todos los peones b jo el
 
-s
-b
-conrol de l Zai atsu
+H
+
+o
+
 t
+
+-
+
+Z
+
+e
+
 o
+
 n
+
+c
+e
+T
+oma una
+arta d l
+por
+c
+e
+b j
+o
+o.
+ada p ón
+ao tu c ntr l
+
+a
+e
+o
+s
+m zo d acci ne
+
 d
-so ataca os con ( ).
 
-c
 e
-Toma una
-arta d
-l
-por
-c
-e
-b
-j
-o
-o.
-ada p
-ón
-ao tu c
-ntr
-l
-a
-e
-o
-s
-m
-zo d
-acci
-ne
 
-c
-e
-Toma una
-arta d
-l
-por
-c
-e
-b
-j
+r
+
 o
-o.
-ada p
-ón
-ao tu c
-ntr
-l
-a
-e
-o
+
 s
-m
-zo d
-acci
-ne
-der osneS
+
+n
+
+e
+
+S
 ```
 
 ### `sh-es-blocks-a4` p. 7
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 7/8
-20
+
+2
+
+0
+
 C
 
 e
-n
-r
-t
-o
-r
-c al
-20
-C
 
 e
+
 n
+
 r
+
 t
+
 o
+
 r
-c al
-dtl amenak
-Colocaa pe
+
+c
+
+a
+
+l
+
+d
+
+t
+
+l
+
+a
+
+m
+
+e
+
+n
+
+a
+
+k
+
+Coloca a pe
 
 l
 ón
-bre stb
+bre
+st
+b
 ue.
 so
-ee loq
-Cybe
+e
+loq
+
+C
+ybe
 inja
 rn
-Cyberninja
-laC
-ir
+
+C
+
 y
+
+b
+
 e
-tuaeb
-laC
-ir
+
+r
+
+n
+
+i
+
+n
+
+j
+
+a
+
+l
+
+a
+
+C
+
+i
+
+r
+
 y
+
 e
-tuaeb
+
+t
+
+u
+
+a
+
+e
+
+b
+
 Coloca al peón
 sobre este bloque, obtienes
 su carta de control.
-Ballerina Coloca al peón
+
+Ballerina
+Coloca al peón
 sobre este bloque, obtienes
 su carta de control.
+
 Ballerina
+
+B
+
+a
+
+ll
+
+e
+
+r
+
+i
+
+na
 ```
 
 ### `sh-es-blocks-a4` p. 8
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 1
+
 2
+
 1
+
 2
+
 3
-34
+
+3
 4
+
+4
+
 8/8
+
 Devis
 D
 er
 Devis
 D
 er
-loi
-a
-B
-b
 
-s
-saaM loi
-a
-B
-b
-
-s
-saaMColoc
-la
-a
-ta
-a
-c
-r
-bajo
-t
-conrol.
-u
-t
-aa
-Bio
-a
-s
-M
-s
 l
+
+o
+
+i
+
+a
+
+B
+
 b
+
+s
+
+s
+
+a
+
+a
+
+M
+
 Coloc
 la
+a ta
 a
-ta
-a
-c
-r
-bajo
-t
-conrol.
+c r
+
+bajo t con rol.
 u
 t
+
 aa
-Bio
-a
-s
+Bio a s
 M
 s
-l
-b
-aidakrA
+l b
+
+a
+
+i
+
+d
+
+a
+
+k
+
+r
+
+A
+
 Coloca la
 carta
-b jo tu ontrol.
+b jo tu
+ontrol.
 a
-cArk dia
+c
+
+Ark dia
 a
-Coloca la
-carta
-b jo tu ontrol.
-a
-cArk dia
-a
+
 Deviser C
-Elige una del
+
+Elige una
+del
 medallero de otro Zaibatsu
 y colocala en tu medallero.
-Mission Elige una del
-medallero de otro Zaibatsu
-y colocala en tu medallero.
+
 Mission
-enorD253-KT
-No
-rad
-No
-rad
+Elige una
+del
+medallero de otro Zaibatsu
+y colocala en tu medallero.
+
+Mission
+
+e
+
+n
+
+o
+
+r
+
+D
+
+2
+
+5
+
+3
+
+-
+
+K
+
+T
+
+N
+
+o
+
+r
+
+a
+
+d
 ```
 
 ## Artifact `sh-es-control-cards`
@@ -610,97 +1113,146 @@ rad
 
 ### `sh-es-control-cards` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 Merc A
-Gana Gana
-si su si su
+
+Gana
+
+si su
+
 objetivo
-es un es un
-( ) ( ).
+
+es un
+
+( )
+( ).
+
 Drone
+
 ARMOR
+
 add-on
+
 weapon
+
 Arkadia
+
 Mientras controles esta
 carta puedes repetir tu
 tirada de dados.
-Mientras controles esta
-carta puedes repetir tu
-tirada de dados.
+
 Limitado a una vez por turno.
+
 Razorblade
 Merc b
+
 No activa
 al
 atacar.
+
 Hostiles
-No activa
-al
-atacar.
-Hostiles
+
 ARMOR
+
 add-on
+
 weapon
-Cyborg
+
+C
+yborg
 Merc C
+
 ARMOR
+
 add-on
+
 weapon
+
 1d6
+
 Sniper
 Merc D
+
 Puede tomar
 como objetivo
 de
 a peones en
 otros bloques
 de información.
+
 Delete ( )
+
 Puede tomar
 como objetivo
 de
 a peones en
 otros bloques
 de información.
+
 Delete ( )
+
 ARMOR
+
 add-on
+
 Operative
+
 add-on
 shadowraider
+
 ARMOR
+
 weapon
+
 mission
+
 Operative
+
 add-on
+
 weapon
+
 mission
+
 shadowraider
+
 ARMOR
+
 Operative
+
 add-on
 shadowraider
+
 ARMOR
+
 weapon
+
 mission
+
 Operative
+
 add-on
 shadowraider
+
 ARMOR
+
 weapon
+
 mission
+
 1/2
 ```
 
 ### `sh-es-control-cards` p. 2
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-Cyborg
+C
+yborg
+
 Coloca
 dos
 ( )
@@ -710,114 +1262,165 @@ contadores
 cuentan como si
 estuvieran en
 tu medallero.
+
 Contadores
 de control
+
 Coloca
 dos
-
 sobre esta
 carta, estos
 contadores
 cuentan como si
 estuvieran en
 tu medallero.
+
 Contadores
 de control ( )
+
 Deviser C
+
 ARMOR
+
 add-on
+
 1d6
+
 deviser B
+
 Mientras
+
 controles este
-peón obtienes peón obtienes
+
+peón obtienes
+
 dos Contadores
-de bonificación.de bonificación.
+
+de bonificación.
+
 ARMOR
+
 add-on
+
 Maas Biolabs
+
 Al inicio de tu turno
 
 puedes descartar una carta
 de tu mano para activar
 la habilidad
 de un peón eliminado.
+
 Reboot ( )
-Al inicio de tu turno
-puedes descartar una carta
-de tu mano para activar
-la habilidad
-de un peón eliminado.
+
 Reboot ( )
+
 deviser A
-Todos los
+
+T
+odos los
+T
+odos los
+
 peones
+
 bajo tu
+
 control obtienen
+
 un Modificador
+
 de blindaje.
+
 ARMOR
+
 add-on
+
 gadget
-Trade Secret
+
+T
+rade Secret
+
 1
+
 Deviser d
+
 ARMOR
+
 add-on
+
 weapon
+
 Explosive
 bot-bomb a
+
 Sacrifica
 este peón:
 Ataca a todos
 los peones del
 bloque con ( ).
-Sacrifica
-este peón:
-Ataca a todos
-los peones del
-bloque con ( ).
+
 ARMOR
+
 add-on
+
 Explosive
 bot-bomb b
+
 Sacrifica
 este peón:
 Ataca a todos
 los peones del
 bloque con ( ).
-Sacrifica
-este peón:
-Ataca a todos
-los peones del
-bloque con ( ).
+
 ARMOR
+
 add-on
+
 No activa
 al
 atacar.
+
 Hostiles
-No activa
-al
-atacar.
-Hostiles
+
 add-on
+
 ARMOR
-cyberninjacyberninja Cyborg , Razorblade
+
+cyberninja
+
+C
+yborg , Razorblade
+C
+yborg , Razorblade
+
 weapon
+
 2d6
-Gana Gana
+
+Gana
+
 si su
-objetivo es objetivo es
-un peón un peón
-clase clase
+
+objetivo es
+
+un peón
+
+clase
+
 Operative
+
 ( ).
+
 Lovedoll
 ballerina
+
 ARMOR
+
 add-on
+
 weapon
+
 2/2
 ```
 
@@ -830,11 +1433,16 @@ weapon
 
 ### `sh-es-action-cards` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 Accelerator
-invisibleserum
+
+invisible
+serum
+invisible
+serum
+
 010001010
 11010
 011001011
@@ -842,19 +1450,31 @@ invisibleserum
 00110
 101110010
 110101011
-010010
+010
 011011001
 010110001
 01101001
+
 icebreaker
+
 pawn ADD-ON
+
 KOTDESIGN
+
 add-on
-Cyborg
-cyberwings
+
+C
+yborg
+
+cyber
+wings
+cyber
+wings
+
 01101100101
-01101001010010
+011010010
 00111001101
+
 01001010
 0011
 11010101
@@ -862,33 +1482,63 @@ cyberwings
 01101001
 00111001
 11001
+
 icebreaker
+
 pawn ADD-ON
+
 add-on
+
 1d6
-stealthcamostealthcamoE-Synapse
+
+stealth
+camo
+stealth
+camo
+E-Synapse
+
 icebreaker
+
 pawn ADD-ON
+
 KOTDESIGN
+
 add-on
+
 Brainchip
-ghostn812
+
+ghost
+n812
+ghost
+n812
+
 0100101011
 0110010111
 0011001101
 1101010110
 0110110010
 011010
+
 010010101101010011011101010
 001100110101010110011001010
-0110110010100010100101
+01101100101000101
 001110011010
+
 KOTDESIGN
+
 icebreaker
+
 pawn ADD-ON
+
 add-on
+
 Brainchip
-alphawolf
+
+alpha
+wolf
+alpha
+wolf
+
 010010101101010
 011001011101010
 00110011010
@@ -896,16 +1546,22 @@ alphawolf
 011011001010001
 0110100101
 001110011010
+
 01001010
 011001011010
 001100110100
 110101011000
 0110
+
 icebreaker
+
 pawn ADD-ON
+
 mission
+
 add-on
 flatline
+
 0100101011010
 0110010111010
 0011001101010
@@ -913,47 +1569,75 @@ flatline
 0110110010001
 0110100101
 001110011010
+
 Brainchip
+
 KOTDESIGN
+
 icebreaker
+
 pawn ADD-ON
+
 gadget
+
 add-on
-hardsuitchimaera
+
+hardsuit
+chimaera
+hardsuit
+chimaera
+
 Este peón
 no es
 afectado
 por
 ataques
 clase
+
 .
 
 Explosive
+
 ( )
-Este peón
-no es
-afectado
-por
-ataques
-clase
-.
+
 Explosive
 ( )
+
 100
 101
 011010
 010110
+
 Reboot
-armor pawn
+
 armor
+pawn
+
+armor
+
 1010011
 0110101
 1001010
 0100101
+
 1001001101
 1011010101
 011010
 0101100101
+
+Este peón
+no es
+afectado
+por
+ataques
+clase
+
+.
+
+Explosive
+
+( )
+
 Este peón
 no es
 afectado
@@ -964,761 +1648,1085 @@ clase
 
 Explosive
 ( )
-Este peón
-no es
-afectado
-por
-ataques
-clase
 
-.
-Explosive
-( )
-hardsuitvolcano
+hardsuit
+volcano
+hardsuit
+volcano
+
 Reboot
-armor pawn
-armor
-10010011010
-101101010101
-011010101001
-hardsuitbasilisk
-Este peón
-no es
-afectado
-por
-ataques
-clase
-.
 
-Explosive
-( )
-Este peón
-no es
-afectado
-por
-ataques
-clase
-
-.
-Explosive
-( )
-Reboot
 armor
 pawn
+
+armor
+
+10010011010
+10110101
+011010101001
+
+hardsuit
+basilisk
+hardsuit
+basilisk
+
+Este peón
+no es
+afectado
+por
+ataques
+clase
+
+.
+
+Explosive
+
+( )
+
+Este peón
+no es
+afectado
+por
+ataques
+clase
+.
+
+Explosive
+( )
+
+Reboot
+
+armor
+
+armor
+
+pawn
+
 1/6
 ```
 
 ### `sh-es-action-cards` p. 2
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 Sara Jane
+
 Cuando actives la habilidad
 agrega ( ) por
 cada carta de acción que
 descartes de tu mano.
+
 Delete ( )
-Cuando actives la habilidad
-agrega ( ) por
-cada carta de acción que
-descartes de tu mano.
-Delete ( )
+
 Delete
+
 pawn weapon
+
 Jack the ripper
+
 1010101
 10111010110
 01010011010
+
 Delete
+
 pawn weapon
+
 masamune
+
 Este peón no activa
-al atacar.Hostiles
-Este peón no activa
-al atacar.Hostiles
+al atacar.
+Hostiles
+
 Razorblade
+
 10101010011010
 10111010110010
+
 010010100011010101
 101111101011101010
 011111010101100
+
 Delete
+
 pawn weapon
+
 10010101
 10111010110010
+
 stryker
+
 Delete
+
 pawn weapon
+
 Este peón puede tomar como
-objetivo de a peones
+objetivo de
+a peones
 en otros bloques de información,
 estos ataques se limitan a ( ).
+
 Delete ( )
-Este peón puede tomar como
-objetivo de a peones
-en otros bloques de información,
-estos ataques se limitan a ( ).
-Delete ( )
-valkyrievalkyrieSniper
+
+valkyrie
+
+Sniper
+
 10101010011010
 10111010110010
+
 Delete
+
 pawn weapon
+
 g
 n
 ju
-g
-e
-r
-au
-t
+ger
+aut
 g
 n
 ju
-g
-e
-r
-au
-t
-100101010
-010
-10
+ger
+aut
+
+100101010 010 10
 1
 0
-10
-110101
-001
-01
+10 110101 001 01
 1
 0
-11
-101
+
+11 101
 0
-00110
-0110
+00110 0110
 1
-010
-0
+1 010
+0 1
 1
+
 Delete
+
 pawn weapon
+
 viper
+
 1001010101010101001010001101010
 10111010110010011101011101010011
 01111010101010111010101100100011
-10101010
+
+1010
 10111010110010
+
 Delete
+
 pawn weapon
+
 p.k.d. III
-Este peón gana Este peón gana
-si su objetivo es un si su objetivo es un
-.Cyborg ( )
+
+Este peón gana
+
+si su objetivo es un
+
+.
+C
+yborg ( )
+
+.
+C
+yborg ( )
+
 Delete
+
 pawn weapon
+
 KOTDESIGN
-cerberuscerberus1010101010101011010
+
+cerberus
+
+1010101010101011010
 1011101011001001110
 0111101010101011101
 1010001101010111010
+
 10010101010110
 10111010101011
 01111010100011
+
 Delete
+
 pawn weapon
-weaponKOTDESIGN
+
+weapon
+KOTDESIGN
+
 2/6
 ```
 
 ### `sh-es-action-cards` p. 3
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-show busineess show busineess Cargo: Popstar- Lovedoll
+show busineess
+
+Cargo: Popstar- Lovedoll
+
 Senso-Red
+
 Debes trasladar como
 a la “Popstar”
 de
-al .
+al
+.
+
 Cargo
+
 Senso-Red
 Central Core
+
 Es muy valiosa, el vulgo ama sus
 escandalos y su falta de talento.
+
 Debes trasladar como
 a la “Popstar”
 de
-al .
+al
+.
 Es muy valiosa, el vulgo ama sus
 escandalos y su falta de talento.
-Cargo
-Senso-Red
-Central Core
+
 Delete
-pawn missionCargo
-babysitter babysitter Cargo: Lost Child
-Arkadia
-Debes trasladar como
-a “Lost Child”
-de
-al .
-Cargo
-Arkadia
-Central Core
-Es impresionante lo cooperativo
-que puede ser un padre afligido.
-Debes trasladar como
-a “Lost Child”
-de
-al .
-Es impresionante lo cooperativo
-que puede ser un padre afligido.
-Cargo
-Arkadia
-Central Core
-Delete
+
 pawn mission
-KOTDESIGN
-Deviser C Deviser C
+
 Cargo
-escort escort Cargo: Glittergirl- Cyborg
-Beauty ClaireDebes trasladar como
-a la“Glittergirl”
-de
-al .
-Cargo
-Beauty Claire
-Central Core
-Con suficiente dinero cualquier
-cosa puede ser comprada.
+
+babysitter
+
+Cargo: Lost Child
+
+Arkadia
+
 Debes trasladar como
-a la“Glittergirl”
+a “Lost Child”
 de
-al .
-Con suficiente dinero cualquier
-cosa puede ser comprada.
+al
+.
+
 Cargo
+
+Arkadia
+Central Core
+
+Es impresionante lo cooperativo
+que puede ser un padre afligido.
+
+Debes trasladar como
+a “Lost Child”
+de
+al
+.
+Es impresionante lo cooperativo
+que puede ser un padre afligido.
+
+Delete
+
+pawn mission
+
+KOTDESIGN
+
+Deviser C
+
+Cargo
+
+escort
+
+Cargo: Glittergirl- C
+yborg
+
+Beauty Claire
+
+Debes trasladar como
+a la “Glittergirl”
+de
+al
+.
+
+Cargo
+
 Beauty Claire
 Central Core
+
+Con suficiente dinero cualquier
+cosa puede ser comprada.
+
+Debes trasladar como
+a la “Glittergirl”
+de
+al
+.
+Con suficiente dinero cualquier
+cosa puede ser comprada.
+
 Delete
-pawn missionCargo
-shipper shipper Cargo: Reminder
+
+pawn mission
+
+Cargo
+
+shipper
+
+Cargo: Reminder
+
 Debes trasladar como Cargo al “Reminder”
-de al .
+de
+al
+.
 Sacrifica este Cargo: Activa el efecto ( )
 del bloque donde se ubica este peón.
-Memory MakerCentral Core
 
-Debes trasladarcomo al “Reminder”
-de al .
-Sacrifica este : Activa el efecto ( )
-del bloque donde se ubica este peón.
-Cargo
-Memory MakerCentral Core
-Delete
-pawn missionCargo
 Memory Maker
-prison break prison break Cargo: The Convict
-Debes trasladar
-como a
-“The Convict” de
-al
-.
-Cargo
-SRONA Corp
 Central Core
+
+Debes trasladar como
+al “Reminder”
+de
+al
+.
+Sacrifica este
+: Activa el efecto ( )
+del bloque donde se ubica este peón.
+
+Cargo
+
+Cargo
+
+Delete
+
+pawn mission
+
+Cargo
+
+Memory Maker
+
+prison break
+
+Cargo: The Convict
+
 Debes trasladar
-como a
+como
+a
 “The Convict” de
 al
 .
+
 Cargo
+
 SRONA Corp
 Central Core
 
 SRONA Corp
+
 Delete
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 Cargo: Mule-Bomb
+
 Hot-Zone
+
 Debes trasladar como
 Cargo al “Mule” de
-al .
+al
+.
 Sacrifica este Cargo:
 Ataca a todos los peones
 del bloque con ( ).
-Hot-ZoneCentral Core
-Debes trasladarcomo
-al“Mule”de
-al .
-Sacrifica este :
+
+Hot-Zone
+Central Core
+
+Debes trasladar como
+al “Mule” de
+al
+.
+Sacrifica este
+:
 Ataca a todos los peones
 del bloque con ( ).
 
 Cargo
-Hot-ZoneCentral Core
-hot potato hot potato
+
+Cargo
+
+hot potato
+
 Delete
-pawn missionCargo
-know how know how Cargo: Code- Trade Secret
+
+pawn mission
+
+Cargo
+
+know how
+
+Cargo: Code- T
+rade Secret
+
 1
+
 Debes trasladar como Cargo
 a el “Code” de un bloque donde
 este ubicado un peón controlado por
-otro Zaibatsu al . Central Core
+otro Zaibatsu al
+.
+Central Core
+
 Debes trasladar como
-a el “Code” deun bloque donde
+a el “Code” de un bloque donde
 este ubicado un peón controlado por
-otro Zaibatsu al .
+otro Zaibatsu al
+.
 
 Cargo
 
 Central Core
+
 Delete
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 KOTDESIGN
-glitch glitch Cargo: Aimbot-Bot
+
+glitch
+
+Cargo: Aimbot-Bot
+
 Shooter
+
 Debes trasladar como Cargo a el
-“Aimbot” de al .
+“Aimbot” de
+al
+.
 Solo puede tomar como objetivo de
 a peones.
-ShooterCentral Core
 
-Icebreaker ( )
-Debes trasladar como ael
-“Aimbot”de al .
-Solo puede tomar como objetivo de
-a peones.
-Cargo
-
-ShooterCentral Core
+Shooter
+Central Core
 
 Icebreaker ( )
 
+Debes trasladar como
+a el
+“Aimbot” de
+al
+.
+Solo puede tomar como objetivo de
+a peones.
+
+Cargo
+
+Shooter
+Central Core
+Icebreaker ( )
+
 Delete
-pawn missionCargo
-Brain drain Brain drain Cargo: Isolated Brain
-Triad
+
+pawn mission
+
+Cargo
+
+Brain drain
+
+Cargo: Isolated Brain
+
+T
+riad
+
 Debes trasladar
 como
 al “Isolated Brain”
-deal
+de
+al
 .
+
 Cargo
-Triad
+
+T
+riad
 Central Core
-Debes trasladar
-como
-al “Isolated Brain”
-deal
-.
-Cargo
-Triad
-Central Core
+
 Delete
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 3/6
 ```
 
 ### `sh-es-action-cards` p. 4
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-fragged fragged Mark: Sardine
+fragged
+
+Mark: Sardine
+
 Hot-Zone
+
 Debes eliminar
-al “Sardine”
+al
+“Sardine”
 y todos los
-en .
+
+en
+.
+
 Mark
-Hostiles
-Hot-Zone
-Debes eliminar
-al “Sardine”
-y todos los
-en .
-Mark
+
 Hostiles
 
 Hot-Zone
+
 Delete
-pawn missionmark
-Commission Commission Mark: Breetva
+
+pawn mission
+
+mark
+
+Commission
+
+Mark: Breetva
+
 SRONA Corp
+
 Debes eliminar al
 “Breetva” y
 todos los
-en .
+en
+.
+
 Mark
 Hostiles
+
 SRONA Corp
+
 Elimina al gato, los
 ratones bailaran.
+
 Debes eliminar al
 “Breetva” y
 todos los
-en .
+en
+.
 Elimina al gato, los
 ratones bailaran.
-Mark
-Hostiles
-SRONA Corp
+
 Delete
-pawn missionmark
-Strafing Strafing Mark: Bioroid - Cyborg
+
+pawn mission
+
+mark
+
+Strafing
+
+Mark: Bioroid - C
+yborg
+
 Debes eliminar al
 “Bioroid” y
 todos los
-en .
+en
+.
+
 Mark
 Hostiles
+
 Shooter
+
 Pocos saben que surgieron
 con propósitos militares.
+
 Debes eliminar al
 “Bioroid” y
 todos los
-en .
+en
+.
 Pocos saben que surgieron
 con propósitos militares.
-Mark
-Hostiles
+
 Shooter
+
 Delete
-pawn missionmark
-Luddism Luddism Mark: Tupilaq - Bomb
+
+pawn mission
+
+mark
+
+Luddism
+
+Mark: T
+upilaq - Bomb
+
 Arkadia
+
 Debes eliminar
-al “Tupilaq”
-en .
-Tras eliminarlo
+al
+“T
+upilaq”
+en
+.
+T
+ras eliminarlo
 todos los peones
 del bloque reciben
 un ataque de ( ).
+
 Mark
+
 Arkadia
-Debes eliminar
-al “Tupilaq”
-en .
-Tras eliminarlo
-todos los peones
-del bloque reciben
-un ataque de ( ).
-Mark
-Arkadia
+
 Delete
-pawn missionmark
-wetwork wetwork Mark: Natty Dread
+
+pawn mission
+
+mark
+
+wetwork
+
+Mark: Natty Dread
+
 Zion Cluster
+
 Debes eliminar
 al
 “Natty Dread” en
 .
+
 Mark
+
 Zion Cluster
+
 Este sujeto es peligroso,
 tiene sueños de libertad.
+
 Debes eliminar
 al
 “Natty Dread” en
 .
 Este sujeto es peligroso,
 tiene sueños de libertad.
-Mark
-Zion Cluster
+
 Delete
-pawn missionmark
+
+pawn mission
+
+mark
+
 Debes eliminar al
 “Doughboy”
 y todos los
-en .
+en
+.
+
 Mark
-HostilesTriad
-Entrar, eliminar,
-extraer y salir.
+
+Hostiles
+T
+riad
+
+Entrar
+, eliminar
+,
+extraer y salir
+.
+
 Debes eliminar al
 “Doughboy”
 y todos los
-en .
-Entrar, eliminar,
-extraer y salir.
-Mark
+en
+.
+Entrar
+, eliminar
+,
+extraer y salir
+.
+
 Hostiles
 
-Triad
-Extraction Extraction Mark: Doughboy
-Triad
+T
+riad
+
+Extraction
+
+Mark: Doughboy
+
+T
+riad
+
 Delete
-pawn missionmark
-Deviser B Deviser B
-Emulator Emulator Mark/ Cargo: Copycat
+
+pawn mission
+
+mark
+
+Deviser B
+
+Emulator
+
+Mark/ Cargo: Copycat
+
 Debes
 eliminar
 al
 “Copycat”
 en
+
 Y debes
 trasladarlo
 como
 al
-.
-Mark
-Cargo
-Maas
-Biolabs
-Central
-Core
-Debes
-eliminar
-al
-“Copycat”
-en
-Y debes
-trasladarlo
-como
-al
+
 .
 
 Mark
+
 Cargo
+
 Maas
 Biolabs
+
 Central
 Core
+
 Maas Biolabs
+
 Delete
-pawn missionmarkCargo
-Gangsta Gangsta Mark: Gangboss
+
+pawn mission
+
+mark
+Cargo
+
+Gangsta
+
+Mark: Gangboss
+
 Edgezone
+
 Debes eliminar al
 “Gangboss”
-en .
+en
+.
 O descarta un
-
 anexo en
 .
-Mark
-Edgezone
-Accelerator ( )
-Debes eliminar al
-“Gangboss”
-en .
-O descarta un
 
-anexo en
-.
 Mark
+
 Edgezone
+
+Edgezone
+
 Accelerator ( )
-Edgezone
+
 Delete
-pawn missionmark
-snooper snooper Mark: Spycam- Drone
+
+pawn mission
+
+mark
+
+snooper
+
+Mark: Spycam- Drone
+
 Debes eliminar al
 “Spycam” y
 todos los
 en cualquier
 bloque que posea
-un .
-Mark
-Hostiles
-Drone( )
-Debes eliminar al
-“Spycam” y
-todos los
-en cualquier
-bloque que posea
-un .
+un
+.
+
 Mark
 Hostiles
 
-Drone( )
+Drone ( )
+
 Delete
-pawn missionmark
+
+pawn mission
+
+mark
+
 4/6
 ```
 
 ### `sh-es-action-cards` p. 5
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-runner D runner D
+runner D
+
+Puedes descartar
+esta carta en
+cualquier momento.
+
+Existe un gran mercado
+subterráneo de talentos
+mercenarios ilegales.
+
 Puedes descartar
 esta carta en
 cualquier momento.
 Existe un gran mercado
 subterráneo de talentos
 mercenarios ilegales.
+
+1
+
+icebreaker
+
+pawn mission
+
+gadget
+
+runner A
+
 Puedes descartar
 esta carta en
 cualquier momento.
-Existe un gran mercado
-subterráneo de talentos
-mercenarios ilegales. 1
-icebreaker
-pawn mission
-gadget
-runner A runner A
+
+Los talentos innatos de los
+Runners llegan a manifestarse
+desde muy temprana edad.
+
 Puedes descartar
 esta carta en
 cualquier momento.
 Los talentos innatos de los
 Runners llegan a manifestarse
 desde muy temprana edad.
+
+1
+
+icebreaker
+
+pawn mission
+
+gadget
+
+runner B
+
+Puedes anexar cartas
+a
+peones bajo tu control
+sin pagar su costo.
+
+Brainchip ( )
+
+icebreaker
+
+pawn mission
+
+gadget
+
+runner C
+
 Puedes descartar
 esta carta en
 cualquier momento.
-Los talentos innatos de los
-Runners llegan a manifestarse
-desde muy temprana edad. 1
-icebreaker
-pawn mission
-gadget
-runner B runner B
-Puedes anexar cartas
-a
-peones bajo tu control
-sin pagar su costo.
-Brainchip ( )
-Puedes anexar cartas
-a
-peones bajo tu control
-sin pagar su costo.
-Brainchip ( )
-icebreaker
-pawn mission
-gadget
-runner C runner C
+
+Los Runners son humanos
+atípicos, conocidos por sus
+manías y excentricidades.
+
 Puedes descartar
 esta carta en
 cualquier momento.
 Los Runners son humanos
 atípicos, conocidos por sus
 manías y excentricidades.
-Puedes descartar
-esta carta en
-cualquier momento.
-Los Runners son humanos
-atípicos, conocidos por sus
-manías y excentricidades. 1
+
+1
+
 icebreaker
+
 pawn mission
+
 gadget
-Simstim tech Simstim tech Cargo: Paparazzo - Bot
+
+Simstim tech
+
+Cargo: Paparazzo - Bot
+
 Senso-Red
+
 Debes obtener el control
-del bloque .
+del bloque
+.
 El “Paparazzo Bot” solo puede estar
-activo como en ese bloque.
+activo como
+en ese bloque.
+
 Senso-Red
+
 Cargo
-Debes obtener el control
-del bloque .
-El “Paparazzo Bot” solo puede estar
-activo como en ese bloque.
-Senso-Red
-Cargo
+
 icebreaker
-pawn missionCargo
-beat the dealer beat the dealer Cargo: Shark FX-Bot
+
+pawn mission
+
+Cargo
+
+beat the dealer
+
+Cargo: Shark FX-Bot
+
 Debes obtener el control
-del bloque .
+del bloque
+.
 El “Shark FX Bot” solo puede estar
-activo como en ese bloque.
+activo como
+en ese bloque.
+
 Arkadia
+
 Cargo
-Debes obtener el control
-del bloque .
-El “Shark FX Bot” solo puede estar
-activo como en ese bloque.
+
 Arkadia
-Cargo
-Arkadia
+
 icebreaker
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 KOTDESIGN
-blackmail blackmail Cargo: Eyebug-Bot
+
+blackmail
+
+Cargo: Eyebug-Bot
+
 Debes obtener el control
-del bloque .
+del bloque
+.
 El “Eyebug Bot” solo puede estar
-activo como en ese bloque.
+activo como
+en ese bloque.
+
 Memory Maker
+
 Cargo
-Debes obtener el control
-del bloque .
-El “Eyebug Bot” solo puede estar
-activo como en ese bloque.
+
 Memory Maker
-Cargo
-Memory Maker
+
 icebreaker
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 KOTDESIGN
-Deviser A Deviser A
-crud crud Cargo: Gecko-Bot
+
+Deviser A
+
+crud
+
+Cargo: Gecko-Bot
+
 Beauty Claire
+
 Debes obtener el control
-del bloque .
+del bloque
+.
 El “Gecko Bot” solo puede estar
-activo como en ese bloque.
+activo como
+en ese bloque.
+
 Beauty Claire
+
 Cargo
-Debes obtener el control
-del bloque .
-El “Gecko Bot” solo puede estar
-activo como en ese bloque.
-Beauty Claire
-Cargo
+
 icebreaker
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 KOTDESIGN
-adquisition adquisition Cargo: Heavy Plume-Bot
+
+adquisition
+
+Cargo: Heavy Plume-Bot
+
 NORAD
+
 Debes obtener el control
-del bloque .
+del bloque
+.
 El “Heavy Plume Bot” solo puede estar
-activo como en ese bloque.
+activo como
+en ese bloque.
+
 NORAD
+
 Cargo
-Debes obtener el control
-del bloque .
-El “Heavy Plume Bot” solo puede estar
-activo como en ese bloque.
-NORAD
-Cargo
+
 icebreaker
-pawn missionCargo
+
+pawn mission
+
+Cargo
+
 5/6
 ```
 
 ### `sh-es-action-cards` p. 6
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-Bodyguard Bodyguard Cargo: The Politician
+Bodyguard
+
+Cargo: The Politician
+
 Debes proteger a “The Politician”
 durante dos inicios de tu turno.
 Si otro Zaibatsu consigue
 eliminarte se queda
 con el Reward.
 
-dosinicios de tu turno
+dos inicios de tu turno
+
 Reward
+
 Debes proteger a “The Politician”
-durante .
+durante
+.
 Si otro Zaibatsu consigue
 eliminarte se queda
-con el .
+con el
+.
+
 Reboot
-missionCargo
+
+mission
+
+Cargo
+
 KOTDESIGN
+
 pawn
+
 Cada vez que elimines un peón,
 roba una carta al azar de la
 mano de su controlador.
@@ -1726,145 +2734,216 @@ Descarta esta carta
 .
 
 al inicio de tu turno
+
 Cada vez que elimines un peón,
 roba una carta al azar de la
 mano de su controlador.
 Descarta esta carta
-. al inicio de tu turno
-lacuna inc lacuna inc
-Reboot
-mission pawn
-Debes sobrevivir durante
 .
-Si otro Zaibatsu
-consigue eliminarte se
-queda con el .
-dos inicios de tu turno
-Reward
-Debes sobrevivir durante
-.
-Si otro Zaibatsu
-consigue eliminarte se
-queda con el .
-dos inicios de tu turno
-Reward
-the running man the running man Cargo: Price Tag
+al inicio de tu turno
+
+lacuna inc
+
 Reboot
-missionCargo
+
+mission
 pawn
-bribery bribery
+
+Debes sobrevivir durante
+.
+Si otro Zaibatsu
+consigue eliminarte se
+queda con el
+.
+
+dos inicios de tu turno
+
+Reward
+
+the running man
+
+Cargo: Price Tag
+
+Reboot
+
+mission
+
+Cargo
+
+pawn
+
+bribery
+
 Maas Biolabs
+
 Sitúate en el bloque
 , y descarta un
 ( ).
+
 Maas Biolabs
+
 Contador de bonificación
-Todo puede ser comprado.
+
+T
+odo puede ser comprado.
+
 Sitúate en el bloque
 , y descarta un
 .
-Todo puede ser comprado.
-Maas Biolabs
+T
+odo puede ser comprado.
+
 Contador de bonificación ( )
+
 Reboot
+
 mission
+
 KOTDESIGN
-Deviser D Deviser D
+
+Deviser D
+
 pawn
-can opener can opener
+
+can opener
+
 Debes eliminar
-a dos .
+a dos
+.
 
 Drone ( )
+
 La repulsión innata por las
 maquinas pensantes ahora es un
 horror generalizado tras el habitual
 uso de Drones de combate.
+
 Debes eliminar
-a dos .
+a dos
+.
 La repulsión innata por las
 maquinas pensantes ahora es un
 horror generalizado tras el habitual
 uso de Drones de combate.
-Drone ( )
+
 Reboot
+
 mission
+
 KOTDESIGN
+
 pawn
-red riding hood red riding hood Cargo: Hit-girl
+
+red riding hood
+
+Cargo: Hit-girl
+
 NORAD
+
 Debes eliminar
 a todos los
 del bloque
 “Hit-girl” solo puede
 estar activa como
 en ese bloque.
+
 Hostiles
 .
+
 Cargo
+
 NORAD
+
 Debes eliminar
 a todos los
-del bloque .
+del bloque
+.
 “Hit-girl” solo puede
 estar activa como
 en ese bloque.
+
 Hostiles
+
+Reboot
+
+mission
+
 Cargo
-NORAD
-Reboot
-missionCargo
+
 KOTDESIGN
+
 pawn
-street racing street racing
+
+street racing
+
+Debes mover este peón diez
+casillas distintas en un turno.
+
+La única manera de ganar el respeto
+de las Street Gangs es siendo el ganador
+.
+
 Debes mover este peón diez
 casillas distintas en un turno.
 La única manera de ganar el respeto
-de las Street Gangs es siendo el ganador.
-Debes mover este peón diez
-casillas distintas en un turno.
-La única manera de ganar el respeto
-de las Street Gangs es siendo el ganador.
+de las Street Gangs es siendo el ganador
+.
+
 Reboot
+
 mission
+
 KOTDESIGN
+
 pawn
-terminator terminator
+
+terminator
+
 Debes eliminar uno, dos
-o tres .
+o tres
+.
 Durante tu fase de
 acción puedes colocar
-esta en tu
+esta
+en tu
 Medallero y obtener el
 correspondiente.
+
 Shadowraiders
+
 Mission
+
 Reward
-Debes eliminar uno, dos
-o tres .
-Durante tu fase de
-acción puedes colocar
-esta en tu
-Medallero y obtener el
-correspondiente.
+
 Shadowraiders
-Mission
-Reward
+
 Reboot
+
 mission
+
 KOTDESIGN
+
 pawn
-car chase car chase
+
+car chase
+
+Debes mover este peón seis bloques
+de información distintos en un turno.
+
+Entrega el paquete, cobra la recompensa.
+
 Debes mover este peón seis bloques
 de información distintos en un turno.
 Entrega el paquete, cobra la recompensa.
-Debes mover este peón seis bloques
-de información distintos en un turno.
-Entrega el paquete, cobra la recompensa.
+
 Reboot
+
 mission
+
 KOTDESIGN
+
 pawn
+
 6/6
 ```
 
@@ -1877,85 +2956,145 @@ pawn
 
 ### `sh-es-pawns` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 shadowraider
-shadowraider shadowraider
+
+shadowraider
+
 Merc d
-Merc d Merc d
+
+Merc d
+
 shadowraider
-shadowraider shadowraider
+
 shadowraider
-shadowraider shadowraider
+
 shadowraider
-shadowraider shadowraider
+
+shadowraider
+
+shadowraider
+
+shadowraider
+
 Merc c
-Merc c Merc c
+
+Merc c
+
 Merc b
-Merc b Merc b
+
+Merc b
+
 Merc A
-Merc A Merc A
+
+Merc A
+
 2
+
 1
+
 1/3
 ```
 
 ### `sh-es-pawns` p. 2
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 bot-bomb B
-bot-bomb B bot-bomb B
+
+bot-bomb B
+
 ballerina
-ballerina ballerina
+
+ballerina
+
 cyberninja
-cyberninja cyberninja
+
+cyberninja
+
 bot-bomb A
-bot-bomb A bot-bomb A
+
+bot-bomb A
+
 deviser d
-deviser d deviser d
+
+deviser d
+
 deviser c
-deviser c deviser c
+
+deviser c
+
 deviser b
-deviser b deviser b
+
+deviser b
+
 deviser A
-deviser A deviser A
+
+deviser A
+
 2/3
 ```
 
 ### `sh-es-pawns` p. 3
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 Outbreak
+
 01
+
 Outbreak
+
 02
+
 Outbreak
+
 03
+
 Outbreak
+
 04
+
 Outbreak
+
 05
+
 Outbreak
+
 06
+
 Outbreak
+
 01
+
 Outbreak
+
 02
+
 Outbreak
+
 03
+
 Outbreak
+
 04
+
 Outbreak
+
 05
+
 Outbreak
+
 06
+
 C.H.A.O.S.
-C.H.A.O.S. C.H.A.O.S.
+
+C.H.A.O.S.
+
 3/3
 ```
 
@@ -1968,25 +3107,225 @@ C.H.A.O.S. C.H.A.O.S.
 
 ### `sh-es-markers` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-01 02 03 04 05 06 07 08
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
+01
+02
+03
+04
+05
+06
+07
+08
+
 1/2
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
+control
+
 control
 ```
 
 ### `sh-es-markers` p. 2
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
 2/2
+
 Los contadores de control y
 los contadores de inicio de turno
 pueden ser remplazados
 por contadores de colores de algún otro juego,
 o inclusive botones o semillas.
+
 The control markers and
 start-of-turn markers
 can be replaced
@@ -2003,22 +3342,41 @@ or even colored buttons or seeds.
 
 ### `sh-es-chaos-card` p. 1
 
-_Extraction method: `pypdf`_
+_Extraction method: `pymupdf`_
 
 ```text
-Carta de Chaos - Chaos card Dorso opcional - Optional card back
+Carta de Chaos - Chaos card
+Dorso opcional - Optional card back
+
 l
+
 o
-rtc no
+
+r
+
+t
+
+c
+
+n
+
+o
+
 l
+
 o
-rtc no
-l
+
+r
+
+t
+
+c
+
+n
+
 o
-rt cno
-l
-o
-rt cno
+
 C.h.a.o.s.
+
 1/1
 ```
