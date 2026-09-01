@@ -48,9 +48,57 @@ func iceFacesFor(faces []int, ice domain.IceValue) []int {
 	return IceFaces(ice)
 }
 
-func attachmentIceModifier(gd *domain.GameData, atts []domain.Attachment) ([]int, bool) {
+func uniqueSortedFaces(faces []int) []int {
+	if len(faces) == 0 {
+		return nil
+	}
+	seen := map[int]bool{}
+	out := []int{}
+	for _, face := range faces {
+		if !seen[face] {
+			seen[face] = true
+			out = append(out, face)
+		}
+	}
+	for i := 0; i < len(out); i++ {
+		for j := i + 1; j < len(out); j++ {
+			if out[j] < out[i] {
+				out[i], out[j] = out[j], out[i]
+			}
+		}
+	}
+	return out
+}
+
+func canonicalFacesForCount(count int) []int {
+	if count < 0 {
+		count = 0
+	}
+	if count > 6 {
+		count = 6
+	}
+	out := make([]int, 0, count)
+	for face := 7 - count; face <= 6; face++ {
+		out = append(out, face)
+	}
+	return out
+}
+
+func adjustIceFaces(baseFaces []int, deltaDice int) []int {
+	unique := uniqueSortedFaces(baseFaces)
+	if len(unique) == 0 {
+		return unique
+	}
+	if deltaDice == 0 {
+		return unique
+	}
+	return canonicalFacesForCount(len(unique) + deltaDice)
+}
+
+func attachmentIceModifier(gd *domain.GameData, atts []domain.Attachment) ([]int, bool, int) {
 	faces := []int{}
 	black := false
+	deltaDice := 0
 	seen := map[int]bool{}
 	for _, att := range atts {
 		card := cardByID(gd, att.CardID)
@@ -66,8 +114,24 @@ func attachmentIceModifier(gd *domain.GameData, atts []domain.Attachment) ([]int
 		if card.Attach.IceModifier.Black {
 			black = true
 		}
+		deltaDice += card.Attach.IceModifier.DeltaDice
 	}
-	return faces, black
+	return faces, black, deltaDice
+}
+
+func spaceIceModifierAmount(gd *domain.GameData, s *domain.GameState, coord domain.Coord, spaceID string) int {
+	pb := s.Cybernet.At(coord)
+	if pb == nil {
+		return 0
+	}
+	block, ok := gd.BlockByID(pb.BlockID)
+	if !ok {
+		return 0
+	}
+	if space := block.Space(spaceID); space != nil && space.Modifier != nil && space.Modifier.Kind == "ice" {
+		return space.Modifier.Amount
+	}
+	return 0
 }
 
 // IcebreakResult reports the outcome of an Icebreak attempt.
@@ -163,7 +227,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 	if !ok {
 		return res, fmt.Errorf("unknown block %q", pb.BlockID)
 	}
-	modifierFaces, modifierBlack := attachmentIceModifier(gd, pb.Attachments)
+	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, pb.Attachments)
 	faces := append([]int{}, iceFacesFor(blockDef.IceFaces, blockDef.IceValue)...)
 	for _, face := range modifierFaces {
 		duplicate := false
@@ -177,6 +241,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 			faces = append(faces, face)
 		}
 	}
+	faces = adjustIceFaces(faces, modifierDelta+spaceIceModifierAmount(gd, s, coord, atkPob.SpaceID))
 	if len(faces) == 0 {
 		return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
 	}
@@ -234,7 +299,7 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 	if !ok {
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
 	}
-	modifierFaces, modifierBlack := attachmentIceModifier(gd, tgtPob.Attachments)
+	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, tgtPob.Attachments)
 	faces := append([]int{}, IceFaces(tgt.IceValue)...)
 	for _, face := range modifierFaces {
 		duplicate := false
@@ -248,6 +313,7 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 			faces = append(faces, face)
 		}
 	}
+	faces = adjustIceFaces(faces, modifierDelta+spaceIceModifierAmount(gd, s, tgtPob.Coord, tgtPob.SpaceID))
 	if len(faces) == 0 {
 		return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
 	}

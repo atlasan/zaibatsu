@@ -34,7 +34,7 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
 - [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
   - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.
-  - [~] Apply attached effects in resolution: granted slots, recycle draw/hand modifiers, and ICE-face/Black-ICE modifiers now resolve in both mirrors. Armor replacing defense dice/nullifying ICE, plus movement-grant and ability-use execution, remain pending.
+  - [~] Apply attached effects in resolution: granted slots, recycle draw/hand modifiers, and ICE-face / ICE-dice / Black-ICE modifiers now resolve in both mirrors, and `space.modifier.kind = ice` now affects Icebreaker resolution. Armor replacing defense dice/nullifying ICE, plus movement-grant and ability-use execution, remain pending.
 - [x] (go/ts) Unified action interface: `Action` tagged union + `Apply(state, gd, action)` reducer dispatching every ability/card/attach action; `RunTurn` drives a turn through it. `playerId` defaults to the current player. Verified identical across mirrors. *Connective tissue for UI / bots / golden-game harness.*
 - [ ] (docs) Update domain-model + parity as each lands.
 

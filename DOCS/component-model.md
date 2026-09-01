@@ -57,7 +57,7 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 | `modifier.kind = defense` (± shielded/unshielded defense dice) | ✅ | |
 | `modifier.kind = hand-size` (± max hand size) | ✅ | |
 | `modifier.kind = attack` (modify a Delete attack) | ✅ | |
-| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ⛔(engine) | source-confirmed: printed as a **flat die on a zone** (e.g. Cleaner). Distinct from the block's ICE *difficulty*, which sits at a **corner** (see ICE section). `ice` added to `space.modifier.kind`; engine consumption pending. |
+| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ✅(engine) | source-confirmed: printed as a **flat die on a zone** (e.g. Cleaner). Distinct from the block's ICE *difficulty*, which sits at a **corner** (see ICE section). Both mirrors now apply the modifier during Icebreaker resolution by adjusting the target's effective ICE dice count. |
 | **`space.direction`** (a space allows movement only one way) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `StepTargets` restricts a space's **cross-edge** exit to the single local edge named by `direction` (tested). No arrows on the base tiles, so detection stays manual. |
 
 ### Board topology
@@ -130,7 +130,7 @@ use is chosen per play (SR-CARD-001).
 | **`attach.grantsStealth`** (bool) | ✅(schema) / ⛔(engine, detect) | grants the **stealth capability** (the target's own movement becomes stealth-capable) without a specific count. E.g. INVISIBLE SERUM "+Stealth". Revealed by the human drafts. |
 | **`attach.grantsSlot[]`** (slot types) | ✅(schema) / ⛔(engine, detect) | gives the target an additional attachment **slot**. E.g. FLATLINE "allow gadget attachment". Revealed by the human drafts. |
 | **`attach.abilityUses[]`** (how a granted ability/move is used) | ✅(schema) / ⛔(engine, detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. `grants`/`removes` now also include `move`. |
-| **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). The card analogue of `space.modifier.kind=ice`. |
+| **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). Both mirrors now consume all three modifier channels during Icebreaker resolution. The card analogue of `space.modifier.kind=ice`. |
 | **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ⛔(engine, detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Card analogue of the space `hand-size` modifier. |
 | **`attach.blockSpace`** (`{shape: circle\|hex}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: a few cards attach **as a block** (`as=block`) — a single-space mini-block placed on a block side. |
 | `attach.cost` (bonus counters, 1+) | ✅ / ⛔(detect) | printed cost glyph (bonus icons). |
@@ -206,9 +206,9 @@ passing occupied spaces and ending only where capacity permits (unused steps los
 SR-MOVE-002). Previously only whole-block `hex` movement executed.
 
 **Remaining engine logic (not yet wired):**
-- `space.modifier.kind = ice` (now *unblocked* — a pawn can be on a space — but its
-  ICE-adjust rule isn't applied yet), the remaining non-`area-attack` block/card
-  effect kinds, and `attach.effectText`.
+- the remaining non-`area-attack` block/card effect kinds, movement-grant and
+  ability-use execution, armor-style defense replacement/nullification, and
+  `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

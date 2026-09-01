@@ -50,20 +50,48 @@ function iceFacesFor(faces: number[] | undefined, ice: IceValue | undefined): nu
   return faces && faces.length > 0 ? faces : iceFaces(ice);
 }
 
-function attachmentIceModifierFaces(
+function uniqueSortedFaces(faces: number[]): number[] {
+  return [...new Set(faces)].sort((a, b) => a - b);
+}
+
+function canonicalFacesForCount(count: number): number[] {
+  const clamped = Math.max(0, Math.min(6, count));
+  const out: number[] = [];
+  for (let face = 7 - clamped; face <= 6; face++) out.push(face);
+  return out;
+}
+
+function adjustIceFaces(baseFaces: number[], deltaDice: number): number[] {
+  const unique = uniqueSortedFaces(baseFaces);
+  if (unique.length === 0) return unique;
+  if (deltaDice === 0) return unique;
+  return canonicalFacesForCount(unique.length + deltaDice);
+}
+
+function attachmentIceModifier(
   gd: GameData,
   atts: { cardId: string }[] | undefined,
-): { faces: number[]; black: boolean } {
+): { faces: number[]; black: boolean; deltaDice: number } {
   const faces: number[] = [];
   let black = false;
+  let deltaDice = 0;
   for (const att of atts ?? []) {
     const modifier = gd.cards.find((card) => card.id === att.cardId)?.attach?.iceModifier;
     for (const face of modifier?.faces ?? []) {
       if (!faces.includes(face)) faces.push(face);
     }
     if (modifier?.black) black = true;
+    deltaDice += modifier?.deltaDice ?? 0;
   }
-  return { faces, black };
+  return { faces, black, deltaDice };
+}
+
+function spaceIceModifierAmount(gd: GameData, coord: Coord, spaceId: string, s: GameState): number {
+  const placed = s.cybernet.at(coord);
+  if (!placed) return 0;
+  const block = blockById(gd, placed.blockId);
+  const space = block?.spaces?.find((candidate) => candidate.id === spaceId);
+  return space?.modifier?.kind === "ice" ? space.modifier.amount ?? 0 : 0;
 }
 
 export interface IcebreakResult {
@@ -150,11 +178,11 @@ export function icebreakBlock(
   if (!pb) throw new Error(`no block at (${coord.q},${coord.r})`);
   const blockDef = blockById(gd, pb.blockId);
   if (!blockDef) throw new Error(`unknown block "${pb.blockId}"`);
-  const attachmentModifier = attachmentIceModifierFaces(gd, pb.attachments);
-  const faces = [...new Set([
+  const attachmentModifier = attachmentIceModifier(gd, pb.attachments);
+  const faces = adjustIceFaces([...new Set([
     ...iceFacesFor(blockDef.iceFaces, blockDef.iceValue),
     ...attachmentModifier.faces,
-  ])];
+  ])], attachmentModifier.deltaDice + spaceIceModifierAmount(gd, coord, atkPob.spaceId, s));
   if (faces.length === 0) {
     throw new Error(`block "${pb.blockId}" has no ICE value and cannot be controlled`);
   }
@@ -207,11 +235,11 @@ export function icebreakPawn(
   }
   const tgt = pawnById(gd, targetId);
   if (!tgt) throw new Error(`unknown target pawn "${targetId}"`);
-  const attachmentModifier = attachmentIceModifierFaces(gd, tgtPob.attachments);
-  const faces = [...new Set([
+  const attachmentModifier = attachmentIceModifier(gd, tgtPob.attachments);
+  const faces = adjustIceFaces([...new Set([
     ...iceFaces(tgt.iceValue),
     ...attachmentModifier.faces,
-  ])];
+  ])], attachmentModifier.deltaDice + spaceIceModifierAmount(gd, tgtPob.coord, tgtPob.spaceId, s));
   if (faces.length === 0) {
     throw new Error(`pawn "${targetId}" has no ICE value and cannot be controlled`);
   }

@@ -336,6 +336,29 @@ func TestBlockAttachmentAddsIceFaces(t *testing.T) {
 	}
 }
 
+func TestBlockAttachmentDeltaDiceChangesIceCount(t *testing.T) {
+	gd := loadOrSkip(t)
+	gd.Cards = append(gd.Cards, domain.ActionCard{ID: "block-ice-delta", Name: "Block ICE Delta", Attach: &domain.Attach{As: "block", IceModifier: &domain.IceModifier{DeltaDice: 5}}})
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	if _, err := PlaceBlock(s, origin, 0, gd, "data-haven", rotFacing(t, gd, "data-haven", 0)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(0)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	bd, _ := gd.BlockByID("data-haven")
+	bd.IceValue = domain.IceHigh
+	s.Cybernet.At(coord).Attachments = []domain.Attachment{{CardID: "block-ice-delta"}}
+	res, err := IcebreakBlock(s, gd, "speedrunner-red", coord, 0)
+	if err != nil {
+		t.Fatalf("IcebreakBlock: %v", err)
+	}
+	if !res.Success {
+		t.Fatalf("delta-dice ICE modifier should allow success, roll=%v", res.Roll)
+	}
+}
+
 func TestPawnAttachmentAddsBlackIce(t *testing.T) {
 	for seed := uint64(1); seed <= 60; seed++ {
 		gd := loadOrSkip(t)
@@ -361,6 +384,32 @@ func TestPawnAttachmentAddsBlackIce(t *testing.T) {
 		}
 	}
 	t.Fatal("no failing seed found in range")
+}
+
+func TestSpaceIceModifierChangesIceCount(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	if _, err := PlaceBlock(s, origin, 0, gd, "data-haven", rotFacing(t, gd, "data-haven", 0)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(0)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	bd, _ := gd.BlockByID("data-haven")
+	bd.IceValue = domain.IceHigh
+	for i := range bd.Spaces {
+		if bd.Spaces[i].ID == "a" {
+			bd.Spaces[i].Modifier = &domain.SpaceModifier{Kind: "ice", Amount: 5}
+		}
+	}
+	res, err := IcebreakBlock(s, gd, "speedrunner-red", coord, 0)
+	if err != nil {
+		t.Fatalf("IcebreakBlock: %v", err)
+	}
+	if !res.Success {
+		t.Fatalf("space ice modifier should allow success, roll=%v", res.Roll)
+	}
 }
 
 func TestIcebreakGrantedByAttachment(t *testing.T) {

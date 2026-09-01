@@ -27,7 +27,7 @@ export interface DefenseDie {
 }
 
 export interface SpaceModifier {
-  kind: "defense" | "hand-size" | "attack";
+  kind: "defense" | "hand-size" | "attack" | "ice";
   amount?: number;
 }
 
