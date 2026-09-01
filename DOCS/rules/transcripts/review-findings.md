@@ -48,4 +48,7 @@ against the regenerated page-image artifacts under `tmp/ruletext/pages/`.
 
 The transcript generator now links every page section to its corresponding page
 image and injects any saved review notes from `tools/ruletext/review_notes.json`
-directly into the generated Markdown.
+directly into the generated Markdown. When a page has a saved
+`reviewedText` override, the rebuilt transcript renders that reviewed page text
+in place of the raw extraction order while still keeping the page-image link and
+the saved review notes beside it.

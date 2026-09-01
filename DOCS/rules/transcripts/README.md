@@ -42,7 +42,9 @@ fallbacks for image-only pages.
 
 Generated transcript pages now include a direct link to the matching local page
 image under `tmp/ruletext/pages/`, and they can render saved review notes from
-`tools/ruletext/review_notes.json` next to the extracted page text.
+`tools/ruletext/review_notes.json` next to the extracted page text. When a
+reviewed page carries a saved `reviewedText` override, the rebuilt transcript
+shows that reviewed page text in place of the raw extraction order.
 
 ## Interpretation Boundary
 

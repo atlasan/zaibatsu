@@ -474,6 +474,7 @@ l
 ### `sh-en-rulebook` p. 9
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-009.png](../../../tmp/ruletext/pages/sh-en-rulebook/page-009.png)
 
@@ -484,89 +485,47 @@ _Extraction method: `pymupdf`_
 - The extraction currently interleaves labels and body text; review against the linked page image before promoting these lines into rules digests or data notes.
 
 ```text
-09
-
 Drone Threat Spaces
 
-Drone threat spaces are a
-special type of double space (p.21).
+Drone threat spaces are a special type of double space (p.21).
 
 Event space
 
-In Zaibatsu Shadowraiders,
-each control marker you assign
-earns you one medal.
-
-Controlling a Block
-
-When an information block with event space ( ) is
-placed in the Cybernet, draw one threat token from the
-pile for each event space on the block.
+When an information block with event space ( ) is placed in the Cybernet, draw one threat token from the pile for each event space on the block.
 
 Place these tokens face up, one per threat space.
 
-e
+Placing Threat Tokens in Event space
 
-n
+1. You must draw a random threat token from the reserve area.
 
-o
+2. Threat tokens are placed face up, in the event space ( ).
 
-r
+The threat token is considered deactivated.
 
-D
+Note: An event space can never contain more than one threat token.
 
-d
+Information block with threat tokens
 
-r
+A pawn can end its move on a space containing a threat token.
 
-a
+A threat token remains on the board until a player deactivates it and collects it as a bonus counter (p.21).
 
-u
+Once a threat token has been collected, the event space ( ) is considered a normal space.
 
-g
+Controlling a Block
 
-Placing Threat T
-okens
-in Event space
-
-1. You must draw a random threat token from the
-reserve area.
-
-2. Threat tokens are placed face up, in the event
-space ( ).
-
-The threat tokens is considered deactivated.
-
-Note: An event space can never contain more than
-one threat token.
-
-Information block
-with threat tokens
-
-A pawn can end its move on a space containing a
-threat token.
-
-A threat tokens remains on the board until a player
-deactivates it and collects it as a bonus counter (p.21).
-
-Once a threat token has been collected, the event
-space( ) is considered a normal space.
-
-Determine a random direction by
-referring to the Central Core 02.
+In Zaibatsu Shadowraiders, each control marker you assign earns you one medal.
 
 Direction dice
 
-Event
-space
-
-Threat
-token
+Determine a random direction by referring to the Central Core 02.
 ```
 
 ### `sh-en-rulebook` p. 10
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-010.png](../../../tmp/ruletext/pages/sh-en-rulebook/page-010.png)
 
@@ -577,62 +536,39 @@ _Extraction method: `pymupdf`_
 - Use the linked page image for the labeled control-card callouts; the extracted text loses the diagram structure.
 
 ```text
-Zaibatsu Shadowraiders introduces a few new attributes that can be
-found on pawn control cards and action cards.
+New Pawn Attributes
 
-Mission Slots
+Zaibatsu Shadowraiders introduces a few new attributes that can be found on pawn control cards and action cards.
 
-A mission slot allows a pawn to
-attach a mission card.
+Card callouts
 
-10
+Operative insignia.
 
-Increase the maximum number of cards you can keep in your hand
-during the recycle actions phase (Zaibatsu Speedrunners p.08).
+Mission slot.
 
-1
+Expansion symbol.
 
-You can use a pawn's Ice-breaker ability to gain control of any pawn
-that has an Black ICE value (Zaibatsu Speedrunners p.28).
-
-If a pawn fails an Icebreaker attempt against a target with Black ICE
-value, the pawn is eliminated.
+Stealth movement ability.
 
 Pawn Black ICE value
 
-New Pawn
-Attributes
+You can use a pawn's Ice-breaker ability to gain control of any pawn that has a Black ICE value (Zaibatsu Speedrunners p.28).
+
+If a pawn fails an Icebreaker attempt against a target with Black ICE value, the pawn is eliminated.
 
 Hand size modifiers
 
-Operative
+Increase the maximum number of cards you can keep in your hand during the recycle actions phase (Zaibatsu Speedrunners p.08).
 
-add-on
-shadowraider
+Mission Slots
 
-ARMOR
-
-weapon
-
-mission
-
-Operative
-insignia
-
-Stealth
-movement
-ability
-
-Expansion
-symbol
-
-Mission
-slot
+A mission slot allows a pawn to attach a mission card.
 ```
 
 ### `sh-en-rulebook` p. 11
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-011.png](../../../tmp/ruletext/pages/sh-en-rulebook/page-011.png)
 
@@ -643,74 +579,53 @@ _Extraction method: `pymupdf`_
 - The bottom-of-page icon glossary is visually clear in the linked image: "ICE value double-modifiers" and "Defense dice modifier".
 
 ```text
-11
+Pawn with a bonus counters cost
 
-Pawn with a
-bonus counters cost
+Mercenary pawns have a bonus counter cost ( ). Mercs are loyal to no one and will only work for the highest bidder.
 
-Mercenary pawns have a bonus counter cost ( ). Mercs are loyal to
-no one and will only work for the highest bidder.
+You can gain control of a mercenary who is free of player control by doing the following:
 
-You can gain control of a mercenary who is free of player control by
-doing the following:
-
-1. Move a pawn under your control to the same block as the mercenary
-you wish to target (Zaibatsu Speedrunners p.22).
+1. Move a pawn under your control to the same block as the mercenary you wish to target (Zaibatsu Speedrunners p.22).
 
 2. Pay the bonus counter cost ( ).
 
-3. Place the mercenary’s control card in front of you.
+3. Place the mercenary's control card in front of you.
 
 4. Place the bonus counter you paid on the card.
 
-You can steal control of a mercenary who is under another player’s
-control by doing the following:
+You can steal control of a mercenary who is under another player's control by doing the following:
 
-2. Pay the number of bonus counters ( ) on the mercenary’s control
-card plus one.
+1. Move a pawn under your control to the same block as the mercenary you wish to target (Zaibatsu Speedrunners p.22).
 
-3. Place the mercenary’s control card in front of you.
+2. Pay the number of bonus counters ( ) on the mercenary's control card plus one.
 
-4. Return the previous owner’s bonus counters.
+3. Place the mercenary's control card in front of you.
+
+4. Return the previous owner's bonus counters.
 
 5. Place the bonus counters you paid on the card.
 
 Note: Each time a mercenary changes control, its cost increases.
 
-When bonus counters are
-removed from a card, they are not
-lost. They are always returned to
-their original owner.
+When bonus counters are removed from a card, they are not lost. They are always returned to their original owner.
 
-In the event that any of the
-bonus counters being used to pay
-for a pawn are lost, discard all cards
-attached to the pawn and place the
-pawn's control card in the common
-area. The pawn is now free from
-Zaibatsu control.
+In the event that any of the bonus counters being used to pay for a pawn are lost, discard all cards attached to the pawn and place the pawn's control card in the common area. The pawn is now free from Zaibatsu control.
 
-If you gain control of a
-mercenary through other means
-(for example, by using an
-Icebreaker action), you do not have
-to pay the bonus counter cost.
+If you gain control of a mercenary through other means (for example, by using an Icebreaker action), you do not have to pay the bonus counter cost.
 
-Increases or decreases the defense dice of the
-pawn.
+ICE value double-modifiers
+
+Adds a two fixed number to the ICE value of the target.
 
 Defense dice modifier
 
-Adds a two fixed number to the ICE value of the
-target.
-
-ICE value
-double-modifiers
+Increases or decreases the defense dice of the pawn.
 ```
 
 ### `sh-en-rulebook` p. 12
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-012.png](../../../tmp/ruletext/pages/sh-en-rulebook/page-012.png)
 
@@ -721,80 +636,49 @@ _Extraction method: `pymupdf`_
 - Use the linked page image to confirm the distinction between card-activated movement, card-activated stealth movement, once-per-turn stealth movement, and the blocked-stealth symbol.
 
 ```text
-12
+Stealth Movement Ability
 
-Stealth Movement
-Ability
+The stealth movement ability allows a pawn to move through a block without drawing the attention of the threats in that block.
 
-The stealth movement ability allows a pawn to
-move through a block without drawing the attention of
-the threats in that block.
+The Stealth movement ability can be activated in any of the following ways:
 
-The Stealth movement ability can be activated in
-any of the following ways:
+Movement is activated by assigning a stealth movement action with cards from your hand.
 
-Pawns that have the card-activated
-movement symbol can:
-
-Move normally using stealth
-movement cards.
-
-Move normally using standard
-movement cards.
-
-Use stealth movement using
-stealth movement cards.
-
-Move normally using standard
-movement cards.
-
-Pawns that have the card-activated
-stealth movement symbol can:
-
-This symbol prevents the pawn
-from activating any kind of stealth
-movement, although normal
-movement can still be used.
-
-Stealth Movement Modifiers
-
-Movement modifiers add or subtract one stealth step each time a pawn
-activates its movement ability.
-
-For card-activated movement ( ), add one additional stealth step
-for each movement card played.
-
-In the case of movement activated once per turn ( ), add one
-additional stealth step to the total steps each time a pawn activates its
-movement ability.
-
-Activating Stealth movement once per turn
-
-Movement is activated by assigning a stealth
-movement action with cards from your hand.
-
-Movement is activated by once per turn as a free
-action.
+Movement is activated once per turn as a free action.
 
 Stealth movement cannot be activated.
 
 Activating Stealth movement using action cards
 
-1d6
+Pawns that have the card-activated movement symbol can:
 
-2d6
+Move normally using standard movement cards.
 
-Pawns with this ability move up to
-three stealth steps each turn as a free
-action.
+Move normally using stealth movement cards.
 
-Pawns with this ability move a
-number of stealth steps equal to a one die
-roll each turn as a free action.
+Pawns that have the card-activated stealth movement symbol can:
 
-Pawns with this ability move a
-number of stealth steps equal to a two die
-roll each turn as a free action.
+Move normally using standard movement cards.
+
+Use stealth movement using stealth movement cards.
+
+Activating Stealth movement once per turn
+
+Pawns with this ability move up to three stealth steps each turn as a free action.
+
+Pawns with this ability move a number of stealth steps equal to a one die roll each turn as a free action.
+
+Pawns with this ability move a number of stealth steps equal to a two die roll each turn as a free action.
+
+Stealth Movement Modifiers
+
+Movement modifiers add or subtract one stealth step each time a pawn activates its movement ability.
+
+For card-activated movement ( ), add one additional stealth step for each movement card played.
+
+In the case of movement activated once per turn ( ), add one additional stealth step to the total steps each time a pawn activates its movement ability.
+
+This symbol prevents the pawn from activating any kind of stealth movement, although normal movement can still be used.
 ```
 
 ### `sh-en-rulebook` p. 13
@@ -1031,6 +915,7 @@ Reward.
 ### `sh-en-rulebook` p. 16
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-016.png](../../../tmp/ruletext/pages/sh-en-rulebook/page-016.png)
 
@@ -1041,136 +926,29 @@ _Extraction method: `pymupdf`_
 - Use the linked page image as the primary source for this example layout; it is suitable for later manual consolidation into cleaner prose.
 
 ```text
-16
+Other Tags
 
-Some mission cards require the player to keep
-track of turns or number of targets eliminated.
+Some mission cards require the player to keep track of turns or number of targets eliminated.
 
-These items can be tracked using the mission
-card’s special tags.
+These items can be tracked using the mission card's special tags.
 
-The mission card’s tags should be aligned with the
-pawn’s mission slot in order to track the current state
-of the mission.
+The mission card's tags should be aligned with the pawn's mission slot in order to track the current state of the mission.
 
-It is important to use the
-mission tags properly because they
-remind all players of the current
-status of each mission.
+In the following example we can see how the "Terminator" mission card is used to track the number of other Shadowraiders you have eliminated.
 
-In the following example we can see how the
-“Terminator” mission card is used to track the number
-of other Shadowraiders you have eliminated.
+1. Attach the mission card so that the first tag is aligned to your pawn's mission slot.
 
-1. Attach the mission card so that the first tag is
-aligned to your pawn’s mission slot.
+After completing the objective you can choose to collect the reward (in this case, a medal) or continue the mission and attempt to eliminate another Shadowraider.
 
-After completing the objective you can choose to
-collect the reward (in this case, a medal) or continue
-the mission and attempt to eliminate another
-Shadowraider.
+2. If you choose to continue the mission (eliminate another Shadowraider), move the mission card down so that the second tag aligns with your pawn's mission slot.
 
-2. If you choose to continue the mission (eliminate
-another Shadowraider), move the mission card down
-so that the second tag aligns with your pawn’s mission
-slot.
+After you complete the next objective the process is repeated. You can choose to collect the reward (two medals) or continue the mission and attempt to defeat another Shadowraider.
 
-After you complete the next objective the process is
-repeated. You can choose to collect the reward (two
-medals) or continue the mission and attempt to defeat
-another Shadowraider.
+3. If you choose to continue the mission (eliminate another Shadowraider), move the mission card down so that the third tag aligns with your pawn's mission slot.
 
-3. If you choose to continue the mission (eliminate
-another Shadowraider), move the mission card down
-so that the third tag aligns with your pawn’s mission
-slot.
+Note: If your Shadowraider pawn is eliminated before you complete the second or third objective, you must discard the mission card without earning any rewards.
 
-Note: If your Shadowraider pawn is eliminated
-before you complete the second or third objective, you
-must discard the mission card without earning any
-rewards.
-
-Other T
-ags
-
-t
-
-o
-
-o
-
-b
-
-r
-
-e
-
-terminator
-
-Operative
-
-add-on
-shadowraider
-
-ARMOR
-
-weapon
-
-mission
-
-terminator
-
-t
-
-o
-
-o
-
-b
-
-r
-
-e
-
-Operative
-
-add-on
-shadowraider
-
-ARMOR
-
-weapon
-
-mission
-
-terminator
-
-t
-
-o
-
-o
-
-b
-
-r
-
-e
-
-Operative
-
-add-on
-shadowraider
-
-ARMOR
-
-weapon
-
-mission
-
-2
-
-3
+It is important to use the mission tags properly because they remind all players of the current status of each mission.
 ```
 
 ### `sh-en-rulebook` p. 17

@@ -6617,6 +6617,30 @@
       }
     },
     {
+      "entryId": "doc/docs/rulebook-compatibility-matrix.md",
+      "kind": "doc",
+      "localId": "docs/rulebook-compatibility-matrix.md",
+      "title": "Rulebook compatibility matrix",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/rulebook-compatibility-matrix.md"
+        ],
+        "docPaths": [
+          "DOCS/rulebook-compatibility-matrix.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
       "entryId": "doc/docs/rules/readme.md",
       "kind": "doc",
       "localId": "docs/rules/readme.md",

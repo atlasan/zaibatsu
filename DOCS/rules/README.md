@@ -10,3 +10,7 @@ engine maturity. Read the game landing page first:
 Use the entry format and status meanings in [documentation governance](../governance.md).
 Tracked transcripts under [transcripts/](transcripts/) are searchable source
 derivatives, not executable rules or replacements for the original PDFs.
+
+For the cross-layer delivery view that ties transcripts, rule modules, shared
+data, mirror runtimes, and tooling together, see the
+[rulebook compatibility matrix](../rulebook-compatibility-matrix.md).

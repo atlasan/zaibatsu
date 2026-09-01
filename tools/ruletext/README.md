@@ -34,6 +34,8 @@ python tools/ruletext/extract.py build --profile speedrunners-rulebook-en
 checked against a stable local image artifact. Generated transcript pages now
 link those page images directly, and any saved review notes from
 `tools/ruletext/review_notes.json` are rendered into the matching page section.
+Pages may also carry a saved `reviewedText` override so rebuilt transcripts can
+show consolidated reviewed page text instead of the raw extraction order.
 
 For focused review work, `snippets.py` can crop detail images or compose a
 small review sheet from those page renders:

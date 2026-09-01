@@ -110,11 +110,25 @@ def load_catalog() -> dict[str, dict]:
     return {asset["id"]: asset for asset in payload["assets"]}
 
 
-def load_review_notes() -> dict[str, dict[str, list[str]]]:
+def load_review_notes() -> dict[str, dict[str, dict[str, object]]]:
     if not REVIEW_NOTES_PATH.exists():
         return {}
     payload = json.loads(REVIEW_NOTES_PATH.read_text(encoding="utf-8"))
-    return {str(artifact_id): {str(page): list(notes) for page, notes in pages.items()} for artifact_id, pages in payload.items()}
+    normalized: dict[str, dict[str, dict[str, object]]] = {}
+    for artifact_id, pages in payload.items():
+        normalized[str(artifact_id)] = {}
+        for page, entry in pages.items():
+            if isinstance(entry, list):
+                normalized[str(artifact_id)][str(page)] = {"notes": list(entry)}
+                continue
+            if isinstance(entry, dict):
+                normalized[str(artifact_id)][str(page)] = {
+                    "notes": list(entry.get("notes", [])),
+                    "reviewedText": str(entry.get("reviewedText", "")).strip(),
+                }
+                continue
+            raise ValueError(f"unsupported review note entry for {artifact_id} page {page}")
+    return normalized
 
 
 def normalize_text(text: str) -> str:
@@ -277,7 +291,7 @@ def write_page_images(artifact_id: str, pdf_path: Path) -> None:
             pixmap.save(target_dir / f"page-{page_number:03d}.png")
 
 
-def build_markdown(profile: Profile, catalog: dict[str, dict], review_notes: dict[str, dict[str, list[str]]]) -> str:
+def build_markdown(profile: Profile, catalog: dict[str, dict], review_notes: dict[str, dict[str, dict[str, object]]]) -> str:
     lines = [
         f"# {profile.title}",
         "",
@@ -326,26 +340,34 @@ def build_markdown(profile: Profile, catalog: dict[str, dict], review_notes: dic
         for page in pages:
             page_number = str(page["page"])
             page_image = artifact_page_dir / f"page-{int(page['page']):03d}.png"
+            page_review = artifact_notes.get(page_number, {})
+            page_notes = [str(note) for note in page_review.get("notes", [])]
+            reviewed_text = str(page_review.get("reviewedText", "")).strip()
             lines.extend(
                 [
                     f"### `{artifact_id}` p. {page['page']}",
                     "",
                     f"_Extraction method: `{page['method']}`_",
+                    *(
+                        [f"_Reviewed transcript override applied from saved findings._"]
+                        if reviewed_text
+                        else []
+                    ),
                     "",
                     f"- Page image: [{page_image.name}]({page_image.as_posix()})",
                     "",
                 ]
             )
-            page_notes = artifact_notes.get(page_number, [])
             if page_notes:
                 lines.extend(["", "#### Review Notes", ""])
                 for note in page_notes:
                     lines.append(f"- {note}")
                 lines.append("")
+            rendered_text = reviewed_text or str(page["text"])
             lines.extend(
                 [
                     "```text",
-                    str(page["text"]),
+                    rendered_text,
                     "```",
                     "",
                 ]

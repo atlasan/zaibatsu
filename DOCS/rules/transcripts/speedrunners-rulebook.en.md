@@ -1987,6 +1987,7 @@ of a block
 ### `sp-en-rulebook` p. 29
 
 _Extraction method: `pymupdf`_
+_Reviewed transcript override applied from saved findings._
 
 - Page image: [page-029.png](../../../tmp/ruletext/pages/sp-en-rulebook/page-029.png)
 
@@ -1997,23 +1998,15 @@ _Extraction method: `pymupdf`_
 - Use the linked page image as the source of truth for the example layout and icon pairing.
 
 ```text
-ICE value
-modifiers
+ICE value modifiers
 
-But with the same modifier of 5
-and ICE values of 6, 5, and 4, you
-only have three chances to succeed
-at an Icebreak attempt: 6, 5, and 4
-because the 5 modifier is
-redundant.
+Adds a fixed number to the ICE value of the target.
 
-With a modifier of 5 and ICE
-values 6, 4, and 3, you have four
-chances to succeed at an Icebreak
-attempt: 6, 5, 4, and 3.
+The effectiveness of the Icebreaker bonus varies with different numbers in the ICE value. For example:
 
-Adds a fixed number to the ICE
-value of the target.
+With a modifier of 5 and ICE values 6, 4, and 3, you have four chances to succeed at an Icebreak attempt: 6, 5, 4, and 3.
+
+But with the same modifier of 5 and ICE values of 6, 5, and 4, you only have three chances to succeed at an Icebreak attempt: 6, 5, and 4 because the 5 modifier is redundant.
 
 Icebreaker modifiers
 
@@ -2027,43 +2020,27 @@ Icebreaker roll modifiers.
 
 Icebreaker roll modifiers with Black ICE.
 
+ICE value modifiers with Black ICE
+
 Adds a fixed number to the ICE value of the target.
 
-Adds black ICE to the target (p.28).
+Adds Black ICE to the target (p.28).
 
-ICE value
-modifiers with Black ICE
+Icebreaker roll modifiers
 
-The effectiveness of the Icebreaker bonus varies with different
-numbers in the ICE value. For example:
+If the result of an Icebreak attempt matches the number shown on the Icebreaker roll modifier, gain control of the target.
 
-If the result of an Icebreak
-attempt matches the number
-shown on the ICE value modifier,
-gain control of the target.
+Adds a six-sided die to the Icebreaker roll.
 
-29
+Icebreaker roll modifiers with Black ICE
 
-Icebreaker
-roll modifiers
+Adds a six-sided die to the Icebreaker roll.
 
-Adds a six-sided die
-to Icebreaker roll.
+Adds Black ICE to the target (p.28).
 
-Icebreaker
-roll modifiers with Black ICE
+Adds two six-sided dice to the Icebreaker roll.
 
-Adds a six-sided die
-to Icebreaker roll.
-
-Adds black ICE to the
-target (p.28).
-
-Adds a two six-sided
-die to Icebreaker roll.
-
-Adds black ICE to the
-target (p.28).
+Adds Black ICE to the target (p.28).
 ```
 
 ### `sp-en-rulebook` p. 30
