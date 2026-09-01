@@ -26,6 +26,7 @@ import {
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import { abilityUsedKey, effectiveAbility, eliminatePawn } from "./combat.ts";
 import { discardAttachments } from "./attach.ts";
+import { applyBlockEffectForTrigger } from "./effects.ts";
 import { checkWin } from "./win.ts";
 
 /** The d6 faces that count as a successful Icebreak. Empty for "none". */
@@ -176,6 +177,7 @@ export function icebreakBlock(
     pb.ownerId = owner.id;
     owner.controlMarkersPlaced++;
     checkWin(s);
+    applyBlockEffectForTrigger(s, gd, coord, "underControl");
   } else {
     const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true || attachmentModifier.black;
     attackerEliminated = resolveBlackIceFailure(s, isBlack, attackerId, success);

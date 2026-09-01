@@ -13,6 +13,7 @@ import { type Coord, type PlacedBlock } from "../domain/hex.ts";
 import { blockById, pawnById, type GameData, type GameState } from "../domain/types.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import { abilityUsedKey, effectiveAbility, findAbility } from "./combat.ts";
+import { applyBlockEffectForTrigger } from "./effects.ts";
 import { canPlace, placeBlock, validPlacements, type Placement } from "./placement.ts";
 
 /** The id of the block currently on top of the pile, or undefined. */
@@ -68,6 +69,7 @@ export function search(
   if (err) throw new Error(err);
   s.blockPile.pop();
   const pb = placeBlock(s, pob.coord, dir, gd, blockId, rot);
+  applyBlockEffectForTrigger(s, gd, pb.coord, "inCybernet");
   if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
   return pb;
 }

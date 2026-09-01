@@ -109,6 +109,35 @@ describe("icebreakBlock", () => {
     const run = () => icebreakBlock(blockScenario(5, "data-haven").s, data, "speedrunner-red", neighbor(ORIGIN, 0), 0).roll;
     expect(run()).toEqual(run());
   });
+
+  test("successful control triggers typed underControl area effects", () => {
+    let found = false;
+    for (let seed = 1; seed <= 60 && !found; seed++) {
+      const d = structuredClone(loadDefault("speedrunners"));
+      d.blocks = d.blocks.map((block) =>
+        block.id === "data-haven"
+          ? { ...block, effects: { underControl: { kind: "area-attack", amount: 1 } } }
+          : block
+      );
+      d.pawns = d.pawns.map((pawn) =>
+        pawn.id === "speedrunner-yellow"
+          ? { ...pawn, defense: [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: false })) }
+          : pawn
+      );
+      const s = newGame({ data: d, playerNames: ["A", "B"], seed });
+      placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+      const coord = neighbor(ORIGIN, 0);
+      s.cybernet.pawns = [];
+      s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+      s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord, spaceId: "a" });
+      const res = icebreakBlock(s, d, "speedrunner-red", coord, 0);
+      if (res.success) {
+        found = true;
+        expect(s.cybernet.pawnById("speedrunner-yellow")).toBeUndefined();
+      }
+    }
+    expect(found).toBe(true);
+  });
 });
 
 describe("icebreakPawn", () => {

@@ -28,9 +28,9 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
   - [x] Search: draw top of block pile + place via `PlaceBlock` (`Search`, `SearchTopBlock`, `ValidSearchPlacements`; block consumed only on legal placement).
   - [x] Reboot: return an eliminated pawn (from the `Eliminated` pool) to the Central Core under the rebooting player's control.
   - [ ] Replace provisional `IceFaces` with real per-block/pawn ICE die faces once transcribed (enables exact ICE-value modifier redundancy).
-  - [~] Multi-target Delete (split dice across co-located targets) + area attacks.
+  - [x] Multi-target Delete (split dice across co-located targets) + area attacks.
     - [x] `DeleteMulti`: roll one die per skull, divide dice across co-located targets in assignment order, allow concentration on one target, and enforce self/co-location checks plus once-per-turn gating. Identical across mirrors.
-    - [~] Area attacks: Bomb-class area Delete now resolves against every pawn in the attacker's block with one shared roll per die. Block-effect dispatch remains pending.
+    - [x] Area attacks: Bomb-class area Delete and typed block `area-attack` effects now resolve against every pawn in the affected block with one shared roll per die. Identical across mirrors.
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
 - [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
   - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.

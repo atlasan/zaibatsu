@@ -30,6 +30,7 @@ export * from "./icebreaker.ts";
 export * from "./abilities.ts";
 export * from "./cards.ts";
 export * from "./attach.ts";
+export * from "./effects.ts";
 export * from "./snapshot.ts";
 export { winner } from "./win.ts";
 

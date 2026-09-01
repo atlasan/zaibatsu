@@ -75,8 +75,8 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 ### Effects — SR-BOARD "Block effects"
 | Field | Status | Notes |
 |---|---|---|
-| `effects.inCybernet` (fires on placement) | ✅ | accepts a bare effect-id string **or** a typed effect (below). |
-| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ⛔(engine) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Engine dispatch is the paused follow-up. |
+| `effects.inCybernet` (fires on placement) | ✅(schema) / ✅(`area-attack` engine) | accepts a bare effect-id string **or** a typed effect (below). Typed `area-attack` now dispatches when a block enters the Cybernet; the other effect kinds remain pending. |
+| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ✅(`area-attack` engine) / ⛔(other kinds) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Typed `area-attack` now dispatches on control gain in both mirrors. |
 
 ---
 
@@ -165,7 +165,8 @@ icons/text stay as labeled evidence rather than being guessed. Everything stays
 - **Space**: `ice` added to `modifier.kind`; `space.direction` (edge 0–5) restriction.
 - **Block effects**: `effects.inCybernet`/`underControl` now typed — a legacy
   string **or** `{kind ∈ gain-control-card|place-pawn|area-attack|all-players|
-  modify-ice|custom, amount?, target?, text?}`.
+  modify-ice|custom, amount?, target?, text?}`. Typed `area-attack` now
+  executes in both mirrors; the other kinds remain pending.
 - **Card**: `attach.grants[]` / `attach.removes[]` (abilities conferred/stripped),
   `attach.effectText`, and clarified `attach.class[]` = target-class restriction.
 
@@ -206,8 +207,8 @@ SR-MOVE-002). Previously only whole-block `hex` movement executed.
 
 **Remaining engine logic (not yet wired):**
 - `space.modifier.kind = ice` (now *unblocked* — a pawn can be on a space — but its
-  ICE-adjust rule isn't applied yet), typed `effects.underControl` dispatch, and
-  `attach.effectText`.
+  ICE-adjust rule isn't applied yet), the remaining non-`area-attack` block/card
+  effect kinds, and `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

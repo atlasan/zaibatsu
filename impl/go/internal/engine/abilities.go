@@ -78,6 +78,7 @@ func Search(s *domain.GameState, gd *domain.GameData, pawnID string, dir, rot in
 	if err != nil {
 		return nil, err
 	}
+	ApplyBlockEffectForTrigger(s, gd, pb.Coord, BlockEffectInCybernet)
 	if ability.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[key] = true
 	}

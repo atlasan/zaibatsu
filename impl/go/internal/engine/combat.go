@@ -197,6 +197,27 @@ type DeleteAreaResult struct {
 	Targets []AreaTargetResult `json:"targets"`
 }
 
+func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord domain.Coord, skulls int) DeleteAreaResult {
+	res := DeleteAreaResult{Coord: coord}
+	res.Roll = AttackRoll(s.RNG, skulls)
+	eliminatedIDs := []string{}
+	for _, pawn := range s.Cybernet.Pawns {
+		if pawn.Coord != coord {
+			continue
+		}
+		target, ok := gd.PawnByID(pawn.PawnID)
+		eliminated := ok && Defeats(res.Roll, target.Defense)
+		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
+		if eliminated {
+			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)
+		}
+	}
+	for _, pawnID := range eliminatedIDs {
+		eliminatePawn(s, pawnID)
+	}
+	return res
+}
+
 // DeleteMulti resolves a single Delete attack roll split across several co-located
 // targets (Speedrunners / Shadowraiders "Combat Against Multiple Threats"). The
 // attacker rolls one die per skull; the first len(targetIDs) dice are assigned in
@@ -314,24 +335,7 @@ func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, ext
 		skulls = 1
 	}
 	skulls += extraSkulls
-	res.Coord = atkPob.Coord
-	res.Roll = AttackRoll(s.RNG, skulls)
-
-	eliminatedIDs := []string{}
-	for _, pawn := range s.Cybernet.Pawns {
-		if pawn.Coord != atkPob.Coord {
-			continue
-		}
-		target, ok := gd.PawnByID(pawn.PawnID)
-		eliminated := ok && Defeats(res.Roll, target.Defense)
-		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
-		if eliminated {
-			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)
-		}
-	}
-	for _, pawnID := range eliminatedIDs {
-		eliminatePawn(s, pawnID)
-	}
+	res = resolveDeleteAreaAtCoord(s, gd, atkPob.Coord, skulls)
 	if ability.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[key] = true
 	}

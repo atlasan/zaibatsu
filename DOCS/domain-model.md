@@ -55,7 +55,7 @@ A hexagonal tile forming the Cybernet.
 - `bonusFragments: int` — count of one-third bonus-icon corners (0..6) _(planned use)_
 - `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. This is visual/reference data, not an effect resolver.
 - `assetRefs?: assetId[]` — source-linked physical assets resolved from the asset manifest.
-- `effects: { inCybernet?, underControl? }` — each is a legacy effect-id string **or** a typed effect `{ kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|custom, amount?, target?, text? }`, fired on placement / on gaining control _(typed dispatch planned)_
+- `effects: { inCybernet?, underControl? }` — each is a legacy effect-id string **or** a typed effect `{ kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|custom, amount?, target?, text? }`, fired on placement / on gaining control. Typed `area-attack` dispatch is live; the other effect kinds remain planned.
 
 ### Space
 A cell on a block.

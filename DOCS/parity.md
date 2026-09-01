@@ -142,7 +142,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
-| Area attacks | ✅ | ✅ | Bomb-class area Delete applies one shared roll to every pawn in the attacker's block; block-effect dispatch remains pending |
+| Area attacks | ✅ | ✅ | Bomb-class area Delete and typed block `area-attack` effects apply one shared roll to every pawn in the affected block; identical across mirrors |
 | Multi-target Delete | ✅ | ✅ | attack dice can be divided across co-located targets, including concentrating several dice on one target; identical across mirrors |
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
