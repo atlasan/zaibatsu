@@ -25,10 +25,11 @@
 - **Applies to:** Speedrunners.
 - **Maturity:** partial.
 - **Rule:** Search discards one card to place a block; Delete rolls one d6 per
-  skull against unshielded defense; Reboot discards four cards to return an
-  eliminated pawn; and Icebreaker rolls against target ICE to gain control.
-  A failed Black-ICE Icebreaker eliminates the attacker. Area effects and exact
-  per-component ICE faces remain pending transcription.
+  skull against unshielded defense, and multi-skull Delete may divide or
+  concentrate those dice across co-located targets; Reboot discards four cards
+  to return an eliminated pawn; and Icebreaker rolls against target ICE to gain
+  control. A failed Black-ICE Icebreaker eliminates the attacker. Area effects
+  and exact per-component ICE faces remain pending transcription.
 
 ## SR-CARD-001 — One chosen action-card use
 

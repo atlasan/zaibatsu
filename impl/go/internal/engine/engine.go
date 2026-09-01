@@ -54,7 +54,7 @@ type Action struct {
 	PawnID        string        `json:"pawnId,omitempty"` // acting pawn (attacker/actor/searcher/rebooted)
 	Path          []SpaceRef    `json:"path,omitempty"`   // declared space-to-space movement path
 	TargetID      string        `json:"targetId,omitempty"`
-	TargetIDs     []string      `json:"targetIds,omitempty"`
+	TargetIDs     []string      `json:"targetIds,omitempty"` // ordered die assignments for delete-multi; duplicates concentrate dice
 	Coord         *domain.Coord `json:"coord,omitempty"`
 	Dir           int           `json:"dir,omitempty"`
 	Rotation      int           `json:"rotation,omitempty"`

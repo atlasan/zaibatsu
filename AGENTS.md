@@ -33,6 +33,9 @@ in code. `DOCS/governance.md` defines authority and required updates.
   `DOCS/domain-model.md` as the shared model description. Register new authored
   docs in `DOCS/registry.json`; ADRs and generated transcripts retain their own
   established formats.
+- **Execution ledger:** keep `tasks/BACKLOG.md`, `DOCS/parity.md`, and
+  `DOCS/rulebook-compatibility-matrix.md` aligned whenever a delivery wave
+  changes real source coverage, runtime behavior, or accepted gaps.
 - **Editor / tester changes:** when `tools/block-editor/` behavior changes,
   update the matching operator docs in `tools/block-editor/README.md`, the
   relevant workstream doc in `DOCS/`, and `tasks/BACKLOG.md`. If actual engine
@@ -43,7 +46,9 @@ in code. `DOCS/governance.md` defines authority and required updates.
 - **Tests:** every engine behavior has a test in both mirrors. Run `go test
   ./...` and `bun test`, plus `bun tools/validate-docs.ts`, `bun
   tools/verify-artifacts.ts`, and `bun tools/validate-spec.ts` for applicable
-  documentation, source, schema, or content changes.
+  documentation, source, schema, or content changes. Prefer the repo-root
+  wrapper scripts `test-engines.bat` and `check-docs.bat` when they cover the
+  touched surface.
 
 ## Conventions
 

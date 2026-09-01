@@ -34,7 +34,7 @@ func TestDeleteMultiRollsPerSkullAndAssignsPerTarget(t *testing.T) {
 			t.Fatalf("expected 2 target results, got %d", len(res.Targets))
 		}
 		// Each target's die is the roll at its index.
-		if res.Targets[0].Die != res.Roll[0] || res.Targets[1].Die != res.Roll[1] {
+		if len(res.Targets[0].Dice) != 1 || len(res.Targets[1].Dice) != 1 || res.Targets[0].Dice[0] != res.Roll[0] || res.Targets[1].Dice[0] != res.Roll[1] {
 			t.Errorf("dice not assigned in order: %+v vs %v", res.Targets, res.Roll)
 		}
 		// Consistency: eliminated targets are off the board.
@@ -70,6 +70,45 @@ func TestDeleteMultiRejectsTooManyTargets(t *testing.T) {
 	}
 }
 
+func TestDeleteMultiAllowsConcentratingDiceOnOneTarget(t *testing.T) {
+	gd := loadOrSkip(t)
+	yellow, ok := gd.PawnByID("speedrunner-yellow")
+	if !ok {
+		t.Fatal("missing speedrunner-yellow")
+	}
+	foundSeed := false
+	for seed := uint64(1); seed <= 200; seed++ {
+		s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: seed})
+		multiScenario(s)
+		res, err := DeleteMulti(s, gd, "speedrunner-green", []string{"speedrunner-yellow", "speedrunner-yellow"}, 0)
+		if err != nil {
+			t.Fatalf("DeleteMulti concentration: %v", err)
+		}
+		if len(res.Targets) != 1 {
+			t.Fatalf("expected 1 grouped target result, got %d", len(res.Targets))
+		}
+		if res.Targets[0].TargetPawnID != "speedrunner-yellow" {
+			t.Fatalf("expected grouped result for speedrunner-yellow, got %+v", res.Targets[0])
+		}
+		if len(res.Targets[0].Dice) != 2 || res.Targets[0].Dice[0] != res.Roll[0] || res.Targets[0].Dice[1] != res.Roll[1] {
+			t.Fatalf("expected both dice assigned to the same target, got %+v vs %v", res.Targets[0], res.Roll)
+		}
+		if !Defeats([]int{res.Roll[0]}, yellow.Defense) && Defeats([]int{res.Roll[1]}, yellow.Defense) {
+			if !res.Targets[0].Eliminated {
+				t.Fatal("expected concentrated second die to eliminate the target")
+			}
+			if s.Cybernet.PawnByID("speedrunner-yellow") != nil {
+				t.Fatal("eliminated concentrated target should be removed from the board")
+			}
+			foundSeed = true
+			break
+		}
+	}
+	if !foundSeed {
+		t.Fatal("expected a seed where the second concentrated die supplies the elimination")
+	}
+}
+
 func TestDeleteMultiRejectsBadTargets(t *testing.T) {
 	gd := loadOrSkip(t)
 	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
@@ -77,10 +116,6 @@ func TestDeleteMultiRejectsBadTargets(t *testing.T) {
 	// self
 	if _, err := DeleteMulti(s, gd, "speedrunner-green", []string{"speedrunner-green"}, 0); err == nil {
 		t.Error("expected error: self target")
-	}
-	// duplicate
-	if _, err := DeleteMulti(s, gd, "speedrunner-green", []string{"speedrunner-yellow", "speedrunner-yellow"}, 0); err == nil {
-		t.Error("expected error: duplicate target")
 	}
 	// non-co-located
 	s.Cybernet.PawnByID("speedrunner-yellow").Coord = domain.Coord{Q: 5, R: 0}

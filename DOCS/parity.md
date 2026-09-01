@@ -140,7 +140,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
-| Multi-target Delete | ✅ | ✅ | one die per co-located target (up to skull count); identical (seed 3 → roll [3,1]) |
+| Multi-target Delete | ✅ | ✅ | attack dice can be divided across co-located targets, including concentrating several dice on one target; identical across mirrors |
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |

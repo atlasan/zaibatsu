@@ -73,7 +73,7 @@ export interface Action {
   pawnId?: string; // acting pawn (attacker/actor/searcher/rebooted)
   path?: SpaceRef[]; // declared space-to-space movement path
   targetId?: string;
-  targetIds?: string[];
+  targetIds?: string[]; // ordered die assignments for delete-multi; duplicates concentrate dice
   coord?: Coord;
   dir?: number;
   rotation?: number;

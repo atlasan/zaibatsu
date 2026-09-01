@@ -32,6 +32,8 @@ the engine.
   these. An attack die value that matches an **unshielded** die eliminates the
   pawn; a match on a **shielded** die is blocked.
 - **AttackRoll**: N six-sided dice, one per **skull icon** on the Delete ability.
+  For multi-target Delete, those dice are assigned in order across co-located
+  targets and may be concentrated on the same target.
 - **AttackDie** _(shadowraiders)_: a *fixed* attack value (4, 5, or 6) carried by
   threats.
 

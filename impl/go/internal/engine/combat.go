@@ -10,10 +10,10 @@ import (
 // impl/ts/src/engine/combat.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // pawn", "Delete ability", "Eliminating a pawn"). Backlog: T-104.
 //
-// SCOPE: single-target Delete. A pawn's Delete rolls one d6 per skull; if any die
-// matches an UNSHIELDED defense die of the target, the target is eliminated. A
-// match on a shielded die is blocked. Splitting an attack's dice across multiple
-// targets, area attacks, and threat/Mark combat are later tasks.
+// SCOPE: targeted Delete and multi-target die assignment. A pawn's Delete rolls
+// one d6 per skull; if any die matches an UNSHIELDED defense die of the target,
+// the target is eliminated. A match on a shielded die is blocked. Area attacks
+// and threat/Mark combat are later tasks.
 
 // abilityUsedKey namespaces a pawn's once-per-turn ability marker.
 func abilityUsedKey(ability, pawnID string) string {
@@ -168,10 +168,10 @@ func eliminatePawn(s *domain.GameState, pawnID string) {
 	}
 }
 
-// MultiTargetResult is the outcome for one target of a multi-target Delete.
+// MultiTargetResult is the outcome for one target of a multi-target Delete assignment.
 type MultiTargetResult struct {
 	TargetPawnID string `json:"targetPawnId"`
-	Die          int    `json:"die"`
+	Dice         []int  `json:"dice"`
 	Eliminated   bool   `json:"eliminated"`
 }
 
@@ -183,13 +183,13 @@ type DeleteMultiResult struct {
 }
 
 // DeleteMulti resolves a single Delete attack roll split across several co-located
-// targets — one attack die per target, in order (Speedrunners "Combat Against
-// Multiple Threats"). The attacker rolls one die per skull; the first len(targets)
-// dice are assigned one-to-one. A target is eliminated if its die matches an
-// unshielded defense die.
+// targets (Speedrunners / Shadowraiders "Combat Against Multiple Threats"). The
+// attacker rolls one die per skull; the first len(targetIDs) dice are assigned in
+// order. A target may appear more than once so multiple dice can be concentrated
+// on it. A target is eliminated if any die assigned to it matches an unshielded
+// defense die.
 //
-// SCOPE: one die per target. Concentrating multiple dice on a single tough target
-// (and area attacks) is a later refinement — tracked in tasks/BACKLOG.md.
+// SCOPE: area attacks are a later refinement — tracked in tasks/BACKLOG.md.
 func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, targetIDs []string, extraSkulls int) (DeleteMultiResult, error) {
 	var res DeleteMultiResult
 	if len(targetIDs) == 0 {
@@ -225,16 +225,12 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 		return res, fmt.Errorf("cannot attack %d targets with only %d skull(s)", len(targetIDs), skulls)
 	}
 
-	// Validate targets: distinct, on the board, co-located, not the attacker.
-	seen := map[string]bool{}
+	// Validate targets: on the board, co-located, not the attacker. A target
+	// may appear more than once to concentrate several dice on it.
 	for _, tid := range targetIDs {
 		if tid == attackerID {
 			return res, fmt.Errorf("a pawn cannot Delete itself")
 		}
-		if seen[tid] {
-			return res, fmt.Errorf("target %q listed more than once", tid)
-		}
-		seen[tid] = true
 		tPob := s.Cybernet.PawnByID(tid)
 		if tPob == nil {
 			return res, fmt.Errorf("target %q is not on the board", tid)
@@ -245,11 +241,19 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 	}
 
 	res.Roll = AttackRoll(s.RNG, skulls)
+	diceByTarget := map[string][]int{}
+	targetOrder := []string{}
 	for i, tid := range targetIDs {
-		die := res.Roll[i]
+		if _, ok := diceByTarget[tid]; !ok {
+			targetOrder = append(targetOrder, tid)
+		}
+		diceByTarget[tid] = append(diceByTarget[tid], res.Roll[i])
+	}
+	for _, tid := range targetOrder {
 		tgt, _ := gd.PawnByID(tid)
-		eliminated := tgt != nil && Defeats([]int{die}, tgt.Defense)
-		res.Targets = append(res.Targets, MultiTargetResult{TargetPawnID: tid, Die: die, Eliminated: eliminated})
+		dice := diceByTarget[tid]
+		eliminated := tgt != nil && Defeats(dice, tgt.Defense)
+		res.Targets = append(res.Targets, MultiTargetResult{TargetPawnID: tid, Dice: dice, Eliminated: eliminated})
 		if eliminated {
 			eliminatePawn(s, tid)
 		}

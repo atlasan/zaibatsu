@@ -29,8 +29,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `(go)`/`(ts)`/`(spec)`/
   - [x] Reboot: return an eliminated pawn (from the `Eliminated` pool) to the Central Core under the rebooting player's control.
   - [ ] Replace provisional `IceFaces` with real per-block/pawn ICE die faces once transcribed (enables exact ICE-value modifier redundancy).
   - [~] Multi-target Delete (split dice across co-located targets) + area attacks.
-    - [x] `DeleteMulti`: roll one die per skull, assign one die per co-located target (up to skull count), distinct/self/co-location checks, once-per-turn gating. Identical across mirrors (seed 3 → [3,1]).
-    - [ ] Concentrate multiple dice on one target; area attacks (Bomb class / block effects).
+    - [x] `DeleteMulti`: roll one die per skull, divide dice across co-located targets in assignment order, allow concentration on one target, and enforce self/co-location checks plus once-per-turn gating. Identical across mirrors.
+    - [ ] Area attacks (Bomb class / block effects).
 - [ ] (go/ts) Bonus fragments → bonus icons → bonus counters; card costs paid in bonus counters.
 - [~] (go/ts) Card attachment: slots, class grants, discard-on-loss rules.
   - [x] Attach to pawn/enemy/block (`AttachToPawn`/`AttachToEnemy`/`AttachToBlock`): slot-present + slot-empty checks, block-needs-ICE, bonus-counter cost paid onto the card; `EffectivePawnClasses` folds in granted classes; attachments discarded (bonus refunded) on elimination and Icebreaker takeover. State verified identical across mirrors.
