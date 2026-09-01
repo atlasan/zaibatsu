@@ -17,7 +17,7 @@
 import type { Coord, PlacedBlock } from "../domain/hex.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import type { GameData, GameState, Player } from "../domain/types.ts";
-import { deleteAbility, type DeleteResult } from "./combat.ts";
+import { deleteAbility, deleteArea, type DeleteAreaResult, type DeleteResult } from "./combat.ts";
 import { icebreakBlock, icebreakPawn, type IcebreakResult } from "./icebreaker.ts";
 import { search } from "./abilities.ts";
 import { reboot } from "./abilities.ts";
@@ -102,6 +102,24 @@ export function playDelete(
   if (!cardActivates(gd, cardId, "delete")) throw new Error(`card "${cardId}" cannot activate Delete`);
   requireOwnedActor(s, playerId, attackerId);
   const res = deleteAbility(s, gd, attackerId, targetId, extraSkulls);
+  consumeCard(s, p, cardId);
+  return res;
+}
+
+/** Plays a Delete-capable card to activate a Bomb-class area Delete. */
+export function playDeleteArea(
+  s: GameState,
+  gd: GameData,
+  playerId: string,
+  cardId: string,
+  attackerId: string,
+  extraSkulls = 0,
+): DeleteAreaResult {
+  const p = player(s, playerId);
+  if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
+  if (!cardActivates(gd, cardId, "delete")) throw new Error(`card "${cardId}" cannot activate Delete`);
+  requireOwnedActor(s, playerId, attackerId);
+  const res = deleteArea(s, gd, attackerId, extraSkulls);
   consumeCard(s, p, cardId);
   return res;
 }

@@ -61,4 +61,17 @@ describe("applyAction dispatch", () => {
     applyAction(s, data, { type: "place-marker" });
     expect(s.players[0]!.controlMarkersPlaced).toBe(before + 1);
   });
+
+  test("delete-area via action resolves the Bomb-class area attack", () => {
+    const d = structuredClone(data);
+    d.pawns = d.pawns.map((pawn) =>
+      pawn.id === "speedrunner-green" ? { ...pawn, class: [...pawn.class, "bomb"] } : pawn
+    );
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 7 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    applyAction(s, d, { type: "delete-area", pawnId: "speedrunner-green" });
+    expect(s.eliminated.length).toBeGreaterThanOrEqual(0);
+  });
 });

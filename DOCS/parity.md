@@ -62,6 +62,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Attack roll | `engine.AttackRoll(rng,skulls)` | `attackRoll(rng,skulls)` |
 | Defense-hit test | `engine.Defeats(roll,def)` | `defeats(roll,def)` |
 | Delete ability | `engine.Delete(...)` | `deleteAbility(...)` ¹ |
+| Delete area | `engine.DeleteArea(...)` | `deleteArea(...)` |
 | Multi-target Delete | `engine.DeleteMulti(...)` | `deleteMulti(...)` |
 | Eliminate a pawn | `engine` (internal `eliminatePawn`) | `eliminatePawn(...)` |
 | Eliminated pool | `domain.GameState.Eliminated` | `GameState.eliminated` |
@@ -82,6 +83,7 @@ keeps them aligned. Update it whenever you add or rename a concept in either.
 | Valid search placements | `engine.ValidSearchPlacements(...)` | `validSearchPlacements(...)` |
 | Reboot ability | `engine.Reboot(s,gd,pawn,player)` | `reboot(s,gd,pawn,player)` |
 | Play card → Delete | `engine.PlayDelete(...)` | `playDelete(...)` |
+| Play card → Delete area | `engine.PlayDeleteArea(...)` | `playDeleteArea(...)` |
 | Play card → Icebreak block | `engine.PlayIcebreakBlock(...)` | `playIcebreakBlock(...)` |
 | Play card → Icebreak pawn | `engine.PlayIcebreakPawn(...)` | `playIcebreakPawn(...)` |
 | Discard 1 → Search | `engine.PlaySearch(...)` | `playSearch(...)` |
@@ -140,6 +142,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Movement budget + activation | ✅ | ✅ | fixed/d6/2d6/hex + modifiers; card/once-per-turn/none gating |
 | Hex movement execution | ✅ | ✅ | block-to-block; d6 sequence verified identical (seed 99) |
 | Combat: Delete + elimination | ✅ | ✅ | single-target attack roll vs defense dice; full pipeline identical (seed 123) |
+| Area attacks | ✅ | ✅ | Bomb-class area Delete applies one shared roll to every pawn in the attacker's block; block-effect dispatch remains pending |
 | Multi-target Delete | ✅ | ✅ | attack dice can be divided across co-located targets, including concentrating several dice on one target; identical across mirrors |
 | Icebreaker: block + pawn control | ✅ | ✅ | roll vs ICE faces (provisional), marker placement/steal, Black-ICE penalty; identical (seed 5 → [6], success) |
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |

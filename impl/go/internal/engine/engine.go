@@ -26,6 +26,7 @@ const (
 	ActMoveHex      ActionType = "move-hex"
 	ActMoveSteps    ActionType = "move-steps"
 	ActDelete       ActionType = "delete"
+	ActDeleteArea   ActionType = "delete-area"
 	ActDeleteMulti  ActionType = "delete-multi"
 	ActIcebreakBlk  ActionType = "icebreak-block"
 	ActIcebreakPawn ActionType = "icebreak-pawn"
@@ -33,6 +34,7 @@ const (
 	ActReboot       ActionType = "reboot"
 	// Card-driven variants (consume cards from hand).
 	ActPlayDelete       ActionType = "play-delete"
+	ActPlayDeleteArea   ActionType = "play-delete-area"
 	ActPlayMove         ActionType = "play-move"
 	ActPlayIcebreakBlk  ActionType = "play-icebreak-block"
 	ActPlayIcebreakPawn ActionType = "play-icebreak-pawn"
@@ -314,6 +316,9 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 	case ActDelete:
 		result, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)
 		return result, err
+	case ActDeleteArea:
+		result, err := DeleteArea(s, gd, a.PawnID, a.ExtraSkulls)
+		return result, err
 	case ActDeleteMulti:
 		result, err := DeleteMulti(s, gd, a.PawnID, a.TargetIDs, a.ExtraSkulls)
 		return result, err
@@ -335,6 +340,9 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 		return result, err
 	case ActPlayDelete:
 		result, err := PlayDelete(s, gd, pid, a.CardID, a.PawnID, a.TargetID, a.ExtraSkulls)
+		return result, err
+	case ActPlayDeleteArea:
+		result, err := PlayDeleteArea(s, gd, pid, a.CardID, a.PawnID, a.ExtraSkulls)
 		return result, err
 	case ActPlayMove:
 		result, err := PlayMove(s, gd, pid, a.CardID, a.PawnID, a.Path)
@@ -455,6 +463,8 @@ func deltaEvents(s *domain.GameState, before stateWatch) []EngineEvent {
 func rollFrom(result any) []int {
 	switch value := result.(type) {
 	case DeleteResult:
+		return value.Roll
+	case DeleteAreaResult:
 		return value.Roll
 	case DeleteMultiResult:
 		return value.Roll

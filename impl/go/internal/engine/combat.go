@@ -10,10 +10,11 @@ import (
 // impl/ts/src/engine/combat.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // pawn", "Delete ability", "Eliminating a pawn"). Backlog: T-104.
 //
-// SCOPE: targeted Delete and multi-target die assignment. A pawn's Delete rolls
-// one d6 per skull; if any die matches an UNSHIELDED defense die of the target,
-// the target is eliminated. A match on a shielded die is blocked. Area attacks
-// and threat/Mark combat are later tasks.
+// SCOPE: targeted Delete, Bomb-class area Delete, and multi-target die
+// assignment. A pawn's Delete rolls one d6 per skull; if any die matches an
+// UNSHIELDED defense die of the target, the target is eliminated. A match on a
+// shielded die is blocked. Threat/Mark combat and block-effect dispatch are
+// later tasks.
 
 // abilityUsedKey namespaces a pawn's once-per-turn ability marker.
 func abilityUsedKey(ability, pawnID string) string {
@@ -182,6 +183,20 @@ type DeleteMultiResult struct {
 	Targets []MultiTargetResult `json:"targets"`
 }
 
+// AreaTargetResult is the outcome for one pawn in an area attack.
+type AreaTargetResult struct {
+	TargetPawnID string `json:"targetPawnId"`
+	Eliminated   bool   `json:"eliminated"`
+}
+
+// DeleteAreaResult reports a Bomb-class area Delete: one shared roll applied to
+// every pawn in the attacker's block.
+type DeleteAreaResult struct {
+	Coord   domain.Coord       `json:"coord"`
+	Roll    []int              `json:"roll"`
+	Targets []AreaTargetResult `json:"targets"`
+}
+
 // DeleteMulti resolves a single Delete attack roll split across several co-located
 // targets (Speedrunners / Shadowraiders "Combat Against Multiple Threats"). The
 // attacker rolls one die per skull; the first len(targetIDs) dice are assigned in
@@ -257,6 +272,65 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 		if eliminated {
 			eliminatePawn(s, tid)
 		}
+	}
+	if ability.Activation == "once-per-turn" {
+		owner.OncePerTurnUsed[key] = true
+	}
+	return res, nil
+}
+
+// DeleteArea resolves a Bomb-class area Delete against every pawn in the
+// attacker's block. The same attack roll is applied to every pawn in the area of
+// effect, including the attacker when present in that block.
+func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, extraSkulls int) (DeleteAreaResult, error) {
+	var res DeleteAreaResult
+	atkPob := s.Cybernet.PawnByID(attackerID)
+	if atkPob == nil {
+		return res, fmt.Errorf("attacker %q is not on the board", attackerID)
+	}
+	atk, ok := gd.PawnByID(attackerID)
+	if !ok {
+		return res, fmt.Errorf("unknown attacker pawn %q", attackerID)
+	}
+	if !containsString(EffectivePawnClasses(gd, atkPob), "bomb") {
+		return res, fmt.Errorf("pawn %q cannot activate an area Delete", attackerID)
+	}
+
+	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
+	if ability == nil || ability.Activation == "none" {
+		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
+	}
+	owner := s.PlayerByID(atkPob.OwnerID)
+	if owner == nil {
+		return res, fmt.Errorf("attacker %q has no controlling player", attackerID)
+	}
+	key := abilityUsedKey("delete", attackerID)
+	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+		return res, fmt.Errorf("pawn %q already used its once-per-turn Delete this turn", attackerID)
+	}
+
+	skulls := ability.Skulls
+	if skulls < 1 {
+		skulls = 1
+	}
+	skulls += extraSkulls
+	res.Coord = atkPob.Coord
+	res.Roll = AttackRoll(s.RNG, skulls)
+
+	eliminatedIDs := []string{}
+	for _, pawn := range s.Cybernet.Pawns {
+		if pawn.Coord != atkPob.Coord {
+			continue
+		}
+		target, ok := gd.PawnByID(pawn.PawnID)
+		eliminated := ok && Defeats(res.Roll, target.Defense)
+		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
+		if eliminated {
+			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)
+		}
+	}
+	for _, pawnID := range eliminatedIDs {
+		eliminatePawn(s, pawnID)
 	}
 	if ability.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[key] = true

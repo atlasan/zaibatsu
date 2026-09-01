@@ -26,10 +26,12 @@
 - **Maturity:** partial.
 - **Rule:** Search discards one card to place a block; Delete rolls one d6 per
   skull against unshielded defense, and multi-skull Delete may divide or
-  concentrate those dice across co-located targets; Reboot discards four cards
-  to return an eliminated pawn; and Icebreaker rolls against target ICE to gain
-  control. A failed Black-ICE Icebreaker eliminates the attacker. Area effects
-  and exact per-component ICE faces remain pending transcription.
+  concentrate those dice across co-located targets. Bomb-class area Delete
+  applies that same roll to every pawn in the attacker's block; block-effect
+  area dispatch remains pending. Reboot discards four cards to return an
+  eliminated pawn; and Icebreaker rolls against target ICE to gain control. A
+  failed Black-ICE Icebreaker eliminates the attacker. Exact per-component ICE
+  faces remain pending transcription.
 
 ## SR-CARD-001 — One chosen action-card use
 

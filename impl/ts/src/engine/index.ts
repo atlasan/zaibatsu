@@ -17,10 +17,10 @@ import {
 
 import { checkWin } from "./win.ts";
 import { moveHex, moveSteps, type SpaceRef } from "./movement.ts";
-import { deleteAbility, deleteMulti } from "./combat.ts";
+import { deleteAbility, deleteArea, deleteMulti } from "./combat.ts";
 import { icebreakBlock, icebreakPawn } from "./icebreaker.ts";
 import { reboot, search } from "./abilities.ts";
-import { playDelete, playIcebreakBlock, playIcebreakPawn, playMove, playReboot, playSearch } from "./cards.ts";
+import { playDelete, playDeleteArea, playIcebreakBlock, playIcebreakPawn, playMove, playReboot, playSearch } from "./cards.ts";
 import { attachToBlock, attachToEnemy, attachToPawn, playerAttachmentModifiers } from "./attach.ts";
 
 export * from "./placement.ts";
@@ -45,12 +45,14 @@ export type ActionType =
   | "move-hex"
   | "move-steps"
   | "delete"
+  | "delete-area"
   | "delete-multi"
   | "icebreak-block"
   | "icebreak-pawn"
   | "search"
   | "reboot"
   | "play-delete"
+  | "play-delete-area"
   | "play-move"
   | "play-icebreak-block"
   | "play-icebreak-pawn"
@@ -285,6 +287,9 @@ function executeAction(s: GameState, gd: GameData, a: Action): unknown {
     case "delete":
       deleteAbility(s, gd, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);
       return;
+    case "delete-area":
+      deleteArea(s, gd, a.pawnId!, a.extraSkulls ?? 0);
+      return;
     case "delete-multi":
       deleteMulti(s, gd, a.pawnId!, a.targetIds ?? [], a.extraSkulls ?? 0);
       return;
@@ -302,6 +307,9 @@ function executeAction(s: GameState, gd: GameData, a: Action): unknown {
       return;
     case "play-delete":
       playDelete(s, gd, pid, a.cardId!, a.pawnId!, a.targetId!, a.extraSkulls ?? 0);
+      return;
+    case "play-delete-area":
+      playDeleteArea(s, gd, pid, a.cardId!, a.pawnId!, a.extraSkulls ?? 0);
       return;
     case "play-move":
       playMove(s, gd, pid, a.cardId!, a.pawnId!, a.path ?? []);

@@ -2,10 +2,11 @@
 // impl/go/internal/engine/combat.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
 // a pawn", "Delete ability", "Eliminating a pawn"). Backlog: T-104.
 //
-// SCOPE: targeted Delete and multi-target die assignment. A pawn's Delete rolls
-// one d6 per skull; if any die matches an UNSHIELDED defense die of the target,
-// the target is eliminated. A match on a shielded die is blocked. Area attacks
-// and threat/Mark combat are later tasks.
+// SCOPE: targeted Delete, Bomb-class area Delete, and multi-target die
+// assignment. A pawn's Delete rolls one d6 per skull; if any die matches an
+// UNSHIELDED defense die of the target, the target is eliminated. A match on a
+// shielded die is blocked. Threat/Mark combat and block-effect dispatch are
+// later tasks.
 
 import {
   pawnById,
@@ -16,8 +17,9 @@ import {
   type Pawn,
   type Ability,
 } from "../domain/types.ts";
+import type { Coord } from "../domain/hex.ts";
 import type { Rng } from "../domain/rng.ts";
-import { discardAttachments } from "./attach.ts";
+import { discardAttachments, effectivePawnClasses } from "./attach.ts";
 
 /** Namespaces a pawn's once-per-turn ability marker. */
 export function abilityUsedKey(ability: string, pawnId: string): string {
@@ -153,6 +155,40 @@ export interface DeleteMultiResult {
   targets: MultiTargetResult[];
 }
 
+export interface AreaTargetResult {
+  targetPawnId: string;
+  eliminated: boolean;
+}
+
+export interface DeleteAreaResult {
+  coord: Coord;
+  roll: number[];
+  targets: AreaTargetResult[];
+}
+
+export function resolveDeleteAreaAtCoord(
+  s: GameState,
+  gd: GameData,
+  coord: Coord,
+  skulls: number,
+): DeleteAreaResult {
+  const roll = attackRoll(s.rng, skulls);
+  const targetIds = s.cybernet.pawns
+    .filter((p) => p.coord.q === coord.q && p.coord.r === coord.r)
+    .map((p) => p.pawnId);
+
+  const targets: AreaTargetResult[] = [];
+  const eliminatedIds: string[] = [];
+  for (const targetId of targetIds) {
+    const tgt = pawnById(gd, targetId);
+    const eliminated = !!tgt && defeats(roll, tgt.defense);
+    targets.push({ targetPawnId: targetId, eliminated });
+    if (eliminated) eliminatedIds.push(targetId);
+  }
+  for (const targetId of eliminatedIds) eliminatePawn(s, targetId);
+  return { coord: { ...coord }, roll, targets };
+}
+
 /**
  * Resolves a single Delete attack roll split across several co-located targets
  * (Speedrunners / Shadowraiders "Combat Against Multiple Threats"). Rolls one
@@ -223,4 +259,43 @@ export function deleteMulti(
   }
   if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
   return { roll, targets };
+}
+
+/**
+ * Resolves a Bomb-class area Delete against every pawn in the attacker's block.
+ * The same attack roll is applied to every pawn in the area of effect, including
+ * the attacker when present in that block. Block-effect dispatch will reuse the
+ * same area-attack semantics in a later slice.
+ */
+export function deleteArea(
+  s: GameState,
+  gd: GameData,
+  attackerId: string,
+  extraSkulls = 0,
+): DeleteAreaResult {
+  const atkPob = s.cybernet.pawnById(attackerId);
+  if (!atkPob) throw new Error(`attacker "${attackerId}" is not on the board`);
+  const atk = pawnById(gd, attackerId);
+  if (!atk) throw new Error(`unknown attacker pawn "${attackerId}"`);
+  if (!effectivePawnClasses(gd, atkPob).includes("bomb")) {
+    throw new Error(`pawn "${attackerId}" cannot activate an area Delete`);
+  }
+
+  const ability = effectiveAbility(gd, atk, atkPob.attachments, "delete");
+  if (!ability || ability.activation === "none") {
+    throw new Error(`pawn "${attackerId}" cannot activate Delete`);
+  }
+
+  const owner = playerById(s, atkPob.ownerId);
+  if (!owner) throw new Error(`attacker "${attackerId}" has no controlling player`);
+  const key = abilityUsedKey("delete", attackerId);
+  if (ability.activation === "once-per-turn" && owner.oncePerTurnUsed[key]) {
+    throw new Error(`pawn "${attackerId}" already used its once-per-turn Delete this turn`);
+  }
+
+  let skulls = ability.skulls && ability.skulls >= 1 ? ability.skulls : 1;
+  skulls += extraSkulls;
+  const result = resolveDeleteAreaAtCoord(s, gd, atkPob.coord, skulls);
+  if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
+  return result;
 }

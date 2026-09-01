@@ -10,6 +10,7 @@ import {
   attackRoll,
   defeats,
   deleteAbility,
+  deleteArea,
   newGame,
 } from "../src/engine/index.ts";
 
@@ -18,6 +19,14 @@ const ORIGIN: Coord = { q: 0, r: 0 };
 
 function game(seed: number) {
   return newGame({ data, playerNames: ["A", "B"], seed });
+}
+
+function bombData(): GameData {
+  const cloned = structuredClone(data);
+  cloned.pawns = cloned.pawns.map((pawn) =>
+    pawn.id === "speedrunner-green" ? { ...pawn, class: [...pawn.class, "bomb"] } : pawn
+  );
+  return cloned;
 }
 
 function placeTwoPawns(
@@ -111,6 +120,51 @@ describe("deleteAbility", () => {
       return deleteAbility(s, data, "speedrunner-green", "speedrunner-yellow", 0).roll;
     };
     expect(run()).toEqual(run());
+  });
+});
+
+describe("deleteArea", () => {
+  test("requires a Bomb-class attacker", () => {
+    const s = game(1);
+    placeTwoPawns(s, ORIGIN, "speedrunner-green", "speedrunner-yellow", "p1");
+    expect(() => deleteArea(s, data, "speedrunner-green", 0)).toThrow();
+  });
+
+  test("applies the same roll to every pawn in the attacker's block, including the attacker", () => {
+    const d = bombData();
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 7 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+
+    const res = deleteArea(s, d, "speedrunner-green", 0);
+    expect(res.coord).toEqual(ORIGIN);
+    expect(res.targets.map((t) => t.targetPawnId)).toEqual([
+      "speedrunner-green",
+      "speedrunner-yellow",
+      "speedrunner-blue",
+    ]);
+    for (const target of res.targets) {
+      const defense = d.pawns.find((p) => p.id === target.targetPawnId)!.defense;
+      const expected = defeats(res.roll, defense);
+      expect(target.eliminated).toBe(expected);
+      expect(!!s.cybernet.pawnById(target.targetPawnId)).toBe(!expected);
+    }
+  });
+
+  test("sets the once-per-turn gate for a Bomb-class attacker", () => {
+    const d = bombData();
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 7 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    d.pawns = d.pawns.map((pawn) =>
+      pawn.id === "drone-turret" ? { ...pawn, class: [...pawn.class, "bomb"] } : pawn
+    );
+
+    deleteArea(s, d, "drone-turret", 0);
+    expect(s.players.find((p) => p.id === "p1")!.oncePerTurnUsed[abilityUsedKey("delete", "drone-turret")]).toBe(true);
   });
 });
 

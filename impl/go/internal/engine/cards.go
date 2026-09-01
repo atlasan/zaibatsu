@@ -148,6 +148,31 @@ func PlayDelete(s *domain.GameState, gd *domain.GameData, playerID, cardID, atta
 	return res, nil
 }
 
+// PlayDeleteArea plays a Delete-capable card to activate a Bomb-class area
+// Delete. The card is consumed only if the play is legal.
+func PlayDeleteArea(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, extraSkulls int) (DeleteAreaResult, error) {
+	var res DeleteAreaResult
+	player := s.PlayerByID(playerID)
+	if player == nil {
+		return res, fmt.Errorf("unknown player %q", playerID)
+	}
+	if !cardInHand(player, cardID) {
+		return res, fmt.Errorf("card %q is not in %s's hand", cardID, playerID)
+	}
+	if !cardActivates(gd, cardID, "delete") {
+		return res, fmt.Errorf("card %q cannot activate Delete", cardID)
+	}
+	if err := requireOwnedActor(s, playerID, attackerID); err != nil {
+		return res, err
+	}
+	res, err := DeleteArea(s, gd, attackerID, extraSkulls)
+	if err != nil {
+		return res, err
+	}
+	_ = consumeCard(s, player, cardID)
+	return res, nil
+}
+
 // PlayIcebreakBlock plays an Icebreaker-capable card to Icebreak the block the
 // attacker occupies.
 func PlayIcebreakBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, coord domain.Coord, extraRollDice int) (IcebreakResult, error) {

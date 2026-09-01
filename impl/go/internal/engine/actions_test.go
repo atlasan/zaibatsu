@@ -75,3 +75,22 @@ func TestPlayerIDDefaultsToCurrent(t *testing.T) {
 		t.Error("place-marker with empty PlayerID should target the current player")
 	}
 }
+
+func TestApplyDeleteAreaDispatch(t *testing.T) {
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Pawns = append([]domain.Pawn{}, gd.Pawns...)
+	for i := range cloned.Pawns {
+		if cloned.Pawns[i].ID == "speedrunner-green" {
+			cloned.Pawns[i] = clonePawnWithClass(cloned.Pawns[i], "bomb")
+		}
+	}
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 7})
+	origin := domain.Coord{Q: 0, R: 0}
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-green", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	if err := Apply(s, &cloned, Action{Type: ActDeleteArea, PawnID: "speedrunner-green"}); err != nil {
+		t.Fatalf("ActDeleteArea: %v", err)
+	}
+}

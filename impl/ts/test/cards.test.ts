@@ -5,6 +5,7 @@ import { opposite, type Coord } from "../src/domain/hex.ts";
 import {
   newGame,
   playDelete,
+  playDeleteArea,
   playMove,
   playReboot,
   playSearch,
@@ -15,6 +16,14 @@ const ORIGIN: Coord = { q: 0, r: 0 };
 
 function game(seed: number): GameState {
   return newGame({ data, playerNames: ["A", "B"], seed });
+}
+
+function bombData(): GameData {
+  const cloned = structuredClone(data);
+  cloned.pawns = cloned.pawns.map((pawn) =>
+    pawn.id === "speedrunner-green" ? { ...pawn, class: [...pawn.class, "bomb"] } : pawn
+  );
+  return cloned;
 }
 
 function rotFacing(blockId: string, dir: number): number {
@@ -73,6 +82,22 @@ describe("playDelete", () => {
     twoPawns(s, "p2"); // attacker owned by p2
     s.players.find((p) => p.id === "p1")!.hand = ["move-1"];
     expect(() => playDelete(s, data, "p1", "move-1", "speedrunner-green", "speedrunner-yellow", 0)).toThrow();
+  });
+
+  test("consumes the card and resolves a Bomb-class area Delete", () => {
+    const d = bombData();
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 7 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    s.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    const p1 = s.players.find((p) => p.id === "p1")!;
+    p1.hand = ["move-1", "move-2"];
+    const before = s.discard.length;
+    const res = playDeleteArea(s, d, "p1", "move-1", "speedrunner-green", 0);
+    expect(p1.hand.includes("move-1")).toBe(false);
+    expect(s.discard.length).toBe(before + 1);
+    expect(res.targets.length).toBe(3);
   });
 });
 

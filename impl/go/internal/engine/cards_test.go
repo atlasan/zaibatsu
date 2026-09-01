@@ -93,6 +93,39 @@ func TestPlayDeleteRejectsUnownedAttacker(t *testing.T) {
 	}
 }
 
+func TestPlayDeleteAreaConsumesCardAndResolves(t *testing.T) {
+	s, gd := cardGame(t, 7)
+	cloned := *gd
+	cloned.Pawns = append([]domain.Pawn{}, gd.Pawns...)
+	for i := range cloned.Pawns {
+		if cloned.Pawns[i].ID == "speedrunner-green" {
+			cloned.Pawns[i] = clonePawnWithClass(cloned.Pawns[i], "bomb")
+		}
+	}
+	gd = &cloned
+	origin := domain.Coord{Q: 0, R: 0}
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-green", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-blue", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	p1 := s.PlayerByID("p1")
+	p1.Hand = []string{"move-1", "move-2"}
+	discardBefore := len(s.Discard)
+	res, err := PlayDeleteArea(s, gd, "p1", "move-1", "speedrunner-green", 0)
+	if err != nil {
+		t.Fatalf("PlayDeleteArea: %v", err)
+	}
+	if cardInHand(p1, "move-1") {
+		t.Error("move-1 should have left the hand")
+	}
+	if len(s.Discard) != discardBefore+1 {
+		t.Errorf("discard grew by %d, want 1", len(s.Discard)-discardBefore)
+	}
+	if len(res.Targets) != 3 {
+		t.Fatalf("expected 3 area targets, got %d", len(res.Targets))
+	}
+}
+
 func TestPlaySearchDiscardsCardAndPlaces(t *testing.T) {
 	s, gd := cardGame(t, 1)
 	origin := domain.Coord{Q: 0, R: 0}

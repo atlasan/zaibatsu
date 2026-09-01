@@ -169,3 +169,86 @@ func TestDeleteRemovedByAttachment(t *testing.T) {
 		t.Error("an attachment that removes Delete should block the attack")
 	}
 }
+
+func bombGameData(t *testing.T) *domain.GameData {
+	t.Helper()
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Pawns = append([]domain.Pawn{}, gd.Pawns...)
+	for i := range cloned.Pawns {
+		if cloned.Pawns[i].ID == "speedrunner-green" || cloned.Pawns[i].ID == "drone-turret" {
+			cloned.Pawns[i] = clonePawnWithClass(cloned.Pawns[i], "bomb")
+		}
+	}
+	return &cloned
+}
+
+func clonePawnWithClass(pawn domain.Pawn, class string) domain.Pawn {
+	classes := append([]string{}, pawn.Class...)
+	classes = append(classes, class)
+	pawn.Class = classes
+	return pawn
+}
+
+func TestDeleteAreaRequiresBombClass(t *testing.T) {
+	gd := loadOrSkip(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	placeTwoPawns(s, origin, "speedrunner-green", "speedrunner-yellow", "p1")
+	if _, err := DeleteArea(s, gd, "speedrunner-green", 0); err == nil {
+		t.Error("expected area Delete to require a Bomb-class attacker")
+	}
+}
+
+func TestDeleteAreaAppliesSameRollToEveryPawnInBlock(t *testing.T) {
+	gd := bombGameData(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 7})
+	origin := domain.Coord{Q: 0, R: 0}
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-green", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-blue", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	res, err := DeleteArea(s, gd, "speedrunner-green", 0)
+	if err != nil {
+		t.Fatalf("DeleteArea: %v", err)
+	}
+	if res.Coord != origin {
+		t.Fatalf("area coord = %v, want %v", res.Coord, origin)
+	}
+	wantIDs := []string{"speedrunner-green", "speedrunner-yellow", "speedrunner-blue"}
+	if len(res.Targets) != len(wantIDs) {
+		t.Fatalf("targets len = %d, want %d", len(res.Targets), len(wantIDs))
+	}
+	for i, target := range res.Targets {
+		if target.TargetPawnID != wantIDs[i] {
+			t.Fatalf("target %d = %q, want %q", i, target.TargetPawnID, wantIDs[i])
+		}
+		def, ok := gd.PawnByID(target.TargetPawnID)
+		if !ok {
+			t.Fatalf("missing pawn def %q", target.TargetPawnID)
+		}
+		wantElim := Defeats(res.Roll, def.Defense)
+		if target.Eliminated != wantElim {
+			t.Fatalf("target %q eliminated=%v, want %v", target.TargetPawnID, target.Eliminated, wantElim)
+		}
+		stillOnBoard := s.Cybernet.PawnByID(target.TargetPawnID) != nil
+		if stillOnBoard != !wantElim {
+			t.Fatalf("board presence mismatch for %q", target.TargetPawnID)
+		}
+	}
+}
+
+func TestDeleteAreaSetsOncePerTurnMarker(t *testing.T) {
+	gd := bombGameData(t)
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 7})
+	origin := domain.Coord{Q: 0, R: 0}
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	if _, err := DeleteArea(s, gd, "drone-turret", 0); err != nil {
+		t.Fatalf("DeleteArea once-per-turn: %v", err)
+	}
+	if !s.PlayerByID("p1").OncePerTurnUsed[abilityUsedKey("delete", "drone-turret")] {
+		t.Fatal("expected once-per-turn Delete marker to be set")
+	}
+}
