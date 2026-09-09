@@ -53,9 +53,9 @@ type Action struct {
 	PlayerID      string        `json:"playerId,omitempty"`
 	CardID        string        `json:"cardId,omitempty"`
 	CardIDs       []string      `json:"cardIds,omitempty"`
-	PawnID        string        `json:"pawnId,omitempty"` // acting pawn (attacker/actor/searcher/rebooted)
-	Path          []SpaceRef    `json:"path,omitempty"`   // declared space-to-space movement path
-        MovementIndex int           `json:"movementIndex,omitempty"` // explicit movement option index: base=0, granted options follow attachment order
+	PawnID        string        `json:"pawnId,omitempty"`        // acting pawn (attacker/actor/searcher/rebooted)
+	Path          []SpaceRef    `json:"path,omitempty"`          // declared space-to-space movement path
+	MovementIndex int           `json:"movementIndex,omitempty"` // explicit movement option index: base=0, granted options follow attachment order
 	TargetID      string        `json:"targetId,omitempty"`
 	TargetIDs     []string      `json:"targetIds,omitempty"` // ordered die assignments for delete-multi; duplicates concentrate dice
 	Coord         *domain.Coord `json:"coord,omitempty"`
@@ -70,14 +70,16 @@ type Action struct {
 type EventType string
 
 const (
-	EventPhaseAdvanced  EventType = "phase-advanced"
-	EventActionAccepted EventType = "action-accepted"
-	EventRoll           EventType = "roll"
-	EventDraw           EventType = "draw"
-	EventElimination    EventType = "elimination"
-	EventControlChanged EventType = "control-changed"
-	EventValidationFail EventType = "validation-failed"
-	EventWinnerDeclared EventType = "winner-declared"
+	EventPhaseAdvanced    EventType = "phase-advanced"
+	EventActionAccepted   EventType = "action-accepted"
+	EventRoll             EventType = "roll"
+	EventDraw             EventType = "draw"
+	EventBonusIconCreated EventType = "bonus-icon-created"
+	EventBonusCollected   EventType = "bonus-collected"
+	EventElimination      EventType = "elimination"
+	EventControlChanged   EventType = "control-changed"
+	EventValidationFail   EventType = "validation-failed"
+	EventWinnerDeclared   EventType = "winner-declared"
 )
 
 // EngineEvent is structured output from phase transitions and accepted actions.
@@ -309,10 +311,10 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 		checkWin(s)
 		return nil, nil
 	case ActMoveHex:
-                result, err := MoveHexWithOption(s, gd, a.PawnID, a.Dir, a.MovementIndex)
+		result, err := MoveHexWithOption(s, gd, a.PawnID, a.Dir, a.MovementIndex)
 		return result, err
 	case ActMoveSteps:
-                result, err := MoveStepsWithOption(s, gd, a.PawnID, a.Path, a.MovementIndex)
+		result, err := MoveStepsWithOption(s, gd, a.PawnID, a.Path, a.MovementIndex)
 		return result, err
 	case ActDelete:
 		result, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)
@@ -391,12 +393,13 @@ type stateWatch struct {
 	markers     map[string]int
 	pawnOwners  map[string]string
 	blockOwners map[string]string
+	bonusIcons  map[string]string
 	eliminated  map[string]bool
 	winnerID    string
 }
 
 func watchState(s *domain.GameState) stateWatch {
-	w := stateWatch{hands: map[string][]string{}, markers: map[string]int{}, pawnOwners: map[string]string{}, blockOwners: map[string]string{}, eliminated: map[string]bool{}, winnerID: s.WinnerID}
+	w := stateWatch{hands: map[string][]string{}, markers: map[string]int{}, pawnOwners: map[string]string{}, blockOwners: map[string]string{}, bonusIcons: map[string]string{}, eliminated: map[string]bool{}, winnerID: s.WinnerID}
 	for _, p := range s.Players {
 		w.hands[p.ID] = append([]string{}, p.Hand...)
 		w.markers[p.ID] = p.ControlMarkersPlaced
@@ -406,6 +409,9 @@ func watchState(s *domain.GameState) stateWatch {
 	}
 	for _, block := range s.Cybernet.Blocks {
 		w.blockOwners[fmt.Sprintf("%d,%d", block.Coord.Q, block.Coord.R)] = block.OwnerID
+	}
+	for _, icon := range s.Cybernet.BonusIcons {
+		w.bonusIcons[icon.Key] = icon.CollectedBy
 	}
 	for _, pawnID := range s.Eliminated {
 		w.eliminated[pawnID] = true
@@ -448,6 +454,15 @@ func deltaEvents(s *domain.GameState, before stateWatch) []EngineEvent {
 		key := fmt.Sprintf("%d,%d", block.Coord.Q, block.Coord.R)
 		if old, ok := before.blockOwners[key]; ok && old != block.OwnerID {
 			events = append(events, EngineEvent{Type: EventControlChanged, Element: "block", ElementID: key, FromOwnerID: old, ToOwnerID: block.OwnerID})
+		}
+	}
+	for _, icon := range s.Cybernet.BonusIcons {
+		previous, existed := before.bonusIcons[icon.Key]
+		if !existed {
+			events = append(events, EngineEvent{Type: EventBonusIconCreated, Element: "bonus-icon", ElementID: icon.Key})
+		}
+		if previous == "" && icon.CollectedBy != "" {
+			events = append(events, EngineEvent{Type: EventBonusCollected, PlayerID: icon.CollectedBy, Element: "bonus-icon", ElementID: icon.Key})
 		}
 	}
 	for _, pawnID := range s.Eliminated {

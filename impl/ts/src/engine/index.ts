@@ -30,6 +30,7 @@ export * from "./icebreaker.ts";
 export * from "./abilities.ts";
 export * from "./cards.ts";
 export * from "./attach.ts";
+export * from "./bonus.ts";
 export * from "./effects.ts";
 export * from "./snapshot.ts";
 export { winner } from "./win.ts";
@@ -91,6 +92,8 @@ export type EngineEventType =
   | "action-accepted"
   | "roll"
   | "draw"
+  | "bonus-icon-created"
+  | "bonus-collected"
   | "elimination"
   | "control-changed"
   | "winner-declared"
@@ -352,6 +355,7 @@ interface StateWatch {
   markers: Map<string, number>;
   pawnOwners: Map<string, string>;
   blockOwners: Map<string, string>;
+  bonusIcons: Map<string, string>;
   eliminated: Set<string>;
   winnerId?: string;
 }
@@ -362,6 +366,7 @@ function watchState(s: GameState): StateWatch {
     markers: new Map(s.players.map((p) => [p.id, p.controlMarkersPlaced])),
     pawnOwners: new Map(s.cybernet.pawns.map((p) => [p.pawnId, p.ownerId])),
     blockOwners: new Map(s.cybernet.blocks.map((b) => [`${b.coord.q},${b.coord.r}`, b.ownerId ?? ""])),
+    bonusIcons: new Map((s.cybernet.bonusIcons ?? []).map((icon) => [icon.key, icon.collectedBy ?? ""])),
     eliminated: new Set(s.eliminated),
     winnerId: s.winnerId,
   };
@@ -402,6 +407,15 @@ function deltaEvents(s: GameState, before: StateWatch): EngineEvent[] {
     const toOwnerId = block.ownerId ?? "";
     if (fromOwnerId !== undefined && fromOwnerId !== toOwnerId) {
       events.push({ type: "control-changed", element: "block", elementId, fromOwnerId, toOwnerId });
+    }
+  }
+  for (const icon of s.cybernet.bonusIcons ?? []) {
+    const previous = before.bonusIcons.get(icon.key);
+    if (previous === undefined) {
+      events.push({ type: "bonus-icon-created", element: "bonus-icon", elementId: icon.key });
+    }
+    if ((previous ?? "") === "" && icon.collectedBy) {
+      events.push({ type: "bonus-collected", playerId: icon.collectedBy, element: "bonus-icon", elementId: icon.key });
     }
   }
   for (const pawnId of s.eliminated) {

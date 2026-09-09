@@ -21,6 +21,7 @@ import {
   type PlacedBlock,
 } from "../domain/hex.ts";
 import { blockById, type Block, type GameData, type GameState } from "../domain/types.ts";
+import { detectBonusIconsAfterPlacement } from "./bonus.ts";
 
 /** One legal way to place a block: a direction from the reference plus a rotation. */
 export interface Placement {
@@ -89,6 +90,7 @@ export function placeBlock(
     coord: neighbor(refCoord, dir),
   };
   s.cybernet.blocks.push(pb);
+  detectBonusIconsAfterPlacement(s, data, pb);
   return pb;
 }
 

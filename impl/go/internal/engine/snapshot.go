@@ -59,8 +59,15 @@ type snapshotDTO struct {
 	Discard       []string     `json:"discard"`
 	BlockPile     []string     `json:"blockPile"`
 	Eliminated    []string     `json:"eliminated"`
+	BonusIcons    []snapBonus  `json:"bonusIcons"`
 	Blocks        []snapBlock  `json:"blocks"`
 	Pawns         []snapPawn   `json:"pawns"`
+}
+
+type snapBonus struct {
+	Key         string         `json:"key"`
+	CollectedBy string         `json:"collectedBy"`
+	Coords      []domain.Coord `json:"coords"`
 }
 
 func strSlice(xs []string) []string {
@@ -101,6 +108,7 @@ func Snapshot(s *domain.GameState) string {
 		Discard:       strSlice(s.Discard),
 		BlockPile:     strSlice(s.BlockPile),
 		Eliminated:    strSlice(s.Eliminated),
+		BonusIcons:    []snapBonus{},
 		Blocks:        make([]snapBlock, 0),
 		Pawns:         make([]snapPawn, 0),
 	}
@@ -117,6 +125,13 @@ func Snapshot(s *domain.GameState) string {
 		})
 	}
 	if s.Cybernet != nil {
+		for _, icon := range s.Cybernet.BonusIcons {
+			dto.BonusIcons = append(dto.BonusIcons, snapBonus{
+				Key:         icon.Key,
+				CollectedBy: icon.CollectedBy,
+				Coords:      append([]domain.Coord{}, icon.Coords...),
+			})
+		}
 		for _, b := range s.Cybernet.Blocks {
 			dto.Blocks = append(dto.Blocks, snapBlock{
 				BlockID: b.BlockID, Rotation: b.Rotation, Q: b.Coord.Q, R: b.Coord.R,

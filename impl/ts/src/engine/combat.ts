@@ -19,7 +19,7 @@ import {
 } from "../domain/types.ts";
 import type { Coord } from "../domain/hex.ts";
 import type { Rng } from "../domain/rng.ts";
-import { discardAttachments, effectivePawnClasses } from "./attach.ts";
+import { discardAttachments, effectiveDefenseDice, effectivePawnClasses } from "./attach.ts";
 
 /** Namespaces a pawn's once-per-turn ability marker. */
 export function abilityUsedKey(ability: string, pawnId: string): string {
@@ -125,7 +125,7 @@ export function deleteAbility(
   skulls += extraSkulls;
 
   const roll = attackRoll(s.rng, skulls);
-  const eliminated = defeats(roll, tgt.defense);
+  const eliminated = defeats(roll, effectiveDefenseDice(gd, tgtPob));
   if (eliminated) eliminatePawn(s, targetId);
   if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
 
@@ -181,7 +181,7 @@ export function resolveDeleteAreaAtCoord(
   const eliminatedIds: string[] = [];
   for (const targetId of targetIds) {
     const tgt = pawnById(gd, targetId);
-    const eliminated = !!tgt && defeats(roll, tgt.defense);
+    const eliminated = !!tgt && defeats(roll, effectiveDefenseDice(gd, s.cybernet.pawnById(targetId)!));
     targets.push({ targetPawnId: targetId, eliminated });
     if (eliminated) eliminatedIds.push(targetId);
   }
@@ -253,7 +253,7 @@ export function deleteMulti(
   for (const tid of targetOrder) {
     const tgt = pawnById(gd, tid);
     const dice = diceByTarget.get(tid) ?? [];
-    const eliminated = !!tgt && defeats(dice, tgt.defense);
+    const eliminated = !!tgt && defeats(dice, effectiveDefenseDice(gd, s.cybernet.pawnById(tid)!));
     targets.push({ targetPawnId: tid, dice, eliminated });
     if (eliminated) eliminatePawn(s, tid);
   }

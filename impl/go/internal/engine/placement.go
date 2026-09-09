@@ -92,6 +92,7 @@ func PlaceBlock(s *domain.GameState, refCoord domain.Coord, dir int, gd *domain.
 		Coord:    refCoord.Neighbor(dir),
 	}
 	s.Cybernet.Blocks = append(s.Cybernet.Blocks, pb)
+	DetectBonusIconsAfterPlacement(s, gd, pb)
 	return pb, nil
 }
 

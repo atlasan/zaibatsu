@@ -227,6 +227,9 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 	if !ok {
 		return res, fmt.Errorf("unknown block %q", pb.BlockID)
 	}
+	if TargetIceNullified(gd, pb.Attachments) {
+		return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
+	}
 	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, pb.Attachments)
 	faces := append([]int{}, iceFacesFor(blockDef.IceFaces, blockDef.IceValue)...)
 	for _, face := range modifierFaces {
@@ -264,6 +267,7 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 		}
 		pb.OwnerID = owner.ID
 		owner.ControlMarkersPlaced++
+		CollectControlledBonusIcons(s, owner.ID)
 		checkWin(s)
 		ApplyBlockEffectForTrigger(s, gd, coord, BlockEffectUnderControl)
 	} else {
@@ -298,6 +302,9 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 	tgt, ok := gd.PawnByID(targetID)
 	if !ok {
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
+	}
+	if TargetIceNullified(gd, tgtPob.Attachments) {
+		return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
 	}
 	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, tgtPob.Attachments)
 	faces := append([]int{}, IceFaces(tgt.IceValue)...)

@@ -4,11 +4,12 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { loadDefault } from "../../impl/ts/src/data/index.ts";
 import { validSearchPlacements } from "../../impl/ts/src/engine/abilities.ts";
+import { targetIceNullified } from "../../impl/ts/src/engine/attach.ts";
 import { advancePhase, applyActionWithEvents, newGame, type Action, type TransitionResult } from "../../impl/ts/src/engine/index.ts";
 import { snapshot } from "../../impl/ts/src/engine/snapshot.ts";
 import { currentPlayer, pawnById, type GameData, type GameState } from "../../impl/ts/src/domain/types.ts";
 import { neighbor } from "../../impl/ts/src/domain/hex.ts";
-import { stepTargets, type SpaceRef } from "../../impl/ts/src/engine/movement.ts";
+import { canActivateMovementOption, effectiveMovementOptions, stepTargets, type MovementOption, type SpaceRef } from "../../impl/ts/src/engine/movement.ts";
 import { coverageSurface } from "./coverage.ts";
 import { sha256 } from "./model.ts";
 
@@ -25,7 +26,7 @@ export interface PlayScenario {
   checkpoints: string[];
 }
 
-interface PlaySession { id: string; setup: PlaySetup; scenarioId?: string; commands: PlayCommand[]; state: GameState; events: TransitionResult["events"]; }
+interface PlaySession { id: string; setup: PlaySetup; scenarioId?: string; commands: PlayCommand[]; data: GameData; state: GameState; events: TransitionResult["events"]; }
 
 const repoRoot = resolve(import.meta.dir, "../..");
 const data = loadDefault("speedrunners");
@@ -52,7 +53,7 @@ const scenarios: PlayScenario[] = [
   { id: "game-basics", title: "Game basics", description: "A short basics fixture for control-marker placement, victory, and reset.", checkpoints: ["Place your last control marker.", "Confirm the winner event, then reset the fixture."] },
   { id: "search-and-move", title: "Search and movement", description: "Place the next block, then test fixed/card movement across the Central Core boundary.", checkpoints: ["Play Search and place the top block.", "Move the Red Speedrunner into that block.", "Use Undo to confirm deterministic replay."] },
   { id: "combat-and-control", title: "Combat and control", description: "A co-located combat fixture with a controllable ICE block and an ICE-bearing pawn.", checkpoints: ["Use a card to Delete a target.", "Use the Cyberninja for a Test Lab Split Delete.", "Icebreak the Cyberninja or the Hacktivism block.", "Inspect rolls, eliminations, and control events."] },
-  { id: "attachments", title: "Attachments", description: "Attach a card to your pawn or an enemy in the same block.", checkpoints: ["Attach Accelerator to your Red Speedrunner.", "Attach Malware to the enemy Speedrunner.", "Inspect slots and attached-card state."] },
+  { id: "attachments", title: "Attachments", description: "Exercise granted movement, armor defense, and ICE nullification without touching canonical spec data.", checkpoints: ["Attach the Stealth Harness to your Red Speedrunner.", "Use the granted stealth move.", "Attach the Block ICE Jammer and confirm block control is no longer offered."] },
   { id: "reboot-and-turn", title: "Reboot and turn flow", description: "Reboot an eliminated pawn with four cards, then exercise pass, recycle, end, and reset.", checkpoints: ["Play four cards to Reboot the eliminated Red Speedrunner.", "Pass and end the turn.", "Reset the fixture and compare its trace."] },
 ];
 
@@ -64,9 +65,41 @@ function scenarioById(id: string): PlayScenario {
   return scenario;
 }
 
-function fixtureState(id: string, setup: PlaySetup): GameState {
+function playDataForScenario(id?: string): GameData {
+  if (id !== "attachments") return data;
+  const cloned = structuredClone(data);
+  cloned.cards.push(
+    {
+      id: "fixture-grant-stealth-steps",
+      name: "Stealth Harness",
+      attach: {
+        as: "pawn",
+        slot: "gadget",
+        grantsMovement: [{ type: "fixed", amount: 1, stealth: true }],
+        abilityUses: [{ ability: "move", activation: "card" }],
+      },
+    },
+    {
+      id: "fixture-armor-override",
+      name: "Shield Mesh",
+      attach: {
+        as: "pawn",
+        slot: "armor",
+        defenseOverride: [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: true })),
+      },
+    },
+    {
+      id: "fixture-block-nullify-ice",
+      name: "Block ICE Jammer",
+      attach: { as: "block", nullifiesIce: true },
+    },
+  );
+  return cloned;
+}
+
+function fixtureState(id: string, setup: PlaySetup, gd: GameData): GameState {
   scenarioById(id);
-  const state = newGame({ data, ...setup });
+  const state = newGame({ data: gd, ...setup });
   state.currentPlayer = 0;
   state.turn = 1;
   state.phase = "action";
@@ -102,9 +135,10 @@ function fixtureState(id: string, setup: PlaySetup): GameState {
     state.cybernet.placePawn({ pawnId: "speedrunner-green", ownerId: p2.id, coord: { q: 0, r: 1 }, spaceId: "h3" });
   } else if (id === "attachments") {
     p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-yellow";
-    p1.hand = ["add-on-accelerator", "enemy-malware"]; p2.hand = [];
-    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 0 }, spaceId: "core" });
-    state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+    p1.hand = ["fixture-grant-stealth-steps", "fixture-armor-override", "fixture-block-nullify-ice", "enemy-malware", "move-1"]; p2.hand = [];
+    state.cybernet.blocks.push({ blockId: "data-haven", rotation: 0, coord: { q: 0, r: 1 } });
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "a" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p2.id, coord: { q: 0, r: 1 }, spaceId: "b" });
   } else if (id === "reboot-and-turn") {
     p1.pawnId = "speedrunner-green"; p2.pawnId = "speedrunner-blue";
     p1.hand = ["move-1", "move-2", "move-3", "enemy-malware", "add-on-accelerator"]; p2.hand = [];
@@ -115,15 +149,16 @@ function fixtureState(id: string, setup: PlaySetup): GameState {
   return state;
 }
 
-function replay(setup: PlaySetup, commands: PlayCommand[], scenarioId?: string): { state: GameState; events: TransitionResult["events"] } {
-  const state = scenarioId ? fixtureState(scenarioId, setup) : newGame({ data, ...setup });
+function replay(setup: PlaySetup, commands: PlayCommand[], scenarioId?: string): { data: GameData; state: GameState; events: TransitionResult["events"] } {
+  const gd = playDataForScenario(scenarioId);
+  const state = scenarioId ? fixtureState(scenarioId, setup, gd) : newGame({ data: gd, ...setup });
   let events: TransitionResult["events"] = [];
   for (const command of commands) {
-    const result = command.kind === "phase" ? advancePhase(state, data) : applyActionWithEvents(state, data, command.action);
+    const result = command.kind === "phase" ? advancePhase(state, gd) : applyActionWithEvents(state, gd, command.action);
     if (!result.accepted) throw new Error(`trace command is no longer valid: ${result.error ?? "rejected command"}`);
     events = result.events;
   }
-  return { state, events };
+  return { data: gd, state, events };
 }
 
 function get(id: string): PlaySession {
@@ -141,7 +176,19 @@ function readableData(gd: GameData) {
   };
 }
 
-function legalOptions(state: GameState, scenarioId?: string) {
+function movementLabel(name: string, option: MovementOption, movementIndex: number): string {
+  const typeLabel = option.movement.type === "steps"
+    ? `${Math.max(0, option.movement.steps ?? 0)} steps`
+    : option.movement.type === "d6"
+      ? "d6 steps"
+      : option.movement.type === "2d6"
+        ? "2d6 steps"
+        : "hex";
+  const sourceLabel = movementIndex === 0 ? "base" : `grant ${option.key}`;
+  return `Move ${name} (${sourceLabel}: ${typeLabel}${option.stealth ? " · stealth" : ""})`;
+}
+
+function legalOptions(state: GameState, gd: GameData, scenarioId?: string) {
   const player = currentPlayer(state);
   const owned = state.cybernet.pawns.filter((pawn) => pawn.ownerId === player.id);
   const actions: Array<Record<string, unknown>> = [];
@@ -166,55 +213,90 @@ function legalOptions(state: GameState, scenarioId?: string) {
   addAction("pass", "Pass");
   if (player.controlMarkersPlaced < player.controlMarkersTotal) addAction("place-marker", "Place a control marker");
   for (const pawn of owned) {
-    const pawnDef = pawnById(data, pawn.pawnId);
-    if (pawnDef && pawnDef.movement.type !== "hex" && pawnDef.movement.activation === "once-per-turn") {
-      const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
-      if (targets.length) {
-        addAction("move-steps", `Move ${pawnDef.name}`, {
-          pawnId: pawn.pawnId,
-          movement: pawnDef.movement,
-          maxSelectableSteps: maxSelectableSteps(pawnDef.movement.type, pawnDef.movement.steps),
-          targets,
-        });
-      }
-    }
-    if (pawnDef?.movement.type === "hex" && pawnDef.movement.activation === "once-per-turn") {
-      const directions = [0, 1, 2, 3, 4, 5].filter((dir) => state.cybernet.at(neighbor(pawn.coord, dir)));
-      if (directions.length) addAction("move-hex", `Move ${pawnDef.name}`, { pawnId: pawn.pawnId, directions });
+    const pawnDef = pawnById(gd, pawn.pawnId);
+    if (pawnDef) {
+      effectiveMovementOptions(gd, pawnDef, pawn.attachments).forEach((option, movementIndex) => {
+        const gate = canActivateMovementOption(state, player, pawn.pawnId, option);
+        if (gate) return;
+        if (option.movement.type === "hex") {
+          const directions = [0, 1, 2, 3, 4, 5].filter((dir) => state.cybernet.at(neighbor(pawn.coord, dir)));
+          if (directions.length) {
+            addAction("move-hex", movementLabel(pawnDef.name, option, movementIndex), {
+              pawnId: pawn.pawnId,
+              movement: option.movement,
+              movementIndex,
+              movementKey: option.key,
+              stealth: option.stealth,
+              directions,
+            });
+          }
+          return;
+        }
+        const targets = stepTargets(gd, state.cybernet, pawn.coord, pawn.spaceId);
+        const maxSelectable = maxSelectableSteps(option.movement.type, option.movement.steps);
+        if (targets.length && maxSelectable > 0) {
+          addAction("move-steps", movementLabel(pawnDef.name, option, movementIndex), {
+            pawnId: pawn.pawnId,
+            movement: option.movement,
+            movementIndex,
+            movementKey: option.key,
+            stealth: option.stealth,
+            maxSelectableSteps: maxSelectable,
+            targets,
+          });
+        }
+      });
     }
     const abilities = pawnDef?.abilities ?? [];
     if (abilities.some((ability) => ability.ability === "search" && ability.activation === "once-per-turn")) {
-      try { addAction("search", `Search with ${pawnDef?.name}`, { pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement is simply not an option */ }
+      try { addAction("search", `Search with ${pawnDef?.name}`, { pawnId: pawn.pawnId, placements: validSearchPlacements(state, gd, pawn.pawnId) }); } catch { /* no legal placement is simply not an option */ }
     }
     const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
     if (colocated.length && abilities.some((ability) => ability.ability === "delete" && ability.activation === "once-per-turn")) addAction("delete", `Delete with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
     const deleteAbility = abilities.find((ability) => ability.ability === "delete" && ability.activation !== "none");
     const skulls = Math.max(1, deleteAbility?.skulls ?? 1);
     if (scenarioId === "combat-and-control" && colocated.length > 1 && skulls > 1) addAction("delete-multi", `Test Lab: Split Delete with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId), maxTargets: skulls });
-    if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) addAction("icebreak-pawn", `Icebreak with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
+    if (colocated.length && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) {
+      const enemyTargets = colocated
+        .filter((other) => other.ownerId !== player.id)
+        .filter((other) => {
+          const target = pawnById(gd, other.pawnId);
+          return !!target?.iceValue && target.iceValue !== "none" && !targetIceNullified(gd, other.attachments);
+        })
+        .map((other) => other.pawnId);
+      if (enemyTargets.length) addAction("icebreak-pawn", `Icebreak with ${pawnDef?.name}`, { pawnId: pawn.pawnId, targetIds: enemyTargets });
+    }
     const block = state.cybernet.at(pawn.coord);
-    if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none" && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) addAction("icebreak-block", `Icebreak ${block.blockId}`, { pawnId: pawn.pawnId, coord: pawn.coord });
+    const blockDef = block ? blockDataFor(gd, block.blockId) : undefined;
+    if (block && block.ownerId !== player.id && blockDef?.iceValue && blockDef.iceValue !== "none" && !targetIceNullified(gd, block.attachments) && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "once-per-turn")) addAction("icebreak-block", `Icebreak ${block.blockId}`, { pawnId: pawn.pawnId, coord: pawn.coord });
   }
   for (const cardId of new Set(player.hand)) {
-    const card = data.cards.find((item) => item.id === cardId);
+    const card = gd.cards.find((item) => item.id === cardId);
     if (!card) continue;
     for (const pawn of owned) {
-      const pawnDef = pawnById(data, pawn.pawnId);
+      const pawnDef = pawnById(gd, pawn.pawnId);
       const abilities = pawnDef?.abilities ?? [];
       const colocated = state.cybernet.pawns.filter((other) => other.pawnId !== pawn.pawnId && other.coord.q === pawn.coord.q && other.coord.r === pawn.coord.r);
       if (card.activates?.includes("delete") && abilities.some((ability) => ability.ability === "delete" && ability.activation === "card") && colocated.length) addAction("play-delete", `Play ${card.name}: Delete`, { cardId, pawnId: pawn.pawnId, targetIds: colocated.map((other) => other.pawnId) });
       if (typeof card.movement === "number" && card.movement > 0) {
-        const targets = stepTargets(data, state.cybernet, pawn.coord, pawn.spaceId);
+        const targets = stepTargets(gd, state.cybernet, pawn.coord, pawn.spaceId);
         if (targets.length) addAction("play-move", `Play ${card.name}: Move ${card.movement}`, { cardId, pawnId: pawn.pawnId, movement: { type: "steps", steps: card.movement, activation: "card" }, maxSelectableSteps: card.movement, targets });
       }
       if (card.activates?.includes("icebreaker") && abilities.some((ability) => ability.ability === "icebreaker" && ability.activation === "card")) {
-        const enemies = colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId);
+        const enemies = colocated
+          .filter((other) => other.ownerId !== player.id)
+          .filter((other) => {
+            const target = pawnById(gd, other.pawnId);
+            return !!target?.iceValue && target.iceValue !== "none" && !targetIceNullified(gd, other.attachments);
+          })
+          .map((other) => other.pawnId);
         if (enemies.length) addAction("play-icebreak-pawn", `Play ${card.name}: Icebreak pawn`, { cardId, pawnId: pawn.pawnId, targetIds: enemies });
         const block = state.cybernet.at(pawn.coord);
-        if (block && block.ownerId !== player.id && blockDataFor(block.blockId)?.iceValue && blockDataFor(block.blockId)?.iceValue !== "none") addAction("play-icebreak-block", `Play ${card.name}: Icebreak block`, { cardId, pawnId: pawn.pawnId, coord: pawn.coord });
+        const blockDef = block ? blockDataFor(gd, block.blockId) : undefined;
+        if (block && block.ownerId !== player.id && blockDef?.iceValue && blockDef.iceValue !== "none" && !targetIceNullified(gd, block.attachments)) addAction("play-icebreak-block", `Play ${card.name}: Icebreak block`, { cardId, pawnId: pawn.pawnId, coord: pawn.coord });
       }
       if (abilities.some((ability) => ability.ability === "search" && ability.activation === "card")) {
-        try { addAction("play-search", `Play ${card.name}: Search`, { cardId, pawnId: pawn.pawnId, placements: validSearchPlacements(state, data, pawn.pawnId) }); } catch { /* no legal placement */ }
+        try { addAction("play-search", `Play ${card.name}: Search`, { cardId, pawnId: pawn.pawnId, placements: validSearchPlacements(state, gd, pawn.pawnId) }); } catch { /* no legal placement */ }
       }
       if (card.attach?.as === "enemy" && colocated.some((other) => other.ownerId !== player.id)) addAction("attach-enemy", `Attach ${card.name} to enemy`, { cardId, pawnId: pawn.pawnId, targetIds: colocated.filter((other) => other.ownerId !== player.id).map((other) => other.pawnId) });
       if (card.attach?.as === "block") addAction("attach-block", `Attach ${card.name} to block`, { cardId, pawnId: pawn.pawnId, coord: pawn.coord });
@@ -222,7 +304,7 @@ function legalOptions(state: GameState, scenarioId?: string) {
     if (card.attach?.as === "pawn" && owned.length) addAction("attach-pawn", `Attach ${card.name} to pawn`, { cardId, targetIds: owned.map((pawn) => pawn.pawnId) });
   }
   for (const pawnId of state.eliminated) {
-    const pawnDef = pawnById(data, pawnId);
+    const pawnDef = pawnById(gd, pawnId);
     if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "once-per-turn")) addAction("reboot", `Reboot ${pawnDef.name}`, { pawnId });
     if (pawnDef?.abilities?.some((ability) => ability.ability === "reboot" && ability.activation === "card") && player.hand.length >= 4) addAction("play-reboot", `Play 4 cards: Reboot ${pawnDef.name}`, { pawnId, cardIds: player.hand });
   }
@@ -255,37 +337,42 @@ function cleanPath(path: unknown): SpaceRef[] {
  * Dice movement exposes its maximum selectable path; the actual seeded roll is
  * still made only when the accepted move action reaches the engine.
  */
-export function getMovementOptions(id: string, pawnId: string, rawPath: unknown, cardId?: string) {
+export function getMovementOptions(id: string, pawnId: string, rawPath: unknown, cardId?: string, movementIndex = 0) {
   const session = get(id);
   if (session.state.phase !== "action") throw new Error("movement is available only during the action phase");
   const player = currentPlayer(session.state);
   const pawn = session.state.cybernet.pawnById(pawnId);
   if (!pawn || pawn.ownerId !== player.id) throw new Error("choose an active player's pawn");
-  const definition = pawnById(data, pawnId);
+  const definition = pawnById(session.data, pawnId);
   if (!definition) throw new Error("unknown pawn");
   let maximum: number;
   let movement: { type: string; steps?: number; activation: string };
+  let movementKey = "base";
+  let stealth = false;
   if (cardId) {
-    const card = data.cards.find((item) => item.id === cardId);
+    const card = session.data.cards.find((item) => item.id === cardId);
     if (!player.hand.includes(cardId) || !card || !Number.isInteger(card.movement) || card.movement! <= 0) {
       throw new Error("choose a movement-valued card in the active player's hand");
     }
     maximum = card.movement!;
     movement = { type: "steps", steps: maximum, activation: "card" };
   } else {
-    if (definition.movement.type === "hex" || definition.movement.activation !== "once-per-turn") {
-      throw new Error("this pawn does not have guided once-per-turn space movement");
-    }
-    if (player.oncePerTurnUsed[`move:${pawnId}`]) throw new Error("this pawn already moved this turn");
-    maximum = maxSelectableSteps(definition.movement.type, definition.movement.steps);
-    movement = definition.movement;
+    const option = effectiveMovementOptions(session.data, definition, pawn.attachments)[movementIndex];
+    if (!option) throw new Error(`movement option ${movementIndex} is unavailable for pawn "${pawnId}"`);
+    const gate = canActivateMovementOption(session.state, player, pawnId, option);
+    if (gate) throw new Error(gate);
+    if (option.movement.type === "hex") throw new Error("guided path preview supports only space movement; use the hex move action");
+    maximum = maxSelectableSteps(option.movement.type, option.movement.steps);
+    movement = option.movement;
+    movementKey = option.key;
+    stealth = option.stealth;
   }
   const path = cleanPath(rawPath);
   if (path.length > maximum) throw new Error(`path exceeds the selectable maximum of ${maximum} steps`);
   let coord = pawn.coord;
   let spaceId = pawn.spaceId;
   for (const [index, step] of path.entries()) {
-    const reachable = stepTargets(data, session.state.cybernet, coord, spaceId);
+    const reachable = stepTargets(session.data, session.state.cybernet, coord, spaceId);
     if (!reachable.some((target) => target.coord.q === step.coord.q && target.coord.r === step.coord.r && target.spaceId === step.spaceId)) {
       throw new Error(`step ${index + 1} is not adjacent to the preceding space`);
     }
@@ -295,14 +382,17 @@ export function getMovementOptions(id: string, pawnId: string, rawPath: unknown,
   return {
     pawnId,
     movement,
+    movementIndex,
+    movementKey,
+    stealth,
     maxSelectableSteps: maximum,
     exactBudgetKnown: movement.type === "steps",
     path,
-    nextTargets: path.length < maximum ? stepTargets(data, session.state.cybernet, coord, spaceId) : [],
+    nextTargets: path.length < maximum ? stepTargets(session.data, session.state.cybernet, coord, spaceId) : [],
   };
 }
 
-function blockDataFor(id: string) { return data.blocks.find((block) => block.id === id); }
+function blockDataFor(gd: GameData, id: string) { return gd.blocks.find((block) => block.id === id); }
 
 function view(session: PlaySession) {
   const state = JSON.parse(snapshot(session.state));
@@ -313,13 +403,13 @@ function view(session: PlaySession) {
     scenario: scenario ? { ...scenario, checkpoints: scenario.checkpoints.map((label, index) => ({ id: `${scenario.id}-${index + 1}`, label, complete: scenarioCheckpoint(session, index) })) } : null,
     dataChecksum,
     state,
-    players: session.state.players.map((player) => ({ id: player.id, name: player.name, color: player.color, pawnId: player.pawnId, markersTotal: player.controlMarkersTotal, markersPlaced: player.controlMarkersPlaced, bonus: player.bonusCounters, hand: player.hand.map((id) => ({ id, name: data.cards.find((card) => card.id === id)?.name ?? id })) })),
+    players: session.state.players.map((player) => ({ id: player.id, name: player.name, color: player.color, pawnId: player.pawnId, markersTotal: player.controlMarkersTotal, markersPlaced: player.controlMarkersPlaced, bonus: player.bonusCounters, hand: player.hand.map((id) => ({ id, name: session.data.cards.find((card) => card.id === id)?.name ?? id })) })),
     activePlayer: session.state.players[session.state.currentPlayer] ? { id: session.state.players[session.state.currentPlayer]!.id, name: session.state.players[session.state.currentPlayer]!.name, color: session.state.players[session.state.currentPlayer]!.color } : null,
     counts: { deck: session.state.deck.length, discard: session.state.discard.length, blockPile: session.state.blockPile.length, eliminated: session.state.eliminated.length },
-    data: readableData(data),
+    data: readableData(session.data),
     layout,
     coverage: coverageSurface("play-workbench"),
-    legalOptions: legalOptions(session.state, session.scenarioId),
+    legalOptions: legalOptions(session.state, session.data, session.scenarioId),
     events: session.events,
     commandCount: session.commands.length,
   };
@@ -330,7 +420,7 @@ function scenarioCheckpoint(session: PlaySession, index: number): boolean {
     case "game-basics": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "place-marker") : Boolean(session.state.winnerId);
     case "search-and-move": return index === 0 ? session.state.cybernet.blocks.length > 1 : index === 1 ? session.state.cybernet.pawns.some((pawn) => pawn.pawnId === "speedrunner-red" && (pawn.coord.q !== 0 || pawn.coord.r !== 0)) : session.commands.length > 2;
     case "combat-and-control": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "play-delete") : index === 1 ? session.commands.some((command) => command.kind === "action" && command.action.type === "delete-multi") : index === 2 ? session.commands.some((command) => command.kind === "action" && command.action.type.startsWith("play-icebreak")) : session.events.some((event) => event.type === "roll");
-    case "attachments": return index === 0 ? Boolean(session.state.cybernet.pawnById("speedrunner-red")?.attachments?.length) : index === 1 ? Boolean(session.state.cybernet.pawnById("speedrunner-yellow")?.attachments?.length) : session.state.cybernet.pawns.some((pawn) => (pawn.attachments?.length ?? 0) > 0);
+    case "attachments": return index === 0 ? Boolean(session.state.cybernet.pawnById("speedrunner-red")?.attachments?.some((att) => att.cardId === "fixture-grant-stealth-steps")) : index === 1 ? Boolean(session.commands.some((command) => command.kind === "action" && command.action.type === "move-steps" && command.action.movementIndex === 1)) : !legalOptions(session.state, session.data, session.scenarioId).actions.some((action) => action.type === "play-icebreak-block");
     case "reboot-and-turn": return index === 0 ? !session.state.eliminated.includes("speedrunner-red") : index === 1 ? session.state.turn > 1 : session.commands.length > 0;
     default: return false;
   }
@@ -338,16 +428,18 @@ function scenarioCheckpoint(session: PlaySession, index: number): boolean {
 
 export function createPlaySession(setup: PlaySetup) {
   const normalized = cleanSetup(setup);
-  const state = newGame({ data, ...normalized });
-  const session: PlaySession = { id: `play-${nextSessionID++}`, setup: normalized, commands: [], state, events: [] };
+  const sessionData = playDataForScenario();
+  const state = newGame({ data: sessionData, ...normalized });
+  const session: PlaySession = { id: `play-${nextSessionID++}`, setup: normalized, commands: [], data: sessionData, state, events: [] };
   sessions.set(session.id, session);
   return view(session);
 }
 
 export function createPlayScenario(id: string, setup: PlaySetup = { playerNames: ["Ada", "Bea"], seed: 5 }) {
   const normalized = cleanSetup(setup);
-  const state = fixtureState(id, normalized);
-  const session: PlaySession = { id: `play-${nextSessionID++}`, setup: normalized, scenarioId: id, commands: [], state, events: [] };
+  const sessionData = playDataForScenario(id);
+  const state = fixtureState(id, normalized, sessionData);
+  const session: PlaySession = { id: `play-${nextSessionID++}`, setup: normalized, scenarioId: id, commands: [], data: sessionData, state, events: [] };
   sessions.set(session.id, session);
   return view(session);
 }
@@ -357,6 +449,7 @@ export function resetPlaySession(id: string, setup?: PlaySetup) {
   session.setup = cleanSetup(setup ?? session.setup);
   session.commands = [];
   const replayed = replay(session.setup, [], session.scenarioId);
+  session.data = replayed.data;
   session.state = replayed.state;
   session.events = [];
   return view(session);
@@ -366,7 +459,7 @@ export function getPlaySession(id: string) { return view(get(id)); }
 
 export function submitPlayCommand(id: string, command: PlayCommand) {
   const session = get(id);
-  const result = command.kind === "phase" ? advancePhase(session.state, data) : applyActionWithEvents(session.state, data, command.action);
+  const result = command.kind === "phase" ? advancePhase(session.state, session.data) : applyActionWithEvents(session.state, session.data, command.action);
   session.events = result.events;
   if (result.accepted) session.commands.push(command);
   return { ...view(session), result };
@@ -376,6 +469,7 @@ export function undoPlayCommand(id: string) {
   const session = get(id);
   session.commands.pop();
   const replayed = replay(session.setup, session.commands, session.scenarioId);
+  session.data = replayed.data;
   session.state = replayed.state;
   session.events = replayed.events;
   return view(session);
@@ -396,7 +490,7 @@ export function importPlayTrace(trace: PlayTrace) {
   const scenarioId = trace.format === "zaibatsu-speedrunners-trace/v2" ? trace.scenarioId : undefined;
   if (scenarioId) scenarioById(scenarioId);
   const replayed = replay(setup, trace.commands, scenarioId);
-  const session: PlaySession = { id: `play-${nextSessionID++}`, setup, scenarioId, commands: trace.commands, state: replayed.state, events: replayed.events };
+  const session: PlaySession = { id: `play-${nextSessionID++}`, setup, scenarioId, commands: trace.commands, data: replayed.data, state: replayed.state, events: replayed.events };
   sessions.set(session.id, session);
   return view(session);
 }

@@ -179,4 +179,37 @@ describe("ability removal via attachment", () => {
     s.cybernet.pawnById("drone-turret")!.attachments = [{ cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 }];
     expect(() => deleteAbility(s, d, "drone-turret", "speedrunner-yellow", 0)).toThrow();
   });
+
+  test("defense override replaces the target's defense during Delete", () => {
+    const vulnerable = [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: false }));
+    const armored = [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: true }));
+
+    const baselineData = loadDefault("speedrunners");
+    baselineData.cards.push({
+      id: "armor-override",
+      name: "Armor Override",
+      attach: { as: "pawn", slot: "armor", defenseOverride: armored },
+    });
+    baselineData.pawns = baselineData.pawns.map((pawn) =>
+      pawn.id === "speedrunner-yellow" ? { ...pawn, defense: vulnerable } : pawn
+    );
+
+    const baseline = newGame({ data: baselineData, playerNames: ["A", "B"], seed: 17 });
+    baseline.cybernet.pawns = [];
+    baseline.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    baseline.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
+    expect(deleteAbility(baseline, baselineData, "drone-turret", "speedrunner-yellow", 0).eliminated).toBe(true);
+
+    const armoredState = newGame({ data: baselineData, playerNames: ["A", "B"], seed: 17 });
+    armoredState.cybernet.pawns = [];
+    armoredState.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
+    armoredState.cybernet.placePawn({
+      pawnId: "speedrunner-yellow",
+      ownerId: "p2",
+      coord: { ...ORIGIN },
+      spaceId: "core",
+      attachments: [{ cardId: "armor-override", slot: "armor", bonusPaid: 0 }],
+    });
+    expect(deleteAbility(armoredState, baselineData, "drone-turret", "speedrunner-yellow", 0).eliminated).toBe(false);
+  });
 });

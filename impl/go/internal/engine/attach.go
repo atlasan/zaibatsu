@@ -295,3 +295,29 @@ func PlayerAttachmentModifiers(s *domain.GameState, gd *domain.GameData, playerI
 	}
 	return drawModifier, handModifier
 }
+
+func EffectiveDefenseDice(gd *domain.GameData, pob *domain.PawnOnBoard) []domain.DefenseDie {
+        base := []domain.DefenseDie{}
+        if def, ok := gd.PawnByID(pob.PawnID); ok {
+                base = append(base, def.Defense...)
+        }
+        override := []domain.DefenseDie(nil)
+        for _, card := range attachmentCards(gd, pob.Attachments) {
+                if card.Attach != nil && len(card.Attach.DefenseOverride) > 0 {
+                        override = card.Attach.DefenseOverride
+                }
+        }
+        if override != nil {
+                        return append([]domain.DefenseDie{}, override...)
+        }
+        return append([]domain.DefenseDie{}, base...)
+}
+
+func TargetIceNullified(gd *domain.GameData, atts []domain.Attachment) bool {
+        for _, card := range attachmentCards(gd, atts) {
+                if card.Attach != nil && card.Attach.NullifiesIce {
+                        return true
+                }
+        }
+        return false
+}

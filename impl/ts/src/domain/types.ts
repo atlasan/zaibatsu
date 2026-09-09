@@ -185,6 +185,10 @@ export interface Attach {
   abilityUses?: AbilityUse[];
   /** Modifies the target's ICE faces, dice count, and black-ICE status. */
   iceModifier?: IceModifier;
+  /** Replaces the target pawn's defense dice while the attachment remains equipped. */
+  defenseOverride?: DefenseDie[];
+  /** The target's ICE is treated as absent while the attachment remains equipped. */
+  nullifiesIce?: boolean;
   /** Change to the number of cards drawn during recycle. */
   drawModifier?: number;
   /** Change to the controller's maximum hand size while attached. */

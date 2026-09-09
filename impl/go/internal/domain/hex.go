@@ -34,7 +34,7 @@ func (c Coord) Neighbor(dir int) Coord {
 
 // Opposite returns the edge that faces back across a shared border.
 func Opposite(dir int) int {
-	return ((dir%6)+6+3)%6
+	return ((dir % 6) + 6 + 3) % 6
 }
 
 // PlacedBlock is a block instance positioned in the Cybernet with a rotation.
@@ -50,17 +50,25 @@ type PlacedBlock struct {
 	Attachments []Attachment `json:"attachments,omitempty"`
 }
 
+// BonusIcon is a formed board icon keyed by the three incident block coordinates.
+type BonusIcon struct {
+	Key         string  `json:"key"`
+	Coords      []Coord `json:"coords"`
+	CollectedBy string  `json:"collectedBy,omitempty"`
+}
+
 // Cybernet is the growing hex layout of placed blocks and the pawns on them.
 // Both are stored in insertion order (deterministic iteration); lookups scan the
 // small slices.
 type Cybernet struct {
-	Blocks []*PlacedBlock `json:"blocks"`
-	Pawns  []*PawnOnBoard `json:"pawns"`
+	Blocks     []*PlacedBlock `json:"blocks"`
+	Pawns      []*PawnOnBoard `json:"pawns"`
+	BonusIcons []*BonusIcon   `json:"bonusIcons,omitempty"`
 }
 
 // NewCybernet returns an empty Cybernet.
 func NewCybernet() *Cybernet {
-	return &Cybernet{Blocks: []*PlacedBlock{}, Pawns: []*PawnOnBoard{}}
+	return &Cybernet{Blocks: []*PlacedBlock{}, Pawns: []*PawnOnBoard{}, BonusIcons: []*BonusIcon{}}
 }
 
 // At returns the placed block at coord c, or nil if the cell is empty.

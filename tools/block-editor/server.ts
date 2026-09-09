@@ -133,8 +133,8 @@ const server = Bun.serve({
           if (suffix.length === 1 && request.method === "GET") return json(getPlaySession(id));
           if (suffix[1] === "command" && request.method === "POST") return json(submitPlayCommand(id, await body<PlayCommand>(request)));
           if (suffix[1] === "movement-options" && request.method === "POST") {
-            const payload = await body<{ pawnId: string; path: unknown; cardId?: string }>(request);
-            return json(getMovementOptions(id, payload.pawnId, payload.path, payload.cardId));
+            const payload = await body<{ pawnId: string; path: unknown; cardId?: string; movementIndex?: number }>(request);
+            return json(getMovementOptions(id, payload.pawnId, payload.path, payload.cardId, payload.movementIndex ?? 0));
           }
           if (suffix[1] === "undo" && request.method === "POST") return json(undoPlayCommand(id));
           if (suffix[1] === "reset" && request.method === "POST") return json(resetPlaySession(id, await body<PlaySetup>(request)));

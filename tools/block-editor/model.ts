@@ -74,6 +74,7 @@ export interface CardAttach {
   as?: "pawn" | "enemy" | "block"; slot?: CardSlot; class?: string[];
   grants?: GrantableAbility[]; removes?: GrantableAbility[]; grantsMovement?: MovementValue[]; grantsStealth?: boolean; grantsSlot?: CardSlot[];
   abilityUses?: AbilityUse[]; iceModifier?: { faces?: number[]; deltaDice?: number; black?: boolean };
+  defenseOverride?: Array<{ value: number; shielded: boolean }>; nullifiesIce?: boolean;
   drawModifier?: number; handModifier?: number; blockSpace?: { shape?: "circle" | "hex" };
   effectText?: string; effectTrigger?: "on-attach" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; cost?: number;
 }
@@ -202,7 +203,7 @@ function validActionCard(card: ActionCardRecord): boolean {
   if (card.movements && (!Array.isArray(card.movements) || card.movements.some((movement) => !validMovement(movement)))) return false;
   if (card.effects && (!Array.isArray(card.effects) || card.effects.some((effect) => !validCardEffect(effect)))) return false;
   const attach = card.attach; if (!attach) return true;
-  if (Object.keys(attach).some((key) => !["as", "slot", "class", "grants", "removes", "grantsMovement", "grantsStealth", "grantsSlot", "abilityUses", "iceModifier", "drawModifier", "handModifier", "blockSpace", "effectText", "effectTrigger", "cost"].includes(key))) return false;
+  if (Object.keys(attach).some((key) => !["as", "slot", "class", "grants", "removes", "grantsMovement", "grantsStealth", "grantsSlot", "abilityUses", "iceModifier", "defenseOverride", "nullifiesIce", "drawModifier", "handModifier", "blockSpace", "effectText", "effectTrigger", "cost"].includes(key))) return false;
   if (attach.as !== undefined && !["pawn", "enemy", "block"].includes(attach.as)) return false;
   if (attach.slot !== undefined && !slots.includes(attach.slot)) return false;
   if ([attach.class, attach.grants, attach.removes, attach.grantsSlot].some((items) => items !== undefined && (!Array.isArray(items) || items.some((item) => typeof item !== "string")))) return false;
@@ -210,7 +211,8 @@ function validActionCard(card: ActionCardRecord): boolean {
   if (attach.grantsMovement && (!Array.isArray(attach.grantsMovement) || attach.grantsMovement.some((movement) => !validMovement(movement)))) return false;
   if (attach.abilityUses && (!Array.isArray(attach.abilityUses) || attach.abilityUses.some((use) => !object(use) || Object.keys(use).some((key) => !["ability", "perTurn", "dice", "activation"].includes(key)) || !abilities.includes(String(use.ability)) || (use.perTurn !== undefined && (!Number.isInteger(use.perTurn) || Number(use.perTurn) < 1)) || (use.dice !== undefined && use.dice !== "d6") || (use.activation !== undefined && !["card", "once-per-turn"].includes(String(use.activation)))))) return false;
   const ice = attach.iceModifier; if (ice && (!object(ice) || Object.keys(ice).some((key) => !["faces", "deltaDice", "black"].includes(key)) || (ice.faces !== undefined && (!Array.isArray(ice.faces) || ice.faces.some((face) => !Number.isInteger(face) || Number(face) < 1 || Number(face) > 6))) || (ice.deltaDice !== undefined && !Number.isInteger(ice.deltaDice)) || (ice.black !== undefined && typeof ice.black !== "boolean"))) return false;
-  if ((attach.drawModifier !== undefined && !Number.isInteger(attach.drawModifier)) || (attach.handModifier !== undefined && !Number.isInteger(attach.handModifier)) || (attach.cost !== undefined && (!Number.isInteger(attach.cost) || attach.cost < 0)) || (attach.grantsStealth !== undefined && typeof attach.grantsStealth !== "boolean") || (attach.effectText !== undefined && typeof attach.effectText !== "string") || (attach.effectTrigger !== undefined && !["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(attach.effectTrigger))) return false;
+  if (attach.defenseOverride && (!Array.isArray(attach.defenseOverride) || attach.defenseOverride.some((die) => !object(die) || Object.keys(die).some((key) => !["value", "shielded"].includes(key)) || !Number.isInteger(die.value) || Number(die.value) < 1 || Number(die.value) > 6 || typeof die.shielded !== "boolean"))) return false;
+  if ((attach.drawModifier !== undefined && !Number.isInteger(attach.drawModifier)) || (attach.handModifier !== undefined && !Number.isInteger(attach.handModifier)) || (attach.cost !== undefined && (!Number.isInteger(attach.cost) || attach.cost < 0)) || (attach.grantsStealth !== undefined && typeof attach.grantsStealth !== "boolean") || (attach.nullifiesIce !== undefined && typeof attach.nullifiesIce !== "boolean") || (attach.effectText !== undefined && typeof attach.effectText !== "string") || (attach.effectTrigger !== undefined && !["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(attach.effectTrigger))) return false;
   return attach.blockSpace === undefined || (object(attach.blockSpace) && Object.keys(attach.blockSpace).every((key) => key === "shape") && (attach.blockSpace.shape === undefined || ["circle", "hex"].includes(attach.blockSpace.shape)));
 }
 export function validateDocument(document: EditorDocument, assets: AssetRecord[], layout?: BlockLayout): string[] {

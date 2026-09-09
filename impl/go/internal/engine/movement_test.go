@@ -162,16 +162,19 @@ func setupHexScenario(t *testing.T) (*domain.GameState, *domain.GameData, string
 func TestMoveHexOntoAdjacentBlock(t *testing.T) {
 	s, gd, pawnID, _, dir := setupHexScenario(t)
 	origin := domain.Coord{Q: 0, R: 0}
-	pob, err := MoveHex(s, gd, pawnID, dir)
+        moved, err := MoveHex(s, gd, pawnID, dir)
 	if err != nil {
 		t.Fatalf("MoveHex: %v", err)
 	}
-	if pob.Coord != origin.Neighbor(dir) {
-		t.Errorf("pawn at %v, want %v", pob.Coord, origin.Neighbor(dir))
+        if moved.Pawn.Coord != origin.Neighbor(dir) {
+                t.Errorf("pawn at %v, want %v", moved.Pawn.Coord, origin.Neighbor(dir))
 	}
-	if pob.SpaceID == "" {
+        if moved.Pawn.SpaceID == "" {
 		t.Error("pawn landed on no space")
 	}
+        if moved.Stealth {
+                t.Error("base hex movement should not report stealth")
+        }
 }
 
 func TestMoveHexRejectsEmptyCell(t *testing.T) {
@@ -436,9 +439,13 @@ func TestAttachmentGrantedHexMovement(t *testing.T) {
 	pob.Attachments = []domain.Attachment{{CardID: "grant-hex", Slot: "gadget"}}
 	pawn, _ := cloned.PawnByID(pawnID)
 	pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
-	if _, err := MoveHexWithOption(s, &cloned, pawnID, 2, 1); err != nil {
+        moved, err := MoveHexWithOption(s, &cloned, pawnID, 2, 1)
+        if err != nil {
 		t.Fatalf("granted MoveHexWithOption: %v", err)
 	}
+        if moved.Stealth {
+                t.Fatal("plain granted hex movement should not report stealth")
+        }
 	if !s.PlayerByID("p1").OncePerTurnUsed[movementUsedKey(pawnID, "0:0")] {
 		t.Fatal("expected granted once-per-turn movement marker to be set")
 	}
@@ -481,6 +488,80 @@ func TestAttachmentGrantedPerTurnMovementUses(t *testing.T) {
 	if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1); err == nil {
 		t.Fatal("expected third granted per-turn move to be blocked")
 	}
+}
+
+func TestGrantedStealthMovementReportsStealth(t *testing.T) {
+        gd := loadOrSkip(t)
+        cloned := *gd
+        cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+        cloned.Cards = append(cloned.Cards, domain.ActionCard{
+                ID:   "grant-stealth-steps",
+                Name: "Grant Stealth Steps",
+                Attach: &domain.Attach{
+                        As:             "pawn",
+                        Slot:           "gadget",
+                        GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 1, Stealth: true}},
+                        AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
+                },
+        })
+        s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+        origin := domain.Coord{Q: 0, R: 0}
+        dir := 2
+        if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
+                t.Fatalf("place: %v", err)
+        }
+        coord := origin.Neighbor(dir)
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-stealth-steps", Slot: "gadget"}}})
+        pawn, _ := cloned.PawnByID("speedrunner-red")
+        pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+
+        moved, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1)
+        if err != nil {
+                t.Fatalf("granted stealth movement: %v", err)
+        }
+        if !moved.Stealth {
+                t.Fatal("expected stealth movement to report stealth usage")
+        }
+        if moved.MovementKey != "0:0" {
+                t.Fatalf("movement key = %q, want 0:0", moved.MovementKey)
+        }
+}
+
+func TestGrantedStealthFlagUpgradesMovement(t *testing.T) {
+        gd := loadOrSkip(t)
+        cloned := *gd
+        cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+        cloned.Cards = append(cloned.Cards, domain.ActionCard{
+                ID:   "grant-stealth-flag",
+                Name: "Grant Stealth Flag",
+                Attach: &domain.Attach{
+                        As:             "pawn",
+                        Slot:           "gadget",
+                        GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 1}},
+                        GrantsStealth:  true,
+                        AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
+                },
+        })
+        s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+        origin := domain.Coord{Q: 0, R: 0}
+        dir := 2
+        if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
+                t.Fatalf("place: %v", err)
+        }
+        coord := origin.Neighbor(dir)
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-stealth-flag", Slot: "gadget"}}})
+        pawn, _ := cloned.PawnByID("speedrunner-red")
+        pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+
+        moved, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1)
+        if err != nil {
+                t.Fatalf("granted stealth flag movement: %v", err)
+        }
+        if !moved.Stealth {
+                t.Fatal("expected grantsStealth to upgrade the granted movement option")
+        }
 }
 
 func TestAttachmentGrantedD6MovementUses(t *testing.T) {

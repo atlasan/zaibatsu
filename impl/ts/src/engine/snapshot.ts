@@ -37,6 +37,11 @@ export function snapshot(s: GameState): string {
     discard: s.discard ?? [],
     blockPile: s.blockPile ?? [],
     eliminated: s.eliminated ?? [],
+    bonusIcons: (s.cybernet.bonusIcons ?? []).map((icon) => ({
+      key: icon.key,
+      collectedBy: icon.collectedBy ?? "",
+      coords: icon.coords.map((coord) => ({ q: coord.q, r: coord.r })),
+    })),
     blocks: s.cybernet.blocks.map((b) => ({
       blockId: b.blockId,
       rotation: b.rotation,

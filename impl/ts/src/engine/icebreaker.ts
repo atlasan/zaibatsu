@@ -25,7 +25,8 @@ import {
 } from "../domain/types.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import { abilityUsedKey, effectiveAbility, eliminatePawn } from "./combat.ts";
-import { discardAttachments } from "./attach.ts";
+import { discardAttachments, targetIceNullified } from "./attach.ts";
+import { collectControlledBonusIcons } from "./bonus.ts";
 import { applyBlockEffectForTrigger } from "./effects.ts";
 import { checkWin } from "./win.ts";
 
@@ -178,6 +179,9 @@ export function icebreakBlock(
   if (!pb) throw new Error(`no block at (${coord.q},${coord.r})`);
   const blockDef = blockById(gd, pb.blockId);
   if (!blockDef) throw new Error(`unknown block "${pb.blockId}"`);
+  if (targetIceNullified(gd, pb.attachments)) {
+    throw new Error(`block "${pb.blockId}" has no ICE value and cannot be controlled`);
+  }
   const attachmentModifier = attachmentIceModifier(gd, pb.attachments);
   const faces = adjustIceFaces([...new Set([
     ...iceFacesFor(blockDef.iceFaces, blockDef.iceValue),
@@ -204,6 +208,7 @@ export function icebreakBlock(
     }
     pb.ownerId = owner.id;
     owner.controlMarkersPlaced++;
+    collectControlledBonusIcons(s, owner.id);
     checkWin(s);
     applyBlockEffectForTrigger(s, gd, coord, "underControl");
   } else {
@@ -235,6 +240,9 @@ export function icebreakPawn(
   }
   const tgt = pawnById(gd, targetId);
   if (!tgt) throw new Error(`unknown target pawn "${targetId}"`);
+  if (targetIceNullified(gd, tgtPob.attachments)) {
+    throw new Error(`pawn "${targetId}" has no ICE value and cannot be controlled`);
+  }
   const attachmentModifier = attachmentIceModifier(gd, tgtPob.attachments);
   const faces = adjustIceFaces([...new Set([
     ...iceFaces(tgt.iceValue),

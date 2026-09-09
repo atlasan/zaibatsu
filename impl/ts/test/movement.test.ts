@@ -167,9 +167,10 @@ function hexScenario(dir = 2) {
 describe("moveHex", () => {
   test("moves onto an adjacent placed block", () => {
     const { s, dir, pawnId } = hexScenario();
-    const pob = moveHex(s, data, pawnId, dir);
-    expect(pob.coord).toEqual(neighbor(ORIGIN, dir));
-    expect(pob.spaceId).not.toBe("");
+    const moved = moveHex(s, data, pawnId, dir);
+    expect(moved.pawn.coord).toEqual(neighbor(ORIGIN, dir));
+    expect(moved.pawn.spaceId).not.toBe("");
+    expect(moved.stealth).toBe(false);
   });
 
   test("rejects moving onto an empty cell", () => {
@@ -296,8 +297,9 @@ describe("moveSteps (budget + pass-through)", () => {
     s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a", attachments: [{ cardId: "grant-steps", slot: "gadget", bonusPaid: 0 }] });
     d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
 
-    moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1);
+    const moved = moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1);
     expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+    expect(moved.stealth).toBe(false);
   });
 
   test("move action selects a granted movement option explicitly", () => {
@@ -335,9 +337,69 @@ describe("attachment-granted hex movement", () => {
     pob.attachments = [{ cardId: "grant-hex", slot: "gadget", bonusPaid: 0 }];
     d.pawns.find((p) => p.id === pawnId)!.movement = { type: "steps", steps: 0, activation: "none" };
 
-    moveHexWithOption(s, d, pawnId, 2, 1);
+    const moved = moveHexWithOption(s, d, pawnId, 2, 1);
+    expect(moved.stealth).toBe(false);
     expect(s.players.find((p) => p.id === "p1")!.oncePerTurnUsed[movementUsedKey(pawnId, "0:0")]).toBe(true);
     expect(() => moveHexWithOption(s, d, pawnId, 2, 1)).toThrow();
+  });
+
+  test("granted movement marked stealth reports stealth usage", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-stealth-steps",
+      name: "Grant Stealth Steps",
+      attach: {
+        as: "pawn",
+        slot: "gadget",
+        grantsMovement: [{ type: "fixed", amount: 1, stealth: true }],
+        abilityUses: [{ ability: "move", activation: "card" }],
+      },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 2, d, "data-haven", rotFacing("data-haven", 2));
+    const coord = neighbor(ORIGIN, 2);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({
+      pawnId: "speedrunner-red",
+      ownerId: "p1",
+      coord,
+      spaceId: "a",
+      attachments: [{ cardId: "grant-stealth-steps", slot: "gadget", bonusPaid: 0 }],
+    });
+    d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    const moved = moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1);
+    expect(moved.stealth).toBe(true);
+    expect(moved.movementKey).toBe("0:0");
+  });
+
+  test("grantsStealth upgrades granted movement to stealth usage", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-stealth-flag",
+      name: "Grant Stealth Flag",
+      attach: {
+        as: "pawn",
+        slot: "gadget",
+        grantsMovement: [{ type: "fixed", amount: 1 }],
+        grantsStealth: true,
+        abilityUses: [{ ability: "move", activation: "card" }],
+      },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 2, d, "data-haven", rotFacing("data-haven", 2));
+    const coord = neighbor(ORIGIN, 2);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({
+      pawnId: "speedrunner-red",
+      ownerId: "p1",
+      coord,
+      spaceId: "a",
+      attachments: [{ cardId: "grant-stealth-flag", slot: "gadget", bonusPaid: 0 }],
+    });
+    d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    expect(moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1).stealth).toBe(true);
   });
 });
 

@@ -36,6 +36,13 @@ export interface MovementOption {
   rolledPerTurn?: "d6";
 }
 
+export interface MovementExecutionResult {
+  pawn: PawnOnBoard;
+  movementIndex: number;
+  movementKey: string;
+  stealth: boolean;
+}
+
 function grantsMove(att: Attachment | undefined): boolean {
   return !!att?.grants?.includes("move");
 }
@@ -429,7 +436,7 @@ export function moveSteps(
   gd: GameData,
   pawnId: string,
   path: SpaceRef[],
-): PawnOnBoard {
+): MovementExecutionResult {
   return moveStepsWithOption(s, gd, pawnId, path, 0);
 }
 
@@ -439,7 +446,7 @@ export function moveStepsWithOption(
   pawnId: string,
   path: SpaceRef[],
   movementIndex = 0,
-): PawnOnBoard {
+): MovementExecutionResult {
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
   const pawn = pawnById(gd, pawnId);
@@ -460,7 +467,7 @@ export function moveStepsWithOption(
   } else if (option.movement.activation === "once-per-turn") {
     owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
-  return pob;
+  return { pawn: pob, movementIndex, movementKey: option.key, stealth: option.stealth };
 }
 
 /**
@@ -475,7 +482,7 @@ export function moveHex(
   gd: GameData,
   pawnId: string,
   dir: number,
-): PawnOnBoard {
+): MovementExecutionResult {
   return moveHexWithOption(s, gd, pawnId, dir, 0);
 }
 
@@ -485,7 +492,7 @@ export function moveHexWithOption(
   pawnId: string,
   dir: number,
   movementIndex = 0,
-): PawnOnBoard {
+): MovementExecutionResult {
   if (dir < 0 || dir > 5) throw new Error(`direction ${dir} out of range 0..5`);
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
@@ -514,5 +521,5 @@ export function moveHexWithOption(
   } else if (option.movement.activation === "once-per-turn") {
     owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
-  return pob;
+  return { pawn: pob, movementIndex, movementKey: option.key, stealth: option.stealth };
 }

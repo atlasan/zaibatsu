@@ -23,7 +23,7 @@
         },
         {
           "path": "spec/schema/action-card.schema.json",
-          "sha256": "b7f0889bbe88e67fa0ca448d329e25317bee1c0ceb3978032b0e079a27c9a7b3"
+          "sha256": "4a851be2557e00cdc9ab0e8f42772c47e4331212cc64b276c22195436f6be0e4"
         },
         {
           "path": "spec/schema/block.schema.json",

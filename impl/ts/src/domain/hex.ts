@@ -58,6 +58,14 @@ export interface PlacedBlock {
   attachments?: Attachment[];
 }
 
+/** A formed bonus icon keyed by the three incident block coordinates. */
+export interface BonusIcon {
+  key: string;
+  coords: Coord[];
+  /** Empty until a player collects the counter from this icon. */
+  collectedBy?: string;
+}
+
 /**
  * The growing hex layout of placed blocks and the pawns on them. Both are stored
  * in insertion order (deterministic iteration); lookups scan the small arrays.
@@ -65,6 +73,7 @@ export interface PlacedBlock {
 export class Cybernet {
   blocks: PlacedBlock[] = [];
   pawns: PawnOnBoard[] = [];
+  bonusIcons: BonusIcon[] = [];
 
   at(c: Coord): PlacedBlock | undefined {
     return this.blocks.find((pb) => coordEqual(pb.coord, c));

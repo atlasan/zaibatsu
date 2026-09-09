@@ -267,6 +267,34 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
     );
     expect(icebreakBlock(s, d, "speedrunner-red", coord, 0).success).toBe(true);
   });
+
+  test("nullified block ICE cannot be controlled", () => {
+    const d = loadDefault("speedrunners");
+    d.cards.push({ id: "block-nullify-ice", name: "Block Nullify ICE", attach: { as: "block", nullifiesIce: true } });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    s.cybernet.at(coord)!.attachments = [{ cardId: "block-nullify-ice", bonusPaid: 0 }];
+    expect(() => icebreakBlock(s, d, "speedrunner-red", coord, 0)).toThrow("has no ICE value");
+  });
+
+  test("nullified pawn ICE cannot be controlled", () => {
+    const d = loadDefault("speedrunners");
+    d.cards.push({ id: "pawn-nullify-ice", name: "Pawn Nullify ICE", attach: { as: "enemy", slot: "armor", nullifiesIce: true } });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: ORIGIN, spaceId: "core" });
+    s.cybernet.placePawn({
+      pawnId: "drone-turret",
+      ownerId: "p2",
+      coord: ORIGIN,
+      spaceId: "core",
+      attachments: [{ cardId: "pawn-nullify-ice", slot: "armor", bonusPaid: 0 }],
+    });
+    expect(() => icebreakPawn(s, d, "speedrunner-red", "drone-turret", 0)).toThrow("has no ICE value");
+  });
 });
 
 describe("ability grant/remove via attachment", () => {

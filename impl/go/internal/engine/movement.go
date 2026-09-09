@@ -41,6 +41,13 @@ type MovementOption struct {
 	RolledPerTurn string
 }
 
+type MovementExecutionResult struct {
+        Pawn          *domain.PawnOnBoard `json:"pawn"`
+        MovementIndex int                 `json:"movementIndex"`
+        MovementKey   string              `json:"movementKey"`
+        Stealth       bool                `json:"stealth"`
+}
+
 func grantActivation(attach *domain.Attach) string {
 	if attach != nil {
 		for _, use := range attach.AbilityUses {
@@ -447,11 +454,11 @@ func MovePathWithBudget(s *domain.GameState, gd *domain.GameData, pawnID string,
 // the path may be shorter than the budget but not longer, each hop must be
 // adjacent, and only the final space is capacity-checked. Gates activation and
 // records the once-per-turn marker. Hex movement uses MoveHex instead.
-func MoveSteps(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef) (*domain.PawnOnBoard, error) {
+func MoveSteps(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef) (*MovementExecutionResult, error) {
 	return MoveStepsWithOption(s, gd, pawnID, path, 0)
 }
 
-func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef, movementIndex int) (*domain.PawnOnBoard, error) {
+func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef, movementIndex int) (*MovementExecutionResult, error) {
 	pob := s.Cybernet.PawnByID(pawnID)
 	if pob == nil {
 		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
@@ -490,7 +497,7 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 	} else if option.Movement.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
 	}
-	return result, nil
+        return &MovementExecutionResult{Pawn: result, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
 }
 
 // MoveHex executes one block of hex movement for the pawn in grid direction dir.
@@ -498,11 +505,11 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 // spaced-edge connection — only that a placed block exists in the target cell
 // with room for the pawn to land. It records the once-per-turn marker when the
 // pawn's movement is a once-per-turn free action.
-func MoveHex(s *domain.GameState, gd *domain.GameData, pawnID string, dir int) (*domain.PawnOnBoard, error) {
+func MoveHex(s *domain.GameState, gd *domain.GameData, pawnID string, dir int) (*MovementExecutionResult, error) {
 	return MoveHexWithOption(s, gd, pawnID, dir, 0)
 }
 
-func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, dir int, movementIndex int) (*domain.PawnOnBoard, error) {
+func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, dir int, movementIndex int) (*MovementExecutionResult, error) {
 	if dir < 0 || dir > 5 {
 		return nil, fmt.Errorf("direction %d out of range 0..5", dir)
 	}
@@ -548,5 +555,5 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 	} else if option.Movement.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
 	}
-	return pob, nil
+        return &MovementExecutionResult{Pawn: pob, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
 }

@@ -19,7 +19,7 @@
 
 import { type Coord } from "../domain/hex.ts";
 import { slotFilled, type Attachment, type PawnOnBoard } from "../domain/pawn_board.ts";
-import { blockById, pawnById, type ActionCard, type GameData, type GameState, type Player } from "../domain/types.ts";
+import { blockById, pawnById, type ActionCard, type DefenseDie, type GameData, type GameState, type Player } from "../domain/types.ts";
 import { iceFaces } from "./icebreaker.ts";
 
 function player(s: GameState, playerId: string): Player {
@@ -110,6 +110,22 @@ export function playerAttachmentModifiers(
     }
   }
   return { drawModifier, handModifier };
+}
+
+export function effectiveDefenseDice(gd: GameData, pob: PawnOnBoard): DefenseDie[] {
+  const base = pawnById(gd, pob.pawnId)?.defense ?? [];
+  let override: DefenseDie[] | undefined;
+  for (const card of attachmentCards(gd, pob.attachments)) {
+    if (card.attach?.defenseOverride?.length) override = card.attach.defenseOverride;
+  }
+  return (override ?? base).map((die) => ({ ...die }));
+}
+
+export function targetIceNullified(
+  gd: GameData,
+  atts: { cardId: string }[] | undefined,
+): boolean {
+  return attachmentCards(gd, atts).some((card) => card.attach?.nullifiesIce === true);
 }
 
 function attachToPawnElement(s: GameState, gd: GameData, p: Player, card: ActionCard, tgt: PawnOnBoard): void {

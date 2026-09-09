@@ -170,6 +170,78 @@ func TestDeleteRemovedByAttachment(t *testing.T) {
 	}
 }
 
+func TestDefenseOverrideReplacesTargetDefenseDuringDelete(t *testing.T) {
+	vulnerable := []domain.DefenseDie{
+		{Value: 1, Shielded: false},
+		{Value: 2, Shielded: false},
+		{Value: 3, Shielded: false},
+		{Value: 4, Shielded: false},
+		{Value: 5, Shielded: false},
+		{Value: 6, Shielded: false},
+	}
+	armored := []domain.DefenseDie{
+		{Value: 1, Shielded: true},
+		{Value: 2, Shielded: true},
+		{Value: 3, Shielded: true},
+		{Value: 4, Shielded: true},
+		{Value: 5, Shielded: true},
+		{Value: 6, Shielded: true},
+	}
+	origin := domain.Coord{Q: 0, R: 0}
+
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Pawns = append([]domain.Pawn{}, gd.Pawns...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "armor-override",
+		Name: "Armor Override",
+		Attach: &domain.Attach{
+			As:              "pawn",
+			Slot:            "armor",
+			DefenseOverride: armored,
+		},
+	})
+	for i := range cloned.Pawns {
+		if cloned.Pawns[i].ID == "speedrunner-yellow" {
+			cloned.Pawns[i].Defense = vulnerable
+		}
+	}
+
+	baseline, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 17})
+	baseline.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	baseline.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	baseline.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-yellow", OwnerID: "p2", Coord: origin, SpaceID: "core"})
+	res, err := Delete(baseline, &cloned, "drone-turret", "speedrunner-yellow", 0)
+	if err != nil {
+		t.Fatalf("baseline Delete: %v", err)
+	}
+	if !res.Eliminated {
+		t.Fatal("expected vulnerable baseline target to be eliminated")
+	}
+
+	armoredState, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 17})
+	armoredState.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	armoredState.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	armoredState.Cybernet.PlacePawn(&domain.PawnOnBoard{
+		PawnID:  "speedrunner-yellow",
+		OwnerID: "p2",
+		Coord:   origin,
+		SpaceID: "core",
+		Attachments: []domain.Attachment{{
+			CardID: "armor-override",
+			Slot:   "armor",
+		}},
+	})
+	res, err = Delete(armoredState, &cloned, "drone-turret", "speedrunner-yellow", 0)
+	if err != nil {
+		t.Fatalf("armored Delete: %v", err)
+	}
+	if res.Eliminated {
+		t.Fatal("expected defense override to block the elimination")
+	}
+}
+
 func bombGameData(t *testing.T) *domain.GameData {
 	t.Helper()
 	gd := loadOrSkip(t)

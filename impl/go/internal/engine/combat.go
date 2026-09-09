@@ -121,8 +121,7 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 	if !ok {
 		return res, fmt.Errorf("unknown attacker pawn %q", attackerID)
 	}
-	tgt, ok := gd.PawnByID(targetID)
-	if !ok {
+	if _, ok := gd.PawnByID(targetID); !ok {
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
 	}
 
@@ -147,7 +146,7 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 	skulls += extraSkulls
 
 	res.Roll = AttackRoll(s.RNG, skulls)
-	if Defeats(res.Roll, tgt.Defense) {
+	if Defeats(res.Roll, EffectiveDefenseDice(gd, tgtPob)) {
 		eliminatePawn(s, targetID)
 		res.Eliminated = true
 	}
@@ -205,8 +204,8 @@ func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord do
 		if pawn.Coord != coord {
 			continue
 		}
-		target, ok := gd.PawnByID(pawn.PawnID)
-		eliminated := ok && Defeats(res.Roll, target.Defense)
+		_, ok := gd.PawnByID(pawn.PawnID)
+		eliminated := ok && Defeats(res.Roll, EffectiveDefenseDice(gd, pawn))
 		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
 		if eliminated {
 			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)
@@ -286,9 +285,8 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 		diceByTarget[tid] = append(diceByTarget[tid], res.Roll[i])
 	}
 	for _, tid := range targetOrder {
-		tgt, _ := gd.PawnByID(tid)
 		dice := diceByTarget[tid]
-		eliminated := tgt != nil && Defeats(dice, tgt.Defense)
+		eliminated := s.Cybernet.PawnByID(tid) != nil && Defeats(dice, EffectiveDefenseDice(gd, s.Cybernet.PawnByID(tid)))
 		res.Targets = append(res.Targets, MultiTargetResult{TargetPawnID: tid, Dice: dice, Eliminated: eliminated})
 		if eliminated {
 			eliminatePawn(s, tid)

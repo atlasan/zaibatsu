@@ -8,11 +8,13 @@ import {
   attachToBlock,
   attachToEnemy,
   attachToPawn,
+  effectiveDefenseDice,
   effectivePawnClasses,
   eliminatePawn,
   icebreakPawn,
   newGame,
   placeBlock,
+  targetIceNullified,
 } from "../src/engine/index.ts";
 
 const ORIGIN: Coord = { q: 0, r: 0 };
@@ -165,5 +167,39 @@ describe("cost + cleanup", () => {
       }
     }
     expect(found).toBe(true);
+  });
+});
+
+describe("attachment runtime helpers", () => {
+  test("defense override replaces pawn defense dice", () => {
+    const d = freshData();
+    d.cards.push({
+      id: "armor-override",
+      name: "Armor Override",
+      attach: {
+        as: "pawn",
+        slot: "armor",
+        defenseOverride: [{ value: 6, shielded: true }],
+      },
+    });
+    const s = game(d);
+    s.cybernet.placePawn({
+      pawnId: "speedrunner-red",
+      ownerId: "p1",
+      coord: { ...ORIGIN },
+      spaceId: "core",
+      attachments: [{ cardId: "armor-override", slot: "armor", bonusPaid: 0 }],
+    });
+    expect(effectiveDefenseDice(d, s.cybernet.pawnById("speedrunner-red")!)).toEqual([{ value: 6, shielded: true }]);
+  });
+
+  test("nullifiesIce is detected from attached cards", () => {
+    const d = freshData();
+    d.cards.push({
+      id: "ice-nullifier",
+      name: "ICE Nullifier",
+      attach: { as: "pawn", slot: "armor", nullifiesIce: true },
+    });
+    expect(targetIceNullified(d, [{ cardId: "ice-nullifier", slot: "armor", bonusPaid: 0 }])).toBe(true);
   });
 });

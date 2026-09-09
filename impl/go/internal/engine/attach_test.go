@@ -61,24 +61,24 @@ func TestAttachToPawnRejectsMissingSlot(t *testing.T) {
 }
 
 func TestGrantedSlotAllowsFollowUpAttachment(t *testing.T) {
-        s, gd := attachGame(t)
-        origin := domain.Coord{Q: 0, R: 0}
-        gd.Cards = append(gd.Cards,
-                domain.ActionCard{ID: "grant-gadget-slot", Name: "Grant Gadget Slot", Attach: &domain.Attach{As: "pawn", Slot: "module", GrantsSlot: []string{"gadget"}}},
-                domain.ActionCard{ID: "follow-up-gadget", Name: "Follow Up Gadget", Attach: &domain.Attach{As: "pawn", Slot: "gadget"}},
-        )
-        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
-        p1 := s.PlayerByID("p1")
-        p1.Hand = []string{"grant-gadget-slot", "follow-up-gadget"}
-        if err := AttachToPawn(s, gd, "p1", "grant-gadget-slot", "drone-turret"); err != nil {
-                t.Fatalf("grant slot attach: %v", err)
-        }
-        if err := AttachToPawn(s, gd, "p1", "follow-up-gadget", "drone-turret"); err != nil {
-                t.Fatalf("follow-up gadget attach: %v", err)
-        }
-        if !s.Cybernet.PawnByID("drone-turret").HasSlotFilled("gadget") {
-                t.Error("granted gadget slot should allow the second attachment")
-        }
+	s, gd := attachGame(t)
+	origin := domain.Coord{Q: 0, R: 0}
+	gd.Cards = append(gd.Cards,
+		domain.ActionCard{ID: "grant-gadget-slot", Name: "Grant Gadget Slot", Attach: &domain.Attach{As: "pawn", Slot: "module", GrantsSlot: []string{"gadget"}}},
+		domain.ActionCard{ID: "follow-up-gadget", Name: "Follow Up Gadget", Attach: &domain.Attach{As: "pawn", Slot: "gadget"}},
+	)
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "drone-turret", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+	p1 := s.PlayerByID("p1")
+	p1.Hand = []string{"grant-gadget-slot", "follow-up-gadget"}
+	if err := AttachToPawn(s, gd, "p1", "grant-gadget-slot", "drone-turret"); err != nil {
+		t.Fatalf("grant slot attach: %v", err)
+	}
+	if err := AttachToPawn(s, gd, "p1", "follow-up-gadget", "drone-turret"); err != nil {
+		t.Fatalf("follow-up gadget attach: %v", err)
+	}
+	if !s.Cybernet.PawnByID("drone-turret").HasSlotFilled("gadget") {
+		t.Error("granted gadget slot should allow the second attachment")
+	}
 }
 
 func TestAttachToEnemySuccessAndRejectsOwn(t *testing.T) {
@@ -198,6 +198,61 @@ func TestTakeoverDiscardsAttachmentsAndReturnsBonus(t *testing.T) {
 	}
 	if !found {
 		t.Fatal("expected a takeover in some seed")
+	}
+}
+
+func TestEffectiveDefenseDiceUsesAttachmentOverride(t *testing.T) {
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "armor-override",
+		Name: "Armor Override",
+		Attach: &domain.Attach{
+			As:              "pawn",
+			Slot:            "armor",
+			DefenseOverride: []domain.DefenseDie{{Value: 6, Shielded: true}},
+		},
+	})
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{
+		PawnID:  "speedrunner-red",
+		OwnerID: "p1",
+		Coord:   domain.Coord{Q: 0, R: 0},
+		SpaceID: "core",
+		Attachments: []domain.Attachment{{
+			CardID: "armor-override",
+			Slot:   "armor",
+		}},
+	})
+	got := EffectiveDefenseDice(&cloned, s.Cybernet.PawnByID("speedrunner-red"))
+	want := []domain.DefenseDie{{Value: 6, Shielded: true}}
+	if len(got) != len(want) {
+		t.Fatalf("defense len = %d, want %d", len(got), len(want))
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("defense[%d] = %+v, want %+v", i, got[i], want[i])
+		}
+	}
+}
+
+func TestTargetIceNullifiedDetectsAttachmentFlag(t *testing.T) {
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "ice-nullifier",
+		Name: "ICE Nullifier",
+		Attach: &domain.Attach{
+			As:           "pawn",
+			Slot:         "armor",
+			NullifiesIce: true,
+		},
+	})
+	if !TargetIceNullified(&cloned, []domain.Attachment{{CardID: "ice-nullifier", Slot: "armor"}}) {
+		t.Fatal("expected nullifiesIce attachment to be detected")
 	}
 }
 

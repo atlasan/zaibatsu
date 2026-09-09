@@ -99,7 +99,7 @@ test("Test Lab scenarios are deterministic, named, and retain their fixture in v
   const created = createPlayScenario("attachments", { playerNames: ["Ada", "Bea"], seed: 9 });
   expect(created.scenario?.title).toBe("Attachments");
   expect(created.activePlayer?.name).toBe("Ada");
-  expect(created.players[0]!.hand.map((card) => card.name)).toContain("Accelerator");
+  expect(created.players[0]!.hand.map((card) => card.name)).toEqual(expect.arrayContaining(["Stealth Harness", "Shield Mesh", "Block ICE Jammer"]));
   const trace = exportPlayTrace(created.id);
   expect(trace.format).toBe("zaibatsu-speedrunners-trace/v2");
   if (trace.format !== "zaibatsu-speedrunners-trace/v2") throw new Error("expected fixture trace");
@@ -113,18 +113,51 @@ test("Test Lab fixture actions remain reducer-validated and reset to their fixtu
   const created = createPlayScenario("attachments");
   const attach = created.legalOptions.actions.find((action) => action.type === "attach-pawn") as { cardId: string; targetIds: string[] };
   expect(attach).toBeDefined();
-  const applied = submitPlayCommand(created.id, { kind: "action", action: { type: "attach-pawn", cardId: attach.cardId, targetId: attach.targetIds[0]! } });
+  const applied = submitPlayCommand(created.id, { kind: "action", action: { type: "attach-pawn", cardId: "fixture-grant-stealth-steps", targetId: attach.targetIds[0]! } });
   expect(applied.result.accepted).toBe(true);
   expect(applied.scenario?.checkpoints.some((checkpoint) => checkpoint.complete)).toBe(true);
   const reset = resetPlaySession(created.id);
   expect(reset.state.pawns.find((pawn) => pawn.pawnId === "speedrunner-red")?.attachments).toEqual([]);
 });
 
+test("attachments fixture exposes granted movement and block ICE nullification truthfully", () => {
+  const created = createPlayScenario("attachments");
+  expect(created.legalOptions.actions.some((action) => action.type === "play-icebreak-block")).toBe(true);
+
+  const attached = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "attach-pawn", cardId: "fixture-grant-stealth-steps", targetId: "speedrunner-red" },
+  });
+  expect(attached.result.accepted).toBe(true);
+  const grantedMove = attached.legalOptions.actions.find((action) => action.type === "move-steps" && action.movementIndex === 1) as { pawnId: string; movementIndex: number; targets: Array<{ coord: { q: number; r: number }; spaceId: string }>; stealth: boolean };
+  expect(grantedMove).toBeDefined();
+  expect(grantedMove.stealth).toBe(true);
+
+  const preview = getMovementOptions(created.id, grantedMove.pawnId, [grantedMove.targets[0]!], undefined, grantedMove.movementIndex);
+  expect(preview.movementIndex).toBe(1);
+  expect(preview.stealth).toBe(true);
+
+  const moved = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "move-steps", pawnId: grantedMove.pawnId, movementIndex: grantedMove.movementIndex, path: [grantedMove.targets[0]!] },
+  });
+  expect(moved.result.accepted).toBe(true);
+  expect(moved.scenario?.checkpoints[1]?.complete).toBe(true);
+
+  const nullified = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "attach-block", cardId: "fixture-block-nullify-ice", pawnId: "speedrunner-red", coord: { q: 0, r: 1 } },
+  });
+  expect(nullified.result.accepted).toBe(true);
+  expect(nullified.legalOptions.actions.some((action) => action.type === "play-icebreak-block")).toBe(false);
+  expect(nullified.scenario?.checkpoints[2]?.complete).toBe(true);
+});
+
 test("Test Lab fixtures expose immediate reducer actions for the supported action families", () => {
   const actions = (scenarioId: string) => createPlayScenario(scenarioId).legalOptions.actions.map((action) => action.type);
   expect(actions("game-basics")).toContain("place-marker");
   expect(actions("search-and-move")).toContain("play-search");
-  expect(actions("combat-and-control")).toEqual(expect.arrayContaining(["play-delete", "delete-multi", "play-icebreak-pawn", "play-icebreak-block"]));
+  expect(actions("combat-and-control")).toEqual(expect.arrayContaining(["play-delete", "delete-multi", "play-icebreak-block"]));
   expect(actions("attachments")).toEqual(expect.arrayContaining(["attach-pawn", "attach-enemy"]));
   expect(actions("reboot-and-turn")).toContain("play-reboot");
 });

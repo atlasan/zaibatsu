@@ -79,6 +79,23 @@
           },
           "description": "Modifies the target's ICE: specific faces granted, more/fewer dice, and/or a black die."
         },
+        "defenseOverride": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "shielded"],
+            "properties": {
+              "value": { "type": "integer", "minimum": 1, "maximum": 6 },
+              "shielded": { "type": "boolean" }
+            }
+          },
+          "description": "Replacement defense dice for the target while the attachment remains equipped."
+        },
+        "nullifiesIce": {
+          "type": "boolean",
+          "description": "The target's ICE is treated as absent while this attachment remains equipped."
+        },
         "drawModifier": { "type": "integer", "description": "Change to the number of cards drawn per turn (+/-)." },
         "handModifier": { "type": "integer", "description": "Change to the target's max hand size (+/-)." },
         "blockSpace": {

@@ -239,6 +239,8 @@ type Attach struct {
         GrantsSlot     []string        `json:"grantsSlot,omitempty"`
         AbilityUses    []AbilityUse    `json:"abilityUses,omitempty"`
         IceModifier    *IceModifier    `json:"iceModifier,omitempty"`
+        DefenseOverride []DefenseDie   `json:"defenseOverride,omitempty"`
+        NullifiesIce   bool            `json:"nullifiesIce,omitempty"`
         DrawModifier   int             `json:"drawModifier,omitempty"`
         HandModifier   int             `json:"handModifier,omitempty"`
         EffectText     string          `json:"effectText,omitempty"`

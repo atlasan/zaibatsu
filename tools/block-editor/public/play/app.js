@@ -194,9 +194,11 @@ function actionPanel() {
     if (option.pawnId) fields.append(field("Pawn", "pawnId", option.pawnId, [option.pawnId], pawnLabel));
     if (option.type === "move-steps" || option.type === "play-move") {
       if (option.cardId) fields.append(field("Card", "cardId", option.cardId, [option.cardId], cardLabel));
+      if (option.movementIndex !== undefined) fields.append(el("p", { class: "hint" }, `Movement option ${option.movementIndex}${option.stealth ? " · stealth-capable" : ""}`));
       await renderMovementFields(fields, option);
       return;
     }
+    if (option.type === "move-hex" && option.movementIndex !== undefined) fields.append(el("p", { class: "hint" }, `Movement option ${option.movementIndex}${option.stealth ? " · stealth-capable" : ""}`));
     if (option.targetIds?.length && option.type !== "delete-multi") fields.append(field("Target", "targetId", option.targetIds[0], option.targetIds, pawnLabel));
     if (option.type === "delete-multi") fields.append(multiField(`Targets (up to ${option.maxTargets})`, "targetIds", option.targetIds));
     if (option.directions) fields.append(field("Direction", "dir", option.directions[0], option.directions, (dir) => `Direction ${dir}`));
@@ -214,6 +216,7 @@ function actionPanel() {
     const option = options[Number(select.value)] || {}; const action = { type: option.type };
     fields.querySelectorAll("select").forEach((input) => { if (input.name === "movementTarget") return; if (input.name === "dir") action.dir = Number(input.value); else if (input.name === "placement") { const [dir, rotation] = input.value.split(",").map(Number); action.dir = dir; action.rotation = rotation; } else if (input.name === "cardIds" || input.name === "targetIds") action[input.name] = [...input.selectedOptions].map((choice) => choice.value); else action[input.name] = input.value; });
     if (option.coord) action.coord = option.coord;
+    if (option.movementIndex !== undefined) action.movementIndex = option.movementIndex;
     if (option.type === "pass") passAndEndTurn();
     else {
       if (option.type === "move-steps" || option.type === "play-move") {
@@ -260,10 +263,10 @@ async function renderMovementFields(fields, option) {
     }
   };
   const refresh = async () => {
-    const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId }) });
+    const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId, movementIndex: option.movementIndex }) });
     detail.replaceChildren(); render(preview); gameScreen();
   };
-  const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId }) });
+  const preview = await api(`/api/play/sessions/${session.id}/movement-options`, { method: "POST", body: JSON.stringify({ pawnId: option.pawnId, path: movementPath, cardId: option.cardId, movementIndex: option.movementIndex }) });
   fields.append(status, list, detail); render(preview);
 }
 
