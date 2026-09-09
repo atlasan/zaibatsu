@@ -55,6 +55,7 @@ type Action struct {
 	CardIDs       []string      `json:"cardIds,omitempty"`
 	PawnID        string        `json:"pawnId,omitempty"` // acting pawn (attacker/actor/searcher/rebooted)
 	Path          []SpaceRef    `json:"path,omitempty"`   // declared space-to-space movement path
+        MovementIndex int           `json:"movementIndex,omitempty"` // explicit movement option index: base=0, granted options follow attachment order
 	TargetID      string        `json:"targetId,omitempty"`
 	TargetIDs     []string      `json:"targetIds,omitempty"` // ordered die assignments for delete-multi; duplicates concentrate dice
 	Coord         *domain.Coord `json:"coord,omitempty"`
@@ -308,10 +309,10 @@ func applyResult(s *domain.GameState, gd *domain.GameData, a Action) (any, error
 		checkWin(s)
 		return nil, nil
 	case ActMoveHex:
-		result, err := MoveHex(s, gd, a.PawnID, a.Dir)
+                result, err := MoveHexWithOption(s, gd, a.PawnID, a.Dir, a.MovementIndex)
 		return result, err
 	case ActMoveSteps:
-		result, err := MoveSteps(s, gd, a.PawnID, a.Path)
+                result, err := MoveStepsWithOption(s, gd, a.PawnID, a.Path, a.MovementIndex)
 		return result, err
 	case ActDelete:
 		result, err := Delete(s, gd, a.PawnID, a.TargetID, a.ExtraSkulls)

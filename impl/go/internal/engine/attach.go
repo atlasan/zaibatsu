@@ -24,8 +24,9 @@ import (
 // discarded). Discard happens on elimination / takeover (see discardAttachments).
 //
 // PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots, recycle
-// draw/hand modifiers, and ICE-face/Black-ICE modifiers are now wired. Armor-
-// style defense replacement and movement-grant execution remain later work.
+// draw/hand modifiers, ICE-face / ICE-dice / Black-ICE modifiers, and
+// attachment-granted movement activation are now wired. Armor-style defense
+// replacement plus the richer movement-use semantics remain later work.
 
 // removeCardFromHand removes one copy of cardID from the hand without discarding it.
 func removeCardFromHand(p *domain.Player, cardID string) error {

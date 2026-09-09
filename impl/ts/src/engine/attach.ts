@@ -13,8 +13,9 @@
 // takeover (see discardAttachments).
 //
 // PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots,
-// recycle draw/hand modifiers, and ICE-face/Black-ICE modifiers are now wired.
-// Armor-style defense replacement and movement-grant execution remain later work.
+// recycle draw/hand modifiers, ICE-face / ICE-dice / Black-ICE modifiers, and
+// attachment-granted movement activation are now wired. Armor-style defense
+// replacement plus the richer movement-use semantics remain later work.
 
 import { type Coord } from "../domain/hex.ts";
 import { slotFilled, type Attachment, type PawnOnBoard } from "../domain/pawn_board.ts";

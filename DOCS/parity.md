@@ -148,7 +148,7 @@ divergence here and compare states *modulo* RNG-internal fields.
 | Search ability (place from pile) | ✅ | ✅ | draws top of pile, places via placement rules; retryable on failure |
 | Reboot ability | ✅ | ✅ | eliminated pawn → Central Core under rebooting player |
 | Card-use: activate abilities | ✅ | ✅ | play matching card → Delete/Icebreak; discard 1 → Search; discard 4 → Reboot; identical (seed 123) |
-| Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; granted slots, recycle draw/hand modifiers, and ICE-face / ICE-dice / Black-ICE modifiers now resolve identically |
+| Card attachment | ✅ | ✅ | attach to pawn/enemy/block, slot + cost checks, discard+refund on elimination/takeover; granted slots, recycle draw/hand modifiers, ICE-face / ICE-dice / Black-ICE modifiers, and explicit attachment-granted movement activation now resolve identically |
 | Block visual layout metadata | OK | OK | six entrances, bonus corners, asset refs, and the source-aligned 2–3–2 point-up placement layout; displayShape renders circle/capsule/compound source coverage only, with no effect or movement resolution |
 | Space-to-space movement | ✅ | ✅ | intra-block neighbours + rotation-aware cross-edge boundary hops; path/capacity/budget behavior is mirror-tested, while provisional data records still need source review |
 | Card-use: move / attach | ✅ | ✅ | card movement consumes its printed-budget card; attachment actions are live; attached effect grants/removals remain a separate gap |

@@ -149,7 +149,8 @@ against itself).
 at zero. `CanActivateMovement` gates on the activation mode (`card` /
 `once-per-turn` with a start-of-turn marker / `none`). A movement-valued action
 card executes the same path rules with its printed budget, consumes that card,
-and does not spend the pawn's once-per-turn movement. **`MoveHex`** executes one
+and does not spend the pawn's once-per-turn movement. Attachments may now grant
+additional explicit movement options with their own activation mode. **`MoveHex`** executes one
 block of hex movement (ignores spaces/modifiers; needs only a placed block with
 room to land). **`StepTargets`**, **`MoveStep`**, and **`MoveSteps`** execute
 `steps`/`d6`/`2d6` paths through intra-block neighbours and rotation-aware

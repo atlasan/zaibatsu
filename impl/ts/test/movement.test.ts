@@ -7,11 +7,15 @@ import { newRng } from "../src/domain/rng.ts";
 import {
   applyAction,
   canActivateMovement,
+  canActivateMovementOption,
   canEndOn,
+  effectiveMovementOptions,
   movementUsedKey,
   moveHex,
+  moveHexWithOption,
   moveStep,
   moveSteps,
+  moveStepsWithOption,
   newGame,
   placeBlock,
   resolveSteps,
@@ -114,6 +118,35 @@ describe("canActivateMovement", () => {
     expect(canActivateMovement(p, opt)).toBeUndefined();
     p.oncePerTurnUsed[movementUsedKey("y")] = true;
     expect(canActivateMovement(p, opt)).toBeDefined();
+  });
+
+  test("granted movement options expose their own activation mode", () => {
+    const p: Player = {
+      id: "p1",
+      name: "A",
+      color: "red",
+      pawnId: "x",
+      controlMarkersTotal: 10,
+      controlMarkersPlaced: 0,
+      bonusCounters: 0,
+      hand: [],
+      maxHandSize: 5,
+      oncePerTurnUsed: {},
+    };
+    const pawn: Pawn = { id: "x", name: "x", expansion: "speedrunners", class: ["operative"], defense: [], movement: { type: "steps", activation: "none" } };
+    const options = effectiveMovementOptions(
+      {
+        ...data,
+        cards: [
+          ...data.cards,
+          { id: "grant-move", name: "Grant Move", attach: { as: "pawn", grantsMovement: [{ type: "fixed", amount: 2 }], abilityUses: [{ ability: "move", activation: "once-per-turn" }] } },
+        ],
+      },
+      pawn,
+      [{ cardId: "grant-move" }],
+    );
+    expect(options.length).toBe(2);
+    expect(canActivateMovementOption(p, "x", options[1]!)).toBeUndefined();
   });
 });
 
@@ -246,6 +279,64 @@ describe("moveSteps (budget + pass-through)", () => {
     data.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 1, activation: "card" };
     applyAction(s, data, { type: "move-steps", pawnId: "speedrunner-red", path: [{ coord, spaceId: "b" }] });
     expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+  });
+
+  test("attachment-granted step movement executes through an explicit movement option", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-steps",
+      name: "Grant Steps",
+      attach: { as: "pawn", grantsMovement: [{ type: "fixed", amount: 2 }], abilityUses: [{ ability: "move", activation: "card" }] },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, d, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a", attachments: [{ cardId: "grant-steps", slot: "gadget", bonusPaid: 0 }] });
+    d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1);
+    expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+  });
+
+  test("move action selects a granted movement option explicitly", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-steps",
+      name: "Grant Steps",
+      attach: { as: "pawn", grantsMovement: [{ type: "fixed", amount: 2 }], abilityUses: [{ ability: "move", activation: "card" }] },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, d, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a", attachments: [{ cardId: "grant-steps", slot: "gadget", bonusPaid: 0 }] });
+    d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    applyAction(s, d, { type: "move-steps", pawnId: "speedrunner-red", movementIndex: 1, path: [{ coord, spaceId: "b" }] });
+    expect(s.cybernet.pawnById("speedrunner-red")!.spaceId).toBe("b");
+  });
+});
+
+describe("attachment-granted hex movement", () => {
+  test("uses the granted once-per-turn option and tracks its own marker", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-hex",
+      name: "Grant Hex",
+      attach: { as: "pawn", grantsMovement: [{ type: "hex" }], abilityUses: [{ ability: "move", activation: "once-per-turn" }] },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 2, d, "data-haven", rotFacing("data-haven", 2));
+    const pob = s.cybernet.pawnById("speedrunner-red")!;
+    pob.attachments = [{ cardId: "grant-hex", slot: "gadget", bonusPaid: 0 }];
+    d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    moveHexWithOption(s, d, "speedrunner-red", 2, 1);
+    expect(s.players.find((p) => p.id === "p1")!.oncePerTurnUsed[movementUsedKey("speedrunner-red", "0:0")]).toBe(true);
+    expect(() => moveHexWithOption(s, d, "speedrunner-red", 2, 1)).toThrow();
   });
 });
 

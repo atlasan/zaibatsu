@@ -14,6 +14,7 @@ import {
   blockById,
   pawnById,
   playerById,
+  type Attachment,
   type GameData,
   type GameState,
   type Movement,
@@ -23,8 +24,103 @@ import {
 import type { Rng } from "../domain/rng.ts";
 
 /** Namespaces a pawn's once-per-turn movement marker. */
-export function movementUsedKey(pawnId: string): string {
-  return `move:${pawnId}`;
+export function movementUsedKey(pawnId: string, movementKey = "base"): string {
+  return `move:${pawnId}:${movementKey}`;
+}
+
+export interface MovementOption {
+  key: string;
+  movement: Movement;
+  stealth: boolean;
+}
+
+function grantsMove(att: Attachment | undefined): boolean {
+  return !!att?.grants?.includes("move");
+}
+
+function removesMove(att: Attachment | undefined): boolean {
+  return !!att?.removes?.includes("move");
+}
+
+function grantActivation(att: Attachment | undefined): Movement["activation"] {
+  const activation = att?.abilityUses?.find((use) => use.ability === "move")?.activation;
+  return activation === "once-per-turn" ? "once-per-turn" : "card";
+}
+
+function movementFromGrant(
+  amount: number | undefined,
+  type: "fixed" | "d6" | "2d6" | "hex",
+  activation: Movement["activation"],
+): Movement {
+  switch (type) {
+    case "fixed":
+      return { type: "steps", steps: amount ?? 0, activation };
+    case "d6":
+      return { type: "d6", activation };
+    case "2d6":
+      return { type: "2d6", activation };
+    case "hex":
+      return { type: "hex", activation };
+  }
+}
+
+export function effectiveMovementOptions(
+  gd: GameData,
+  pawn: Pawn,
+  atts: { cardId: string }[] | undefined,
+): MovementOption[] {
+  const attached = (atts ?? [])
+    .map((att) => gd.cards.find((card) => card.id === att.cardId)?.attach)
+    .filter((attach): attach is Attachment => !!attach);
+  if (attached.some(removesMove)) return [];
+
+  const options: MovementOption[] = [{ key: "base", movement: pawn.movement, stealth: false }];
+  attached.forEach((attach, attachIndex) => {
+    const grantedDirectly = grantsMove(attach);
+    attach.grantsMovement?.forEach((grant, grantIndex) => {
+      if (!grantedDirectly && grantIndex === 0) {
+        // grantsMovement is itself enough to expose movement even without an explicit grants:["move"] marker.
+      }
+      options.push({
+        key: `${attachIndex}:${grantIndex}`,
+        movement: movementFromGrant(grant.amount, grant.type, grantActivation(attach)),
+        stealth: !!(grant.stealth || attach.grantsStealth),
+      });
+    });
+  });
+  return options;
+}
+
+export function movementOptionAt(
+  gd: GameData,
+  pawn: Pawn,
+  atts: { cardId: string }[] | undefined,
+  movementIndex = 0,
+): MovementOption {
+  const options = effectiveMovementOptions(gd, pawn, atts);
+  const option = options[movementIndex];
+  if (!option) throw new Error(`movement option ${movementIndex} is unavailable for pawn "${pawn.id}"`);
+  return option;
+}
+
+/** Whether the player may activate the selected movement option now (consumes nothing). */
+export function canActivateMovementOption(
+  p: Player,
+  pawnId: string,
+  option: MovementOption,
+): string | undefined {
+  switch (option.movement.activation) {
+    case "none":
+      return `pawn "${pawnId}" cannot activate movement`;
+    case "card":
+      return undefined;
+    case "once-per-turn":
+      return p.oncePerTurnUsed[movementUsedKey(pawnId, option.key)]
+        ? `pawn "${pawnId}" already used movement option "${option.key}" this turn`
+        : undefined;
+    default:
+      return `pawn "${pawnId}" has unknown movement activation "${option.movement.activation}"`;
+  }
 }
 
 /**
@@ -54,18 +150,7 @@ export function resolveSteps(m: Movement, rng: Rng, extraSteps = 0): number {
 
 /** Whether the player may activate the pawn's movement now (consumes nothing). */
 export function canActivateMovement(p: Player, pawn: Pawn): string | undefined {
-  switch (pawn.movement.activation) {
-    case "none":
-      return `pawn "${pawn.id}" cannot activate movement`;
-    case "card":
-      return undefined; // a card must be played; the caller supplies it
-    case "once-per-turn":
-      return p.oncePerTurnUsed[movementUsedKey(pawn.id)]
-        ? `pawn "${pawn.id}" already used its once-per-turn movement this turn`
-        : undefined;
-    default:
-      return `pawn "${pawn.id}" has unknown movement activation "${pawn.movement.activation}"`;
-  }
+  return canActivateMovementOption(p, pawn.id, { key: "base", movement: pawn.movement, stealth: false });
 }
 
 /** The pawn capacity of a space in the Cybernet. Throws if the space is unknown. */
@@ -269,22 +354,33 @@ export function moveSteps(
   pawnId: string,
   path: SpaceRef[],
 ): PawnOnBoard {
+  return moveStepsWithOption(s, gd, pawnId, path, 0);
+}
+
+export function moveStepsWithOption(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  path: SpaceRef[],
+  movementIndex = 0,
+): PawnOnBoard {
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
   const pawn = pawnById(gd, pawnId);
   if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
-  if (pawn.movement.type === "hex") throw new Error(`pawn "${pawnId}" has hex movement; use moveHex`);
+  const option = movementOptionAt(gd, pawn, pob.attachments, movementIndex);
+  if (option.movement.type === "hex") throw new Error(`pawn "${pawnId}" movement option "${option.key}" is hex; use moveHex`);
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
-  const gate = canActivateMovement(owner, pawn);
+  const gate = canActivateMovementOption(owner, pawnId, option);
   if (gate) throw new Error(gate);
   // Validate before resolving dice, so an illegal path never consumes RNG.
   validatePath(s, gd, pawnId, path);
   // Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
-  const budget = resolveSteps(pawn.movement, s.rng, 0);
+  const budget = resolveSteps(option.movement, s.rng, 0);
   movePathWithBudget(s, gd, pawnId, path, budget);
-  if (pawn.movement.activation === "once-per-turn") {
-    owner.oncePerTurnUsed[movementUsedKey(pawnId)] = true;
+  if (option.movement.activation === "once-per-turn") {
+    owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return pob;
 }
@@ -302,17 +398,28 @@ export function moveHex(
   pawnId: string,
   dir: number,
 ): PawnOnBoard {
+  return moveHexWithOption(s, gd, pawnId, dir, 0);
+}
+
+export function moveHexWithOption(
+  s: GameState,
+  gd: GameData,
+  pawnId: string,
+  dir: number,
+  movementIndex = 0,
+): PawnOnBoard {
   if (dir < 0 || dir > 5) throw new Error(`direction ${dir} out of range 0..5`);
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
   const pawn = pawnById(gd, pawnId);
   if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
-  if (pawn.movement.type !== "hex") {
-    throw new Error(`pawn "${pawnId}" does not have hex movement`);
+  const option = movementOptionAt(gd, pawn, pob.attachments, movementIndex);
+  if (option.movement.type !== "hex") {
+    throw new Error(`pawn "${pawnId}" movement option "${option.key}" is not hex`);
   }
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
-  const gate = canActivateMovement(owner, pawn);
+  const gate = canActivateMovementOption(owner, pawnId, option);
   if (gate) throw new Error(gate);
 
   const target = neighbor(pob.coord, dir);
@@ -324,8 +431,8 @@ export function moveHex(
 
   pob.coord = target;
   pob.spaceId = landing;
-  if (pawn.movement.activation === "once-per-turn") {
-    owner.oncePerTurnUsed[movementUsedKey(pawnId)] = true;
+  if (option.movement.activation === "once-per-turn") {
+    owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return pob;
 }
