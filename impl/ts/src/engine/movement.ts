@@ -32,6 +32,8 @@ export interface MovementOption {
   key: string;
   movement: Movement;
   stealth: boolean;
+  perTurnUses?: number;
+  rolledPerTurn?: "d6";
 }
 
 function grantsMove(att: Attachment | undefined): boolean {
@@ -45,6 +47,13 @@ function removesMove(att: Attachment | undefined): boolean {
 function grantActivation(att: Attachment | undefined): Movement["activation"] {
   const activation = att?.abilityUses?.find((use) => use.ability === "move")?.activation;
   return activation === "once-per-turn" ? "once-per-turn" : "card";
+}
+
+function grantUseRule(att: Attachment | undefined): Pick<MovementOption, "perTurnUses" | "rolledPerTurn"> {
+  const use = att?.abilityUses?.find((entry) => entry.ability === "move");
+  if (use?.perTurn && use.perTurn >= 1) return { perTurnUses: use.perTurn };
+  if (use?.dice === "d6") return { rolledPerTurn: "d6" };
+  return {};
 }
 
 function movementFromGrant(
@@ -85,6 +94,7 @@ export function effectiveMovementOptions(
         key: `${attachIndex}:${grantIndex}`,
         movement: movementFromGrant(grant.amount, grant.type, grantActivation(attach)),
         stealth: !!(grant.stealth || attach.grantsStealth),
+        ...grantUseRule(attach),
       });
     });
   });
@@ -105,10 +115,21 @@ export function movementOptionAt(
 
 /** Whether the player may activate the selected movement option now (consumes nothing). */
 export function canActivateMovementOption(
+  s: GameState,
   p: Player,
   pawnId: string,
   option: MovementOption,
 ): string | undefined {
+  if (option.perTurnUses !== undefined) {
+    return grantedMovementUsesRemaining(s, p, pawnId, option) > 0
+      ? undefined
+      : `pawn "${pawnId}" already used movement option "${option.key}" its ${option.perTurnUses} per-turn uses`;
+  }
+  if (option.rolledPerTurn === "d6") {
+    return grantedMovementUsesRemaining(s, p, pawnId, option) > 0
+      ? undefined
+      : `pawn "${pawnId}" already used all rolled uses for movement option "${option.key}" this turn`;
+  }
   switch (option.movement.activation) {
     case "none":
       return `pawn "${pawnId}" cannot activate movement`;
@@ -150,7 +171,62 @@ export function resolveSteps(m: Movement, rng: Rng, extraSteps = 0): number {
 
 /** Whether the player may activate the pawn's movement now (consumes nothing). */
 export function canActivateMovement(p: Player, pawn: Pawn): string | undefined {
-  return canActivateMovementOption(p, pawn.id, { key: "base", movement: pawn.movement, stealth: false });
+  return canActivateMovementOption({} as GameState, p, pawn.id, { key: "base", movement: pawn.movement, stealth: false });
+}
+
+function grantedMovementBudgetKey(pawnId: string, movementKey: string, slot: number): string {
+  return `move-budget:${pawnId}:${movementKey}:${slot}`;
+}
+
+function grantedMovementUseKey(pawnId: string, movementKey: string, slot: number): string {
+  return `move-use:${pawnId}:${movementKey}:${slot}`;
+}
+
+function ensureGrantedMovementBudget(
+  s: GameState,
+  p: Player,
+  pawnId: string,
+  option: MovementOption,
+): number {
+  if (option.perTurnUses !== undefined) return option.perTurnUses;
+  if (option.rolledPerTurn !== "d6") return 0;
+  let count = 0;
+  while (p.oncePerTurnUsed[grantedMovementBudgetKey(pawnId, option.key, count)]) count++;
+  if (count > 0) return count;
+  count = s.rng.intn(6) + 1;
+  for (let slot = 0; slot < count; slot++) {
+    p.oncePerTurnUsed[grantedMovementBudgetKey(pawnId, option.key, slot)] = true;
+  }
+  return count;
+}
+
+function grantedMovementUsesRemaining(
+  s: GameState,
+  p: Player,
+  pawnId: string,
+  option: MovementOption,
+): number {
+  const budget = ensureGrantedMovementBudget(s, p, pawnId, option);
+  let used = 0;
+  while (p.oncePerTurnUsed[grantedMovementUseKey(pawnId, option.key, used)]) used++;
+  return budget - used;
+}
+
+function consumeGrantedMovementUse(
+  s: GameState,
+  p: Player,
+  pawnId: string,
+  option: MovementOption,
+): void {
+  const budget = ensureGrantedMovementBudget(s, p, pawnId, option);
+  for (let slot = 0; slot < budget; slot++) {
+    const key = grantedMovementUseKey(pawnId, option.key, slot);
+    if (!p.oncePerTurnUsed[key]) {
+      p.oncePerTurnUsed[key] = true;
+      return;
+    }
+  }
+  throw new Error(`pawn "${pawnId}" already exhausted movement option "${option.key}" this turn`);
 }
 
 /** The pawn capacity of a space in the Cybernet. Throws if the space is unknown. */
@@ -372,14 +448,16 @@ export function moveStepsWithOption(
   if (option.movement.type === "hex") throw new Error(`pawn "${pawnId}" movement option "${option.key}" is hex; use moveHex`);
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
-  const gate = canActivateMovementOption(owner, pawnId, option);
+  const gate = canActivateMovementOption(s, owner, pawnId, option);
   if (gate) throw new Error(gate);
   // Validate before resolving dice, so an illegal path never consumes RNG.
   validatePath(s, gd, pawnId, path);
   // Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
   const budget = resolveSteps(option.movement, s.rng, 0);
   movePathWithBudget(s, gd, pawnId, path, budget);
-  if (option.movement.activation === "once-per-turn") {
+  if (option.perTurnUses !== undefined || option.rolledPerTurn === "d6") {
+    consumeGrantedMovementUse(s, owner, pawnId, option);
+  } else if (option.movement.activation === "once-per-turn") {
     owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return pob;
@@ -419,7 +497,7 @@ export function moveHexWithOption(
   }
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
-  const gate = canActivateMovementOption(owner, pawnId, option);
+  const gate = canActivateMovementOption(s, owner, pawnId, option);
   if (gate) throw new Error(gate);
 
   const target = neighbor(pob.coord, dir);
@@ -431,7 +509,9 @@ export function moveHexWithOption(
 
   pob.coord = target;
   pob.spaceId = landing;
-  if (option.movement.activation === "once-per-turn") {
+  if (option.perTurnUses !== undefined || option.rolledPerTurn === "d6") {
+    consumeGrantedMovementUse(s, owner, pawnId, option);
+  } else if (option.movement.activation === "once-per-turn") {
     owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return pob;

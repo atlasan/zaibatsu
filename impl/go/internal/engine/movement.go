@@ -34,9 +34,11 @@ func movementUsedKey(pawnID string, movementKey ...string) string {
 }
 
 type MovementOption struct {
-	Key      string
-	Movement domain.Movement
-	Stealth  bool
+	Key           string
+	Movement      domain.Movement
+	Stealth       bool
+	PerTurnUses   int
+	RolledPerTurn string
 }
 
 func grantActivation(attach *domain.Attach) string {
@@ -51,6 +53,23 @@ func grantActivation(attach *domain.Attach) string {
 		}
 	}
 	return "card"
+}
+
+func grantUseRule(attach *domain.Attach) (int, string) {
+	if attach != nil {
+		for _, use := range attach.AbilityUses {
+			if use.Ability != "move" {
+				continue
+			}
+			if use.PerTurn >= 1 {
+				return use.PerTurn, ""
+			}
+			if use.Dice == "d6" {
+				return 0, "d6"
+			}
+		}
+	}
+	return 0, ""
 }
 
 func movementFromGrant(grant domain.MovementGrant, activation string) domain.Movement {
@@ -81,11 +100,14 @@ func EffectiveMovementOptions(gd *domain.GameData, pawn *domain.Pawn, atts []dom
 			continue
 		}
 		activation := grantActivation(card.Attach)
+		perTurnUses, rolledPerTurn := grantUseRule(card.Attach)
 		for grantIndex, grant := range card.Attach.GrantsMovement {
 			options = append(options, MovementOption{
-				Key:      fmt.Sprintf("%d:%d", attachIndex, grantIndex),
-				Movement: movementFromGrant(grant, activation),
-				Stealth:  grant.Stealth || card.Attach.GrantsStealth,
+				Key:           fmt.Sprintf("%d:%d", attachIndex, grantIndex),
+				Movement:      movementFromGrant(grant, activation),
+				Stealth:       grant.Stealth || card.Attach.GrantsStealth,
+				PerTurnUses:   perTurnUses,
+				RolledPerTurn: rolledPerTurn,
 			})
 		}
 	}
@@ -100,7 +122,19 @@ func MovementOptionAt(gd *domain.GameData, pawn *domain.Pawn, atts []domain.Atta
 	return options[movementIndex], nil
 }
 
-func CanActivateMovementOption(p *domain.Player, pawnID string, option MovementOption) error {
+func CanActivateMovementOption(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) error {
+	if option.PerTurnUses > 0 {
+		if grantedMovementUsesRemaining(s, p, pawnID, option) > 0 {
+			return nil
+		}
+		return fmt.Errorf("pawn %q already used movement option %q its %d per-turn uses", pawnID, option.Key, option.PerTurnUses)
+	}
+	if option.RolledPerTurn == "d6" {
+		if grantedMovementUsesRemaining(s, p, pawnID, option) > 0 {
+			return nil
+		}
+		return fmt.Errorf("pawn %q already used all rolled uses for movement option %q this turn", pawnID, option.Key)
+	}
 	switch option.Movement.Activation {
 	case "none":
 		return fmt.Errorf("pawn %q cannot activate movement", pawnID)
@@ -143,7 +177,60 @@ func ResolveSteps(m domain.Movement, rng *domain.RNG, extraSteps int) int {
 // CanActivateMovement reports whether the player may activate the pawn's movement
 // now. It does not consume anything; MoveHex records the once-per-turn marker.
 func CanActivateMovement(p *domain.Player, pawn *domain.Pawn) error {
-	return CanActivateMovementOption(p, pawn.ID, MovementOption{Key: "base", Movement: pawn.Movement})
+	return CanActivateMovementOption(nil, p, pawn.ID, MovementOption{Key: "base", Movement: pawn.Movement})
+}
+
+func grantedMovementBudgetKey(pawnID, movementKey string, slot int) string {
+	return fmt.Sprintf("move-budget:%s:%s:%d", pawnID, movementKey, slot)
+}
+
+func grantedMovementUseKey(pawnID, movementKey string, slot int) string {
+	return fmt.Sprintf("move-use:%s:%s:%d", pawnID, movementKey, slot)
+}
+
+func ensureGrantedMovementBudget(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) int {
+	if option.PerTurnUses > 0 {
+		return option.PerTurnUses
+	}
+	if option.RolledPerTurn != "d6" {
+		return 0
+	}
+	count := 0
+	for p.OncePerTurnUsed[grantedMovementBudgetKey(pawnID, option.Key, count)] {
+		count++
+	}
+	if count > 0 {
+		return count
+	}
+	if s == nil || s.RNG == nil {
+		return 0
+	}
+	count = s.RNG.Intn(6) + 1
+	for slot := 0; slot < count; slot++ {
+		p.OncePerTurnUsed[grantedMovementBudgetKey(pawnID, option.Key, slot)] = true
+	}
+	return count
+}
+
+func grantedMovementUsesRemaining(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) int {
+	budget := ensureGrantedMovementBudget(s, p, pawnID, option)
+	used := 0
+	for p.OncePerTurnUsed[grantedMovementUseKey(pawnID, option.Key, used)] {
+		used++
+	}
+	return budget - used
+}
+
+func consumeGrantedMovementUse(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) error {
+	budget := ensureGrantedMovementBudget(s, p, pawnID, option)
+	for slot := 0; slot < budget; slot++ {
+		key := grantedMovementUseKey(pawnID, option.Key, slot)
+		if !p.OncePerTurnUsed[key] {
+			p.OncePerTurnUsed[key] = true
+			return nil
+		}
+	}
+	return fmt.Errorf("pawn %q already exhausted movement option %q this turn", pawnID, option.Key)
 }
 
 // SpaceCapacityAt returns the pawn capacity of a space in the Cybernet.
@@ -384,7 +471,7 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 	if owner == nil {
 		return nil, fmt.Errorf("pawn %q has no controlling player", pawnID)
 	}
-	if err := CanActivateMovementOption(owner, pawnID, option); err != nil {
+	if err := CanActivateMovementOption(s, owner, pawnID, option); err != nil {
 		return nil, err
 	}
 	// Validate before resolving dice, so an illegal path never consumes RNG.
@@ -392,14 +479,18 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 		return nil, err
 	}
 	// Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
-        result, err := MovePathWithBudget(s, gd, pawnID, path, ResolveSteps(option.Movement, s.RNG, 0))
+	result, err := MovePathWithBudget(s, gd, pawnID, path, ResolveSteps(option.Movement, s.RNG, 0))
 	if err != nil {
 		return nil, err
 	}
-	if option.Movement.Activation == "once-per-turn" {
+	if option.PerTurnUses > 0 || option.RolledPerTurn == "d6" {
+		if err := consumeGrantedMovementUse(s, owner, pawnID, option); err != nil {
+			return nil, err
+		}
+	} else if option.Movement.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
 	}
-        return result, nil
+	return result, nil
 }
 
 // MoveHex executes one block of hex movement for the pawn in grid direction dir.
@@ -435,7 +526,7 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 	if owner == nil {
 		return nil, fmt.Errorf("pawn %q has no controlling player", pawnID)
 	}
-	if err := CanActivateMovementOption(owner, pawnID, option); err != nil {
+	if err := CanActivateMovementOption(s, owner, pawnID, option); err != nil {
 		return nil, err
 	}
 
@@ -450,7 +541,11 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 
 	pob.Coord = target
 	pob.SpaceID = landing
-	if option.Movement.Activation == "once-per-turn" {
+	if option.PerTurnUses > 0 || option.RolledPerTurn == "d6" {
+		if err := consumeGrantedMovementUse(s, owner, pawnID, option); err != nil {
+			return nil, err
+		}
+	} else if option.Movement.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
 	}
 	return pob, nil

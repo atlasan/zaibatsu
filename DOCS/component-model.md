@@ -126,10 +126,10 @@ use is chosen per play (SR-CARD-001).
 | **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
 | **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ✅(detect-marker) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). Detection: `cards.py` now flags the **✕ remove-marker** on main-face ability badges (`icon.removed`, `proposals.attach.removesCount`); the human still names *which* ability (the badge glyph isn't read). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
-| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). Both mirrors now expose these as explicit selectable movement options with card / once-per-turn activation; granted stealth semantics remain pending. E.g. STEALTH CAMO "+3 stealth" / CYBER WINGS "+1d6 stealth". |
+| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). Both mirrors now expose these as explicit selectable movement options with card / once-per-turn / `perTurn` / `d6` move-use budgeting; granted stealth semantics remain pending. E.g. STEALTH CAMO "+3 stealth" / CYBER WINGS "+1d6 stealth". |
 | **`attach.grantsStealth`** (bool) | ✅(schema) / ⛔(engine, detect) | grants the **stealth capability** (the target's own movement becomes stealth-capable) without a specific count. E.g. INVISIBLE SERUM "+Stealth". Revealed by the human drafts. |
 | **`attach.grantsSlot[]`** (slot types) | ✅(schema) / ⛔(engine, detect) | gives the target an additional attachment **slot**. E.g. FLATLINE "allow gadget attachment". Revealed by the human drafts. |
-| **`attach.abilityUses[]`** (how a granted ability/move is used) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. Card / once-per-turn activation for granted **move** is now wired in both mirrors; `perTurn`/`dice` semantics remain pending. `grants`/`removes` now also include `move`. |
+| **`attach.abilityUses[]`** (how a granted ability/move is used) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. All four modes now budget granted **move** activations in both mirrors; broader non-move `abilityUses` handling remains pending. `grants`/`removes` now also include `move`. |
 | **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). Both mirrors now consume all three modifier channels during Icebreaker resolution. The card analogue of `space.modifier.kind=ice`. |
 | **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ⛔(engine, detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Card analogue of the space `hand-size` modifier. |
 | **`attach.blockSpace`** (`{shape: circle\|hex}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: a few cards attach **as a block** (`as=block`) — a single-space mini-block placed on a block side. |
@@ -207,8 +207,8 @@ SR-MOVE-002). Previously only whole-block `hex` movement executed.
 
 **Remaining engine logic (not yet wired):**
 - the remaining non-`area-attack` block/card effect kinds, granted stealth
-  semantics, the richer `abilityUses` modes (`perTurn`, `dice`), armor-style
-  defense replacement/nullification, and `attach.effectText`.
+  semantics, broader non-move `abilityUses` handling, armor-style defense
+  replacement/nullification, and `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

@@ -146,7 +146,7 @@ describe("canActivateMovement", () => {
       [{ cardId: "grant-move" }],
     );
     expect(options.length).toBe(2);
-    expect(canActivateMovementOption(p, "x", options[1]!)).toBeUndefined();
+    expect(canActivateMovementOption({} as never, p, "x", options[1]!)).toBeUndefined();
   });
 });
 
@@ -330,13 +330,74 @@ describe("attachment-granted hex movement", () => {
     });
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 2, d, "data-haven", rotFacing("data-haven", 2));
-    const pob = s.cybernet.pawnById("speedrunner-red")!;
+    const pawnId = s.players[0]!.pawnId;
+    const pob = s.cybernet.pawnById(pawnId)!;
     pob.attachments = [{ cardId: "grant-hex", slot: "gadget", bonusPaid: 0 }];
+    d.pawns.find((p) => p.id === pawnId)!.movement = { type: "steps", steps: 0, activation: "none" };
+
+    moveHexWithOption(s, d, pawnId, 2, 1);
+    expect(s.players.find((p) => p.id === "p1")!.oncePerTurnUsed[movementUsedKey(pawnId, "0:0")]).toBe(true);
+    expect(() => moveHexWithOption(s, d, pawnId, 2, 1)).toThrow();
+  });
+});
+
+describe("attachment-granted limited uses", () => {
+  test("perTurn uses allow several granted moves in the same turn", () => {
+    const d = structuredClone(data);
+    d.cards.push({
+      id: "grant-per-turn",
+      name: "Grant Per Turn",
+      attach: { as: "pawn", grantsMovement: [{ type: "fixed", amount: 1 }], abilityUses: [{ ability: "move", perTurn: 2 }] },
+    });
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    const dir = 2;
+    placeBlock(s, ORIGIN, dir, d, "data-haven", rotFacing("data-haven", dir));
+    const coord = neighbor(ORIGIN, dir);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a", attachments: [{ cardId: "grant-per-turn", slot: "gadget", bonusPaid: 0 }] });
     d.pawns.find((p) => p.id === "speedrunner-red")!.movement = { type: "steps", steps: 0, activation: "none" };
 
-    moveHexWithOption(s, d, "speedrunner-red", 2, 1);
-    expect(s.players.find((p) => p.id === "p1")!.oncePerTurnUsed[movementUsedKey("speedrunner-red", "0:0")]).toBe(true);
-    expect(() => moveHexWithOption(s, d, "speedrunner-red", 2, 1)).toThrow();
+    moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1);
+    moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "a" }], 1);
+    expect(() => moveStepsWithOption(s, d, "speedrunner-red", [{ coord, spaceId: "b" }], 1)).toThrow();
+  });
+
+  test("d6 uses are rolled once per turn and consumed across activations", () => {
+    const setup = () => {
+      const d = structuredClone(data);
+      d.cards.push({
+        id: "grant-d6-uses",
+        name: "Grant D6 Uses",
+        attach: { as: "pawn", grantsMovement: [{ type: "hex" }], abilityUses: [{ ability: "move", dice: "d6" }] },
+      });
+      const s = newGame({ data: d, playerNames: ["A", "B"], seed: 7 });
+      placeBlock(s, ORIGIN, 2, d, "data-haven", rotFacing("data-haven", 2));
+      const pawnId = s.players[0]!.pawnId;
+      const pob = s.cybernet.pawnById(pawnId)!;
+      pob.attachments = [{ cardId: "grant-d6-uses", slot: "gadget", bonusPaid: 0 }];
+      d.pawns.find((p) => p.id === pawnId)!.movement = { type: "steps", steps: 0, activation: "none" };
+      return { s, d, pawnId };
+    };
+
+    const run = () => {
+      const { s, d, pawnId } = setup();
+      let uses = 0;
+      while (true) {
+        const pob = s.cybernet.pawnById(pawnId)!;
+        const dir = pob.coord.q === 0 && pob.coord.r === 0 ? 2 : 5;
+        try {
+          moveHexWithOption(s, d, pawnId, dir, 1);
+          uses++;
+        } catch {
+          return uses;
+        }
+      }
+    };
+
+    const uses = run();
+    expect(uses).toBeGreaterThanOrEqual(1);
+    expect(uses).toBeLessThanOrEqual(6);
+    expect(run()).toBe(uses);
   });
 });
 

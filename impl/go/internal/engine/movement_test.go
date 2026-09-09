@@ -105,27 +105,27 @@ func TestCanActivateMovement(t *testing.T) {
 }
 
 func TestGrantedMovementOptionActivation(t *testing.T) {
-       p := &domain.Player{OncePerTurnUsed: map[string]bool{}}
-       pawn := &domain.Pawn{ID: "x", Movement: domain.Movement{Type: "steps", Activation: "none"}}
-       gd := loadOrSkip(t)
-       cloned := *gd
-       cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-       cloned.Cards = append(cloned.Cards, domain.ActionCard{
-               ID:   "grant-move",
-               Name: "Grant Move",
-               Attach: &domain.Attach{
-                       As:             "pawn",
-                       GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
-                       AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "once-per-turn"}},
-               },
-       })
-       options := EffectiveMovementOptions(&cloned, pawn, []domain.Attachment{{CardID: "grant-move"}})
-       if len(options) != 2 {
-               t.Fatalf("expected 2 movement options, got %d", len(options))
-       }
-       if err := CanActivateMovementOption(p, "x", options[1]); err != nil {
-               t.Fatalf("granted movement option should be activatable: %v", err)
-       }
+	p := &domain.Player{OncePerTurnUsed: map[string]bool{}}
+	pawn := &domain.Pawn{ID: "x", Movement: domain.Movement{Type: "steps", Activation: "none"}}
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "grant-move",
+		Name: "Grant Move",
+		Attach: &domain.Attach{
+			As:             "pawn",
+			GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
+			AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "once-per-turn"}},
+		},
+	})
+	options := EffectiveMovementOptions(&cloned, pawn, []domain.Attachment{{CardID: "grant-move"}})
+	if len(options) != 2 {
+		t.Fatalf("expected 2 movement options, got %d", len(options))
+	}
+	if err := CanActivateMovementOption(nil, p, "x", options[1]); err != nil {
+		t.Fatalf("granted movement option should be activatable: %v", err)
+	}
 }
 
 // setupHexScenario builds a game, places a block adjacent to the core, and puts a
@@ -350,100 +350,190 @@ func TestMoveStepsViaActionReducer(t *testing.T) {
 }
 
 func TestAttachmentGrantedStepMovement(t *testing.T) {
-       gd := loadOrSkip(t)
-       cloned := *gd
-       cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-       cloned.Cards = append(cloned.Cards, domain.ActionCard{
-               ID:   "grant-steps",
-               Name: "Grant Steps",
-               Attach: &domain.Attach{
-                       As:             "pawn",
-                       GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
-                       AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
-               },
-       })
-       s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
-       origin := domain.Coord{Q: 0, R: 0}
-       dir := 2
-       if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
-               t.Fatalf("place: %v", err)
-       }
-       coord := origin.Neighbor(dir)
-       s.Cybernet.Pawns = []*domain.PawnOnBoard{}
-       s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-steps", Slot: "gadget"}}})
-       pawn, _ := cloned.PawnByID("speedrunner-red")
-       pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
-       if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1); err != nil {
-               t.Fatalf("granted MoveStepsWithOption: %v", err)
-       }
-       if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
-               t.Errorf("pawn should end on b, got %q", got)
-       }
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "grant-steps",
+		Name: "Grant Steps",
+		Attach: &domain.Attach{
+			As:             "pawn",
+			GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
+			AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
+		},
+	})
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-steps", Slot: "gadget"}}})
+	pawn, _ := cloned.PawnByID("speedrunner-red")
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+	if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1); err != nil {
+		t.Fatalf("granted MoveStepsWithOption: %v", err)
+	}
+	if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
+		t.Errorf("pawn should end on b, got %q", got)
+	}
 }
 
 func TestMoveStepsActionSelectsGrantedMovementOption(t *testing.T) {
-       gd := loadOrSkip(t)
-       cloned := *gd
-       cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-       cloned.Cards = append(cloned.Cards, domain.ActionCard{
-               ID:   "grant-steps",
-               Name: "Grant Steps",
-               Attach: &domain.Attach{
-                       As:             "pawn",
-                       GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
-                       AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
-               },
-       })
-       s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
-       origin := domain.Coord{Q: 0, R: 0}
-       dir := 2
-       if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
-               t.Fatalf("place: %v", err)
-       }
-       coord := origin.Neighbor(dir)
-       s.Cybernet.Pawns = []*domain.PawnOnBoard{}
-       s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-steps", Slot: "gadget"}}})
-       pawn, _ := cloned.PawnByID("speedrunner-red")
-       pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
-       if err := Apply(s, &cloned, Action{Type: ActMoveSteps, PawnID: "speedrunner-red", MovementIndex: 1, Path: []SpaceRef{{coord, "b"}}}); err != nil {
-               t.Fatalf("ActMoveSteps granted movement: %v", err)
-       }
-       if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
-               t.Errorf("pawn should be on b after action, got %q", got)
-       }
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "grant-steps",
+		Name: "Grant Steps",
+		Attach: &domain.Attach{
+			As:             "pawn",
+			GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 2}},
+			AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "card"}},
+		},
+	})
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-steps", Slot: "gadget"}}})
+	pawn, _ := cloned.PawnByID("speedrunner-red")
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+	if err := Apply(s, &cloned, Action{Type: ActMoveSteps, PawnID: "speedrunner-red", MovementIndex: 1, Path: []SpaceRef{{coord, "b"}}}); err != nil {
+		t.Fatalf("ActMoveSteps granted movement: %v", err)
+	}
+	if got := s.Cybernet.PawnByID("speedrunner-red").SpaceID; got != "b" {
+		t.Errorf("pawn should be on b after action, got %q", got)
+	}
 }
 
 func TestAttachmentGrantedHexMovement(t *testing.T) {
-       gd := loadOrSkip(t)
-       cloned := *gd
-       cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-       cloned.Cards = append(cloned.Cards, domain.ActionCard{
-               ID:   "grant-hex",
-               Name: "Grant Hex",
-               Attach: &domain.Attach{
-                       As:             "pawn",
-                       GrantsMovement: []domain.MovementGrant{{Type: "hex"}},
-                       AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "once-per-turn"}},
-               },
-       })
-       s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
-       origin := domain.Coord{Q: 0, R: 0}
-       if _, err := PlaceBlock(s, origin, 2, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", 2)); err != nil {
-               t.Fatalf("place: %v", err)
-       }
-       pob := s.Cybernet.PawnByID("speedrunner-red")
-       pob.Attachments = []domain.Attachment{{CardID: "grant-hex", Slot: "gadget"}}
-       pawn, _ := cloned.PawnByID("speedrunner-red")
-       pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
-       if _, err := MoveHexWithOption(s, &cloned, "speedrunner-red", 2, 1); err != nil {
-               t.Fatalf("granted MoveHexWithOption: %v", err)
-       }
-       if !s.PlayerByID("p1").OncePerTurnUsed[movementUsedKey("speedrunner-red", "0:0")] {
-               t.Fatal("expected granted once-per-turn movement marker to be set")
-       }
-       if _, err := MoveHexWithOption(s, &cloned, "speedrunner-red", 2, 1); err == nil {
-               t.Fatal("expected second granted hex move this turn to be blocked")
-       }
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "grant-hex",
+		Name: "Grant Hex",
+		Attach: &domain.Attach{
+			As:             "pawn",
+			GrantsMovement: []domain.MovementGrant{{Type: "hex"}},
+			AbilityUses:    []domain.AbilityUse{{Ability: "move", Activation: "once-per-turn"}},
+		},
+	})
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	if _, err := PlaceBlock(s, origin, 2, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", 2)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	pawnID := s.Players[0].PawnID
+	pob := s.Cybernet.PawnByID(pawnID)
+	pob.Attachments = []domain.Attachment{{CardID: "grant-hex", Slot: "gadget"}}
+	pawn, _ := cloned.PawnByID(pawnID)
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+	if _, err := MoveHexWithOption(s, &cloned, pawnID, 2, 1); err != nil {
+		t.Fatalf("granted MoveHexWithOption: %v", err)
+	}
+	if !s.PlayerByID("p1").OncePerTurnUsed[movementUsedKey(pawnID, "0:0")] {
+		t.Fatal("expected granted once-per-turn movement marker to be set")
+	}
+	if _, err := MoveHexWithOption(s, &cloned, pawnID, 2, 1); err == nil {
+		t.Fatal("expected second granted hex move this turn to be blocked")
+	}
+}
+
+func TestAttachmentGrantedPerTurnMovementUses(t *testing.T) {
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+	cloned.Cards = append(cloned.Cards, domain.ActionCard{
+		ID:   "grant-per-turn",
+		Name: "Grant Per Turn",
+		Attach: &domain.Attach{
+			As:             "pawn",
+			GrantsMovement: []domain.MovementGrant{{Type: "fixed", Amount: 1}},
+			AbilityUses:    []domain.AbilityUse{{Ability: "move", PerTurn: 2}},
+		},
+	})
+	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+	origin := domain.Coord{Q: 0, R: 0}
+	dir := 2
+	if _, err := PlaceBlock(s, origin, dir, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", dir)); err != nil {
+		t.Fatalf("place: %v", err)
+	}
+	coord := origin.Neighbor(dir)
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a", Attachments: []domain.Attachment{{CardID: "grant-per-turn", Slot: "gadget"}}})
+	pawn, _ := cloned.PawnByID("speedrunner-red")
+	pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+
+	if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1); err != nil {
+		t.Fatalf("first granted per-turn move: %v", err)
+	}
+	if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "a"}}, 1); err != nil {
+		t.Fatalf("second granted per-turn move: %v", err)
+	}
+	if _, err := MoveStepsWithOption(s, &cloned, "speedrunner-red", []SpaceRef{{coord, "b"}}, 1); err == nil {
+		t.Fatal("expected third granted per-turn move to be blocked")
+	}
+}
+
+func TestAttachmentGrantedD6MovementUses(t *testing.T) {
+	setup := func() (*domain.GameState, *domain.GameData) {
+		gd := loadOrSkip(t)
+		cloned := *gd
+		cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+		cloned.Cards = append(cloned.Cards, domain.ActionCard{
+			ID:   "grant-d6-uses",
+			Name: "Grant D6 Uses",
+			Attach: &domain.Attach{
+				As:             "pawn",
+				GrantsMovement: []domain.MovementGrant{{Type: "hex"}},
+				AbilityUses:    []domain.AbilityUse{{Ability: "move", Dice: "d6"}},
+			},
+		})
+		s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 7})
+		origin := domain.Coord{Q: 0, R: 0}
+		if _, err := PlaceBlock(s, origin, 2, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", 2)); err != nil {
+			t.Fatalf("place: %v", err)
+		}
+		pawnID := s.Players[0].PawnID
+		pob := s.Cybernet.PawnByID(pawnID)
+		pob.Attachments = []domain.Attachment{{CardID: "grant-d6-uses", Slot: "gadget"}}
+		pawn, _ := cloned.PawnByID(pawnID)
+		pawn.Movement = domain.Movement{Type: "steps", Steps: 0, Activation: "none"}
+		return s, &cloned
+	}
+
+	run := func() int {
+		s, cloned := setup()
+		uses := 0
+		for {
+			pawnID := s.Players[0].PawnID
+			pob := s.Cybernet.PawnByID(pawnID)
+			dir := 2
+			if pob.Coord.Q != 0 || pob.Coord.R != 0 {
+				dir = 5
+			}
+			if _, err := MoveHexWithOption(s, cloned, pawnID, dir, 1); err != nil {
+				return uses
+			}
+			uses++
+		}
+	}
+
+	uses := run()
+	if uses < 1 || uses > 6 {
+		t.Fatalf("expected rolled d6 uses between 1 and 6, got %d", uses)
+	}
+	if again := run(); again != uses {
+		t.Fatalf("expected deterministic rolled d6 uses, got %d then %d", uses, again)
+	}
 }
 
 func TestBoundarySpacesDerivedOnLoad(t *testing.T) {

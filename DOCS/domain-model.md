@@ -18,7 +18,7 @@ the engine.
 - **Activation**: `card` (played via action card) | `once-per-turn` (free) | `none` (cannot activate)
 - **IceValue**: `none` | `low` (3 dice) | `medium` (2 dice) | `high` (1 die) | `black`
 - **SpaceType**: `normal` (1 pawn) | `double` (2 pawns) | `special` (unlimited) | `pawn` (specific pawn's home) | `effect`
-- **SpaceModifier**: `defense` | `hand-size` | `attack`
+- **SpaceModifier**: `defense` | `hand-size` | `attack` | `ice`
 - **SlotType**: `add-on` | `gadget` | `weapon` | `armor` | `module` | `mission`
 - **MovementType**: `steps` (fixed N) | `d6` | `2d6` | `hex` (one whole block)
 - **Class** (non-exhaustive, data-driven): `operative`, `drone`, `bot`, `cyborg`,
@@ -95,9 +95,10 @@ chooses exactly one use; the others are void.
 - Live resolution currently uses:
   - `grants` / `removes` for ability availability;
   - `grantsSlot` when checking whether a follow-up attachment may be equipped;
-  - `iceModifier.faces` / `iceModifier.black` when resolving Icebreaker against the target;
+  - `grantsMovement` + move-scoped `abilityUses` for explicit granted movement options and their card / once-per-turn / `perTurn` / `d6` budgets;
+  - `iceModifier.faces` / `iceModifier.deltaDice` / `iceModifier.black` when resolving Icebreaker against the target;
   - `drawModifier` / `handModifier` during recycle for the controller of the attached target.
-- `grantsMovement`, `grantsStealth`, `abilityUses`, armor-style defense replacement, and ICE-dice-count changes remain modeled data with later engine work pending.
+- `grantsStealth`, broader non-move `abilityUses`, armor-style defense replacement, and `attach.effectText` remain modeled data with later engine work pending.
 
 ### MissionCard _(shadowraiders, planned)_
 Attached to a pawn's mission slot; tracks state via tags (mark/cargo/counter);
@@ -150,7 +151,8 @@ at zero. `CanActivateMovement` gates on the activation mode (`card` /
 `once-per-turn` with a start-of-turn marker / `none`). A movement-valued action
 card executes the same path rules with its printed budget, consumes that card,
 and does not spend the pawn's once-per-turn movement. Attachments may now grant
-additional explicit movement options with their own activation mode. **`MoveHex`** executes one
+additional explicit movement options with their own activation mode and
+per-turn / `d6` use budgets. **`MoveHex`** executes one
 block of hex movement (ignores spaces/modifiers; needs only a placed block with
 room to land). **`StepTargets`**, **`MoveStep`**, and **`MoveSteps`** execute
 `steps`/`d6`/`2d6` paths through intra-block neighbours and rotation-aware
