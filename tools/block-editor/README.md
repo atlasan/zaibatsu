@@ -38,7 +38,7 @@ The sandbox setup screen includes standard seeded play plus a **Test Lab** of
 clearly labeled deterministic fixtures. Fixtures are local reducer tests, not
 source-complete games; their v2 traces recreate the same fixture on import.
 Current fixture coverage includes game basics, search/movement, combat/control,
-attachments, and reboot/turn flow.
+attachments, bonus economy, typed effect execution, and reboot/turn flow.
 
 For browser regression coverage, install Chromium once and run:
 
@@ -141,8 +141,9 @@ The block authoring screen exposes an explicit **1–N space → zone mapping**:
 
 `/play/` is a local reducer-backed tester for the current implemented
 Speedrunners subset. It groups guided actions by basics/turn flow, movement,
-search/placement, combat, icebreaker/control, attachments, and reboot. It is
-intended for rules debugging and acceptance coverage, not as a source-complete
-production game client. The setup screen and live session now surface an
-explicit shared coverage panel that distinguishes implemented runtime slices
-from modeled-but-still-pending work.
+search/placement, combat, icebreaker/control, attachments, bonus economy,
+typed effect execution, and reboot. It is intended for rules debugging and
+acceptance coverage, not as a source-complete production game client. The
+setup screen and live session now surface an explicit shared coverage panel
+that distinguishes implemented runtime slices from modeled-but-still-pending
+work.

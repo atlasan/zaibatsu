@@ -5923,13 +5923,13 @@
       "kind": "block",
       "localId": "chiba-city",
       "title": "Chiba City",
-      "status": "cataloged",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "mechanic:block-control",
         "resource:block",
-        "status:cataloged",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -5959,7 +5959,8 @@
         "sourceIds": [
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-blocks-a4"
         ]
       }
     },
@@ -7550,6 +7551,47 @@
       }
     },
     {
+      "entryId": "pawn/cracker",
+      "kind": "pawn",
+      "localId": "cracker",
+      "title": "Cracker",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
       "entryId": "pawn/drone-turret",
       "kind": "pawn",
       "localId": "drone-turret",
@@ -7560,6 +7602,88 @@
         "game:speedrunners",
         "resource:pawn",
         "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "pawn/gynoid",
+      "kind": "pawn",
+      "localId": "gynoid",
+      "title": "Gynoid",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "pawn/idoru",
+      "kind": "pawn",
+      "localId": "idoru",
+      "title": "Idoru",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {

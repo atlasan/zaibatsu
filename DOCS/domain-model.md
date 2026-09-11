@@ -42,7 +42,7 @@ the engine.
 
 ## Entities
 
-### Block (information block / hex tile) _(slice: id/name/ice/spaces/core; effects planned)_
+### Block (information block / hex tile) _(slice: id/name/ice/spaces/core; effects partially live)_
 A hexagonal tile forming the Cybernet.
 - `id`, `name`, `expansion`
 - `isCentralCore: bool` — the Central Core (and Shadowraiders' Central Core 02)
@@ -52,10 +52,10 @@ A hexagonal tile forming the Cybernet.
 - `spaces: Space[]` — the cells pawns occupy
 - `edges: bool[6]` — which of the 6 outer entrances are open. Each has one standardized target hex in clockwise order: `E1→h3`, `E2→h4`, `E3→h5`, `E4→h6`, `E5→h7`, `E6→h2`.
 - `boundarySpaces: SpaceId[][6]` — derived from each open entrance's target hex and its current gameplay-space owner; authors do not hand-enter it.
-- `bonusFragments: int` — count of one-third bonus-icon corners (0..6) _(planned use)_
-- `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. This is visual/reference data, not an effect resolver.
+- `bonusFragments: int` — count of one-third bonus-icon corners (0..6), mirrored by the true count in `bonusCorners` when present
+- `bonusCorners?: bool[6]` — source-layout flags for the six clockwise corners; when present their true count equals `bonusFragments`. Together with block placement they drive deterministic bonus-icon formation.
 - `assetRefs?: assetId[]` — source-linked physical assets resolved from the asset manifest.
-- `effects: { inCybernet?, underControl? }` — each is a legacy effect-id string **or** a typed effect `{ kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|custom, amount?, target?, text? }`, fired on placement / on gaining control. Typed `area-attack` dispatch is live; the other effect kinds remain planned.
+- `effects: { inCybernet?, underControl? }` — each is a legacy effect-id string **or** a typed effect `{ kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|custom, amount?, target?, text? }`, fired on placement / on gaining control. Typed `area-attack` and `place-pawn` dispatch are live in both mirrors; the remaining effect kinds stay planned.
 
 ### Space
 A cell on a block.
@@ -91,14 +91,18 @@ chooses exactly one use; the others are void.
 - `movement?: int` — steps it grants through the card-consuming `play-move`
   action, independent of the pawn's once-per-turn movement
 - `activates?: Ability[]` — abilities it can activate when played
-- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability|move[], removes?: Ability|move[], grantsSlot?: SlotType[], grantsMovement?: MovementGrant[], grantsStealth?: bool, abilityUses?: AbilityUse[], iceModifier?: { faces?: int[], deltaDice?: int, black?: bool }, drawModifier?: int, handModifier?: int, effectText?: string, effectTrigger?: ... , cost?: int }`
+- `effects?: { kind: gain-control-card|place-pawn|area-attack|all-players|modify-ice|draw-cards|gain-bonus|sacrifice-pawn|custom, amount?: int, target?: string, text?: string, trigger?: on-play|begin-turn|end-turn|on-control|on-icebreak|continuous }[]`
+- `attach?: { as: 'pawn'|'enemy'|'block', slot?: SlotType, class?: Class[] (target restriction), grants?: Ability|move[], removes?: Ability|move[], grantsSlot?: SlotType[], grantsMovement?: MovementGrant[], grantsStealth?: bool, abilityUses?: AbilityUse[], defenseOverride?: DefenseDie[], nullifiesIce?: bool, iceModifier?: { faces?: int[], deltaDice?: int, black?: bool }, drawModifier?: int, handModifier?: int, effectText?: string, effectTrigger?: ... , cost?: int }`
 - Live resolution currently uses:
   - `grants` / `removes` for ability availability;
+  - `effects` for the current direct-play typed slice (`on-icebreak` `place-pawn` is source-backed today);
   - `grantsSlot` when checking whether a follow-up attachment may be equipped;
   - `grantsMovement` + move-scoped `abilityUses` for explicit granted movement options and their card / once-per-turn / `perTurn` / `d6` budgets;
+  - `grantsStealth` to mark movement as stealth-capable in reducer options/results;
+  - `defenseOverride` / `nullifiesIce` when resolving defense and Icebreaker against the attached target;
   - `iceModifier.faces` / `iceModifier.deltaDice` / `iceModifier.black` when resolving Icebreaker against the target;
   - `drawModifier` / `handModifier` during recycle for the controller of the attached target.
-- `grantsStealth`, broader non-move `abilityUses`, armor-style defense replacement, and `attach.effectText` remain modeled data with later engine work pending.
+- Broader non-move `abilityUses` handling and `attach.effectText` remain modeled data with later engine work pending.
 
 ### MissionCard _(shadowraiders, planned)_
 Attached to a pawn's mission slot; tracks state via tags (mark/cargo/counter);
@@ -115,7 +119,7 @@ completing grants **medals** (→ control markers) or **control of a pawn**.
 - **Medal** _(shadowraiders)_ — earned from missions; each medal = one control
   marker you may place.
 
-### Cybernet (board) _(slice: hex model + block placement; pawn positions & attachments planned)_
+### Cybernet (board) _(slice: hex model + block placement; pawn positions, bonus icons, and attachments live)_
 The growing hex layout of placed blocks. Model:
 - **Coord** — axial `(q, r)`. Six edge/grid directions `0..5`; `HexDirections[i]`
   is the neighbor delta across edge `i`; `Opposite(i) = (i+3) mod 6`.
@@ -123,9 +127,15 @@ The growing hex layout of placed blocks. Model:
   `e` faces grid direction `(e + rotation) mod 6`; so the local edge exposed on
   grid direction `d` is `(d − rotation) mod 6`, and `edgeHasSpace(block, rot, d)`
   reads `block.edges[(d − rot) mod 6]`.
+- **BonusIcon** — `{ key, coords[3], collectedBy? }`. Each icon is identified by
+  the sorted triple of incident block coordinates around one shared vertex, is
+  created when authored `bonusCorners` complete that vertex, and awards one
+  bonus counter the first time a single player controls all three contributing
+  blocks.
 - **Cybernet** — placed blocks in placement order (deterministic iteration);
-  `At(coord)` / `Occupied(coord)` scan the small set. Setup seeds the **Central
-  Core at `(0,0)`, rotation 0**.
+  `At(coord)` / `Occupied(coord)` scan the small set, and `bonusIcons[]` tracks
+  formed/collected board icons. Setup seeds the **Central Core at `(0,0)`,
+  rotation 0**.
 
 **Placing a block (Search), relative to a reference block:** the target cell must
 be empty and adjacent to the reference; the reference's edge facing the target

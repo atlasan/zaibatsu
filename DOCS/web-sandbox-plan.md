@@ -17,11 +17,11 @@ public hosting remain outside this workstream.
 The setup screen offers both standard seeded sessions and clearly labeled Test
 Lab fixtures. Fixtures arrange deterministic legal reducer state only so a user
 can immediately exercise current implemented action families: game basics,
-search/movement, combat/control, attachments, and reboot/turn flow. They never
-write `spec/` and do not claim that provisional Speedrunners content is
-source-complete. The host also serves a shared coverage map so `/play/` can say
-explicitly which slices are runnable now and which authored/modelled slices are
-still pending.
+search/movement, combat/control, attachments, bonus economy, typed effect
+execution, and reboot/turn flow. They never write `spec/` and do not claim
+that provisional Speedrunners content is source-complete. The host also serves
+a shared coverage map so `/play/` can say explicitly which slices are runnable
+now and which authored/modelled slices are still pending.
 
 ## Contract
 
@@ -33,8 +33,9 @@ still pending.
   reconstructs the same fixture before replay. An import with a different
   checksum, unknown fixture, or stale command is rejected before replay.
 - Engine transitions return structured events (`phase-advanced`, accepted
-  action, roll, draw, elimination, control change, winner, or validation
-  failure). UI text is presentation only; it never parses engine messages.
+  action, roll, draw, bonus creation/collection, pawn placement, elimination,
+  control change, winner, or validation failure). UI text is presentation only;
+  it never parses engine messages.
 - The CSS tactical board is the guaranteed rendering path. A local,
   checksum-pinned artifact may be layered behind it when available through the
   existing artifact endpoint; missing artwork is silent and harmless.
@@ -44,7 +45,7 @@ still pending.
 1. Create a seeded 2–4 player session and click **Start action phase**.
 2. The guided-action selector groups reducer-legal choices by family: basics /
    turn flow, movement, search / placement, combat, icebreaker / control,
-   attachments, and reboot.
+   attachments, bonus economy, typed effect execution, and reboot.
 3. The selector prefers a legal Search when the active hand can pay for it.
    Choose its shown direction/rotation, then execute it to add the top block
    from the pile to the Cybernet.
@@ -63,9 +64,10 @@ still pending.
    path builder with its printed fixed budget and is discarded only after the
    engine accepts the path.
 7. Coverage panels on the setup screen and in a live session keep the sandbox's
-   current runtime scope explicit: implemented action families and attachment
-   resolution are shown separately from pending bonus-counter, effect-registry,
-   armor, movement-grant, and ability-use work.
+   current runtime scope explicit: implemented action families, bonus economy,
+   typed effect execution, and attachment resolution are shown separately from
+   the still-pending broader effect registry, non-move ability-use work, and
+   source-complete content coverage.
 
 ## Acceptance gate
 

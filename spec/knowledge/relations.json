@@ -988,7 +988,22 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "pawn/cracker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "pawn/drone-turret",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/gynoid",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/idoru",
       "to": "game/speedrunners"
     },
     {
@@ -1366,6 +1381,30 @@
       "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 1, tile 2 <-> page 1, tile 2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 3 <-> page 1, tile 3"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 1 <-> page 2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 2 <-> page 2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 3 <-> page 2"
     },
     {
       "type": "cross-checks-with",
@@ -4830,6 +4869,71 @@
     },
     {
       "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cracker",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "pawn/drone-turret",
       "to": "doc/docs/domain-model.md"
     },
@@ -4891,6 +4995,136 @@
     {
       "type": "documented-by",
       "from": "pawn/drone-turret",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/gynoid",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/idoru",
       "to": "doc/readme.md"
     },
     {
@@ -7074,7 +7308,8 @@
     {
       "type": "evidenced-by-source",
       "from": "block/chiba-city",
-      "to": "source/sp-en-blocks-a4"
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 1, tile 3"
     },
     {
       "type": "evidenced-by-source",
@@ -7085,6 +7320,12 @@
       "type": "evidenced-by-source",
       "from": "block/chiba-city",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/chiba-city",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 1, tile 3"
     },
     {
       "type": "evidenced-by-source",
@@ -7231,6 +7472,23 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "pawn/cracker",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cracker",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cracker",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "pawn/drone-turret",
       "to": "source/sp-en-control-cards"
     },
@@ -7242,6 +7500,40 @@
     {
       "type": "evidenced-by-source",
       "from": "pawn/drone-turret",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/gynoid",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/gynoid",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/gynoid",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/idoru",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/idoru",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/idoru",
       "to": "source/sp-en-rulebook"
     },
     {
@@ -7515,6 +7807,12 @@
     },
     {
       "type": "verified-by-provenance",
+      "from": "block/chiba-city",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
       "from": "block/hacktivism",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
@@ -7528,6 +7826,24 @@
     {
       "type": "verified-by-provenance",
       "from": "mode/speedrunners",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/cracker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/gynoid",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/idoru",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     }

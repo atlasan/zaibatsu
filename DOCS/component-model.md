@@ -75,8 +75,8 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 ### Effects — SR-BOARD "Block effects"
 | Field | Status | Notes |
 |---|---|---|
-| `effects.inCybernet` (fires on placement) | ✅(schema) / ✅(`area-attack` engine) | accepts a bare effect-id string **or** a typed effect (below). Typed `area-attack` now dispatches when a block enters the Cybernet; the other effect kinds remain pending. |
-| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ✅(`area-attack` engine) / ⛔(other kinds) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Typed `area-attack` now dispatches on control gain in both mirrors. |
+| `effects.inCybernet` (fires on placement) | ✅(schema) / ✅(typed engine subset) | accepts a bare effect-id string **or** a typed effect (below). Typed `area-attack` and `place-pawn` now dispatch in both mirrors; the remaining effect kinds stay pending. |
+| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ✅(typed engine subset) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Typed `area-attack` and the current source-backed `place-pawn` subset now dispatch on control gain in both mirrors. |
 
 ---
 
@@ -116,7 +116,7 @@ use is chosen per play (SR-CARD-001).
 |---|---|---|
 | **`movements[]`** (`{type: fixed\|d6\|2d6\|hex, amount?, stealth?}`) | ✅(schema) / ⛔(detect) | 0+ movement options: **fixed steps / one die / two dice / one whole hex** (SR-MOVE-001), optionally **stealth** (Shadowraiders: normal budget, no threat wake — SH-PAWN-001). Legacy `movement:int` = one `{fixed}`. |
 | `activates[]` (`search`/`delete`/`reboot`/`icebreaker`) | ✅(schema) / ⛔(detect) | the action(s) this card can be spent on. Independent of the card use; OCR keyword-matched today (from the bottom-strip badges/labels). |
-| **`effects[]`** (typed **operations** the card performs when **played**) | ✅(schema) / ⛔(engine, detect) | `{kind ∈ gain-control-card\|place-pawn\|area-attack\|all-players\|modify-ice\|draw-cards\|gain-bonus\|sacrifice-pawn\|custom, amount?, target?, text?, trigger?}`. For a directly-played one-time effect (not an attach-time effect). Card analogue of the block `effects`. |
+| **`effects[]`** (typed **operations** the card performs when **played**) | ✅(schema) / ✅(engine, source-backed subset) / ⛔(detect) | `{kind ∈ gain-control-card\|place-pawn\|area-attack\|all-players\|modify-ice\|draw-cards\|gain-bonus\|sacrifice-pawn\|custom, amount?, target?, text?, trigger?}`. For a directly-played one-time effect (not an attach-time effect). Card analogue of the block `effects`. The current live subset executes card-triggered `place-pawn` on `on-icebreak`; broader effect kinds remain pending. |
 
 ### Card part — attachment use (`attach{}`), what it confers on the target
 | Field | Status | Notes |
@@ -126,14 +126,16 @@ use is chosen per play (SR-CARD-001).
 | **`attach.grants[]`** (abilities the attachment **gives** the target) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: applied via `effectiveAbility` (a granted ability is card-activated on the target; Icebreaker tested). These live on the **main face** (not the action strip), so they are **not** the same as `activates`. Detection: main-face badges/rules text — human-filled today. |
 | **`attach.removes[]`** (abilities the attachment **strips**) | ✅(schema) / ✅(engine) / ✅(detect-marker) | schema + both mirrors: `effectiveAbility` strips the ability even when innate (tested). Detection: `cards.py` now flags the **✕ remove-marker** on main-face ability badges (`icon.removed`, `proposals.attach.removesCount`); the human still names *which* ability (the badge glyph isn't read). |
 | `attach.class[]` (**target** class restriction) | ✅ / ⛔(detect) | the classes this card may attach to (e.g. "only **Cleaner** pawns"); clarified in schema. Distinct from the card's own `class` (identity, still a gap). |
-| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). Both mirrors now expose these as explicit selectable movement options with card / once-per-turn / `perTurn` / `d6` move-use budgeting; granted stealth semantics remain pending. E.g. STEALTH CAMO "+3 stealth" / CYBER WINGS "+1d6 stealth". |
-| **`attach.grantsStealth`** (bool) | ✅(schema) / ⛔(engine, detect) | grants the **stealth capability** (the target's own movement becomes stealth-capable) without a specific count. E.g. INVISIBLE SERUM "+Stealth". Revealed by the human drafts. |
-| **`attach.grantsSlot[]`** (slot types) | ✅(schema) / ⛔(engine, detect) | gives the target an additional attachment **slot**. E.g. FLATLINE "allow gadget attachment". Revealed by the human drafts. |
+| **`attach.grantsMovement[]`** (`movementValue`) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | movement options the attachment **gives** its target (fixed/d6/2d6/hex, optionally stealth). Both mirrors now expose these as explicit selectable movement options with card / once-per-turn / `perTurn` / `d6` move-use budgeting, and stealth-bearing grants report stealth-capable movement in the reducer/UI. E.g. STEALTH CAMO "+3 stealth" / CYBER WINGS "+1d6 stealth". |
+| **`attach.grantsStealth`** (bool) | ✅(schema) / ✅(engine) / ⛔(detect) | grants the **stealth capability** (the target's own movement becomes stealth-capable) without a specific count. Both mirrors now report that capability through movement options/results. E.g. INVISIBLE SERUM "+Stealth". Revealed by the human drafts. |
+| **`attach.grantsSlot[]`** (slot types) | ✅(schema) / ✅(engine) / ⛔(detect) | gives the target an additional attachment **slot**. E.g. FLATLINE "allow gadget attachment". Revealed by the human drafts. |
 | **`attach.abilityUses[]`** (how a granted ability/move is used) | ✅(schema) / ✅(engine, partial) / ⛔(detect) | source-flagged: a granted ability (incl. **move**) is used a fixed **`perTurn`** count, a **`d6`** roll, or **card / once-per-turn** activation. All four modes now budget granted **move** activations in both mirrors; broader non-move `abilityUses` handling remains pending. `grants`/`removes` now also include `move`. |
 | **`attach.iceModifier`** (`{faces?, deltaDice?, black?}`) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged: an attachment can grant specific ICE **die faces**, add/remove **dice**, and/or a **black** die (a failed Icebreak vs a black die eliminates the pawn). Both mirrors now consume all three modifier channels during Icebreaker resolution. The card analogue of `space.modifier.kind=ice`. |
-| **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ⛔(engine, detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Card analogue of the space `hand-size` modifier. |
+| **`attach.defenseOverride`** (`DefenseDie[]`) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged armor semantics: replace the target's defense dice while attached. Both mirrors now consume the authored override during Delete/combat defense resolution. |
+| **`attach.nullifiesIce`** (bool) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged armor semantics: the attached target ignores block ICE while this attachment remains equipped. Both mirrors now hide impossible Icebreak actions in `/play/` and bypass ICE resolution at runtime. |
+| **`attach.drawModifier`** / **`attach.handModifier`** (int ±) | ✅(schema) / ✅(engine) / ⛔(detect) | source-flagged: change the **cards drawn per turn** / max hand size while attached. Both mirrors now apply these during recycle. Card analogue of the space `hand-size` modifier. |
 | **`attach.blockSpace`** (`{shape: circle\|hex}`) | ✅(schema) / ⛔(engine, detect) | source-flagged: a few cards attach **as a block** (`as=block`) — a single-space mini-block placed on a block side. |
-| `attach.cost` (bonus counters, 1+) | ✅ / ⛔(detect) | printed cost glyph (bonus icons). |
+| `attach.cost` (bonus counters, 1+) | ✅ / ✅(engine) / ⛔(detect) | printed cost glyph (bonus icons). Costs are now paid from the controller's bonus counters onto the card and refunded to the original owner when the attachment leaves play. |
 | **`attach.effectText`** + **`attach.effectTrigger`** (special effect + timing) | ✅(schema) / ⛔(engine, detect) | free-text effect (e.g. "Gain control of this pawn.") and **when** it fires: `on-attach` (default) / `begin-turn` / `end-turn` / `on-control` / `on-icebreak` / `continuous`. |
 
 **Detection partition.** The two parts are read from different **regions**, not
@@ -165,8 +167,9 @@ icons/text stay as labeled evidence rather than being guessed. Everything stays
 - **Space**: `ice` added to `modifier.kind`; `space.direction` (edge 0–5) restriction.
 - **Block effects**: `effects.inCybernet`/`underControl` now typed — a legacy
   string **or** `{kind ∈ gain-control-card|place-pawn|area-attack|all-players|
-  modify-ice|custom, amount?, target?, text?}`. Typed `area-attack` now
-  executes in both mirrors; the other kinds remain pending.
+  modify-ice|custom, amount?, target?, text?}`. Typed `area-attack` and the
+  current source-backed `place-pawn` subset now execute in both mirrors; the
+  other kinds remain pending.
 - **Card**: `attach.grants[]` / `attach.removes[]` (abilities conferred/stripped),
   `attach.effectText`, and clarified `attach.class[]` = target-class restriction.
 
@@ -183,6 +186,12 @@ while inferred gameplay content remains review-required.
   override the category) and `blackIce` are **consumed** by the Icebreaker (tested
   in both mirrors). Golden fixtures regenerated (they were stale from the content
   expansion, not from these changes); Go and TS produce byte-identical snapshots.
+- The live typed effect slice now includes block `area-attack`, block
+  `place-pawn`, and card-triggered `place-pawn`, with structured `pawn-placed`
+  events emitted from both mirrors.
+- Bonus icons now form from authored `bonusCorners`, collect once when one
+  player controls all three contributing blocks, and pay/refund attachment
+  costs in both mirrors.
 
 **Ability grant/remove — landed (Go + TS, tested):** `attach.grants` / `attach.removes`
 are applied by `effectiveAbility(gd, pawn, attachments, name)` (combat.go / combat.ts):
@@ -206,9 +215,8 @@ passing occupied spaces and ending only where capacity permits (unused steps los
 SR-MOVE-002). Previously only whole-block `hex` movement executed.
 
 **Remaining engine logic (not yet wired):**
-- the remaining non-`area-attack` block/card effect kinds, granted stealth
-  semantics, broader non-move `abilityUses` handling, armor-style defense
-  replacement/nullification, and `attach.effectText`.
+- the remaining non-`place-pawn`/non-`area-attack` block/card effect kinds,
+  broader non-move `abilityUses` handling, and `attach.effectText`.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).

@@ -109,12 +109,17 @@ const catalog: CoverageCatalog = {
         {
           label: "Current implemented action families",
           status: "implemented",
-          detail: "Surfaces basics, movement, search, combat, icebreaker/control, attachments, and reboot when the reducer says they are legal.",
+          detail: "Surfaces basics, movement, search, combat, icebreaker/control, attachments, bonus economy, typed effect execution, and reboot when the reducer says they are legal.",
         },
         {
           label: "Attachment runtime exercised in the sandbox",
           status: "implemented",
-          detail: "Exercises slot/class checks, granted/removes ability resolution, granted slots, recycle draw/hand modifiers, ICE-face/Black-ICE modifiers, and discard/refund on elimination or takeover.",
+          detail: "Exercises slot/class checks, granted/removes ability resolution, granted slots, recycle draw/hand modifiers, ICE-face/Black-ICE modifiers, armor-style defense replacement, ICE nullification, granted stealth reporting, and discard/refund on elimination or takeover.",
+        },
+        {
+          label: "Bonus and typed effect slices",
+          status: "implemented",
+          detail: "Exercises bonus-icon formation/collection/spend plus the current typed block/card effect subset, including structured bonus and pawn-placement events.",
         },
         {
           label: "Coverage transparency",
@@ -124,7 +129,7 @@ const catalog: CoverageCatalog = {
         {
           label: "Modeled or planned-but-not-runnable slices",
           status: "planned",
-          detail: "Bonus-counter economy, space ICE modifiers, typed effect dispatch, armor/nullify semantics, attachment-granted movement, attachment ability-use execution, and full source-complete content remain outside the current runnable subset.",
+          detail: "The broader effect registry, broader non-move attachment ability-use execution, Shadowraiders-only systems, and full source-complete content remain outside the current runnable subset.",
         },
       ],
     },
@@ -132,18 +137,18 @@ const catalog: CoverageCatalog = {
   sharedGaps: [
     {
       label: "Bonus-counter economy",
-      status: "planned",
-      detail: "Bonus fragments/icons are authored, but the engine still needs the full counter economy and card-cost spend flow.",
+      status: "implemented",
+      detail: "Bonus icons now form from authored corners, collect once on three-block control, and pay/refund attachment costs in both mirrors and the local sandbox.",
     },
     {
       label: "Typed effect execution",
-      status: "planned",
-      detail: "Typed block/card effects are authored today, but the shared effect registry and runtime dispatch are still pending.",
+      status: "partial",
+      detail: "Typed block `area-attack` and `place-pawn`, plus card-triggered `place-pawn`, now execute in both mirrors and `/play/`; the broader effect registry is still pending.",
     },
     {
       label: "Attachment completion",
       status: "partial",
-      detail: "Granted slots, recycle modifiers, and ICE modifiers resolve now; armor semantics, granted movement, and ability-use execution still need engine work.",
+      detail: "Granted slots, recycle modifiers, ICE modifiers, armor-style defense override/nullify, granted movement, and stealth reporting resolve now; broader non-move ability-use execution still needs engine work.",
     },
     {
       label: "Source-complete Speedrunners content",
