@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { loadDefault } from "../src/data/index.ts";
+import { neighbor } from "../src/domain/hex.ts";
 import {
   controlMarkersFor,
   newGame,
@@ -110,6 +111,30 @@ describe("live phase API", () => {
     expect(result.accepted).toBe(true);
     expect(result.events.some((event) => event.type === "action-accepted")).toBe(true);
     expect(result.events.some((event) => event.type === "control-changed")).toBe(true);
+  });
+
+  test("emits pawn-placed when an on-icebreak card effect spawns a pawn", () => {
+    const d = structuredClone(loadDefault("speedrunners"));
+    d.blocks = d.blocks.map((block) =>
+      block.id === "data-haven" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
+    );
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 43 });
+    const coord = neighbor({ q: 0, r: 0 }, 0);
+    s.cybernet.blocks.push({ blockId: "data-haven", rotation: 0, coord });
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    s.players[0]!.hand = ["cracker"];
+    advancePhase(s, d);
+
+    const result = applyActionWithEvents(s, d, {
+      type: "play-icebreak-block",
+      cardId: "cracker",
+      pawnId: "speedrunner-red",
+      coord,
+    });
+
+    expect(result.accepted).toBe(true);
+    expect(result.events.some((event) => event.type === "pawn-placed" && event.elementId === "cracker")).toBe(true);
   });
 });
 

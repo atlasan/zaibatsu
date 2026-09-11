@@ -4,8 +4,10 @@ import { blockById, type GameData, type GameState } from "../src/domain/types.ts
 import { opposite, type Coord } from "../src/domain/hex.ts";
 import {
   newGame,
+  placeBlock,
   playDelete,
   playDeleteArea,
+  playIcebreakBlock,
   playMove,
   playReboot,
   playSearch,
@@ -114,6 +116,29 @@ describe("playSearch", () => {
     expect(pb.blockId).toBe("data-haven");
     expect(p1.hand.includes("move-1")).toBe(false);
     expect(s.blockPile.length).toBe(0);
+  });
+});
+
+describe("playIcebreakBlock", () => {
+  test("applies on-icebreak card effects and places the authored pawn", () => {
+    const d = structuredClone(data);
+    d.blocks = d.blocks.map((block) =>
+      block.id === "data-haven" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
+    );
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
+    const coord = { q: 1, r: 0 };
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+    const p1 = s.players.find((p) => p.id === "p1")!;
+    p1.hand = ["cracker"];
+
+    const res = playIcebreakBlock(s, d, "p1", "cracker", "speedrunner-red", coord);
+
+    expect(res.success).toBe(true);
+    expect(p1.hand).toEqual([]);
+    expect(s.discard.at(-1)).toBe("cracker");
+    expect(s.cybernet.pawnById("cracker")).toEqual(expect.objectContaining({ ownerId: "p1", coord }));
   });
 });
 

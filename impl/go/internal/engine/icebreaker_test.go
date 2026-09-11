@@ -413,61 +413,61 @@ func TestSpaceIceModifierChangesIceCount(t *testing.T) {
 }
 
 func TestNullifiedBlockIceCannotBeControlled(t *testing.T) {
-	gd := loadOrSkip(t)
-	cloned := *gd
-	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-	cloned.Cards = append(cloned.Cards, domain.ActionCard{
-		ID:   "block-nullify-ice",
-		Name: "Block Nullify ICE",
-		Attach: &domain.Attach{
-			As:           "block",
-			NullifiesIce: true,
-		},
-	})
-	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
-	origin := domain.Coord{Q: 0, R: 0}
-	if _, err := PlaceBlock(s, origin, 0, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", 0)); err != nil {
-		t.Fatalf("place: %v", err)
-	}
-	coord := origin.Neighbor(0)
-	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
-	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
-	s.Cybernet.At(coord).Attachments = []domain.Attachment{{CardID: "block-nullify-ice"}}
-	if _, err := IcebreakBlock(s, &cloned, "speedrunner-red", coord, 0); err == nil {
-		t.Fatal("expected nullified block ICE to reject control")
-	}
+        gd := loadOrSkip(t)
+        cloned := *gd
+        cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+        cloned.Cards = append(cloned.Cards, domain.ActionCard{
+                ID:   "block-nullify-ice",
+                Name: "Block Nullify ICE",
+                Attach: &domain.Attach{
+                        As:           "block",
+                        NullifiesIce: true,
+                },
+        })
+        s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+        origin := domain.Coord{Q: 0, R: 0}
+        if _, err := PlaceBlock(s, origin, 0, &cloned, "data-haven", rotFacing(t, &cloned, "data-haven", 0)); err != nil {
+                t.Fatalf("place: %v", err)
+        }
+        coord := origin.Neighbor(0)
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+        s.Cybernet.At(coord).Attachments = []domain.Attachment{{CardID: "block-nullify-ice"}}
+        if _, err := IcebreakBlock(s, &cloned, "speedrunner-red", coord, 0); err == nil {
+                t.Fatal("expected nullified block ICE to reject control")
+        }
 }
 
 func TestNullifiedPawnIceCannotBeControlled(t *testing.T) {
-	gd := loadOrSkip(t)
-	cloned := *gd
-	cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
-	cloned.Cards = append(cloned.Cards, domain.ActionCard{
-		ID:   "pawn-nullify-ice",
-		Name: "Pawn Nullify ICE",
-		Attach: &domain.Attach{
-			As:           "enemy",
-			Slot:         "armor",
-			NullifiesIce: true,
-		},
-	})
-	s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
-	origin := domain.Coord{Q: 0, R: 0}
-	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
-	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: origin, SpaceID: "core"})
-	s.Cybernet.PlacePawn(&domain.PawnOnBoard{
-		PawnID:  "drone-turret",
-		OwnerID: "p2",
-		Coord:   origin,
-		SpaceID: "core",
-		Attachments: []domain.Attachment{{
-			CardID: "pawn-nullify-ice",
-			Slot:   "armor",
-		}},
-	})
-	if _, err := IcebreakPawn(s, &cloned, "speedrunner-red", "drone-turret", 0); err == nil {
-		t.Fatal("expected nullified pawn ICE to reject control")
-	}
+        gd := loadOrSkip(t)
+        cloned := *gd
+        cloned.Cards = append([]domain.ActionCard{}, gd.Cards...)
+        cloned.Cards = append(cloned.Cards, domain.ActionCard{
+                ID:   "pawn-nullify-ice",
+                Name: "Pawn Nullify ICE",
+                Attach: &domain.Attach{
+                        As:           "enemy",
+                        Slot:         "armor",
+                        NullifiesIce: true,
+                },
+        })
+        s, _ := NewGame(Config{Data: &cloned, PlayerNames: []string{"A", "B"}, Seed: 1})
+        origin := domain.Coord{Q: 0, R: 0}
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: origin, SpaceID: "core"})
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{
+                PawnID:  "drone-turret",
+                OwnerID: "p2",
+                Coord:   origin,
+                SpaceID: "core",
+                Attachments: []domain.Attachment{{
+                        CardID: "pawn-nullify-ice",
+                        Slot:   "armor",
+                }},
+        })
+        if _, err := IcebreakPawn(s, &cloned, "speedrunner-red", "drone-turret", 0); err == nil {
+                t.Fatal("expected nullified pawn ICE to reject control")
+        }
 }
 
 func TestIcebreakGrantedByAttachment(t *testing.T) {

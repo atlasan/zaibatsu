@@ -151,6 +151,16 @@ type BlockEffects struct {
 	UnderControl *BlockEffect `json:"underControl,omitempty"`
 }
 
+// CardEffect is a typed operation performed by an action card with an explicit
+// trigger/timing.
+type CardEffect struct {
+        Kind    string `json:"kind"`
+        Amount  int    `json:"amount,omitempty"`
+        Target  string `json:"target,omitempty"`
+        Text    string `json:"text,omitempty"`
+        Trigger string `json:"trigger,omitempty"`
+}
+
 // Block is a hexagonal Cybernet tile.
 type Block struct {
 	ID            string    `json:"id"`
@@ -255,6 +265,7 @@ type ActionCard struct {
 	Copies      int      `json:"copies,omitempty"`
 	Movement    int      `json:"movement,omitempty"`
 	Activates   []string `json:"activates,omitempty"`
+        Effects     []CardEffect `json:"effects,omitempty"`
 	Attach      *Attach  `json:"attach,omitempty"`
 	Provisional bool     `json:"provisional,omitempty"`
 }

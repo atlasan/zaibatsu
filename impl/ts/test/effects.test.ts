@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { loadDefault } from "../src/data/index.ts";
 import { blockById, type DefenseDie, type GameData } from "../src/domain/types.ts";
 import { neighbor, opposite } from "../src/domain/hex.ts";
-import { newGame, placeBlock, applyBlockEffectForTrigger, applyBlockEffect } from "../src/engine/index.ts";
+import { newGame, placeBlock, applyBlockEffectForTrigger, applyBlockEffect, icebreakBlock } from "../src/engine/index.ts";
 
 const ORIGIN = { q: 0, r: 0 };
 
@@ -50,7 +50,8 @@ describe("block effects", () => {
 
     const res = applyBlockEffect(s, d, coord, { kind: "area-attack", amount: 1 })!;
 
-    expect(res.targets.map((target) => target.targetPawnId)).toEqual(["speedrunner-red", "speedrunner-yellow"]);
+    expect(res.kind).toBe("area-attack");
+    expect(res.result.targets.map((target) => target.targetPawnId)).toEqual(["speedrunner-red", "speedrunner-yellow"]);
     expect(s.cybernet.pawnById("speedrunner-yellow")).toBeUndefined();
   });
 
@@ -65,7 +66,25 @@ describe("block effects", () => {
 
     const res = applyBlockEffectForTrigger(s, d, coord, "inCybernet");
 
-    expect(res).toBeDefined();
+    expect(res?.kind).toBe("area-attack");
     expect(s.cybernet.pawnById("speedrunner-yellow")).toBeUndefined();
+  });
+
+  test("under-control place-pawn effects place the authored pawn on successful Icebreak", () => {
+    const d = structuredClone(loadDefault("speedrunners"));
+    d.blocks = d.blocks.map((block) => (
+      block.id === "idoru" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
+    ));
+    const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
+    placeBlock(s, ORIGIN, 0, d, "idoru", rotFacing(d, "idoru", 0));
+    const coord = neighbor(ORIGIN, 0);
+    s.cybernet.pawns = [];
+    s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
+
+    const res = icebreakBlock(s, d, "speedrunner-red", coord);
+
+    expect(res.success).toBe(true);
+    expect(s.cybernet.at(coord)?.ownerId).toBe("p1");
+    expect(s.cybernet.pawnById("idoru")).toEqual(expect.objectContaining({ ownerId: "p1", coord }));
   });
 });

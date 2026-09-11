@@ -83,6 +83,51 @@
       "provisional": true
     },
     {
+      "id": "cracker",
+      "name": "Cracker",
+      "expansion": "speedrunners",
+      "class": ["cracker", "cyborg"],
+      "defense": [
+        { "value": 2, "shielded": true },
+        { "value": 5, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
+      "abilities": [{ "ability": "icebreaker", "activation": "card" }],
+      "slots": ["add-on", "gadget", "armor"],
+      "special": "Gain a +1 Icebreaker roll modifier against blocks controlled by other players.",
+      "provisional": true
+    },
+    {
+      "id": "idoru",
+      "name": "Idoru",
+      "expansion": "speedrunners",
+      "class": ["lovedoll"],
+      "defense": [
+        { "value": 1, "shielded": true },
+        { "value": 4, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
+      "abilities": [{ "ability": "search", "activation": "card" }],
+      "slots": ["add-on", "armor"],
+      "special": "Place a control marker on this card. This marker counts as being in the Cybernet.",
+      "provisional": true
+    },
+    {
+      "id": "gynoid",
+      "name": "Gynoid",
+      "expansion": "speedrunners",
+      "class": ["lovedoll"],
+      "defense": [
+        { "value": 2, "shielded": true },
+        { "value": 4, "shielded": false }
+      ],
+      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
+      "abilities": [{ "ability": "search", "activation": "card" }],
+      "slots": ["add-on", "armor"],
+      "special": "At the beginning of your turn you may target another pawn and steal one card at random from its controller's hand.",
+      "provisional": true
+    },
+    {
       "id": "drone-turret",
       "name": "Drone Turret",
       "expansion": "speedrunners",

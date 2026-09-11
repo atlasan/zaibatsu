@@ -16,6 +16,6 @@
     { "id": "accela-accelerator", "name": "Accela Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source identifies this as an Accela Accelerator card.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c06"] },
     { "id": "biochip", "name": "Biochip", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names Biochip and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c07"] },
     { "id": "e-synapse-neural-interface", "name": "E-Synapse Neural Interface", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names E-Synapse neural interface and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c08"] },
-    { "id": "cracker", "name": "Cracker", "copies": 1, "summary": "Use with Icebreaker on a block; place the Cracker in this block under your control.", "activates": ["icebreaker"], "assetRefs": ["sp-en-action-cards-p01-c09"] }
+    { "id": "cracker", "name": "Cracker", "copies": 1, "summary": "Use with Icebreaker on a block; place the Cracker in this block under your control.", "activates": ["icebreaker"], "effects": [{ "kind": "place-pawn", "target": "cracker", "trigger": "on-icebreak", "text": "Place the Cracker in this block under your control." }], "assetRefs": ["sp-en-action-cards-p01-c09"] }
   ]
 }

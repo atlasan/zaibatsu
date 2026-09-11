@@ -30,8 +30,8 @@ function bonusFixtureData() {
   });
   data.blocks.push(
     bonusBlock("bonus-a", [false, true, false, false, false, false]),
-    bonusBlock("bonus-b", [false, false, false, false, false, true]),
-    bonusBlock("bonus-c", [false, false, false, true, false, false], "high"),
+    bonusBlock("bonus-b", [false, false, false, true, false, false]),
+    bonusBlock("bonus-c", [false, false, false, false, false, true], "high"),
   );
   data.cards.push({ id: "bonus-cost-card", name: "Bonus Cost Card", attach: { as: "pawn", slot: "gadget", cost: 1 } });
   return data;

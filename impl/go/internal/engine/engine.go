@@ -76,6 +76,7 @@ const (
 	EventDraw             EventType = "draw"
 	EventBonusIconCreated EventType = "bonus-icon-created"
 	EventBonusCollected   EventType = "bonus-collected"
+        EventPawnPlaced       EventType = "pawn-placed"
 	EventElimination      EventType = "elimination"
 	EventControlChanged   EventType = "control-changed"
 	EventValidationFail   EventType = "validation-failed"
@@ -446,7 +447,9 @@ func deltaEvents(s *domain.GameState, before stateWatch) []EngineEvent {
 		}
 	}
 	for _, pawn := range s.Cybernet.Pawns {
-		if old, ok := before.pawnOwners[pawn.PawnID]; ok && old != pawn.OwnerID {
+                if old, ok := before.pawnOwners[pawn.PawnID]; !ok {
+                        events = append(events, EngineEvent{Type: EventPawnPlaced, Element: "pawn", ElementID: pawn.PawnID, ToOwnerID: pawn.OwnerID})
+                } else if old != pawn.OwnerID {
 			events = append(events, EngineEvent{Type: EventControlChanged, Element: "pawn", ElementID: pawn.PawnID, FromOwnerID: old, ToOwnerID: pawn.OwnerID})
 		}
 	}

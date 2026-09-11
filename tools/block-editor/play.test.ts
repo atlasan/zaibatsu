@@ -95,7 +95,7 @@ test("guided card movement exposes its printed budget and discards only after ac
 });
 
 test("Test Lab scenarios are deterministic, named, and retain their fixture in v2 traces", () => {
-  expect(listPlayScenarios().map((scenario) => scenario.id)).toEqual(["game-basics", "search-and-move", "combat-and-control", "attachments", "reboot-and-turn"]);
+  expect(listPlayScenarios().map((scenario) => scenario.id)).toEqual(["game-basics", "search-and-move", "combat-and-control", "attachments", "bonus-economy", "effect-execution", "reboot-and-turn"]);
   const created = createPlayScenario("attachments", { playerNames: ["Ada", "Bea"], seed: 9 });
   expect(created.scenario?.title).toBe("Attachments");
   expect(created.activePlayer?.name).toBe("Ada");
@@ -159,7 +159,70 @@ test("Test Lab fixtures expose immediate reducer actions for the supported actio
   expect(actions("search-and-move")).toContain("play-search");
   expect(actions("combat-and-control")).toEqual(expect.arrayContaining(["play-delete", "delete-multi", "play-icebreak-block"]));
   expect(actions("attachments")).toEqual(expect.arrayContaining(["attach-pawn", "attach-enemy"]));
+  expect(actions("bonus-economy")).toEqual(expect.arrayContaining(["play-search", "attach-pawn"]));
+  expect(actions("effect-execution")).toContain("play-icebreak-block");
   expect(actions("reboot-and-turn")).toContain("play-reboot");
+});
+
+test("bonus-economy fixture creates, collects, and spends a bonus counter truthfully", () => {
+  const created = createPlayScenario("bonus-economy");
+  const search = created.legalOptions.actions.find((action) => action.type === "play-search") as { cardId: string; pawnId: string; placements: Array<{ dir: number; rotation: number }> };
+  expect(search).toBeDefined();
+
+  const placed = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "play-search", cardId: search.cardId, pawnId: search.pawnId, ...(search.placements.find((placement) => placement.dir === 0) ?? search.placements[0]!) },
+  });
+  expect(placed.result.accepted).toBe(true);
+  expect(placed.state.bonusIcons).toHaveLength(1);
+  expect(placed.scenario?.checkpoints[0]?.complete).toBe(true);
+
+  const move = placed.legalOptions.actions.find((action) => action.type === "move-hex" && action.pawnId === "speedrunner-yellow") as { pawnId: string; directions: number[] };
+  expect(move).toBeDefined();
+  const moved = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "move-hex", pawnId: move.pawnId, dir: move.directions.find((dir) => dir === 0) ?? move.directions[0]! },
+  });
+  expect(moved.result.accepted).toBe(true);
+
+  const icebreak = moved.legalOptions.actions.find((action) => action.type === "play-icebreak-block") as { cardId: string; pawnId: string; coord: { q: number; r: number } };
+  expect(icebreak).toBeDefined();
+  const collected = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "play-icebreak-block", cardId: icebreak.cardId, pawnId: icebreak.pawnId, coord: icebreak.coord },
+  });
+  expect(collected.result.accepted).toBe(true);
+  expect(collected.players[0]!.bonus).toBe(1);
+  expect(collected.state.bonusIcons[0]!.collectedBy).toBe("p1");
+  expect(collected.scenario?.checkpoints[1]?.complete).toBe(true);
+
+  const attach = collected.legalOptions.actions.find((action) => action.type === "attach-pawn" && action.cardId === "fixture-bonus-gadget") as { cardId: string; targetIds: string[] };
+  expect(attach).toBeDefined();
+  const spent = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "attach-pawn", cardId: attach.cardId, targetId: "speedrunner-yellow" },
+  });
+  expect(spent.result.accepted).toBe(true);
+  expect(spent.players[0]!.bonus).toBe(0);
+  expect(spent.state.pawns.find((pawn) => pawn.pawnId === "speedrunner-yellow")?.attachments?.[0]?.cardId).toBe("fixture-bonus-gadget");
+  expect(spent.scenario?.checkpoints.every((checkpoint) => checkpoint.complete)).toBe(true);
+});
+
+test("effect-execution fixture drives typed card and block effects through the reducer", () => {
+  const created = createPlayScenario("effect-execution");
+  const icebreak = created.legalOptions.actions.find((action) => action.type === "play-icebreak-block") as { cardId: string; pawnId: string; coord: { q: number; r: number } };
+  expect(icebreak).toBeDefined();
+
+  const applied = submitPlayCommand(created.id, {
+    kind: "action",
+    action: { type: "play-icebreak-block", cardId: icebreak.cardId, pawnId: icebreak.pawnId, coord: icebreak.coord },
+  });
+
+  expect(applied.result.accepted).toBe(true);
+  expect(applied.state.pawns.find((pawn) => pawn.pawnId === "cracker")?.ownerId).toBe("p1");
+  expect(applied.state.pawns.find((pawn) => pawn.pawnId === "idoru")?.ownerId).toBe("p1");
+  expect(applied.result.events.filter((event) => event.type === "pawn-placed").map((event) => event.elementId)).toEqual(expect.arrayContaining(["cracker", "idoru"]));
+  expect(applied.scenario?.checkpoints.every((checkpoint) => checkpoint.complete)).toBe(true);
 });
 
 test("game basics fixture can place the last marker and declare a winner", () => {

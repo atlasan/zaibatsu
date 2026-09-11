@@ -204,8 +204,8 @@ func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord do
 		if pawn.Coord != coord {
 			continue
 		}
-		_, ok := gd.PawnByID(pawn.PawnID)
-		eliminated := ok && Defeats(res.Roll, EffectiveDefenseDice(gd, pawn))
+                _, ok := gd.PawnByID(pawn.PawnID)
+                eliminated := ok && Defeats(res.Roll, EffectiveDefenseDice(gd, pawn))
 		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
 		if eliminated {
 			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)

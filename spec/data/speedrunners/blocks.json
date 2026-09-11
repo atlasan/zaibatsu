@@ -25,7 +25,7 @@
         { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
         { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
       ],
-      "effects": { "underControl": "sp-idoru" },
+      "effects": { "underControl": { "kind": "place-pawn", "target": "idoru", "text": "Place the Idoru in this block under your control." } },
       "assetRefs": ["sp-en-blocks-a4-p01-c01"]
     },
     {
@@ -69,7 +69,7 @@
         { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
         { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
       ],
-      "effects": { "underControl": "sp-chiba-city" },
+      "effects": { "underControl": { "kind": "place-pawn", "target": "gynoid", "text": "Place the Gynoid in this block under your control." } },
       "assetRefs": ["sp-en-blocks-a4-p01-c03"]
     }
   ]

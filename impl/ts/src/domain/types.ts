@@ -96,6 +96,31 @@ export interface BlockEffects {
   underControl?: BlockEffect;
 }
 
+export type CardEffectTrigger =
+  | "on-play"
+  | "begin-turn"
+  | "end-turn"
+  | "on-control"
+  | "on-icebreak"
+  | "continuous";
+
+export interface CardEffect {
+  kind:
+    | "gain-control-card"
+    | "place-pawn"
+    | "area-attack"
+    | "all-players"
+    | "modify-ice"
+    | "draw-cards"
+    | "gain-bonus"
+    | "sacrifice-pawn"
+    | "custom";
+  amount?: number;
+  target?: string;
+  text?: string;
+  trigger?: CardEffectTrigger;
+}
+
 export interface Block {
   id: string;
   name: string;
@@ -207,6 +232,7 @@ export interface ActionCard {
   copies?: number;
   movement?: number;
   activates?: AbilityName[];
+  effects?: CardEffect[];
   attach?: Attach;
   provisional?: boolean;
 }

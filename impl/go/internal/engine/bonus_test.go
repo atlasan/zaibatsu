@@ -39,8 +39,8 @@ func bonusFixtureData(t *testing.T) *domain.GameData {
 	}
 	gd.Blocks = append(gd.Blocks,
 		bonusBlock("bonus-a", []bool{false, true, false, false, false, false}, domain.IceNone),
-		bonusBlock("bonus-b", []bool{false, false, false, false, false, true}, domain.IceNone),
-		bonusBlock("bonus-c", []bool{false, false, false, true, false, false}, domain.IceHigh),
+			bonusBlock("bonus-b", []bool{false, false, false, true, false, false}, domain.IceNone),
+			bonusBlock("bonus-c", []bool{false, false, false, false, false, true}, domain.IceHigh),
 	)
 	gd.Cards = append(gd.Cards, domain.ActionCard{
 		ID:   "bonus-cost-card",

@@ -94,6 +94,7 @@ export type EngineEventType =
   | "draw"
   | "bonus-icon-created"
   | "bonus-collected"
+  | "pawn-placed"
   | "elimination"
   | "control-changed"
   | "winner-declared"
@@ -107,7 +108,7 @@ export interface EngineEvent {
   toPhase?: import("../domain/types.ts").Phase;
   roll?: number[];
   pawnId?: string;
-  element?: "pawn" | "block";
+  element?: "pawn" | "block" | "bonus-icon";
   elementId?: string;
   fromOwnerId?: string;
   toOwnerId?: string;
@@ -397,6 +398,10 @@ function deltaEvents(s: GameState, before: StateWatch): EngineEvent[] {
   }
   for (const pawn of s.cybernet.pawns) {
     const fromOwnerId = before.pawnOwners.get(pawn.pawnId);
+    if (fromOwnerId === undefined) {
+      events.push({ type: "pawn-placed", element: "pawn", elementId: pawn.pawnId, toOwnerId: pawn.ownerId });
+      continue;
+    }
     if (fromOwnerId !== undefined && fromOwnerId !== pawn.ownerId) {
       events.push({ type: "control-changed", element: "pawn", elementId: pawn.pawnId, fromOwnerId, toOwnerId: pawn.ownerId });
     }

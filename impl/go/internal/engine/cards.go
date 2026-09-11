@@ -194,6 +194,9 @@ func PlayIcebreakBlock(s *domain.GameState, gd *domain.GameData, playerID, cardI
 	if err != nil {
 		return res, err
 	}
+        if res.Success {
+                ApplyCardEffectsForTrigger(s, gd, playerID, cardID, "on-icebreak", &coord)
+        }
 	_ = consumeCard(s, player, cardID)
 	return res, nil
 }

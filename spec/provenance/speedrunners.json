@@ -37,6 +37,30 @@
         { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 2" }
       ]
     },
+    "block/chiba-city": {
+      "sources": [
+        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 3" },
+        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 3" }
+      ]
+    },
+    "pawn/cracker": {
+      "sources": [
+        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 1" },
+        { "artifactId": "sp-en-pawns", "locator": "page 2" }
+      ]
+    },
+    "pawn/idoru": {
+      "sources": [
+        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 2" },
+        { "artifactId": "sp-en-pawns", "locator": "page 2" }
+      ]
+    },
+    "pawn/gynoid": {
+      "sources": [
+        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 3" },
+        { "artifactId": "sp-en-pawns", "locator": "page 2" }
+      ]
+    },
     "action-card/octagon-dex": {
       "sources": [
         { "artifactId": "sp-en-action-cards", "locator": "page 1, card 1" },

@@ -151,6 +151,45 @@ func TestPlaySearchDiscardsCardAndPlaces(t *testing.T) {
 	}
 }
 
+func TestPlayIcebreakBlockAppliesOnIcebreakCardEffects(t *testing.T) {
+        s, gd := cardGame(t, 1)
+        cloned := *gd
+        cloned.Blocks = append([]domain.Block{}, gd.Blocks...)
+        for i := range cloned.Blocks {
+                if cloned.Blocks[i].ID == "data-haven" {
+                        cloned.Blocks[i].IceFaces = []int{1, 2, 3, 4, 5, 6}
+                }
+        }
+        gd = &cloned
+        origin := domain.Coord{Q: 0, R: 0}
+        if _, err := PlaceBlock(s, origin, 0, gd, "data-haven", rotFacing(t, gd, "data-haven", 0)); err != nil {
+                t.Fatalf("PlaceBlock: %v", err)
+        }
+        coord := origin.Neighbor(0)
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+        p1 := s.PlayerByID("p1")
+        p1.Hand = []string{"cracker"}
+
+        res, err := PlayIcebreakBlock(s, gd, "p1", "cracker", "speedrunner-red", coord, 0)
+        if err != nil {
+                t.Fatalf("PlayIcebreakBlock: %v", err)
+        }
+        if !res.Success {
+                t.Fatal("expected PlayIcebreakBlock to succeed")
+        }
+        if cardInHand(p1, "cracker") {
+                t.Fatal("cracker should have been consumed")
+        }
+        placed := s.Cybernet.PawnByID("cracker")
+        if placed == nil {
+                t.Fatal("expected Cracker pawn to be placed")
+        }
+        if placed.OwnerID != "p1" || placed.Coord != coord {
+                t.Fatalf("cracker = %#v, want owner p1 at %v", placed, coord)
+        }
+}
+
 func TestPlayMoveUsesCardBudgetAndConsumesCard(t *testing.T) {
 	s, gd := cardGame(t, 1)
 	coord := domain.Coord{Q: 0, R: -1}

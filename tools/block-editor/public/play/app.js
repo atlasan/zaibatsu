@@ -128,7 +128,7 @@ function gameScreen() {
   const left = el("aside", { class: "side-stack" });
   const center = el("section", { class: "panel board-panel" });
   const right = el("aside", { class: "side-stack right" });
-  left.append(playerPanel(), phasePanel(), actionPanel(), scenarioPanel(), coveragePanel("play-workbench"), tracePanel());
+  left.append(playerPanel(), phasePanel(), bonusPanel(), actionPanel(), scenarioPanel(), coveragePanel("play-workbench"), tracePanel());
   center.append(boardPanel());
   right.append(inspectorPanel(), eventPanel(), snapshotPanel());
   shell.append(left, center, right); app.append(header, shell);
@@ -169,6 +169,22 @@ function scenarioPanel() {
   const list = el("ol", { class: "checkpoint-list" });
   session.scenario.checkpoints.forEach((checkpoint) => list.append(el("li", { class: checkpoint.complete ? "complete" : "" }, checkpoint.complete ? "✓ " : "○ ", checkpoint.label)));
   panel.append(list, el("p", { class: "hint" }, "Fixture traces export as v2 and replay the same starting scenario."));
+  return panel;
+}
+
+function bonusPanel() {
+  const panel = el("section", { class: "panel" }, el("h2", {}, "Bonus icons"));
+  const icons = session.state.bonusIcons || [];
+  if (!icons.length) {
+    panel.append(el("p", { class: "empty" }, "No formed bonus icons are on the board."));
+    return panel;
+  }
+  const list = el("div", { class: "list" });
+  icons.forEach((icon) => {
+    const owner = icon.collectedBy ? player(icon.collectedBy)?.name || icon.collectedBy : "uncollected";
+    list.append(el("div", { class: "log-item" }, `${icon.collectedBy ? "Collected" : "Formed"} bonus icon · ${owner} · ${icon.coords.map((coord) => `(${coord.q}, ${coord.r})`).join(" / ")}`));
+  });
+  panel.append(list, el("p", { class: "hint" }, "A formed icon stays visible here; once collected, it has no further gameplay effect."));
   return panel;
 }
 
@@ -301,7 +317,7 @@ function tile(placed) {
 function installPanZoom(viewport, board) { let drag = null; viewport.addEventListener("pointerdown", (event) => { if (event.target !== viewport) return; drag = { x: event.clientX, y: event.clientY }; viewport.classList.add("dragging"); viewport.setPointerCapture(event.pointerId); }); viewport.addEventListener("pointermove", (event) => { if (!drag) return; view.x += event.clientX - drag.x; view.y += event.clientY - drag.y; drag = { x: event.clientX, y: event.clientY }; board.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.zoom})`; }); viewport.addEventListener("pointerup", () => { drag = null; viewport.classList.remove("dragging"); }); viewport.addEventListener("wheel", (event) => { event.preventDefault(); view.zoom = Math.min(2.2, Math.max(.45, view.zoom + (event.deltaY < 0 ? .1 : -.1))); board.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.zoom})`; }, { passive: false }); }
 
 function inspectorPanel() { const panel = el("section", { class: "panel inspector" }); panel.append(el("h2", {}, "Inspector")); if (!selected) { panel.append(el("p", { class: "empty" }, "Select a block or pawn on the Cybernet.")); return panel; } const data = selected.kind === "pawn" ? pawnData(selected.id) : (() => { const [q, r] = selected.id.split(",").map(Number); return blockData(session.state.blocks.find((item) => item.q === q && item.r === r)?.blockId); })(); const details = el("dl"); Object.entries(data || {}).filter(([key]) => ["id", "name", "iceValue", "movement", "abilities", "spaces", "assetRefs"].includes(key)).forEach(([key, value]) => { details.append(el("dt", {}, key), el("dd", {}, typeof value === "object" ? JSON.stringify(value) : String(value))); }); panel.append(details); return panel; }
-function describeEvent(event) { const actor = event.playerId ? player(event.playerId)?.name || event.playerId : ""; if (event.type === "phase-advanced") return `${actor || "Turn"}: ${event.fromPhase} → ${event.toPhase}`; if (event.type === "action-accepted") return `${actor || "Player"} completed ${event.actionType || "an action"}.`; if (event.type === "roll") return `Roll: ${event.roll?.join(", ") || "—"}.`; if (event.type === "draw") return `${actor || "Player"} drew ${cardLabel(event.cardId)}.`; if (event.type === "elimination") return `${pawnLabel(event.pawnId)} was eliminated.`; if (event.type === "control-changed") return `Control changed: ${event.element || "element"} ${event.elementId || ""}.`; if (event.type === "winner-declared") return `${actor || "A player"} wins.`; return event.message || "Action was rejected."; }
+function describeEvent(event) { const actor = event.playerId ? player(event.playerId)?.name || event.playerId : ""; if (event.type === "phase-advanced") return `${actor || "Turn"}: ${event.fromPhase} → ${event.toPhase}`; if (event.type === "action-accepted") return `${actor || "Player"} completed ${event.actionType || "an action"}.`; if (event.type === "roll") return `Roll: ${event.roll?.join(", ") || "—"}.`; if (event.type === "draw") return `${actor || "Player"} drew ${cardLabel(event.cardId)}.`; if (event.type === "bonus-icon-created") return `A bonus icon formed at ${event.elementId || "the board"}.`; if (event.type === "bonus-collected") return `${actor || "Player"} collected a bonus icon.`; if (event.type === "pawn-placed") return `${pawnLabel(event.elementId)} entered the Cybernet under ${player(event.toOwnerId)?.name || event.toOwnerId || "a player"}.`; if (event.type === "elimination") return `${pawnLabel(event.pawnId)} was eliminated.`; if (event.type === "control-changed") return `Control changed: ${event.element || "element"} ${event.elementId || ""}.`; if (event.type === "winner-declared") return `${actor || "A player"} wins.`; return event.message || "Action was rejected."; }
 function eventPanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Event / action log")); const list = el("div", { class: "list", "aria-live": "polite" }); (session.events?.length ? session.events : [{ type: "ready", message: "Session created." }]).slice().reverse().forEach((event) => list.append(el("div", { class: `log-item ${event.type}` }, describeEvent(event)))); panel.append(list); return panel; }
 function snapshotPanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Canonical snapshot"), el("pre", { class: "snapshot" }, JSON.stringify(session.state))); return panel; }
 function tracePanel() { const panel = el("section", { class: "panel" }); panel.append(el("h2", {}, "Trace")); const download = el("button", { type: "button" }, "Export trace"); download.addEventListener("click", async () => { const trace = await api(`/api/play/sessions/${session.id}/trace`); const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([JSON.stringify(trace, null, 2)], { type: "application/json" })); link.download = "speedrunners-trace.json"; link.click(); URL.revokeObjectURL(link.href); }); const file = el("input", { class: "trace-input", type: "file", accept: "application/json" }); const upload = el("button", { type: "button" }, "Import trace"); upload.addEventListener("click", () => file.click()); file.addEventListener("change", async () => { const selectedFile = file.files?.[0]; if (!selectedFile) return; try { session = await api("/api/play/traces/import", { method: "POST", body: await selectedFile.text() }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); } catch (cause) { error = cause.message; gameScreen(); } }); const reset = el("button", { type: "button" }, "Reset"); reset.addEventListener("click", async () => { session = await api(`/api/play/sessions/${session.id}/reset`, { method: "POST", body: JSON.stringify(session.setup) }); error = ""; selected = null; selectedActionIndex = 0; gameScreen(); }); panel.append(el("div", { class: "button-row" }), file); panel.querySelector(".button-row").append(download, upload, reset); return panel; }

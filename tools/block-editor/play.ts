@@ -54,6 +54,8 @@ const scenarios: PlayScenario[] = [
   { id: "search-and-move", title: "Search and movement", description: "Place the next block, then test fixed/card movement across the Central Core boundary.", checkpoints: ["Play Search and place the top block.", "Move the Red Speedrunner into that block.", "Use Undo to confirm deterministic replay."] },
   { id: "combat-and-control", title: "Combat and control", description: "A co-located combat fixture with a controllable ICE block and an ICE-bearing pawn.", checkpoints: ["Use a card to Delete a target.", "Use the Cyberninja for a Test Lab Split Delete.", "Icebreak the Cyberninja or the Hacktivism block.", "Inspect rolls, eliminations, and control events."] },
   { id: "attachments", title: "Attachments", description: "Exercise granted movement, armor defense, and ICE nullification without touching canonical spec data.", checkpoints: ["Attach the Stealth Harness to your Red Speedrunner.", "Use the granted stealth move.", "Attach the Block ICE Jammer and confirm block control is no longer offered."] },
+  { id: "bonus-economy", title: "Bonus economy", description: "Create a bonus icon, collect its counter by taking the third block, then spend that counter on an attachment.", checkpoints: ["Play Search to create the bonus icon.", "Move onto the new block and collect the bonus counter with Icebreaker.", "Spend the earned counter on Bonus Rig."] },
+  { id: "effect-execution", title: "Typed effects", description: "Use Cracker on Idoru to exercise the current typed card and block effect slice through the reducer.", checkpoints: ["Play Cracker to Icebreak the Idoru block.", "Confirm both Cracker and Idoru were placed under your control.", "Inspect the pawn-placement events from that action."] },
   { id: "reboot-and-turn", title: "Reboot and turn flow", description: "Reboot an eliminated pawn with four cards, then exercise pass, recycle, end, and reset.", checkpoints: ["Play four cards to Reboot the eliminated Red Speedrunner.", "Pass and end the turn.", "Reset the fixture and compare its trace."] },
 ];
 
@@ -66,33 +68,68 @@ function scenarioById(id: string): PlayScenario {
 }
 
 function playDataForScenario(id?: string): GameData {
-  if (id !== "attachments") return data;
+  if (id !== "attachments" && id !== "bonus-economy" && id !== "effect-execution") return data;
   const cloned = structuredClone(data);
+  if (id === "attachments") {
+    cloned.cards.push(
+      {
+        id: "fixture-grant-stealth-steps",
+        name: "Stealth Harness",
+        attach: {
+          as: "pawn",
+          slot: "gadget",
+          grantsMovement: [{ type: "fixed", amount: 1, stealth: true }],
+          abilityUses: [{ ability: "move", activation: "card" }],
+        },
+      },
+      {
+        id: "fixture-armor-override",
+        name: "Shield Mesh",
+        attach: {
+          as: "pawn",
+          slot: "armor",
+          defenseOverride: [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: true })),
+        },
+      },
+      {
+        id: "fixture-block-nullify-ice",
+        name: "Block ICE Jammer",
+        attach: { as: "block", nullifiesIce: true },
+      },
+    );
+    return cloned;
+  }
+  if (id === "effect-execution") {
+    cloned.blocks = cloned.blocks.map((block) =>
+      block.id === "idoru" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
+    );
+    return cloned;
+  }
+  const core = cloned.blocks.find((block) => block.isCentralCore);
+  if (!core) return cloned;
+  const basis = structuredClone(core);
+  const bonusBlock = (blockId: string, bonusCorners: boolean[], iceValue: "none" | "high" = "none") => ({
+    ...structuredClone(basis),
+    id: blockId,
+    name: blockId,
+    isCentralCore: false,
+    iceValue,
+    iceFaces: iceValue === "high" ? [1, 2, 3, 4, 5, 6] : [],
+    edges: [true, true, true, true, true, true],
+    boundarySpaces: [["a"], ["a"], ["a"], ["a"], ["a"], ["a"]],
+    bonusCorners,
+    bonusFragments: bonusCorners.filter(Boolean).length,
+    spaces: [{ id: "a", type: "special", zoneIds: ["h1"], capacity: "unlimited", neighbors: [] }],
+  });
+  cloned.blocks.push(
+    bonusBlock("fixture-bonus-a", [false, true, false, false, false, false]),
+    bonusBlock("fixture-bonus-b", [false, false, false, true, false, false]),
+    bonusBlock("fixture-bonus-c", [false, false, false, false, false, true], "high"),
+  );
   cloned.cards.push(
-    {
-      id: "fixture-grant-stealth-steps",
-      name: "Stealth Harness",
-      attach: {
-        as: "pawn",
-        slot: "gadget",
-        grantsMovement: [{ type: "fixed", amount: 1, stealth: true }],
-        abilityUses: [{ ability: "move", activation: "card" }],
-      },
-    },
-    {
-      id: "fixture-armor-override",
-      name: "Shield Mesh",
-      attach: {
-        as: "pawn",
-        slot: "armor",
-        defenseOverride: [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: true })),
-      },
-    },
-    {
-      id: "fixture-block-nullify-ice",
-      name: "Block ICE Jammer",
-      attach: { as: "block", nullifiesIce: true },
-    },
+    { id: "fixture-search", name: "Search Spike", activates: ["search"] },
+    { id: "fixture-icebreak", name: "ICE Key", activates: ["icebreaker"] },
+    { id: "fixture-bonus-gadget", name: "Bonus Rig", attach: { as: "pawn", slot: "gadget", cost: 1 } },
   );
   return cloned;
 }
@@ -139,6 +176,23 @@ function fixtureState(id: string, setup: PlaySetup, gd: GameData): GameState {
     state.cybernet.blocks.push({ blockId: "data-haven", rotation: 0, coord: { q: 0, r: 1 } });
     state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "a" });
     state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p2.id, coord: { q: 0, r: 1 }, spaceId: "b" });
+  } else if (id === "bonus-economy") {
+    p1.pawnId = "speedrunner-yellow"; p2.pawnId = "speedrunner-blue";
+    p1.hand = ["fixture-search", "fixture-icebreak", "fixture-bonus-gadget"]; p2.hand = [];
+    p1.controlMarkersPlaced = 2;
+    state.cybernet.blocks.push(
+      { blockId: "fixture-bonus-a", rotation: 0, coord: { q: 0, r: 1 }, ownerId: p1.id },
+      { blockId: "fixture-bonus-b", rotation: 0, coord: { q: 1, r: 0 }, ownerId: p1.id },
+    );
+    state.blockPile = ["fixture-bonus-c"];
+    state.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "a" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
+  } else if (id === "effect-execution") {
+    p1.pawnId = "speedrunner-red"; p2.pawnId = "speedrunner-blue";
+    p1.hand = ["cracker"]; p2.hand = [];
+    state.cybernet.blocks.push({ blockId: "idoru", rotation: 0, coord: { q: 0, r: 1 } });
+    state.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: p1.id, coord: { q: 0, r: 1 }, spaceId: "h1" });
+    state.cybernet.placePawn({ pawnId: "speedrunner-blue", ownerId: p2.id, coord: { q: 0, r: 0 }, spaceId: "core" });
   } else if (id === "reboot-and-turn") {
     p1.pawnId = "speedrunner-green"; p2.pawnId = "speedrunner-blue";
     p1.hand = ["move-1", "move-2", "move-3", "enemy-malware", "add-on-accelerator"]; p2.hand = [];
@@ -421,6 +475,8 @@ function scenarioCheckpoint(session: PlaySession, index: number): boolean {
     case "search-and-move": return index === 0 ? session.state.cybernet.blocks.length > 1 : index === 1 ? session.state.cybernet.pawns.some((pawn) => pawn.pawnId === "speedrunner-red" && (pawn.coord.q !== 0 || pawn.coord.r !== 0)) : session.commands.length > 2;
     case "combat-and-control": return index === 0 ? session.commands.some((command) => command.kind === "action" && command.action.type === "play-delete") : index === 1 ? session.commands.some((command) => command.kind === "action" && command.action.type === "delete-multi") : index === 2 ? session.commands.some((command) => command.kind === "action" && command.action.type.startsWith("play-icebreak")) : session.events.some((event) => event.type === "roll");
     case "attachments": return index === 0 ? Boolean(session.state.cybernet.pawnById("speedrunner-red")?.attachments?.some((att) => att.cardId === "fixture-grant-stealth-steps")) : index === 1 ? Boolean(session.commands.some((command) => command.kind === "action" && command.action.type === "move-steps" && command.action.movementIndex === 1)) : !legalOptions(session.state, session.data, session.scenarioId).actions.some((action) => action.type === "play-icebreak-block");
+    case "bonus-economy": return index === 0 ? Boolean(session.state.cybernet.bonusIcons?.length) : index === 1 ? Boolean(session.state.cybernet.bonusIcons?.some((icon) => icon.collectedBy === "p1")) : Boolean(session.state.cybernet.pawnById("speedrunner-yellow")?.attachments?.some((att) => att.cardId === "fixture-bonus-gadget"));
+    case "effect-execution": return index === 0 ? Boolean(session.commands.some((command) => command.kind === "action" && command.action.type === "play-icebreak-block")) : index === 1 ? Boolean(session.state.cybernet.pawnById("cracker") && session.state.cybernet.pawnById("idoru")) : Boolean(session.events.filter((event) => event.type === "pawn-placed").some((event) => event.elementId === "cracker" || event.elementId === "idoru"));
     case "reboot-and-turn": return index === 0 ? !session.state.eliminated.includes("speedrunner-red") : index === 1 ? session.state.turn > 1 : session.commands.length > 0;
     default: return false;
   }

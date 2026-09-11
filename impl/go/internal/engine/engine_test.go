@@ -210,3 +210,42 @@ func TestApplyWithEventsRejectsIllegalPhaseAndReportsControl(t *testing.T) {
 		t.Errorf("wrong-player error = %q", wrong.Error)
 	}
 }
+
+func TestApplyWithEventsReportsPawnPlacedForOnIcebreakCardEffects(t *testing.T) {
+        gd := loadOrSkip(t)
+        cloned := *gd
+        cloned.Blocks = append([]domain.Block{}, gd.Blocks...)
+        for i := range cloned.Blocks {
+                if cloned.Blocks[i].ID == "data-haven" {
+                        cloned.Blocks[i].IceFaces = []int{1, 2, 3, 4, 5, 6}
+                }
+        }
+        gd = &cloned
+        s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 43})
+        coord := domain.Coord{Q: 1, R: 0}
+        s.Cybernet.Blocks = append(s.Cybernet.Blocks, &domain.PlacedBlock{BlockID: "data-haven", Rotation: 0, Coord: coord})
+        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+        s.Players[0].Hand = []string{"cracker"}
+        AdvancePhase(s, gd)
+
+        result := ApplyWithEvents(s, gd, Action{
+                Type:   ActPlayIcebreakBlk,
+                CardID: "cracker",
+                PawnID: "speedrunner-red",
+                Coord:  &coord,
+        })
+
+        if !result.Accepted {
+                t.Fatalf("expected accepted action: %#v", result)
+        }
+        found := false
+        for _, event := range result.Events {
+                if event.Type == EventPawnPlaced && event.ElementID == "cracker" {
+                        found = true
+                }
+        }
+        if !found {
+                t.Fatalf("expected pawn-placed event in %#v", result.Events)
+        }
+}

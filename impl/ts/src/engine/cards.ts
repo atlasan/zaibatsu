@@ -18,6 +18,7 @@ import type { Coord, PlacedBlock } from "../domain/hex.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import type { GameData, GameState, Player } from "../domain/types.ts";
 import { deleteAbility, deleteArea, type DeleteAreaResult, type DeleteResult } from "./combat.ts";
+import { applyCardEffectsForTrigger } from "./effects.ts";
 import { icebreakBlock, icebreakPawn, type IcebreakResult } from "./icebreaker.ts";
 import { search } from "./abilities.ts";
 import { reboot } from "./abilities.ts";
@@ -139,6 +140,7 @@ export function playIcebreakBlock(
   if (!cardActivates(gd, cardId, "icebreaker")) throw new Error(`card "${cardId}" cannot activate Icebreaker`);
   requireOwnedActor(s, playerId, attackerId);
   const res = icebreakBlock(s, gd, attackerId, coord, extraRollDice);
+  if (res.success) applyCardEffectsForTrigger(s, gd, playerId, cardId, "on-icebreak", coord);
   consumeCard(s, p, cardId);
   return res;
 }
