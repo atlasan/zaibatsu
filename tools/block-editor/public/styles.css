@@ -185,3 +185,7 @@ button { border:1px solid var(--line); border-radius:8px; padding:8px 11px; colo
 .zone.unassigned polygon { fill:#ffca720d; stroke:#f8ca7277; stroke-dasharray:1 1; }
 @media (max-width:820px) { .canvas-actions { justify-content:flex-start; } .effect-grid { grid-template-columns:1fr; } }
 @media (max-width:820px) { .structured-grid { grid-template-columns:1fr; } }
+
+/* Keep the entrance label clear of a zone center in the canonical fallback. */
+.entrance-control{width:54px;min-width:54px;}
+.entrance-control small{min-width:0;max-width:100%;}

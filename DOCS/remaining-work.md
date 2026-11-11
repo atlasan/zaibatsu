@@ -6,7 +6,9 @@ Updated 2026-11-11 after the Arms Industry funded-counter delivery. This is a co
 
 **No complete official mode is accepted yet.** The executable local quick match and focused scenarios prove substantial engine behavior, but do not prove all printed content, official setup or every end condition. Keep the original target: Speedrunners → Shadowraiders → Total War → Strategic Alliance → Cyber-Revolution → Chaos → Outbreak → Total War–Chaos.
 
-The current checks pass: 506 Bun tests, all Go packages, TypeScript checking, 66 browser tests and six Python artifact tests. Documentation/spec/artifact checks verify 55 local source originals and 22 unchanged frozen regression files. The coverage checklist has 324 rows, of which 70 are both source-verified and implemented. Rows include components and rules; 70 is not a number of complete components or modes.
+The current checks pass: 508 Bun tests, all Go packages, TypeScript checking, 66 browser tests and six Python artifact tests. Documentation/spec/artifact checks verify 55 local source originals and 22 unchanged frozen regression files. The coverage checklist has 324 rows, of which 70 are both source-verified and implemented. Rows include components and rules; 70 is not a number of complete components or modes.
+
+CI checks run without ignored primary PDFs, generated page renders or local OCR caches. Exact transcript page-render links are optional local evidence; ordinary missing documents and anchors still fail. A local source audit can require originals with `bun tools/verify-artifacts.ts --require-originals`. Frozen regression JSON is explicitly tracked and its original bytes remain protected.
 
 The core now has explicit authorized choices, committed movement rolls, public combat assignment, physical pawn/control-card zones, many attachment and phase handlers, hidden-information views, pure available-action queries, physical use markers, controller-owned played cards, and held block Bonus counters. These contracts can support later UI, bots, networking and native clients. They still need the missing content, decisions and mode recipes below.
 

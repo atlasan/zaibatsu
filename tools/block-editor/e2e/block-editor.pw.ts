@@ -19,6 +19,8 @@ test("one-way internal links can be authored, saved and removed independently of
 });
 
 test("block editor fits the source, projects HexVision geometry, and keeps zone actions stable", async ({ page }) => {
+  const layoutResponse=await page.request.get("/api/block-layout/sp-en-blocks-a4-p01-c01");
+  const sourceLayout=await layoutResponse.json();
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
   await page.locator('[data-asset="sp-en-blocks-a4-p01-c01"]').click();
@@ -40,8 +42,8 @@ test("block editor fits the source, projects HexVision geometry, and keeps zone 
   expect(after.documentHeight).toBe(after.viewportHeight);
   expect(after.commandbarBottom).toBe(after.viewportHeight);
   const outerPoints = await page.locator(".outer-guide").getAttribute("points");
-  expect(outerPoints).toContain("99.");
-  expect(outerPoints).not.toContain("93,25");
+  expect(outerPoints).toBe(sourceLayout.layout.outerHex.vertices.map((point:{x:number;y:number})=>`${point.x},${point.y}`).join(" "));
+  if(sourceLayout.vision && sourceLayout.imageSize) {expect(outerPoints).toContain("99.");expect(outerPoints).not.toContain("93,25");}
   await expect(page.getByText("Legacy category:")).toBeVisible();
 });
 

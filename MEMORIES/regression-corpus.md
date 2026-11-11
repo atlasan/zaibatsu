@@ -27,3 +27,5 @@ Regression loaders now set the explicit `RegressionFixture` / `regressionFixture
 [ADR-0019](../DOCS/adr/0019-physical-bonus-counter-reserve.md) advances source state/checksums to v12 for the finite bonus supply and physical icon counters. Historical frozen states omit the supply and retain old behavior; source-v11 traces reject explicitly.
 
 [ADR-0021](../DOCS/adr/0021-native-pawn-phase-effects-and-controlled-placement.md) advances source state/checksums to v13 for native pawn phase choices and transfer visibility. Refresh only source evidence; v12 source traces reject explicitly and frozen bytes/outcomes remain unchanged.
+
+**Clean checkout:** the broad game-directory ignore patterns also match nested fixture data. Keep `spec/fixtures/provisional-v1/**` explicitly unignored and track every listed JSON file, while retaining `-text` so CRLF-based hashes remain unchanged. A passing working-copy hash check alone does not prove those files were committed; verify the exported checkout too.

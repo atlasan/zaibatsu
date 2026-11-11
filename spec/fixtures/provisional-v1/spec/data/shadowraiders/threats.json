@@ -1,0 +1,37 @@
+{
+  "$comment": "Guard drone combat profile directly reviewed in sh-en-rulebook p.21. Full threat-token and drone corpus remains open.",
+  "threats": [
+    {
+      "id": "guard",
+      "name": "Guard",
+      "type": "drone",
+      "attackDie": 5,
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ]
+    }
+  ]
+}

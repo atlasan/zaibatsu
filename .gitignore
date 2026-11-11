@@ -23,6 +23,9 @@ SpeedRunners/
 !spec/data/speedrunners/**
 !spec/data/shadowraiders/
 !spec/data/shadowraiders/**
+# Regression JSON is repository evidence, not an upstream asset directory.
+# The broad game-directory exclusions above must not omit its nested data.
+!spec/fixtures/provisional-v1/**
 *.rar
 *.pdf
 

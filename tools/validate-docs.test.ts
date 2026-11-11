@@ -67,4 +67,16 @@ describe("validateDocs", () => {
   test("rejects an unregistered authored document", () => {
     expect(validateDocs(fixture({ unregistered: true }))).toContain("governed document is not registered: DOCS/unregistered.md");
   });
+
+  test("accepts absent optional transcript renders in a clean checkout", () => {
+    const root = fixture();
+    write(root, "DOCS/rules/transcripts/rendered.md", "# Rendered evidence\n\n[Pages](../../../tmp/ruletext/pages/sp-en-rulebook)\n[Page](../../../tmp/ruletext/pages/sp-en-rulebook/page-001.png)\n");
+    expect(validateDocs(root)).toEqual([]);
+  });
+
+  test("still rejects missing authored links and lookalike render directories", () => {
+    const root = fixture();
+    write(root, "DOCS/rules/transcripts/rendered.md", "# Broken evidence\n\n[Wrong directory](../../../tmp/ruletext/pages-other/sp-en-rulebook/page-001.png)\n[Missing document](../../../tmp/ruletext/pages/sp-en-rulebook/notes.md)\n");
+    expect(validateDocs(root).filter(error => error.includes("links to missing"))).toHaveLength(2);
+  });
 });

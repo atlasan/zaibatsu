@@ -1,5 +1,5 @@
 import { existsSync, lstatSync, readFileSync, readdirSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 export function walk(dir: string): string[] {
   if (!existsSync(dir)) return [];
@@ -52,11 +52,16 @@ export function validateMarkdownLinks(root: string, files: string[]): string[] {
       const [targetPart, anchor] = raw.split("#", 2);
       const target = targetPart || "";
       const resolved = target ? resolve(dirname(file), target) : file;
-      if (!resolved.startsWith(resolve(root))) {
+      const withinRoot = relative(resolve(root), resolved);
+      if (withinRoot === ".." || withinRoot.startsWith(`..${sep}`) || isAbsolute(withinRoot)) {
         failures.push(`${toRepoPath(root, file)} links outside repository: ${raw}`);
         continue;
       }
       if (!existsSync(resolved)) {
+        // Transcripts cite optional page renders regenerated from ignored PDFs.
+        // A clean checkout has the transcript and source locator, not these PNGs.
+        const localRender = toRepoPath(root, resolved);
+        if (/^tmp\/ruletext\/pages\/[a-z0-9-]+(?:\/page-\d+\.png)?\/?$/.test(localRender)) continue;
         failures.push(`${toRepoPath(root, file)} links to missing ${raw}`);
         continue;
       }

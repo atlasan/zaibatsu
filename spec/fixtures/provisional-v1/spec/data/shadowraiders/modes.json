@@ -1,0 +1,193 @@
+{
+  "$comment": "Source-verified mode metadata. Per-component data remains intentionally absent until direct component-sheet transcription is complete.",
+  "modes": [
+    {
+      "id": "shadowraiders",
+      "name": "Shadowraiders",
+      "sourceId": "shadowraiders",
+      "expansions": [
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 2,
+        "max": 4
+      },
+      "controlMarkers": {
+        "default": 8
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "setup": [
+        "shadowraider-starters",
+        "seed-threat-tokens"
+      ],
+      "notes": "Use Shadowraiders components; each assigned control marker earns a medal."
+    },
+    {
+      "id": "chaos",
+      "name": "Chaos",
+      "sourceId": "chaos",
+      "expansions": [
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 1,
+        "max": 1
+      },
+      "controlMarkers": {
+        "default": 6
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "lose": [
+        "chaos-wins"
+      ],
+      "setup": [
+        "chaos-ai",
+        "black-ice-tokens"
+      ],
+      "notes": "Solo mode against the Chaos pawn and megacard."
+    },
+    {
+      "id": "outbreak",
+      "name": "Outbreak",
+      "sourceId": "outbreak",
+      "expansions": [
+        "speedrunners",
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 1,
+        "max": 1
+      },
+      "controlMarkers": {
+        "default": 6
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "lose": [
+        "outbreak-reaches-core"
+      ],
+      "setup": [
+        "central-core-02",
+        "outbreak-markers"
+      ],
+      "notes": "Solo mode using Speedrunners material and Shadowraiders outbreak components."
+    },
+    {
+      "id": "total-war",
+      "name": "Total War",
+      "sourceId": "total-war",
+      "expansions": [
+        "speedrunners",
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 2,
+        "max": 8
+      },
+      "controlMarkers": {
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 6,
+        "6": 6,
+        "7": 6,
+        "8": 6,
+        "default": 8
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "setup": [
+        "two-central-cores",
+        "mixed-control-cards"
+      ],
+      "notes": "Threat tokens and bonus counters are interchangeable."
+    },
+    {
+      "id": "strategic-alliance",
+      "name": "Strategic Alliance",
+      "sourceId": "strategic-alliance",
+      "expansions": [
+        "speedrunners",
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 2,
+        "max": 4
+      },
+      "controlMarkers": {
+        "default": 8
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "setup": [
+        "one-speedrunner-and-one-shadowraider-per-player"
+      ],
+      "notes": "Total War alternate rule set."
+    },
+    {
+      "id": "cyber-revolution",
+      "name": "Cyber-Revolution",
+      "sourceId": "cyber-revolution",
+      "expansions": [
+        "speedrunners",
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 2,
+        "max": 8
+      },
+      "controlMarkers": {
+        "default": 8
+      },
+      "win": [
+        "team-all-control-markers-assigned"
+      ],
+      "setup": [
+        "two-equal-teams",
+        "speedrunner-team",
+        "shadowraider-team"
+      ],
+      "notes": "Two equal teams, Speedrunners versus Shadowraiders; eight control markers per team.",
+      "allowedPlayerCounts": [
+        2,
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "id": "total-war-chaos",
+      "name": "Total War - Chaos",
+      "sourceId": "total-war-chaos",
+      "expansions": [
+        "speedrunners",
+        "shadowraiders"
+      ],
+      "players": {
+        "min": 1,
+        "max": 8
+      },
+      "controlMarkers": {
+        "default": 8
+      },
+      "win": [
+        "all-control-markers-assigned"
+      ],
+      "lose": [
+        "chaos-wins"
+      ],
+      "setup": [
+        "total-war",
+        "chaos-after-each-player"
+      ],
+      "notes": "Total War alternate rule set."
+    }
+  ]
+}

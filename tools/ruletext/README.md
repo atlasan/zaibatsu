@@ -11,6 +11,13 @@ It keeps three layers separate:
 3. `DOCS/rules/transcripts/` - tracked, cited transcript artifacts used by docs,
    provenance review, and canonical data transcription.
 
+Transcript links to `tmp/ruletext/pages/<source>/page-NNN.png` and their page
+directories are optional local renders. Documentation checks allow those exact
+generated paths to be absent in a clean checkout; ordinary missing documents,
+anchors and lookalike directories still fail. Source IDs/locators and catalog
+checks remain separate. Use `verify-artifacts --require-originals` when the
+local primary sources must be present and freshly verified.
+
 ## Install
 
 ```powershell
