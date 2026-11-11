@@ -2,3 +2,5 @@ node_modules/
 .sessions/
 exports/
 .dist/
+test-results/
+playwright-report/
