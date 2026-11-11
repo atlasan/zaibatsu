@@ -73,17 +73,19 @@ bun run src/index.ts
 For implementation, rules transcription, and content tooling, start from
 [the documentation index](DOCS/INDEX.md). The Speedrunners provisional core is
 implemented in both mirrors: setup, turn phases, placement, core abilities,
-control changes, attachments, snapshots, and golden scenarios. Source-backed
-component transcription, space-to-space movement, applied attachment effects,
-bonus economy, and Shadowraiders remain in progress.
+control changes, attachments, snapshots, and golden scenarios. Space movement,
+bonus economy, and the current attachment subset execute. Full component
+transcription, printed recycle obligations, broader effects, and Shadowraiders
+remain in progress.
 
 For local tools:
 
 - `http://localhost:4173/` is the block editor.
 - `http://localhost:4173/action-cards/` is the action-card editor.
-- `http://localhost:4173/play/` is a local reducer-backed Speedrunners tester
-  for the current implemented subset and named Test Lab fixtures, not a full
-  shipped game client.
+- `http://localhost:4173/play/` plays an experimental 2–4 player hotseat quick
+  match: first to control four blocks wins. Card/runner selection, board
+  movement, combat/control, attachments, handoff, and replay save/resume are
+  available, plus a separate Test Lab. Full official content remains pending.
 
 Use [the parity contract](DOCS/parity.md) for mirror evidence and
 [the backlog](tasks/BACKLOG.md) for live delivery status. For relevant changes,
@@ -100,3 +102,5 @@ bun tools/validate-spec.ts
 Engine-code licensing is tracked in `tasks/BACKLOG.md`. The underlying game,
 rules, names, and artwork remain the property of their creators under the
 original CC BY-NC 2.5 MX license.
+
+Current full-game completion gaps are documented in [DOCS/remaining-work.md](DOCS/remaining-work.md). Passing local engine/sandbox checks does not mean every official component or mode is implemented; the ordered live work remains [tasks/BACKLOG.md](tasks/BACKLOG.md).

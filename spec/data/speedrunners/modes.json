@@ -1,0 +1,33 @@
+{
+  "$comment": "Local experimental match over the current mixed corpus; official Speedrunners acceptance remains separate.",
+  "modes": [
+    {
+      "id": "speedrunners-quick-match",
+      "name": "Quick match",
+      "expansions": [
+        "speedrunners"
+      ],
+      "players": {
+        "min": 2,
+        "max": 4
+      },
+      "controlMarkers": {
+        "default": 4
+      },
+      "maxHandSize": 5,
+      "startingHand": [
+        3,
+        4,
+        5,
+        5
+      ],
+      "win": [
+        "all-control-markers-placed"
+      ],
+      "lose": [],
+      "provisional": true,
+      "notes": "Local experimental mode: win by controlling four blocks. Uses the current mixed provisional/source-linked content and implemented engine mechanics; full physical-game content and recycle obligations remain pending.",
+      "bonusCounterSupply": 24
+    }
+  ]
+}

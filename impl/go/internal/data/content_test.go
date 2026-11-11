@@ -81,7 +81,22 @@ func TestLoadProvidesOptionalContentCollections(t *testing.T) {
 	if data.ControlCards == nil || data.Threats == nil || data.Missions == nil {
 		t.Fatal("optional content collections must be initialized")
 	}
-	if len(data.Modes) != 1 || data.Modes[0].ID != data.Mode.ID {
+	if len(data.ControlCards) != 9 {
+		t.Fatal("expected four starters plus Idoru, Gynoid, Drone MK-2 and Drone Probe cards")
+	}
+	starters := 0
+	for _, card := range data.ControlCards {
+		if card.IsStarter {
+			starters++
+		}
+		if card.ID == "idoru-control" && !card.Provisional {
+			t.Fatal("Idoru card was promoted")
+		}
+	}
+	if starters != 4 {
+		t.Fatal("starter cards changed")
+	}
+	if len(data.Modes) != 1 || data.Modes[0].ID != "speedrunners-quick-match" || !data.Modes[0].Provisional {
 		t.Fatalf("modes fallback = %#v, want primary mode", data.Modes)
 	}
 }
@@ -102,5 +117,20 @@ func TestLoadRejectsStaleValidationManifest(t *testing.T) {
 	}
 	if got := err.Error(); !strings.Contains(got, "spec validation manifest is stale") {
 		t.Fatalf("Load error = %q, want stale manifest guidance", got)
+	}
+}
+
+func TestLoadGuardThreatSidecar(t *testing.T) {
+	threats, err := LoadThreats("shadowraiders")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(threats) != 1 || threats[0].ID != "guard" || threats[0].AttackDie != 5 || len(threats[0].Defense) != 6 {
+		t.Fatal(threats)
+	}
+	for i, d := range threats[0].Defense {
+		if d.Value != i+1 || d.Shielded != (i < 4) {
+			t.Fatal(threats)
+		}
 	}
 }

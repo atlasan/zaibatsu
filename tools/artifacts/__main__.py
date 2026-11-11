@@ -54,6 +54,7 @@ def sheet_kind_for(role: str) -> str:
 CORE_ARTIFACTS = (
     "sp-en-blocks-a4", "sp-en-pawns", "sp-en-markers",
     "sp-en-action-cards", "sh-en-action-cards",
+    "sp-en-control-cards", "sh-en-control-cards",
     "sh-en-blocks-a4", "sh-en-pawns", "sh-en-markers",
 )
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import {
   attachToPawn,
   collectControlledBonusIcons,
@@ -11,7 +11,7 @@ import {
 } from "../src/engine/index.ts";
 
 function bonusFixtureData() {
-  const data = structuredClone(loadDefault("speedrunners"));
+  const data = structuredClone(loadRegression("speedrunners"));
   const core = data.blocks.find((block) => block.isCentralCore);
   if (!core) throw new Error("missing central core");
   const basis = structuredClone(core);
@@ -26,7 +26,7 @@ function bonusFixtureData() {
     boundarySpaces: [["a"], ["a"], ["a"], ["a"], ["a"], ["a"]],
     bonusCorners,
     bonusFragments: bonusCorners.filter(Boolean).length,
-    spaces: [{ id: "a", type: "special", zoneIds: ["h1"], capacity: "unlimited", neighbors: [] }],
+    spaces: [{ id: "a", type: "special" as const, zoneIds: ["h1" as const], capacity: "unlimited" as const, neighbors: [] }],
   });
   data.blocks.push(
     bonusBlock("bonus-a", [false, true, false, false, false, false]),

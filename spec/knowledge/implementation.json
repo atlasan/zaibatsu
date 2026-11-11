@@ -1,0 +1,4943 @@
+{
+  "implementationVersion": 1,
+  "entries": [
+    {
+      "id": "asset/sp-en-blocks-a4-p03-c02",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        }
+      ],
+      "records": [
+        "block/central-core"
+      ],
+      "mechanics": [
+        "special-space",
+        "unlimited-capacity",
+        "setup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 1 (blue)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 1 (blue)"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-blue",
+        "control-card/speedrunner-blue-control"
+      ],
+      "mechanics": [
+        "card-activation",
+        "starter-icebreaker-face",
+        "control-card-ownership"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c02",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 2 (green)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 2 (green)"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-green",
+        "control-card/speedrunner-green-control"
+      ],
+      "mechanics": [
+        "card-activation",
+        "starter-icebreaker-face",
+        "control-card-ownership"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c04",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 4 (pink)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 4 (pink)"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-pink",
+        "control-card/speedrunner-pink-control"
+      ],
+      "mechanics": [
+        "card-activation",
+        "starter-icebreaker-face",
+        "control-card-ownership"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c05",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 5 (orange)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 5 (orange)"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-orange",
+        "control-card/speedrunner-orange-control"
+      ],
+      "mechanics": [
+        "card-activation",
+        "starter-icebreaker-face",
+        "control-card-ownership"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 1 (Octagon Dex)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 2 (Octagon Dex)"
+        }
+      ],
+      "records": [
+        "action-card/octagon-dex"
+      ],
+      "mechanics": [
+        "ignore-arrows",
+        "remove-search",
+        "card-movement"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceOctagonArrowAndSearch"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Octagon bypasses arrows"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c02",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 2 (Simstim Record)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 3 (Simstim Record)"
+        }
+      ],
+      "records": [
+        "action-card/simstim-record"
+      ],
+      "mechanics": [
+        "remove-movement"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceSimstimMovementProvisionalBonus"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Simstim cancels card"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "SIMSTIM-COUNTER-LIFETIME: printed while-controlled gain does not specify withdrawal, spending across other attachments, or cleanup. Do not invent counter lifecycle; component remains provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c03",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 3 (DJ)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 1 (DJ)"
+        }
+      ],
+      "records": [
+        "action-card/dj"
+      ],
+      "mechanics": [
+        "card-movement",
+        "informational-music-choice"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceOctagonArrowAndSearch"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Octagon bypasses arrows"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c04",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 4 (accelerator-transgenic-therapy)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 4 (accelerator-transgenic-therapy)"
+        }
+      ],
+      "records": [
+        "action-card/accelerator-transgenic-therapy"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "movement-step-modifier",
+        "refund",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceAcceleratorStepAndCost"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "printed accelerators pay costs"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c05",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 5 (hyper-accelerator)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 5 (hyper-accelerator)"
+        }
+      ],
+      "records": [
+        "action-card/hyper-accelerator"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "movement-step-modifier",
+        "refund",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceAcceleratorStepAndCost"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "printed accelerators pay costs"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c06",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 6 (accela-accelerator)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 6 (accela-accelerator)"
+        }
+      ],
+      "records": [
+        "action-card/accela-accelerator"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "movement-step-modifier",
+        "refund",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceAcceleratorStepAndCost"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "printed accelerators pay costs"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c07",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 7 (biochip)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 7 (biochip)"
+        }
+      ],
+      "records": [
+        "action-card/biochip"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "once-per-turn-granted-movement",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceESynapseMovement"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "E-Synapse movement"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c08",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 8 (e-synapse-neural-interface)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 8 (e-synapse-neural-interface)"
+        }
+      ],
+      "records": [
+        "action-card/e-synapse-neural-interface"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "once-per-turn-granted-movement",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceESynapseMovement"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "E-Synapse movement"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-004",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        }
+      ],
+      "records": [
+        "block/central-core"
+      ],
+      "mechanics": [
+        "special-space",
+        "unlimited-capacity",
+        "setup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-002",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 1 (blue)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 1 (blue)"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-blue",
+        "control-card/speedrunner-blue-control"
+      ],
+      "mechanics": [
+        "card-activation",
+        "starter-icebreaker-face",
+        "control-card-ownership"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceCoreAndPrintedStarters"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Core and printed starters"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-003",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.23, eliminating a pawn; p.27 Reboot"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.23, eliminating a pawn; p.27 Reboot"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-blue",
+        "control-card/speedrunner-blue-control"
+      ],
+      "mechanics": [
+        "retained-reboot-pool",
+        "reserve-pool",
+        "control-card-release",
+        "piece-conservation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/prevention_test.go",
+            "contains": "TestLifecycleReservePlacementAndCommonCard"
+          },
+          {
+            "path": "impl/go/internal/engine/prevention_test.go",
+            "contains": "TestPreventionDeclineRebootVersusReserve"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/prevention.test.ts",
+            "contains": "typed placement consumes reserve"
+          },
+          {
+            "path": "impl/ts/test/prevention.test.ts",
+            "contains": "declining resolves sourced Reboot retention"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "Remaining printed nonstarter control-card corpus, prevention exceptions and broader attachment lifecycle remain incomplete; synthetic control records test the shared handler."
+      ]
+    },
+    {
+      "id": "rule/SR-CARD-004",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 1 (Octagon Dex)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 2 (Octagon Dex)"
+        }
+      ],
+      "records": [
+        "action-card/octagon-dex"
+      ],
+      "mechanics": [
+        "ignore-arrows",
+        "remove-search",
+        "card-movement"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceOctagonArrowAndSearch"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Octagon bypasses arrows"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-005",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 4 (accelerator-transgenic-therapy)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 4 (accelerator-transgenic-therapy)"
+        }
+      ],
+      "records": [
+        "action-card/accelerator-transgenic-therapy"
+      ],
+      "mechanics": [
+        "attachment-cost",
+        "movement-step-modifier",
+        "refund",
+        "attached-own-class"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceAcceleratorStepAndCost"
+          },
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceESynapseMovement"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "printed accelerators pay costs"
+          },
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "E-Synapse movement"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-006",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 2 (Simstim Record)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 3 (Simstim Record)"
+        }
+      ],
+      "records": [
+        "action-card/simstim-record"
+      ],
+      "mechanics": [
+        "remove-movement"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "TestSourceSimstimMovementProvisionalBonus"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "Simstim cancels card"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "SIMSTIM-COUNTER-LIFETIME: printed while-controlled gain does not specify withdrawal, spending across other attachments, or cleanup. Do not invent counter lifecycle; component remains provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c02",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 2 (Toxin)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 9 (Toxin)"
+        }
+      ],
+      "records": [
+        "action-card/toxin"
+      ],
+      "mechanics": [
+        "typed-phase-effects",
+        "pending-authorized-choice"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_effects_test.go",
+            "contains": "TestPhaseToxinChoiceAuthorityAndDiscard"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-effects.test.ts",
+            "contains": "Toxin pauses before marker reset"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations are rejected atomically until source ordering is resolved; component remains provisional."
+      ]
+    },
+    {
+      "id": "rule/SR-TURN-006",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 2 (Toxin)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 9 (Toxin)"
+        }
+      ],
+      "records": [
+        "action-card/toxin"
+      ],
+      "mechanics": [
+        "typed-phase-effects",
+        "pending-authorized-choice"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_effects_test.go",
+            "contains": "TestPhaseToxinChoiceAuthorityAndDiscard"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-effects.test.ts",
+            "contains": "Toxin pauses before marker reset"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations are rejected atomically until source ordering is resolved; component remains provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c05",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 5 (Rootkit)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 8 (Rootkit)"
+        }
+      ],
+      "records": [
+        "action-card/rootkit"
+      ],
+      "mechanics": [
+        "typed-phase-effects",
+        "phase-discard"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_effects_test.go",
+            "contains": "TestPhaseRootkitDiscardTiming"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-effects.test.ts",
+            "contains": "Rootkit discards at action end"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations are rejected atomically until source ordering is resolved; component remains provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c04",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 4 (Selective Disclosure)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 4 (Selective Disclosure)"
+        }
+      ],
+      "records": [
+        "action-card/selective-disclosure"
+      ],
+      "mechanics": [
+        "typed-phase-effects",
+        "phase-discard"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_effects_test.go",
+            "contains": "TestPhaseSelectiveDisclosureCleanup"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-effects.test.ts",
+            "contains": "Selective Disclosure discards itself"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations are rejected atomically until source ordering is resolved; component remains provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p01-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 1"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 1"
+        }
+      ],
+      "records": [
+        "block/idoru"
+      ],
+      "mechanics": [
+        "exact-printed-topology",
+        "non-playable-title-zone",
+        "exact-ice-faces",
+        "bonus-corners",
+        "neutral-matching-pawn-placement",
+        "space-defense-shielding"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/toyeku_test.go",
+            "contains": "TestToyekuNeutralPlacementSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/toyeku.test.ts",
+            "contains": "Search places Idoru on its pawn space without control"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p01-c02",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 2"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 2"
+        }
+      ],
+      "records": [
+        "block/hacktivism"
+      ],
+      "mechanics": [
+        "directed-space-link",
+        "defense-space",
+        "global-placement-effect"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/sprawl_test.go",
+            "contains": "TestSprawlGeometryAndSharedCommitmentEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/sprawl.test.ts",
+            "contains": "Sprawl: bilingual page-one geometry"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-025: marker removal/refill and lost-control acceptance."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p01-c03",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 3"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 3"
+        }
+      ],
+      "records": [
+        "block/chiba-city"
+      ],
+      "mechanics": [
+        "directed-space-link",
+        "defense-space",
+        "global-placement-effect"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/sprawl_test.go",
+            "contains": "TestSprawlGeometryAndSharedCommitmentEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/sprawl.test.ts",
+            "contains": "Sprawl: bilingual page-one geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-026: hand shortfalls and global private commitment timing remain unresolved."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c02",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 2"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 3"
+        }
+      ],
+      "records": [
+        "action-card/electric-sheep"
+      ],
+      "mechanics": [
+        "beginning-phase",
+        "sacrifice",
+        "seeded-card-draw",
+        "paid-counter-refund"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_card_effects_test.go",
+            "contains": "TestPhaseElectricSheepSacrificeDrawConservation"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-card-effects.test.ts",
+            "contains": "Electric Sheep sacrifices before drawing"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations remain unresolved; component stays provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c03",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 3"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 2"
+        }
+      ],
+      "records": [
+        "action-card/jetpack"
+      ],
+      "mechanics": [
+        "beginning-phase",
+        "destination-choice",
+        "capacity",
+        "paid-counter-refund"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_card_effects_test.go",
+            "contains": "TestPhaseJetpackDestinationsRefundAndGolden"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-card-effects.test.ts",
+            "contains": "Jetpack offers free destinations"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations remain unresolved; component stays provisional.",
+        "JETPACK-THREAT-ACTIVATION: EN move versus ES placement; threatening destinations are excluded/rejected pending authority."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c05",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 5"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 5"
+        }
+      ],
+      "records": [
+        "action-card/insider-trading"
+      ],
+      "mechanics": [
+        "beginning-phase",
+        "physical-card-discard-choice",
+        "maximum-hand-size"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_card_effects_test.go",
+            "contains": "TestPhaseInsiderTradingPhysicalDiscardsAndBenefit"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-card-effects.test.ts",
+            "contains": "Insider Trading selects exactly two"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER: simultaneous obligations remain unresolved; component stays provisional.",
+        "FORCED-DISCARD-SHORTFALL: fewer than two hand cards rejects atomically pending source clarification."
+      ]
+    },
+    {
+      "id": "rule/SR-TURN-007",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, cards 2, 3, 5"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, cards 2, 3, 5"
+        }
+      ],
+      "records": [
+        "action-card/electric-sheep",
+        "action-card/jetpack",
+        "action-card/insider-trading"
+      ],
+      "mechanics": [
+        "sacrifice-and-draw",
+        "physical-card-discard-choice",
+        "relocation-choice",
+        "phase-combat-resumption"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/phase_card_effects_test.go",
+            "contains": "TestPhaseExplicitNormalMovementCombatResumption"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/phase-card-effects.test.ts",
+            "contains": "explicitly normal-movement effect pauses"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PHASE-EFFECT-ORDER; FORCED-DISCARD-SHORTFALL; JETPACK-THREAT-ACTIVATION remain open under T-RULES-005/007/008."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c01",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 1 (Dummy)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 1 (Dummy)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.23, eliminating/sacrificing a pawn"
+        }
+      ],
+      "records": [
+        "action-card/dummy"
+      ],
+      "mechanics": [
+        "elimination-prevention",
+        "controller-owned-reaction",
+        "discard-attachment",
+        "paid-counter-refund"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/prevention_test.go",
+            "contains": "TestPreventionDefenderChoiceOutsideActiveTurn"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/prevention.test.ts",
+            "contains": "defender-owned Dummy decision prevents cleanup"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PREVENTION-SACRIFICE and PREVENTION-SIMULTANEOUS remain unresolved under T-RULES-010; card remains provisional."
+      ]
+    },
+    {
+      "id": "rule/SR-CARD-007",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 1"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 1"
+        }
+      ],
+      "records": [
+        "action-card/dummy"
+      ],
+      "mechanics": [
+        "elimination-prevention",
+        "pending-controller-choice",
+        "black-ice",
+        "area-attack",
+        "phase-resumption"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/prevention_test.go",
+            "contains": "TestPreventionBeginningRetaliationResumesAfterChoice"
+          },
+          {
+            "path": "impl/go/internal/engine/prevention_test.go",
+            "contains": "TestPreventionAreaAndSimultaneousWindowRollback"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/prevention.test.ts",
+            "contains": "beginning movement and fixed retaliation stay pending"
+          },
+          {
+            "path": "impl/ts/test/prevention.test.ts",
+            "contains": "area attacks hold a defender decision"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "PREVENTION-SACRIFICE: cost-dependent benefit versus replacement is not settled.",
+        "PREVENTION-SIMULTANEOUS: multiple protected casualties require source-backed ordering."
+      ]
+    },
+    {
+      "id": "rule/SR-SETUP-004",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.5, starting components and unused starter removal"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.5, starting components and unused starter removal"
+        }
+      ],
+      "records": [
+        "pawn/speedrunner-blue",
+        "pawn/speedrunner-green",
+        "pawn/speedrunner-pink",
+        "pawn/speedrunner-orange"
+      ],
+      "mechanics": [
+        "starter-assignment",
+        "out-of-game-pool",
+        "physical-control-card-zones"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_foundation_test.go",
+            "contains": "unused starter card incorrectly in common area"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-foundation.test.ts",
+            "contains": "c.zone===\"out-of-game\""
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-008",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.34, attached card class-type"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.34, Clase de carta anexa"
+        }
+      ],
+      "records": [
+        "action-card/accela-accelerator",
+        "action-card/accelerator-transgenic-therapy",
+        "action-card/biochip",
+        "action-card/e-synapse-neural-interface",
+        "action-card/hyper-accelerator",
+        "action-card/insider-trading",
+        "action-card/selective-disclosure"
+      ],
+      "mechanics": [
+        "printed-own-class-grant",
+        "continuous-attachment-benefit",
+        "takeover-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourcePrintedAttachmentOwnClasses"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "printed Accelerator, E-Synapse and Trade Secret classes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p01-c09",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 9 (Gentleman Loser)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 9 (Gentleman Loser)"
+        }
+      ],
+      "records": [
+        "action-card/cracker"
+      ],
+      "mechanics": [
+        "block-attachment",
+        "attachment-time-pawn-placement",
+        "separate-card-use"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourceGentlemanLoserIsNotIcebreakerPlacement"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourceUnsupportedAttachmentTimeGate"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "Gentleman Loser is a block attachment"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "unsupported block attachment resolution rejects"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-013: exact block-extension placement and pawn destination decisions are not implemented. Attachment attempts reject before payment; old Icebreaker placement was revoked."
+      ]
+    },
+    {
+      "id": "rule/SR-CARD-009",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 9 (Gentleman Loser)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 9 (Gentleman Loser)"
+        }
+      ],
+      "records": [
+        "action-card/cracker"
+      ],
+      "mechanics": [
+        "block-attachment",
+        "attachment-time-pawn-placement",
+        "separate-card-use"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourceGentlemanLoserIsNotIcebreakerPlacement"
+          },
+          {
+            "path": "impl/go/internal/engine/source_attachment_classes_test.go",
+            "contains": "TestSourceUnsupportedAttachmentTimeGate"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "Gentleman Loser is a block attachment"
+          },
+          {
+            "path": "impl/ts/test/source-attachment-classes.test.ts",
+            "contains": "unsupported block attachment resolution rejects"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-013: exact block-extension placement and pawn destination decisions are not implemented. Attachment attempts reject before payment; old Icebreaker placement was revoked."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c03",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 3"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 2"
+        }
+      ],
+      "records": [
+        "action-card/worm"
+      ],
+      "mechanics": [
+        "attachment-target-exclusion",
+        "printed-own-class-grant",
+        "continuous-attachment-benefit",
+        "takeover-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionPenaltiesCleanupAndSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionNativeAndGainedOperative"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "continuous penalties, action strips and takeover cleanup"
+          },
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "native and gained Operative classes reject"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c06",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 3"
+        }
+      ],
+      "records": [
+        "action-card/under-clocker"
+      ],
+      "mechanics": [
+        "attachment-target-exclusion",
+        "printed-own-class-grant",
+        "continuous-attachment-benefit",
+        "takeover-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionPenaltiesCleanupAndSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionNativeAndGainedOperative"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "continuous penalties, action strips and takeover cleanup"
+          },
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "native and gained Operative classes reject"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c09",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 9"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 1"
+        }
+      ],
+      "records": [
+        "action-card/hijacker"
+      ],
+      "mechanics": [
+        "attachment-target-exclusion",
+        "printed-own-class-grant",
+        "continuous-attachment-benefit",
+        "takeover-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionPenaltiesCleanupAndSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionNativeAndGainedOperative"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "continuous penalties, action strips and takeover cleanup"
+          },
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "native and gained Operative classes reject"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-010",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 3"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 2"
+        },
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 3"
+        },
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 9"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 1"
+        }
+      ],
+      "records": [
+        "action-card/worm",
+        "action-card/under-clocker",
+        "action-card/hijacker"
+      ],
+      "mechanics": [
+        "attachment-target-exclusion",
+        "printed-own-class-grant",
+        "continuous-attachment-benefit",
+        "takeover-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionPenaltiesCleanupAndSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/attachment_restrictions_test.go",
+            "contains": "TestAttachmentRestrictionNativeAndGainedOperative"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "continuous penalties, action strips and takeover cleanup"
+          },
+          {
+            "path": "impl/ts/test/attachment-restrictions.test.ts",
+            "contains": "native and gained Operative classes reject"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-011",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.33–34, physical attachment slots and Gunhed/AK-12kM illustration"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pp.33–34, physical attachment slots and Gunhed/AK-12kM illustration"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "physical-attachment-slots",
+        "granted-slot-choice",
+        "dependent-slot-cleanup",
+        "cost-refund",
+        "source-trace-versioning"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/attachment_slots_test.go",
+            "contains": "TestAttachmentSlotsPhaseCascadeSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/attachment_slots_test.go",
+            "contains": "TestAttachmentSlotsDistinctPhysicalCopiesAndChoices"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/attachment-slots.test.ts",
+            "contains": "phase self-discard cascades through providers"
+          },
+          {
+            "path": "impl/ts/test/attachment-slots.test.ts",
+            "contains": "identical cards occupy distinct rooted slots"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c06",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.22, 26–27, 34; settled card/single-free cases only"
+        }
+      ],
+      "records": [
+        "action-card/weapon-gunhed"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "independent-delete-activations",
+        "card-costs",
+        "granted-slots",
+        "public-roll-assignment"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c07",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 7"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 7"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.22, 26–27, 34; settled card/single-free cases only"
+        }
+      ],
+      "records": [
+        "action-card/ak-12km"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "independent-delete-activations",
+        "card-costs",
+        "granted-slots",
+        "public-roll-assignment"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-012",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.22, 26–27, 34; settled card/single-free cases only"
+        }
+      ],
+      "records": [
+        "action-card/weapon-gunhed",
+        "action-card/ak-12km"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "independent-delete-activations",
+        "card-costs",
+        "granted-slots",
+        "public-roll-assignment"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-ABILITY-003",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.22, 26–27, 34; settled card/single-free cases only"
+        }
+      ],
+      "records": [
+        "action-card/weapon-gunhed",
+        "action-card/ak-12km"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "independent-delete-activations",
+        "card-costs",
+        "granted-slots",
+        "public-roll-assignment"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p03-c08",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.26, cumulative once-per-turn symbols"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.26, noncumulative once-per-turn symbols"
+        }
+      ],
+      "records": [
+        "action-card/servocanon"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "single-free-delete",
+        "independent-delete-activations"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-014: English and Spanish disagree on multiple free badges. That route rejects without state/RNG changes; single-free and independent paid routes execute."
+      ]
+    },
+    {
+      "id": "rule/SR-CARD-013",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.26, cumulative once-per-turn symbols"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.26, noncumulative once-per-turn symbols"
+        }
+      ],
+      "records": [
+        "action-card/servocanon"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "single-free-delete",
+        "independent-delete-activations"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-014: English and Spanish disagree on multiple free badges. That route rejects without state/RNG changes; single-free and independent paid routes execute."
+      ]
+    },
+    {
+      "id": "rule/SR-ABILITY-004",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 8"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "p.26, cumulative once-per-turn symbols"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "p.26, noncumulative once-per-turn symbols"
+        }
+      ],
+      "records": [
+        "action-card/servocanon"
+      ],
+      "mechanics": [
+        "printed-delete-strength",
+        "single-free-delete",
+        "independent-delete-activations"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeletePublicFreePaidSharedEvidence"
+          },
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteCancellationAndTakeoverRefund"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "free versus card activations share public-roll evidence"
+          },
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "cancellation defeats every activation"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-014: English and Spanish disagree on multiple free badges. That route rejects without state/RNG changes; single-free and independent paid routes execute."
+      ]
+    },
+    {
+      "id": "rule/SH-THREAT-003",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "p.24, one initiator and pooled printed skulls"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "p.24, one initiator and pooled printed skulls"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "joint-attack",
+        "initiator-activation",
+        "printed-delete-strength"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/delete_attributes_test.go",
+            "contains": "TestPrintedDeleteJointUsesInitiatorAndBareSkullContributor"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/delete-attributes.test.ts",
+            "contains": "joint attack pays only its initiator"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 1"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 4"
+        }
+      ],
+      "records": [
+        "action-card/virus"
+      ],
+      "mechanics": [
+        "attachment-time-control",
+        "effective-class-eligibility",
+        "control-card-transfer",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/malware_control_movement_test.go",
+            "contains": "TestMalwareVirusControlCleanupSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/malware-control-movement.test.ts",
+            "contains": "Virus transfers its eligible target"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-014",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 1"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 4"
+        }
+      ],
+      "records": [
+        "action-card/virus"
+      ],
+      "mechanics": [
+        "attachment-time-control",
+        "effective-class-eligibility",
+        "control-card-transfer",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/malware_control_movement_test.go",
+            "contains": "TestMalwareVirusControlCleanupSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/malware-control-movement.test.ts",
+            "contains": "Virus transfers its eligible target"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c04",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 4"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 5"
+        }
+      ],
+      "records": [
+        "action-card/lima-flag"
+      ],
+      "mechanics": [
+        "movement-entry-restriction",
+        "per-step-validation",
+        "hex-movement",
+        "post-discard-relocation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/malware_control_movement_test.go",
+            "contains": "TestMalwareLimaPathsSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/malware-control-movement.test.ts",
+            "contains": "Lima Flag filters Core entry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-015",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 4"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 5"
+        }
+      ],
+      "records": [
+        "action-card/lima-flag"
+      ],
+      "mechanics": [
+        "movement-entry-restriction",
+        "per-step-validation",
+        "hex-movement",
+        "post-discard-relocation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/malware_control_movement_test.go",
+            "contains": "TestMalwareLimaPathsSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/malware-control-movement.test.ts",
+            "contains": "Lima Flag filters Core entry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-016",
+      "runtime": "planned",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 7"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 6"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "attachment-discard",
+        "persistent-slot-ban"
+      ],
+      "tests": {
+        "go": [],
+        "ts": []
+      },
+      "sandbox": "planned",
+      "gaps": [
+        "T-RULES-015: all-attached-cards discard includes no self-exception; continuing Add-on ban lacks an accepted lifetime/reset policy."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c07",
+      "runtime": "planned",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 7"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 6"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "attachment-discard",
+        "persistent-slot-ban"
+      ],
+      "tests": {
+        "go": [],
+        "ts": []
+      },
+      "sandbox": "planned",
+      "gaps": [
+        "T-RULES-015: all-attached-cards discard includes no self-exception; continuing Add-on ban lacks an accepted lifetime/reset policy."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p02-c08",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 7"
+        }
+      ],
+      "records": [
+        "action-card/trojan"
+      ],
+      "mechanics": [
+        "continuous-controller-hand-reveal",
+        "player-views",
+        "hidden-pile-counts",
+        "authorized-action-options",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/player_view_test.go",
+            "contains": "TestTrojanContinuousRevealSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/player-view.test.ts",
+            "contains": "source-backed continuous reveal"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-017",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 7"
+        }
+      ],
+      "records": [
+        "action-card/trojan"
+      ],
+      "mechanics": [
+        "continuous-controller-hand-reveal",
+        "player-views",
+        "hidden-pile-counts",
+        "authorized-action-options",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/player_view_test.go",
+            "contains": "TestTrojanContinuousRevealSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/player-view.test.ts",
+            "contains": "source-backed continuous reveal"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-ZONE-001",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "page 10, hand and public zones"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "page 10, hand and public zones"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "player-views",
+        "hidden-pile-counts",
+        "event-projection"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/player_view_test.go",
+            "contains": "TestTrojanContinuousRevealSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/player-view.test.ts",
+            "contains": "source-backed continuous reveal"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-005",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "page 15, steps 1–5; pages 26–27, Search activation"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "page 15, steps 1–5; pages 26–27, Search activation"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "search-declaration",
+        "physical-card-cost",
+        "public-block-draw",
+        "pending-placement-choice",
+        "authorized-responder",
+        "bonus-and-threat-placement-timing"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/search_choice_test.go",
+            "contains": "TestSourceSearchSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/search-choice.test.ts",
+            "contains": "commit, public reveal, retry and legal placement"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-MOVE-003",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "committed-movement-roll",
+        "pending-path-choice",
+        "physical-card-cost",
+        "zero-step-stop",
+        "threat-and-stealth-timing"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/movement_choice_test.go",
+            "contains": "TestRolledMovementSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/movement-choice.test.ts",
+            "contains": "public dice, committed marker, occupied pass-through"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-MOVE-004",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "global-movement-cancellation",
+        "card-and-granted-movement",
+        "movement-versus-placement"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/movement_choice_test.go",
+            "contains": "TestRolledMovementSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/movement-choice.test.ts",
+            "contains": "public dice, committed marker, occupied pass-through"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-MOVE-005",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 24–25, movement and activation markers"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "physical-ability-markers",
+        "control-transfer",
+        "attachment-instance-identity",
+        "card-zone-marker-lifetime"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/use_markers_test.go",
+            "contains": "TestPhysicalNativeMarkerControlTransferSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/use-markers.test.ts",
+            "contains": "native uses follow control-card transfer"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-021: discarded attached-card marker removal and physical copy identity through deck/hand reuse remain unresolved; affected reattachment and strict official limited-use bundles reject."
+      ]
+    },
+    {
+      "id": "rule/SR-MOVE-006",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 24–25, up-to fixed/card movement and unused steps"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 24–25, up-to fixed/card movement and unused steps"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "zero-step-movement",
+        "physical-card-cost",
+        "physical-ability-markers",
+        "clamped-allowance",
+        "pure-action-responses",
+        "no-threat-entry"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/zero_movement_test.go",
+            "contains": "TestZeroMovementSharedSnapshotsEventsAndPhysicalCosts"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/zero-movement.test.ts",
+            "contains": "isolated native activation and duplicate physical card payments"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-006",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 13/16, matching pawn spaces and neutral placement"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 13/16, matching pawn spaces and neutral placement"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "neutral-matching-pawn-placement",
+        "common-control-card",
+        "reserve-piece-conservation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/toyeku_test.go",
+            "contains": "TestToyekuNeutralPlacementSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/toyeku.test.ts",
+            "contains": "Search places Idoru on its pawn space without control"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-007",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "A4 page 1, tile 1 (Toyeku Company); rulebook pp12/13/16/21/38"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "A4 page 1, tile 1 (Toyeku Company); rulebook pp12/13/16/21/38"
+        }
+      ],
+      "records": [
+        "block/idoru"
+      ],
+      "mechanics": [
+        "exact-printed-topology",
+        "non-playable-title-zone",
+        "exact-ice-faces",
+        "bonus-corners",
+        "neutral-matching-pawn-placement",
+        "space-defense-shielding"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/toyeku_test.go",
+            "contains": "TestToyekuNeutralPlacementSharedWindowsAndEvents"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/toyeku.test.ts",
+            "contains": "Search places Idoru on its pawn space without control"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-DEFENSE-001",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 13/21/36/38, defense examples, armor and symbology"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 13/21/36/38, defense examples, armor and symbology"
+        }
+      ],
+      "records": [],
+      "mechanics": [
+        "exact-defense-faces",
+        "current-space-shielding",
+        "armor-profile",
+        "all-pawn-combat-routes",
+        "pure-profile-query"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/defense_spaces_test.go",
+            "contains": "TestDefenseSpacesPrintedExamplesArmorAndPureProfiles"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/defense-spaces.test.ts",
+            "contains": "bilingual page21 face-by-face examples and armor precedence"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, top row third card (Idoru)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        }
+      ],
+      "records": [
+        "pawn/idoru",
+        "control-card/idoru-control"
+      ],
+      "mechanics": [
+        "control-card-marker",
+        "pawn-control",
+        "immediate-victory"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/control_markers_test.go",
+            "contains": "TestIdoruAttributesAndSharedControlMarkerEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/control-markers.test.ts",
+            "contains": "Idoru: bilingual attributes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-023/025: marker refill and same-owner reacquisition remain unresolved; common retention is explicitly experimental."
+      ],
+      "id": "asset/sp-en-control-cards-p02-c02"
+    },
+    {
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, top row third card (Idoru)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        }
+      ],
+      "records": [
+        "pawn/idoru",
+        "control-card/idoru-control"
+      ],
+      "mechanics": [
+        "control-card-marker",
+        "pawn-control",
+        "immediate-victory"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/control_markers_test.go",
+            "contains": "TestIdoruAttributesAndSharedControlMarkerEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/control-markers.test.ts",
+            "contains": "Idoru: bilingual attributes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-023/025: marker refill and same-owner reacquisition remain unresolved; common retention is explicitly experimental."
+      ],
+      "id": "rule/SR-PAWN-004"
+    },
+    {
+      "id": "rule/SR-MOVE-007",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "page 14, Direction arrow; p11 Sprawl illustration"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "page 14, Flecha de dirección"
+        }
+      ],
+      "records": [
+        "block/hacktivism",
+        "block/chiba-city"
+      ],
+      "mechanics": [
+        "directed-space-link",
+        "arrow-exception"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/sprawl_test.go",
+            "contains": "TestInternalArrowsDirectionsRotationsExceptionsAndCleanup"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/sprawl.test.ts",
+            "contains": "Internal arrows: forward/reverse links"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-008",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 2"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 2"
+        }
+      ],
+      "records": [
+        "block/hacktivism"
+      ],
+      "mechanics": [
+        "directed-space-link",
+        "defense-space",
+        "global-placement-effect"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/sprawl_test.go",
+            "contains": "TestSprawlGeometryAndSharedCommitmentEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/sprawl.test.ts",
+            "contains": "Sprawl: bilingual page-one geometry"
+          }
+        ]
+      },
+      "sandbox": "partial",
+      "gaps": [
+        "T-RULES-025: marker removal/refill and lost-control acceptance."
+      ]
+    },
+    {
+      "id": "rule/SR-BOARD-009",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 3"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 3"
+        }
+      ],
+      "records": [
+        "block/chiba-city"
+      ],
+      "mechanics": [
+        "directed-space-link",
+        "defense-space",
+        "global-placement-effect"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/sprawl_test.go",
+            "contains": "TestSprawlGeometryAndSharedCommitmentEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/sprawl.test.ts",
+            "contains": "Sprawl: bilingual page-one geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-026: hand shortfalls and global private commitment timing remain unresolved."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p02-c01",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        }
+      ],
+      "records": [
+        "block/antro"
+      ],
+      "mechanics": [
+        "optional-effect-space",
+        "authorized-choice",
+        "physical-attachment-selection",
+        "dependent-slot-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/antro_test.go",
+            "contains": "TestAntroGeometryChoicesAndSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/antro.test.ts",
+            "contains": "Antro: printed geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-027: target scope, stopping/relocation and threat timing remain provisional."
+      ]
+    },
+    {
+      "id": "rule/SR-BOARD-010",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        }
+      ],
+      "records": [
+        "block/antro"
+      ],
+      "mechanics": [
+        "optional-effect-space",
+        "authorized-choice",
+        "physical-attachment-selection",
+        "dependent-slot-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/antro_test.go",
+            "contains": "TestAntroGeometryChoicesAndSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/antro.test.ts",
+            "contains": "Antro: printed geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-027: target scope, stopping/relocation and threat timing remain provisional."
+      ]
+    },
+    {
+      "id": "rule/SR-SPACE-001",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        }
+      ],
+      "records": [
+        "block/antro"
+      ],
+      "mechanics": [
+        "optional-effect-space",
+        "authorized-choice",
+        "physical-attachment-selection",
+        "dependent-slot-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/antro_test.go",
+            "contains": "TestAntroGeometryChoicesAndSharedEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/antro.test.ts",
+            "contains": "Antro: printed geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-027: target scope, stopping/relocation and threat timing remain provisional."
+      ]
+    },
+    {
+      "id": "asset/sp-en-action-cards-p04-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        }
+      ],
+      "records": [
+        "action-card/phase-loop"
+      ],
+      "mechanics": [
+        "acting-icebreaker-dice",
+        "black-ice-immunity",
+        "hand-limit-modifier",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/antro_test.go",
+            "contains": "TestPhaseLoopPrintedAttributesAndBothActingRoutes"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/antro.test.ts",
+            "contains": "Phase-Loop: bilingual printed fields"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-CARD-018",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        }
+      ],
+      "records": [
+        "action-card/phase-loop"
+      ],
+      "mechanics": [
+        "acting-icebreaker-dice",
+        "black-ice-immunity",
+        "hand-limit-modifier",
+        "attachment-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/antro_test.go",
+            "contains": "TestPhaseLoopPrintedAttributesAndBothActingRoutes"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/antro.test.ts",
+            "contains": "Phase-Loop: bilingual printed fields"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p02-c02",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        }
+      ],
+      "records": [
+        "block/electromagnetic-pulse"
+      ],
+      "mechanics": [
+        "controlled-pawn-threshold",
+        "owner-authorized-sacrifice",
+        "public-pawn-commitments",
+        "elimination-cleanup",
+        "reboot-retention",
+        "physical-conservation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/emp_test.go",
+            "contains": "TestEMPGeometryAndSharedSacrificeEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/emp.test.ts",
+            "contains": "EMP: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-029: simultaneous order and retained-pawn sacrifice eligibility; T-RULES-010: sacrifice versus prevention."
+      ]
+    },
+    {
+      "id": "rule/SR-BOARD-011",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        }
+      ],
+      "records": [
+        "block/electromagnetic-pulse"
+      ],
+      "mechanics": [
+        "controlled-pawn-threshold",
+        "owner-authorized-sacrifice",
+        "public-pawn-commitments",
+        "elimination-cleanup",
+        "reboot-retention",
+        "physical-conservation"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/emp_test.go",
+            "contains": "TestEMPGeometryAndSharedSacrificeEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/emp.test.ts",
+            "contains": "EMP: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-029: simultaneous order and retained-pawn sacrifice eligibility; T-RULES-010: sacrifice versus prevention."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p02-c03",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        }
+      ],
+      "records": [
+        "block/copyleft"
+      ],
+      "mechanics": [
+        "all-player-bonus-award",
+        "normal-double-space",
+        "directed-space-link",
+        "defense-space"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/copyleft_test.go",
+            "contains": "TestCopyleftGeometryArtworkAndSharedPhysicalCounterEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/copyleft.test.ts",
+            "contains": "Copyleft: bilingual topology"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-030/031: exhausted reserve and partial fulfillment remain unresolved; full mode/setup acceptance stays open."
+      ]
+    },
+    {
+      "id": "rule/SR-BOARD-012",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        }
+      ],
+      "records": [
+        "block/copyleft"
+      ],
+      "mechanics": [
+        "all-player-bonus-award",
+        "normal-double-space",
+        "directed-space-link",
+        "defense-space"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/copyleft_test.go",
+            "contains": "TestCopyleftGeometryArtworkAndSharedPhysicalCounterEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/copyleft.test.ts",
+            "contains": "Copyleft: bilingual topology"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-030/031: exhausted reserve and partial fulfillment remain unresolved; full mode/setup acceptance stays open."
+      ]
+    },
+    {
+      "id": "rule/SR-BONUS-001",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
+        }
+      ],
+      "records": [
+        "mode/speedrunners"
+      ],
+      "mechanics": [
+        "finite-bonus-supply",
+        "on-icon-counter-allocation",
+        "attachment-investment-refund",
+        "pure-reserve-query",
+        "funded-placement-preview"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/copyleft_test.go",
+            "contains": "TestPhysicalBonusAllocationPriorityTransferAndRefundConservation"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/copyleft.test.ts",
+            "contains": "Bonus pool: icon allocation precedes"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-030/031: exhausted reserve and partial fulfillment remain unresolved; full mode/setup acceptance stays open."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p03-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        }
+      ],
+      "records": [
+        "block/clandestine-broadcast"
+      ],
+      "mechanics": [
+        "controller-core-permission",
+        "explicit-reboot-destination",
+        "control-sensitive-public-query",
+        "special-space-defense",
+        "normal-space-capacity"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/broadcast_test.go",
+            "contains": "TestBroadcastBilingualGeometryAndSharedRebootEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/broadcast.test.ts",
+            "contains": "Broadcast: bilingual special space"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-013",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        }
+      ],
+      "records": [
+        "block/clandestine-broadcast"
+      ],
+      "mechanics": [
+        "controller-core-permission",
+        "explicit-reboot-destination",
+        "control-sensitive-public-query",
+        "special-space-defense",
+        "normal-space-capacity"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/broadcast_test.go",
+            "contains": "TestBroadcastBilingualGeometryAndSharedRebootEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/broadcast.test.ts",
+            "contains": "Broadcast: bilingual special space"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p03-c03",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        }
+      ],
+      "records": [
+        "block/pink-district"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "repeat-placement-relocation",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-resolution-stop",
+        "directed-space-link"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/gynoid_test.go",
+            "contains": "TestGynoidPinkBilingualRecordsAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/gynoid.test.ts",
+            "contains": "Pink District and Gynoid: bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-014",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        }
+      ],
+      "records": [
+        "block/pink-district"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "repeat-placement-relocation",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-resolution-stop",
+        "directed-space-link"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/gynoid_test.go",
+            "contains": "TestGynoidPinkBilingualRecordsAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/gynoid.test.ts",
+            "contains": "Pink District and Gynoid: bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p02-c03",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 3 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 2 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit7; aliases assemble the same single pawn"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/gynoid",
+        "control-card/gynoid-control"
+      ],
+      "mechanics": [
+        "native-pawn-phase-effect",
+        "optional-target-choice",
+        "seeded-physical-hand-theft",
+        "historical-reveal-privacy",
+        "phase-suspension-and-marker-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/gynoid_test.go",
+            "contains": "TestGynoidPhysicalRandomTheftAndHistoricalPrivacy"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/gynoid.test.ts",
+            "contains": "Gynoid: accepted theft transfers"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-005: simultaneous native/attached beginning-effect order remains unresolved; official native phase construction stays gated independently of provisional flags."
+      ]
+    },
+    {
+      "id": "rule/SR-PAWN-005",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 3 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 2 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit7; aliases assemble the same single pawn"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/gynoid",
+        "control-card/gynoid-control"
+      ],
+      "mechanics": [
+        "native-pawn-phase-effect",
+        "optional-target-choice",
+        "seeded-physical-hand-theft",
+        "historical-reveal-privacy",
+        "phase-suspension-and-marker-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/gynoid_test.go",
+            "contains": "TestGynoidPhysicalRandomTheftAndHistoricalPrivacy"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/gynoid.test.ts",
+            "contains": "Gynoid: accepted theft transfers"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-005: simultaneous native/attached beginning-effect order remains unresolved; official native phase construction stays gated independently of provisional flags."
+      ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p04-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        }
+      ],
+      "records": [
+        "block/yakuza"
+      ],
+      "mechanics": [
+        "optional-block-attack",
+        "adjacent-block-target-choice",
+        "target-before-one-skull-roll",
+        "single-defender-reaction",
+        "directed-space-links",
+        "printed-defense-faces"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/yakuza_test.go",
+            "contains": "TestYakuzaBilingualGeometryAndSharedAttackPreventionEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/yakuza.test.ts",
+            "contains": "Yakuza: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-015",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        }
+      ],
+      "records": [
+        "block/yakuza"
+      ],
+      "mechanics": [
+        "optional-block-attack",
+        "adjacent-block-target-choice",
+        "target-before-one-skull-roll",
+        "single-defender-reaction",
+        "directed-space-links",
+        "printed-defense-faces"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/yakuza_test.go",
+            "contains": "TestYakuzaBilingualGeometryAndSharedAttackPreventionEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/yakuza.test.ts",
+            "contains": "Yakuza: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p04-c02",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru: marker counts as in Cybernet)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, third card in top row (Idoru: counted Cybernet marker)"
+        }
+      ],
+      "records": [
+        "block/corporate-scandal"
+      ],
+      "mechanics": [
+        "exclusive-cybernet-marker-threshold",
+        "counted-control-card-marker",
+        "whole-hand-public-discard",
+        "played-payment-before-capture-effects",
+        "repeat-takeover-timing",
+        "printed-defense-face"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/corporate_scandal_test.go",
+            "contains": "TestCorporateScandalBilingualGeometryPhysicalThresholdsAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/corporate-scandal.test.ts",
+            "contains": "Corporate Scandal: bilingual source geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-016",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru: marker counts as in Cybernet)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, third card in top row (Idoru: counted Cybernet marker)"
+        }
+      ],
+      "records": [
+        "block/corporate-scandal"
+      ],
+      "mechanics": [
+        "exclusive-cybernet-marker-threshold",
+        "counted-control-card-marker",
+        "whole-hand-public-discard",
+        "played-payment-before-capture-effects",
+        "repeat-takeover-timing",
+        "printed-defense-face"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/corporate_scandal_test.go",
+            "contains": "TestCorporateScandalBilingualGeometryPhysicalThresholdsAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/corporate-scandal.test.ts",
+            "contains": "Corporate Scandal: bilingual source geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p04-c03",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        }
+      ],
+      "records": [
+        "block/black-clinic"
+      ],
+      "mechanics": [
+        "mandatory-cybernet-pawn-choice",
+        "all-physical-attachment-discard",
+        "nested-slot-cleanup-and-refunds",
+        "continuous-benefit-and-reveal-cleanup",
+        "current-space-hand-size-profile",
+        "recycle-hand-limit",
+        "unlimited-special-space",
+        "directed-space-link"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/black_clinic_test.go",
+            "contains": "TestBlackClinicBilingualGeometryDecisionsCleanupAndHandRecyclingSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/black-clinic.test.ts",
+            "contains": "Black Clinic: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-017",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        }
+      ],
+      "records": [
+        "block/black-clinic"
+      ],
+      "mechanics": [
+        "mandatory-cybernet-pawn-choice",
+        "all-physical-attachment-discard",
+        "nested-slot-cleanup-and-refunds",
+        "continuous-benefit-and-reveal-cleanup",
+        "current-space-hand-size-profile",
+        "recycle-hand-limit",
+        "unlimited-special-space",
+        "directed-space-link"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/black_clinic_test.go",
+            "contains": "TestBlackClinicBilingualGeometryDecisionsCleanupAndHandRecyclingSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/black-clinic.test.ts",
+            "contains": "Black Clinic: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-TURN-008",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        }
+      ],
+      "records": [
+        "block/black-clinic"
+      ],
+      "mechanics": [
+        "mandatory-cybernet-pawn-choice",
+        "all-physical-attachment-discard",
+        "nested-slot-cleanup-and-refunds",
+        "continuous-benefit-and-reveal-cleanup",
+        "current-space-hand-size-profile",
+        "recycle-hand-limit",
+        "unlimited-special-space",
+        "directed-space-link"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/black_clinic_test.go",
+            "contains": "TestBlackClinicBilingualGeometryDecisionsCleanupAndHandRecyclingSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/black-clinic.test.ts",
+            "contains": "Black Clinic: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p05-c01",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/engineering-war",
+        "pawn/drone-mk-2",
+        "control-card/drone-mk-2-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "ownership-sensitive-module-cleanup",
+        "native-movement-use-preservation",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/engineering_war_test.go",
+            "contains": "TestEngineeringWarMK2BilingualSourceMovementCombatAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/engineering-war.test.ts",
+            "contains": "Engineering War / Drone MK-2: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-018",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/engineering-war",
+        "pawn/drone-mk-2",
+        "control-card/drone-mk-2-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "ownership-sensitive-module-cleanup",
+        "native-movement-use-preservation",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/engineering_war_test.go",
+            "contains": "TestEngineeringWarMK2BilingualSourceMovementCombatAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/engineering-war.test.ts",
+            "contains": "Engineering War / Drone MK-2: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p02-c04",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-mk-2",
+        "control-card/drone-mk-2-control"
+      ],
+      "mechanics": [
+        "native-five-step-free-movement",
+        "paid-movement-fallback",
+        "card-delete-one-skull",
+        "public-roll-before-assignment",
+        "physical-control-card-use-markers",
+        "module-eligibility-cost-and-cleanup",
+        "non-reboot-reserve-release"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/engineering_war_test.go",
+            "contains": "TestEngineeringWarMK2BilingualSourceMovementCombatAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/engineering-war.test.ts",
+            "contains": "Engineering War / Drone MK-2: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-006",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-mk-2",
+        "control-card/drone-mk-2-control"
+      ],
+      "mechanics": [
+        "native-five-step-free-movement",
+        "paid-movement-fallback",
+        "card-delete-one-skull",
+        "public-roll-before-assignment",
+        "physical-control-card-use-markers",
+        "module-eligibility-cost-and-cleanup",
+        "non-reboot-reserve-release"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/engineering_war_test.go",
+            "contains": "TestEngineeringWarMK2BilingualSourceMovementCombatAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/engineering-war.test.ts",
+            "contains": "Engineering War / Drone MK-2: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p05-c02",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/combat-prototypes",
+        "pawn/drone-probe",
+        "control-card/drone-probe-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "four-entrance-rotation",
+        "ownership-sensitive-module-cleanup",
+        "independent-native-use-preservation",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_probe_test.go",
+            "contains": "TestCombatPrototypesDroneProbeBilingualSourceSearchMovementAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-probe.test.ts",
+            "contains": "Combat Prototypes / Drone Probe: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-019",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/combat-prototypes",
+        "pawn/drone-probe",
+        "control-card/drone-probe-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "four-entrance-rotation",
+        "ownership-sensitive-module-cleanup",
+        "independent-native-use-preservation",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_probe_test.go",
+            "contains": "TestCombatPrototypesDroneProbeBilingualSourceSearchMovementAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-probe.test.ts",
+            "contains": "Combat Prototypes / Drone Probe: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p02-c07",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-probe",
+        "control-card/drone-probe-control"
+      ],
+      "mechanics": [
+        "native-free-search-reveal-before-placement",
+        "hidden-safe-pure-search-options",
+        "native-five-step-free-movement",
+        "paid-movement-fallback",
+        "independent-physical-control-card-use-markers",
+        "module-eligibility-cost-and-cleanup",
+        "non-reboot-reserve-release"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_probe_test.go",
+            "contains": "TestCombatPrototypesDroneProbeBilingualSourceSearchMovementAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-probe.test.ts",
+            "contains": "Combat Prototypes / Drone Probe: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-007",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-probe",
+        "control-card/drone-probe-control"
+      ],
+      "mechanics": [
+        "native-free-search-reveal-before-placement",
+        "hidden-safe-pure-search-options",
+        "native-five-step-free-movement",
+        "paid-movement-fallback",
+        "independent-physical-control-card-use-markers",
+        "module-eligibility-cost-and-cleanup",
+        "non-reboot-reserve-release"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_probe_test.go",
+            "contains": "TestCombatPrototypesDroneProbeBilingualSourceSearchMovementAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-probe.test.ts",
+            "contains": "Combat Prototypes / Drone Probe: exact bilingual records"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p05-c03",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/military-development",
+        "pawn/drone-turret",
+        "control-card/drone-turret-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "ownership-sensitive-module-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_turret_test.go",
+            "contains": "TestMilitaryDevelopmentTurretBilingualSourceOffTurnAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-turret.test.ts",
+            "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-020",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "block/military-development",
+        "pawn/drone-turret",
+        "control-card/drone-turret-control"
+      ],
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "ownership-sensitive-module-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_turret_test.go",
+            "contains": "TestMilitaryDevelopmentTurretBilingualSourceOffTurnAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-turret.test.ts",
+            "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p02-c08",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-turret",
+        "control-card/drone-turret-control"
+      ],
+      "mechanics": [
+        "typed-any-player-turn-ability-permission",
+        "controller-owned-public-roll-and-assignment",
+        "no-movement-activation",
+        "private-pure-controller-options",
+        "separate-module-free-delete",
+        "physical-control-and-elimination-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_turret_test.go",
+            "contains": "TestMilitaryDevelopmentTurretBilingualSourceOffTurnAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-turret.test.ts",
+            "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-008",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        }
+      ],
+      "records": [
+        "pawn/drone-turret",
+        "control-card/drone-turret-control"
+      ],
+      "mechanics": [
+        "typed-any-player-turn-ability-permission",
+        "controller-owned-public-roll-and-assignment",
+        "no-movement-activation",
+        "private-pure-controller-options",
+        "separate-module-free-delete",
+        "physical-control-and-elimination-cleanup"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_turret_test.go",
+            "contains": "TestMilitaryDevelopmentTurretBilingualSourceOffTurnAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-turret.test.ts",
+            "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-TURN-009",
+      "runtime": "implemented",
+      "sources": [
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "page 8 (played cards remain face up until the recycling phase of your turn), pages 20, 24, 30 (Turret permission, indivisible movement and card uses)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "page 8 (played cards remain face up until the recycling phase of your turn), pages 20, 24, 30 (Turret permission, indivisible movement and card uses)"
+        }
+      ],
+      "records": [
+        "pawn/drone-turret",
+        "control-card/drone-turret-control"
+      ],
+      "mechanics": [
+        "played-card-controller-ownership",
+        "physical-duplicate-conservation",
+        "controller-specific-recycling",
+        "pending-action-noninterleaving"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/drone_turret_test.go",
+            "contains": "TestMilitaryDevelopmentTurretBilingualSourceOffTurnAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/drone-turret.test.ts",
+            "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p06-c01",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        }
+      ],
+      "records": [
+        "block/arms-industry"
+      ],
+      "mechanics": [
+        "physical-block-bonus-placement",
+        "one-time-existing-counter-transfer",
+        "combined-icon-and-block-reserve-funding",
+        "public-detached-counter-receipt",
+        "black-ice-and-prevention",
+        "current-stopped-pawn-hand-limit",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/arms_industry_test.go",
+            "contains": "TestArmsIndustryBilingualFundedPlacementCollectionAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/arms-industry.test.ts",
+            "contains": "Arms Industry: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-031: reserve exhaustion/partial fulfillment is not sourced; strict official construction remains gated.",
+        "T-RULES-047: funded behavior executes in both mirrors and sandbox; do not declare the component or mode fully accepted."
+      ]
+    },
+    {
+      "id": "rule/SR-BOARD-021",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        }
+      ],
+      "records": [
+        "block/arms-industry"
+      ],
+      "mechanics": [
+        "physical-block-bonus-placement",
+        "one-time-existing-counter-transfer",
+        "combined-icon-and-block-reserve-funding",
+        "public-detached-counter-receipt",
+        "black-ice-and-prevention",
+        "current-stopped-pawn-hand-limit",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/arms_industry_test.go",
+            "contains": "TestArmsIndustryBilingualFundedPlacementCollectionAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/arms-industry.test.ts",
+            "contains": "Arms Industry: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-031: reserve exhaustion/partial fulfillment is not sourced; strict official construction remains gated.",
+        "T-RULES-047: funded behavior executes in both mirrors and sandbox; do not declare the component or mode fully accepted."
+      ]
+    },
+    {
+      "id": "rule/SR-BONUS-002",
+      "runtime": "partial",
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        }
+      ],
+      "records": [
+        "block/arms-industry"
+      ],
+      "mechanics": [
+        "physical-block-bonus-placement",
+        "one-time-existing-counter-transfer",
+        "combined-icon-and-block-reserve-funding",
+        "public-detached-counter-receipt",
+        "black-ice-and-prevention",
+        "current-stopped-pawn-hand-limit",
+        "immediate-victory-effect-stop"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/arms_industry_test.go",
+            "contains": "TestArmsIndustryBilingualFundedPlacementCollectionAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/arms-industry.test.ts",
+            "contains": "Arms Industry: bilingual geometry"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": [
+        "T-RULES-031: reserve exhaustion/partial fulfillment is not sourced; strict official construction remains gated.",
+        "T-RULES-047: funded behavior executes in both mirrors and sandbox; do not declare the component or mode fully accepted."
+      ]
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
-import { basename, extname, join, resolve } from "node:path";
+import { basename, extname, join, resolve, sep } from "node:path";
 import { editorCoverageCatalog } from "./coverage.ts";
 import { buildActionCardPatch, buildPatch, migrateSession, sha256, validateActionDeck, validateDocument, type ActionCardDocument, type AssetRecord, type BlockLayout, type EditorDocument, type EditorSession, type HexVisionTile } from "./model";
-import { createPlayScenario, createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, importPlayTrace, listPlayScenarios, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
+import { createPlayScenario, createPlaySession, exportPlayTrace, getMovementOptions, getPlaySession, getPlayPlayerView, importPlayTrace, listPlayScenarios, resetPlaySession, submitPlayCommand, undoPlayCommand, type PlayCommand, type PlaySetup, type PlayTrace } from "./play";
 
 const editorRoot = import.meta.dir;
 const repoRoot = resolve(editorRoot, "../..");
@@ -109,6 +109,7 @@ const server = Bun.serve({
   async fetch(request) {
     const url = new URL(request.url);
     try {
+      if (url.pathname === "/api/play/health" && request.method === "GET") return json({ service: "zaibatsu-play", status: "ok" });
       if (url.pathname === "/api/assets") return json({ assets: assetRecords() });
       if (url.pathname === "/api/coverage") return json(editorCoverageCatalog());
       // Play sessions are intentionally in-memory. These routes never write
@@ -131,6 +132,7 @@ const server = Bun.serve({
         if (!id) return json({ error: "Invalid play session id" }, 400);
         try {
           if (suffix.length === 1 && request.method === "GET") return json(getPlaySession(id));
+          if (suffix[1] === "player-view" && request.method === "GET") return json(getPlayPlayerView(id,url.searchParams.get("viewer")??""));
           if (suffix[1] === "command" && request.method === "POST") return json(submitPlayCommand(id, await body<PlayCommand>(request)));
           if (suffix[1] === "movement-options" && request.method === "POST") {
             const payload = await body<{ pawnId: string; path: unknown; cardId?: string; movementIndex?: number }>(request);
@@ -139,7 +141,12 @@ const server = Bun.serve({
           if (suffix[1] === "undo" && request.method === "POST") return json(undoPlayCommand(id));
           if (suffix[1] === "reset" && request.method === "POST") return json(resetPlaySession(id, await body<PlaySetup>(request)));
           if (suffix[1] === "trace" && request.method === "GET") return json(exportPlayTrace(id));
-        } catch (error) { return json({ error: error instanceof Error ? error.message : "Play session error" }, 400); }
+        } catch (error) {
+          const message = error instanceof Error ? error.message : "Play session error";
+          return message === "Play session not found"
+            ? json({ error: message, code: "session-expired" }, 404)
+            : json({ error: message }, 400);
+        }
       }
       if (url.pathname === "/api/block-assets") return json({ assets: blockAssets() });
       if (url.pathname === "/api/action-card-assets") return json({ assets: actionCardAssets() });
@@ -180,7 +187,7 @@ const server = Bun.serve({
         const patch = isBlock ? buildPatch(payload.document, base ?? "") : buildActionCardPatch(payload.document, base); const report = { format: "zaibatsu-editor-report/v2", generatedAt: new Date().toISOString(), documentId: payload.document.id, assetId: payload.document.source.assetId, knowledge: payload.document.knowledge ?? null, vision: visionFor(assetRecords().find((item) => item.assetId === payload.document.source.assetId)!), validation: { errors }, patchSha256: sha256(JSON.stringify(patch)) };
         await Bun.write(join(exportsRoot, `${name}.patch.json`), `${JSON.stringify(patch, null, 2)}\n`); await Bun.write(join(exportsRoot, `${name}.report.json`), `${JSON.stringify(report, null, 2)}\n`); return json({ ok: true, patch: `tools/block-editor/exports/${name}.patch.json`, report: `tools/block-editor/exports/${name}.report.json` });
       }
-      if (url.pathname.startsWith("/api/artifact/")) { const assetId = decodeURIComponent(url.pathname.slice("/api/artifact/".length)); const asset = assetRecords().find((record) => record.assetId === assetId); const output = asset?.outputs?.png ? resolve(repoRoot, asset.outputs.png) : null; if (!asset || !output || !output.startsWith(repoRoot) || !existsSync(output)) return json({ error: "Local extracted image is unavailable. Run the artifact refresh first." }, 404); return new Response(Bun.file(output), { headers: { "Content-Type": contentType(output), "Cache-Control": "no-store" } }); }
+      if (url.pathname.startsWith("/api/artifact/")) { const assetId = decodeURIComponent(url.pathname.slice("/api/artifact/".length)); const asset = manifest().assets.find((record) => record.assetId === assetId); const output = asset?.outputs?.png ? resolve(repoRoot, asset.outputs.png) : null; if (!asset || !output || !output.startsWith(`${repoRoot}${sep}`) || !existsSync(output)) return json({ error: "Local extracted image is unavailable. Run the artifact refresh first." }, 404); return new Response(Bun.file(output), { headers: { "Content-Type": contentType(output), "Cache-Control": "no-store" } }); }
       const requested = url.pathname === "/" ? "index.html" : url.pathname === "/action-cards" || url.pathname === "/action-cards/" ? "action-cards/index.html" : url.pathname === "/play" || url.pathname === "/play/" ? "play/index.html" : url.pathname.slice(1); const file = resolve(publicRoot, requested); if (!file.startsWith(publicRoot) || !existsSync(file)) return new Response("Not found", { status: 404 }); return new Response(Bun.file(file), { headers: { "Content-Type": contentType(file) } });
     } catch (error) { return json({ error: error instanceof Error ? error.message : "Unexpected editor error" }, 500); }
   },

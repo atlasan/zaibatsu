@@ -1,4 +1,4 @@
-# Shadowraiders data (structure prepared; records pending)
+# Shadowraiders data (partial component transcription)
 
 Reserved for the Shadowraiders expansion content: blocks (with event / drone
 threat spaces), Shadowraider + mercenary pawns, threat tokens, mission cards,
@@ -11,9 +11,12 @@ extensions for threats and missions are already tracked under `spec/schema/`.
 The repository now keeps explicit empty shells for:
 
 - `control-cards.json`
-- `threats.json`
+- `threats.json` now contains the directly reviewed Guard drone from rulebook p.21.
 - `missions.json`
 
 Those files document the canonical structure the loaders expect while making it
 clear that record-level transcription and provenance are still pending. Tracked
 work remains in `tasks/BACKLOG.md`.
+
+`loadThreats` / `LoadThreats` read the validated threat sidecar. A complete
+expansion bundle and executable solo/team modes remain in T-PLAY-002.

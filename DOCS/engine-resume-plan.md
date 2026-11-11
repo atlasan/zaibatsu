@@ -1,78 +1,204 @@
-# Engine resume plan (paused pending Phase-2 content)
+# Engine completion workstream
 
-The Speedrunners **core engine is complete for the provisional seed data** and is
-**paused**. The remaining Phase-1 engine items are blocked only because the
-provisional `spec/data/speedrunners/*` lacks geometric/effect detail. This doc is
-the fast-resume checklist: when real content lands, each item below has its
-unblock signal, approach, files, and verification already worked out.
+The accepted delivery order is Speedrunners, Shadowraiders, then Total War, Strategic Alliance, Cyber-Revolution, Chaos, Outbreak and Total War–Chaos. Each rule completes source review, schema/data, both engines, tests, sandbox integration and delivery evidence before its task closes. Live status belongs to [the backlog](../tasks/BACKLOG.md); mirror evidence belongs to [parity](parity.md).
 
-## Resume trigger
-Pick this back up when `spec/data/speedrunners/**` carries **real records** —
-i.e. `"provisional": true` is being removed and blocks/pawns/cards start
-populating the fields each item needs (below). The block schema already has
-`boundarySpaces`; watch for it (and the others) getting real values.
+## Ordered delivery gates
 
-## Standing rules for every item
-Land on **both** mirrors (Go `internal/engine`, TS `src/engine`) · update
-[`parity.md`](parity.md) symbols + status · add a `golden/*.snap` scenario (both
-mirrors assert it) · keep `go test`, `bun test`, `tsc`, `validate-spec`,
-`verify-artifacts` green · verify the new state is byte-identical across mirrors
-before committing (the usual cross-check).
+1. Freeze the current provisional corpus and establish the source/rule/component checklist. Reconcile physical copies, aliases and exact locators without promoting review observations automatically.
+2. Verify Core and starters, then complete the official board graph, ICE, bonus corners, pools, card/control zones and marker accounting. Keep precise unreviewed topology provisional.
+3. Add typed effect sequencing, pending player choices and source-permitted reactions. Preserve atomic rejection/RNG rollback and roll-before-assignment combat. Resolve phase effects before advancing past required choices.
+4. Complete all Speedrunners blocks, pawns, control cards and 54 action cards, including marker-on-card rules, control effects, attachment lifecycle and special pawn abilities. Prove an ordinary official match to victory.
+5. Complete Shadowraiders content, threats, stealth restrictions, mercenaries, Core 02/directions, missions, tags, cargo, counters, medals and rewards. Prove standard expansion setup and outcomes.
+6. Complete each remaining mode in the stated order, including combined components, multiple cores, teams and prescribed solo behavior. Each requires setup-to-outcome replay evidence in both mirrors.
 
-## Data-gated items
+## Per-item acceptance
 
-### 1. Space-to-space movement
-- **Needs:** `boundarySpaces` on blocks (which local space(s) sit on each of the
-  6 edges) + intra-block space adjacency (which spaces connect within a block).
-- **Approach:** build a space graph — intra-block adjacency from the block data,
-  cross-block edges by joining the boundary spaces of two edge-connected placed
-  blocks. Execute `steps`/`d6`/`2d6` over it: pass through occupied spaces, only
-  *end* where `CanEndOn` allows, unused steps lost, no interleaving. `ResolveSteps`
-  already gives the budget.
-- **Files:** `domain` (space-graph helpers on Cybernet), `engine/movement.{go,ts}`
-  (`MoveSteps`/`moveSteps` + a path or step-by-step API), `movement` tests, golden.
-- **Then unblocks:** card-activated movement — add a `move`/`play-move` case to the
-  unified `Apply` and a `PlayMove` in `cards`.
+Use primary English artwork/rulebook and Spanish cross-checks. Record uncertain interpretations and leave affected items provisional while independent work continues. Never infer a missing numeric symbol or source geometry.
 
-### 2. Apply attached effects in resolution
-- **Needs:** card-effect fields on `ActionCard`/`Attach` — armor `defenseDice`,
-  weapon skull bonus, gadget/ability grants, movement grants, hand-size + ICE
-  modifiers.
-- **Approach:** add effective-* helpers and thread them through resolvers:
-  `EffectiveDefense(pob)` (armor **replaces** defense dice and **nullifies** ICE),
-  `EffectiveSkulls` (weapon adds; used by `Delete`/`DeleteMulti`),
-  `EffectiveIce` (armor → none; used by `IcebreakPawn`), effective movement/
-  abilities/hand-size. `EffectivePawnClasses` already exists as the template.
-- **Files:** `domain` (card-effect fields), `engine/attach.{go,ts}` (effective-*),
-  wire into `combat`/`icebreaker`/`movement`, tests, golden.
+Schema changes precede content changes. Gameplay data is shared; code handlers and tests are mirrored. Keep content definitions separate from runtime instances, and UI/bot integrations on the same action/event/query contracts. Model pending effects/choices in snapshots and clones as they arrive.
 
-### 3. Bonus fragments → bonus icons → bonus counters
-- **Needs:** per-corner fragment data on blocks (which of the 6 corners carry a
-  ⅓ fragment) — today `bonusFragments` is only a count.
-- **Approach:** on block placement, check each shared vertex (3 hexes meet at a
-  vertex); if all three placed blocks expose a fragment at that corner, a bonus
-  icon forms → place a bonus counter. Collected when one player controls all
-  three blocks. This feeds attach costs (item 2) and the economy.
-- **Files:** `domain` (hex-vertex model + corner exposure by rotation),
-  `engine/placement.{go,ts}` (post-place icon detection), collection on
-  Icebreaker control, tests, golden.
+Run both engine suites, TypeScript checking, documentation/spec/artifact verification, checklist freshness and frozen-fixture verification. Add shared golden scenarios and ordered-event evidence, interaction tests, and applicable browser controls/replay checks. CI enforces the repeatable checks.
 
-### 4. Real ICE die faces (replace provisional `IceFaces`)
-- **Needs:** actual ICE die faces on blocks/pawns (today derived from the
-  low/medium/high/black category).
-- **Approach:** `IceFaces` reads real faces; implement ICE-value modifiers
-  (add specific winning numbers, with redundancy handling per the rulebook).
-- **Files:** `domain` (ice faces field), `engine/icebreaker.{go,ts}`, tests.
+No mode is complete while its required content, effects or interpretations remain provisional. Visual polish, public hosting, native/network clients and general-purpose bots remain later integration targets.
 
-## Not data-gated (can be done any time)
-- Multi-dice concentration on one target + area attacks (Bomb class / block effects).
-- Card-activated movement + attach via the unified `Apply` (attach resolvers exist;
-  just add action cases) — partly waits on item 1 for move.
-- CI: run both test suites + `tsc` + `validate-spec` + `verify-artifacts` + the
-  golden/demo parity on every change.
 
-## State at pause
+Current phase-family progress includes six single-card obligations, pending discard/relocation decisions, sacrifice/draw and generic combat-interrupted phase resumption. These are tested in both mirrors and exposed in Test Lab; SR-TURN-007 and T-RULES-005/007/008 retain unresolved interactions. Continue source-ordered independent card families and the revoked block replacements while those interpretations await evidence.
 
-This is a workstream guide, not a live status record. Check
-[`tasks/BACKLOG.md`](../tasks/BACKLOG.md) for ordered work and
-[`parity.md`](parity.md) for current mirror coverage before resuming an item.
+
+The lifecycle prerequisite now distinguishes reserve, retained Reboot and excluded starter pieces, with explicit physical card zones. Dummy adds the first typed elimination-replacement response, including non-active controllers. Shared tests cover cleanup, costs, repeated attacks, area/Black ICE, beginning retaliation and full rejection rollback; source gaps remain in SR-CARD-007. T-RULES-011 tracks the setup die procedure exposed by re-audit, and T-RULES-012 tracks class/slot lifecycle before dependent cards.
+
+
+The reviewed own-class prerequisite also executes (SR-CARD-008). Re-audit corrected Gentleman Loser from an incorrect Icebreaker-triggered Cracker pilot to a provisional Block attachment; T-RULES-013 now owns its geometry/choice implementation. Continue this dependency alongside exact block topology, remaining target-class/slot cleanup and the printed card order.
+
+Attachment integration now uses source protocol v2 physical slot references (ADR-0008/SR-CARD-011). Both queries and sandbox enumerate actual locations, and phase/prevention removals cascade through providers. Full source-mode completion remains open. Next T-RULES-012 work is the printed Gunhed/weapon/module corpus and cumulative Delete strength/activation semantics; preserve the synthetic slot fixtures as generic evidence and the frozen regression corpus unchanged.
+
+Printed Delete now separates strength from activation (SR-ABILITY-003). Gunhed and AK-12kM replace/add their verified live records, and Servocanon executes settled single-free behavior but stays provisional under the newly exposed bilingual p.26 conflict (T-RULES-014). Source joint attacks use one initiator and bare-skull contributors. Continue the printed content order and remaining attachment/control exceptions; do not treat these focused goldens as a complete ordinary-setup victory replay.
+
+Virus and Lima Flag now execute under SR-CARD-014/015 with shared snapshot/event evidence, source-backed records and sandbox controls. The common source Enemy-target check now excludes neutral pawns. Spammer is explicitly isolated under T-RULES-015 because the bilingual all-cards discard and continuing Add-on ban lack accepted persistence/self-discard semantics. Next independent work is Trojan and engine-owned player-view masking/reveal under T-RULES-016; avoid claiming reveal support from the existing trusted local operator/debug state.
+
+
+The **Ability markers follow control** Test Lab scenario uses a synthetic Cleaner/free-movement target that has already spent its use. Attach Virus, inspect **Used abilities**, then advance both turns to Ada's beginning to clear the now-controlled marker. Options, inspector allocations and mark/clear/retained events come from the engine. Export/import and undo preserve marker state; prior source-v4 checksums reject. Marked discarded attachments retain unresolved evidence, shown as an inspector notice; affected reattachment is unavailable. This does not adopt a discard/reset ruling or promote the synthetic pawn. T-RULES-021 owns that remaining lifecycle and full deck/hand physical-copy identity; T-RULES-020 now completes the independent zero-step activation rule; continue source-ordered printed components.
+
+
+The **Spend movement without taking a step** Test Lab fixture gives Ada synthetic free fixed movement on the isolated Central Core. Select that movement and execute with no steps to spend its marker; select **Play Uplink: Move 1** and execute with no steps to spend one of two physical Uplink cards. The status explains that current-space finish spends the activation. Fixed/card actions now use engine-owned options, including zero allowance and isolation. Preview, replay and undo preserve both costs and RNG; empty source movement does not awaken threats. The frozen quick-match controls retain their old one-step minimum. Source protocol v6 invalidates earlier source checksums. T-RULES-020 is complete; continue source-ordered independent components while T-RULES-021 remains unresolved.
+
+
+Previous marker/zero-step checkpoint: 310 Bun tests and 34 browser checks passed. The Toyeku/defense delivery extends that baseline; its current validation is recorded below.
+
+
+The **Toyeku and neutral Idoru** Test Lab fixture uses the real first block. Play DJ: Search, place the revealed tile, then use Dummy's two steps to enter the Idoru pawn space and move onto **defense**. Idoru stays uncontrolled with its card in common; the runner's inspector now shows vulnerable face1 while the block keeps ICE3/4/6. All placement/option/profile data comes from the engine, with replay/undo and neutral journal wording. The fixture explicitly leaves Idoru's own pawn abilities provisional.
+
+In the block editor, **Non-playable title / art zones** accounts for source regions with no gameplay space. Toyeku excludes h1; do not add a phantom center space. Select the **defense** modifier and author each **Defense face** as unchanged, black/shielded or white/unshielded, rather than entering a numeric amount or ICE modifier. The **place-neutral-pawn** effect requires its matching pawn-space id/target on placement. Save/load and patches retain both fields. Geometry helpers respect excluded zones; explicit seven-zone prefill and Clear all reset exclusions. Source protocol v7 rejects earlier source checksums; frozen quick-match traces stay compatible.
+
+
+Toyeku/defense validation checkpoint: 322 Bun tests, all Go packages, TypeScript checking and 36 browser checks pass. Source/spec/documentation/artifact checks and the 228-asset review sidecars verify; 55 local originals and all 22 frozen fixture files retain their recorded evidence. The checklist now has 298 items and 43 source-verified implemented claim rows, not a completion percentage. Next shared prerequisite: Idoru marker allocations under T-RULES-023, then Hacktivism and Sprawl in printed order; no full mode is accepted yet.
+
+Idoru/control-card marker checkpoint: the bilingual card pass corrected the pilot to no class/abilities, shielded1/white2–6, ICE1/6 (not the old misread5), card movement and Add-on/Armor. Typed actual acquisition now allocates one counted marker on the control card; other-owner transfer returns the old marker before the new allocation, and the last marker wins immediately. Snapshots, cloning, public projections, pure physical-location queries, costs/refunds and semantic events include this allocation. The source-v8 checksum rejects earlier source rules while frozen bytes remain unchanged.
+
+The **Idoru control-card marker** Test Lab fixture stages neutral Idoru on Toyeku and a one-marker victory. Existing Icebreaker controls execute the engine operation. Inspector/card-zone panels show counted card markers and exact pawn ICE; victory, replay/recovery and undo pass browser checks. The host exact-ICE target filter now recognizes verified faces without requiring a legacy category. Marker effects also compose with attachment takeover; a synthetic Cleaner eligibility test verifies Virus's return/control/placement journal order without promoting that class onto the real pawn.
+
+Final validation for this checkpoint: **330 Bun tests**, all Go packages, type checking and **37 browser checks** pass. Docs/spec/artifact checks verify **55 local originals**, **22 unchanged frozen files**, and **228 assets/557 parts/62 archive members**. Knowledge outputs contain329 entries/1880 relations; the checklist has299 items/43 fully source-verified implemented claim rows. The new Idoru rule is partial and does not increase the completed-row count.
+
+T-RULES-023 remains partial, with T-RULES-025 owning marker refill/reset after removal and same-owner marked common-card reacquisition. The literal experimental reading retains a marker when a non-Reboot card returns to common; reacquisition by that marker's owner rejects rather than guessing. This does not establish complete Idoru or Hacktivism. Recheck cataloged authoritative clarifications for that dependency; continue independent source-ordered block work (Sprawl) if it remains unresolved. Starting-roll ties T-RULES-022 and all other recorded gaps remain open. No ordinary official mode is accepted yet.
+
+Internal-arrow/Sprawl checkpoint: page-one Hacktivism and Sprawl now replace the revoked seven-circle pilots with bilingual five-space rings around excluded h1, exact double capacities and boundaries, ICE2/5/6 or2/4/6, defense2/3 or3, and bonus V2–V6 or V1/V2/V3/V6. Their internal arrows use typed from/to links over the physical graph. Both mirrors permit the forward link, bar the reverse, preserve alternate/rotated cross-edge exits and apply Octagon's attachment exception through removal. Source/schema/constructor/editor validation checks endpoints and orientation. SR-MOVE-007 is implemented; both full tiles remain provisional for their effect gaps.
+
+Sprawl's typed placement effect now collects each affected player's own physical hand commitment privately. It counts controlled cards for retained pawns, permits either authorized response order, preserves hands/piles until everyone submits, then publishes each physical discard once in stable seat/hand order. Snapshot/clone/recovery retain trusted selections; public views expose counts/submission status and only the viewer's own options. Normal action/phase interleaving, stale/wrong/extra choices and hand shortfalls reject without losing state/RNG. Shortfalls preserve the already-paid revealed Search. Hacktivism records its actual typed marker-removal instruction and explicitly rejects it pending T-RULES-025, rather than silently ignoring it.
+
+Test Lab **Sprawl all-player discards** exercises Search, a two-card Ada commitment, retained Bea's one-card commitment, hidden intermediate selection, final public discards and trace replay/undo. **Sprawl one-way space links** stages a rotated tile and Octagon exception. The editor authors **One-way space links**, persists/validates them, and clears links on full geometry replacement. The shared Vision path now computes fragment counts from all six corner flags consistently with the frontend. Browser screenshots verify the actual decision and authoring controls in view.
+
+Validation: **339 Bun tests**, all Go packages, type checking and **40 browser checks** pass, including source readiness and unsupported-mechanic gates independently isolated in both mirrors. The final conservation/query assertions and focused browser screenshot checks also pass. Documentation/spec/artifact checks verify55 local originals and22 unchanged frozen files; asset review verifies228 assets/557 parts/62 archive members. Knowledge has329 entries/1892 relations, and coverage has302 items/44 fully source-verified implemented claim rows. These counts do not establish complete game coverage.
+
+Source protocol/checksum is source-v9 / source-v9/internal-arrows-block-discards; prior source-v8 traces reject clearly. Frozen regression remains unchanged. T-RULES-026 still owns Sprawl shortfalls and global commitment timing (the current private-commit interpretation is experimental); T-RULES-025 still owns Idoru/Hacktivism marker removal/refill. Continue independent printed order with page2 tile1 Antro, checking its source and shared prerequisites before implementation. All earlier setup, card, pawn, corpus and mode gaps remain open; no ordinary official mode is accepted.
+
+## Antro and Phase-Loop delivery checkpoint
+
+Antro (EN/ES A4 p2 tile1) now has verified ring geometry, title exclusion, ICE3/5/6, bonusesV3/V5/V6, double capacities and exact defense shielding. Its optional Add-on/Gadget stops use engine-owned physical attachment decisions with decline, provider cleanup/refunds, phase suspension/resumption, rolled-movement continuity and atomic rejection. The first Gadget, Phase-Loop (EN/ES action p4c1), is verified and implemented: Cyberdeck/Gadget, cost1, hand−2, extra acting Icebreaker die1, Black ICE immunity and independent two-step/Icebreaker strip. Acting modifiers stay separate from target ICE and grant no activation. New schemas, shared data, both mirrors, shared Antro evidence, editor retained fields, sandbox physical responses, inspector and replay/recovery/undo cover this slice.
+
+Validation: **355 Bun tests**, all Go packages, type checking and **42 browser checks** pass. Docs/spec/artifact checks retain **55 local originals** and **22 unchanged frozen files**; review sidecars retain228 assets/557 parts/62 archive members. Knowledge has331 entries/1943 relations; coverage has305 items/46 fully source-verified implemented claim rows. Claims count asset/rule rows, not whole modes.
+
+Current source protocol/checksum is source-v10 / source-v10/optional-space-discard; prior source-v9 traces reject. Antro remains partial under T-RULES-027 (target scope, zero/placement/relocation stop boundaries, threat timing). No official mode is accepted. Continue independent printed block order with page2 tile2 **Electromagnetic Pulse**, checking the bilingual source and mechanic prerequisites first. Gadget order resumes with **Eriela** p4c2 when that family is processed. All earlier pawn/card/deck/setup/mode and interpretation gates remain open.
+
+## Electromagnetic Pulse delivery checkpoint
+
+Electromagnetic Pulse (EN/ES A4 p2 tile2) now has six single normal ring spaces around title exclusionh1, ICE4/5/6, bonusV1/V2/V3/V4/V6, h3→h2 arrow and flat unshielded defense2 in h5. The earlier observation called that square2 ICE; it is corrected. Shared threshold2/amount1 data drives public owner-authorized pawn selections. Both mirrors revalidate the whole batch before normal sacrifice cleanup, retaining Reboot pieces or releasing non-Reboot pieces to reserve/common, discarding attachments and refunding paid counters. Queries expose executable targets separately from unresolved prevention cases. Pending choices, public commitments, options, semantic events and final states share `golden/emp.json`; four-player threshold behavior is tested too. Sandbox/editor controls, source views, replay/recovery/undo and save/load/export cover the slice. The empty-hand prompt now directs players to pending decisions before turn completion.
+
+Validation: **365 Bun tests**, all Go packages, TypeScript checking and **44 browser checks** pass, with final focused browser checks for the source fields and pending-decision prompt. Documentation/spec/artifact checks verify55 local originals and22 unchanged frozen files; asset review retains228 assets/557 parts/62 archive members. Knowledge has332 entries/1969 relations; coverage has306 items/46 fully source-verified implemented claim rows. A stale Antro test's last-block assumption was replaced with id lookup; no historical fixture bytes changed.
+
+Current source protocol/checksum is source-v11 / source-v11/global-pawn-sacrifice; prior v10 source traces reject. SR-BOARD-011/T-RULES-029 remain partial for simultaneous ordering and retained target eligibility; sacrifice/prevention also inherits T-RULES-010. Strict official loading gates the effect independently of provisional flags. No official mode is accepted. Continue printed block order at **p2 tile3 (saved observation: Copyleft)**, verifying the actual printed title, geometry, global bonus rule and Eiko prerequisite against both sheets before promotion. All earlier content/deck/setup/pawn/mode and interpretation gaps remain open.
+
+## Copyleft and physical bonus supply delivery checkpoint
+
+Copyleft (EN/ES A4 p2 tile3) now has four normal ring spaces around excluded h1 title/art: shielded4 left double h2/h7, upper-right h3 single, right h4 single and lower h5/h6 double. Its arrow is h3 to h4, own ICE2/3/6 is at V3 and bonus fragments are V1/V2/V5. EKO is normal artwork, not an Eiko pawn prerequisite; the earlier next-item assumption is revoked. The complete pawn/control-card sheets and printed effect provide no such pawn. Typed placement data awards one counter to every player after allocating counters to all completed bonus icons.
+
+Shared mode data now supplies the physical24-counter pool. Both mirrors derive reserve from player-free, invested physical attachments and uncollected on-icon counters. Collection transfers an existing counter once, including with empty reserve; attachment payments/refunds conserve the pool. Atomic multi-icon allocation, pure funded-placement previews, snapshots/clones, public views and ordered counter-placement/award events are integrated. Existing card/threat award paths use the guard; synthetic guard tests do not verify Shadowraiders rewards. The Test Lab **Copyleft bonus reserve** scenario exercises Search, allocation, all-player awards, investment, movement, collection, replay and undo. Editor controls retain and validate the typed global award.
+
+Validation: **378 Bun tests**, all Go packages, TypeScript checking and **46 browser checks** pass. Documentation/spec/artifact checks verify **55 local originals** and **22 unchanged frozen files**; asset review retains228 assets/557 parts/62 archive members. Knowledge has333 entries/2001 relations; coverage has308 items/46 source-verified implemented claim rows. These are individual claim counts, not complete components or modes. Whitespace checks pass and frozen fixture bytes remain unchanged.
+
+Current source protocol/checksum is source-v12 / source-v12/physical-bonus-reserve; prior v11 source traces reject. SR-BOARD-012/SR-BONUS-001 and T-RULES-030/031 retain the unresolved reserve-exhaustion/partial-fulfillment policy. Experimental underfunded placements reject atomically against the already paid Search reveal; strict official construction rejects the unaccepted Copyleft family independently of flags. No ordinary official mode is accepted. Continue independent printed block order at **p3 tile1 (saved observation: Clandestine Broadcast)**, verifying its actual source and prerequisites first. All earlier card/pawn/setup/corpus/mode gaps remain open.
+
+## Clandestine Broadcast delivery checkpoint
+
+SR-BOARD-013/T-RULES-032 completes the bilingual p3 tile1 component: a large unlimited special broadcast space (h1/h2/h3/h4/h7) with shielded defense4/3, two normal lower singles, mutual links, all six entrances, white ICE2/6 at V6 and no arrows/bonus fragments. Shared `controller-core` under-control data names the large landing space. Both mirrors derive optional Reboot permission from current block ownership, separately from physical setup Core identity. Explicit matching-card, four-card and synthetic free-Reboot actions select an engine-owned coordinate/space destination; existing calls still default to the original Core. Costs, multiplicity, retained control, use markers, timing and rejection/RNG are tested. Ordinary Lima Flag movement still distinguishes actual Core identity from this optional permission.
+
+Seven mirrored tests and `golden/broadcast.json` assert byte snapshots, options, views and ordered events, plus source Search/control, takeover victory, lost permission, special defense and normal occupancy. The **Clandestine Broadcast Reboot destinations** Test Lab stages control/elimination and exposes both destinations with replay/recovery/undo/reset. Editor save/load/export validates the special target and under-control timing. These focused fixtures do not accept a full official match. ADR-0020 records the additive contract; source state remains v12 while changed content updates trace checksums. All source goldens were refreshed; the historical corpus was preserved.
+
+The complete browser suite also exposed an existing action-card validation race that could erase a Delete activation edited while a request was pending. T-RULES-033 preserves current fields, ignores obsolete/different-draft responses, withholds stale diagnostics and stops stale export. A controlled-delay browser test verifies edits survive and no export occurs before revalidation.
+
+Validation: **388 Bun tests**, all Go packages, TypeScript checking and **49 browser checks** pass. The added final Core-identity interaction assertions also pass in both mirrors. Documentation/spec/artifact checks retain **55 local originals**, **22 unchanged frozen files** and **228 assets/557 parts/62 archive members**. Knowledge has334 entries/2027 relations; coverage has309 items/48 source-verified implemented claim rows. These counts do not establish complete component, deck or mode coverage.
+
+Continue printed block order at **p3 tile3 Pink District**; the intervening p3 tile2 Core is already verified. Verify Gynoid's pawn/control-card prerequisite before implementing its dependent placement/control behavior. All earlier explicit interpretation, physical-copy, complete-content, official-setup and mode acceptance gates remain open. The full thread goal remains active.
+
+## Pink District and Gynoid delivery checkpoint
+
+SR-BOARD-014/T-RULES-034 completes Pink District's bilingual p3 tile3 graph: two normal double capsules, matching unlimited Gynoid home, excluded h1 title/art, all entrances, own white ICE2/6 at V3, bonusV1/V5 and Gynoid-to-left arrow. Tile placement alone leaves Gynoid in reserve; capturing the block places and controls the one physical pawn on her matching space. Repeat capture relocates/acquires the existing piece, discarding/refunding attachments only if pawn control changes. Source final-marker victory stops further block effects. Pool/card mismatches reject with unchanged state/RNG.
+
+SR-PAWN-005/T-RULES-035 corrects Gynoid from the pilot to Lovedoll, shielded1/vulnerable2–6, exact rhombus ICE2/3/4/5, card movement without fixed steps, no native core abilities/Search and Add-on/Armor. Shared native phase data joins the checked queue with authorized target/decline responses. The accepted target selects one physical hand position via seeded RNG, including duplicate and literal friendly-target cases. Decline/previews consume no randomness. The receipt is a transfer event, with no duplicate deck draw. Private histories reveal identity to transfer parties; existing Trojan reveal records public visibility at transfer time, independent of later attachment removal. Beginning marker cleanup waits for the decision. Simultaneous native/attached phase order remains T-RULES-005, with independent strict official gates even after flags are cleared.
+
+Eleven tests per mirror and `golden/gynoid.json` assert byte snapshots, native pending state, options, observer projections, ordered events and private/public histories. They cover source placement/control, ownership cleanup/refunds, physical conservation, all rejection windows, ordinary turn handoffs after pawn takeover, native cleanup and immediate victory. Two sandbox scenarios and editor controls exercise Search/capture, optional theft, inspection, replay/recovery/undo/reset and matching-home save/load/export. These focused scenarios are not full official-mode acceptance.
+
+T-RULES-036 resolves a real source-link gap: both English control-card PDFs now yield36 repeatable core crops/atlases, replacing the same supplemental ids without duplicate review pieces. The shared manifest has201 assets; all201 local outputs verify. The review set remains228 assets/557 parts, with55 local originals and62 archive members. Six Python detector/core-source tests pass and are wired into CI.
+
+Validation: **403 Bun tests**, all Go packages, TypeScript checking and **52 browser checks** pass. Documentation/spec/artifact checks retain **22 unchanged frozen files**. Knowledge has371 entries/2203 relations; coverage has311 items/50 source-verified implemented claim rows. The added36 physical crops explain most knowledge growth; these are not counts of completed mechanics or modes. Source state/checksums now use source-v13 / source-v13/native-phase-theft; v12 source traces reject and all source goldens were refreshed.
+
+Continue independent printed block order at **p4 tile1 (saved observation: Yakuza)**, verifying its actual title, topology, effect and dependencies first. Gynoid composition and all earlier source interpretation, complete corpus/deck/setup and mode gates remain open. No ordinary official mode is accepted; the full thread goal remains active.
+
+## Yakuza delivery checkpoint
+
+SR-BOARD-015/T-RULES-037 completes the bilingual p4 tile1 geometry and optional capture attack: four spaces, both internal arrows, upper white3/2/1 vulnerable defense, own ICE4/6 at V6 and bonusV2/V3/V5. Both engines expose a controller's adjacent-target/decline choice before one skull rolls. Literal friendly/neutral targets, physical adjacency independent of movement entrances, effective defense, cleanup/refunds, repeat takeover and immediate victory are covered. A hit may open the defender's permitted Dummy response without rerolling. Shared byte evidence retains both decision windows, options/views and ordered events. Source protocol/checksum advances to v14/adjacent-block-attack; earlier source traces reject and frozen regression remains unchanged.
+
+Validation: **416 Bun tests**, all Go packages, TypeScript checking, **54 browser checks** and **six Python artifact tests** pass. Source/spec/docs/artifact checks retain55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has372 entries/2229 relations; coverage has312 items/52 source-verified implemented claim rows. Those rows are not counts of complete components or modes. Sandbox/editor screenshots confirm target, defender and authoring controls; expired-host recovery, replay/undo/reset and save/load/export pass.
+
+Continue p4 tile2 **Corporate Scandal** after dedicated source verification. The primary English and Spanish sheets confirm a more-than-five Cybernet marker threshold and whole-hand discard on control; exact geometry and symbol review remain part of its delivery. No full official mode is accepted; all earlier explicit gaps remain live.
+
+## Corporate Scandal delivery checkpoint
+
+SR-BOARD-016/T-RULES-038 completes bilingual p4 tile2 Corporate Scandal: six single ring spaces, excluded h1 title/art, shielded defense3 on h5, own ICE5/6 at V1, V2/V3/V5/V6 bonus fragments and all entrances. Its mandatory shared marker threshold discards every player's remaining hand only when physical Cybernet allocations are strictly above five. The newly captured marker and returned old-owner marker are applied first; Idoru's explicitly counted card allocation contributes, ordinary pawn control/reserve markers do not. Duplicate remaining cards have distinct public receipts; a qualifying empty hand resolves without choice or RNG.
+
+This exposed and fixes source card-payment timing: the matching Icebreaker card leaves hand for played cards after target validation and before the roll/control/effects, so whole-hand discard cannot consume it. Earlier played cards, physical attachments and invested counters stay allocated. Typed source control receipts precede dependent effects. Eleven tests per mirror and golden/corporate-scandal.json cover byte snapshots/options/views/events, strict descriptors, physical conservation, pure previews/RNG, threshold boundaries, Idoru, takeover, empty/other players, ring/defense, failed/illegal captures and immediate victory. A deliberately invalid resolution after payment/roll/capture proves complete rollback. Sandbox/editor Search/capture/history/replay/recovery/undo/reset/save/load/export are covered; the fixture stages other holdings and does not prove an ordinary full match.
+
+Validation: **430 Bun tests**, all Go packages, TypeScript checking and **56 browser checks** pass. Six Python artifact tests also pass in this turn; shared pipeline code is unchanged by this slice. Documentation/spec/artifact checks retain55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has373 entries/2259 relations; coverage has313 items/54 source-verified implemented claim rows. These are not counts of completed components or modes. Source protocol/checksum advances to v15/marker-hand-discard; v14 source traces reject, all23 source golden evidence files refresh, and historical frozen behavior stays unchanged.
+
+Continue independent printed block order at **p4 tile3 Black Clinic**, verifying its exact source geometry, symbols, attachment target scope and cleanup prerequisites before promotion. Earlier native phase composition, Idoru removal/reacquisition, other explicit interpretation/content/deck/setup and all full-mode acceptance gates remain live. No ordinary official mode is accepted; the full thread goal remains active.
+
+## Black Clinic and hand-space delivery checkpoint
+
+SR-BOARD-017/T-RULES-039 completes bilingual p4 tile3 Black Clinic. Four normal singles form the ring with a large h5/h6 unlimited special Clinic circle; h1 title/effect art is excluded. The helmet-to-hand arrow, all entrances, own ICE3/6 at V6, bonusV1/V2/V3/V5, vulnerable defense1/2 and hand-minus1 are checked against primary sheets and rulebooks. On capture/repeated takeover the controller must choose a live Cybernet pawn, including own/enemy/neutral/distant/empty targets. Every physical attachment discards once with refund to the target controller, removing provider/continuous/reveal benefits without elimination or ownership change. Source victory skips the effect. T-RULES-021 spent-card evidence/reuse gate stays intact.
+
+SR-TURN-008/T-RULES-040 resolves the previously ignored hand-space prerequisite. Pure public profiles combine player/mode base, current attachments and stopped controlled-pawn spaces for the nonnegative recycling maximum. The source occupancy reading/rationale is explicit; passing/leaving/control changes do not permanently alter base or immediately draw/discard. Black Clinic's actual movement/recycling flow refills to four. Existing attachment-only APIs and frozen behavior stay compatible.
+
+Twelve equivalent tests per mirror and golden/black-clinic.json prove byte snapshots, pending state, options/projections/profiles and ordered semantic events. Interactions include source Search/capture, wrong/stale/extra/phase rejection with unchanged RNG, physical nested cleanup/refunds, empty/distant/neutral/retained targets, Dummy/Trojan, spent metadata and clone/reuse guard, capacity/defense/arrow/Octagon, hand aggregation/current control/leaving/clamp, takeover and immediate victory. Sandbox/editor target/cleanup/hand-limit/refill controls, replay/recovery/undo/reset and save/load/export pass; screenshots were inspected. This focused fixture stages paid attachments and does not prove a complete ordinary match.
+
+Validation: **445 Bun tests**, all Go packages, TypeScript checking, **58 browser checks** and **six Python artifact tests** pass. Documentation/spec/artifact checks verify55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has374 entries/2285 relations; coverage has315 items/57 source-verified implemented claim rows. Counts are not unique completed rules/components/modes. Source protocol/checksum is v16/global-pawn-detachment; v15 source traces reject, all24 source evidence files refresh and historical frozen semantics remain unchanged. Canonical component/turn notes and current domain protocol references were reconciled.
+
+Continue independent printed block order at **p5 tile1**, verifying actual title, topology, symbols, effect and dependencies first; saved observation says Engineering War but is not authoritative. All earlier explicit native phase, Idoru, discarded-card reuse, complete corpus/deck/setup and mode gates remain live. No ordinary official mode is accepted; the full thread goal remains active.
+
+## Engineering War and Drone MK-2 delivery checkpoint
+
+SR-BOARD-018/T-RULES-041 completes bilingual p5 tile1 Engineering War: three-space line, central h1 unlimited matching pawn home, normal left/right singles, h2/h3/h5/h6 title/effect exclusions, only E2/E5 entrances, own ICE3/6 at V6, vulnerable defense1 and V1–V5 bonus fragments. The teal right-circle glyph is classified as artwork with the source reading/rationale recorded in the rule module. Actual Search permits two connecting rotations for a given Core edge; capture deploys the one Drone MK-2 pawn/control card through the existing controlled-placement handler. Repeat placement/ownership cleanup/refund and immediate victory stopping remain shared behavior.
+
+SR-PAWN-006/T-RULES-042 verifies EN/ES p2c4 and EN folded pawn p2 unit2: Drone, shielded1–3/vulnerable4–6, exact ICE2/6, Module-only slot, native free five-step movement and one-skull card Delete. Additional paid movement is independent under p25. Native use follows the physical control card across takeover/common release and clears at the current controller beginning; neither relocation nor reacquisition refreshes it. No Search/Icebreaker/Reboot/out-of-turn exception is invented. Single Servocanon free activation and native paid Delete coexist with physical cost/marker cleanup; wider T-RULES-014/021 remain provisional.
+
+Twelve tests per mirror and golden/engineering-war.json assert byte snapshots/options/views/events through real Search/capture, native movement and public combat. Cases include exact entrance rotations, five-step/zero/occupied/cost limits, roll-before-assignment and no rerolls, Module eligibility/costs, full-turn takeover/reset timing, same-owner relocation, non-Reboot elimination/reserve/common/reentry, source pool mismatch rollback after payment/roll and immediate victory. Sandbox/editor controls, replay/recovery/undo/reset and target save/load/export pass; screenshots were inspected. Shared schema/domain/handlers already covered these mechanics, so this wave adds content and proof rather than prose-specific engine branches. Current loader/foundation expectations include seven control-card definitions and do not imply the full18-card corpus.
+
+Validation: **460 Bun tests**, all Go packages, TypeScript checking, **60 browser checks** and **six Python artifact tests** pass. Documentation/spec/artifact checks verify55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has376 entries/2336 relations; coverage has317 items/61 source-verified implemented claim rows, not counts of completed unique components or modes. Source protocol/checksum is v17/engineering-mk2; v16 source traces reject, all25 source evidence files refresh and frozen regression stays unchanged. Provenance file summaries now reflect all eight verified implemented block records and the additional native pawn.
+
+Continue printed order at **p5 tile2**, verifying the English/Spanish block and its pawn/control-card prerequisite before promotion. All earlier explicit phase, Idoru, discarded-card reuse, complete corpus/deck/setup and mode gates remain live. No ordinary official mode is accepted; the full thread goal remains active.
+
+## Combat Prototypes and Drone Probe delivery checkpoint
+
+SR-BOARD-019/T-RULES-043 verifies EN/ES p5 tile2 Combat Prototypes: central unlimited matching Drone Probe home, four surrounding single spaces, excluded h3/h6 artwork, E2/E3/E5/E6 entrances, exact ICE4/6 at V2 and V1/V3/V4/V5/V6 bonus fragments. Circuit/globe/triangle graphics add no pawns, modifiers or arrows. Capturing uses existing controlled placement of the one physical pawn/card, repeated relocation/acquisition, ownership-sensitive Module cleanup/refunds, retained uses and immediate-victory stop. Tile placement alone grants no pawn/control.
+
+SR-PAWN-007/T-RULES-044 verifies EN/ES p2c7 and EN pawn p2 folded unit3: Drone, one Module, shielded1–2/vulnerable3–6, exact ICE1/3/6, native free once-per-turn Search and independent five-step movement. The decorative skull is not a Delete badge. Accepted Search commits its own physical native marker and reveals without paying a card; placement follows as an authorized decision. Public eligibility never inspects hidden top identity/topology. Invalid placement preserves the committed reveal/use. Additional paid movement is independent; no paid Search or paid Delete is invented. Both native markers follow the physical control card through takeover/common release and clear at its current controller beginning. Single Servocanon grants free Delete only; broader T-RULES-014/021 remain separate.
+
+Thirteen tests per mirror and golden/drone-probe.json compare byte snapshots/options/views and ordered events through real Search/capture, free Search/placement and independent movement. Coverage includes empty hands/piles/sealed references, hidden-safe previews/RNG, invalid responders/costs/placements/interleaving, occupied destinations, Module eligibility/cleanup, full-turn takeover/reset, reserve/common elimination and immediate victory. Sprawl discard shortfall and EMP sacrifice handoffs preserve the committed free Search without promoting their existing T-RULES-007/025/029 interpretations. Sandbox/browser replay/import/recovery/Undo/reset and editor matching-target save/load pass; screenshots were inspected. The browser replay test now waits for the imported pending view before selecting a rotation. No new schema fields or engine branches were needed. Current shared mixed corpus has18 block definitions,11 pawn definitions and8 control-card definitions; these are not official completeness counts.
+
+Validation: **476 Bun tests**, all Go packages, TypeScript checking, **62 browser checks** and **six Python artifact tests** pass. Documentation/spec/artifact checks verify55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has378 entries/2387 relations; coverage has319 items/65 source-verified implemented claim rows, not unique completed component/mode counts. Source protocol/checksum is v18/probe-free-search; prior v17 source traces reject clearly, all26 current source evidence files refresh and frozen regression remains unchanged. Provenance/review/geometry-truth/knowledge outputs and current domain/memory protocol facts are reconciled.
+
+Continue printed order at **p5 tile3 Military Development**, verifying actual EN/ES geometry/effect and the Drone Turret control-card/pawn dependency first. Its permitted turn exceptions need source-backed engine support; existing pilot prose is not executable acceptance. All earlier native phase, Idoru, discarded-card reuse, full corpus/deck/setup and mode gates remain live. No ordinary official mode is accepted; the full thread goal remains active.
+
+## Military Development / Drone Turret and owned played cards checkpoint
+
+SR-BOARD-020/T-RULES-045 verifies EN/ES p5 tile3: three-space hand–Turret home–right line, h1 unlimited matching home, two normal singles, h2/h3/h5/h6 title/effect exclusions, only E2/E5 entrances, ICE4/6 at V5 and the other five bonus corners. All six primary crop corners were inspected; the ICE corner is not a fragment. Hand+1 follows current stopped-pawn ownership under SR-TURN-008. Control deploys the same one physical Turret/card through existing matching placement, with ownership-sensitive Module cleanup/refunds, retained uses, guards and immediate victory stopping. Tile placement alone grants no pawn/control.
+
+SR-PAWN-008/T-RULES-046 verifies EN/ES p2c8, bilingual p20/p24 and EN pawn p2 separate folded unit8. Corrected the pilot to Drone, Module, shielded1–4/vulnerable5/6, exact ICE1/4, card-activated one-skull Delete and crossed-out movement. Shared schema/model field abilityTurn:any-player-turn enables only this controller's ability actions between completed actions, in any idle turn phase, without changing active player/phase. It does not grant another pawn, movement, attachment, free payment or interleaving of pending paths/Search/combat/replacement/phase resolution. The source timing reading is documented; no simultaneous-priority policy is invented. Shadowraiders joint-threat initiative remains separate.
+
+SR-TURN-009/ADR-0025 fixes played-card ownership exposed by off-turn costs. EN/ES p8 explicitly keeps face-up cards until the paying player's own recycling. Public parallel playedCardOwners allocation preserves the one physical played zone, duplicates and order in both mirrors. Source paid movement/ability cards remain face up in permitted non-action phases too; Search and four-card Reboot still discard immediately. Recycling removes only its player's allocation. Pawn control/elimination and other turns do not transfer/discard paid cards. Clones/snapshots/views/replay include detached owners; invalid present allocation rejects before resolution/RNG. Existing unallocated programmatic fixtures keep an active-player fallback; frozen corpus keeps historical semantics.
+
+Thirteen equivalent tests per mirror and golden/drone-turret.json assert byte snapshots/options/views/ordered events through actual Search, capture, approach and off-turn paid public combat. Cases cover every idle phase, private pure controller queries, exact costs and authorized assignment, duplicate paid-card conservation/own recycling, pending noninterleaving, defender Dummy, separate Module free use and current-controller reset, hand-space profile/no movement, takeover/elimination, invalid pool rollback and immediate victory. Repeated-Search payment tests now explicitly order a known harmless second tile rather than depending on random unrelated source additions. Sandbox handoff/public owner/face-up labels, replay/import/recovery/Undo/reset and editor target persistence pass; screenshots were inspected. Browser target selection explicitly attacks Bea's pawn and confirms elimination. Import and Undo disable old controls while loading; browser uploads wait until prior operations finish, preventing lost/stale responses. Ordinary matches hand off private views whenever the responder changes.
+
+Validation: **492 Bun tests**, all Go packages, TypeScript checking, **64 browser checks** plus the strengthened targeted Turret case, and **six Python artifact tests** pass. Documentation/spec/artifact checks verify55 local originals,22 unchanged frozen files and228 assets/557 parts/62 archive members. Knowledge has379 entries/2421 relations; coverage has322 items/70 source-verified implemented claim rows, not unique completed component/mode counts. Source protocol/checksum is v19/any-turn-abilities; v18 source traces reject, all27 current source evidence files refresh and frozen regression stays unchanged. Mixed corpus now has19 block definitions,11 pawns and9 control cards; ten block records are source-verified implemented, not the full24 physical blocks. Operator current checksum statements and canonical domain facts were reconciled.
+
+Continue printed block order at **p6 tile1**, verifying actual EN/ES title/topology/effects and the pawn/control-card prerequisite before promotion. Earlier phase composition, Idoru, marked-card lifetime/reuse, full corpus/deck/setup and mode acceptance gates remain live. No ordinary full official mode is accepted; the entire thread goal remains active.
+
+## Arms Industry funded-counter delivery and publish checkpoint
+
+SR-BOARD-021/SR-BONUS-002/T-RULES-047 verify EN/ES p6 tile1 Arms Industry: four normal singles in the h3–h2–h7–h6 chain, center h1 counter storage and h4/h5 effect exclusions, E1/E4/E5/E6 entrances, Black ICE6 at V5, fragmentsV2/V3/V4/V6 and hand−1. The earlier saved five-space review was corrected after dedicated primary geometry/corner inspection. No pawn prerequisite or connector arrow exists.
+
+Shared typed place-block-bonus1/collect-block-bonus effects and public PlacedBlock allocation/collectedBy receipt execute in both mirrors. Pool onBoard includes held block pieces and uncollected icons. Combined new-icon/block funding is previewed before placement; collection transfers existing pieces at empty reserve, once, without minting on takeover. Source capture now records control then icon collection explicitly before block collection. Snapshots/clones/views include detached records and the source protocol/checksum is v20/block-bonus-counters;28 source evidence generators refresh while22 frozen files stay unchanged. The unresolved T-RULES-031 shortage policy remains an explicit strict official construction gate; the component stays provisional despite complete funded execution.
+
+Eleven tests per mirror and golden/arms-industry.json cover primary facts, paid reveal versus placement, combined supply shortage, pure previews, semantic order, empty-reserve transfers, repeated capture, Black ICE, Dummy, missing/corrupt allocation rollback, hand-space movement exclusions, physical card conservation and immediate victory. Sandbox held-piece badge/inspector and board-wide pool labels, editor paired descriptors, source Search/capture, replay/recovery/Undo/reset pass; screenshots were inspected. The staged two-peer formation is not an ordinary complete match.
+
+Validation passes:506 Bun tests, all Go packages, TypeScript checking,66 browser checks and six Python artifact tests. Source/docs/spec checks verify55 local originals,228 assets/557 parts/62 archive members and22 unchanged frozen files. Before adding the remaining-work report, knowledge has380 entries/2447 relations and coverage324 rows/70 source-verified implemented rows; generated current totals are authoritative. Counts are not unique complete components or modes. Mixed data has20 blocks,11 pawns,9 control cards and32 action definitions/48 declared copies, requiring official reconciliation.
+
+User requested finishing this slice, committing/pushing all accumulated workspace changes and documenting gaps. [Remaining work](remaining-work.md) records the full retained scope and missing component/rule/mode/UI acceptance. Continue independent printed order at p6 tile2 Cleaner B after verifying its own pawn/control-card dependency. All earlier provisional gates and all official-mode acceptance remain open; do not mark the full goal complete.

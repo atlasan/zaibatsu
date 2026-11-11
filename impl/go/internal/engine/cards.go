@@ -6,6 +6,20 @@ import (
 	"github.com/zaibatsu/zaibatsu-go/internal/domain"
 )
 
+// PlayRebootCard uses a matching Reboot action part (the discard-four alternative remains).
+func PlayRebootCard(s *domain.GameState, gd *domain.GameData, playerID, cardID, pawnID string, destination ...SpaceRef) (*domain.PawnOnBoard, error) {
+	p := s.PlayerByID(playerID)
+	if p == nil || !cardInHand(p, cardID) || !cardActivates(gd, cardID, "reboot") {
+		return nil, fmt.Errorf("select a Reboot card in hand")
+	}
+	pawn, err := Reboot(s, gd, pawnID, playerID, destination...)
+	if err != nil {
+		return nil, err
+	}
+	_ = consumeCard(s, p, cardID)
+	return pawn, nil
+}
+
 // Action-card use resolution: playing cards from hand to drive the core
 // abilities. Mirrors impl/ts/src/engine/cards.ts. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Action cards — ways to use an action card"). Backlog: card-use resolution.
@@ -58,11 +72,30 @@ func cardActivates(gd *domain.GameData, cardID, ability string) bool {
 
 // consumeCard removes one copy of cardID from the player's hand and moves it to
 // the discard pile.
-func consumeCard(s *domain.GameState, p *domain.Player, cardID string) error {
+func consumeCard(s *domain.GameState, p *domain.Player, cardID string, discardNow ...bool) error {
+	if s.PlayedCardOwners != nil && len(s.PlayedCardOwners) != len(s.PlayedCards) {
+		return fmt.Errorf("played card ownership does not match physical cards")
+	}
 	for i, c := range p.Hand {
 		if c == cardID {
 			p.Hand = append(p.Hand[:i], p.Hand[i+1:]...)
-			s.Discard = append(s.Discard, cardID)
+			if (s.RulesVersion != "" || s.Phase == domain.PhaseAction || s.PendingPhase != "") && !(len(discardNow) > 0 && discardNow[0]) {
+				if s.RulesVersion != "" {
+					if s.PlayedCardOwners == nil {
+						s.PlayedCardOwners = []string{}
+						for range s.PlayedCards {
+							s.PlayedCardOwners = append(s.PlayedCardOwners, s.CurrentPlayerPtr().ID)
+						}
+					}
+					if len(s.PlayedCardOwners) != len(s.PlayedCards) {
+						return fmt.Errorf("played card ownership does not match physical cards")
+					}
+					s.PlayedCardOwners = append(s.PlayedCardOwners, p.ID)
+				}
+				s.PlayedCards = append(s.PlayedCards, cardID)
+			} else {
+				s.Discard = append(s.Discard, cardID)
+			}
 			return nil
 		}
 	}
@@ -140,7 +173,7 @@ func PlayDelete(s *domain.GameState, gd *domain.GameData, playerID, cardID, atta
 	if err := requireOwnedActor(s, playerID, attackerID); err != nil {
 		return res, err
 	}
-	res, err := Delete(s, gd, attackerID, targetID, extraSkulls)
+	res, err := Delete(s, gd, attackerID, targetID, extraSkulls, "card")
 	if err != nil {
 		return res, err
 	}
@@ -148,8 +181,31 @@ func PlayDelete(s *domain.GameState, gd *domain.GameData, playerID, cardID, atta
 	return res, nil
 }
 
-// PlayDeleteArea plays a Delete-capable card to activate a Bomb-class area
-// Delete. The card is consumed only if the play is legal.
+// PlayDeleteMulti spends one Delete card and assigns dice, including concentration.
+func PlayDeleteMulti(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, targetIDs []string, extraSkulls int) (DeleteMultiResult, error) {
+	var res DeleteMultiResult
+	p := s.PlayerByID(playerID)
+	if p == nil {
+		return res, fmt.Errorf("unknown player %q", playerID)
+	}
+	if !cardInHand(p, cardID) {
+		return res, fmt.Errorf("card %q is not in %s's hand", cardID, playerID)
+	}
+	if !cardActivates(gd, cardID, "delete") {
+		return res, fmt.Errorf("card %q cannot activate Delete", cardID)
+	}
+	if err := requireOwnedActor(s, playerID, attackerID); err != nil {
+		return res, err
+	}
+	res, err := DeleteMulti(s, gd, attackerID, targetIDs, extraSkulls, "card")
+	if err != nil {
+		return res, err
+	}
+	_ = consumeCard(s, p, cardID)
+	return res, nil
+}
+
+// PlayDeleteArea spends a Delete card to activate a Bomb-class area Delete.
 func PlayDeleteArea(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, extraSkulls int) (DeleteAreaResult, error) {
 	var res DeleteAreaResult
 	player := s.PlayerByID(playerID)
@@ -165,7 +221,7 @@ func PlayDeleteArea(s *domain.GameState, gd *domain.GameData, playerID, cardID, 
 	if err := requireOwnedActor(s, playerID, attackerID); err != nil {
 		return res, err
 	}
-	res, err := DeleteArea(s, gd, attackerID, extraSkulls)
+	res, err := DeleteArea(s, gd, attackerID, extraSkulls, "card")
 	if err != nil {
 		return res, err
 	}
@@ -175,7 +231,7 @@ func PlayDeleteArea(s *domain.GameState, gd *domain.GameData, playerID, cardID, 
 
 // PlayIcebreakBlock plays an Icebreaker-capable card to Icebreak the block the
 // attacker occupies.
-func PlayIcebreakBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, coord domain.Coord, extraRollDice int) (IcebreakResult, error) {
+func PlayIcebreakBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, attackerID string, coord domain.Coord, extraRollDice int, sinks ...*[]EngineEvent) (IcebreakResult, error) {
 	var res IcebreakResult
 	player := s.PlayerByID(playerID)
 	if player == nil {
@@ -190,14 +246,22 @@ func PlayIcebreakBlock(s *domain.GameState, gd *domain.GameData, playerID, cardI
 	if err := requireOwnedActor(s, playerID, attackerID); err != nil {
 		return res, err
 	}
-	res, err := IcebreakBlock(s, gd, attackerID, coord, extraRollDice)
+	var payment func() error
+	if s.RulesVersion != "" {
+		payment = func() error { return consumeCard(s, player, cardID) }
+	}
+	res, err := icebreakBlockWithPayment(s, gd, attackerID, coord, extraRollDice, payment, sinks...)
 	if err != nil {
 		return res, err
 	}
-        if res.Success {
-                ApplyCardEffectsForTrigger(s, gd, playerID, cardID, "on-icebreak", &coord)
-        }
-	_ = consumeCard(s, player, cardID)
+	if res.Success {
+		if _, err := ApplyCardEffectsForTrigger(s, gd, playerID, cardID, "on-icebreak", &coord); err != nil {
+			return res, err
+		}
+	}
+	if s.RulesVersion == "" {
+		_ = consumeCard(s, player, cardID)
+	}
 	return res, nil
 }
 
@@ -241,13 +305,13 @@ func PlaySearch(s *domain.GameState, gd *domain.GameData, playerID, cardID, pawn
 	if err != nil {
 		return nil, err
 	}
-	_ = consumeCard(s, player, cardID)
+	_ = consumeCard(s, player, cardID, true)
 	return pb, nil
 }
 
 // PlayReboot discards four cards (any cards) to activate Reboot on an eliminated
 // pawn, returning it to the Central Core under playerID's control.
-func PlayReboot(s *domain.GameState, gd *domain.GameData, playerID string, cardIDs []string, pawnID string) (*domain.PawnOnBoard, error) {
+func PlayReboot(s *domain.GameState, gd *domain.GameData, playerID string, cardIDs []string, pawnID string, destination ...SpaceRef) (*domain.PawnOnBoard, error) {
 	player := s.PlayerByID(playerID)
 	if player == nil {
 		return nil, fmt.Errorf("unknown player %q", playerID)
@@ -258,12 +322,12 @@ func PlayReboot(s *domain.GameState, gd *domain.GameData, playerID string, cardI
 	if !handContainsAll(player, cardIDs) {
 		return nil, fmt.Errorf("%s does not hold all 4 cards to discard", playerID)
 	}
-	pob, err := Reboot(s, gd, pawnID, playerID)
+	pob, err := Reboot(s, gd, pawnID, playerID, destination...)
 	if err != nil {
 		return nil, err
 	}
 	for _, c := range cardIDs {
-		_ = consumeCard(s, player, c)
+		_ = consumeCard(s, player, c, true)
 	}
 	return pob, nil
 }

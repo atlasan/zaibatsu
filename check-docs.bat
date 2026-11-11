@@ -6,4 +6,6 @@ echo Validating documentation, rebuilding knowledge, and checking source/spec li
 bun tools\validate-docs.ts || exit /b 1
 bun tools\build-knowledge.ts || exit /b 1
 bun tools\validate-spec.ts || exit /b 1
+bun tools\rules-coverage.ts || exit /b 1
+bun tools\verify-regression.ts || exit /b 1
 bun tools\verify-artifacts.ts

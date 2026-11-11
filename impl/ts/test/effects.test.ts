@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { blockById, type DefenseDie, type GameData } from "../src/domain/types.ts";
 import { neighbor, opposite } from "../src/domain/hex.ts";
 import { newGame, placeBlock, applyBlockEffectForTrigger, applyBlockEffect, icebreakBlock } from "../src/engine/index.ts";
@@ -11,7 +11,7 @@ function allFacesDefense(): DefenseDie[] {
 }
 
 function effectData(): GameData {
-  const d = structuredClone(loadDefault("speedrunners"));
+  const d = structuredClone(loadRegression("speedrunners"));
   d.pawns = d.pawns.map((pawn) =>
     pawn.id === "speedrunner-yellow" ? { ...pawn, defense: allFacesDefense() } : pawn
   );
@@ -51,6 +51,7 @@ describe("block effects", () => {
     const res = applyBlockEffect(s, d, coord, { kind: "area-attack", amount: 1 })!;
 
     expect(res.kind).toBe("area-attack");
+    if (res.kind !== "area-attack") throw new Error("expected area attack resolution");
     expect(res.result.targets.map((target) => target.targetPawnId)).toEqual(["speedrunner-red", "speedrunner-yellow"]);
     expect(s.cybernet.pawnById("speedrunner-yellow")).toBeUndefined();
   });
@@ -71,7 +72,7 @@ describe("block effects", () => {
   });
 
   test("under-control place-pawn effects place the authored pawn on successful Icebreak", () => {
-    const d = structuredClone(loadDefault("speedrunners"));
+    const d = structuredClone(loadRegression("speedrunners"));
     d.blocks = d.blocks.map((block) => (
       block.id === "idoru" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
     ));

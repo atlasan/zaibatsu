@@ -34,3 +34,8 @@ only a reviewer may promote an exported patch after checking its source locators
 asset checksums, and confidence/evidence report. English artwork is primary;
 Spanish editions are optional supporting cross-checks. No extraction result is
 an executable effect definition.
+
+The [asset review register](../../DOCS/artifacts/asset-review.md) covers the
+English component artwork and supporting print variants. Its `visual-reviewed`
+status does not satisfy bilingual record verification or remove canonical
+`provisional` markers; promote only after the normal source/interpretation checks.

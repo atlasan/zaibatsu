@@ -398,6 +398,11 @@ function addDataFile(path: string, expansion: "speedrunners" | "shadowraiders"):
   if (Array.isArray(data.missions)) {
     for (const mission of data.missions as Json[]) addRecordEntry("mission", String(mission.id), String(mission.name), expansion, path, mission);
   }
+  if (Array.isArray(data.modes)) {
+    // Official modes already come from the verified inventory. Local profiles
+    // must appear separately with their explicit provisional status.
+    for (const mode of data.modes as Json[]) if (mode.provisional === true) addRecordEntry("mode", String(mode.id), String(mode.name), expansion, path, mode);
+  }
   if (typeof data.id === "string" && typeof data.name === "string") {
     addRecordEntry("mode", String(data.id), String(data.name), expansion, path, data);
   }
@@ -407,7 +412,9 @@ addDataFile("data/speedrunners/blocks.json", "speedrunners");
 addDataFile("data/speedrunners/action-cards.json", "speedrunners");
 addDataFile("data/speedrunners/pawns.json", "speedrunners");
 addDataFile("data/speedrunners/mode.json", "speedrunners");
+addDataFile("data/speedrunners/modes.json", "speedrunners");
 addDataFile("data/shadowraiders/modes.json", "shadowraiders");
+addDataFile("data/shadowraiders/threats.json", "shadowraiders");
 
 const verifiedRecords = new Map<string, Status>();
 for (const entry of entries.values()) verifiedRecords.set(entry.entryId, entry.status);

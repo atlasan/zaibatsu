@@ -2,29 +2,133 @@
   "status": "cataloged",
   "files": {
     "data/shadowraiders/modes.json": {
-      "sources": ["sh-en-rulebook", "sh-es-rulebook"],
+      "sources": [
+        "sh-en-rulebook",
+        "sh-es-rulebook"
+      ],
       "note": "Mode-level facts verified; component records have not yet been transcribed."
     },
     "data/shadowraiders/control-cards.json": {
-      "candidateSources": ["sh-en-control-cards", "sh-es-control-cards"],
+      "candidateSources": [
+        "sh-en-control-cards",
+        "sh-es-control-cards"
+      ],
       "note": "Canonical file shell present; no control-card record has been transcribed yet."
     },
     "data/shadowraiders/threats.json": {
-      "candidateSources": ["sh-en-rulebook", "sh-es-rulebook", "sh-en-markers", "sh-es-markers", "sh-en-chaos-card", "sh-es-chaos-card"],
-      "note": "Canonical file shell present; no threat record has been transcribed yet."
+      "candidateSources": [
+        "sh-en-rulebook",
+        "sh-es-rulebook",
+        "sh-en-markers",
+        "sh-es-markers",
+        "sh-en-chaos-card",
+        "sh-es-chaos-card"
+      ],
+      "note": "Guard drone reviewed against the primary English rulebook p.21. Other threat records remain untranscribed."
     },
     "data/shadowraiders/missions.json": {
-      "candidateSources": ["sh-en-control-cards", "sh-es-control-cards", "sh-en-rulebook", "sh-es-rulebook"],
+      "candidateSources": [
+        "sh-en-control-cards",
+        "sh-es-control-cards",
+        "sh-en-rulebook",
+        "sh-es-rulebook"
+      ],
       "note": "Canonical file shell present; no mission-card record has been transcribed yet."
     }
   },
   "records": {
-    "mode/shadowraiders": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 4-7" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 4-7" }] },
-    "mode/chaos": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 26-33" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 26-33" }] },
-    "mode/outbreak": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 34-37" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 34-37" }] },
-    "mode/total-war": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "pp. 38-41" }, { "artifactId": "sh-es-rulebook", "locator": "pp. 38-41" }] },
-    "mode/strategic-alliance": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 42" }, { "artifactId": "sh-es-rulebook", "locator": "p. 42" }] },
-    "mode/cyber-revolution": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 43" }, { "artifactId": "sh-es-rulebook", "locator": "p. 43" }] },
-    "mode/total-war-chaos": { "sources": [{ "artifactId": "sh-en-rulebook", "locator": "p. 44" }, { "artifactId": "sh-es-rulebook", "locator": "p. 44" }] }
+    "mode/shadowraiders": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "pp. 4-7"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "pp. 4-7"
+        }
+      ]
+    },
+    "mode/chaos": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "pp. 26\u201334"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "pp. 26-33"
+        }
+      ]
+    },
+    "mode/outbreak": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "pp. 35\u201338"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "pp. 34-37"
+        }
+      ]
+    },
+    "mode/total-war": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "pp. 39\u201341"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "pp. 38-41"
+        }
+      ]
+    },
+    "mode/strategic-alliance": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "p. 42"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "p. 42"
+        }
+      ]
+    },
+    "mode/cyber-revolution": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "p. 42"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "p. 43"
+        }
+      ]
+    },
+    "mode/total-war-chaos": {
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "p. 42"
+        },
+        {
+          "artifactId": "sh-es-rulebook",
+          "locator": "p. 44"
+        }
+      ]
+    },
+    "threat/guard": {
+      "status": "verified",
+      "sources": [
+        {
+          "artifactId": "sh-en-rulebook",
+          "locator": "p.21, Guard drone: fixed attack 5; shielded defense 1\u20134, unshielded 5\u20136"
+        }
+      ]
+    }
   }
 }

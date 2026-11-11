@@ -1,3 +1,7 @@
+import {rebootDestination} from "./reboot-destinations.ts";
+import type {SpaceRef} from "./movement.ts";
+import {abilityUseSpent,spendAbilityUse} from "./use-markers.ts";
+import { setPawnControl } from "./control.ts";
 // The remaining two core abilities: Search (place a block from the pile) and
 // Reboot (re-enter an eliminated pawn at the Central Core). Mirrors
 // impl/go/internal/engine/abilities.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-ABILITY-002
@@ -29,6 +33,10 @@ export function validSearchPlacements(
 ): Placement[] {
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
+  if(gd.regressionFixture!=="provisional-v1") {
+    const choice=s.pendingChoice;if(choice?.kind!=="place-block" || choice.pawnId!==pawnId || !choice.reference || !choice.blockId) throw new Error("declare Search before requesting placement options");
+    return validPlacements(s.cybernet,gd,choice.reference,choice.blockId);
+  }
   const top = searchTopBlock(s);
   if (!top) throw new Error("no blocks left in the pile");
   return validPlacements(s.cybernet, gd, pob.coord, top);
@@ -47,6 +55,7 @@ export function search(
   dir: number,
   rot: number,
 ): PlacedBlock {
+  if(gd.regressionFixture!=="provisional-v1") throw new Error("source Search requires declaration and placement choices");
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
   const actor = pawnById(gd, pawnId);
@@ -74,17 +83,6 @@ export function search(
   return pb;
 }
 
-/** The placed Central Core's coordinate and landing space id. */
-function centralCorePlacement(s: GameState, gd: GameData): { coord: Coord; space: string } {
-  for (const pb of s.cybernet.blocks) {
-    const bd = blockById(gd, pb.blockId);
-    if (bd?.isCentralCore) {
-      return { coord: pb.coord, space: bd.spaces?.[0]?.id ?? "" };
-    }
-  }
-  throw new Error("no Central Core in the Cybernet");
-}
-
 /**
  * Re-enters an eliminated pawn at the Central Core under playerId's control. The
  * pawn must have the Reboot ability and be in the eliminated pool. Throws on an
@@ -95,7 +93,10 @@ export function reboot(
   gd: GameData,
   pawnId: string,
   playerId: string,
+  destination?: SpaceRef,
 ): PawnOnBoard {
+  const controlCard = s.controlCards?.find(card => card.subject.kind === "pawn" && card.subject.id === pawnId);
+  if (controlCard && controlCard.ownerId !== playerId) throw new Error("only a pawn you control can Reboot");
   const idx = s.eliminated.indexOf(pawnId);
   if (idx < 0) throw new Error(`pawn "${pawnId}" is not eliminated`);
   const actor = pawnById(gd, pawnId);
@@ -109,13 +110,14 @@ export function reboot(
   const owner = s.players.find((p) => p.id === playerId);
   if (!owner) throw new Error(`unknown player "${playerId}"`);
   const key = abilityUsedKey("reboot", pawnId);
-  if (ability.activation === "once-per-turn" && owner.oncePerTurnUsed[key]) {
+  if (ability.activation === "once-per-turn" && abilityUseSpent(s,gd,owner,pawnId,"reboot")) {
     throw new Error(`pawn "${pawnId}" already used its once-per-turn Reboot this turn`);
   }
-  const { coord, space } = centralCorePlacement(s, gd);
+  const { coord, spaceId: space } = rebootDestination(s, gd, playerId, pawnId, destination);
   const pob: PawnOnBoard = { pawnId, ownerId: playerId, coord, spaceId: space };
   s.cybernet.placePawn(pob);
+  setPawnControl(s, pawnId, playerId);
   s.eliminated.splice(idx, 1);
-  if (ability.activation === "once-per-turn") owner.oncePerTurnUsed[key] = true;
+  if (ability.activation === "once-per-turn") spendAbilityUse(s,gd,owner,pawnId,"reboot");
   return pob;
 }

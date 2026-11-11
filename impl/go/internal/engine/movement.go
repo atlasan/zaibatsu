@@ -10,11 +10,12 @@ import (
 // (block-to-block) execution. Mirrors impl/ts/src/engine/movement.ts. See
 // DOCS/rules/speedrunners/board-and-movement.md ("SR-MOVE-001") and DOCS/domain-model.md.
 //
-// SCOPE (Phase 1): this implements pawn positions, space occupancy, the numeric
+// Shared movement primitives; source die decisions live in movement_choice.go.
+// This implements pawn positions, space occupancy, the numeric
 // step budget for every movement type (fixed / d6 / 2d6 / hex) including
 // modifiers, activation gating (card / once-per-turn / none), and EXECUTION of
-// hex movement (one whole block, ignoring spaces & space modifiers — the one
-// movement type the current data can resolve correctly).
+// hex movement (one whole block, ignoring spaces and space modifiers).
+// Printed component topology remains a separate source-promotion requirement.
 //
 // Space-to-space stepping: StepTargets is the space-adjacency graph (intra-block
 // space.neighbors + cross-edge boundarySpaces, respecting open edges, rotation,
@@ -34,18 +35,20 @@ func movementUsedKey(pawnID string, movementKey ...string) string {
 }
 
 type MovementOption struct {
-	Key           string
-	Movement      domain.Movement
-	Stealth       bool
-	PerTurnUses   int
-	RolledPerTurn string
+	AttachmentIndex *int
+	GrantIndex      int
+	Key             string
+	Movement        domain.Movement
+	Stealth         bool
+	PerTurnUses     int
+	RolledPerTurn   string
 }
 
 type MovementExecutionResult struct {
-        Pawn          *domain.PawnOnBoard `json:"pawn"`
-        MovementIndex int                 `json:"movementIndex"`
-        MovementKey   string              `json:"movementKey"`
-        Stealth       bool                `json:"stealth"`
+	Pawn          *domain.PawnOnBoard `json:"pawn"`
+	MovementIndex int                 `json:"movementIndex"`
+	MovementKey   string              `json:"movementKey"`
+	Stealth       bool                `json:"stealth"`
 }
 
 func grantActivation(attach *domain.Attach) string {
@@ -95,6 +98,9 @@ func movementFromGrant(grant domain.MovementGrant, activation string) domain.Mov
 }
 
 func EffectiveMovementOptions(gd *domain.GameData, pawn *domain.Pawn, atts []domain.Attachment) []MovementOption {
+	if gd.RegressionFixture != "provisional-v1" && pawn.Movement.Activation == "none" {
+		return nil
+	}
 	attachments := attachmentCards(gd, atts)
 	for _, card := range attachments {
 		if card.Attach != nil && containsString(card.Attach.Removes, "move") {
@@ -109,7 +115,23 @@ func EffectiveMovementOptions(gd *domain.GameData, pawn *domain.Pawn, atts []dom
 		activation := grantActivation(card.Attach)
 		perTurnUses, rolledPerTurn := grantUseRule(card.Attach)
 		for grantIndex, grant := range card.Attach.GrantsMovement {
+			var physicalIndex *int
+			if gd.RegressionFixture != "provisional-v1" {
+				known := 0
+				for i, att := range atts {
+					if cardByID(gd, att.CardID) == nil {
+						continue
+					}
+					if known == attachIndex {
+						index := i
+						physicalIndex = &index
+						break
+					}
+					known++
+				}
+			}
 			options = append(options, MovementOption{
+				AttachmentIndex: physicalIndex, GrantIndex: grantIndex,
 				Key:           fmt.Sprintf("%d:%d", attachIndex, grantIndex),
 				Movement:      movementFromGrant(grant, activation),
 				Stealth:       grant.Stealth || card.Attach.GrantsStealth,
@@ -130,6 +152,21 @@ func MovementOptionAt(gd *domain.GameData, pawn *domain.Pawn, atts []domain.Atta
 }
 
 func CanActivateMovementOption(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) error {
+	if s != nil && s.RulesVersion != "" {
+		if option.RolledPerTurn != "" {
+			return fmt.Errorf("unsupported source rolled movement-use budget")
+		}
+		limit := option.PerTurnUses
+		if limit == 0 && option.Movement.Activation == "once-per-turn" {
+			limit = 1
+		}
+		if limit > 0 {
+			if MovementUsesTaken(s, pawnID, option.AttachmentIndex, option.GrantIndex) < limit {
+				return nil
+			}
+			return fmt.Errorf("the physical movement ability is already spent this turn")
+		}
+	}
 	if option.PerTurnUses > 0 {
 		if grantedMovementUsesRemaining(s, p, pawnID, option) > 0 {
 			return nil
@@ -229,6 +266,10 @@ func grantedMovementUsesRemaining(s *domain.GameState, p *domain.Player, pawnID 
 }
 
 func consumeGrantedMovementUse(s *domain.GameState, p *domain.Player, pawnID string, option MovementOption) error {
+	if s.RulesVersion != "" {
+		SpendMovementUse(s, pawnID, option.AttachmentIndex, option.GrantIndex)
+		return nil
+	}
 	budget := ensureGrantedMovementBudget(s, p, pawnID, option)
 	for slot := 0; slot < budget; slot++ {
 		key := grantedMovementUseKey(pawnID, option.Key, slot)
@@ -274,6 +315,9 @@ func CanEndOn(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, spac
 		}
 	}
 	if occ >= cap {
+		if gd.RegressionFixture != "provisional-v1" {
+			return fmt.Errorf("space %q at (%d,%d) is full (%d/%d)", spaceID, coord.Q, coord.R, occ, cap)
+		}
 		return fmt.Errorf("space %q at %v is full (%d/%d)", spaceID, coord, occ, cap)
 	}
 	return nil
@@ -300,8 +344,8 @@ func firstOpenSpace(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord
 
 // SpaceRef names a gameplay space: the block cell it sits in plus the space id.
 type SpaceRef struct {
-	Coord   domain.Coord
-	SpaceID string
+	Coord   domain.Coord `json:"coord"`
+	SpaceID string       `json:"spaceId"`
 }
 
 func sliceHas(xs []string, s string) bool {
@@ -318,7 +362,49 @@ func sliceHas(xs []string, s string) bool {
 // hops into an adjacent block when both blocks encode boundarySpaces and the edge
 // is open. A space's `direction`, when set, restricts its cross-edge exit to that
 // single edge (the printed direction arrow). Order is deterministic.
-func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, spaceID string) []SpaceRef {
+// MovementEntryError checks entry by movement, not occupancy or placement.
+func MovementEntryError(gd *domain.GameData, cy *domain.Cybernet, pawnID string, from, to domain.Coord) error {
+	if gd.RegressionFixture != "provisional-v1" {
+		if def, ok := gd.PawnByID(pawnID); ok && def.Movement.Activation == "none" {
+			return fmt.Errorf("pawn cannot move")
+		}
+		if pawn := cy.PawnByID(pawnID); pawn != nil {
+			for _, att := range pawn.Attachments {
+				card := cardByID(gd, att.CardID)
+				if card != nil && card.Attach != nil && containsString(card.Attach.Removes, "move") {
+					return fmt.Errorf("pawn cannot move")
+				}
+			}
+		}
+	}
+	if from == to {
+		return nil
+	}
+	placed := cy.At(to)
+	if placed == nil {
+		return nil
+	}
+	block, ok := gd.BlockByID(placed.BlockID)
+	if !ok || !block.IsCentralCore {
+		return nil
+	}
+	pawn := cy.PawnByID(pawnID)
+	if pawn != nil {
+		for _, att := range pawn.Attachments {
+			card := cardByID(gd, att.CardID)
+			if card != nil && card.Attach != nil && containsString(card.Attach.ForbiddenDestinations, "central-core") {
+				return fmt.Errorf("pawn %q cannot enter Central Core", pawnID)
+			}
+		}
+	}
+	return nil
+}
+
+func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, spaceID string, pawnIDs ...string) []SpaceRef {
+	ignoreArrows := false
+	if len(pawnIDs) > 0 {
+		ignoreArrows = IgnoresDirectionArrows(gd, cy.PawnByID(pawnIDs[0]))
+	}
 	pb := cy.At(coord)
 	if pb == nil {
 		return nil
@@ -333,7 +419,7 @@ func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, s
 	}
 	var out []SpaceRef
 	for _, nb := range sp.Neighbors {
-		if block.Space(nb) != nil {
+		if block.Space(nb) != nil && (gd.RegressionFixture == "provisional-v1" || ignoreArrows || arrowAllowsStep(block, spaceID, nb)) {
 			out = append(out, SpaceRef{coord, nb})
 		}
 	}
@@ -344,7 +430,7 @@ func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, s
 			if !block.Edges[e] || !sliceHas(block.BoundarySpaces[e], spaceID) {
 				continue
 			}
-			if sp.Direction != nil && *sp.Direction != e {
+			if sp.Direction != nil && *sp.Direction != e && !ignoreArrows {
 				continue // the printed arrow restricts exit to this local edge only
 			}
 			gridDir := (e + pb.Rotation) % 6
@@ -366,6 +452,15 @@ func StepTargets(gd *domain.GameData, cy *domain.Cybernet, coord domain.Coord, s
 			}
 		}
 	}
+	if len(pawnIDs) > 0 {
+		filtered := []SpaceRef{}
+		for _, target := range out {
+			if MovementEntryError(gd, cy, pawnIDs[0], coord, target.Coord) == nil {
+				filtered = append(filtered, target)
+			}
+		}
+		return filtered
+	}
 	return out
 }
 
@@ -378,7 +473,7 @@ func MoveStep(s *domain.GameState, gd *domain.GameData, pawnID string, target do
 		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
 	}
 	reachable := false
-	for _, t := range StepTargets(gd, s.Cybernet, pob.Coord, pob.SpaceID) {
+	for _, t := range StepTargets(gd, s.Cybernet, pob.Coord, pob.SpaceID, pawnID) {
 		if t.Coord == target && t.SpaceID == targetSpaceID {
 			reachable = true
 			break
@@ -408,12 +503,17 @@ func validatePath(s *domain.GameState, gd *domain.GameData, pawnID string, path 
 		return validatedPath{}, fmt.Errorf("pawn %q is not on the board", pawnID)
 	}
 	if len(path) == 0 {
-		return validatedPath{}, fmt.Errorf("empty movement path")
+		if gd.RegressionFixture == "provisional-v1" {
+			return validatedPath{}, fmt.Errorf("empty movement path")
+		}
+		if err := CanEndOn(gd, s.Cybernet, pob.Coord, pob.SpaceID, pawnID); err != nil {
+			return validatedPath{}, err
+		}
 	}
 	coord, spaceID := pob.Coord, pob.SpaceID
 	for i, step := range path {
 		reachable := false
-		for _, target := range StepTargets(gd, s.Cybernet, coord, spaceID) {
+		for _, target := range StepTargets(gd, s.Cybernet, coord, spaceID, pawnID) {
 			if target.Coord == step.Coord && target.SpaceID == step.SpaceID {
 				reachable = true
 				break
@@ -436,7 +536,49 @@ func validatePath(s *domain.GameState, gd *domain.GameData, pawnID string, path 
 // authorized budget. It does not gate pawn activation or use RNG, allowing a
 // movement-valued action card to consume its own action rather than the pawn's
 // once-per-turn movement.
-func MovePathWithBudget(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef, budget int) (*domain.PawnOnBoard, error) {
+func IgnoresDirectionArrows(gd *domain.GameData, pawn *domain.PawnOnBoard) bool {
+	if pawn == nil {
+		return false
+	}
+	for _, card := range attachmentCards(gd, pawn.Attachments) {
+		if card.Attach != nil && card.Attach.IgnoresDirectionArrows {
+			return true
+		}
+	}
+	return false
+}
+
+func MovementStepModifier(gd *domain.GameData, pawn *domain.PawnOnBoard) int {
+	amount := 0
+	for _, card := range attachmentCards(gd, pawn.Attachments) {
+		if card.Attach != nil {
+			amount += card.Attach.MovementModifier
+		}
+	}
+	return amount
+}
+
+func MovePathWithBudget(s *domain.GameState, gd *domain.GameData, pawnID string, path []SpaceRef, budget int, applyModifiers ...bool) (*domain.PawnOnBoard, error) {
+	pawn := s.Cybernet.PawnByID(pawnID)
+	if pawn == nil {
+		return nil, fmt.Errorf("pawn cannot move")
+	}
+	if gd.RegressionFixture != "provisional-v1" {
+		if def, ok := gd.PawnByID(pawnID); ok && def.Movement.Activation == "none" {
+			return nil, fmt.Errorf("pawn cannot move")
+		}
+	}
+	for _, card := range attachmentCards(gd, pawn.Attachments) {
+		if card.Attach != nil && containsString(card.Attach.Removes, "move") {
+			return nil, fmt.Errorf("pawn cannot move")
+		}
+	}
+	if len(applyModifiers) == 0 || applyModifiers[0] {
+		budget += MovementStepModifier(gd, pawn)
+	}
+	if budget < 0 {
+		budget = 0
+	}
 	result, err := validatePath(s, gd, pawnID, path)
 	if err != nil {
 		return nil, err
@@ -471,6 +613,12 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 	if err != nil {
 		return nil, err
 	}
+	if gd.RegressionFixture != "provisional-v1" && (option.Movement.Type == "d6" || option.Movement.Type == "2d6") {
+		return nil, fmt.Errorf("roll movement before choosing its path")
+	}
+	if gd.RegressionFixture != "provisional-v1" && option.RolledPerTurn != "" {
+		return nil, fmt.Errorf("unsupported source rolled movement-use budget")
+	}
 	if option.Movement.Type == "hex" {
 		return nil, fmt.Errorf("pawn %q movement option %q is hex; use MoveHex", pawnID, option.Key)
 	}
@@ -481,12 +629,12 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 	if err := CanActivateMovementOption(s, owner, pawnID, option); err != nil {
 		return nil, err
 	}
-	// Validate before resolving dice, so an illegal path never consumes RNG.
+	// Frozen dice validate here before RNG; source dice use the committed decision API.
 	if _, err := validatePath(s, gd, pawnID, path); err != nil {
 		return nil, err
 	}
 	// Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
-	result, err := MovePathWithBudget(s, gd, pawnID, path, ResolveSteps(option.Movement, s.RNG, 0))
+	result, err := MovePathWithBudget(s, gd, pawnID, path, ResolveSteps(option.Movement, s.RNG, MovementStepModifier(gd, pob)), false)
 	if err != nil {
 		return nil, err
 	}
@@ -495,9 +643,13 @@ func MoveStepsWithOption(s *domain.GameState, gd *domain.GameData, pawnID string
 			return nil, err
 		}
 	} else if option.Movement.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
+		if s.RulesVersion != "" {
+			SpendMovementUse(s, pawnID, option.AttachmentIndex, option.GrantIndex)
+		} else {
+			owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
+		}
 	}
-        return &MovementExecutionResult{Pawn: result, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
+	return &MovementExecutionResult{Pawn: result, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
 }
 
 // MoveHex executes one block of hex movement for the pawn in grid direction dir.
@@ -525,6 +677,9 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 	if err != nil {
 		return nil, err
 	}
+	if gd.RegressionFixture != "provisional-v1" && option.RolledPerTurn != "" {
+		return nil, fmt.Errorf("unsupported source rolled movement-use budget")
+	}
 	if option.Movement.Type != "hex" {
 		return nil, fmt.Errorf("pawn %q movement option %q is not hex", pawnID, option.Key)
 	}
@@ -541,6 +696,9 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 	if s.Cybernet.At(target) == nil {
 		return nil, fmt.Errorf("no block at %v to move onto", target)
 	}
+	if err := MovementEntryError(gd, s.Cybernet, pawnID, pob.Coord, target); err != nil {
+		return nil, err
+	}
 	landing := firstOpenSpace(gd, s.Cybernet, target, pawnID)
 	if landing == "" {
 		return nil, fmt.Errorf("no open space to land on at %v", target)
@@ -553,7 +711,11 @@ func MoveHexWithOption(s *domain.GameState, gd *domain.GameData, pawnID string, 
 			return nil, err
 		}
 	} else if option.Movement.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
+		if s.RulesVersion != "" {
+			SpendMovementUse(s, pawnID, option.AttachmentIndex, option.GrantIndex)
+		} else {
+			owner.OncePerTurnUsed[movementUsedKey(pawnID, option.Key)] = true
+		}
 	}
-        return &MovementExecutionResult{Pawn: pob, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
+	return &MovementExecutionResult{Pawn: pob, MovementIndex: movementIndex, MovementKey: option.Key, Stealth: option.Stealth}, nil
 }

@@ -13,8 +13,8 @@ import (
 // SCOPE: targeted Delete, Bomb-class area Delete, and multi-target die
 // assignment. A pawn's Delete rolls one d6 per skull; if any die matches an
 // UNSHIELDED defense die of the target, the target is eliminated. A match on a
-// shielded die is blocked. Threat/Mark combat and block-effect dispatch are
-// later tasks.
+// shielded die is blocked. Public threat combat and replacement windows live
+// in their dedicated modules; complete component/mode coverage remains open.
 
 // abilityUsedKey namespaces a pawn's once-per-turn ability marker.
 func abilityUsedKey(ability, pawnID string) string {
@@ -40,11 +40,18 @@ func abilityListHas(list []string, name string) bool {
 	return false
 }
 
-// effectiveAbility resolves a pawn's ability after applying its attachments'
-// grants and removes (SR-CARD: an add-on/weapon can grant or strip an ability on
-// its target). A removed ability is unavailable even if innate; an ability the
-// pawn lacks but an attachment grants becomes card-activated. Mirrors combat.ts.
+// effectiveAbility is a compatibility summary. Source Delete returns its first
+// supported route; action/query callers select explicit card/free routes through
+// DeleteActivationOptions and requireDeleteActivation. Other abilities and
+// explicit frozen data retain their historical grants/removes logic.
 func effectiveAbility(gd *domain.GameData, pawn *domain.Pawn, atts []domain.Attachment, name string) *domain.Ability {
+	if name == "delete" && gd.RegressionFixture != "provisional-v1" {
+		options := DeleteActivationOptions(gd, pawn, atts)
+		if len(options) > 0 {
+			return &options[0]
+		}
+		return nil
+	}
 	for _, a := range atts {
 		if card := cardByID(gd, a.CardID); card != nil && card.Attach != nil && abilityListHas(card.Attach.Removes, name) {
 			return nil
@@ -74,6 +81,38 @@ func AttackRoll(rng *domain.RNG, skulls int) []int {
 	return out
 }
 
+func EffectiveAttackSkulls(gd *domain.GameData, s *domain.GameState, pawnID string, base int) int {
+	p := s.Cybernet.PawnByID(pawnID)
+	skulls := base
+	if skulls < 1 {
+		skulls = 1
+	}
+	if p == nil {
+		return skulls
+	}
+	for _, att := range p.Attachments {
+		c := cardByID(gd, att.CardID)
+		if c != nil && c.Attach != nil {
+			skulls += c.Attach.AttackModifier
+		}
+	}
+	pb := s.Cybernet.At(p.Coord)
+	if pb != nil {
+		b, ok := gd.BlockByID(pb.BlockID)
+		if ok {
+			for _, sp := range b.Spaces {
+				if sp.ID == p.SpaceID && sp.Modifier != nil && sp.Modifier.Kind == "attack" {
+					skulls += sp.Modifier.Amount
+				}
+			}
+		}
+	}
+	if skulls < 1 {
+		skulls = 1
+	}
+	return skulls
+}
+
 // Defeats reports whether an attack roll eliminates a pawn with the given defense
 // dice: any attack die value that equals an UNSHIELDED defense die value is a hit.
 func Defeats(roll []int, defense []domain.DefenseDie) bool {
@@ -98,7 +137,7 @@ type DeleteResult struct {
 // extraSkulls folds in cumulative skull modifiers (from cards/spaces — not yet
 // auto-sourced). On elimination the target is removed from the board and added to
 // the Eliminated pool.
-func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID string, extraSkulls int) (DeleteResult, error) {
+func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID string, extraSkulls int, activations ...string) (DeleteResult, error) {
 	var res DeleteResult
 	res.TargetPawnID = targetID
 
@@ -126,6 +165,17 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 	}
 
 	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
+	if gd.RegressionFixture != "provisional-v1" {
+		activation := "once-per-turn"
+		if len(activations) > 0 {
+			activation = activations[0]
+		}
+		var err error
+		ability, err = requireDeleteActivation(gd, atk, atkPob.Attachments, activation)
+		if err != nil {
+			return res, err
+		}
+	}
 	if ability == nil || ability.Activation == "none" {
 		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
 	}
@@ -134,24 +184,30 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 	if owner == nil {
 		return res, fmt.Errorf("attacker %q has no controlling player", attackerID)
 	}
-	key := abilityUsedKey("delete", attackerID)
-	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+	if ability.Activation == "once-per-turn" && AbilityUseSpent(s, gd, owner, attackerID, "delete") {
 		return res, fmt.Errorf("pawn %q already used its once-per-turn Delete this turn", attackerID)
 	}
 
-	skulls := ability.Skulls
-	if skulls < 1 {
-		skulls = 1
-	}
+	skulls := EffectiveAttackSkulls(gd, s, attackerID, ability.Skulls)
 	skulls += extraSkulls
 
-	res.Roll = AttackRoll(s.RNG, skulls)
-	if Defeats(res.Roll, EffectiveDefenseDice(gd, tgtPob)) {
-		eliminatePawn(s, targetID)
-		res.Eliminated = true
+	if s.RulesVersion != "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
 	}
-	if ability.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[key] = true
+	res.Roll = AttackRoll(s.RNG, skulls)
+	defense, err := DefenseProfile(s, gd, tgtPob)
+	if err != nil {
+		return res, err
+	}
+	if Defeats(res.Roll, defense) {
+		eliminated, err := attemptEliminatePawn(s, gd, targetID, "attack")
+		if err != nil {
+			return res, err
+		}
+		res.Eliminated = eliminated
+	}
+	if s.RulesVersion == "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
 	}
 	return res, nil
 }
@@ -159,13 +215,69 @@ func Delete(s *domain.GameState, gd *domain.GameData, attackerID, targetID strin
 // eliminatePawn removes a pawn from the board and records it in the Eliminated
 // pool (for a later Reboot). Attached cards are discarded and any bonus counters
 // they held are returned to the owner.
-func eliminatePawn(s *domain.GameState, pawnID string) {
-	if pob := s.Cybernet.PawnByID(pawnID); pob != nil {
-		discardAttachments(s, pob)
+func eliminatePawn(s *domain.GameState, pawnID string, definitions ...*domain.GameData) bool {
+	var gd *domain.GameData
+	if len(definitions) > 0 {
+		gd = definitions[0]
 	}
-	if s.Cybernet.RemovePawn(pawnID) {
-		s.Eliminated = append(s.Eliminated, pawnID)
+	return finalizePawnElimination(s, pawnID, gd, nil)
+}
+
+func finalizePawnElimination(s *domain.GameState, pawnID string, gd *domain.GameData, events *[]EngineEvent) bool {
+	pawn := s.Cybernet.PawnByID(pawnID)
+	if pawn == nil {
+		return false
 	}
+	if s.RulesVersion != "" && gd == nil {
+		panic("source lifecycle elimination requires GameData")
+	}
+	journal := phaseEventSink([]*[]EngineEvent{events})
+	retained := s.RulesVersion == ""
+	if gd != nil {
+		if def, ok := gd.PawnByID(pawnID); ok && effectiveAbility(gd, def, pawn.Attachments, "reboot") != nil {
+			retained = true
+		}
+	}
+	cardID, previousOwner := "", ""
+	for _, card := range s.ControlCards {
+		if card.Subject.Kind == "pawn" && card.Subject.ID == pawnID {
+			cardID = card.CardID
+			previousOwner = card.OwnerID
+		}
+	}
+	cards := []string{}
+	for _, att := range pawn.Attachments {
+		cards = append(cards, att.CardID)
+	}
+	s.Cybernet.RemovePawn(pawnID)
+	*journal = append(*journal, EngineEvent{Type: EventElimination, PawnID: pawnID})
+	if retained {
+		if !containsString(s.Eliminated, pawnID) {
+			s.Eliminated = append(s.Eliminated, pawnID)
+		}
+	} else {
+		for i, id := range s.Eliminated {
+			if id == pawnID {
+				s.Eliminated = append(s.Eliminated[:i], s.Eliminated[i+1:]...)
+				break
+			}
+		}
+		if !containsString(s.Reserve, pawnID) {
+			s.Reserve = append(s.Reserve, pawnID)
+		}
+		*journal = append(*journal, EngineEvent{Type: "pawn-returned-to-reserve", PawnID: pawnID})
+	}
+	discardAttachments(s, pawn)
+	for _, id := range cards {
+		*journal = append(*journal, EngineEvent{Type: "card-discarded", CardID: id})
+	}
+	if !retained {
+		SetPawnControl(s, pawnID, "")
+		if previousOwner != "" {
+			*journal = append(*journal, EngineEvent{Type: "control-card-released", PlayerID: previousOwner, CardID: cardID, PawnID: pawnID})
+		}
+	}
+	return true
 }
 
 // MultiTargetResult is the outcome for one target of a multi-target Delete assignment.
@@ -196,7 +308,7 @@ type DeleteAreaResult struct {
 	Targets []AreaTargetResult `json:"targets"`
 }
 
-func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord domain.Coord, skulls int) DeleteAreaResult {
+func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord domain.Coord, skulls int) (DeleteAreaResult, error) {
 	res := DeleteAreaResult{Coord: coord}
 	res.Roll = AttackRoll(s.RNG, skulls)
 	eliminatedIDs := []string{}
@@ -204,17 +316,29 @@ func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord do
 		if pawn.Coord != coord {
 			continue
 		}
-                _, ok := gd.PawnByID(pawn.PawnID)
-                eliminated := ok && Defeats(res.Roll, EffectiveDefenseDice(gd, pawn))
+		_, ok := gd.PawnByID(pawn.PawnID)
+		defense, err := DefenseProfile(s, gd, pawn)
+		if err != nil {
+			return res, err
+		}
+		eliminated := ok && Defeats(res.Roll, defense)
 		res.Targets = append(res.Targets, AreaTargetResult{TargetPawnID: pawn.PawnID, Eliminated: eliminated})
 		if eliminated {
 			eliminatedIDs = append(eliminatedIDs, pawn.PawnID)
 		}
 	}
 	for _, pawnID := range eliminatedIDs {
-		eliminatePawn(s, pawnID)
+		eliminated, err := attemptEliminatePawn(s, gd, pawnID, "attack")
+		if err != nil {
+			return res, err
+		}
+		for i := range res.Targets {
+			if res.Targets[i].TargetPawnID == pawnID {
+				res.Targets[i].Eliminated = eliminated
+			}
+		}
 	}
-	return res
+	return res, nil
 }
 
 // DeleteMulti resolves a single Delete attack roll split across several co-located
@@ -225,7 +349,7 @@ func resolveDeleteAreaAtCoord(s *domain.GameState, gd *domain.GameData, coord do
 // defense die.
 //
 // SCOPE: area attacks are a later refinement — tracked in tasks/BACKLOG.md.
-func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, targetIDs []string, extraSkulls int) (DeleteMultiResult, error) {
+func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, targetIDs []string, extraSkulls int, activations ...string) (DeleteMultiResult, error) {
 	var res DeleteMultiResult
 	if len(targetIDs) == 0 {
 		return res, fmt.Errorf("no targets given")
@@ -239,6 +363,17 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 		return res, fmt.Errorf("unknown attacker pawn %q", attackerID)
 	}
 	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
+	if gd.RegressionFixture != "provisional-v1" {
+		activation := "once-per-turn"
+		if len(activations) > 0 {
+			activation = activations[0]
+		}
+		var err error
+		ability, err = requireDeleteActivation(gd, atk, atkPob.Attachments, activation)
+		if err != nil {
+			return res, err
+		}
+	}
 	if ability == nil || ability.Activation == "none" {
 		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
 	}
@@ -246,15 +381,11 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 	if owner == nil {
 		return res, fmt.Errorf("attacker %q has no controlling player", attackerID)
 	}
-	key := abilityUsedKey("delete", attackerID)
-	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+	if ability.Activation == "once-per-turn" && AbilityUseSpent(s, gd, owner, attackerID, "delete") {
 		return res, fmt.Errorf("pawn %q already used its once-per-turn Delete this turn", attackerID)
 	}
 
-	skulls := ability.Skulls
-	if skulls < 1 {
-		skulls = 1
-	}
+	skulls := EffectiveAttackSkulls(gd, s, attackerID, ability.Skulls)
 	skulls += extraSkulls
 	if len(targetIDs) > skulls {
 		return res, fmt.Errorf("cannot attack %d targets with only %d skull(s)", len(targetIDs), skulls)
@@ -275,6 +406,9 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 		}
 	}
 
+	if s.RulesVersion != "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
+	}
 	res.Roll = AttackRoll(s.RNG, skulls)
 	diceByTarget := map[string][]int{}
 	targetOrder := []string{}
@@ -286,14 +420,22 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 	}
 	for _, tid := range targetOrder {
 		dice := diceByTarget[tid]
-		eliminated := s.Cybernet.PawnByID(tid) != nil && Defeats(dice, EffectiveDefenseDice(gd, s.Cybernet.PawnByID(tid)))
+		defense, err := DefenseProfile(s, gd, s.Cybernet.PawnByID(tid))
+		if err != nil {
+			return res, err
+		}
+		eliminated := s.Cybernet.PawnByID(tid) != nil && Defeats(dice, defense)
 		res.Targets = append(res.Targets, MultiTargetResult{TargetPawnID: tid, Dice: dice, Eliminated: eliminated})
 		if eliminated {
-			eliminatePawn(s, tid)
+			eliminated, err := attemptEliminatePawn(s, gd, tid, "attack")
+			if err != nil {
+				return res, err
+			}
+			res.Targets[len(res.Targets)-1].Eliminated = eliminated
 		}
 	}
-	if ability.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[key] = true
+	if s.RulesVersion == "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
 	}
 	return res, nil
 }
@@ -301,7 +443,7 @@ func DeleteMulti(s *domain.GameState, gd *domain.GameData, attackerID string, ta
 // DeleteArea resolves a Bomb-class area Delete against every pawn in the
 // attacker's block. The same attack roll is applied to every pawn in the area of
 // effect, including the attacker when present in that block.
-func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, extraSkulls int) (DeleteAreaResult, error) {
+func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, extraSkulls int, activations ...string) (DeleteAreaResult, error) {
 	var res DeleteAreaResult
 	atkPob := s.Cybernet.PawnByID(attackerID)
 	if atkPob == nil {
@@ -316,6 +458,17 @@ func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, ext
 	}
 
 	ability := effectiveAbility(gd, atk, atkPob.Attachments, "delete")
+	if gd.RegressionFixture != "provisional-v1" {
+		activation := "once-per-turn"
+		if len(activations) > 0 {
+			activation = activations[0]
+		}
+		var err error
+		ability, err = requireDeleteActivation(gd, atk, atkPob.Attachments, activation)
+		if err != nil {
+			return res, err
+		}
+	}
 	if ability == nil || ability.Activation == "none" {
 		return res, fmt.Errorf("pawn %q cannot activate Delete", attackerID)
 	}
@@ -323,19 +476,22 @@ func DeleteArea(s *domain.GameState, gd *domain.GameData, attackerID string, ext
 	if owner == nil {
 		return res, fmt.Errorf("attacker %q has no controlling player", attackerID)
 	}
-	key := abilityUsedKey("delete", attackerID)
-	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+	if ability.Activation == "once-per-turn" && AbilityUseSpent(s, gd, owner, attackerID, "delete") {
 		return res, fmt.Errorf("pawn %q already used its once-per-turn Delete this turn", attackerID)
 	}
 
-	skulls := ability.Skulls
-	if skulls < 1 {
-		skulls = 1
-	}
+	skulls := EffectiveAttackSkulls(gd, s, attackerID, ability.Skulls)
 	skulls += extraSkulls
-	res = resolveDeleteAreaAtCoord(s, gd, atkPob.Coord, skulls)
-	if ability.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[key] = true
+	var err error
+	if s.RulesVersion != "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
+	}
+	res, err = resolveDeleteAreaAtCoord(s, gd, atkPob.Coord, skulls)
+	if err != nil {
+		return res, err
+	}
+	if s.RulesVersion == "" && ability.Activation == "once-per-turn" {
+		SpendAbilityUse(s, gd, owner, attackerID, "delete")
 	}
 	return res, nil
 }

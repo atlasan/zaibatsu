@@ -1,0 +1,84 @@
+{
+  "manifestVersion": 1,
+  "generatedBy": "tools/validate-spec.ts",
+  "entries": [
+    {
+      "expansion": "speedrunners",
+      "files": [
+        {
+          "path": "spec/data/speedrunners/action-cards.json",
+          "sha256": "73a26dad7e87ac1a0d5a325339611d93fc1c29b91c638a248777de846ec9f9da"
+        },
+        {
+          "path": "spec/data/speedrunners/blocks.json",
+          "sha256": "80443c0b75379e94cc538469537facc789f08d81c493a0e9a51a2a69d1e6b740"
+        },
+        {
+          "path": "spec/data/speedrunners/mode.json",
+          "sha256": "72e92397f1553b2e6196e6be9980b267e9094bb818e69846f4da25cdc6a0f54f"
+        },
+        {
+          "path": "spec/data/speedrunners/modes.json",
+          "sha256": "9566fc73bad232921b792a8d318f1617120e5d5c9a52448b6a5eda392dfc5341"
+        },
+        {
+          "path": "spec/data/speedrunners/pawns.json",
+          "sha256": "b18a6779724078a2f95a003e6010926a1a486a3dabe0af5cade4c79b2a245c5d"
+        },
+        {
+          "path": "spec/schema/action-card.schema.json",
+          "sha256": "4273be5f8456cc191bad7678cd8181b1e42aeaf665d458802b5d970a8aa945d4"
+        },
+        {
+          "path": "spec/schema/block.schema.json",
+          "sha256": "cee69e280fc6790f8114444ec9d335c931ed406ce2581e5eeac8111d5340069b"
+        },
+        {
+          "path": "spec/schema/mode.schema.json",
+          "sha256": "b51cff6c6c628a073a6ffbf7836ae57fde4077635a5980624bf9cf42bf7485c8"
+        },
+        {
+          "path": "spec/schema/pawn.schema.json",
+          "sha256": "b1e91854c5f5431103e8a3c93ce72aac09b50d29c9de6eb0543cb388e7d96992"
+        }
+      ]
+    },
+    {
+      "expansion": "shadowraiders",
+      "files": [
+        {
+          "path": "spec/data/shadowraiders/control-cards.json",
+          "sha256": "ad0ec528fb60ea3b329aa3099d317db2b4d1dfbc1f3392524838f3858f186b31"
+        },
+        {
+          "path": "spec/data/shadowraiders/missions.json",
+          "sha256": "5fbe926beea4ca8b6bc4c9aa969bb78772d6b15cb22c2eaa796fb0ed90a7ee9d"
+        },
+        {
+          "path": "spec/data/shadowraiders/modes.json",
+          "sha256": "8bda7efb412592c7f6420f75a955b51e4469bf418417d71d9613aa4199ee0256"
+        },
+        {
+          "path": "spec/data/shadowraiders/threats.json",
+          "sha256": "32f86327256615e5dd036dc7b240da86d25d71d285ca98d7e29ee570625e895f"
+        },
+        {
+          "path": "spec/schema/control-card.schema.json",
+          "sha256": "80912860efd02f480e015f9964e6fb6076aa9e8f7c2a3e2aafabd2b8b77b1d16"
+        },
+        {
+          "path": "spec/schema/mission-card.schema.json",
+          "sha256": "c3e160b926e23612116278b697851260aed94e0a961984962cd6efdb0aa30e77"
+        },
+        {
+          "path": "spec/schema/mode.schema.json",
+          "sha256": "b51cff6c6c628a073a6ffbf7836ae57fde4077635a5980624bf9cf42bf7485c8"
+        },
+        {
+          "path": "spec/schema/threat.schema.json",
+          "sha256": "e0f2add11969b7f3bdb1eb5e83f3a73e70b61c067db9b4f65474ab99164340a4"
+        }
+      ]
+    }
+  ]
+}

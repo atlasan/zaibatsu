@@ -46,8 +46,9 @@ type DefenseDie struct {
 
 // SpaceModifier tweaks a space's behavior (defense / hand-size / attack).
 type SpaceModifier struct {
-	Kind   string `json:"kind"`
-	Amount int    `json:"amount"`
+	Kind   string       `json:"kind"`
+	Amount int          `json:"amount,omitempty"`
+	Dice   []DefenseDie `json:"dice,omitempty"`
 }
 
 // Space is a cell on a block that pawns occupy.
@@ -98,7 +99,14 @@ func (c ExplicitSpaceCapacity) MarshalJSON() ([]byte, error) {
 
 // Space is a gameplay location on a block. ZoneIDs are standardized source-aligned placement hexes;
 // neighbors are inferred candidates for future step movement.
+type SpaceEffect struct {
+	Kind     string `json:"kind"`
+	CardType string `json:"cardType"`
+	Scope    string `json:"scope"`
+	Optional bool   `json:"optional"`
+}
 type Space struct {
+	Effect       *SpaceEffect          `json:"effect,omitempty"`
 	ID           string                `json:"id"`
 	Type         string                `json:"type"`
 	ZoneIDs      []string              `json:"zoneIds,omitempty"`
@@ -109,6 +117,7 @@ type Space struct {
 	Neighbors    []string        `json:"neighbors,omitempty"`
 	PawnID       string          `json:"pawnId,omitempty"`
 	EffectID     string          `json:"effectId,omitempty"`
+	ThreatID     string          `json:"threatId,omitempty"`
 	Location     *SpaceLocation  `json:"location,omitempty"`
 	Footprint    *SpaceFootprint `json:"footprint,omitempty"`
 	Modifier     *SpaceModifier  `json:"modifier,omitempty"`
@@ -120,11 +129,15 @@ type Space struct {
 // a typed action (kind + optional amount/target/text). It round-trips back to a
 // bare string when only the id is set, keeping existing data byte-identical.
 type BlockEffect struct {
-	ID     string `json:"-"`
-	Kind   string `json:"kind,omitempty"`
-	Amount int    `json:"amount,omitempty"`
-	Target string `json:"target,omitempty"`
-	Text   string `json:"text,omitempty"`
+	MarkerThreshold        int    `json:"markerThreshold,omitempty"`
+	Scope                  string `json:"scope,omitempty"`
+	Optional               bool   `json:"optional,omitempty"`
+	MinimumControlledPawns int    `json:"minimumControlledPawns,omitempty"`
+	ID                     string `json:"-"`
+	Kind                   string `json:"kind,omitempty"`
+	Amount                 int    `json:"amount,omitempty"`
+	Target                 string `json:"target,omitempty"`
+	Text                   string `json:"text,omitempty"`
 }
 
 func (e *BlockEffect) UnmarshalJSON(b []byte) error {
@@ -154,21 +167,27 @@ type BlockEffects struct {
 // CardEffect is a typed operation performed by an action card with an explicit
 // trigger/timing.
 type CardEffect struct {
-        Kind    string `json:"kind"`
-        Amount  int    `json:"amount,omitempty"`
-        Target  string `json:"target,omitempty"`
-        Text    string `json:"text,omitempty"`
-        Trigger string `json:"trigger,omitempty"`
+	Kind    string `json:"kind"`
+	Amount  int    `json:"amount,omitempty"`
+	Target  string `json:"target,omitempty"`
+	Text    string `json:"text,omitempty"`
+	Trigger string `json:"trigger,omitempty"`
 }
 
 // Block is a hexagonal Cybernet tile.
+type SpaceArrow struct {
+	From string `json:"from"`
+	To   string `json:"to"`
+}
 type Block struct {
-	ID            string    `json:"id"`
-	Name          string    `json:"name"`
-	Expansion     Expansion `json:"expansion"`
-	LayoutID      string    `json:"layoutId,omitempty"`
-	IsCentralCore bool      `json:"isCentralCore,omitempty"`
-	IceValue      IceValue  `json:"iceValue,omitempty"`
+	SpaceArrows        []SpaceArrow `json:"spaceArrows,omitempty"`
+	NonPlayableZoneIDs []string     `json:"nonPlayableZoneIds,omitempty"`
+	ID                 string       `json:"id"`
+	Name               string       `json:"name"`
+	Expansion          Expansion    `json:"expansion"`
+	LayoutID           string       `json:"layoutId,omitempty"`
+	IsCentralCore      bool         `json:"isCentralCore,omitempty"`
+	IceValue           IceValue     `json:"iceValue,omitempty"`
 	// IceFaces are the specific 1-6 die faces a successful Icebreak must match.
 	// When present the engine uses these instead of deriving from IceValue.
 	IceFaces []int `json:"iceFaces,omitempty"`
@@ -200,74 +219,141 @@ type Ability struct {
 }
 
 type MovementGrant struct {
-        Type    string `json:"type"`
-        Amount  int    `json:"amount,omitempty"`
-        Stealth bool   `json:"stealth,omitempty"`
+	Type    string `json:"type"`
+	Amount  int    `json:"amount,omitempty"`
+	Stealth bool   `json:"stealth,omitempty"`
 }
 
 type AbilityUse struct {
-        Ability    string `json:"ability"`
-        PerTurn    int    `json:"perTurn,omitempty"`
-        Dice       string `json:"dice,omitempty"`
-        Activation string `json:"activation,omitempty"`
+	Ability    string `json:"ability"`
+	PerTurn    int    `json:"perTurn,omitempty"`
+	Dice       string `json:"dice,omitempty"`
+	Activation string `json:"activation,omitempty"`
 }
 
 type IceModifier struct {
-        Faces     []int `json:"faces,omitempty"`
-        DeltaDice int   `json:"deltaDice,omitempty"`
-        Black     bool  `json:"black,omitempty"`
+	Faces     []int `json:"faces,omitempty"`
+	DeltaDice int   `json:"deltaDice,omitempty"`
+	Black     bool  `json:"black,omitempty"`
+}
+
+// IcebreakerModifier belongs to the actor, never the target's innate ICE.
+type IcebreakerModifier struct {
+	Faces           []int `json:"faces,omitempty"`
+	RollDice        int   `json:"rollDice,omitempty"`
+	Black           bool  `json:"black,omitempty"`
+	IgnoresBlackIce bool  `json:"ignoresBlackIce,omitempty"`
 }
 
 // Pawn is an agent: piece (position) + control card (attributes).
+type ControlMarkerEffect struct {
+	Kind   string `json:"kind"`
+	Amount int    `json:"amount"`
+}
+type ControlCardMarker struct {
+	PlayerID string `json:"playerId"`
+	CardID   string `json:"cardId"`
+	Amount   int    `json:"amount"`
+}
+type PawnPhaseEffect struct {
+	Trigger  string `json:"trigger"`
+	Kind     string `json:"kind"`
+	Amount   int    `json:"amount"`
+	Scope    string `json:"scope"`
+	Target   string `json:"target"`
+	Optional bool   `json:"optional"`
+}
 type Pawn struct {
-	ID          string       `json:"id"`
-	Name        string       `json:"name"`
-	Expansion   Expansion    `json:"expansion"`
-	LayoutID    string       `json:"layoutId,omitempty"`
-	Class       []string     `json:"class"`
-	Defense     []DefenseDie `json:"defense"`
-	Movement    Movement     `json:"movement"`
-	Abilities   []Ability    `json:"abilities,omitempty"`
-	IceValue    IceValue     `json:"iceValue,omitempty"`
-	Slots       []string     `json:"slots,omitempty"`
-	Special     string       `json:"special,omitempty"`
-	IsStarter   bool         `json:"isStarter,omitempty"`
-	MercCost    int          `json:"mercCost,omitempty"`
-	Provisional bool         `json:"provisional,omitempty"`
+	AbilityTurn         string               `json:"abilityTurn,omitempty"`
+	PhaseEffects        []PawnPhaseEffect    `json:"phaseEffects,omitempty"`
+	ControlMarkerEffect *ControlMarkerEffect `json:"controlMarkerEffect,omitempty"`
+	ID                  string               `json:"id"`
+	Name                string               `json:"name"`
+	Expansion           Expansion            `json:"expansion"`
+	LayoutID            string               `json:"layoutId,omitempty"`
+	Class               []string             `json:"class"`
+	Defense             []DefenseDie         `json:"defense"`
+	Movement            Movement             `json:"movement"`
+	Abilities           []Ability            `json:"abilities,omitempty"`
+	IceValue            IceValue             `json:"iceValue,omitempty"`
+	IceFaces            []int                `json:"iceFaces,omitempty"`
+	IcebreakerModifier  *IcebreakerModifier  `json:"icebreakerModifier,omitempty"`
+	Slots               []string             `json:"slots,omitempty"`
+	Special             string               `json:"special,omitempty"`
+	IsStarter           bool                 `json:"isStarter,omitempty"`
+	Color               string               `json:"color,omitempty"`
+	MercCost            int                  `json:"mercCost,omitempty"`
+	Provisional         bool                 `json:"provisional,omitempty"`
+	AssetRefs           []string             `json:"assetRefs,omitempty"`
+	Artwork             *PawnArtwork         `json:"artwork,omitempty"`
+}
+
+// PawnArtwork is a source sheet window used only by clients; it has no rule effect.
+type PawnArtwork struct {
+	AssetID  string      `json:"assetId"`
+	Width    int         `json:"width"`
+	Height   int         `json:"height"`
+	Rect     ArtworkRect `json:"rect"`
+	Rotation int         `json:"rotation,omitempty"`
+}
+type ArtworkRect struct {
+	X      int `json:"x"`
+	Y      int `json:"y"`
+	Width  int `json:"width"`
+	Height int `json:"height"`
 }
 
 // Attach describes how an action card may attach to a game element, and what it
 // confers on the target (grants/removes abilities, plus a special effect text).
+type DeleteAttribute struct {
+	Skulls     int    `json:"skulls"`
+	Activation string `json:"activation,omitempty"`
+}
+
 type Attach struct {
-        As             string          `json:"as"`
-        Slot           string          `json:"slot,omitempty"`
-        Class          []string        `json:"class,omitempty"`
-        Grants         []string        `json:"grants,omitempty"`
-        Removes        []string        `json:"removes,omitempty"`
-        GrantsMovement []MovementGrant `json:"grantsMovement,omitempty"`
-        GrantsStealth  bool            `json:"grantsStealth,omitempty"`
-        GrantsSlot     []string        `json:"grantsSlot,omitempty"`
-        AbilityUses    []AbilityUse    `json:"abilityUses,omitempty"`
-        IceModifier    *IceModifier    `json:"iceModifier,omitempty"`
-        DefenseOverride []DefenseDie   `json:"defenseOverride,omitempty"`
-        NullifiesIce   bool            `json:"nullifiesIce,omitempty"`
-        DrawModifier   int             `json:"drawModifier,omitempty"`
-        HandModifier   int             `json:"handModifier,omitempty"`
-        EffectText     string          `json:"effectText,omitempty"`
-        EffectTrigger  string          `json:"effectTrigger,omitempty"`
-        Cost           int             `json:"cost,omitempty"`
+	IcebreakerModifier     *IcebreakerModifier    `json:"icebreakerModifier,omitempty"`
+	ControllerHand         string                 `json:"controllerHand,omitempty"`
+	Delete                 *DeleteAttribute       `json:"delete,omitempty"`
+	EliminationPrevention  *EliminationPrevention `json:"eliminationPrevention,omitempty"`
+	PhaseEffects           []PhaseEffect          `json:"phaseEffects,omitempty"`
+	As                     string                 `json:"as"`
+	Slot                   string                 `json:"slot,omitempty"`
+	Class                  []string               `json:"class,omitempty"`
+	ForbiddenDestinations  []string               `json:"forbiddenDestinations,omitempty"`
+	ForbiddenClasses       []string               `json:"forbiddenClasses,omitempty"`
+	Grants                 []string               `json:"grants,omitempty"`
+	Removes                []string               `json:"removes,omitempty"`
+	GrantsMovement         []MovementGrant        `json:"grantsMovement,omitempty"`
+	GrantsStealth          bool                   `json:"grantsStealth,omitempty"`
+	IgnoresDirectionArrows bool                   `json:"ignoresDirectionArrows,omitempty"`
+	MovementModifier       int                    `json:"movementModifier,omitempty"`
+	GrantsSlot             []string               `json:"grantsSlot,omitempty"`
+	AbilityUses            []AbilityUse           `json:"abilityUses,omitempty"`
+	IceModifier            *IceModifier           `json:"iceModifier,omitempty"`
+	DefenseOverride        []DefenseDie           `json:"defenseOverride,omitempty"`
+	NullifiesIce           bool                   `json:"nullifiesIce,omitempty"`
+	DrawModifier           int                    `json:"drawModifier,omitempty"`
+	HandModifier           int                    `json:"handModifier,omitempty"`
+	EffectText             string                 `json:"effectText,omitempty"`
+	EffectTrigger          string                 `json:"effectTrigger,omitempty"`
+	Cost                   int                    `json:"cost,omitempty"`
+	AttackModifier         int                    `json:"attackModifier,omitempty"`
 }
 
 // ActionCard is a multi-use card from the shared action deck.
 type ActionCard struct {
-	ID          string   `json:"id"`
-	Name        string   `json:"name"`
-	Copies      int      `json:"copies,omitempty"`
-	Movement    int      `json:"movement,omitempty"`
-	Activates   []string `json:"activates,omitempty"`
-        Effects     []CardEffect `json:"effects,omitempty"`
-	Attach      *Attach  `json:"attach,omitempty"`
-	Provisional bool     `json:"provisional,omitempty"`
+	Type        string       `json:"type,omitempty"`
+	Class       []string     `json:"class,omitempty"`
+	ID          string       `json:"id"`
+	Name        string       `json:"name"`
+	Copies      int          `json:"copies,omitempty"`
+	Movement    int          `json:"movement,omitempty"`
+	Activates   []string     `json:"activates,omitempty"`
+	Effects     []CardEffect `json:"effects,omitempty"`
+	Attach      *Attach      `json:"attach,omitempty"`
+	AssetRefs   []string     `json:"assetRefs,omitempty"`
+	Summary     string       `json:"summary,omitempty"`
+	Provisional bool         `json:"provisional,omitempty"`
 }
 
 // ControlCard is a physical card that controls a pawn or block.
@@ -288,12 +374,14 @@ type CardSubject struct {
 
 // Threat is a Shadowraiders hostile entity. Resolution remains an engine concern.
 type Threat struct {
-	ID          string   `json:"id"`
-	Name        string   `json:"name"`
-	Type        string   `json:"type"`
-	AttackDie   int      `json:"attackDie,omitempty"`
-	Effects     []string `json:"effects,omitempty"`
-	Provisional bool     `json:"provisional,omitempty"`
+	ID          string       `json:"id"`
+	Name        string       `json:"name"`
+	Type        string       `json:"type"`
+	AttackDie   int          `json:"attackDie,omitempty"`
+	Defense     []DefenseDie `json:"defense,omitempty"`
+	Copies      int          `json:"copies,omitempty"`
+	Effects     []string     `json:"effects,omitempty"`
+	Provisional bool         `json:"provisional,omitempty"`
 }
 
 // MissionCard holds data for a Shadowraiders mission and its normalized reward.
@@ -313,16 +401,21 @@ type MissionReward struct {
 
 // Mode is a playable game mode definition.
 type Mode struct {
-	ID             string         `json:"id"`
-	Name           string         `json:"name"`
-	Expansions     []Expansion    `json:"expansions,omitempty"`
-	Players        PlayerRange    `json:"players"`
-	ControlMarkers map[string]int `json:"controlMarkers"`
-	MaxHandSize    int            `json:"maxHandSize,omitempty"`
-	StartingHand   []int          `json:"startingHand,omitempty"`
-	Win            []string       `json:"win,omitempty"`
-	Lose           []string       `json:"lose,omitempty"`
-	Notes          string         `json:"notes,omitempty"`
+	BonusCounterSupply  *int           `json:"bonusCounterSupply,omitempty"`
+	ID                  string         `json:"id"`
+	Name                string         `json:"name"`
+	Expansions          []Expansion    `json:"expansions,omitempty"`
+	Players             PlayerRange    `json:"players"`
+	AllowedPlayerCounts []int          `json:"allowedPlayerCounts,omitempty"`
+	SourceID            string         `json:"sourceId,omitempty"`
+	Setup               []string       `json:"setup,omitempty"`
+	ControlMarkers      map[string]int `json:"controlMarkers"`
+	MaxHandSize         int            `json:"maxHandSize,omitempty"`
+	StartingHand        []int          `json:"startingHand,omitempty"`
+	Win                 []string       `json:"win,omitempty"`
+	Lose                []string       `json:"lose,omitempty"`
+	Notes               string         `json:"notes,omitempty"`
+	Provisional         bool           `json:"provisional,omitempty"`
 }
 
 // PlayerRange is a mode's supported player count.
@@ -333,14 +426,15 @@ type PlayerRange struct {
 
 // GameData is the loaded, validated content the engine plays with.
 type GameData struct {
-	Blocks       []Block
-	Pawns        []Pawn
-	Cards        []ActionCard
-	Mode         Mode
-	ControlCards []ControlCard
-	Threats      []Threat
-	Missions     []MissionCard
-	Modes        []Mode
+	RegressionFixture string
+	Blocks            []Block
+	Pawns             []Pawn
+	Cards             []ActionCard
+	Mode              Mode
+	ControlCards      []ControlCard
+	Threats           []Threat
+	Missions          []MissionCard
+	Modes             []Mode
 }
 
 // BlockByID returns the block definition with the given id.
@@ -394,20 +488,150 @@ func (p *Player) MarkersRemaining() int {
 }
 
 // GameState is the full, replayable state of a game.
+type UseMarker struct {
+	Ability string `json:"ability"`
+	Uses    int    `json:"uses"`
+}
+type NativeUseMarker struct {
+	PawnID  string `json:"pawnId"`
+	Ability string `json:"ability"`
+	Uses    int    `json:"uses"`
+}
+type BlockSacrificeDecision struct {
+	ID               string   `json:"id"`
+	PlayerID         string   `json:"playerId"`
+	CandidatePawnIDs []string `json:"candidatePawnIds"`
+	Submitted        bool     `json:"submitted"`
+	PawnID           string   `json:"pawnId,omitempty"`
+}
+type PendingBlockSacrifices struct {
+	BlockID   string                   `json:"blockId"`
+	Coord     Coord                    `json:"coord"`
+	Decisions []BlockSacrificeDecision `json:"decisions"`
+}
+type BlockDiscardDecision struct {
+	ID        string   `json:"id"`
+	PlayerID  string   `json:"playerId"`
+	Amount    int      `json:"amount"`
+	Submitted bool     `json:"submitted"`
+	CardIDs   []string `json:"cardIds,omitempty"`
+}
+type PendingBlockDiscards struct {
+	BlockID   string                 `json:"blockId"`
+	Coord     Coord                  `json:"coord"`
+	Decisions []BlockDiscardDecision `json:"decisions"`
+}
 type GameState struct {
-	Players       []*Player `json:"players"`
-	CurrentPlayer int       `json:"currentPlayer"`
-	Turn          int       `json:"turn"`
-	Phase         Phase     `json:"phase"`
-	Deck          []string  `json:"deck"`
-	Discard       []string  `json:"discard"`
-	BlockPile     []string  `json:"blockPile"`
-	Cybernet      *Cybernet `json:"cybernet"`
+	BonusCounterSupply     *int                    `json:"bonusCounterSupply,omitempty"`
+	PendingBlockSacrifices *PendingBlockSacrifices `json:"pendingBlockSacrifices,omitempty"`
+	PendingBlockDiscards   *PendingBlockDiscards   `json:"pendingBlockDiscards,omitempty"`
+	ControlCardMarkers     []ControlCardMarker     `json:"controlCardMarkers,omitempty"`
+	NativeUseMarkers       []NativeUseMarker       `json:"nativeUseMarkers,omitempty"`
+	UnresolvedUseCards     []Attachment            `json:"unresolvedUseCards,omitempty"`
+	AttachmentSerial       int                     `json:"attachmentSerial,omitempty"`
+	OutOfGame              []string                `json:"outOfGame,omitempty"`
+	PendingEliminations    []PendingElimination    `json:"pendingEliminations,omitempty"`
+	DecisionSerial         int                     `json:"decisionSerial,omitempty"`
+	RulesVersion           string                  `json:"rulesVersion,omitempty"`
+	Reserve                []string                `json:"reserve,omitempty"`
+	PendingPhase           string                  `json:"pendingPhase,omitempty"`
+	PendingEffects         []PendingEffect         `json:"pendingEffects,omitempty"`
+	PendingChoice          *PendingChoice          `json:"pendingChoice,omitempty"`
+	Players                []*Player               `json:"players"`
+	CurrentPlayer          int                     `json:"currentPlayer"`
+	Turn                   int                     `json:"turn"`
+	Phase                  Phase                   `json:"phase"`
+	Deck                   []string                `json:"deck"`
+	Discard                []string                `json:"discard"`
+	PlayedCards            []string                `json:"playedCards"`
+	PlayedCardOwners       []string                `json:"playedCardOwners,omitempty"`
+	ControlCards           []ControlCardState      `json:"controlCards,omitempty"`
+	Threats                []ThreatOnBoard         `json:"threats,omitempty"`
+	ThreatPile             []string                `json:"threatPile,omitempty"`
+	ClearedEvents          []string                `json:"clearedEvents,omitempty"`
+	PendingAttack          *PendingAttack          `json:"pendingAttack,omitempty"`
+	PendingThreats         *PendingThreatCombat    `json:"pendingThreats,omitempty"`
+	BlockPile              []string                `json:"blockPile"`
+	Cybernet               *Cybernet               `json:"cybernet"`
 	// Eliminated holds pawn ids removed from the Cybernet. A Reboot re-enters one
 	// at the Central Core under the rebooting player's control.
 	Eliminated []string `json:"eliminated"`
 	WinnerID   string   `json:"winnerId,omitempty"`
 	RNG        *RNG     `json:"-"`
+}
+
+type PhaseEffect struct {
+	Trigger    string `json:"trigger"`
+	Kind       string `json:"kind"`
+	Amount     int    `json:"amount,omitempty"`
+	ThreatMode string `json:"threatMode,omitempty"`
+}
+type PendingEffect struct {
+	PhaseEffect
+	ID       string `json:"id"`
+	PlayerID string `json:"playerId"`
+	PawnID   string `json:"pawnId"`
+	CardID   string `json:"cardId"`
+	Source   string `json:"source,omitempty"`
+	Scope    string `json:"scope,omitempty"`
+	Target   string `json:"target,omitempty"`
+	Optional bool   `json:"optional,omitempty"`
+}
+type EliminationPrevention struct {
+	Kind string `json:"kind"`
+}
+
+type PendingElimination struct {
+	ID       string `json:"id"`
+	PawnID   string `json:"pawnId"`
+	PlayerID string `json:"playerId"`
+	Cause    string `json:"cause"`
+}
+
+type MovementOrigin struct {
+	Coord   Coord  `json:"coord"`
+	SpaceID string `json:"spaceId"`
+}
+type PendingMovement struct {
+	Roll          []int          `json:"roll"`
+	Budget        int            `json:"budget"`
+	Origin        MovementOrigin `json:"origin"`
+	MovementIndex int            `json:"movementIndex"`
+	MovementKey   string         `json:"movementKey"`
+	Stealth       bool           `json:"stealth"`
+}
+type PendingChoice struct {
+	ID        string           `json:"id"`
+	PlayerID  string           `json:"playerId"`
+	Kind      string           `json:"kind"`
+	EffectID  string           `json:"effectId"`
+	PawnID    string           `json:"pawnId"`
+	CardID    string           `json:"cardId"`
+	Amount    int              `json:"amount,omitempty"`
+	CardIDs   []string         `json:"cardIds,omitempty"`
+	BlockID   string           `json:"blockId,omitempty"`
+	SpaceID   string           `json:"spaceId,omitempty"`
+	Reference *Coord           `json:"reference,omitempty"`
+	Movement  *PendingMovement `json:"movement,omitempty"`
+}
+
+type ThreatOnBoard struct {
+	ID       string `json:"id"`
+	ThreatID string `json:"threatId"`
+	Coord    Coord  `json:"coord"`
+	SpaceID  string `json:"spaceId"`
+	Status   string `json:"status"`
+}
+type PendingAttack struct {
+	PlayerID    string   `json:"playerId"`
+	AttackerIDs []string `json:"attackerIds"`
+	Coord       Coord    `json:"coord"`
+	Roll        []int    `json:"roll"`
+}
+type PendingThreatCombat struct {
+	Coord       Coord    `json:"coord"`
+	AttackerIDs []string `json:"attackerIds"`
+	Stage       string   `json:"stage"`
 }
 
 // CurrentPlayerPtr returns the player whose turn it is.
@@ -423,4 +647,12 @@ func (s *GameState) PlayerByID(id string) *Player {
 		}
 	}
 	return nil
+}
+
+// ControlCardState places a physical card in a player control zone or the common area.
+type ControlCardState struct {
+	Subject CardSubject `json:"subject"`
+	CardID  string      `json:"cardId"`
+	OwnerID string      `json:"ownerId"`
+	Zone    string      `json:"zone,omitempty"`
 }

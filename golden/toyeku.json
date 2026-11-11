@@ -1,0 +1,1353 @@
+{
+  "tile": {
+    "id": "idoru",
+    "name": "Toyeku Company",
+    "expansion": "speedrunners",
+    "layoutId": "standard-seven-zone-2-3-2-pointy",
+    "iceValue": "low",
+    "iceFaces": [
+      3,
+      4,
+      6
+    ],
+    "edges": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "boundarySpaces": [
+      [
+        "upper"
+      ],
+      [
+        "defense"
+      ],
+      [
+        "idoru"
+      ],
+      [
+        "idoru"
+      ],
+      [
+        "left"
+      ],
+      [
+        "upper"
+      ]
+    ],
+    "bonusFragments": 3,
+    "bonusCorners": [
+      false,
+      true,
+      true,
+      false,
+      false,
+      true
+    ],
+    "spaces": [
+      {
+        "id": "upper",
+        "type": "normal",
+        "zoneIds": [
+          "h2",
+          "h3"
+        ],
+        "capacity": 2,
+        "displayShape": "capsule",
+        "neighbors": [
+          "left",
+          "defense"
+        ]
+      },
+      {
+        "id": "left",
+        "type": "normal",
+        "zoneIds": [
+          "h7"
+        ],
+        "capacity": 1,
+        "neighbors": [
+          "upper",
+          "idoru"
+        ]
+      },
+      {
+        "id": "defense",
+        "type": "normal",
+        "zoneIds": [
+          "h4"
+        ],
+        "capacity": 1,
+        "neighbors": [
+          "upper",
+          "idoru"
+        ],
+        "modifier": {
+          "kind": "defense",
+          "dice": [
+            {
+              "value": 1,
+              "shielded": false
+            }
+          ]
+        }
+      },
+      {
+        "id": "idoru",
+        "type": "pawn",
+        "pawnId": "idoru",
+        "zoneIds": [
+          "h5",
+          "h6"
+        ],
+        "capacity": "unlimited",
+        "displayShape": "circle",
+        "neighbors": [
+          "left",
+          "defense"
+        ]
+      }
+    ],
+    "effects": {
+      "inCybernet": {
+        "kind": "place-neutral-pawn",
+        "target": "idoru",
+        "text": "Place the Idoru in this block."
+      }
+    },
+    "assetRefs": [
+      "sp-en-blocks-a4-p01-c01"
+    ],
+    "nonPlayableZoneIds": [
+      "h1"
+    ]
+  },
+  "before": {
+    "turn": 1,
+    "phase": "action",
+    "currentPlayer": 0,
+    "winnerId": "",
+    "players": [
+      {
+        "id": "p1",
+        "color": "pink",
+        "pawnId": "speedrunner-pink",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "dj",
+          "move-1",
+          "worm"
+        ],
+        "oncePerTurn": []
+      },
+      {
+        "id": "p2",
+        "color": "orange",
+        "pawnId": "speedrunner-orange",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "lima-flag"
+        ],
+        "oncePerTurn": []
+      }
+    ],
+    "deck": [
+      "move-2",
+      "move-3",
+      "octagon-dex",
+      "insider-trading",
+      "move-1",
+      "e-synapse-neural-interface",
+      "enemy-malware",
+      "enemy-malware",
+      "move-1",
+      "virus",
+      "move-3",
+      "move-2",
+      "weapon-gunhed",
+      "jetpack",
+      "dummy",
+      "simstim-record",
+      "servocanon",
+      "trojan",
+      "move-3",
+      "biochip",
+      "move-1",
+      "under-clocker",
+      "move-2",
+      "armor-brainchip",
+      "toxin",
+      "cracker",
+      "move-2",
+      "armor-brainchip",
+      "accelerator-transgenic-therapy",
+      "move-2",
+      "phase-loop",
+      "rootkit",
+      "move-2",
+      "add-on-accelerator",
+      "electric-sheep",
+      "ak-12km",
+      "hijacker",
+      "accela-accelerator",
+      "selective-disclosure",
+      "move-3",
+      "move-1",
+      "add-on-accelerator",
+      "move-1",
+      "hyper-accelerator"
+    ],
+    "discard": [],
+    "playedCards": [],
+    "blockPile": [
+      "black-market",
+      "electromagnetic-pulse",
+      "antro",
+      "copyleft",
+      "firewall-node",
+      "pink-district",
+      "server-farm",
+      "corporate-scandal",
+      "engineering-war",
+      "data-haven",
+      "military-development",
+      "chiba-city",
+      "black-clinic",
+      "combat-prototypes",
+      "clandestine-broadcast",
+      "yakuza",
+      "hacktivism",
+      "arms-industry",
+      "idoru"
+    ],
+    "eliminated": [],
+    "rulesVersion": "source-v20",
+    "reserve": [
+      "cracker",
+      "idoru",
+      "gynoid",
+      "drone-turret",
+      "merc-cyberninja",
+      "drone-mk-2",
+      "drone-probe"
+    ],
+    "outOfGame": [
+      "speedrunner-blue",
+      "speedrunner-green"
+    ],
+    "nativeUseMarkers": [],
+    "unresolvedUseCards": [],
+    "bonusCounterSupply": 24,
+    "bonusIcons": [],
+    "blocks": [
+      {
+        "blockId": "central-core",
+        "rotation": 0,
+        "q": 0,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      }
+    ],
+    "pawns": [
+      {
+        "pawnId": "speedrunner-pink",
+        "ownerId": "p1",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "speedrunner-orange",
+        "ownerId": "p2",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      }
+    ],
+    "controlCards": [
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-blue"
+        },
+        "cardId": "speedrunner-blue-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-green"
+        },
+        "cardId": "speedrunner-green-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-pink"
+        },
+        "cardId": "speedrunner-pink-control",
+        "ownerId": "p1",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-orange"
+        },
+        "cardId": "speedrunner-orange-control",
+        "ownerId": "p2",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "idoru"
+        },
+        "cardId": "idoru-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "gynoid"
+        },
+        "cardId": "gynoid-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-mk-2"
+        },
+        "cardId": "drone-mk-2-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-probe"
+        },
+        "cardId": "drone-probe-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-turret"
+        },
+        "cardId": "drone-turret-control",
+        "ownerId": "",
+        "zone": "common"
+      }
+    ]
+  },
+  "pending": {
+    "turn": 1,
+    "phase": "action",
+    "currentPlayer": 0,
+    "winnerId": "",
+    "players": [
+      {
+        "id": "p1",
+        "color": "pink",
+        "pawnId": "speedrunner-pink",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "move-1",
+          "worm"
+        ],
+        "oncePerTurn": []
+      },
+      {
+        "id": "p2",
+        "color": "orange",
+        "pawnId": "speedrunner-orange",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "lima-flag"
+        ],
+        "oncePerTurn": []
+      }
+    ],
+    "deck": [
+      "move-2",
+      "move-3",
+      "octagon-dex",
+      "insider-trading",
+      "move-1",
+      "e-synapse-neural-interface",
+      "enemy-malware",
+      "enemy-malware",
+      "move-1",
+      "virus",
+      "move-3",
+      "move-2",
+      "weapon-gunhed",
+      "jetpack",
+      "dummy",
+      "simstim-record",
+      "servocanon",
+      "trojan",
+      "move-3",
+      "biochip",
+      "move-1",
+      "under-clocker",
+      "move-2",
+      "armor-brainchip",
+      "toxin",
+      "cracker",
+      "move-2",
+      "armor-brainchip",
+      "accelerator-transgenic-therapy",
+      "move-2",
+      "phase-loop",
+      "rootkit",
+      "move-2",
+      "add-on-accelerator",
+      "electric-sheep",
+      "ak-12km",
+      "hijacker",
+      "accela-accelerator",
+      "selective-disclosure",
+      "move-3",
+      "move-1",
+      "add-on-accelerator",
+      "move-1",
+      "hyper-accelerator"
+    ],
+    "discard": [
+      "dj"
+    ],
+    "playedCards": [],
+    "blockPile": [
+      "black-market",
+      "electromagnetic-pulse",
+      "antro",
+      "copyleft",
+      "firewall-node",
+      "pink-district",
+      "server-farm",
+      "corporate-scandal",
+      "engineering-war",
+      "data-haven",
+      "military-development",
+      "chiba-city",
+      "black-clinic",
+      "combat-prototypes",
+      "clandestine-broadcast",
+      "yakuza",
+      "hacktivism",
+      "arms-industry"
+    ],
+    "eliminated": [],
+    "rulesVersion": "source-v20",
+    "reserve": [
+      "cracker",
+      "idoru",
+      "gynoid",
+      "drone-turret",
+      "merc-cyberninja",
+      "drone-mk-2",
+      "drone-probe"
+    ],
+    "outOfGame": [
+      "speedrunner-blue",
+      "speedrunner-green"
+    ],
+    "nativeUseMarkers": [],
+    "unresolvedUseCards": [],
+    "bonusCounterSupply": 24,
+    "bonusIcons": [],
+    "blocks": [
+      {
+        "blockId": "central-core",
+        "rotation": 0,
+        "q": 0,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      }
+    ],
+    "pawns": [
+      {
+        "pawnId": "speedrunner-pink",
+        "ownerId": "p1",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "speedrunner-orange",
+        "ownerId": "p2",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      }
+    ],
+    "controlCards": [
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-blue"
+        },
+        "cardId": "speedrunner-blue-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-green"
+        },
+        "cardId": "speedrunner-green-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-pink"
+        },
+        "cardId": "speedrunner-pink-control",
+        "ownerId": "p1",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-orange"
+        },
+        "cardId": "speedrunner-orange-control",
+        "ownerId": "p2",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "idoru"
+        },
+        "cardId": "idoru-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "gynoid"
+        },
+        "cardId": "gynoid-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-mk-2"
+        },
+        "cardId": "drone-mk-2-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-probe"
+        },
+        "cardId": "drone-probe-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-turret"
+        },
+        "cardId": "drone-turret-control",
+        "ownerId": "",
+        "zone": "common"
+      }
+    ],
+    "pendingChoice": {
+      "id": "search-1",
+      "playerId": "p1",
+      "kind": "place-block",
+      "effectId": "search-1",
+      "pawnId": "speedrunner-pink",
+      "cardId": "dj",
+      "blockId": "idoru",
+      "reference": {
+        "q": 0,
+        "r": 0
+      }
+    },
+    "decisionSerial": 1
+  },
+  "options": [
+    {
+      "action": {
+        "type": "resolve-choice",
+        "choiceId": "search-1"
+      },
+      "responses": [
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:0:5"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:1:5"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:2:5"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:3:5"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:4:5"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:0"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:1"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:2"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:3"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:4"
+        },
+        {
+          "type": "resolve-choice",
+          "playerId": "p1",
+          "choiceId": "search-1",
+          "optionId": "place:5:5"
+        }
+      ]
+    }
+  ],
+  "after": {
+    "turn": 1,
+    "phase": "action",
+    "currentPlayer": 0,
+    "winnerId": "",
+    "players": [
+      {
+        "id": "p1",
+        "color": "pink",
+        "pawnId": "speedrunner-pink",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "move-1",
+          "worm"
+        ],
+        "oncePerTurn": []
+      },
+      {
+        "id": "p2",
+        "color": "orange",
+        "pawnId": "speedrunner-orange",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "hand": [
+          "lima-flag"
+        ],
+        "oncePerTurn": []
+      }
+    ],
+    "deck": [
+      "move-2",
+      "move-3",
+      "octagon-dex",
+      "insider-trading",
+      "move-1",
+      "e-synapse-neural-interface",
+      "enemy-malware",
+      "enemy-malware",
+      "move-1",
+      "virus",
+      "move-3",
+      "move-2",
+      "weapon-gunhed",
+      "jetpack",
+      "dummy",
+      "simstim-record",
+      "servocanon",
+      "trojan",
+      "move-3",
+      "biochip",
+      "move-1",
+      "under-clocker",
+      "move-2",
+      "armor-brainchip",
+      "toxin",
+      "cracker",
+      "move-2",
+      "armor-brainchip",
+      "accelerator-transgenic-therapy",
+      "move-2",
+      "phase-loop",
+      "rootkit",
+      "move-2",
+      "add-on-accelerator",
+      "electric-sheep",
+      "ak-12km",
+      "hijacker",
+      "accela-accelerator",
+      "selective-disclosure",
+      "move-3",
+      "move-1",
+      "add-on-accelerator",
+      "move-1",
+      "hyper-accelerator"
+    ],
+    "discard": [
+      "dj"
+    ],
+    "playedCards": [],
+    "blockPile": [
+      "black-market",
+      "electromagnetic-pulse",
+      "antro",
+      "copyleft",
+      "firewall-node",
+      "pink-district",
+      "server-farm",
+      "corporate-scandal",
+      "engineering-war",
+      "data-haven",
+      "military-development",
+      "chiba-city",
+      "black-clinic",
+      "combat-prototypes",
+      "clandestine-broadcast",
+      "yakuza",
+      "hacktivism",
+      "arms-industry"
+    ],
+    "eliminated": [],
+    "rulesVersion": "source-v20",
+    "reserve": [
+      "cracker",
+      "gynoid",
+      "drone-turret",
+      "merc-cyberninja",
+      "drone-mk-2",
+      "drone-probe"
+    ],
+    "outOfGame": [
+      "speedrunner-blue",
+      "speedrunner-green"
+    ],
+    "nativeUseMarkers": [],
+    "unresolvedUseCards": [],
+    "bonusCounterSupply": 24,
+    "bonusIcons": [],
+    "blocks": [
+      {
+        "blockId": "central-core",
+        "rotation": 0,
+        "q": 0,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      },
+      {
+        "blockId": "idoru",
+        "rotation": 0,
+        "q": 1,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      }
+    ],
+    "pawns": [
+      {
+        "pawnId": "speedrunner-pink",
+        "ownerId": "p1",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "speedrunner-orange",
+        "ownerId": "p2",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "idoru",
+        "ownerId": "",
+        "q": 1,
+        "r": 0,
+        "spaceId": "idoru",
+        "attachments": []
+      }
+    ],
+    "controlCards": [
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-blue"
+        },
+        "cardId": "speedrunner-blue-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-green"
+        },
+        "cardId": "speedrunner-green-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-pink"
+        },
+        "cardId": "speedrunner-pink-control",
+        "ownerId": "p1",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-orange"
+        },
+        "cardId": "speedrunner-orange-control",
+        "ownerId": "p2",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "idoru"
+        },
+        "cardId": "idoru-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "gynoid"
+        },
+        "cardId": "gynoid-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-mk-2"
+        },
+        "cardId": "drone-mk-2-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-probe"
+        },
+        "cardId": "drone-probe-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-turret"
+        },
+        "cardId": "drone-turret-control",
+        "ownerId": "",
+        "zone": "common"
+      }
+    ],
+    "decisionSerial": 1
+  },
+  "observer": {
+    "bonusPool": {
+      "supply": 24,
+      "reserve": 24,
+      "free": 0,
+      "invested": 0,
+      "onBoard": 0
+    },
+    "format": "zaibatsu-player-view/v1",
+    "viewerId": "p2",
+    "turn": 1,
+    "phase": "action",
+    "currentPlayer": 0,
+    "winnerId": "",
+    "players": [
+      {
+        "id": "p1",
+        "name": "A",
+        "color": "pink",
+        "pawnId": "speedrunner-pink",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "oncePerTurn": [],
+        "hand": {
+          "count": 2,
+          "visibility": "hidden",
+          "cards": []
+        },
+        "handSize": {
+          "base": 5,
+          "attachments": 0,
+          "spaces": 0,
+          "maximum": 5
+        }
+      },
+      {
+        "id": "p2",
+        "name": "B",
+        "color": "orange",
+        "pawnId": "speedrunner-orange",
+        "markersTotal": 10,
+        "markersPlaced": 0,
+        "bonus": 0,
+        "oncePerTurn": [],
+        "hand": {
+          "count": 1,
+          "visibility": "owner",
+          "cards": [
+            "lima-flag"
+          ]
+        },
+        "handSize": {
+          "base": 5,
+          "attachments": 0,
+          "spaces": 0,
+          "maximum": 5
+        }
+      }
+    ],
+    "useMarkers": [],
+    "piles": {
+      "deck": 44,
+      "blockPile": 18,
+      "threatPile": 0
+    },
+    "discard": [
+      "dj"
+    ],
+    "playedCards": [],
+    "eliminated": [],
+    "reserve": [
+      "cracker",
+      "gynoid",
+      "drone-turret",
+      "merc-cyberninja",
+      "drone-mk-2",
+      "drone-probe"
+    ],
+    "outOfGame": [
+      "speedrunner-blue",
+      "speedrunner-green"
+    ],
+    "bonusIcons": [],
+    "blocks": [
+      {
+        "blockId": "central-core",
+        "rotation": 0,
+        "q": 0,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      },
+      {
+        "blockId": "idoru",
+        "rotation": 0,
+        "q": 1,
+        "r": 0,
+        "ownerId": "",
+        "attachments": []
+      }
+    ],
+    "pawns": [
+      {
+        "pawnId": "speedrunner-pink",
+        "ownerId": "p1",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "speedrunner-orange",
+        "ownerId": "p2",
+        "q": 0,
+        "r": 0,
+        "spaceId": "core",
+        "attachments": []
+      },
+      {
+        "pawnId": "idoru",
+        "ownerId": "",
+        "q": 1,
+        "r": 0,
+        "spaceId": "idoru",
+        "attachments": []
+      }
+    ],
+    "controlCards": [
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-blue"
+        },
+        "cardId": "speedrunner-blue-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-green"
+        },
+        "cardId": "speedrunner-green-control",
+        "ownerId": "",
+        "zone": "out-of-game"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-pink"
+        },
+        "cardId": "speedrunner-pink-control",
+        "ownerId": "p1",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "speedrunner-orange"
+        },
+        "cardId": "speedrunner-orange-control",
+        "ownerId": "p2",
+        "zone": "control"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "idoru"
+        },
+        "cardId": "idoru-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "gynoid"
+        },
+        "cardId": "gynoid-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-mk-2"
+        },
+        "cardId": "drone-mk-2-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-probe"
+        },
+        "cardId": "drone-probe-control",
+        "ownerId": "",
+        "zone": "common"
+      },
+      {
+        "subject": {
+          "kind": "pawn",
+          "id": "drone-turret"
+        },
+        "cardId": "drone-turret-control",
+        "ownerId": "",
+        "zone": "common"
+      }
+    ],
+    "threats": [],
+    "clearedEvents": [],
+    "options": []
+  },
+  "events": [
+    {
+      "type": "action-accepted",
+      "playerId": "p1",
+      "actionType": "play-search"
+    },
+    {
+      "type": "card-discarded",
+      "cardId": "dj"
+    },
+    {
+      "type": "block-drawn",
+      "playerId": "p1",
+      "pawnId": "speedrunner-pink",
+      "element": "block",
+      "elementId": "idoru",
+      "coord": {
+        "q": 0,
+        "r": 0
+      }
+    },
+    {
+      "type": "choice-required",
+      "playerId": "p1",
+      "elementId": "search-1",
+      "cardId": "dj"
+    },
+    {
+      "type": "choice-resolved",
+      "playerId": "p1",
+      "cardId": "dj",
+      "elementId": "search-1"
+    },
+    {
+      "type": "block-placed",
+      "playerId": "p1",
+      "pawnId": "speedrunner-pink",
+      "element": "block",
+      "elementId": "idoru",
+      "coord": {
+        "q": 1,
+        "r": 0
+      }
+    },
+    {
+      "type": "pawn-placed",
+      "element": "pawn",
+      "elementId": "idoru",
+      "coord": {
+        "q": 1,
+        "r": 0
+      },
+      "spaceId": "idoru"
+    }
+  ]
+}

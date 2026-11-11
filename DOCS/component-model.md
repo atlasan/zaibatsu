@@ -32,33 +32,27 @@ indexed on the 6 outer edges/vertices.
 
 ### ICE (defense vs Icebreaker) — SR-BOARD "ICE value"
 
-**Printed form (source-confirmed):** the block's ICE **difficulty** sits at a hex
-**corner** — a die or 3-D dice showing the value; a **black die** = Black ICE
-(e.g. Freeside). This is separate from an **ICE modifier** printed as a flat die
-*inside a space* (`space.modifier.kind = ice`). Detection must key ICE difficulty
-to a corner and not confuse it with an in-zone modifier die. Human ground truth
-for four blocks (Central Core, Pink District, Cleaner, Freeside) is captured in
-`tools/hexvision/blocks-truth.json`.
+**Printed forms (EN/ES pp.13/21/38):** three-dimensional dice at a block corner encode block ICE; a black corner die supplies Black ICE. Flat square black/white dice inside spaces change shielding of numbered pawn defense faces. A rhombus on a pawn card is its ICE value. Saved review/detection observations that called a flat square an ICE modifier need source rechecking; Toyeku's white1 is now corrected. Keep source observations separate from canonical verified data.
 
 | Field | Status | Notes |
 |---|---|---|
 | `iceValue` (`none`/`low`/`medium`/`high`/`black`) | ✅ | category: low=3 dice, medium=2, high=1, black=1 black die. |
-| **`iceFaces`** (the specific 1–6 die faces) | ✅(schema) / ✅(detect) / ✅(engine) | schema + both engine mirrors: `iceFacesFor` prefers the authored faces over the category derivation (Go + TS, tested). `tools/hexvision/detect.py` **reads the flat die faces** from the tile → `iceDiceCandidates`, review-required. |
+| **`iceFaces`** (the specific 1–6 die faces) | ✅(schema) / ✅(detect) / ✅(engine) | Schema + both mirrors prefer authored exact faces. Detector candidates remain review-only; identify block ICE from corner cubes rather than accepting a flat-square candidate as ICE. |
 | **`blackIce`** (bool) | ✅(schema) / ✅(engine) | schema + both mirrors: a failed Icebreak against a `blackIce` block eliminates the attacker (independent of the `black` category; tested). |
 
 ### Spaces (per gameplay cell) — SR-BOARD "Spaces"
 Each space: `id`, `type` (`normal`/`special`/`pawn`/`effect`), `zoneIds` (1+ of
-h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
-(intra-block links — data present, step traversal deferred), `displayShape`
+h1–h7), `capacity` (int | `unlimited`; finite defaults use zone count, special/pawn spaces default unlimited), `neighbors`
+(executable intra-block links), `displayShape`
 (`auto`/`circle`/`capsule`/`compound`; render-only), `pawnId` (for pawn spaces),
 `effectId` (for effect spaces). ✅ modeled. Plus per-space **modifiers**:
 | Modifier | Status | Notes |
 |---|---|---|
-| `modifier.kind = defense` (± shielded/unshielded defense dice) | ✅ | |
-| `modifier.kind = hand-size` (± max hand size) | ✅ | |
+| `modifier.kind = defense`, `dice: [{value,shielded}]` | ✅ | Exact square-die faces set shielding in the current space after the pawn/armor profile; p.21 profiles and every combat route are mirrored/tested. Numeric placeholders reject. |
+| `modifier.kind = hand-size` (± max hand size) | ✅ | Nonzero signed source amounts contribute for currently stopped controlled pawns during recycling, together with attachment amounts/base. Both mirrors expose pure public profiles; SR-TURN-008 records occupancy rationale. Black Clinic minus1 refills to four. |
 | `modifier.kind = attack` (modify a Delete attack) | ✅ | |
-| **`modifier.kind = ice`** (space modifies a target's ICE) | ✅(schema) / ✅(engine) | source-confirmed: printed as a **flat die on a zone** (e.g. Cleaner). Distinct from the block's ICE *difficulty*, which sits at a **corner** (see ICE section). Both mirrors now apply the modifier during Icebreaker resolution by adjusting the target's effective ICE dice count. |
-| **`space.direction`** (a space allows movement only one way) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `StepTargets` restricts a space's **cross-edge** exit to the single local edge named by `direction` (tested). No arrows on the base tiles, so detection stays manual. |
+| **`modifier.kind = ice`** | provisional experiment | Historical numeric ICE-count behavior remains separate; it is not evidence that a flat square is ICE. Recheck unpromoted records against primary symbology. |
+| **`space.direction`** (a space allows movement only one way) | ✅(schema) / ✅(engine) / ⛔(detect) | schema + both mirrors: `StepTargets` restricts a space's **cross-edge** exit to the single local edge named by `direction` (tested). This cross-edge direction is distinct from `spaceArrows`, which encodes reviewed directed internal links. Toyeku has none; reviewed Sprawl, Hacktivism, Pink District, Yakuza and Black Clinic links execute with Octagon exceptions. Unreviewed links retain their own source gates. |
 
 ### Board topology
 | Field | Status | Notes |
@@ -69,14 +63,14 @@ h1–h7), `capacity` (int | `unlimited`; default = zone count), `neighbors`
 ### Bonus zone — SR-BOARD "Bonus fragments/icons"
 | Field | Status | Notes |
 |---|---|---|
-| `bonusCorners[6]` (which of 6 corners are **white**) | ✅(data) / ⛔(economy) | a bonus zone forms where **three white corners** meet on the board; the bonus-icon economy is not yet resolved by the engine. |
+| `bonusCorners[6]` | ✅ | Author the actual printed bonus fragments, not every white region (the ICE corner is distinct). Engine icons form/collect from three matching fragments; full printed geometry remains under source review. |
 | `bonusFragments` (count) | ✅ | derived from `bonusCorners`. |
 
 ### Effects — SR-BOARD "Block effects"
 | Field | Status | Notes |
 |---|---|---|
-| `effects.inCybernet` (fires on placement) | ✅(schema) / ✅(typed engine subset) | accepts a bare effect-id string **or** a typed effect (below). Typed `area-attack` and `place-pawn` now dispatch in both mirrors; the remaining effect kinds stay pending. |
-| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ✅(typed engine subset) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Typed `area-attack` and the current source-backed `place-pawn` subset now dispatch on control gain in both mirrors. |
+| `effects.inCybernet` (fires on placement) | ✅(schema) / ✅(typed engine subset) | accepts a bare effect-id string **or** a typed effect (below). Typed area attacks and source `place-neutral-pawn` dispatch in both mirrors; historical/synthetic controlled placement remains separate. Other effect kinds stay pending. |
+| `effects.underControl` (fires on a successful Icebreaker / change of control) | ✅(schema) / ✅(typed engine subset) | user-flagged; now typed: each effect is a legacy string **or** `{kind, amount?, target?, text?}` with `kind ∈ {gain-control-card, place-pawn, place-neutral-pawn, area-attack, all-players, modify-ice, custom}`. Existing string data stays valid. Area attacks and historical/synthetic controlled placement dispatch; complete source matching-space/repeated-control pawn effects remain under T-RULES-006. Neutral placement is a distinct placement trigger. |
 
 ---
 
@@ -220,3 +214,8 @@ SR-MOVE-002). Previously only whole-block `hex` movement executed.
 - Detection still open: card `class` (own identity), grant/remove ✕-marker glyph,
   card cost/movement glyphs; block name (stylised diagonal — manual) and direction
   arrows (absent on base tiles).
+
+
+Verified blocks account explicitly for non-playable title/art zones through `nonPlayableZoneIds`. These zones create no movement node, capacity or entrance. Source cross-validation checks known pawn/card targets for neutral placement and complete zone/boundary/neighbor/ICE/corner accounting. `place-neutral-pawn` is distinct from historical controlled placement: matching pawn space, unique reserve piece, common-area card and empty ownership. See SR-BOARD-006/007 and ADR-0014.
+
+Page-one follow-up: Hacktivism and Sprawl each have five gameplay spaces around non-playable h1, including one double space. Hacktivism's h2/h7 capsule shields2/3; Sprawl's h3 circle shields3. Their printed arrows are directed internal space links, not legacy edge-direction numbers. Source-backed boundaries and ICE/bonus faces now replace the pilot observations. Sprawl retains the chiba-city alias because Chiba City is secondary artwork on the same physical tile, not an extra piece. Both full records remain provisional for the effect acceptance gaps in SR-BOARD-008/009.

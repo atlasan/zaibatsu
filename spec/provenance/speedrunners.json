@@ -1,119 +1,961 @@
 {
   "status": "cataloged",
   "files": {
+    "data/speedrunners/modes.json": {
+      "note": "Explicit provisional quick-match profile under ADR-0005. Four control markers is a local experimental choice. Its physical supply24 comes from the base product; explicit frozen regression sessions retain historical resource semantics."
+    },
     "data/speedrunners/blocks.json": {
-      "candidateSources": ["sp-en-blocks-a4", "sp-en-blocks-letter", "sp-en-rulebook"],
-      "note": "Mixed baseline: seed fixtures remain provisional while verified page-1 block records are tracked below."
+      "candidateSources": [
+        "sp-en-blocks-a4",
+        "sp-en-blocks-letter",
+        "sp-en-rulebook"
+      ],
+      "note": "Verified implemented records: Central Core, Toyeku Company, Clandestine Broadcast, Pink District, Yakuza, Corporate Scandal, Black Clinic, Engineering War, Combat Prototypes and Military Development. Reviewed provisional Hacktivism/Sprawl, Antro, Electromagnetic Pulse and Copyleft retain their explicit marker/commitment/target/sacrifice/reserve-shortfall gaps. Other pilot records remain provisional; complete physical block corpus is not accepted. Arms Industry topology and funded physical-counter placement/collection are source-verified and executable, with strict official acceptance still gated on T-RULES-031 reserve exhaustion."
     },
     "data/speedrunners/pawns.json": {
-      "candidateSources": ["sp-en-control-cards", "sp-en-pawns", "sp-en-rulebook"],
-      "note": "Seed fixtures only; no pawn record has been verified."
+      "candidateSources": [
+        "sp-en-control-cards",
+        "sp-en-pawns",
+        "sp-en-rulebook"
+      ],
+      "note": "Four bilingual-verified starters, Drone MK-2, Drone Probe and Drone Turret execute from shared native data. Idoru marker lifecycle and Gynoid phase composition remain partial; other provisional nonstarter fixtures require source promotion. Complete physical pawn corpus remains unaccepted."
     },
     "data/speedrunners/action-cards.json": {
-      "candidateSources": ["sp-en-action-cards", "sp-en-rulebook"],
-      "note": "Mixed baseline: seed fixtures remain provisional while verified page-1 action-card records are tracked below."
+      "candidateSources": [
+        "sp-en-action-cards",
+        "sp-en-rulebook"
+      ],
+      "note": "Mixed baseline: verified page-one records coexist with provisional fixtures and six phase cards. Electric Sheep (EN p3 c2 / ES p3 c3), Jetpack (EN p3 c3 / ES p3 c2), and Insider Trading (EN/ES p3 c5) have directly cross-checked type, action strip, copies, cost and printed effects. Their independent runtime behavior is tested; simultaneous phase order, Insider underfilled discard, and Jetpack move/place threat semantics remain unresolved under SR-TURN-007. They are intentionally excluded from the verified records map. Dummy (EN/ES p3 c1) also has checked one-copy add-on identity, one-counter cost, two-step/Delete strip and printed prevention text. Its attack/Black ICE handler is tested; sacrifice and simultaneous replacement interpretations remain provisional under SR-CARD-007 and are not promoted in the verified records map. Re-audit revoked the earlier Cracker pilot: EN/ES p1 c9 is Gentleman Loser, a block attachment; its placement belongs to attachment time, not successful Icebreaker. The record remains id=cracker for compatibility, is provisional, and has no verified gameplayRef. Page-one Accelerator/E-Synapse own classes and printed names are now retained and granted under EN/ES p.34. Worm (EN p2c3 / ES p2c2), Under Clocker (EN p2c6 / ES p2c3), and Hijacker (EN p2c9 / ES p2c1) now have verified one-copy identity, Malware class, add-on/enemy symbols, Operative exclusions, one-step/Icebreaker strip and continuous penalties. Synthetic legacy class grants were moved to top-level own classes in the live corpus; frozen data is unchanged. Toxin is EN p2c2 / ES p2c9; Rootkit is EN p2c5 / ES p2c8 (cross-check locators, still provisional). Bilingual rulebook pp.33–34 independently verify physical provider slots and dependent cleanup under SR-CARD-011. Synthetic slot fixtures test this generic rule; Gunhed and AK-12kM have since been promoted, while Servocanon remains provisional under T-RULES-014. Gunhed EN/ES p3c6 is now corrected from a two-copy Weapon placeholder to a one-copy Brainchip Add-on: cost2, Add-on/Weapon grants, one skull and card Delete. AK-12kM p3c7 is one Weapon/cost1/one skull without an activation. Both have two-step/Delete strips and verified records. Servocanon p3c8 is one Module/cost1/one skull/free Delete, with the same strip; its single-free behavior executes but the EN/ES p26 stacking conflict prevents promotion under T-RULES-014. Virus (EN p2c1 / ES p2c4) and Lima Flag (EN p2c4 / ES p2c5) now have verified one-copy Malware/Add-on/Enemy identity, no cost, one-step/Icebreaker strip, Cleaner takeover and Core-entry restriction respectively. Virus discard/transfer uses EN/ES rulebook pp22/32/33. Spammer (EN p2c7 / ES p2c6) self-discard/persistence remains T-RULES-015; Trojan (EN p2c8 / ES p2c7) reveal remains T-RULES-016, without canonical executable records yet. Trojan (EN p2c8 / ES p2c7) now has bilingual verified one-copy Malware/Enemy Add-on identity, no cost, one-step/Icebreaker strip and typed controller-hand reveal. Both rulebooks p.10 establish hidden hands/piles; current player projections and lifecycle cleanup execute without promoting trusted operator snapshots to player payloads."
     },
     "data/speedrunners/mode.json": {
-      "sources": ["sp-en-rulebook", "sp-es-rulebook"],
-      "note": "Mode-level setup and win-condition facts are source-verified."
+      "sources": [
+        "sp-en-rulebook",
+        "sp-es-rulebook"
+      ],
+      "note": "Mode-level marker and opening-hand facts are source-verified; unused starter exclusion is cross-checked on EN/ES p.5 and executes in both engines. The starting-player die procedure and complete physical setup accounting remain T-RULES-011; this provenance does not certify full runtime setup. Bilingual pp.10/15/26/27 also verify Search activation before top-block draw and subsequent placement; mirrored source-v3 runtime now commits the cost, holds the public revealed block in an authorized decision, then places it and runs supported placement timing. This is a generic engine delivery, not new verification of the provisional block corpus or full mode setup. Bilingual pp.18/24/25 establish movement activation markers, one/two-die allowances, unused-step loss, non-interleaving, independent card movement and global cannot-move cancellation. Mirrored source-v4 roll/path choices and cancellation execute with synthetic mover/topology fixtures; no printed pawn or block is newly promoted. Bilingual pp.18/22–23/33 support native control-card continuity and equipped physical instance tracking, now implemented/tested in source-v5 with shared snapshots/events and sandbox capture/reset. No explicit discarded-card reset was found; T-RULES-021 preserves that gap, evidence and strict official/reuse gates. No source component is newly promoted. Bilingual pp.24–25 up-to-step and unused-step-loss wording is interpreted consistently for zero-step fixed/card activation under SR-MOVE-006. Source-v6 mirrored helpers, queries and sandbox spend normal costs without position/RNG/threat-entry changes; tests include isolation and zero modifiers. This narrow generic delivery does not promote mover/topology records. Physical supply24 is verified against EN/ES p4 and the independent inventory. Source-v12 tracks invested/on-icon/free counters and derives reserve; this does not settle shortages or certify full setup."
+    },
+    "data/speedrunners/control-cards.json": {
+      "sources": [
+        "sp-en-control-cards",
+        "sp-es-control-cards"
+      ],
+      "note": "Four starter cards plus partial Idoru and Gynoid physical control cards. Their record-level evidence is separate from the incomplete18-card corpus and full setup. Source loaders/snapshots keep Gynoid common/reserve versus controlled placement explicit."
     }
   },
   "records": {
     "mode/speedrunners": {
       "sources": [
-        { "artifactId": "sp-en-rulebook", "locator": "pp. 6-7" },
-        { "artifactId": "sp-es-rulebook", "locator": "pp. 6-7" }
-      ]
-    },
-    "block/idoru": {
-      "sources": [
-        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 1" },
-        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 1" }
-      ]
-    },
-    "block/hacktivism": {
-      "sources": [
-        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 2" },
-        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 2" }
-      ]
-    },
-    "block/chiba-city": {
-      "sources": [
-        { "artifactId": "sp-en-blocks-a4", "locator": "page 1, tile 3" },
-        { "artifactId": "sp-es-blocks-a4", "locator": "page 1, tile 3" }
-      ]
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
+        }
+      ],
+      "note": " Physical bonus-counter supply24 and icon allocation before placement effects are implemented; shortage policy remains T-RULES-031."
     },
     "pawn/cracker": {
       "sources": [
-        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 1" },
-        { "artifactId": "sp-en-pawns", "locator": "page 2" }
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 1"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2"
+        }
       ]
     },
     "pawn/idoru": {
       "sources": [
-        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 2" },
-        { "artifactId": "sp-en-pawns", "locator": "page 2" }
-      ]
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, top row third card (Idoru)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        }
+      ],
+      "note": "Printed attributes verified: no class badge/native ability; defense1 shielded/2–6 vulnerable, ICE1/6 (six-dot rhombus), card move, Add-on/Armor; one physical card/pawn. Acquisition/counting/takeover/victory execute. Full rule stays provisional under SR-PAWN-004/T-RULES-023/025: common retention is literal experimental policy, same-owner marked reacquisition rejects, and marker-removal refill timing remains unaccepted."
     },
     "pawn/gynoid": {
       "sources": [
-        { "artifactId": "sp-en-control-cards", "locator": "page 2, card 3" },
-        { "artifactId": "sp-en-pawns", "locator": "page 2" }
-      ]
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 3 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 2 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit7; aliases assemble the same single pawn"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        }
+      ],
+      "note": "One physical Lovedoll pawn and one control card. EN p2c3 / ES p2c2 correct the pilot: card movement without a fixed step amount, no core abilities/Search, Add-on/Armor, shielded1/vulnerable2–6 and exact rhombus ICE2/3/4/5 without an invented category. Native optional beginning theft targets another controlled pawn in Cybernet (including a friendly pawn), selects one physical hand position uniformly using seeded RNG after target acceptance, and transfers that card. Both mirrors expose private/pure choices, exact receipt events, event-time public reveal, snapshots and sandbox replay/undo. Record remains provisional solely for unresolved same-timing phase composition T-RULES-005; strict native official loading gates it independently of flags."
     },
     "action-card/octagon-dex": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 1" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 1" }
-      ]
-    },
-    "action-card/simstim-record": {
-      "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 2" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 2" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 1"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 2"
+        }
       ]
     },
     "action-card/dj": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 3" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 3" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 3"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 1"
+        }
       ]
     },
     "action-card/accelerator-transgenic-therapy": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 4" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 4" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 4"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 4"
+        }
       ]
     },
     "action-card/hyper-accelerator": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 5" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 5" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 5"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 5"
+        }
       ]
     },
     "action-card/accela-accelerator": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 6" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 6" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 6"
+        }
       ]
     },
     "action-card/biochip": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 7" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 7" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 7"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 7"
+        }
       ]
     },
     "action-card/e-synapse-neural-interface": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 8" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 8" }
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 1, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 1, card 8"
+        }
       ]
     },
-    "action-card/cracker": {
+    "pawn/speedrunner-blue": {
       "sources": [
-        { "artifactId": "sp-en-action-cards", "locator": "page 1, card 9" },
-        { "artifactId": "sp-es-action-cards", "locator": "page 1, card 9" }
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 1 (Speedrunner blue)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 1 (Speedrunner blue)"
+        }
       ]
+    },
+    "control-card/speedrunner-blue-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 1 (Speedrunner blue)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 1 (Speedrunner blue)"
+        }
+      ]
+    },
+    "pawn/speedrunner-green": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 2 (Speedrunner green)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 2 (Speedrunner green)"
+        }
+      ]
+    },
+    "control-card/speedrunner-green-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 2 (Speedrunner green)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 2 (Speedrunner green)"
+        }
+      ]
+    },
+    "pawn/speedrunner-pink": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 4 (Speedrunner pink)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 4 (Speedrunner pink)"
+        }
+      ]
+    },
+    "control-card/speedrunner-pink-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 4 (Speedrunner pink)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 4 (Speedrunner pink)"
+        }
+      ]
+    },
+    "pawn/speedrunner-orange": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 5 (Speedrunner orange)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 5 (Speedrunner orange)"
+        }
+      ]
+    },
+    "control-card/speedrunner-orange-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 5 (Speedrunner orange)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 5 (Speedrunner orange)"
+        }
+      ]
+    },
+    "block/central-core": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 2 (Central Core)"
+        }
+      ]
+    },
+    "action-card/worm": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 3"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 2"
+        }
+      ]
+    },
+    "action-card/under-clocker": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 3"
+        }
+      ]
+    },
+    "action-card/hijacker": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 9"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 1"
+        }
+      ]
+    },
+    "action-card/weapon-gunhed": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 6"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 6"
+        }
+      ]
+    },
+    "action-card/ak-12km": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 3, card 7"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 3, card 7"
+        }
+      ]
+    },
+    "action-card/virus": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 1"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 4"
+        }
+      ]
+    },
+    "action-card/lima-flag": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 4"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 5"
+        }
+      ]
+    },
+    "action-card/trojan": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 2, card 8"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 2, card 7"
+        }
+      ]
+    },
+    "block/idoru": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 1 (Toyeku Company)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 1 (Toyeku Company)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
+        }
+      ]
+    },
+    "control-card/idoru-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, top row third card (Idoru)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–23, 24–25, 36, 38"
+        }
+      ],
+      "note": "Printed attributes verified: no class badge/native ability; defense1 shielded/2–6 vulnerable, ICE1/6 (six-dot rhombus), card move, Add-on/Armor; one physical card/pawn. Acquisition/counting/takeover/victory execute. Full rule stays provisional under SR-PAWN-004/T-RULES-023/025: common retention is literal experimental policy, same-owner marked reacquisition rejects, and marker-removal refill timing remains unaccepted."
+    },
+    "block/hacktivism": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 2"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 2"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 11–14, 18, 21, 23"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 11–14, 18, 21, 23"
+        }
+      ],
+      "note": "Source-checked geometry/ICE/defense/bonus/arrows; one physical tile, aliases are not extra copies. Full effect acceptance remains T-RULES-025 (Hacktivism) or T-RULES-026 (Sprawl). Internal arrows execute in both mirrors; normal-hand Sprawl commitments use an explicitly provisional timing interpretation."
+    },
+    "block/chiba-city": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 1, tile 3"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 1, tile 3"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 11–14, 18, 21, 23"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 11–14, 18, 21, 23"
+        }
+      ],
+      "note": "Source-checked geometry/ICE/defense/bonus/arrows; one physical tile, aliases are not extra copies. Full effect acceptance remains T-RULES-025 (Hacktivism) or T-RULES-026 (Sprawl). Internal arrows execute in both mirrors; normal-hand Sprawl commitments use an explicitly provisional timing interpretation."
+    },
+    "block/antro": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 1 (Antro)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 13, 21, 33"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 13, 21, 33"
+        }
+      ],
+      "note": "Printed geometry, faces, fragments, effect families and copies verified. Full effect targeting/stop timing remains provisional T-RULES-027."
+    },
+    "action-card/phase-loop": {
+      "sources": [
+        {
+          "artifactId": "sp-en-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        },
+        {
+          "artifactId": "sp-es-action-cards",
+          "locator": "page 4, cell 1 (Phase-Loop)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 29, 32–33, 37–38"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 29, 32–33, 37–38"
+        }
+      ],
+      "note": "Acting extra Icebreaker die, Black ICE immunity, hand limit−2, Gadget/Cyberdeck, cost1, one copy and two-step/Icebreaker strip verified."
+    },
+    "block/electromagnetic-pulse": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 13, 16–17, 21–23, 35"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 13, 16–17, 21–23, 35"
+        }
+      ],
+      "note": "Verified six-space geometry, non-playable center, exact defense/ICE/bonus/arrows, one tile and placement threshold/amount. Full simultaneous/retained/prevention interpretation remains provisional T-RULES-029/010."
+    },
+    "block/copyleft": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 2, tile 3 (Copyleft)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 4, 12–19 (spaces, inventory and ordered placement)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 4, 12–19 (spaces, inventory and ordered placement)"
+        },
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "pages 1–2, complete18-card set (no EKO pawn)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "pages 1–2, complete18-card set (no EKO pawn)"
+        }
+      ],
+      "note": "Four-space geometry, exact faces/bonus/defense/arrows, one tile and all-player reserve award verified. EKO is artwork, not a new pawn or unlimited pawn space. Full reserve-exhaustion acceptance remains T-RULES-030/031."
+    },
+    "block/clandestine-broadcast": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 1 (Clandestine Broadcast)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+        }
+      ],
+      "note": "One physical tile; alternative language/paper layouts are aliases, not additional copies. Three-space graph: large unlimited h1/h2/h3/h4/h7 broadcast with shielded4/3; h5/right and h6/left normal singles, mutual links. All entrances, white ICE2/6 at V6, no arrows/bonus corners. Lower logos are artwork, with no printed entry restriction. Controller Core use is continuing optional Reboot permission into the large circle; actual Core identity/setup, ownership/cost/phase rules remain distinct. Typed handler, both mirrors and shared byte snapshots/events plus sandbox/editor replay/save/load verify execution; complete game/mode acceptance remains open."
+    },
+    "block/pink-district": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 3, tile 3 (Pink District)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+        }
+      ],
+      "note": "One physical tile; alternate paper/language sheets are aliases. Two normal double spaces h2/h7 left and h3/h4 right, unlimited Gynoid home h5/h6, excluded title h1, complete three-space links, Gynoid-to-left arrow, white ICE2/6 at V3, bonusV1/V5, all entrances. Under-control placement targets the same physical pawn and matching space, not the first open space; repeats relocate/acquire with ownership-sensitive cleanup/refunds. Tile placement alone does not deploy/control the pawn; immediate last-marker victory stops further block effects. Both mirrors and sandbox/editor evidence cover this block. Gynoid native phase composition remains a separate provisional dependency."
+    },
+    "control-card/gynoid-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 3 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 2 (Gynoid)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit7; aliases assemble the same single pawn"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+        }
+      ],
+      "note": "One physical Lovedoll pawn and one control card. EN p2c3 / ES p2c2 correct the pilot: card movement without a fixed step amount, no core abilities/Search, Add-on/Armor, shielded1/vulnerable2–6 and exact rhombus ICE2/3/4/5 without an invented category. Native optional beginning theft targets another controlled pawn in Cybernet (including a friendly pawn), selects one physical hand position uniformly using seeded RNG after target acceptance, and transfers that card. Both mirrors expose private/pure choices, exact receipt events, event-time public reveal, snapshots and sandbox replay/undo. Record remains provisional solely for unresolved same-timing phase composition T-RULES-005; strict native official loading gates it independently of flags."
+    },
+    "block/yakuza": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 1 (Yakuza)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+        }
+      ],
+      "note": "One physical tile; alternate language/paper layouts are aliases. Normal upper h2/h3 double, left h7 and right h4 singles, lower dragon h5/h6 double, excluded h1 title/art. Full upper-left/right and dragon-left/right graph, right-to-upper and left-to-dragon arrows, all entrances, white corner ICE4/6 at V6, bonusV2/V3/V5. Flat white3/2/1 dice make defense faces vulnerable, not ICE. On control and repeat takeover, optionally choose any live pawn on a physically adjacent placed block, then attack with one skull. No enemy-only or movement-entrance restriction; no pawn Delete activation/cost/modifier. Previews/decline use no RNG. Effective defense, ordinary cleanup/refunds and authorized single-defender prevention apply; immediate last-marker victory suppresses the effect. Mirrored tests/shared byte evidence and sandbox/editor recovery/replay/undo/save/load verify this component, not complete official matches."
+    },
+    "block/corporate-scandal": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 2 (Corporate Scandal)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+        },
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 2 (Idoru: marker counts as in Cybernet)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, third card in top row (Idoru: counted Cybernet marker)"
+        }
+      ],
+      "note": "One physical Corporate Scandal tile; alternate language/paper layouts are aliases. Six normal single spaces h2 camera/h3 upper swirl/h4 circuit/h5 shield/h6 lower swirl/h7 helmet form the ring; h1 title/effect art is excluded, with no center shortcut or arrows. All six entrances; own white ICE5/6 at V1; four bonus fragments V2/V3/V5/V6. Flat black die3 on h5 makes defense3 shielded, not ICE. Other artwork creates no pawn, hand modifier or action. On control/repeated takeover, every player with strictly more than five physical Cybernet markers discards all remaining hand cards. Threshold is evaluated after capture/return of the previous marker and includes Idoru counted control-card allocations, not ordinary pawn ownership or unallocated reserve. The paid activating card has already left hand for face-up played cards; duplicate remaining cards each discard publicly. Empty qualifying hands are valid. Mandatory whole-hand effects require no player choice or RNG; final-marker victory skips them. Mirrored tests/byte events and sandbox/editor replay/undo/save/load prove supported component behavior, not full official modes."
+    },
+    "block/black-clinic": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 4, tile 3 (Black Clinic)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+        }
+      ],
+      "note": "One physical tile; alternate paper/language layouts are aliases. Normal h2 stream/h3 helmet/h4 hand/h7 left singles and large h5/h6 unlimited special Clinic circle; h1 title/effect excluded. Five-space ring, helmet-to-hand arrow, all six entrances; own white ICE3/6 at V6 and bonusV1/V2/V3/V5. Lower flat white1/2 dice make defense faces vulnerable, not ICE. The h4 black hand icon is hand-size minus1. Bottle/helmet/swirl art deploy no pawn. On capture/repeated takeover, the block controller must choose any live Cybernet pawn, including own/enemy/neutral/distant/empty targets, and discard all of its physical attachments. No enemy/attached-only qualifier or decline is printed. Existing cleanup retains spent-marker evidence, returns investments to the current pawn controller, removes continuous/granted-slot benefits and updates public reveal; it neither eliminates nor changes control. Source final-marker victory skips effects. Current hand-space occupancy contributes to the controller maximum during recycling; passing/leaving creates no persistent change. Mirrored tests/byte evidence and sandbox/editor verify execution. Used-card redraw remains separately gated by T-RULES-021; no complete official mode is accepted."
+    },
+    "block/engineering-war": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 1 (Engineering War)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+        }
+      ],
+      "note": "One physical Engineering War tile; alternate language/paper layouts are aliases. Three-space line: h7 single defense, central h1 unlimited Drone MK-2 home, h4 normal right single; excluded h2/h3 title and h5/h6 effect art. Only E2/right and E5/left connect; own white ICE3/6 at V6, bonusV1–V5. Flat white1 on left changes defense, not ICE. The teal arrow-like glyph wholly inside the right circle is artwork, unlike the outlined white space-connecting arrows in the rulebook/other reviewed tiles; no spaceArrows/direction is inferred. Capture places the same physical Drone MK-2 and control card under the block controller; tile placement alone does not. Repeat takeover relocates/acquires with ownership-sensitive module cleanup/refund; same-controller placement preserves attachments/native uses. Source final-marker victory skips deployment. Both mirrors, byte snapshots/events/options and sandbox/editor replay/save/load cover the source sequence; full setup/content/modes remain separate."
+    },
+    "pawn/drone-mk-2": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        }
+      ],
+      "note": "One Drone MK-2 pawn and one control card; paired standee panels and alternate formats/languages are aliases, not extra copies. Drone class, shielded defense1/2/3 and vulnerable4/5/6, exact rhombus ICE2/6, one Module slot, one-skull card-activated Delete and native once-per-turn five-step movement. No Search, Icebreaker, Reboot or out-of-turn exception is printed. Free movement accepts up to five steps, including zero; paid movement remains separately permitted under p25 without refreshing/spending the native free source. Source Delete pays/rolls before assignment. Native use markers follow the physical control card across takeover/common release, clearing only at its current controller beginning; relocation is not a refresh. No-Reboot elimination releases the pawn/card to reserve/common and refunds module costs. Single Servocanon-free plus native paid activation works; its wider multiple-free/used-card gaps remain separately provisional. Twelve mirrored tests/shared byte evidence and sandbox integration prove this pawn/card behavior, not full official modes."
+    },
+    "control-card/drone-mk-2-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 4 (Drone MK-2)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+        }
+      ],
+      "note": "One Drone MK-2 pawn and one control card; paired standee panels and alternate formats/languages are aliases, not extra copies. Drone class, shielded defense1/2/3 and vulnerable4/5/6, exact rhombus ICE2/6, one Module slot, one-skull card-activated Delete and native once-per-turn five-step movement. No Search, Icebreaker, Reboot or out-of-turn exception is printed. Free movement accepts up to five steps, including zero; paid movement remains separately permitted under p25 without refreshing/spending the native free source. Source Delete pays/rolls before assignment. Native use markers follow the physical control card across takeover/common release, clearing only at its current controller beginning; relocation is not a refresh. No-Reboot elimination releases the pawn/card to reserve/common and refunds module costs. Single Servocanon-free plus native paid activation works; its wider multiple-free/used-card gaps remain separately provisional. Twelve mirrored tests/shared byte evidence and sandbox integration prove this pawn/card behavior, not full official modes."
+    },
+    "block/combat-prototypes": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 2 (Combat Prototypes)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+        }
+      ],
+      "note": "One physical Combat Prototypes tile, with alternate formats/languages treated as aliases. Five spaces: four normal singles h2/h4/h5/h7 surround unlimited matching Drone Probe h1. Center connects all four; h2–h7 and h4–h5 also connect. Exclude h3 title and h6 effect art. Entrances E2/E3/E5/E6, exact white ICE4/6 at V2, bonusV1/V3/V4/V5/V6. Circuit/globe/triangle graphics add no pawns, arrows or modifiers. Capture places/relocates and controls the one physical Drone Probe and card; placement alone does not. Ownership-sensitive module cleanup/refunds, retained native markers, physical pool guards and immediate-victory stop use shared handlers. Thirteen mirrored tests, shared byte evidence and sandbox/editor replay/save/load verify this component; full mode acceptance remains separate."
+    },
+    "pawn/drone-probe": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        }
+      ],
+      "note": "One Drone Probe pawn/control card; opposed standee panels and alternate formats/languages are aliases. Drone, one Module slot, shielded1/2 and vulnerable3/4/5/6, exact ICE1/3/6. Independent native once-per-turn free Search and five-step movement; no native Delete, Icebreaker, Reboot, stealth or turn exception. Decorative skull artwork is not a Delete badge. Accepted free Search spends no card and commits its own physical native marker when revealing the top block; authorized placement follows without a second cost. Public eligibility uses edges, occupancy and pile count without inspecting the hidden top tile; queries leave state/RNG unchanged. Movement has a separate marker; additional paid movement does not refresh either. No paid Search fallback or paid Delete badge is invented. Both native markers follow the physical control card through takeover/common release and clear only at its current controller beginning. Module costs/refunds and non-Reboot reserve/common release remain shared. Single Servocanon grants free Delete only, not paid Delete. Thirteen mirrored tests and shared snapshots/events/options cover native behavior, invalid commands, pile/placement limits, Sprawl shortfall and EMP sacrifice handoff. Existing T-RULES-007/014/021/025/029 interpretations remain provisional independently; this delivery does not promote them."
+    },
+    "control-card/drone-probe-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 7 (Drone Probe)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+        }
+      ],
+      "note": "One Drone Probe pawn/control card; opposed standee panels and alternate formats/languages are aliases. Drone, one Module slot, shielded1/2 and vulnerable3/4/5/6, exact ICE1/3/6. Independent native once-per-turn free Search and five-step movement; no native Delete, Icebreaker, Reboot, stealth or turn exception. Decorative skull artwork is not a Delete badge. Accepted free Search spends no card and commits its own physical native marker when revealing the top block; authorized placement follows without a second cost. Public eligibility uses edges, occupancy and pile count without inspecting the hidden top tile; queries leave state/RNG unchanged. Movement has a separate marker; additional paid movement does not refresh either. No paid Search fallback or paid Delete badge is invented. Both native markers follow the physical control card through takeover/common release and clear only at its current controller beginning. Module costs/refunds and non-Reboot reserve/common release remain shared. Single Servocanon grants free Delete only, not paid Delete. Thirteen mirrored tests and shared snapshots/events/options cover native behavior, invalid commands, pile/placement limits, Sprawl shortfall and EMP sacrifice handoff. Existing T-RULES-007/014/021/025/029 interpretations remain provisional independently; this delivery does not promote them."
+    },
+    "block/military-development": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 5, tile 3 (Military Development)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+        }
+      ],
+      "note": "One physical Military Development tile; alternate language/layout sheets are aliases. Three-space line: h7 normal hand+1 single, central h1 unlimited matching Drone Turret home, h4 normal right single. Exclude h2/h3 effect art and h5/h6 title art. Only E2/right and E5/left are entrances; exact white ICE4/6 at V5, fragmentsV1/V2/V3/V4/V6, no arrows. Teal lettering/circuit and STOP are artwork. Capture places/relocates and controls the same one physical Turret and card, with ownership-sensitive Module cleanup/refunds, preserved uses, physical guards and immediate-victory stop. Placement alone deploys nothing. Hand+1 aggregates for the controller of a stopped pawn, independent of tile ownership; no movement activation is granted to the Turret. Both mirrors and source Search/capture/byte evidence plus sandbox/editor persistence verify the component; full setup/content/mode acceptance remains separate."
+    },
+    "pawn/drone-turret": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        }
+      ],
+      "note": "One physical Drone Turret pawn/card; opposed strip panels and alternative languages/formats are aliases. Drone, one Module, shielded1–4/vulnerable5/6, exact ICE1/4, one-skull card Delete, crossed-out movement. Replaces the incorrect provisional free-Delete/low-ICE pilot. Typed abilityTurn:any-player-turn changes ability timing only, retaining controller, printed/granted activation, costs, targets and physical markers. The explicit controller pays and owns the public roll/assignment while active player/turn/phase remain unchanged. No movement activation, other pawn, attachment or phase-control permission is created. Pending actions/choices/combat remain indivisible (p24 forbids movement interleaving); no simultaneous-priority rule is invented. Source p8 keeps paid face-up cards with their player until that player recycles, including cards played during another turn or outside action phase. Parallel playedCardOwners metadata preserves duplicates/physical inventory and controller-specific recycling. Module free Delete remains separate and clears at the current controller beginning. Native movement remains cancelled even with a movement grant. Thirteen equivalent mirror tests and shared byte evidence exercise controller/public assignment, private previews, all idle phases, payment/recycle conservation, Dummy, takeover/elimination, invalid authority/costs, pending windows and victory. Shadowraiders joint-threat composition and broader multiple-free/used-card gaps remain separate."
+    },
+    "control-card/drone-turret-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 2, card 8 (Drone Turret)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+        }
+      ],
+      "note": "One physical Drone Turret pawn/card; opposed strip panels and alternative languages/formats are aliases. Drone, one Module, shielded1–4/vulnerable5/6, exact ICE1/4, one-skull card Delete, crossed-out movement. Replaces the incorrect provisional free-Delete/low-ICE pilot. Typed abilityTurn:any-player-turn changes ability timing only, retaining controller, printed/granted activation, costs, targets and physical markers. The explicit controller pays and owns the public roll/assignment while active player/turn/phase remain unchanged. No movement activation, other pawn, attachment or phase-control permission is created. Pending actions/choices/combat remain indivisible (p24 forbids movement interleaving); no simultaneous-priority rule is invented. Source p8 keeps paid face-up cards with their player until that player recycles, including cards played during another turn or outside action phase. Parallel playedCardOwners metadata preserves duplicates/physical inventory and controller-specific recycling. Module free Delete remains separate and clears at the current controller beginning. Native movement remains cancelled even with a movement grant. Thirteen equivalent mirror tests and shared byte evidence exercise controller/public assignment, private previews, all idle phases, payment/recycle conservation, Dummy, takeover/elimination, invalid authority/costs, pending windows and victory. Shadowraiders joint-threat composition and broader multiple-free/used-card gaps remain separate."
+    },
+    "block/arms-industry": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 6, tile 1 (Arms Industry)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+        }
+      ],
+      "note": "One physical Arms Industry tile; language/layout variants are aliases. Four normal single spaces h2/h3/h7/h6 form upper-right–upper-left–left–hand; hand−1 on h6. H1 counter storage and h4/h5 effect artwork are not movement spaces. Entrances E1/E4/E5/E6; own Black ICE6 at V5; fragmentsV2/V3/V4/V6, no V1 fragment or white connector arrows. Teal lettering is artwork. Typed placement allocates one physical reserve counter on the block; control collects that same counter once, retaining collectedBy receipt. Counter ownership is distinct from three-block icons and player free/invested pools. Combined new-icon and block funding is checked before placement; collection works at empty reserve. Real source Search/capture, shared snapshots/events/views,11 tests in each mirror, sandbox replay/Undo/reset and editor pairing execute funded behavior. Placement reserve exhaustion remains T-RULES-031; record and strict official bundle acceptance remain provisional under T-RULES-047."
     }
   }
 }

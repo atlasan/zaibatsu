@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { neighbor } from "../src/domain/hex.ts";
 import {
   controlMarkersFor,
@@ -12,7 +12,7 @@ import {
   type Config,
 } from "../src/engine/index.ts";
 
-const data = loadDefault("speedrunners");
+const data = loadRegression("speedrunners");
 
 function game(names: string[], seed: number) {
   const cfg: Config = { data, playerNames: names, seed };
@@ -59,7 +59,7 @@ describe("turn loop", () => {
   });
 
   test("recycle applies attachment-driven draw and hand modifiers", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     d.cards[0]!.attach = { as: "pawn", slot: "add-on", drawModifier: -1, handModifier: -2 };
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 11 });
     const p1 = s.players[0]!;
@@ -86,8 +86,10 @@ describe("live phase API", () => {
     expect(advancePhase(s, data).phase).toBe("action");
     const recycle = advancePhase(s, data);
     expect(recycle.phase).toBe("recycle");
-    expect(recycle.events.some((event) => event.type === "draw")).toBe(true);
-    expect(advancePhase(s, data).phase).toBe("end");
+    expect(recycle.events.some((event) => event.type === "draw")).toBe(false);
+    const recycled = advancePhase(s, data);
+    expect(recycled.phase).toBe("end");
+    expect(recycled.events.some((event) => event.type === "draw")).toBe(true);
     expect(advancePhase(s, data).phase).toBe("beginning");
     expect(s.currentPlayer).toBe(1);
   });
@@ -104,17 +106,18 @@ describe("live phase API", () => {
     expect(wrongPlayer.error).toBe("only the active player may act");
   });
 
-  test("reports accepted actions and state changes", () => {
+  test("rejects free marker placement and accepts a legal pass", () => {
     const s = game(["A", "B"], 43);
     advancePhase(s, data);
-    const result = applyActionWithEvents(s, data, { type: "place-marker" });
+    expect(applyActionWithEvents(s, data, { type: "place-marker" }).accepted).toBe(false);
+    const result = applyActionWithEvents(s, data, { type: "pass" });
     expect(result.accepted).toBe(true);
     expect(result.events.some((event) => event.type === "action-accepted")).toBe(true);
-    expect(result.events.some((event) => event.type === "control-changed")).toBe(true);
+    expect(s.players[0]!.controlMarkersPlaced).toBe(0);
   });
 
   test("emits pawn-placed when an on-icebreak card effect spawns a pawn", () => {
-    const d = structuredClone(loadDefault("speedrunners"));
+    const d = structuredClone(loadRegression("speedrunners"));
     d.blocks = d.blocks.map((block) =>
       block.id === "data-haven" ? { ...block, iceFaces: [1, 2, 3, 4, 5, 6] } : block
     );

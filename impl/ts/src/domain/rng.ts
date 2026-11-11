@@ -29,6 +29,13 @@ export class Rng {
     return this.next32() % n;
   }
 
+  /** Copies the current stream without advancing it. */
+  clone(): Rng {
+    const copy = new Rng(0);
+    copy.state = this.state;
+    return copy;
+  }
+
   /** In-place Fisher–Yates shuffle, mirroring rng.go exactly. */
   shuffle<T>(arr: T[]): void {
     for (let i = arr.length - 1; i > 0; i--) {

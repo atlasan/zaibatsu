@@ -1,3 +1,5 @@
+import { buildRulesCoverage } from "../rules-coverage.ts";
+
 export type CoverageStatus = "implemented" | "partial" | "planned";
 
 export interface CoverageItem {
@@ -20,6 +22,7 @@ export interface CoverageCatalog {
   summary: string;
   surfaces: CoverageSurface[];
   sharedGaps: CoverageItem[];
+  ruleChecklist?: ReturnType<typeof buildRulesCoverage>;
 }
 
 const catalog: CoverageCatalog = {
@@ -51,7 +54,7 @@ const catalog: CoverageCatalog = {
         {
           label: "Gameplay-space structure",
           status: "implemented",
-          detail: "Covers 1-N zone mapping, display shape, capacity override notes, derived neighbors, direction, modifiers, pawn ids, and effect ids.",
+          detail: "Covers 1-N zone mapping, explicit non-playable title/art zones, display shape, capacity notes, derived neighbors, direction, exact defense-face shielding, other modifiers, pawn ids, and effect ids.",
         },
         {
           label: "Review workflow and helper evidence",
@@ -78,14 +81,14 @@ const catalog: CoverageCatalog = {
           detail: "Covers legacy fixed movement, structured movement rows, and action-strip activates for Search/Delete/Reboot/Icebreaker.",
         },
         {
-          label: "Direct card effects",
+          label: "Typed card operations",
           status: "implemented",
-          detail: "Authors current typed direct-play effects with trigger, amount, target, and custom text.",
+          detail: "Authors typed operations with trigger, amount, target and text, including provisional attachment-time intent; authoring does not enable an unsupported runtime mechanic.",
         },
         {
           label: "Attachment structure and modifiers",
           status: "implemented",
-          detail: "Covers attach target/slot/class, grants/removes, granted movement/slots/stealth, ability uses, ICE modifiers, draw/hand modifiers, block-space shape, effect timing/text, and cost.",
+          detail: "Covers attach target/slot/class exclusions, independent printed Delete strength/activation, grants/removes, granted movement/slots/stealth, ability uses, ICE modifiers, draw/hand modifiers, block-space shape, effect timing/text, cost, and typed beginning/action-end effects with card amounts and reviewed relocation threat policy.",
         },
         {
           label: "Review workflow and helper evidence",
@@ -99,12 +102,12 @@ const catalog: CoverageCatalog = {
       title: "Play workbench",
       route: "/play/",
       status: "partial",
-      summary: "The sandbox covers the current implemented Speedrunners runtime subset with reducer-backed sessions, guided actions, fixtures, and replay tooling.",
+      summary: "Local hotseat quick matches reach a four-block victory with the current content, plus a separate Test Lab. Full official content, broader phase effects, missions and mode loops remain incomplete.",
       items: [
         {
           label: "Local session orchestration",
           status: "implemented",
-          detail: "Supports seeded sessions, deterministic Test Lab fixtures, undo/reset, trace import/export, event logs, and canonical snapshots.",
+          detail: "Supports seeded quick matches, card/runner selection, board paths, placement previews, hotseat handoff, browser-local replay saves, undo/reset, trace import/export, cumulative events, and separate Test Lab fixtures.",
         },
         {
           label: "Current implemented action families",
@@ -143,12 +146,12 @@ const catalog: CoverageCatalog = {
     {
       label: "Typed effect execution",
       status: "partial",
-      detail: "Typed block `area-attack` and `place-pawn`, plus card-triggered `place-pawn`, now execute in both mirrors and `/play/`; the broader effect registry is still pending.",
+      detail: "Typed block `area-attack` and `place-pawn`, plus card-triggered `place-pawn`, now execute in both mirrors and `/play/`; six single-card phase obligations and physical discard/destination choices also execute. Simultaneous ordering, underfilled forced discards, Jetpack threat semantics and the broader effect registry remain open.",
     },
     {
       label: "Attachment completion",
       status: "partial",
-      detail: "Granted slots, recycle modifiers, ICE modifiers, armor-style defense override/nullify, granted movement, and stealth reporting resolve now; broader non-move ability-use execution still needs engine work.",
+      detail: "Granted slots, recycle modifiers, ICE modifiers, armor-style defense override/nullify, granted movement, and stealth reporting resolve now; Dummy adds a defender-owned optional elimination-prevention window with paid-counter refund. Broader class/slot cascades and non-move ability-use execution remain open; public/joint attacks include typed skull modifiers.",
     },
     {
       label: "Source-complete Speedrunners content",
@@ -172,6 +175,7 @@ export function editorCoverageCatalog(): CoverageCatalog {
     summary: catalog.summary,
     surfaces: catalog.surfaces.map(cloneSurface),
     sharedGaps: catalog.sharedGaps.map(cloneItem),
+    ruleChecklist: buildRulesCoverage(),
   };
 }
 

@@ -1,0 +1,37 @@
+[
+  [
+    {
+      "type": "choice-required",
+      "playerId": "p1",
+      "elementId": "1:beginning:speedrunner-pink:0:0",
+      "cardId": "jetpack"
+    }
+  ],
+  [
+    {
+      "type": "choice-resolved",
+      "playerId": "p1",
+      "cardId": "jetpack",
+      "elementId": "1:beginning:speedrunner-pink:0:0"
+    },
+    {
+      "type": "card-discarded",
+      "cardId": "jetpack"
+    },
+    {
+      "type": "pawn-relocated",
+      "pawnId": "speedrunner-pink",
+      "coord": {
+        "q": 8,
+        "r": 0
+      },
+      "spaceId": "free"
+    },
+    {
+      "type": "phase-advanced",
+      "playerId": "p1",
+      "fromPhase": "beginning",
+      "toPhase": "action"
+    }
+  ]
+]

@@ -18,6 +18,9 @@ These files make the rulebooks and component sheets:
 - English editions are the primary transcript source.
 - Spanish editions are cross-check references.
 - Record-level verification still belongs in `spec/provenance/*.json`.
+- The [asset-by-asset report](asset-review.md) and
+  [review guide](../../artifacts/asset-review.md) add per-component visual
+  observations and individual sheet pieces, independently of page transcripts.
 
 ## Generation
 

@@ -1,0 +1,96 @@
+[
+  {
+    "action": {
+      "type": "pass"
+    }
+  },
+  {
+    "action": {
+      "type": "play-move",
+      "pawnId": "speedrunner-pink",
+      "cardId": "accela-accelerator"
+    },
+    "movement": {
+      "type": "steps",
+      "steps": 1,
+      "activation": "card"
+    },
+    "maxSteps": 1,
+    "responses": [
+      {
+        "type": "play-move",
+        "pawnId": "speedrunner-pink",
+        "cardId": "accela-accelerator"
+      }
+    ]
+  },
+  {
+    "action": {
+      "type": "play-move",
+      "pawnId": "speedrunner-pink",
+      "cardId": "selective-disclosure"
+    },
+    "movement": {
+      "type": "steps",
+      "steps": 2,
+      "activation": "card"
+    },
+    "maxSteps": 2,
+    "responses": [
+      {
+        "type": "play-move",
+        "pawnId": "speedrunner-pink",
+        "cardId": "selective-disclosure"
+      }
+    ]
+  },
+  {
+    "action": {
+      "type": "play-move",
+      "pawnId": "speedrunner-pink",
+      "cardId": "move-3"
+    },
+    "movement": {
+      "type": "steps",
+      "steps": 3,
+      "activation": "card"
+    },
+    "maxSteps": 3,
+    "responses": [
+      {
+        "type": "play-move",
+        "pawnId": "speedrunner-pink",
+        "cardId": "move-3"
+      }
+    ]
+  },
+  {
+    "action": {
+      "type": "play-search",
+      "pawnId": "speedrunner-pink",
+      "cardId": "accela-accelerator"
+    }
+  },
+  {
+    "action": {
+      "type": "play-search",
+      "pawnId": "speedrunner-pink",
+      "cardId": "selective-disclosure"
+    }
+  },
+  {
+    "action": {
+      "type": "play-search",
+      "pawnId": "speedrunner-pink",
+      "cardId": "move-3"
+    }
+  },
+  {
+    "action": {
+      "type": "attach-pawn",
+      "cardId": "selective-disclosure",
+      "targetId": "speedrunner-pink",
+      "slotRef": "pawn:add-on"
+    }
+  }
+]

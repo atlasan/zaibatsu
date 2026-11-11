@@ -5,7 +5,7 @@
       "entryId": "action-card/accela-accelerator",
       "kind": "action-card",
       "localId": "accela-accelerator",
-      "title": "Accela Accelerator",
+      "title": "Accela",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -51,7 +51,7 @@
       "entryId": "action-card/accelerator-transgenic-therapy",
       "kind": "action-card",
       "localId": "accelerator-transgenic-therapy",
-      "title": "Accelerator",
+      "title": "Transgenic Therapy",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -132,6 +132,52 @@
         "sourceIds": [
           "sp-en-action-cards",
           "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/ak-12km",
+      "kind": "action-card",
+      "localId": "ak-12km",
+      "title": "AK-12kM",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed weapon adds one skull; it has no Delete activation badge of its own.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c07"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
         ]
       }
     },
@@ -227,17 +273,17 @@
       "entryId": "action-card/cracker",
       "kind": "action-card",
       "localId": "cracker",
-      "title": "Cracker",
-      "status": "verified",
+      "title": "Gentleman Loser",
+      "status": "provisional",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "mechanic:icebreaker",
         "resource:action-card",
-        "status:verified",
+        "status:provisional",
         "workflow:canonical-data"
       ],
-      "summary": "Use with Icebreaker on a block; place the Cracker in this block under your control.",
+      "summary": "Printed block attachment. Its Cracker placement belongs to attachment resolution, not Icebreaker activation. Block attachment geometry and target-space choice remain unsupported/provisional; attachment attempts reject.",
       "refs": {
         "filePaths": [
           "spec/data/speedrunners/action-cards.json",
@@ -264,8 +310,7 @@
         ],
         "sourceIds": [
           "sp-en-action-cards",
-          "sp-en-rulebook",
-          "sp-es-action-cards"
+          "sp-en-rulebook"
         ]
       }
     },
@@ -283,7 +328,7 @@
         "status:verified",
         "workflow:canonical-data"
       ],
-      "summary": "Attach to a pawn as an add-on; while you control this card, you choose the music that plays during the game.",
+      "summary": "Its controller chooses the music. Informational tabletop instruction; no game-state effect.",
       "refs": {
         "filePaths": [
           "spec/data/speedrunners/action-cards.json",
@@ -316,10 +361,55 @@
       }
     },
     {
+      "entryId": "action-card/dummy",
+      "kind": "action-card",
+      "localId": "dummy",
+      "title": "Dummy",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Detach and discard this attachment to prevent its pawn from being eliminated. Attack and Black ICE windows execute; sacrifice interaction and simultaneous prevention ordering remain provisional.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c01"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
       "entryId": "action-card/e-synapse-neural-interface",
       "kind": "action-card",
       "localId": "e-synapse-neural-interface",
-      "title": "E-Synapse Neural Interface",
+      "title": "Neural Interface",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -358,6 +448,51 @@
           "sp-en-action-cards",
           "sp-en-rulebook",
           "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/electric-sheep",
+      "kind": "action-card",
+      "localId": "electric-sheep",
+      "title": "Electric Sheep",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c02"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
         ]
       }
     },
@@ -404,10 +539,55 @@
       }
     },
     {
+      "entryId": "action-card/hijacker",
+      "kind": "action-card",
+      "localId": "hijacker",
+      "title": "Hijacker",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c09"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
       "entryId": "action-card/hyper-accelerator",
       "kind": "action-card",
       "localId": "hyper-accelerator",
-      "title": "Hyper Accelerator",
+      "title": "Hyper",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -441,6 +621,141 @@
         ],
         "assetIds": [
           "sp-en-action-cards-p01-c05"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/insider-trading",
+      "kind": "action-card",
+      "localId": "insider-trading",
+      "title": "Insider Trading",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved. Underfilled forced discard remains unresolved.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c05"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/jetpack",
+      "kind": "action-card",
+      "localId": "jetpack",
+      "title": "Jetpack",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved. Threat activation during relocation remains unresolved.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c03"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/lima-flag",
+      "kind": "action-card",
+      "localId": "lima-flag",
+      "title": "Lima Flag",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c04"
         ],
         "sourceIds": [
           "sp-en-action-cards",
@@ -631,10 +946,10 @@
       }
     },
     {
-      "entryId": "action-card/simstim-record",
+      "entryId": "action-card/phase-loop",
       "kind": "action-card",
-      "localId": "simstim-record",
-      "title": "Simstim Record",
+      "localId": "phase-loop",
+      "title": "Phase-Loop",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -642,6 +957,188 @@
         "mechanic:icebreaker",
         "resource:action-card",
         "status:verified",
+        "workflow:canonical-data"
+      ],
+      "summary": "Gadget: one additional Icebreaker die, Black ICE immunity for this pawn, and hand size minus two; costs one bonus counter.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p04-c01"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/rootkit",
+      "kind": "action-card",
+      "localId": "rootkit",
+      "title": "Rootkit",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c05"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/selective-disclosure",
+      "kind": "action-card",
+      "localId": "selective-disclosure",
+      "title": "Selective Disclosure",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c04"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/servocanon",
+      "kind": "action-card",
+      "localId": "servocanon",
+      "title": "Servocanon",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed module adds one skull and one free Delete activation each turn. Multiple free activators have conflicting EN/ES p.26 wording and remain provisional under T-RULES-014.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c08"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/simstim-record",
+      "kind": "action-card",
+      "localId": "simstim-record",
+      "title": "Simstim Record",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:provisional",
         "workflow:canonical-data"
       ],
       "summary": "Attach to a pawn as an add-on; while you control this card, gain one bonus counter.",
@@ -671,23 +1168,67 @@
         ],
         "sourceIds": [
           "sp-en-action-cards",
-          "sp-en-rulebook",
-          "sp-es-action-cards"
+          "sp-en-rulebook"
         ]
       }
     },
     {
-      "entryId": "action-card/weapon-gunhed",
+      "entryId": "action-card/toxin",
       "kind": "action-card",
-      "localId": "weapon-gunhed",
-      "title": "Gunhed",
+      "localId": "toxin",
+      "title": "Toxin",
       "status": "provisional",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
-        "mechanic:delete",
+        "mechanic:icebreaker",
         "resource:action-card",
         "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c02"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/trojan",
+      "kind": "action-card",
+      "localId": "trojan",
+      "title": "Trojan",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -711,10 +1252,194 @@
           "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
           "README.md"
         ],
-        "assetIds": [],
+        "assetIds": [
+          "sp-en-action-cards-p02-c08"
+        ],
         "sourceIds": [
           "sp-en-action-cards",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/under-clocker",
+      "kind": "action-card",
+      "localId": "under-clocker",
+      "title": "Under Clocker",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c06"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/virus",
+      "kind": "action-card",
+      "localId": "virus",
+      "title": "Virus",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c01"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/weapon-gunhed",
+      "kind": "action-card",
+      "localId": "weapon-gunhed",
+      "title": "Gunhed",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:delete",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "summary": "Printed Brainchip add-on; legacy id retained. Supplies an additional Add-on slot, a Weapon slot, one skull and card-activated Delete.",
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p03-c06"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "action-card/worm",
+      "kind": "action-card",
+      "localId": "worm",
+      "title": "Worm",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:icebreaker",
+        "resource:action-card",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/action-cards.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-action-cards-p02-c03"
+        ],
+        "sourceIds": [
+          "sp-en-action-cards",
+          "sp-en-rulebook",
+          "sp-es-action-cards"
         ]
       }
     },
@@ -3133,6 +3858,564 @@
         ],
         "sourceIds": [
           "sh-en-blocks-a4"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c01",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c01",
+      "title": "sh-en-control-cards-p01-c01",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c01"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c02",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c02",
+      "title": "sh-en-control-cards-p01-c02",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c02"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c03",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c03",
+      "title": "sh-en-control-cards-p01-c03",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c03"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c04",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c04",
+      "title": "sh-en-control-cards-p01-c04",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c04"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c05",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c05",
+      "title": "sh-en-control-cards-p01-c05",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c05"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c06",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c06",
+      "title": "sh-en-control-cards-p01-c06",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c06"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c07",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c07",
+      "title": "sh-en-control-cards-p01-c07",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c07"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c08",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c08",
+      "title": "sh-en-control-cards-p01-c08",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c08"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p01-c09",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p01-c09",
+      "title": "sh-en-control-cards-p01-c09",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p01-c09"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c01",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c01",
+      "title": "sh-en-control-cards-p02-c01",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c01"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c02",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c02",
+      "title": "sh-en-control-cards-p02-c02",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c02"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c03",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c03",
+      "title": "sh-en-control-cards-p02-c03",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c03"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c04",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c04",
+      "title": "sh-en-control-cards-p02-c04",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c04"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c05",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c05",
+      "title": "sh-en-control-cards-p02-c05",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c05"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c06",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c06",
+      "title": "sh-en-control-cards-p02-c06",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c06"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c07",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c07",
+      "title": "sh-en-control-cards-p02-c07",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c07"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c08",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c08",
+      "title": "sh-en-control-cards-p02-c08",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c08"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sh-en-control-cards-p02-c09",
+      "kind": "asset",
+      "localId": "sh-en-control-cards-p02-c09",
+      "title": "sh-en-control-cards-p02-c09",
+      "status": "cataloged",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sh-en-control-cards-p02-c09"
+        ],
+        "sourceIds": [
+          "sh-en-control-cards"
         ]
       }
     },
@@ -5710,6 +6993,564 @@
       }
     },
     {
+      "entryId": "asset/sp-en-control-cards-p01-c01",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c01",
+      "title": "sp-en-control-cards-p01-c01",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c01"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c02",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c02",
+      "title": "sp-en-control-cards-p01-c02",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c02"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c03",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c03",
+      "title": "sp-en-control-cards-p01-c03",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c03"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c04",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c04",
+      "title": "sp-en-control-cards-p01-c04",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c04"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c05",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c05",
+      "title": "sp-en-control-cards-p01-c05",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c05"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c06",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c06",
+      "title": "sp-en-control-cards-p01-c06",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c06"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c07",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c07",
+      "title": "sp-en-control-cards-p01-c07",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c07"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c08",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c08",
+      "title": "sp-en-control-cards-p01-c08",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c08"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p01-c09",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p01-c09",
+      "title": "sp-en-control-cards-p01-c09",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 1",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p01-c09"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c01",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c01",
+      "title": "sp-en-control-cards-p02-c01",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c01"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c02",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c02",
+      "title": "sp-en-control-cards-p02-c02",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c02"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c03",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c03",
+      "title": "sp-en-control-cards-p02-c03",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c03"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c04",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c04",
+      "title": "sp-en-control-cards-p02-c04",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c04"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c05",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c05",
+      "title": "sp-en-control-cards-p02-c05",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c05"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c06",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c06",
+      "title": "sp-en-control-cards-p02-c06",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c06"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c07",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c07",
+      "title": "sp-en-control-cards-p02-c07",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c07"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c08",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c08",
+      "title": "sp-en-control-cards-p02-c08",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c08"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
+      "entryId": "asset/sp-en-control-cards-p02-c09",
+      "kind": "asset",
+      "localId": "sp-en-control-cards-p02-c09",
+      "title": "sp-en-control-cards-p02-c09",
+      "status": "cataloged",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:asset",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "summary": "control-card page 2",
+      "refs": {
+        "filePaths": [
+          "spec/assets/manifest.json"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/README.md",
+          "DOCS/artifacts/toolset.md",
+          "DOCS/block-editor-plan.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c09"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards"
+        ]
+      }
+    },
+    {
       "entryId": "asset/sp-en-markers-p01-sheet",
       "kind": "asset",
       "localId": "sp-en-markers-p01-sheet",
@@ -5834,6 +7675,147 @@
       }
     },
     {
+      "entryId": "block/antro",
+      "kind": "block",
+      "localId": "antro",
+      "title": "Antro",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p02-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/arms-industry",
+      "kind": "block",
+      "localId": "arms-industry",
+      "title": "Arms Industry",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p06-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/black-clinic",
+      "kind": "block",
+      "localId": "black-clinic",
+      "title": "Black Clinic",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p04-c03"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
       "entryId": "block/black-market",
       "kind": "block",
       "localId": "black-market",
@@ -5881,12 +7863,12 @@
       "kind": "block",
       "localId": "central-core",
       "title": "Central Core",
-      "status": "provisional",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:block",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -5910,11 +7892,14 @@
           "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
           "README.md"
         ],
-        "assetIds": [],
+        "assetIds": [
+          "sp-en-blocks-a4-p03-c02"
+        ],
         "sourceIds": [
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-blocks-a4"
         ]
       }
     },
@@ -5922,7 +7907,7 @@
       "entryId": "block/chiba-city",
       "kind": "block",
       "localId": "chiba-city",
-      "title": "Chiba City",
+      "title": "Sprawl",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -5960,7 +7945,200 @@
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
           "sp-en-rulebook",
-          "sp-es-blocks-a4"
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/clandestine-broadcast",
+      "kind": "block",
+      "localId": "clandestine-broadcast",
+      "title": "Clandestine Broadcast",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p03-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/combat-prototypes",
+      "kind": "block",
+      "localId": "combat-prototypes",
+      "title": "Combat Prototypes",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p05-c02"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/copyleft",
+      "kind": "block",
+      "localId": "copyleft",
+      "title": "Copyleft",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p02-c03"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-control-cards",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/corporate-scandal",
+      "kind": "block",
+      "localId": "corporate-scandal",
+      "title": "Corporate Scandal",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p04-c02"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-control-cards",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -6004,6 +8182,100 @@
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
           "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/electromagnetic-pulse",
+      "kind": "block",
+      "localId": "electromagnetic-pulse",
+      "title": "Electromagnetic Pulse",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p02-c02"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/engineering-war",
+      "kind": "block",
+      "localId": "engineering-war",
+      "title": "Engineering War",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p05-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -6092,7 +8364,8 @@
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
           "sp-en-rulebook",
-          "sp-es-blocks-a4"
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -6100,7 +8373,7 @@
       "entryId": "block/idoru",
       "kind": "block",
       "localId": "idoru",
-      "title": "Idoru",
+      "title": "Toyeku Company",
       "status": "verified",
       "expansion": "speedrunners",
       "tags": [
@@ -6138,7 +8411,102 @@
           "sp-en-blocks-a4",
           "sp-en-blocks-letter",
           "sp-en-rulebook",
-          "sp-es-blocks-a4"
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/military-development",
+      "kind": "block",
+      "localId": "military-development",
+      "title": "Military Development",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p05-c03"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "block/pink-district",
+      "kind": "block",
+      "localId": "pink-district",
+      "title": "Pink District",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p03-c03"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -6186,6 +8554,53 @@
       }
     },
     {
+      "entryId": "block/yakuza",
+      "kind": "block",
+      "localId": "yakuza",
+      "title": "Yakuza",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p04-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
       "entryId": "doc/docs/architecture.md",
       "kind": "doc",
       "localId": "docs/architecture.md",
@@ -6204,6 +8619,30 @@
         ],
         "docPaths": [
           "DOCS/architecture.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
+      "entryId": "doc/docs/artifacts/asset-review.md",
+      "kind": "doc",
+      "localId": "docs/artifacts/asset-review.md",
+      "title": "Asset review register",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/artifacts/asset-review.md"
+        ],
+        "docPaths": [
+          "DOCS/artifacts/asset-review.md"
         ],
         "assetIds": [],
         "sourceIds": []
@@ -6405,7 +8844,7 @@
       "entryId": "doc/docs/engine-resume-plan.md",
       "kind": "doc",
       "localId": "docs/engine-resume-plan.md",
-      "title": "Engine resume plan (paused pending Phase-2 content)",
+      "title": "Engine completion workstream",
       "status": "cataloged",
       "expansion": "shared",
       "tags": [
@@ -6588,6 +9027,30 @@
         ],
         "docPaths": [
           "DOCS/parity.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
+      "entryId": "doc/docs/remaining-work.md",
+      "kind": "doc",
+      "localId": "docs/remaining-work.md",
+      "title": "Remaining work to complete Zaibatsu",
+      "status": "cataloged",
+      "expansion": "shared",
+      "tags": [
+        "game:shared",
+        "resource:doc",
+        "status:cataloged",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "DOCS/remaining-work.md"
+        ],
+        "docPaths": [
+          "DOCS/remaining-work.md"
         ],
         "assetIds": [],
         "sourceIds": []
@@ -7440,6 +9903,43 @@
       }
     },
     {
+      "entryId": "mode/speedrunners-quick-match",
+      "kind": "mode",
+      "localId": "speedrunners-quick-match",
+      "title": "Quick match",
+      "status": "provisional",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:mode",
+        "status:provisional",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/modes.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [],
+        "sourceIds": []
+      }
+    },
+    {
       "entryId": "mode/strategic-alliance",
       "kind": "mode",
       "localId": "strategic-alliance",
@@ -7592,16 +10092,16 @@
       }
     },
     {
-      "entryId": "pawn/drone-turret",
+      "entryId": "pawn/drone-mk-2",
       "kind": "pawn",
-      "localId": "drone-turret",
-      "title": "Drone Turret",
-      "status": "provisional",
+      "localId": "drone-mk-2",
+      "title": "Drone MK-2",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:pawn",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -7624,11 +10124,105 @@
           "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
           "README.md"
         ],
-        "assetIds": [],
+        "assetIds": [
+          "sp-en-control-cards-p02-c04"
+        ],
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "pawn/drone-probe",
+      "kind": "pawn",
+      "localId": "drone-probe",
+      "title": "Drone Probe",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c07"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "pawn/drone-turret",
+      "kind": "pawn",
+      "localId": "drone-turret",
+      "title": "Drone Turret",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c08"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -7665,11 +10259,15 @@
           "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
           "README.md"
         ],
-        "assetIds": [],
+        "assetIds": [
+          "sp-en-control-cards-p02-c03"
+        ],
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -7710,7 +10308,9 @@
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
         ]
       }
     },
@@ -7760,12 +10360,12 @@
       "kind": "pawn",
       "localId": "speedrunner-blue",
       "title": "Speedrunner (Blue)",
-      "status": "provisional",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:pawn",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -7792,7 +10392,8 @@
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards"
         ]
       }
     },
@@ -7801,12 +10402,12 @@
       "kind": "pawn",
       "localId": "speedrunner-green",
       "title": "Speedrunner (Green)",
-      "status": "provisional",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:pawn",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -7833,21 +10434,22 @@
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards"
         ]
       }
     },
     {
-      "entryId": "pawn/speedrunner-red",
+      "entryId": "pawn/speedrunner-orange",
       "kind": "pawn",
-      "localId": "speedrunner-red",
-      "title": "Speedrunner (Red)",
-      "status": "provisional",
+      "localId": "speedrunner-orange",
+      "title": "Speedrunner (Orange)",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:pawn",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -7874,21 +10476,22 @@
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards"
         ]
       }
     },
     {
-      "entryId": "pawn/speedrunner-yellow",
+      "entryId": "pawn/speedrunner-pink",
       "kind": "pawn",
-      "localId": "speedrunner-yellow",
-      "title": "Speedrunner (Yellow)",
-      "status": "provisional",
+      "localId": "speedrunner-pink",
+      "title": "Speedrunner (Pink)",
+      "status": "verified",
       "expansion": "speedrunners",
       "tags": [
         "game:speedrunners",
         "resource:pawn",
-        "status:provisional",
+        "status:verified",
         "workflow:canonical-data"
       ],
       "refs": {
@@ -7915,7 +10518,8 @@
         "sourceIds": [
           "sp-en-control-cards",
           "sp-en-pawns",
-          "sp-en-rulebook"
+          "sp-en-rulebook",
+          "sp-es-control-cards"
         ]
       }
     },
@@ -9685,6 +12289,49 @@
         "assetIds": [],
         "sourceIds": [
           "sp-es-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "threat/guard",
+      "kind": "threat",
+      "localId": "guard",
+      "title": "Guard",
+      "status": "verified",
+      "expansion": "shadowraiders",
+      "tags": [
+        "game:shadowraiders",
+        "resource:threat",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/shadowraiders/threats.json",
+          "spec/provenance/shadowraiders.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/shadowraiders.md",
+          "DOCS/rules/shadowraiders/missions-modes-and-symbology.md",
+          "DOCS/rules/shadowraiders/pawns-threats-and-combat.md",
+          "DOCS/rules/shadowraiders/setup-and-components.md",
+          "DOCS/rules/transcripts/shadowraiders-components.en.md",
+          "DOCS/rules/transcripts/shadowraiders-components.es.md",
+          "DOCS/rules/transcripts/shadowraiders-rulebook.en.md",
+          "DOCS/rules/transcripts/shadowraiders-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [],
+        "sourceIds": [
+          "sh-en-chaos-card",
+          "sh-en-markers",
+          "sh-en-rulebook",
+          "sh-es-chaos-card",
+          "sh-es-markers",
+          "sh-es-rulebook"
         ]
       }
     },

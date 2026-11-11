@@ -4,13 +4,43 @@
   "title": "Action card",
   "description": "A multi-use card from the shared action deck. One use is chosen per play; the rest are void. See DOCS/domain-model.md.",
   "type": "object",
-  "required": ["id", "name"],
+  "required": [
+    "id",
+    "name"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-    "name": { "type": "string", "description": "The printed title." },
-    "type": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission", "action", "movement", "event"], "description": "The card's printed type/category. For an attachment card this matches attach.slot." },
-    "class": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "The card's OWN class tag(s), e.g. accelerator / e-synapse / cyborg / brainchip. Distinct from attach.class (the TARGET class restriction)." },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The printed title."
+    },
+    "type": {
+      "enum": [
+        "add-on",
+        "gadget",
+        "weapon",
+        "armor",
+        "module",
+        "mission",
+        "action",
+        "movement",
+        "event",
+        "block"
+      ],
+      "description": "The card's printed type/category. For an attachment card this matches attach.slot."
+    },
+    "class": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "The card's OWN class tag(s), e.g. accelerator / e-synapse / cyborg / brainchip. Distinct from attach.class (the TARGET class restriction)."
+    },
     "copies": {
       "type": "integer",
       "minimum": 1,
@@ -18,8 +48,7 @@
       "description": "How many identical copies of this card are in the deck."
     },
     "summary": {
-      "type": "string",
-      "description": "Concise source-reviewed gameplay paraphrase; not a full printed-card transcription."
+      "type": "string"
     },
     "movement": {
       "type": "integer",
@@ -28,43 +57,188 @@
     },
     "movements": {
       "type": "array",
-      "items": { "$ref": "#/$defs/movementValue" },
+      "items": {
+        "$ref": "#/$defs/movementValue"
+      },
       "description": "The card's ACTION-part movement options (0+): each is fixed steps / one die / two dice / one whole hex, optionally stealth (Shadowraiders). One is chosen when the card is spent on movement."
     },
     "activates": {
       "type": "array",
-      "items": { "enum": ["search", "delete", "reboot", "icebreaker"] },
+      "items": {
+        "enum": [
+          "search",
+          "delete",
+          "reboot",
+          "icebreaker"
+        ]
+      },
       "description": "The card's ACTION part: the ability actions the card can be spent on when played directly (0+, normally one). Independent of the attach use below."
     },
     "effects": {
       "type": "array",
-      "items": { "$ref": "#/$defs/cardEffect" },
-      "description": "Typed operations the card performs when PLAYED directly (not via attach), each with a trigger. For attach-time effects use attach.effectText / attach.effectTrigger."
+      "items": {
+        "$ref": "#/$defs/cardEffect"
+      },
+      "description": "Typed card operations, selected by trigger. on-attach operations belong only to the attachment use; unsupported attachment resolution rejects explicitly."
     },
     "attach": {
       "type": "object",
       "additionalProperties": false,
       "description": "The card's main use: attaching to a target, and what it confers there.",
       "properties": {
-        "as": { "enum": ["pawn", "enemy", "block"] },
-        "slot": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] },
-        "class": { "type": "array", "items": { "type": "string" }, "description": "Target class restriction: the classes this card may attach to (e.g. Cleaner pawns)." },
-        "grants": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete). May include move." },
-        "removes": { "type": "array", "items": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] }, "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)." },
-        "grantsMovement": { "type": "array", "items": { "$ref": "#/$defs/movementValue" }, "description": "Movement options this attachment GIVES its target (fixed / d6 / 2d6 / hex, optionally stealth). Frequency (per-turn / d6 / card) is carried by abilityUses with ability=move." },
-        "grantsStealth": { "type": "boolean", "description": "The target may move with STEALTH (its normal movement becomes stealth-capable — Shadowraiders), without granting a specific number of stealth moves. E.g. INVISIBLE SERUM \"+Stealth\"." },
-        "grantsSlot": { "type": "array", "items": { "enum": ["add-on", "gadget", "weapon", "armor", "module", "mission"] }, "uniqueItems": true, "description": "Additional attachment slot(s) this card gives its target, e.g. FLATLINE \"allow gadget attachment\"." },
+        "as": {
+          "enum": [
+            "pawn",
+            "enemy",
+            "block"
+          ]
+        },
+        "slot": {
+          "enum": [
+            "add-on",
+            "gadget",
+            "weapon",
+            "armor",
+            "module",
+            "mission"
+          ]
+        },
+        "class": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Attachment-time target eligibility: at least one effective target class must match. This field does not grant a class; printed own classes belong in the card's top-level class."
+        },
+        "forbiddenClasses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Attachment-time target exclusion: reject any effective target class listed here, even when another class is allowed. Does not remove or grant classes."
+        },
+        "forbiddenDestinations": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "central-core"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Block categories this pawn cannot enter by movement. Does not ban moving within its current block or explicit placement."
+        },
+        "grants": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "search",
+              "delete",
+              "reboot",
+              "icebreaker",
+              "move"
+            ]
+          },
+          "description": "Abilities this attachment GIVES its target (e.g. a weapon grants Delete). May include move."
+        },
+        "delete": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "skulls"
+          ],
+          "properties": {
+            "skulls": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "activation": {
+              "enum": [
+                "card",
+                "once-per-turn"
+              ]
+            }
+          },
+          "description": "Printed Delete contribution. Skulls add to the pawn's attack; an activation is granted only when its badge is printed. Strength alone does not grant Delete. Do not combine with legacy grants/abilityUses for Delete on the same card."
+        },
+        "removes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "search",
+              "delete",
+              "reboot",
+              "icebreaker",
+              "move"
+            ]
+          },
+          "description": "Abilities this attachment STRIPS from its target (the cross-marked badge)."
+        },
+        "grantsMovement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/movementValue"
+          },
+          "description": "Movement options this attachment GIVES its target (fixed / d6 / 2d6 / hex, optionally stealth). Frequency (per-turn / d6 / card) is carried by abilityUses with ability=move."
+        },
+        "grantsStealth": {
+          "type": "boolean",
+          "description": "The target may move with STEALTH (its normal movement becomes stealth-capable — Shadowraiders), without granting a specific number of stealth moves. E.g. INVISIBLE SERUM \"+Stealth\"."
+        },
+        "grantsSlot": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "add-on",
+              "gadget",
+              "weapon",
+              "armor",
+              "module",
+              "mission"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Distinct additional physical slots supplied by this attached card, one of each listed type. They can duplicate native slot types. Their occupants depend on this provider and are discarded if it is removed; see SR-CARD-011."
+        },
         "abilityUses": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["ability"],
+            "required": [
+              "ability"
+            ],
             "properties": {
-              "ability": { "enum": ["search", "delete", "reboot", "icebreaker", "move"] },
-              "perTurn": { "type": "integer", "minimum": 1, "description": "A fixed number of uses per turn." },
-              "dice": { "const": "d6", "description": "Uses per turn are a d6 roll instead of a fixed count." },
-              "activation": { "enum": ["card", "once-per-turn"], "description": "Or the granted ability is card-activated / once-per-turn." }
+              "ability": {
+                "enum": [
+                  "search",
+                  "delete",
+                  "reboot",
+                  "icebreaker",
+                  "move"
+                ]
+              },
+              "perTurn": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "A fixed number of uses per turn."
+              },
+              "dice": {
+                "const": "d6",
+                "description": "Uses per turn are a d6 roll instead of a fixed count."
+              },
+              "activation": {
+                "enum": [
+                  "card",
+                  "once-per-turn"
+                ],
+                "description": "Or the granted ability is card-activated / once-per-turn."
+              }
             }
           },
           "description": "How a granted ability may be used: a fixed perTurn count, a d6 roll, or card/once-per-turn activation."
@@ -73,9 +247,24 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "faces": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 6 }, "maxItems": 6, "description": "Specific die faces this attachment grants to the target's ICE." },
-            "deltaDice": { "type": "integer", "description": "Change to the number of ICE dice (+/-)." },
-            "black": { "type": "boolean", "description": "Adds/uses a black ICE die: a failed Icebreak against it eliminates the attacking pawn." }
+            "faces": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "maxItems": 6,
+              "description": "Specific die faces this attachment grants to the target's ICE."
+            },
+            "deltaDice": {
+              "type": "integer",
+              "description": "Change to the number of ICE dice (+/-)."
+            },
+            "black": {
+              "type": "boolean",
+              "description": "Adds/uses a black ICE die: a failed Icebreak against it eliminates the attacking pawn."
+            }
           },
           "description": "Modifies the target's ICE: specific faces granted, more/fewer dice, and/or a black die."
         },
@@ -84,10 +273,19 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["value", "shielded"],
+            "required": [
+              "value",
+              "shielded"
+            ],
             "properties": {
-              "value": { "type": "integer", "minimum": 1, "maximum": 6 },
-              "shielded": { "type": "boolean" }
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "shielded": {
+                "type": "boolean"
+              }
             }
           },
           "description": "Replacement defense dice for the target while the attachment remains equipped."
@@ -96,48 +294,298 @@
           "type": "boolean",
           "description": "The target's ICE is treated as absent while this attachment remains equipped."
         },
-        "drawModifier": { "type": "integer", "description": "Change to the number of cards drawn per turn (+/-)." },
-        "handModifier": { "type": "integer", "description": "Change to the target's max hand size (+/-)." },
+        "drawModifier": {
+          "type": "integer",
+          "description": "Change to the number of cards drawn per turn (+/-)."
+        },
+        "handModifier": {
+          "type": "integer",
+          "description": "Change to the target's max hand size (+/-)."
+        },
         "blockSpace": {
           "type": "object",
           "additionalProperties": false,
-          "properties": { "shape": { "enum": ["circle", "hex"] } },
+          "properties": {
+            "shape": {
+              "enum": [
+                "circle",
+                "hex"
+              ]
+            }
+          },
           "description": "When as=block, the card becomes a single-space mini-block on a block side; this is its printed shape."
         },
-        "effectText": { "type": "string", "description": "Special on-attach effect text, e.g. \"Gain control of this pawn.\"" },
-        "effectTrigger": { "enum": ["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"], "description": "When effectText fires; defaults to on-attach." },
-        "cost": { "type": "integer", "minimum": 0, "description": "Bonus-counter cost to attach (bonus icons, 1+)." }
+        "effectText": {
+          "type": "string",
+          "description": "Special on-attach effect text, e.g. \"Gain control of this pawn.\""
+        },
+        "effectTrigger": {
+          "enum": [
+            "on-attach",
+            "begin-turn",
+            "end-turn",
+            "on-control",
+            "on-icebreak",
+            "continuous"
+          ],
+          "description": "When effectText fires; defaults to on-attach."
+        },
+        "cost": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Bonus-counter cost to attach (bonus icons, 1+)."
+        },
+        "attackModifier": {
+          "type": "integer",
+          "description": "Additional printed Delete skulls while attached."
+        },
+        "ignoresDirectionArrows": {
+          "type": "boolean"
+        },
+        "movementModifier": {
+          "type": "integer"
+        },
+        "phaseEffects": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "trigger",
+                  "kind"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "trigger": {
+                    "enum": [
+                      "begin-turn",
+                      "end-action"
+                    ]
+                  },
+                  "kind": {
+                    "enum": [
+                      "discard-self",
+                      "discard-hand",
+                      "discard-or-sacrifice"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "trigger",
+                  "kind",
+                  "amount"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "trigger": {
+                    "enum": [
+                      "begin-turn",
+                      "end-action"
+                    ]
+                  },
+                  "kind": {
+                    "enum": [
+                      "sacrifice-and-draw",
+                      "discard-cards"
+                    ]
+                  },
+                  "amount": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "trigger",
+                  "kind"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "trigger": {
+                    "enum": [
+                      "begin-turn",
+                      "end-action"
+                    ]
+                  },
+                  "kind": {
+                    "enum": [
+                      "discard-and-relocate"
+                    ]
+                  },
+                  "threatMode": {
+                    "enum": [
+                      "normal-movement",
+                      "placement"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "eliminationPrevention": {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "discard-self"
+            }
+          }
+        },
+        "controllerHand": {
+          "const": "face-up",
+          "description": "The current controller of the attached pawn plays with their hand face up while attached."
+        },
+        "icebreakerModifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "faces": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "uniqueItems": true
+            },
+            "rollDice": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "black": {
+              "type": "boolean"
+            },
+            "ignoresBlackIce": {
+              "type": "boolean"
+            }
+          }
+        }
       }
     },
     "assetRefs": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
       "uniqueItems": true,
       "description": "Physical asset ids resolved through spec/assets/manifest.json."
     },
-    "provisional": { "type": "boolean", "default": false }
+    "provisional": {
+      "type": "boolean",
+      "default": false
+    }
   },
   "$defs": {
     "cardEffect": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind"],
-      "properties": {
-        "kind": { "enum": ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"], "description": "The operation; `custom` carries free text." },
-        "amount": { "type": "integer", "description": "A quantity for the operation (cards drawn, bonus gained, dice, …)." },
-        "target": { "type": "string", "description": "Optional operation target." },
-        "text": { "type": "string", "description": "Printed effect text; required when kind is custom." },
-        "trigger": { "enum": ["on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"], "description": "When the operation fires; defaults to on-play." }
-      }
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger"
+          ],
+          "properties": {
+            "kind": {
+              "const": "gain-target-control"
+            },
+            "trigger": {
+              "const": "on-attach"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/genericCardEffect"
+        }
+      ]
     },
     "movementValue": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "properties": {
-        "type": { "enum": ["fixed", "d6", "2d6", "hex"], "description": "fixed steps / one die / two dice / one whole hex (SR-MOVE-001)." },
-        "amount": { "type": "integer", "minimum": 1, "description": "Step count for `fixed` (or a bonus added to a dice roll)." },
-        "stealth": { "type": "boolean", "default": false, "description": "Shadowraiders stealth movement: normal step budget but does not wake threats (SH-PAWN-001)." }
+        "type": {
+          "enum": [
+            "fixed",
+            "d6",
+            "2d6",
+            "hex"
+          ],
+          "description": "fixed steps / one die / two dice / one whole hex (SR-MOVE-001)."
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Step count for `fixed` (or a bonus added to a dice roll)."
+        },
+        "stealth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shadowraiders stealth movement: normal step budget but does not wake threats (SH-PAWN-001)."
+        }
+      }
+    },
+    "genericCardEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "gain-control-card",
+            "place-pawn",
+            "area-attack",
+            "all-players",
+            "modify-ice",
+            "draw-cards",
+            "gain-bonus",
+            "sacrifice-pawn",
+            "custom"
+          ],
+          "description": "The operation; `custom` carries free text."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "A quantity for the operation (cards drawn, bonus gained, dice, …)."
+        },
+        "target": {
+          "type": "string",
+          "description": "Optional operation target."
+        },
+        "text": {
+          "type": "string",
+          "description": "Printed effect text; required when kind is custom."
+        },
+        "trigger": {
+          "enum": [
+            "on-play",
+            "begin-turn",
+            "end-turn",
+            "on-control",
+            "on-icebreak",
+            "continuous",
+            "on-attach"
+          ],
+          "description": "When the operation fires; defaults to on-play."
+        }
       }
     }
   }

@@ -1,3 +1,7 @@
+import type {EngineEvent} from "./index.ts";
+import {effectiveIcebreakerModifier} from "./icebreaker-modifiers.ts";
+import {abilityUseSpent,spendAbilityUse} from "./use-markers.ts";
+import { gainPawnControl } from "./control-markers.ts";
 // Icebreaker: gain control of a block or pawn that has an ICE value. Mirrors
 // impl/go/internal/engine/icebreaker.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Icebreaker ability", "Black ICE"). Backlog: T-104.
@@ -7,10 +11,8 @@
 // on it (the real path to the win condition); controlling a pawn changes owner.
 // Failing against Black ICE eliminates the attacking pawn.
 //
-// ICE FACES ARE PROVISIONAL. The data models ICE as a category, not specific die
-// faces. iceFaces derives canonical top-N faces so base success probability is
-// faithful (low = 3 chances, medium = 2, high = 1, black = 1 high-risk). Real
-// face values come with transcription — tracked in tasks/BACKLOG.md.
+// Verified content supplies exact printed ICE faces. Category-derived faces remain
+// a historical/provisional fallback; passing those fixtures does not promote data.
 
 import { neighbor, type Coord } from "../domain/hex.ts";
 import {
@@ -130,7 +132,7 @@ function checkIcebreaker(
   if (!owner) throw new Error(`attacker "${attackerId}" has no controlling player`);
   if (
     ability.activation === "once-per-turn" &&
-    owner.oncePerTurnUsed[abilityUsedKey("icebreaker", attackerId)]
+    abilityUseSpent(s,gd,owner,attackerId,"icebreaker")
   ) {
     throw new Error(`pawn "${attackerId}" already used its once-per-turn Icebreaker this turn`);
   }
@@ -138,27 +140,28 @@ function checkIcebreaker(
 }
 
 function markIcebreakerUsed(
+  s:GameState,
   gd: GameData,
   owner: Player,
   attackerId: string,
-  atts: { cardId: string }[],
+  atts: { cardId: string }[] | undefined,
 ): void {
   const atk = pawnById(gd, attackerId);
   const ability = atk && effectiveAbility(gd, atk, atts, "icebreaker");
   if (ability && ability.activation === "once-per-turn") {
-    owner.oncePerTurnUsed[abilityUsedKey("icebreaker", attackerId)] = true;
+    spendAbilityUse(s,gd,owner,attackerId,"icebreaker");
   }
 }
 
 function resolveBlackIceFailure(
   s: GameState,
+  gd: GameData,
   isBlack: boolean,
   attackerId: string,
   success: boolean,
 ): boolean {
   if (!success && isBlack) {
-    eliminatePawn(s, attackerId);
-    return true;
+    return eliminatePawn(s, attackerId, gd, "black-ice");
   }
   return false;
 }
@@ -170,6 +173,8 @@ export function icebreakBlock(
   attackerId: string,
   coord: Coord,
   extraRollDice = 0,
+  events:EngineEvent[]=[],
+  beforeRoll?:()=>void,
 ): IcebreakResult {
   const { owner, atkPob } = checkIcebreaker(s, gd, attackerId);
   if (atkPob.coord.q !== coord.q || atkPob.coord.r !== coord.r) {
@@ -194,7 +199,11 @@ export function icebreakBlock(
     throw new Error(`you already control block "${pb.blockId}"`);
   }
 
-  const roll = icebreakRoll(s, extraRollDice);
+  const actorModifier = effectiveIcebreakerModifier(gd,atkPob);
+  faces.push(...(actorModifier?.faces ?? []));
+  beforeRoll?.();
+  if(s.rulesVersion) markIcebreakerUsed(s,gd,owner,attackerId,atkPob.attachments);
+  const roll = icebreakRoll(s, extraRollDice + (actorModifier?.rollDice ?? 0));
   const success = anyMatch(roll, faces);
   let attackerEliminated = false;
 
@@ -206,17 +215,22 @@ export function icebreakBlock(
       const prev = playerById(s, pb.ownerId);
       if (prev && prev.controlMarkersPlaced > 0) prev.controlMarkersPlaced--;
     }
+    const previousOwner=pb.ownerId;
     pb.ownerId = owner.id;
     owner.controlMarkersPlaced++;
-    collectControlledBonusIcons(s, owner.id);
+    if(s.rulesVersion)events.push({type:"control-changed",element:"block",elementId:`${coord.q},${coord.r}`,...(previousOwner?{fromOwnerId:previousOwner}:{}),toOwnerId:owner.id});
+    const collected=collectControlledBonusIcons(s, owner.id);
+    if(s.rulesVersion)for(const icon of collected)events.push({type:"bonus-collected",playerId:owner.id,element:"bonus-icon",elementId:icon.key});
     checkWin(s);
-    applyBlockEffectForTrigger(s, gd, coord, "underControl");
+    if(!s.rulesVersion || !s.winnerId) {
+      applyBlockEffectForTrigger(s, gd, coord, "underControl",events);
+    }
   } else {
-    const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true || attachmentModifier.black;
-    attackerEliminated = resolveBlackIceFailure(s, isBlack, attackerId, success);
+    const isBlack = blockDef.iceValue === "black" || blockDef.blackIce === true || attachmentModifier.black || actorModifier?.black === true;
+    attackerEliminated = resolveBlackIceFailure(s, gd, isBlack && !actorModifier?.ignoresBlackIce, attackerId, success);
   }
 
-  markIcebreakerUsed(gd, owner, attackerId, atkPob.attachments);
+  if(!s.rulesVersion) markIcebreakerUsed(s,gd, owner, attackerId, atkPob.attachments);
   return { roll, success, attackerEliminated };
 }
 
@@ -245,14 +259,17 @@ export function icebreakPawn(
   }
   const attachmentModifier = attachmentIceModifier(gd, tgtPob.attachments);
   const faces = adjustIceFaces([...new Set([
-    ...iceFaces(tgt.iceValue),
+    ...iceFacesFor(tgt.iceFaces, tgt.iceValue),
     ...attachmentModifier.faces,
   ])], attachmentModifier.deltaDice + spaceIceModifierAmount(gd, tgtPob.coord, tgtPob.spaceId, s));
   if (faces.length === 0) {
     throw new Error(`pawn "${targetId}" has no ICE value and cannot be controlled`);
   }
 
-  const roll = icebreakRoll(s, extraRollDice);
+  const actorModifier = effectiveIcebreakerModifier(gd,atkPob);
+  faces.push(...(actorModifier?.faces ?? []));
+  if(s.rulesVersion) markIcebreakerUsed(s,gd,owner,attackerId,atkPob.attachments);
+  const roll = icebreakRoll(s, extraRollDice + (actorModifier?.rollDice ?? 0));
   const success = anyMatch(roll, faces);
   let attackerEliminated = false;
 
@@ -260,11 +277,11 @@ export function icebreakPawn(
     // Gaining control of a pawn discards its attached cards (returning any bonus
     // counters to the previous owner) before ownership transfers.
     discardAttachments(s, tgtPob);
-    tgtPob.ownerId = owner.id;
+    gainPawnControl(s, gd, targetId, owner.id);
   } else {
-    attackerEliminated = resolveBlackIceFailure(s, tgt.iceValue === "black" || attachmentModifier.black, attackerId, success);
+    attackerEliminated = resolveBlackIceFailure(s, gd, (tgt.iceValue === "black" || attachmentModifier.black || actorModifier?.black === true) && !actorModifier?.ignoresBlackIce, attackerId, success);
   }
 
-  markIcebreakerUsed(gd, owner, attackerId, atkPob.attachments);
+  if(!s.rulesVersion) markIcebreakerUsed(s,gd, owner, attackerId, atkPob.attachments);
   return { roll, success, attackerEliminated };
 }

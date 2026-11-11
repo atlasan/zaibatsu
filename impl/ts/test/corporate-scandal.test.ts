@@ -1,0 +1,58 @@
+import {test,expect} from "bun:test";
+import {readFileSync} from "node:fs";
+import {loadDefault} from "../src/data/index.ts";
+import {newRng} from "../src/domain/rng.ts";
+import {newGame,applyActionWithEvents,availableActions,snapshot,cloneGameState,playerView,eventsForPlayer,gainPawnControl,grantBonusCounters,controlMarkerAllocations,bonusCounterPool,defenseProfile,stepTargets,type Action} from "../src/engine/index.ts";
+import {cybernetControlMarkerCount} from "../src/engine/block-hand-discards.ts";
+
+function fixture(counts=[5,6],idoru=false) {
+ const gd=loadDefault("speedrunners"),s=newGame({data:gd,allowProvisional:true,playerNames:counts.map((_,i)=>String.fromCharCode(65+i)),seed:42});s.phase="action";s.deck.push(...s.players.flatMap(p=>p.hand));for(const p of s.players)p.hand=[];
+ const take=(i:number,id:string)=>{const at=s.deck.indexOf(id);if(at<0)throw new Error(id);s.deck.splice(at,1);s.players[i]!.hand.push(id);};for(const id of ["dj","move-2","worm","move-1","move-1"])take(0,id);for(const id of ["move-1","move-1","move-2"])take(1,id);for(let i=2;i<counts.length;i++)take(i,"move-3");
+ if(idoru) {s.reserve=s.reserve!.filter(id=>id!=="idoru");s.cybernet.placePawn({pawnId:"idoru",ownerId:"",coord:{q:0,r:0},spaceId:"core"});gainPawnControl(s,gd,"idoru","p1");}
+ const peers=gd.blocks.filter(b=>!b.isCentralCore && b.id!=="corporate-scandal");let cursor=0;
+ for(const [i,count] of counts.entries()) {const p=s.players[i]!;for(let n=cybernetControlMarkerCount(s,p.id);n<count;n++){const b=peers[cursor++]!;if(!b)throw new Error("not enough physical fixture tiles");s.cybernet.blocks.push({blockId:b.id,coord:{q:-cursor,r:0},rotation:0,ownerId:p.id});s.blockPile=s.blockPile.filter(id=>id!==b.id);}p.controlMarkersPlaced=count;}
+ s.blockPile=s.blockPile.filter(id=>id!=="corporate-scandal");s.blockPile.push("corporate-scandal");const actor=s.players[0]!.pawnId,target=s.players[1]!.pawnId;return {gd,s,actor,target,take};
+}
+function accept(f:ReturnType<typeof fixture>,a:Action){const r=applyActionWithEvents(f.s,f.gd,a);if(!r.accepted)throw new Error(r.error);return r;}
+function reject(f:ReturnType<typeof fixture>,a:Action){const before=snapshot(f.s),rng=f.s.rng.clone(),r=applyActionWithEvents(f.s,f.gd,a);expect(r.accepted).toBe(false);expect(snapshot(f.s)).toBe(before);expect(f.s.rng.clone().intn(100000)).toBe(rng.intn(100000));}
+function prepare(f:ReturnType<typeof fixture>){const reveal=accept(f,{type:"play-search",pawnId:f.actor,cardId:"dj"}),placed=accept(f,{type:"resolve-choice",choiceId:f.s.pendingChoice!.id,optionId:"place:0:0"});const moved=accept(f,{type:"play-move",pawnId:f.actor,cardId:"move-2",path:[{coord:{q:1,r:0},spaceId:"lower-swirl"}]});return {reveal,placed,moved};}
+function capture(f:ReturnType<typeof fixture>,cardId="worm"){return accept(f,{type:"play-icebreak-block",pawnId:f.actor,cardId,coord:{q:1,r:0}});}
+function inventory(f:ReturnType<typeof fixture>){return [...f.s.deck,...f.s.discard,...f.s.playedCards??[],...f.s.players.flatMap(p=>p.hand),...f.s.cybernet.pawns.flatMap(p=>(p.attachments??[]).map(a=>a.cardId))].sort();}
+function evidence(){const f=fixture([5,6],true),initial=snapshot(f.s),prepared=prepare(f),ready=snapshot(f.s);f.s.rng=newRng(5);const before=snapshot(f.s),options=availableActions(f.s,f.gd),observer=playerView(f.s,f.gd),captured=capture(f);return {initial,ready,before,options,observer,finished:snapshot(f.s),events:[prepared.reveal.events,prepared.placed.events,prepared.moved.events,captured.events],spectator:eventsForPlayer(f.s,captured.events)};}
+
+test("Corporate Scandal: bilingual source geometry, physical marker thresholds and whole-hand events share byte evidence",()=>{
+ const f=fixture(),b=f.gd.blocks.find(b=>b.id==="corporate-scandal")!;expect(b.name).toBe("Corporate Scandal");expect(b.iceFaces).toEqual([5,6]);expect(b.bonusCorners).toEqual([false,true,true,false,true,true]);expect(b.nonPlayableZoneIds).toEqual(["h1"]);expect(b.spaces!.map(sp=>sp.capacity)).toEqual([1,1,1,1,1,1]);expect(b.spaces![3]!.modifier).toEqual({kind:"defense",dice:[{value:3,shielded:true}]});expect(b.effects!.underControl).toEqual({kind:"discard-hands-above-markers",markerThreshold:5});expect(evidence()).toEqual(JSON.parse(readFileSync(new URL("../../../golden/corporate-scandal.json",import.meta.url),"utf8")));
+});
+test("Corporate Scandal: the newly placed sixth marker triggers every qualifying hand, preserving played payment and duplicates",()=>{
+ const f=fixture(),cards=inventory(f);prepare(f);const hands=f.s.players.map(p=>[...p.hand]),played=[...f.s.playedCards!];f.s.rng=newRng(5);const rng=f.s.rng.clone();expect(rng.intn(6)+1).toBe(6);const r=capture(f);expect(f.s.rng.clone().intn(100000)).toBe(rng.intn(100000));expect(f.s.players.map(p=>p.hand)).toEqual([[],[]]);expect(f.s.playedCards).toEqual([...played,"worm"]);expect(f.s.discard.slice(-5)).toEqual([...hands[0]!.filter(id=>id!=="worm"),...hands[1]!]);expect(r.events.filter(e=>e.type==="card-discarded").map(e=>[e.playerId,e.cardId])).toEqual([["p1","move-1"],["p1","move-1"],["p2","move-1"],["p2","move-1"],["p2","move-2"]]);expect(r.events.findIndex(e=>e.type==="control-changed")).toBeLessThan(r.events.findIndex(e=>e.type==="block-hand-discarded"));expect(inventory(f)).toEqual(cards);expect(f.s.pendingChoice).toBeUndefined();
+});
+test("Corporate Scandal: exactly five markers are below the exclusive threshold and previews preserve full state and RNG",()=>{
+ const f=fixture([4,5]);prepare(f);f.s.rng=newRng(5);const before=snapshot(f.s),rng=f.s.rng.clone(),options=availableActions(f.s,f.gd);expect(options.some(o=>o.action?.type==="play-icebreak-block")).toBe(true);playerView(f.s,f.gd);cloneGameState(f.s);expect(snapshot(f.s)).toBe(before);expect(f.s.rng.clone().intn(100000)).toBe(rng.intn(100000));const r=capture(f);expect(f.s.players.map(p=>p.hand.length)).toEqual([2,3]);expect(r.events.some(e=>e.type==="block-hand-discarded" || e.type==="card-discarded")).toBe(false);
+});
+test("Corporate Scandal: Idoru's printed counted marker contributes while ordinary pawn control and unallocated reserve do not",()=>{
+ const f=fixture([5,6],true);expect(f.s.cybernet.blocks.filter(b=>b.ownerId==="p1")).toHaveLength(4);expect(cybernetControlMarkerCount(f.s,"p1")).toBe(5);prepare(f);f.s.rng=newRng(5);capture(f);expect(cybernetControlMarkerCount(f.s,"p1")).toBe(6);expect(f.s.players[0]!.hand).toEqual([]);expect(f.s.controlCardMarkers).toEqual([{playerId:"p1",cardId:"idoru-control",amount:1}]);expect(f.s.controlCards!.find(c=>c.subject.id===f.actor)!.ownerId).toBe("p1");
+});
+test("Corporate Scandal: takeover counts the returned old-owner marker before deciding whose hand is discarded",()=>{
+ const f=fixture();prepare(f);const source=f.s.cybernet.at({q:1,r:0})!,oldPeer=f.s.cybernet.blocks.find(b=>b.ownerId==="p2")!;delete oldPeer.ownerId;source.ownerId="p2";f.s.rng=newRng(5);capture(f);expect(f.s.players.map(p=>p.controlMarkersPlaced)).toEqual([6,5]);expect(f.s.players.map(p=>p.hand.length)).toEqual([0,3]);
+});
+test("Corporate Scandal: source placement alone, failed captures and rejected commands do not discard hands",()=>{
+ const f=fixture(),hand2=[...f.s.players[1]!.hand];prepare(f);expect(f.s.players[1]!.hand).toEqual(hand2);f.s.rng=newRng(1);const r=capture(f);expect(r.events.find(e=>e.type==="roll")!.roll).toEqual([2]);expect(f.s.players.map(p=>p.hand.length)).toEqual([2,3]);expect(f.s.cybernet.at({q:1,r:0})!.ownerId).toBeUndefined();reject(f,{type:"play-icebreak-block",pawnId:f.actor,cardId:"worm",coord:{q:1,r:0}});reject(f,{type:"play-icebreak-block",playerId:"p2",pawnId:f.actor,cardId:"move-1",coord:{q:1,r:0}});reject(f,{type:"play-icebreak-block",pawnId:f.actor,cardId:"move-1",coord:{q:9,r:9}});const before=snapshot(f.s);expect(applyActionWithEvents(f.s,f.gd,{type:"play-icebreak-block",pawnId:f.actor,cardId:"move-1",coord:{q:1,r:0},extraRollDice:1}).accepted).toBe(false);expect(snapshot(f.s)).toBe(before);
+});
+test("Corporate Scandal: qualifying empty hands are valid and all other players participate without a choice",()=>{
+ const f=fixture([5,0,6]);prepare(f);f.s.deck.push(...f.s.players[2]!.hand);f.s.players[2]!.hand=[];const cards=inventory(f);f.s.rng=newRng(5);const r=capture(f);expect(f.s.players.map(p=>p.hand.length)).toEqual([0,3,0]);expect(r.events.filter(e=>e.type==="block-hand-discarded").map(e=>e.playerId)).toEqual(["p1","p3"]);expect(f.s.pendingChoice).toBeUndefined();expect(inventory(f)).toEqual(cards);expect(eventsForPlayer(f.s,r.events).filter(e=>e.type==="card-discarded")).toEqual(r.events.filter(e=>e.type==="card-discarded"));
+});
+test("Corporate Scandal: shielded3 is a space modifier, the normal ring has no center shortcut and immediate victory stops discard",()=>{
+ const f=fixture();prepare(f);const pawn=f.s.cybernet.pawnById(f.actor)!;expect(defenseProfile(f.s,f.gd,{...pawn,spaceId:"shield"}).find(d=>d.value===3)!.shielded).toBe(true);expect(stepTargets(f.gd,f.s.cybernet,pawn.coord,"camera",f.actor).filter(t=>t.coord.q===1 && t.coord.r===0).map(t=>t.spaceId).sort()).toEqual(["helmet","upper-swirl"]);f.s.players[0]!.controlMarkersTotal=6;f.s.rng=newRng(5);const r=capture(f);expect(f.s.winnerId).toBe("p1");expect(f.s.players.map(p=>p.hand.length)).toEqual([2,3]);expect(r.events.some(e=>e.type==="block-hand-discarded")).toBe(false);expect(availableActions(f.s,f.gd)).toEqual([]);
+});
+test("Corporate Scandal: malformed thresholds, trigger and cost/target additions fail construction, with isolated strict acceptance",()=>{
+ for(const mutation of ["threshold","amount","target","timing","misplaced"]) {const gd=loadDefault("speedrunners"),b=gd.blocks.find(b=>b.id==="corporate-scandal")!,e:any=b.effects!.underControl;if(mutation==="threshold")e.markerThreshold=0;if(mutation==="amount")e.amount=1;if(mutation==="target")e.target="p1";if(mutation==="timing")b.effects={inCybernet:e};if(mutation==="misplaced")e.kind="controller-core";expect(()=>newGame({data:gd,allowProvisional:true,playerNames:["A","B"],seed:42})).toThrow(/marker hand discard/);}
+ const gd=loadDefault("speedrunners");gd.blocks=gd.blocks.filter(b=>b.isCentralCore || b.id==="corporate-scandal");gd.pawns=gd.pawns.filter(p=>p.isStarter);gd.controlCards=gd.controlCards!.filter(c=>c.isStarter);gd.cards=[];expect(newGame({data:gd,playerNames:["A","B"],seed:42}).cybernet.blocks).toHaveLength(1);
+});
+
+test("Corporate Scandal: existing attachments, investments and previously played cards survive the hand-only effect",()=>{
+ const f=fixture();f.take(1,"dummy");grantBonusCounters(f.s,"p2",1);f.s.currentPlayer=1;accept(f,{type:"attach-pawn",cardId:"dummy",targetId:f.target,slotRef:"pawn:add-on"});f.s.currentPlayer=0;accept(f,{type:"play-move",pawnId:f.actor,cardId:"move-1",path:[]});const cards=inventory(f);prepare(f);const attachments=structuredClone(f.s.cybernet.pawnById(f.target)!.attachments),pool=bonusCounterPool(f.s),markers=controlMarkerAllocations(f.s);f.s.rng=newRng(5);capture(f);
+ expect(f.s.cybernet.pawnById(f.target)!.attachments).toEqual(attachments);expect(bonusCounterPool(f.s)).toEqual(pool);expect(controlMarkerAllocations(f.s).filter(m=>m.elementId!=="1,0")).toEqual(markers);expect(f.s.playedCards).toEqual(["move-1","move-2","worm"]);expect(inventory(f)).toEqual(cards);
+});
+test("Corporate Scandal: a rejected resolution after payment, roll and capture restores full state and RNG",()=>{
+ const f=fixture([5,6],true);prepare(f);f.s.rng=newRng(5);(f.gd.blocks.find(b=>b.id==="corporate-scandal")!.effects!.underControl as any).markerThreshold=0;reject(f,{type:"play-icebreak-block",pawnId:f.actor,cardId:"worm",coord:{q:1,r:0}});expect(f.s.players[0]!.hand).toContain("worm");expect(f.s.cybernet.at({q:1,r:0})!.ownerId).toBeUndefined();
+});

@@ -1,4 +1,4 @@
-// Command zaibatsu runs a demo Speedrunners game to completion using the shared
+// Command zaibatsu runs a demo Speedrunners game to completion using the frozen provisional
 // data in spec/data. It's the Go mirror of impl/ts/src/index.ts.
 package main
 
@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	gd, err := data.LoadDefault("speedrunners")
+	gd, err := data.LoadRegression("speedrunners")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "error loading data:", err)
 		os.Exit(1)

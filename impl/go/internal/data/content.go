@@ -2,11 +2,38 @@ package data
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/zaibatsu/zaibatsu-go/internal/domain"
 )
+
+// LoadRegression loads the frozen provisional corpus, never official content.
+func LoadRegression(expansion string, modeID ...string) (*domain.GameData, error) {
+	dir, err := FindSpecDir()
+	if err != nil {
+		return nil, err
+	}
+	gd, err := Load(filepath.Join(dir, "..", "fixtures", "provisional-v1", "spec", "data"), expansion)
+	if err != nil {
+		return nil, err
+	}
+	if len(modeID) == 0 {
+		gd.RegressionFixture = "provisional-v1"
+		gd.Mode.Provisional = true
+		return gd, nil
+	}
+	for _, mode := range append([]domain.Mode{gd.Mode}, gd.Modes...) {
+		if mode.ID == modeID[0] {
+			gd.Mode = mode
+			gd.RegressionFixture = "provisional-v1"
+			gd.Mode.Provisional = true
+			return gd, nil
+		}
+	}
+	return nil, fmt.Errorf("unknown regression mode %q", modeID[0])
+}
 
 type controlCardsFile struct {
 	ControlCards []domain.ControlCard `json:"controlCards"`

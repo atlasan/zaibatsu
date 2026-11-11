@@ -1,0 +1,562 @@
+{
+  "members": [
+    {
+      "artifactId": "sortme-sh-pawns-acetate-b",
+      "archiveSha256": "5398ddc4dcfb74e159c429e494c0ac79d6ad43937936fa157162c6bcabb0a024",
+      "member": "Sh 04 Pawns BC Acetate.pdf",
+      "sha256": "38439f9a591fe74b17dc2e43cfbba13fb9e3cf42edd0b574973e4758f9e85641",
+      "bytes": 241987,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-acetate-b/Sh 04 Pawns BC Acetate.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-acetate-b",
+      "archiveSha256": "5398ddc4dcfb74e159c429e494c0ac79d6ad43937936fa157162c6bcabb0a024",
+      "member": "Sp-Sh 02 Pawns B Adhesive.pdf",
+      "sha256": "12800982d766d0b780ad3b62fda9119bd5592517366285e6d56e178527d97117",
+      "bytes": 298979,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-acetate-b/Sp-Sh 02 Pawns B Adhesive.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-acetate-c",
+      "archiveSha256": "a859316275e24d4bc92c67e24b6f80785254b9ae27d9b39bea58a0bba13aa5c2",
+      "member": "Sh 04 Pawns BC Acetate.pdf",
+      "sha256": "38439f9a591fe74b17dc2e43cfbba13fb9e3cf42edd0b574973e4758f9e85641",
+      "bytes": 241987,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-acetate-c/Sh 04 Pawns BC Acetate.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-acetate-c",
+      "archiveSha256": "a859316275e24d4bc92c67e24b6f80785254b9ae27d9b39bea58a0bba13aa5c2",
+      "member": "Sh 04 Pawns C Base.pdf",
+      "sha256": "73cb9208b5614969c727009fe69d0ba1b4e9ac0b0ae4c5316f2f0600231d40bd",
+      "bytes": 239649,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-acetate-c/Sh 04 Pawns C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-color-b",
+      "archiveSha256": "ebee1ab13a0d23c429110dc41c95106ce62a131fff8feec795f98f7f57cdff0e",
+      "member": "Sh 04 Pawns BC Color.pdf",
+      "sha256": "fa4d323523b9fa95660709fdbb6f312247736eff608753fe614555ca0f56210a",
+      "bytes": 584515,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-color-b/Sh 04 Pawns BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-color-b",
+      "archiveSha256": "ebee1ab13a0d23c429110dc41c95106ce62a131fff8feec795f98f7f57cdff0e",
+      "member": "Sp-Sh 02 Pawns B Adhesive.pdf",
+      "sha256": "12800982d766d0b780ad3b62fda9119bd5592517366285e6d56e178527d97117",
+      "bytes": 298979,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-color-b/Sp-Sh 02 Pawns B Adhesive.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-color-c",
+      "archiveSha256": "dfbc829074a77e342e744b80d6b75a1e251472fe7fcdca21dd45239aa1285349",
+      "member": "Sh 04 Pawns BC Color.pdf",
+      "sha256": "fa4d323523b9fa95660709fdbb6f312247736eff608753fe614555ca0f56210a",
+      "bytes": 584515,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-color-c/Sh 04 Pawns BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-pawns-color-c",
+      "archiveSha256": "dfbc829074a77e342e744b80d6b75a1e251472fe7fcdca21dd45239aa1285349",
+      "member": "Sh 04 Pawns C Base.pdf",
+      "sha256": "73cb9208b5614969c727009fe69d0ba1b4e9ac0b0ae4c5316f2f0600231d40bd",
+      "bytes": 239649,
+      "localPath": "tmp/asset-review/archives/sortme-sh-pawns-color-c/Sh 04 Pawns C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-markers-color-b",
+      "archiveSha256": "48a91aaaf608aeb661f9dc0c86e4d623504bd60a5ce0fde3ffd2a28560747e3c",
+      "member": "Sh 05 Markers BC Color.pdf",
+      "sha256": "2f370a9c3b0a6648c5e1c2c9794dbd4a5ef1839e4b79b7674971fd8968562f63",
+      "bytes": 265463,
+      "localPath": "tmp/asset-review/archives/sortme-sh-markers-color-b/Sh 05 Markers BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-markers-color-c",
+      "archiveSha256": "06d8fe6f916667b29740ee5cc04c0c8d7968d72afc2f9eea3308260a783b8bb0",
+      "member": "Sh 05 Markers BC Color.pdf",
+      "sha256": "2f370a9c3b0a6648c5e1c2c9794dbd4a5ef1839e4b79b7674971fd8968562f63",
+      "bytes": 265463,
+      "localPath": "tmp/asset-review/archives/sortme-sh-markers-color-c/Sh 05 Markers BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-markers-color-c",
+      "archiveSha256": "06d8fe6f916667b29740ee5cc04c0c8d7968d72afc2f9eea3308260a783b8bb0",
+      "member": "Sh 05 Markers C Base.pdf",
+      "sha256": "a9ff0718a1ec3096d24b166b1df2db90bc598dcf6c2d5feebd7780e4e66c357e",
+      "bytes": 146795,
+      "localPath": "tmp/asset-review/archives/sortme-sh-markers-color-c/Sh 05 Markers C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-acetate-b",
+      "archiveSha256": "5bdde552d4c84ad6e01f6aedf7118b6052d90c059410466e6fe6961de6047d8b",
+      "member": "Sp 04 Pawns BC Acetate.pdf",
+      "sha256": "c28e07076360b2088899d49e5d09b5435f8a800e17e5a2237f89db8c7bb659cd",
+      "bytes": 194445,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-acetate-b/Sp 04 Pawns BC Acetate.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-acetate-b",
+      "archiveSha256": "5bdde552d4c84ad6e01f6aedf7118b6052d90c059410466e6fe6961de6047d8b",
+      "member": "Sp-Sh 02 Pawns B Adhesive.pdf",
+      "sha256": "12800982d766d0b780ad3b62fda9119bd5592517366285e6d56e178527d97117",
+      "bytes": 298979,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-acetate-b/Sp-Sh 02 Pawns B Adhesive.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-acetate-c",
+      "archiveSha256": "f464eeae3fc8e4f1c0cddf83a3a0754a728dc0bff11683308449f61084fb52d7",
+      "member": "Sp 04 Pawns BC Acetate.pdf",
+      "sha256": "c28e07076360b2088899d49e5d09b5435f8a800e17e5a2237f89db8c7bb659cd",
+      "bytes": 194445,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-acetate-c/Sp 04 Pawns BC Acetate.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-acetate-c",
+      "archiveSha256": "f464eeae3fc8e4f1c0cddf83a3a0754a728dc0bff11683308449f61084fb52d7",
+      "member": "Sp 04 Pawns C Base.pdf",
+      "sha256": "1d96a94392b9286318ea376a4d8d8c9de729f2c8577cb5f874e481bb11e14fb2",
+      "bytes": 153014,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-acetate-c/Sp 04 Pawns C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-color-b",
+      "archiveSha256": "8e5b8660bb2aed1d4ee38a39d6ca29227e789b7ae96173a91fc8b09a45785f28",
+      "member": "Sp 04 Pawns BC Color.pdf",
+      "sha256": "1311e52791a39a99b1d95a1ec079cd82b813894d923dc763917201002026156c",
+      "bytes": 454991,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-color-b/Sp 04 Pawns BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-color-b",
+      "archiveSha256": "8e5b8660bb2aed1d4ee38a39d6ca29227e789b7ae96173a91fc8b09a45785f28",
+      "member": "Sp-Sh 02 Pawns B Adhesive.pdf",
+      "sha256": "12800982d766d0b780ad3b62fda9119bd5592517366285e6d56e178527d97117",
+      "bytes": 298979,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-color-b/Sp-Sh 02 Pawns B Adhesive.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-color-c",
+      "archiveSha256": "f61427b2f512e1930073e404b8bf501460fb21e51713ff1128259377bb1da49c",
+      "member": "Sp 04 Pawns BC Color.pdf",
+      "sha256": "1311e52791a39a99b1d95a1ec079cd82b813894d923dc763917201002026156c",
+      "bytes": 454991,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-color-c/Sp 04 Pawns BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-pawns-color-c",
+      "archiveSha256": "f61427b2f512e1930073e404b8bf501460fb21e51713ff1128259377bb1da49c",
+      "member": "Sp 04 Pawns C Base.pdf",
+      "sha256": "1d96a94392b9286318ea376a4d8d8c9de729f2c8577cb5f874e481bb11e14fb2",
+      "bytes": 153014,
+      "localPath": "tmp/asset-review/archives/sortme-sp-pawns-color-c/Sp 04 Pawns C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-markers-color-b",
+      "archiveSha256": "aceba43b4517f77f6d471a014a19901fbacc87876f5b6daaaefcc02d45368403",
+      "member": "Sp 05 Markers BC Color.pdf",
+      "sha256": "27e7adedd88ee845a12df0dfcb23a94f50d989f7a93767f9827627d1a1bbcf3a",
+      "bytes": 371701,
+      "localPath": "tmp/asset-review/archives/sortme-sp-markers-color-b/Sp 05 Markers BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-markers-color-c",
+      "archiveSha256": "95c5ad17a6d737c48e659f26336ee95f1cd1595c02ee1ac96a0c41c8acdebc4a",
+      "member": "Sp 05 Markers BC Color.pdf",
+      "sha256": "27e7adedd88ee845a12df0dfcb23a94f50d989f7a93767f9827627d1a1bbcf3a",
+      "bytes": 371701,
+      "localPath": "tmp/asset-review/archives/sortme-sp-markers-color-c/Sp 05 Markers BC Color.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sp-markers-color-c",
+      "archiveSha256": "95c5ad17a6d737c48e659f26336ee95f1cd1595c02ee1ac96a0c41c8acdebc4a",
+      "member": "Sp 05 Markers C Base.pdf",
+      "sha256": "11a9f541e7af7aac0a44a7d880cf3d9b39a25dae97d2eb30c3b8de985cabdc5b",
+      "bytes": 93066,
+      "localPath": "tmp/asset-review/archives/sortme-sp-markers-color-c/Sp 05 Markers C Base.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-block-backs",
+      "archiveSha256": "33b02900efc592bcb21ae40edd6b380c8c2e6df4d636045c5ec250f12852ab0d",
+      "member": "Sp-Sh 01b Blocks Backs A4.pdf",
+      "sha256": "d40beaae84db7c88ac318305fa59d296a9b45e8957335bb4088e7400d72f7cd8",
+      "bytes": 330644,
+      "localPath": "tmp/asset-review/archives/sortme-block-backs/Sp-Sh 01b Blocks Backs A4.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-block-backs",
+      "archiveSha256": "33b02900efc592bcb21ae40edd6b380c8c2e6df4d636045c5ec250f12852ab0d",
+      "member": "Sp-Sh 01b Blocks Backs Letter.pdf",
+      "sha256": "59ebe7180f05bd2324ecf36f2ad4f33a811643d19193a8938b13128abc390ed5",
+      "bytes": 333753,
+      "localPath": "tmp/asset-review/archives/sortme-block-backs/Sp-Sh 01b Blocks Backs Letter.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-card-backs",
+      "archiveSha256": "11423adf001a52ed289c45e1de4269a527465c91d1412a524f3ff055a2ed22b9",
+      "member": "Sp-Sh 02b Control Backs Kot.pdf",
+      "sha256": "2c0d88888088b95a786d0654d7e1303c6eaef1c8fe0e9d9b7d24e39b8bbfc3a4",
+      "bytes": 500611,
+      "localPath": "tmp/asset-review/archives/sortme-card-backs/Sp-Sh 02b Control Backs Kot.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-card-backs",
+      "archiveSha256": "11423adf001a52ed289c45e1de4269a527465c91d1412a524f3ff055a2ed22b9",
+      "member": "Sp-Sh 03b Action Backs Kot.pdf",
+      "sha256": "66684dabec0b56d314d689f7efa79d628bd1589a2fd41a9063f32483d69b5dc8",
+      "bytes": 983625,
+      "localPath": "tmp/asset-review/archives/sortme-card-backs/Sp-Sh 03b Action Backs Kot.pdf",
+      "equivalentArtifactId": null
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 00 Readme (en).pdf",
+      "sha256": "347919fd9f0c03b2ccbe1f714541904cfaf8cf5f0865f6bb4ebf80443921c168",
+      "bytes": 162767,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 00 Readme (en).pdf",
+      "equivalentArtifactId": "sh-en-readme"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 01 Blocks A4 (en).pdf",
+      "sha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6",
+      "bytes": 2403004,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 01 Blocks A4 (en).pdf",
+      "equivalentArtifactId": "sh-en-blocks-a4"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 01 Blocks Letter (en).pdf",
+      "sha256": "600e3ea15c31511cd891636bf8fe119cb7f55d06bae967a02ec6099882a270ad",
+      "bytes": 2400341,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 01 Blocks Letter (en).pdf",
+      "equivalentArtifactId": "sh-en-blocks-letter"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 02 Control Cards (en).pdf",
+      "sha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3",
+      "bytes": 1106670,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 02 Control Cards (en).pdf",
+      "equivalentArtifactId": "sh-en-control-cards"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 03 Action Cards (en).pdf",
+      "sha256": "c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee",
+      "bytes": 2337172,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 03 Action Cards (en).pdf",
+      "equivalentArtifactId": "sh-en-action-cards"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 04 Pawns A Color.pdf",
+      "sha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf",
+      "bytes": 733881,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 04 Pawns A Color.pdf",
+      "equivalentArtifactId": "sh-es-pawns"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 05 Markers A Color.pdf",
+      "sha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa",
+      "bytes": 359822,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 05 Markers A Color.pdf",
+      "equivalentArtifactId": "sh-es-markers"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 06 Chaos Card.pdf",
+      "sha256": "8bda0df51c9f14436d24424221e411a3ff328f20d5076359f6a4e350f8e4ceb9",
+      "bytes": 295357,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 06 Chaos Card.pdf",
+      "equivalentArtifactId": "sh-es-chaos-card"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 09 Rulebook (2017-06-28) (en).pdf",
+      "sha256": "93c3cc54ee7a9da2ecaef4e2d1732c2b919f7dc7bd7c7244b079b904d6180f7f",
+      "bytes": 15171904,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 09 Rulebook (2017-06-28) (en).pdf",
+      "equivalentArtifactId": "sh-en-rulebook"
+    },
+    {
+      "artifactId": "sortme-sh-en-archive",
+      "archiveSha256": "1288390d62bf47901f5e847298389920a85d990f1dbe592a7866f835c3ffd660",
+      "member": "Sh 99 Updates (2017-06-28) (en).txt",
+      "sha256": "95bf763d9e99732e22b4e6c921d7a1bc26ddb91ca9854af2bed4694a4898e751",
+      "bytes": 94,
+      "localPath": "tmp/asset-review/archives/sortme-sh-en-archive/Sh 99 Updates (2017-06-28) (en).txt",
+      "equivalentArtifactId": "sh-en-updates"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 00 Leame (es).pdf",
+      "sha256": "e00aeb8d952b2f770309a9249d217ecd4dd743ff4c0ead8dd0d11d783221430b",
+      "bytes": 162674,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 00 Leame (es).pdf",
+      "equivalentArtifactId": "sh-es-readme"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 01 Bloques A4 (es).pdf",
+      "sha256": "410a44ae2e303653f3828fde50adc94e77e130f0e4ff861cd2b68c5b392ac5b2",
+      "bytes": 2385908,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 01 Bloques A4 (es).pdf",
+      "equivalentArtifactId": "sh-es-blocks-a4"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 01 Bloques Letter (es).pdf",
+      "sha256": "aee67dae2c1cf45e0b73b8298f360dd01b60e64126ffa6d2bfbaa437ffddc877",
+      "bytes": 2385881,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 01 Bloques Letter (es).pdf",
+      "equivalentArtifactId": "sh-es-blocks-letter"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 02 Control Cartas (es).pdf",
+      "sha256": "d945fdc5e75478a07f027c8c704b968042ca190ca6b63ceb72c29deb6a9c2376",
+      "bytes": 1093047,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 02 Control Cartas (es).pdf",
+      "equivalentArtifactId": "sh-es-control-cards"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 03 Action Cartas (es).pdf",
+      "sha256": "856494a8d7672135e248af65532ed908e0300802a480df49cd63a001ce0b8243",
+      "bytes": 2340704,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 03 Action Cartas (es).pdf",
+      "equivalentArtifactId": "sh-es-action-cards"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 04 Pawns A Color.pdf",
+      "sha256": "2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf",
+      "bytes": 733881,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 04 Pawns A Color.pdf",
+      "equivalentArtifactId": "sh-es-pawns"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 05 Markers A Color.pdf",
+      "sha256": "b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa",
+      "bytes": 359822,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 05 Markers A Color.pdf",
+      "equivalentArtifactId": "sh-es-markers"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 06 Chaos Card.pdf",
+      "sha256": "8bda0df51c9f14436d24424221e411a3ff328f20d5076359f6a4e350f8e4ceb9",
+      "bytes": 295357,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 06 Chaos Card.pdf",
+      "equivalentArtifactId": "sh-es-chaos-card"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 09 Manual (2017-06-28) (es).pdf",
+      "sha256": "a802fe222c55d215b987d89781770025eb8818a75e7b4ce188ec44a2982b439a",
+      "bytes": 12872873,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 09 Manual (2017-06-28) (es).pdf",
+      "equivalentArtifactId": "sh-es-rulebook"
+    },
+    {
+      "artifactId": "sortme-sh-es-archive",
+      "archiveSha256": "73f55a1269164ea3b9405c3c435dc5e6bbe5dbcbc1993fb533ff8de368df0fdc",
+      "member": "Sh 99 Actualizaciones (2017-06-28) (es).txt",
+      "sha256": "96f26b92496da7a7ffcb2aae2d561e59255993ca664da9f4278617feceb0ea97",
+      "bytes": 99,
+      "localPath": "tmp/asset-review/archives/sortme-sh-es-archive/Sh 99 Actualizaciones (2017-06-28) (es).txt",
+      "equivalentArtifactId": "sh-es-updates"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 00 Leame (es).pdf",
+      "sha256": "353be98ae18e55540f64f7dd0a2b610793f9921519bbe73977441a04aa12e1db",
+      "bytes": 162335,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 00 Leame (es).pdf",
+      "equivalentArtifactId": "sp-es-readme"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 01 Bloques A4 (es).pdf",
+      "sha256": "ce19fdc026e974267b09651a95627e6af7154ab69005ea92d1199d9ff9b21b1e",
+      "bytes": 3156946,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 01 Bloques A4 (es).pdf",
+      "equivalentArtifactId": "sp-es-blocks-a4"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 01 Bloques Letter (es).pdf",
+      "sha256": "92e08d3e1ae56cd004c82e6d4fafab44e2be8ad56feb6eb065b388310c04eebe",
+      "bytes": 3154411,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 01 Bloques Letter (es).pdf",
+      "equivalentArtifactId": "sp-es-blocks-letter"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 02 Control Cartas (es).pdf",
+      "sha256": "6cd396ea224f236d73b70ab5b19c78accc675bcc4a2d0eac2127f090f1c5e0a1",
+      "bytes": 1164158,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 02 Control Cartas (es).pdf",
+      "equivalentArtifactId": "sp-es-control-cards"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 03 Action Cartas (es).pdf",
+      "sha256": "0df394bed660e43065ed3b60ff89dca8c4e77d92e1d47b8759059eb1cbce1d2f",
+      "bytes": 2735852,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 03 Action Cartas (es).pdf",
+      "equivalentArtifactId": "sp-es-action-cards"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 04 Pawns A Color.pdf",
+      "sha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753",
+      "bytes": 585959,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 04 Pawns A Color.pdf",
+      "equivalentArtifactId": "sp-en-pawns"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 05 Markers A Color.pdf",
+      "sha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66",
+      "bytes": 436777,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 05 Markers A Color.pdf",
+      "equivalentArtifactId": "sp-en-markers"
+    },
+    {
+      "artifactId": "sortme-sp-es-archive",
+      "archiveSha256": "337bfec787c2ef45764214d93ea43f06a9f969c413680c3b186ce39495e05cb1",
+      "member": "Sp 09 Manual (2017-06-19) (es).pdf",
+      "sha256": "9ac889eaff10d6a9cf60265b375a085d4b6fd9d86c92456eeb8a61b0cc94833e",
+      "bytes": 8486310,
+      "localPath": "tmp/asset-review/archives/sortme-sp-es-archive/Sp 09 Manual (2017-06-19) (es).pdf",
+      "equivalentArtifactId": "sp-es-rulebook"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 00 Readme (en).pdf",
+      "sha256": "5d47fc4528632821b8ba155ca257773114fb3dd6aa9d73dfe45a1c0ff221b9ab",
+      "bytes": 162527,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 00 Readme (en).pdf",
+      "equivalentArtifactId": "sp-en-readme"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 01 Blocks A4 (en).pdf",
+      "sha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a",
+      "bytes": 3142608,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 01 Blocks A4 (en).pdf",
+      "equivalentArtifactId": "sp-en-blocks-a4"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 01 Blocks Letter (en).pdf",
+      "sha256": "85bf994eb6b9865e05acecc90f94c3f6f950d6ed993e374b26a47c25dbc95804",
+      "bytes": 3144165,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 01 Blocks Letter (en).pdf",
+      "equivalentArtifactId": "sp-en-blocks-letter"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 02 Control Cards (en).pdf",
+      "sha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346",
+      "bytes": 1165986,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 02 Control Cards (en).pdf",
+      "equivalentArtifactId": "sp-en-control-cards"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 03 Action Cards (en).pdf",
+      "sha256": "4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0",
+      "bytes": 2734415,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 03 Action Cards (en).pdf",
+      "equivalentArtifactId": "sp-en-action-cards"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 04 Pawns A Color.pdf",
+      "sha256": "7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753",
+      "bytes": 585959,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 04 Pawns A Color.pdf",
+      "equivalentArtifactId": "sp-en-pawns"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 05 Markers A Color.pdf",
+      "sha256": "c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66",
+      "bytes": 436777,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 05 Markers A Color.pdf",
+      "equivalentArtifactId": "sp-en-markers"
+    },
+    {
+      "artifactId": "sortme-sp-en-archive",
+      "archiveSha256": "ed4e83d8f68ff05329875d3fcf574b797e06ba36a00fddf04cd5203d88d3d9fa",
+      "member": "Sp 09 Rulebook (2017-06-26) (en).pdf",
+      "sha256": "c05942ecdfb942329941899f5d4287f194aa7054e4b9fa62cc9127c88f180fca",
+      "bytes": 9758181,
+      "localPath": "tmp/asset-review/archives/sortme-sp-en-archive/Sp 09 Rulebook (2017-06-26) (en).pdf",
+      "equivalentArtifactId": "sp-en-rulebook"
+    }
+  ]
+}

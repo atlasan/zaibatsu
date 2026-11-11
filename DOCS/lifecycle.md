@@ -82,10 +82,7 @@ ignored sources but does not fail solely because they are absent.
 ## Current baseline
 
 The catalog contains the local 2017 Speedrunners and Shadowraiders releases plus
-print/archive support. Existing `spec/data/speedrunners/` records are
-explicitly **provisional** seed data; they are not verified transcriptions.
-Current loaders perform light structural checks only. JSON-Schema validation is
-tracked by task `T-101`.
+print/archive support. The canonical Speedrunners corpus mixes verified source records and explicitly provisional records. Both loaders require a checksum-pinned schema validation manifest before loading it. The historical mixed corpus is frozen under `spec/fixtures/provisional-v1/`; passing regression tests does not establish official content completeness.
 
 ## Inventory verification
 

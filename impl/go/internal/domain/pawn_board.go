@@ -8,9 +8,12 @@ package domain
 // optionally holding bonus counters paid to attach it. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Attaching cards").
 type Attachment struct {
-	CardID    string `json:"cardId"`
-	Slot      string `json:"slot,omitempty"`
-	BonusPaid int    `json:"bonusPaid,omitempty"`
+	InstanceID string      `json:"instanceId,omitempty"`
+	UseMarkers []UseMarker `json:"useMarkers,omitempty"`
+	CardID     string      `json:"cardId"`
+	Slot       string      `json:"slot,omitempty"`
+	SlotRef    string      `json:"slotRef,omitempty"`
+	BonusPaid  int         `json:"bonusPaid,omitempty"`
 }
 
 // PawnOnBoard is a pawn instance positioned in the Cybernet.
@@ -22,7 +25,7 @@ type PawnOnBoard struct {
 	Attachments []Attachment `json:"attachments,omitempty"`
 }
 
-// HasSlotFilled reports whether an attachment already occupies the given slot.
+// HasSlotFilled is historical type-level occupancy. Source capacity uses physical slot queries.
 func (p *PawnOnBoard) HasSlotFilled(slot string) bool {
 	for _, a := range p.Attachments {
 		if a.Slot == slot {

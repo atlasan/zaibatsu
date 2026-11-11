@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import type { GameData, GameState } from "../src/domain/types.ts";
 import { neighbor, type Coord } from "../src/domain/hex.ts";
 import {
@@ -11,7 +11,7 @@ import {
 } from "../src/engine/index.ts";
 import { blockById, pawnById } from "../src/domain/types.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function rotFacing(blockId: string, dir: number): number {
@@ -113,7 +113,7 @@ describe("icebreakBlock", () => {
   test("successful control triggers typed underControl area effects", () => {
     let found = false;
     for (let seed = 1; seed <= 60 && !found; seed++) {
-      const d = structuredClone(loadDefault("speedrunners"));
+      const d = structuredClone(loadRegression("speedrunners"));
       d.blocks = d.blocks.map((block) =>
         block.id === "data-haven"
           ? { ...block, effects: { underControl: { kind: "area-attack", amount: 1 } } }
@@ -169,7 +169,7 @@ describe("icebreakPawn", () => {
 
 describe("authored ICE faces + Black ICE (field-driven)", () => {
   test("icebreakBlock uses authored iceFaces over the category", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
     const coord = neighbor(ORIGIN, 0);
@@ -183,7 +183,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
 
   test("failed Icebreak vs blackIce field eliminates the attacker", () => {
     for (let seed = 1; seed <= 60; seed++) {
-      const d = loadDefault("speedrunners");
+      const d = loadRegression("speedrunners");
       const s = newGame({ data: d, playerNames: ["A", "B"], seed });
       placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
       const coord = neighbor(ORIGIN, 0);
@@ -202,7 +202,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
   });
 
   test("block attachments can add ICE faces", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     d.cards.push({ id: "block-ice-mod", name: "Block ICE Mod", attach: { as: "block", iceModifier: { faces: [1, 2, 3, 4, 5, 6] } } });
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
@@ -216,7 +216,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
   });
 
   test("block attachments can change the effective ICE dice count", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     d.cards.push({ id: "block-ice-delta", name: "Block ICE Delta", attach: { as: "block", iceModifier: { deltaDice: 5 } } });
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
@@ -231,7 +231,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
 
   test("pawn attachments can add Black ICE", () => {
     for (let seed = 1; seed <= 60; seed++) {
-      const d = loadDefault("speedrunners");
+      const d = loadRegression("speedrunners");
       d.cards.push({ id: "pawn-black-ice", name: "Pawn Black ICE", attach: { as: "enemy", slot: "add-on", iceModifier: { black: true } } });
       const s = newGame({ data: d, playerNames: ["A", "B"], seed });
       s.cybernet.pawns = [];
@@ -254,7 +254,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
   });
 
   test("space ice modifiers change the target's effective ICE dice count", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
     const coord = neighbor(ORIGIN, 0);
@@ -269,7 +269,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
   });
 
   test("nullified block ICE cannot be controlled", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     d.cards.push({ id: "block-nullify-ice", name: "Block Nullify ICE", attach: { as: "block", nullifiesIce: true } });
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
@@ -281,7 +281,7 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
   });
 
   test("nullified pawn ICE cannot be controlled", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     d.cards.push({ id: "pawn-nullify-ice", name: "Pawn Nullify ICE", attach: { as: "enemy", slot: "armor", nullifiesIce: true } });
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     s.cybernet.pawns = [];
@@ -299,30 +299,30 @@ describe("authored ICE faces + Black ICE (field-driven)", () => {
 
 describe("ability grant/remove via attachment", () => {
   test("an add-on that grants Icebreaker lets a non-Icebreaker pawn Icebreak", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
     const coord = neighbor(ORIGIN, 0);
     s.cybernet.pawns = [];
     s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
     pawnById(d, "speedrunner-red")!.abilities = []; // strip innate Icebreaker
-    d.cards[0].attach = { as: "pawn", slot: "add-on", grants: ["icebreaker"] };
+    d.cards[0]!.attach = { as: "pawn", slot: "add-on", grants: ["icebreaker"] };
     s.cybernet.pawnById("speedrunner-red")!.attachments = [
-      { cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 },
+      { cardId: d.cards[0]!.id, slot: "add-on", bonusPaid: 0 },
     ];
     expect(() => icebreakBlock(s, d, "speedrunner-red", coord, 0)).not.toThrow();
   });
 
   test("an add-on that removes Icebreaker prevents the Icebreak", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     placeBlock(s, ORIGIN, 0, d, "data-haven", rotFacing("data-haven", 0));
     const coord = neighbor(ORIGIN, 0);
     s.cybernet.pawns = [];
     s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord, spaceId: "a" });
-    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["icebreaker"] };
+    d.cards[0]!.attach = { as: "pawn", slot: "add-on", removes: ["icebreaker"] };
     s.cybernet.pawnById("speedrunner-red")!.attachments = [
-      { cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 },
+      { cardId: d.cards[0]!.id, slot: "add-on", bonusPaid: 0 },
     ];
     expect(() => icebreakBlock(s, d, "speedrunner-red", coord, 0)).toThrow();
   });

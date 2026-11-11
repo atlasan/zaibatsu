@@ -72,3 +72,13 @@ keep the resulting assets non-commercial and retain the source attribution.
 PDFs. Each produces 54 `action-card` manifest entries. English files are the
 primary transcription evidence; Spanish files may be consulted manually as
 supporting evidence and are never substituted automatically.
+
+## Core control-card assets
+
+`refresh-core` also includes both English control-card PDFs. Each yields18
+`control-card` manifest entries using the same stable page/cell grid contract.
+They link physical pawn/control evidence without automatically assigning a
+verified gameplay reference. Gynoid uses `sp-en-control-cards-p02-c03`; the
+Spanish cross-check is p2c2 and remains independent primary review evidence.
+Run `python -m unittest discover -s tools/artifacts/tests` for repeatable
+detector/core-source checks; CI runs these without requiring ignored PDFs.

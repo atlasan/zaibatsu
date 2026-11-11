@@ -11,8 +11,12 @@ import type { Coord } from "./hex.ts";
  * ("Attaching cards").
  */
 export interface Attachment {
+  instanceId?:string;
+  useMarkers?:import("./types.ts").UseMarker[];
   cardId: string;
   slot?: string;
+  /** Stable physical location: pawn:add-on, then /weapon for granted slots. */
+  slotRef?: string;
   bonusPaid?: number;
 }
 
@@ -25,7 +29,7 @@ export interface PawnOnBoard {
   attachments?: Attachment[];
 }
 
-/** Whether an attachment already occupies the given slot on a pawn. */
+/** Historical type-level occupancy query. Source capacity uses physical slot queries. */
 export function slotFilled(pob: PawnOnBoard, slot: string): boolean {
   return (pob.attachments ?? []).some((a) => a.slot === slot);
 }

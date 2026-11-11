@@ -1,0 +1,78 @@
+[
+  [
+    {
+      "type": "action-accepted",
+      "playerId": "p1",
+      "actionType": "roll-delete"
+    },
+    {
+      "type": "roll",
+      "playerId": "p1",
+      "actionType": "roll-delete",
+      "roll": [
+        6
+      ]
+    }
+  ],
+  [
+    {
+      "type": "action-accepted",
+      "playerId": "p1",
+      "actionType": "assign-delete"
+    },
+    {
+      "type": "choice-required",
+      "playerId": "p2",
+      "elementId": "elimination:1:1",
+      "cardId": "dummy"
+    }
+  ],
+  [
+    {
+      "type": "choice-resolved",
+      "playerId": "p2",
+      "cardId": "dummy",
+      "elementId": "elimination:1:1"
+    },
+    {
+      "type": "card-discarded",
+      "cardId": "dummy"
+    },
+    {
+      "type": "elimination-prevented",
+      "pawnId": "speedrunner-orange",
+      "playerId": "p2",
+      "cardId": "dummy"
+    }
+  ],
+  [
+    {
+      "type": "action-accepted",
+      "playerId": "p1",
+      "actionType": "roll-delete"
+    },
+    {
+      "type": "roll",
+      "playerId": "p1",
+      "actionType": "roll-delete",
+      "roll": [
+        5
+      ]
+    }
+  ],
+  [
+    {
+      "type": "action-accepted",
+      "playerId": "p1",
+      "actionType": "assign-delete"
+    },
+    {
+      "type": "elimination",
+      "pawnId": "speedrunner-orange"
+    },
+    {
+      "type": "card-discarded",
+      "cardId": "fixture-support"
+    }
+  ]
+]

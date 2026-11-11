@@ -44,6 +44,10 @@ primary source or accepted ADR establishes a new rule or durable decision.
 
 Full definitions and review obligations are in [governance.md](governance.md).
 
+## Completion gaps
+
+[Remaining work](remaining-work.md) records the current full-game completion gates, component coverage and unresolved interpretations. Use the backlog for the ordered live work list.
+
 ## Workstream context
 
 These are useful detailed guides, but do not own live project status:

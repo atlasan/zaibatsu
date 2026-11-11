@@ -1,21 +1,762 @@
 {
-  "$comment": "Speedrunners action deck. Mixed baseline: the original seed helpers remain provisional so current tests keep a stable fixture deck, while page-1 source-backed cards from 'Sp 03 Action Cards' are now transcribed with record-level provenance. Full deck transcription is still tracked in tasks/BACKLOG.md.",
+  "$comment": "Mixed source promotion. Page-one action strips and attachment symbols checked against EN/ES sheets; Simstim bonus lifecycle remains explicitly provisional. Seed fixtures are frozen under spec/fixtures/provisional-v1.",
   "cards": [
-    { "id": "move-1", "name": "Uplink", "copies": 6, "movement": 1, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
-    { "id": "move-2", "name": "Fast Uplink", "copies": 6, "movement": 2, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
-    { "id": "move-3", "name": "Overclock", "copies": 4, "movement": 3, "activates": ["search", "delete", "reboot", "icebreaker"], "provisional": true },
-    { "id": "add-on-accelerator", "name": "Accelerator", "copies": 2, "movement": 1, "activates": ["search"], "attach": { "as": "pawn", "slot": "add-on", "class": ["accelerator"] }, "provisional": true },
-    { "id": "weapon-gunhed", "name": "Gunhed", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "pawn", "slot": "weapon" }, "provisional": true },
-    { "id": "armor-brainchip", "name": "Brainchip", "copies": 2, "movement": 1, "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "armor", "class": ["brainchip"] }, "provisional": true },
-    { "id": "enemy-malware", "name": "Malware", "copies": 2, "movement": 1, "activates": ["delete"], "attach": { "as": "enemy", "slot": "add-on", "class": ["malware"] }, "provisional": true },
-    { "id": "octagon-dex", "name": "Octagon \"dex\"", "copies": 1, "summary": "Attach to a pawn as an add-on; the pawn ignores direction arrows.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c01"] },
-    { "id": "simstim-record", "name": "Simstim Record", "copies": 1, "summary": "Attach to a pawn as an add-on; while you control this card, gain one bonus counter.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c02"] },
-    { "id": "dj", "name": "DJ", "copies": 1, "summary": "Attach to a pawn as an add-on; while you control this card, you choose the music that plays during the game.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c03"] },
-    { "id": "accelerator-transgenic-therapy", "name": "Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed card identifies this copy as Accelerator with transgenic therapy branding.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c04"] },
-    { "id": "hyper-accelerator", "name": "Hyper Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source identifies this as a Hyper Accelerator card.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c05"] },
-    { "id": "accela-accelerator", "name": "Accela Accelerator", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source identifies this as an Accela Accelerator card.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c06"] },
-    { "id": "biochip", "name": "Biochip", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names Biochip and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c07"] },
-    { "id": "e-synapse-neural-interface", "name": "E-Synapse Neural Interface", "copies": 1, "summary": "Attach to a pawn as an add-on. The printed source names E-Synapse neural interface and marks the card for Icebreaker use.", "activates": ["icebreaker"], "attach": { "as": "pawn", "slot": "add-on" }, "assetRefs": ["sp-en-action-cards-p01-c08"] },
-    { "id": "cracker", "name": "Cracker", "copies": 1, "summary": "Use with Icebreaker on a block; place the Cracker in this block under your control.", "activates": ["icebreaker"], "effects": [{ "kind": "place-pawn", "target": "cracker", "trigger": "on-icebreak", "text": "Place the Cracker in this block under your control." }], "assetRefs": ["sp-en-action-cards-p01-c09"] }
+    {
+      "id": "move-1",
+      "name": "Uplink",
+      "copies": 6,
+      "movement": 1,
+      "activates": [
+        "search",
+        "delete",
+        "reboot",
+        "icebreaker"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "move-2",
+      "name": "Fast Uplink",
+      "copies": 6,
+      "movement": 2,
+      "activates": [
+        "search",
+        "delete",
+        "reboot",
+        "icebreaker"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "move-3",
+      "name": "Overclock",
+      "copies": 4,
+      "movement": 3,
+      "activates": [
+        "search",
+        "delete",
+        "reboot",
+        "icebreaker"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "add-on-accelerator",
+      "name": "Accelerator",
+      "copies": 2,
+      "movement": 1,
+      "activates": [
+        "search"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on"
+      },
+      "provisional": true,
+      "class": [
+        "accelerator"
+      ]
+    },
+    {
+      "id": "weapon-gunhed",
+      "name": "Gunhed",
+      "type": "add-on",
+      "class": [
+        "brainchip"
+      ],
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 2,
+        "grantsSlot": [
+          "add-on",
+          "weapon"
+        ],
+        "delete": {
+          "skulls": 1,
+          "activation": "card"
+        }
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c06"
+      ],
+      "summary": "Printed Brainchip add-on; legacy id retained. Supplies an additional Add-on slot, a Weapon slot, one skull and card-activated Delete."
+    },
+    {
+      "id": "armor-brainchip",
+      "name": "Brainchip",
+      "copies": 2,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "armor"
+      },
+      "provisional": true,
+      "class": [
+        "brainchip"
+      ]
+    },
+    {
+      "id": "enemy-malware",
+      "name": "Malware",
+      "copies": 2,
+      "movement": 1,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on"
+      },
+      "provisional": true,
+      "class": [
+        "malware"
+      ]
+    },
+    {
+      "id": "octagon-dex",
+      "name": "Octagon \"dex\"",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on; the pawn ignores direction arrows.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "removes": [
+          "search"
+        ],
+        "ignoresDirectionArrows": true
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c01"
+      ],
+      "movement": 1
+    },
+    {
+      "id": "simstim-record",
+      "name": "Simstim Record",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on; while you control this card, gain one bonus counter.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "removes": [
+          "move"
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c02"
+      ],
+      "movement": 1,
+      "provisional": true
+    },
+    {
+      "id": "dj",
+      "name": "DJ",
+      "copies": 1,
+      "summary": "Its controller chooses the music. Informational tabletop instruction; no game-state effect.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on"
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c03"
+      ],
+      "movement": 1
+    },
+    {
+      "id": "accelerator-transgenic-therapy",
+      "name": "Transgenic Therapy",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on. The printed card identifies this copy as Accelerator with transgenic therapy branding.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "movementModifier": 1
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c04"
+      ],
+      "movement": 1,
+      "type": "add-on",
+      "class": [
+        "accelerator"
+      ]
+    },
+    {
+      "id": "hyper-accelerator",
+      "name": "Hyper",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on. The printed source identifies this as a Hyper Accelerator card.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "movementModifier": 1
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c05"
+      ],
+      "movement": 1,
+      "type": "add-on",
+      "class": [
+        "accelerator"
+      ]
+    },
+    {
+      "id": "accela-accelerator",
+      "name": "Accela",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on. The printed source identifies this as an Accela Accelerator card.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "movementModifier": 1
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c06"
+      ],
+      "movement": 1,
+      "type": "add-on",
+      "class": [
+        "accelerator"
+      ]
+    },
+    {
+      "id": "biochip",
+      "name": "Biochip",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on. The printed source names Biochip and marks the card for Icebreaker use.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "grantsMovement": [
+          {
+            "type": "fixed",
+            "amount": 3
+          }
+        ],
+        "abilityUses": [
+          {
+            "ability": "move",
+            "activation": "once-per-turn"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c07"
+      ],
+      "movement": 1,
+      "type": "add-on",
+      "class": [
+        "e-synapse"
+      ]
+    },
+    {
+      "id": "e-synapse-neural-interface",
+      "name": "Neural Interface",
+      "copies": 1,
+      "summary": "Attach to a pawn as an add-on. The printed source names E-Synapse neural interface and marks the card for Icebreaker use.",
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 2,
+        "grantsMovement": [
+          {
+            "type": "fixed",
+            "amount": 5
+          }
+        ],
+        "abilityUses": [
+          {
+            "ability": "move",
+            "activation": "once-per-turn"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p01-c08"
+      ],
+      "movement": 1,
+      "type": "add-on",
+      "class": [
+        "e-synapse"
+      ]
+    },
+    {
+      "id": "cracker",
+      "name": "Gentleman Loser",
+      "copies": 1,
+      "summary": "Printed block attachment. Its Cracker placement belongs to attachment resolution, not Icebreaker activation. Block attachment geometry and target-space choice remain unsupported/provisional; attachment attempts reject.",
+      "activates": [
+        "icebreaker"
+      ],
+      "effects": [
+        {
+          "kind": "place-pawn",
+          "target": "cracker",
+          "trigger": "on-attach",
+          "text": "Place the Cracker in this block under your control."
+        }
+      ],
+      "assetRefs": [
+        "sp-en-action-cards-p01-c09"
+      ],
+      "movement": 1,
+      "type": "block",
+      "provisional": true,
+      "attach": {
+        "as": "block"
+      }
+    },
+    {
+      "id": "toxin",
+      "name": "Toxin",
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "phaseEffects": [
+          {
+            "trigger": "begin-turn",
+            "kind": "discard-or-sacrifice"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c02"
+      ],
+      "provisional": true,
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ]
+    },
+    {
+      "id": "rootkit",
+      "name": "Rootkit",
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "phaseEffects": [
+          {
+            "trigger": "end-action",
+            "kind": "discard-hand"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c05"
+      ],
+      "provisional": true,
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ]
+    },
+    {
+      "id": "selective-disclosure",
+      "name": "Selective Disclosure",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "handModifier": 1,
+        "phaseEffects": [
+          {
+            "trigger": "begin-turn",
+            "kind": "discard-self"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c04"
+      ],
+      "provisional": true,
+      "summary": "Printed single phase effect executes; simultaneous beginning-effect ordering remains unresolved and rejects atomically.",
+      "type": "add-on",
+      "class": [
+        "trade-secret"
+      ]
+    },
+    {
+      "id": "electric-sheep",
+      "name": "Electric Sheep",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 2,
+        "phaseEffects": [
+          {
+            "trigger": "begin-turn",
+            "kind": "sacrifice-and-draw",
+            "amount": 3
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c02"
+      ],
+      "provisional": true,
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved.",
+      "type": "add-on"
+    },
+    {
+      "id": "jetpack",
+      "name": "Jetpack",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "phaseEffects": [
+          {
+            "trigger": "begin-turn",
+            "kind": "discard-and-relocate"
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c03"
+      ],
+      "provisional": true,
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved. Threat activation during relocation remains unresolved.",
+      "type": "add-on"
+    },
+    {
+      "id": "insider-trading",
+      "name": "Insider Trading",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "handModifier": 2,
+        "phaseEffects": [
+          {
+            "trigger": "begin-turn",
+            "kind": "discard-cards",
+            "amount": 2
+          }
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c05"
+      ],
+      "provisional": true,
+      "summary": "Printed single beginning effect supported. Simultaneous phase ordering remains unresolved. Underfilled forced discard remains unresolved.",
+      "type": "add-on",
+      "class": [
+        "trade-secret"
+      ]
+    },
+    {
+      "id": "dummy",
+      "name": "Dummy",
+      "type": "add-on",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "add-on",
+        "cost": 1,
+        "eliminationPrevention": {
+          "kind": "discard-self"
+        }
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c01"
+      ],
+      "provisional": true,
+      "summary": "Detach and discard this attachment to prevent its pawn from being eliminated. Attack and Black ICE windows execute; sacrifice interaction and simultaneous prevention ordering remain provisional."
+    },
+    {
+      "id": "worm",
+      "name": "Worm",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "forbiddenClasses": [
+          "operative"
+        ],
+        "handModifier": -1
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c03"
+      ]
+    },
+    {
+      "id": "under-clocker",
+      "name": "Under Clocker",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "forbiddenClasses": [
+          "operative"
+        ],
+        "removes": [
+          "delete"
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c06"
+      ]
+    },
+    {
+      "id": "hijacker",
+      "name": "Hijacker",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "forbiddenClasses": [
+          "operative"
+        ],
+        "removes": [
+          "move"
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c09"
+      ]
+    },
+    {
+      "id": "ak-12km",
+      "name": "AK-12kM",
+      "type": "weapon",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "weapon",
+        "cost": 1,
+        "delete": {
+          "skulls": 1
+        }
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c07"
+      ],
+      "summary": "Printed weapon adds one skull; it has no Delete activation badge of its own."
+    },
+    {
+      "id": "servocanon",
+      "name": "Servocanon",
+      "type": "module",
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "delete"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "module",
+        "cost": 1,
+        "delete": {
+          "skulls": 1,
+          "activation": "once-per-turn"
+        }
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p03-c08"
+      ],
+      "provisional": true,
+      "summary": "Printed module adds one skull and one free Delete activation each turn. Multiple free activators have conflicting EN/ES p.26 wording and remain provisional under T-RULES-014."
+    },
+    {
+      "id": "virus",
+      "name": "Virus",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "class": [
+          "cleaner"
+        ]
+      },
+      "effects": [
+        {
+          "kind": "gain-target-control",
+          "trigger": "on-attach",
+          "text": "This card can only be attached to Cleaner pawns. Gain control of this pawn."
+        }
+      ],
+      "assetRefs": [
+        "sp-en-action-cards-p02-c01"
+      ]
+    },
+    {
+      "id": "lima-flag",
+      "name": "Lima Flag",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "forbiddenDestinations": [
+          "central-core"
+        ]
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c04"
+      ]
+    },
+    {
+      "id": "trojan",
+      "name": "Trojan",
+      "type": "add-on",
+      "class": [
+        "malware"
+      ],
+      "copies": 1,
+      "movement": 1,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "enemy",
+        "slot": "add-on",
+        "controllerHand": "face-up"
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p02-c08"
+      ]
+    },
+    {
+      "id": "phase-loop",
+      "name": "Phase-Loop",
+      "type": "gadget",
+      "class": [
+        "cyberdeck"
+      ],
+      "copies": 1,
+      "movement": 2,
+      "activates": [
+        "icebreaker"
+      ],
+      "attach": {
+        "as": "pawn",
+        "slot": "gadget",
+        "cost": 1,
+        "handModifier": -2,
+        "icebreakerModifier": {
+          "rollDice": 1,
+          "ignoresBlackIce": true
+        }
+      },
+      "assetRefs": [
+        "sp-en-action-cards-p04-c01"
+      ],
+      "summary": "Gadget: one additional Icebreaker die, Black ICE immunity for this pawn, and hand size minus two; costs one bonus counter."
+    }
   ]
 }

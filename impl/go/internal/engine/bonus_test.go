@@ -39,8 +39,8 @@ func bonusFixtureData(t *testing.T) *domain.GameData {
 	}
 	gd.Blocks = append(gd.Blocks,
 		bonusBlock("bonus-a", []bool{false, true, false, false, false, false}, domain.IceNone),
-			bonusBlock("bonus-b", []bool{false, false, false, true, false, false}, domain.IceNone),
-			bonusBlock("bonus-c", []bool{false, false, false, false, false, true}, domain.IceHigh),
+		bonusBlock("bonus-b", []bool{false, false, false, true, false, false}, domain.IceNone),
+		bonusBlock("bonus-c", []bool{false, false, false, false, false, true}, domain.IceHigh),
 	)
 	gd.Cards = append(gd.Cards, domain.ActionCard{
 		ID:   "bonus-cost-card",
@@ -116,7 +116,7 @@ func TestSearchCreatesBonusIconAndIcebreakCollectsItExactlyOnce(t *testing.T) {
 	if icon.CollectedBy != player.ID {
 		t.Fatalf("icon collectedBy = %q, want %q", icon.CollectedBy, player.ID)
 	}
-	if got := CollectControlledBonusIcons(state, player.ID); len(got) != 0 {
+	if got, err := CollectControlledBonusIcons(state, player.ID); err != nil || len(got) != 0 {
 		t.Fatalf("extra collected icons = %d, want 0", len(got))
 	}
 	if player.BonusCounters != 1 {

@@ -3,14 +3,72 @@
   "$id": "https://zaibatsu/spec/schema/threat.schema.json",
   "title": "Shadowraiders threat",
   "type": "object",
-  "required": ["id", "name", "type"],
+  "required": [
+    "id",
+    "name",
+    "type"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-    "name": { "type": "string" },
-    "type": { "enum": ["drone", "token", "mark", "chaos"] },
-    "attackDie": { "enum": [4, 5, 6] },
-    "effects": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "provisional": { "type": "boolean", "default": false }
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "drone",
+        "token",
+        "mark",
+        "chaos"
+      ]
+    },
+    "attackDie": {
+      "enum": [
+        4,
+        5,
+        6
+      ]
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "provisional": {
+      "type": "boolean",
+      "default": false
+    },
+    "defense": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "shielded"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "shielded": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "copies": {
+      "type": "integer",
+      "minimum": 1
+    }
   }
 }

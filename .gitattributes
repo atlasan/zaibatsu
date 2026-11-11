@@ -7,3 +7,7 @@
 *.pdf binary
 *.rar binary
 *.lockb binary
+
+# Frozen regression evidence includes pre-existing CRLF schema hashes.
+# Preserve its exact bytes on every platform.
+spec/fixtures/provisional-v1/** -text

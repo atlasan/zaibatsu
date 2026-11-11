@@ -11,6 +11,25 @@ from tools.artifacts.pipeline import (Crop, DetectedAsset, crop_asset, detect_cr
 
 
 class PipelineTests(unittest.TestCase):
+    def test_core_refresh_includes_control_cards_with_the_grid_detector(self):
+        from tools.artifacts.__main__ import CORE_ARTIFACTS, detector_for, kind_for
+        for artifact_id in ("sp-en-control-cards", "sh-en-control-cards"):
+            self.assertIn(artifact_id, CORE_ARTIFACTS)
+        self.assertEqual(detector_for("control-cards", "auto"), "grid")
+        self.assertEqual(kind_for("control-cards"), "control-card")
+
+    def test_control_card_grid_preserves_page_and_cell_identity(self):
+        from tools.artifacts.pipeline import detected_assets
+        image = Image.new("RGB", (600, 900), "white")
+        draw = ImageDraw.Draw(image)
+        for y in (25, 320, 615):
+            for x in (25, 220, 415):
+                draw.rectangle((x, y, x + 150, y + 230), fill="#102030")
+        assets = detected_assets("sp-en-control-cards", 2, "control-card", detect_crops(image, min_size=30))
+        self.assertEqual(len(assets), 9)
+        self.assertEqual(assets[2].asset_id, "sp-en-control-cards-p02-c03")
+        self.assertTrue(all(asset.kind == "control-card" for asset in assets))
+
     def sheet(self) -> Image.Image:
         image = Image.new("RGB", (500, 300), "white")
         draw = ImageDraw.Draw(image)

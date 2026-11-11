@@ -86,3 +86,24 @@ page instead of silently dropping it.
 - Rulebook/component transcripts are source aids; record-level verification still
   happens in `spec/provenance/*.json`.
 - Raw extraction output is never treated as canonical gameplay data.
+
+## Asset-by-asset visual review
+
+The [review register](../../DOCS/artifacts/asset-review.md) documents 228 asset
+records and 557 individually listed sheet parts. `review_assets.py` rebuilds
+JSON/CSV/report outputs from saved observations and pinned source crops.
+
+```powershell
+python tools/ruletext/review_assets.py verify
+python tools/ruletext/review_assets.py verify --require-originals
+python tools/ruletext/review_assets.py render
+python tools/ruletext/review_assets.py build
+```
+
+`render` restores ignored supplemental images; use the existing artifact
+pipeline for core manifest images. `build` requires originals, RAR support from
+`tar`, and restored images. This workflow does not promote canonical data.
+
+The36 English control-card crops are now core manifest assets restored by the
+artifact pipeline, with unchanged page/cell ids. They are excluded from the
+supplemental image list so review accounting does not duplicate those pieces.

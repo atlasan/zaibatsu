@@ -1,0 +1,91 @@
+{
+  "controlCards": [
+    {
+      "id": "speedrunner-blue-control",
+      "name": "Speedrunner (Blue)",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "speedrunner-blue"
+      },
+      "isStarter": true
+    },
+    {
+      "id": "speedrunner-green-control",
+      "name": "Speedrunner (Green)",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "speedrunner-green"
+      },
+      "isStarter": true
+    },
+    {
+      "id": "speedrunner-pink-control",
+      "name": "Speedrunner (Pink)",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "speedrunner-pink"
+      },
+      "isStarter": true
+    },
+    {
+      "id": "speedrunner-orange-control",
+      "name": "Speedrunner (Orange)",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "speedrunner-orange"
+      },
+      "isStarter": true
+    },
+    {
+      "id": "idoru-control",
+      "name": "Idoru",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "idoru"
+      },
+      "provisional": true
+    },
+    {
+      "id": "gynoid-control",
+      "name": "Gynoid",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "gynoid"
+      },
+      "provisional": true
+    },
+    {
+      "id": "drone-mk-2-control",
+      "name": "Drone MK-2",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "drone-mk-2"
+      }
+    },
+    {
+      "id": "drone-probe-control",
+      "name": "Drone Probe",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "drone-probe"
+      }
+    },
+    {
+      "id": "drone-turret-control",
+      "name": "Drone Turret",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "drone-turret"
+      }
+    }
+  ]
+}

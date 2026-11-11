@@ -1,13 +1,13 @@
 const app = document.querySelector("#app");
 
 const MOVEMENT_TYPES = ["fixed", "d6", "2d6", "hex"];
-const CARD_TYPES = ["add-on", "gadget", "weapon", "armor", "module", "mission", "action", "movement", "event"];
+const CARD_TYPES = ["add-on", "gadget", "weapon", "armor", "module", "mission", "action", "movement", "event", "block"];
 const ACTIVATE_ABILITIES = ["search", "delete", "reboot", "icebreaker"];
 const GRANTABLE_ABILITIES = ["move", "search", "delete", "icebreaker", "reboot"];
 const ATTACH_AS = ["pawn", "enemy", "block"];
 const CARD_SLOTS = ["add-on", "gadget", "weapon", "armor", "module", "mission"];
-const CARD_EFFECT_KINDS = ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"];
-const CARD_EFFECT_TRIGGERS = ["on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"];
+const CARD_EFFECT_KINDS = ["gain-control-card", "gain-target-control", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"];
+const CARD_EFFECT_TRIGGERS = ["on-attach", "on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"];
 const ATTACH_EFFECT_TRIGGERS = ["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"];
 const BLOCK_SPACE_SHAPES = ["circle", "hex"];
 
@@ -236,7 +236,7 @@ function movementRows(rows = [], attribute) {
 
 function effectRows(rows = []) {
   const values = rows.length ? rows : [{}];
-  return values.map((row, index) => `<div class="structured-row"><div class="structured-row-head"><strong>Direct play effect ${index + 1}</strong>${values.length > 1 ? `<button type="button" class="secondary" data-remove-row="effect:${index}">remove</button>` : ""}</div><div class="form-grid"><label>Kind<select data-effect-kind="${index}"><option value="">none</option>${CARD_EFFECT_KINDS.map((kind) => `<option value="${kind}" ${row.kind === kind ? "selected" : ""}>${kind}</option>`).join("")}</select></label><label>Trigger<select data-effect-trigger="${index}"><option value="">none</option>${CARD_EFFECT_TRIGGERS.map((trigger) => `<option value="${trigger}" ${row.trigger === trigger ? "selected" : ""}>${trigger}</option>`).join("")}</select></label><label>Amount<input data-effect-amount="${index}" type="number" value="${maybe(row.amount)}"></label><label>Target<input data-effect-target="${index}" value="${escape(row.target ?? "")}"></label></div><label>Effect text<input data-effect-text="${index}" value="${escape(row.text ?? "")}"></label></div>`).join("");
+  return values.map((row, index) => `<div class="structured-row"><div class="structured-row-head"><strong>Typed card effect ${index + 1}</strong>${values.length > 1 ? `<button type="button" class="secondary" data-remove-row="effect:${index}">remove</button>` : ""}</div><div class="form-grid"><label>Kind<select data-effect-kind="${index}"><option value="">none</option>${CARD_EFFECT_KINDS.map((kind) => `<option value="${kind}" ${row.kind === kind ? "selected" : ""}>${kind}</option>`).join("")}</select></label><label>Trigger<select data-effect-trigger="${index}"><option value="">none</option>${CARD_EFFECT_TRIGGERS.map((trigger) => `<option value="${trigger}" ${row.trigger === trigger ? "selected" : ""}>${trigger}</option>`).join("")}</select></label><label>Amount<input data-effect-amount="${index}" type="number" value="${maybe(row.amount)}"></label><label>Target<input data-effect-target="${index}" value="${escape(row.target ?? "")}"></label></div><label>Effect text<input data-effect-text="${index}" value="${escape(row.text ?? "")}"></label></div>`).join("");
 }
 
 function abilityUseRows(rows = []) {
@@ -307,7 +307,7 @@ function renderInspector(draft) {
   const transcription = draft.transcription;
   const attach = card.attach ?? {};
   const vision = transcription.vision ? `<p class="hint">Vision confidence: ${Math.round(transcription.vision.confidence * 100)}%. Review is required before this can leave draft status.</p>` : "";
-  const attachActive = Boolean(attach.as || attach.slot || attach.class?.length || attach.grants?.length || attach.removes?.length || attach.grantsMovement?.length || attach.grantsStealth || attach.grantsSlot?.length || attach.abilityUses?.length || attach.iceModifier?.faces?.length || attach.iceModifier?.deltaDice !== undefined || attach.iceModifier?.black || attach.drawModifier !== undefined || attach.handModifier !== undefined || attach.blockSpace?.shape || attach.effectText || attach.effectTrigger || attach.cost !== undefined);
+  const attachActive = Boolean(attach.icebreakerModifier || attach.controllerHand || attach.delete || attach.as || attach.slot || attach.class?.length || attach.forbiddenClasses?.length || attach.forbiddenDestinations?.length || attach.grants?.length || attach.removes?.length || attach.grantsMovement?.length || attach.eliminationPrevention || attach.phaseEffects?.length || attach.grantsStealth || attach.ignoresDirectionArrows || attach.movementModifier !== undefined || attach.grantsSlot?.length || attach.abilityUses?.length || attach.iceModifier?.faces?.length || attach.iceModifier?.deltaDice !== undefined || attach.iceModifier?.black || attach.drawModifier !== undefined || attach.handModifier !== undefined || attach.attackModifier !== undefined || attach.blockSpace?.shape || attach.effectText || attach.effectTrigger || attach.cost !== undefined);
   const structuredPreview = {
     movements: card.movements ?? [],
     effects: card.effects ?? [],
@@ -340,8 +340,8 @@ function renderInspector(draft) {
       <div class="button-row"><button type="button" class="secondary" data-add-row="movement">Add movement option</button></div>
     </fieldset>
     <fieldset>
-      <legend>Direct play effects</legend>
-      <p class="hint">These are one-shot effects on play, separate from the attachment part.</p>
+      <legend>Typed card effects</legend>
+      <p class="hint">Operations run only at their selected trigger. Attachment-time effects are separate from movement and ability-strip uses.</p>
       <div class="structured-stack">
         ${effectRows(card.effects ?? [])}
       </div>
@@ -352,14 +352,28 @@ function renderInspector(draft) {
       <div class="form-grid">
         <label>Attach as<select name="attach-as"><option value="">none</option>${ATTACH_AS.map((value) => `<option value="${value}" ${attach.as === value ? "selected" : ""}>${value}</option>`).join("")}</select></label>
         <label>Attach slot<select name="attach-slot"><option value="">none</option>${CARD_SLOTS.map((value) => `<option value="${value}" ${attach.slot === value ? "selected" : ""}>${value}</option>`).join("")}</select></label>
+        <label>Forbidden target classes<input name="attach-forbidden-classes" value="${escape((attach.forbiddenClasses ?? []).join(", "))}" placeholder="comma separated"></label>
         <label>Target classes<input name="attach-class" value="${escape((attach.class ?? []).join(", "))}" placeholder="comma separated"></label>
         <label>Cost<input name="attach-cost" type="number" min="0" value="${maybe(attach.cost)}"></label>
         <label>Draw modifier<input name="attach-draw" type="number" value="${maybe(attach.drawModifier)}"></label>
+        <label>Movement step modifier<input name="attach-movement-modifier" type="number" step="1" value="${maybe(attach.movementModifier)}"></label>
+        <label>Printed Delete skulls<input name="attach-delete-skulls" type="number" min="1" value="${maybe(attach.delete?.skulls)}"></label>
+        <label>Printed Delete activation<select name="attach-delete-activation">${[["","Strength only"],["card","Matching card"],["once-per-turn","Once per turn"]].map(([value,label])=>`<option value="${value}" ${value===(attach.delete?.activation??"")?"selected":""}>${label}</option>`).join("")}</select></label>
         <label>Hand modifier<input name="attach-hand" type="number" value="${maybe(attach.handModifier)}"></label>
+        <label>Delete skull modifier<input name="attach-attack" type="number" step="1" value="${maybe(attach.attackModifier)}"></label>
         <label>Block-space shape<select name="attach-block-shape"><option value="">none</option>${BLOCK_SPACE_SHAPES.map((value) => `<option value="${value}" ${attach.blockSpace?.shape === value ? "selected" : ""}>${value}</option>`).join("")}</select></label>
         <label>Effect trigger<select name="attach-effect-trigger"><option value="">none</option>${ATTACH_EFFECT_TRIGGERS.map((value) => `<option value="${value}" ${attach.effectTrigger === value ? "selected" : ""}>${value}</option>`).join("")}</select></label>
       </div>
       <label>Effect text<textarea name="attach-effect-text" rows="3" placeholder="Source-reviewed effect wording or concise authored note">${escape(attach.effectText ?? "")}</textarea></label>
+      <label class="toggle"><input name="attach-face-up" type="checkbox" ${boolAttr(attach.controllerHand === "face-up")}> Controller plays with hand face up</label>
+      <label class="toggle"><input name="attach-forbid-core" type="checkbox" ${boolAttr(Boolean(attach.forbiddenDestinations?.includes("central-core")))}> Cannot move onto Central Core</label>
+      <label class="toggle"><input name="attach-prevent-elimination" type="checkbox" ${boolAttr(Boolean(attach.eliminationPrevention))}> Discard this attachment to prevent pawn elimination</label>
+      <fieldset><legend>Turn effects</legend>${["begin-turn","end-action"].flatMap(trigger => ["discard-self","discard-hand","discard-or-sacrifice","sacrifice-and-draw","discard-and-relocate","discard-cards"].map(kind => {
+        const effect=attach.phaseEffects?.find(effect=>effect.trigger===trigger && effect.kind===kind);
+        const key=`${trigger}-${kind}`;
+        return `<div><label class="toggle"><input type="checkbox" data-phase-kind="${kind}" data-phase-trigger="${trigger}" ${boolAttr(Boolean(effect))}>${trigger === "begin-turn" ? "Beginning of turn" : "End of actions"}: ${{"discard-self":"Discard this attachment","discard-hand":"Discard controller hand","discard-or-sacrifice":"Discard a card or sacrifice this pawn","sacrifice-and-draw":"Sacrifice this pawn, then draw cards","discard-and-relocate":"Discard this attachment, then relocate pawn","discard-cards":"Discard selected hand cards"}[kind]}</label>${["sacrifice-and-draw","discard-cards"].includes(kind) ? `<label>Number of cards<input type="number" min="1" step="1" data-phase-amount="${key}" value="${effect?.amount??1}"></label>` : ""}${kind === "discard-and-relocate" ? `<label>Threat interaction<select data-phase-threat="${key}"><option value="">Unresolved</option><option value="normal-movement" ${effect?.threatMode==="normal-movement"?"selected":""}>Normal movement</option><option value="placement" ${effect?.threatMode==="placement"?"selected":""}>Placement</option></select></label>` : ""}</div>`;
+      })).join("")}</fieldset>
+      <label class="toggle"><input name="attach-ignore-arrows" type="checkbox" ${boolAttr(attach.ignoresDirectionArrows)}> Ignores direction arrows</label>
       <label class="toggle"><input name="attach-grants-stealth" type="checkbox" ${boolAttr(attach.grantsStealth)}> Grants stealth capability</label>
       <div class="structured-grid">
         <fieldset>
@@ -375,7 +389,7 @@ function renderInspector(draft) {
           <div class="corners">${checkboxGroup("data-attach-slot-grant", CARD_SLOTS, attach.grantsSlot)}</div>
         </fieldset>
         <fieldset>
-          <legend>ICE modifier</legend>
+          <legend>Target ICE modifier</legend>
           <div class="ice-faces">${[1, 2, 3, 4, 5, 6].map((face) => `<label><input type="checkbox" data-ice-face="${face}" ${attach.iceModifier?.faces?.includes(face) ? "checked" : ""}> ${face}</label>`).join("")}</div>
           <div class="form-grid">
             <label>Delta dice<input name="attach-ice-delta" type="number" value="${maybe(attach.iceModifier?.deltaDice)}"></label>
@@ -383,6 +397,13 @@ function renderInspector(draft) {
           </div>
         </fieldset>
       </div>
+      <fieldset>
+        <legend>Acting Icebreaker modifier</legend>
+        <div class="ice-faces">${[1,2,3,4,5,6].map(face=>`<label><input type="checkbox" data-acting-ice-face="${face}" ${attach.icebreakerModifier?.faces?.includes(face)?"checked":""}> ${face}</label>`).join("")}</div>
+        <label>Extra acting dice<input name="acting-ice-dice" type="number" min="0" value="${maybe(attach.icebreakerModifier?.rollDice)}"></label>
+        <label><input name="acting-ice-black" type="checkbox" ${boolAttr(attach.icebreakerModifier?.black)}> Black ICE risk for acting pawn</label>
+        <label><input name="acting-ice-ignore-black" type="checkbox" ${boolAttr(attach.icebreakerModifier?.ignoresBlackIce)}> Acting pawn ignores Black ICE</label>
+      </fieldset>
       <fieldset>
         <legend>Granted movement</legend>
         <div class="structured-stack">${movementRows(attach.grantsMovement ?? [], "grant-movement")}</div>
@@ -454,12 +475,17 @@ function readDraft() {
   const attachAs = get("attach-as").value;
   const attachSlot = get("attach-slot").value;
   const attachClass = readCommaList(get("attach-class").value);
+  const forbiddenClasses = readCommaList(get("attach-forbidden-classes").value);
   const attachCost = get("attach-cost").value.trim();
   const drawModifier = get("attach-draw").value.trim();
   const handModifier = get("attach-hand").value.trim();
+  const deleteSkulls=get("attach-delete-skulls").value.trim(),deleteActivation=get("attach-delete-activation").value;
+  const attackModifier = get("attach-attack").value.trim();
   const blockShape = get("attach-block-shape").value;
   const effectText = get("attach-effect-text").value.trim();
   const effectTrigger = get("attach-effect-trigger").value;
+  const ignoresDirectionArrows = get("attach-ignore-arrows").checked;
+  const movementModifier = get("attach-movement-modifier").value.trim();
   const grantsStealth = get("attach-grants-stealth").checked;
   const grants = [...form.querySelectorAll("[data-attach-grant]")].filter((input) => input.checked).map((input) => input.dataset.attachGrant);
   const removes = [...form.querySelectorAll("[data-attach-remove]")].filter((input) => input.checked).map((input) => input.dataset.attachRemove);
@@ -469,20 +495,37 @@ function readDraft() {
   const iceFaces = [...form.querySelectorAll("[data-ice-face]")].filter((input) => input.checked).map((input) => Number(input.dataset.iceFace));
   const iceDelta = get("attach-ice-delta").value.trim();
   const iceBlack = get("attach-ice-black").checked;
+  const actingFaces=[...form.querySelectorAll("[data-acting-ice-face]")].filter(i=>i.checked).map(i=>Number(i.dataset.actingIceFace)),actingDice=get("acting-ice-dice").value.trim(),actingBlack=get("acting-ice-black").checked,actingIgnore=get("acting-ice-ignore-black").checked;
 
+  const phaseEffects = [...form.querySelectorAll("[data-phase-kind]")].filter(input=>input.checked).map(input=>{
+    const key=`${input.dataset.phaseTrigger}-${input.dataset.phaseKind}`;
+    const amount=form.querySelector(`[data-phase-amount="${key}"]`);
+    const threat=form.querySelector(`[data-phase-threat="${key}"]`);
+    return {trigger:input.dataset.phaseTrigger,kind:input.dataset.phaseKind,...(amount?{amount:Number(amount.value)}:{}),...(threat?.value?{threatMode:threat.value}:{})};
+  });
   const attach = {
+    ...(get("attach-prevent-elimination").checked ? {eliminationPrevention:{kind:"discard-self"}} : {}),
+    ...(phaseEffects.length ? {phaseEffects} : {}),
     ...(attachAs ? { as: attachAs } : {}),
     ...(attachSlot ? { slot: attachSlot } : {}),
     ...(attachClass.length ? { class: attachClass } : {}),
+    ...(forbiddenClasses.length ? { forbiddenClasses } : {}),
+    ...(get("attach-face-up").checked?{controllerHand:"face-up"}:{}),
+    ...(get("attach-forbid-core").checked?{forbiddenDestinations:["central-core"]}:{}),
     ...(grants.length ? { grants } : {}),
     ...(removes.length ? { removes } : {}),
     ...(grantsMovement ? { grantsMovement } : {}),
+    ...(ignoresDirectionArrows ? { ignoresDirectionArrows: true } : {}),
+    ...(movementModifier ? { movementModifier: Number(movementModifier) } : {}),
     ...(grantsStealth ? { grantsStealth: true } : {}),
     ...(grantsSlot.length ? { grantsSlot } : {}),
     ...(abilityUses ? { abilityUses } : {}),
     ...((iceFaces.length || iceDelta || iceBlack) ? { iceModifier: { ...(iceFaces.length ? { faces: iceFaces } : {}), ...(iceDelta ? { deltaDice: Number(iceDelta) } : {}), ...(iceBlack ? { black: true } : {}) } } : {}),
+    ...((actingFaces.length||actingDice||actingBlack||actingIgnore)?{icebreakerModifier:{...(actingFaces.length?{faces:actingFaces}:{}),...(actingDice?{rollDice:Number(actingDice)}:{}),...(actingBlack?{black:true}:{}),...(actingIgnore?{ignoresBlackIce:true}:{})}}:{}),
     ...(drawModifier ? { drawModifier: Number(drawModifier) } : {}),
     ...(handModifier ? { handModifier: Number(handModifier) } : {}),
+    ...((deleteSkulls || deleteActivation)?{delete:{skulls:Number(deleteSkulls),...(deleteActivation?{activation:deleteActivation}:{})}}:{}),
+    ...(attackModifier ? { attackModifier: Number(attackModifier) } : {}),
     ...(blockShape ? { blockSpace: { shape: blockShape } } : {}),
     ...(effectText ? { effectText } : {}),
     ...(effectTrigger ? { effectTrigger } : {}),
@@ -501,18 +544,35 @@ function readDraft() {
   return normalizeDraft(draft);
 }
 
+let validationRequestSerial = 0;
 async function validate() {
   const draft = readDraft();
-  if (!draft) return;
+  if (!draft) return false;
+  const requestSerial = ++validationRequestSerial;
+  const submitted = JSON.stringify(draft);
+  let errors, failed = false;
   try {
-    const data = await api("/api/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ document: draft }) });
-    state.validation = [...data.errors];
-    state.notice = state.validation.length ? `${state.validation.length} issue${state.validation.length === 1 ? "" : "s"} to resolve` : "Card is valid for export";
+    const data = await api("/api/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ document: JSON.parse(submitted) }) });
+    errors = [...data.errors];
   } catch (error) {
-    state.validation = [error.message];
+    errors = [error.message];
+    failed = true;
+  }
+  if (requestSerial !== validationRequestSerial || selectedDraft() !== draft) return false;
+  // Preserve edits made while awaiting the response and withhold stale diagnostics.
+  const changed = JSON.stringify(readDraft()) !== submitted;
+  if (changed) {
+    state.validation = [];
+    state.notice = "Card changed during validation. Validate again.";
+  } else if (failed) {
+    state.validation = errors;
     state.notice = "Validation failed";
+  } else {
+    state.validation = errors;
+    state.notice = errors.length ? `${errors.length} issue${errors.length === 1 ? "" : "s"} to resolve` : "Card is valid for export";
   }
   render();
+  return !changed && !failed && errors.length === 0;
 }
 
 async function validateDeck() {
@@ -567,8 +627,7 @@ async function load() {
 async function exportPatch() {
   const draft = readDraft();
   if (!draft) return;
-  await validate();
-  if (state.validation.length) return;
+  if (!await validate()) return;
   try {
     const data = await api("/api/export", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: `${state.sessionName}-${draft.actionCard.id}`, document: draft }) });
     state.notice = `Exported ${data.patch}`;

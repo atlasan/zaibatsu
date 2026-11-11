@@ -54,3 +54,9 @@ Speedrunners, Shadowraiders (2–4p), Chaos (solo), Outbreak (solo), Total War
 - Determinism (seeded RNG) preserved end-to-end.
 - Rules ambiguities resolved in `DOCS/rules/*` with rationale.
 - Mods/expansions kept as additive data + effect modules, never core forks.
+
+Current Speedrunners delivery includes verified Combat Prototypes and Drone Probe native free Search/movement, with shared data, both mirrors, byte evidence and sandbox/editor acceptance. The ordered next item is Military Development / Drone Turret; full content, ordinary setup-to-victory and mode acceptance remain open. See [the execution checkpoint](engine-resume-plan.md) and [live backlog](../tasks/BACKLOG.md).
+
+Speedrunners now includes verified Military Development/Drone Turret, typed permitted-turn ability execution and controller-owned played-card recycling, with shared data, both mirrors and sandbox/editor acceptance. Continue printed p6 tile1 after primary review. Full official setup-to-victory, remaining corpus and mode acceptance remain open; the latest checkpoint and backlog remain the ordered delivery owners.
+
+Arms Industry's funded physical block-counter lifecycle is implemented in both mirrors and sandbox, with reserve exhaustion explicitly provisional. The [remaining-work snapshot](remaining-work.md) inventories outstanding components, interpretations, all official modes and UI/acceptance gates; the backlog remains the ordered live list. Next independent printed block is Cleaner B at p6 tile2.

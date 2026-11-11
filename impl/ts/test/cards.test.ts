@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { blockById, type GameData, type GameState } from "../src/domain/types.ts";
 import { opposite, type Coord } from "../src/domain/hex.ts";
 import {
@@ -13,7 +13,7 @@ import {
   playSearch,
 } from "../src/engine/index.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function game(seed: number): GameState {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { blockById, type GameData } from "../src/domain/types.ts";
 import { neighbor, opposite, type Coord } from "../src/domain/hex.ts";
 import { UNLIMITED, spaceCapacity, spaceCapacityFor } from "../src/domain/pawn_board.ts";
@@ -23,7 +23,7 @@ import {
 } from "../src/engine/index.ts";
 import type { Player, Pawn } from "../src/domain/types.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function game(seed = 1) {
@@ -227,7 +227,7 @@ describe("moveStep (intra-block + capacity)", () => {
 
 describe("stepTargets (cross-edge + direction)", () => {
   test("cross-edge hop respects rotation and a direction restriction", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     const dh = blockById(d, "data-haven")!;
     dh.boundarySpaces = [["b"], [], [], [], [], []]; // local edge 0 -> space b
@@ -465,7 +465,7 @@ describe("attachment-granted limited uses", () => {
 
 describe("boundarySpaces derivation", () => {
   test("derived on load from open edges + zoneIds", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const b = blockById(d, "data-haven")!;
     // edges [T,F,T,T,F,T]; space b owns h2,h3 -> boundary on edge 0 (h3) and 5 (h2).
     expect(b.boundarySpaces).toEqual([["b"], [], [], [], [], ["b"]]);

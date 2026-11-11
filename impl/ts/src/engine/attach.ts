@@ -1,3 +1,7 @@
+import {supportsAttachmentTiming,validateAttachmentRules} from "./attachment-timing.ts";
+import {newAttachmentInstance,retainDiscardedUseCards,requireResolvedCardReuse} from "./use-markers.ts";
+import { gainPawnControl } from "./control-markers.ts";
+import type {EngineEvent} from "./index.ts";
 // Card attachment: attaching action cards to pawns, enemy pawns, and blocks.
 // Mirrors impl/go/internal/engine/attach.go. See DOCS/rules/speedrunners/pawns-abilities-and-cards.md
 // ("Attaching cards", "Pawn attachment cards"). Backlog: card attachment.
@@ -15,11 +19,13 @@
 // PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots,
 // recycle draw/hand modifiers, ICE-face / ICE-dice / Black-ICE modifiers, and
 // attachment-granted movement activation are now wired. Armor-style defense
-// replacement plus the richer movement-use semantics remain later work.
+// replacement, own-class grants, target-class eligibility and movement-use
+// budgets and provider-slot cascades execute. Broader effects remain later work.
 
 import { type Coord } from "../domain/hex.ts";
 import { slotFilled, type Attachment, type PawnOnBoard } from "../domain/pawn_board.ts";
 import { blockById, pawnById, type ActionCard, type DefenseDie, type GameData, type GameState, type Player } from "../domain/types.ts";
+import { availableAttachmentSlots, pawnAttachmentSlots } from "./attachment-slots.ts";
 import { iceFaces } from "./icebreaker.ts";
 
 function player(s: GameState, playerId: string): Player {
@@ -51,6 +57,7 @@ function removeCardFromHand(p: Player, cardId: string): void {
  */
 export function discardAttachments(s: GameState, pob: PawnOnBoard): void {
   if (!pob.attachments || pob.attachments.length === 0) return;
+  retainDiscardedUseCards(s,pob.attachments);
   const owner = s.players.find((p) => p.id === pob.ownerId);
   for (const a of pob.attachments) {
     s.discard.push(a.cardId);
@@ -75,6 +82,7 @@ function payAttachCost(p: Player, cost: number): number {
 }
 
 export function effectivePawnSlots(gd: GameData, pob: PawnOnBoard): string[] {
+  if (gd.regressionFixture!=="provisional-v1") return [...new Set(pawnAttachmentSlots(gd,pob).map(slot=>slot.slot))];
   const seen = new Set<string>();
   const out: string[] = [];
   const add = (slot: string | undefined) => {
@@ -115,10 +123,8 @@ export function playerAttachmentModifiers(
 export function effectiveDefenseDice(gd: GameData, pob: PawnOnBoard): DefenseDie[] {
   const base = pawnById(gd, pob.pawnId)?.defense ?? [];
   let override: DefenseDie[] | undefined;
-  for (const card of attachmentCards(gd, pob.attachments)) {
-    if (card.attach?.defenseOverride?.length) override = card.attach.defenseOverride;
-  }
-  return (override ?? base).map((die) => ({ ...die }));
+  for (const card of attachmentCards(gd, pob.attachments)) if (card.attach?.defenseOverride?.length) override = card.attach.defenseOverride;
+  return (override ?? base).map(die=>({...die}));
 }
 
 export function targetIceNullified(
@@ -128,11 +134,27 @@ export function targetIceNullified(
   return attachmentCards(gd, atts).some((card) => card.attach?.nullifiesIce === true);
 }
 
-function attachToPawnElement(s: GameState, gd: GameData, p: Player, card: ActionCard, tgt: PawnOnBoard): void {
+function attachToPawnElement(s: GameState, gd: GameData, p: Player, card: ActionCard, tgt: PawnOnBoard, slotRef?:string, events:EngineEvent[]=[]): void {
+  requireResolvedCardReuse(s,card.id);
+  validateAttachmentRules(card);
+  if(!supportsAttachmentTiming(card)) throw new Error("attachment-time effects require unsupported placement/choice resolution");
   const slot = card.attach?.slot;
   if (!slot) throw new Error(`card "${card.id}" has no slot to attach into`);
+  if (gd.regressionFixture !== "provisional-v1") {
+    const classes = effectivePawnClasses(gd, tgt);
+    if (card.attach?.forbiddenClasses?.some(value => classes.includes(value))) throw new Error(`card "${card.id}" forbids the target pawn's class`);
+    if (card.attach?.class?.length && !card.attach.class.some(value => classes.includes(value))) throw new Error(`card "${card.id}" requires a matching target class`);
+  }
   if (!effectivePawnSlots(gd, tgt).includes(slot)) throw new Error(`pawn "${tgt.pawnId}" has no ${slot} slot`);
-  if (slotFilled(tgt, slot)) throw new Error(`pawn "${tgt.pawnId}" already has its ${slot} slot filled`);
+  let selected:string|undefined;
+  if(gd.regressionFixture==="provisional-v1") {
+    if(slotRef) throw new Error("physical slot references require the source engine");
+    if(slotFilled(tgt,slot)) throw new Error(`pawn "${tgt.pawnId}" already has its ${slot} slot filled`);
+  } else {
+    const free=availableAttachmentSlots(gd,tgt,slot);
+    if(slotRef) {if(!free.some(location=>location.ref===slotRef)) throw new Error("the selected attachment slot is unavailable");selected=slotRef;}
+    else {if(!free.length) throw new Error(`pawn "${tgt.pawnId}" has no empty ${slot} slot`);if(free.length>1) throw new Error("choose a physical attachment slot");selected=free[0]!.ref;}
+  }
   const paid = payAttachCost(p, card.attach?.cost ?? 0);
   try {
     removeCardFromHand(p, card.id);
@@ -140,12 +162,17 @@ function attachToPawnElement(s: GameState, gd: GameData, p: Player, card: Action
     p.bonusCounters += paid;
     throw e;
   }
-  const att: Attachment = { cardId: card.id, slot, bonusPaid: paid };
+  const att: Attachment = { cardId: card.id, slot, ...(selected?{slotRef:selected}:{}), bonusPaid: paid,...(s.rulesVersion?{instanceId:newAttachmentInstance(s)}:{}) };
   (tgt.attachments ??= []).push(att);
+  if(card.effects?.some(effect=>effect.trigger==="on-attach" && effect.kind==="gain-target-control")) {
+    for(const attached of tgt.attachments) events.push({type:"card-discarded",cardId:attached.cardId});
+    discardAttachments(s,tgt);gainPawnControl(s,gd,tgt.pawnId,p.id,events);
+  }
 }
 
 /** Attaches a `pawn` card to a pawn the player controls. */
-export function attachToPawn(s: GameState, gd: GameData, playerId: string, cardId: string, targetPawnId: string): void {
+export function attachToPawn(s: GameState, gd: GameData, playerId: string, cardId: string, targetPawnId: string, slotRef?:string): void {
+  requireResolvedCardReuse(s,cardId);
   const p = player(s, playerId);
   if (!p.hand.includes(cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   const card = cardById(gd, cardId);
@@ -153,7 +180,7 @@ export function attachToPawn(s: GameState, gd: GameData, playerId: string, cardI
   const tgt = s.cybernet.pawnById(targetPawnId);
   if (!tgt) throw new Error(`pawn "${targetPawnId}" is not on the board`);
   if (tgt.ownerId !== playerId) throw new Error(`pawn "${targetPawnId}" is not controlled by ${playerId}`);
-  attachToPawnElement(s, gd, p, card, tgt);
+  attachToPawnElement(s, gd, p, card, tgt, slotRef);
 }
 
 /** Attaches an `enemy` card to an opponent's pawn co-located with an acting pawn. */
@@ -164,6 +191,8 @@ export function attachToEnemy(
   cardId: string,
   actorPawnId: string,
   targetPawnId: string,
+  slotRef?:string,
+  events:EngineEvent[]=[],
 ): void {
   const p = player(s, playerId);
   if (!p.hand.includes(cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
@@ -173,10 +202,11 @@ export function attachToEnemy(
   const tgt = s.cybernet.pawnById(targetPawnId);
   if (!tgt) throw new Error(`target pawn "${targetPawnId}" is not on the board`);
   if (tgt.ownerId === playerId) throw new Error("enemy attachment must target another player's pawn");
+  if (gd.regressionFixture!=="provisional-v1" && !s.players.some(player=>player.id===tgt.ownerId)) throw new Error("enemy attachments require another player's controlled pawn");
   if (actor.coord.q !== tgt.coord.q || actor.coord.r !== tgt.coord.r) {
     throw new Error("acting pawn and target are not in the same block");
   }
-  attachToPawnElement(s, gd, p, card, tgt);
+  attachToPawnElement(s, gd, p, card, tgt, slotRef,events);
 }
 
 /** Attaches a `block` card to the block an acting pawn occupies. */
@@ -192,6 +222,7 @@ export function attachToBlock(
   if (!p.hand.includes(cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   const card = cardById(gd, cardId);
   if (!card?.attach || card.attach.as !== "block") throw new Error(`card "${cardId}" is not a block attachment`);
+  if (gd.regressionFixture !== "provisional-v1" && (card.attach.class?.length || card.attach.forbiddenClasses?.length)) throw new Error("target-class restrictions require a pawn or enemy attachment");
   const actor = requireOwnedActor(s, playerId, actorPawnId);
   if (actor.coord.q !== coord.q || actor.coord.r !== coord.r) {
     throw new Error("acting pawn is not on the target block");
@@ -203,6 +234,7 @@ export function attachToBlock(
   if (iceFaces(def.iceValue).length === 0) {
     throw new Error(`cannot attach to block "${pb.blockId}": it has no ICE value`);
   }
+  if(!supportsAttachmentTiming(card)) throw new Error("attachment-time effects require unsupported placement/choice resolution");
   const paid = payAttachCost(p, card.attach.cost ?? 0);
   try {
     removeCardFromHand(p, card.id);
@@ -210,7 +242,7 @@ export function attachToBlock(
     p.bonusCounters += paid;
     throw e;
   }
-  (pb.attachments ??= []).push({ cardId: card.id, slot: card.attach.slot, bonusPaid: paid });
+  (pb.attachments ??= []).push({ cardId: card.id, slot: card.attach.slot, bonusPaid: paid,...(s.rulesVersion?{instanceId:newAttachmentInstance(s)}:{}) });
 }
 
 /** The pawn's base classes plus any granted by attached cards (deduplicated). */
@@ -225,7 +257,9 @@ export function effectivePawnClasses(gd: GameData, pob: PawnOnBoard): string[] {
   };
   for (const c of pawnById(gd, pob.pawnId)?.class ?? []) add(c);
   for (const a of pob.attachments ?? []) {
-    for (const c of cardById(gd, a.cardId)?.attach?.class ?? []) add(c);
+    const card=cardById(gd,a.cardId);
+    for (const c of card?.class??[]) add(c);
+    if (gd.regressionFixture === "provisional-v1") for (const c of card?.attach?.class ?? []) add(c);
   }
   return out;
 }

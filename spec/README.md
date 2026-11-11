@@ -35,7 +35,4 @@ post-parse structural checks as a final engine-facing guard.
 
 ## Provisional data
 
-All current `data/speedrunners/` component records are seed fixtures and carry
-`provisional: true`. Their file-level candidate source map is deliberately not
-record-level verification. Do not remove that marker until the relevant
-transcription and provenance task is complete.
+The current Speedrunners corpus mixes verified records with provisional fixtures. Each record retains its actual source maturity; complete official-match readiness remains open. Preserve `spec/fixtures/provisional-v1/` and use explicit regression loaders for historical scenarios. Remove a provisional marker only after the relevant transcription, interpretation and provenance checks complete.

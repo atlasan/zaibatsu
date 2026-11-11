@@ -2,7 +2,7 @@ import { afterEach, expect, test } from "bun:test";
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { loadDefault, loadGameData } from "./index.ts";
+import { loadDefault, loadGameData, loadThreats } from "./index.ts";
 
 type ValidationManifest = {
   entries: Array<{
@@ -53,4 +53,10 @@ test("loadGameData rejects stale validated spec content", () => {
   const blocksPath = join(tempRoot, "spec", "data", "speedrunners", "blocks.json");
   writeFileSync(blocksPath, `${readFileSync(blocksPath, "utf8")}\n`);
   expect(() => loadGameData(join(tempRoot, "spec", "data"), "speedrunners")).toThrow(/spec validation manifest is stale/);
+});
+
+test("validated Shadowraiders sidecar loads the printed Guard combat faces", () => {
+ const guard = loadThreats("shadowraiders").find(t => t.id === "guard")!;
+ expect(guard.attackDie).toBe(5);
+ expect(guard.defense?.filter(d => d.shielded).map(d => d.value)).toEqual([1,2,3,4]);
 });

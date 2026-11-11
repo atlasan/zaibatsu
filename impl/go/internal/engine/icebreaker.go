@@ -16,11 +16,8 @@ import (
 // control card (changes owner). Failing against Black ICE eliminates the
 // attacking pawn.
 //
-// ICE FACES ARE PROVISIONAL. The data models ICE as a category (low/medium/high/
-// black), not specific die faces. IceFaces derives canonical top-N faces so the
-// base success probability is faithful to the rulebook (low = 3 chances, medium =
-// 2, high = 1, black = 1 high-risk). Real face values (and thus exact ICE-value
-// modifier interactions) come with transcription — tracked in tasks/BACKLOG.md.
+// Verified content supplies exact printed ICE faces. Category-derived faces remain
+// a historical/provisional fallback; passing those fixtures does not promote data.
 
 // IceFaces returns the d6 faces that count as a successful Icebreak against the
 // given ICE value. Empty for "none" (uncontrollable).
@@ -184,33 +181,36 @@ func checkIcebreaker(s *domain.GameState, gd *domain.GameData, attackerID string
 	if owner == nil {
 		return nil, nil, fmt.Errorf("attacker %q has no controlling player", attackerID)
 	}
-	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[abilityUsedKey("icebreaker", attackerID)] {
+	if ability.Activation == "once-per-turn" && AbilityUseSpent(s, gd, owner, attackerID, "icebreaker") {
 		return nil, nil, fmt.Errorf("pawn %q already used its once-per-turn Icebreaker this turn", attackerID)
 	}
 	return owner, atkPob, nil
 }
 
 // markIcebreakerUsed records the once-per-turn marker if applicable.
-func markIcebreakerUsed(gd *domain.GameData, owner *domain.Player, attackerID string, atts []domain.Attachment) {
+func markIcebreakerUsed(s *domain.GameState, gd *domain.GameData, owner *domain.Player, attackerID string, atts []domain.Attachment) {
 	if atk, ok := gd.PawnByID(attackerID); ok {
 		if ab := effectiveAbility(gd, atk, atts, "icebreaker"); ab != nil && ab.Activation == "once-per-turn" {
-			owner.OncePerTurnUsed[abilityUsedKey("icebreaker", attackerID)] = true
+			SpendAbilityUse(s, gd, owner, attackerID, "icebreaker")
 		}
 	}
 }
 
 // resolveBlackIceFailure eliminates the attacker if the target had Black ICE and
 // the attempt failed. Returns whether the attacker was eliminated.
-func resolveBlackIceFailure(s *domain.GameState, isBlack bool, attackerID string, success bool) bool {
+func resolveBlackIceFailure(s *domain.GameState, gd *domain.GameData, isBlack bool, attackerID string, success bool) (bool, error) {
 	if !success && isBlack {
-		eliminatePawn(s, attackerID)
-		return true
+		return attemptEliminatePawn(s, gd, attackerID, "black-ice")
 	}
-	return false
+	return false, nil
 }
 
 // IcebreakBlock attempts to gain control of the block the attacker occupies.
-func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, coord domain.Coord, extraRollDice int) (IcebreakResult, error) {
+func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, coord domain.Coord, extraRollDice int, sinks ...*[]EngineEvent) (IcebreakResult, error) {
+	return icebreakBlockWithPayment(s, gd, attackerID, coord, extraRollDice, nil, sinks...)
+}
+
+func icebreakBlockWithPayment(s *domain.GameState, gd *domain.GameData, attackerID string, coord domain.Coord, extraRollDice int, beforeRoll func() error, sinks ...*[]EngineEvent) (IcebreakResult, error) {
 	var res IcebreakResult
 	owner, atkPob, err := checkIcebreaker(s, gd, attackerID)
 	if err != nil {
@@ -227,9 +227,9 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 	if !ok {
 		return res, fmt.Errorf("unknown block %q", pb.BlockID)
 	}
-        if TargetIceNullified(gd, pb.Attachments) {
-                return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
-        }
+	if TargetIceNullified(gd, pb.Attachments) {
+		return res, fmt.Errorf("block %q has no ICE value and cannot be controlled", pb.BlockID)
+	}
 	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, pb.Attachments)
 	faces := append([]int{}, iceFacesFor(blockDef.IceFaces, blockDef.IceValue)...)
 	for _, face := range modifierFaces {
@@ -252,7 +252,17 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 		return res, fmt.Errorf("you already control block %q", pb.BlockID)
 	}
 
-	res.Roll = icebreakRoll(s.RNG, extraRollDice)
+	actorModifier := EffectiveIcebreakerModifier(gd, atkPob)
+	faces = append(faces, actorModifier.Faces...)
+	if beforeRoll != nil {
+		if err := beforeRoll(); err != nil {
+			return res, err
+		}
+	}
+	if s.RulesVersion != "" {
+		markIcebreakerUsed(s, gd, owner, attackerID, atkPob.Attachments)
+	}
+	res.Roll = icebreakRoll(s.RNG, extraRollDice+actorModifier.RollDice)
 	res.Success = anyMatch(res.Roll, faces)
 
 	if res.Success {
@@ -265,17 +275,40 @@ func IcebreakBlock(s *domain.GameState, gd *domain.GameData, attackerID string, 
 				prev.ControlMarkersPlaced--
 			}
 		}
+		previousOwner := pb.OwnerID
 		pb.OwnerID = owner.ID
 		owner.ControlMarkersPlaced++
-                CollectControlledBonusIcons(s, owner.ID)
+		if s.RulesVersion != "" {
+			sink := phaseEventSink(sinks)
+			*sink = append(*sink, EngineEvent{Type: EventControlChanged, Element: "block", ElementID: fmt.Sprintf("%d,%d", coord.Q, coord.R), FromOwnerID: previousOwner, ToOwnerID: owner.ID})
+		}
+		collected, err := CollectControlledBonusIcons(s, owner.ID)
+		if err != nil {
+			return res, err
+		}
+		if s.RulesVersion != "" {
+			sink := phaseEventSink(sinks)
+			for _, icon := range collected {
+				*sink = append(*sink, EngineEvent{Type: EventBonusCollected, PlayerID: owner.ID, Element: "bonus-icon", ElementID: icon.Key})
+			}
+		}
 		checkWin(s)
-		ApplyBlockEffectForTrigger(s, gd, coord, BlockEffectUnderControl)
+		if s.RulesVersion == "" || s.WinnerID == "" {
+			if _, err := ApplyBlockEffectForTrigger(s, gd, coord, BlockEffectUnderControl, sinks...); err != nil {
+				return res, err
+			}
+		}
 	} else {
-		isBlack := blockDef.IceValue == domain.IceBlack || blockDef.BlackIce || modifierBlack
-		res.AttackerEliminated = resolveBlackIceFailure(s, isBlack, attackerID, res.Success)
+		isBlack := blockDef.IceValue == domain.IceBlack || blockDef.BlackIce || modifierBlack || actorModifier.Black
+		res.AttackerEliminated, err = resolveBlackIceFailure(s, gd, isBlack && !actorModifier.IgnoresBlackIce, attackerID, res.Success)
+		if err != nil {
+			return res, err
+		}
 	}
 
-	markIcebreakerUsed(gd, owner, attackerID, atkPob.Attachments)
+	if s.RulesVersion == "" {
+		markIcebreakerUsed(s, gd, owner, attackerID, atkPob.Attachments)
+	}
 	return res, nil
 }
 
@@ -303,11 +336,11 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 	if !ok {
 		return res, fmt.Errorf("unknown target pawn %q", targetID)
 	}
-        if TargetIceNullified(gd, tgtPob.Attachments) {
-                return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
-        }
+	if TargetIceNullified(gd, tgtPob.Attachments) {
+		return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
+	}
 	modifierFaces, modifierBlack, modifierDelta := attachmentIceModifier(gd, tgtPob.Attachments)
-	faces := append([]int{}, IceFaces(tgt.IceValue)...)
+	faces := append([]int{}, iceFacesFor(tgt.IceFaces, tgt.IceValue)...)
 	for _, face := range modifierFaces {
 		duplicate := false
 		for _, existing := range faces {
@@ -325,18 +358,30 @@ func IcebreakPawn(s *domain.GameState, gd *domain.GameData, attackerID, targetID
 		return res, fmt.Errorf("pawn %q has no ICE value and cannot be controlled", targetID)
 	}
 
-	res.Roll = icebreakRoll(s.RNG, extraRollDice)
+	actorModifier := EffectiveIcebreakerModifier(gd, atkPob)
+	faces = append(faces, actorModifier.Faces...)
+	if s.RulesVersion != "" {
+		markIcebreakerUsed(s, gd, owner, attackerID, atkPob.Attachments)
+	}
+	res.Roll = icebreakRoll(s.RNG, extraRollDice+actorModifier.RollDice)
 	res.Success = anyMatch(res.Roll, faces)
 
 	if res.Success {
 		// Gaining control of a pawn discards its attached cards (returning any
 		// bonus counters to the previous owner) before ownership transfers.
 		discardAttachments(s, tgtPob)
-		tgtPob.OwnerID = owner.ID
+		if err := GainPawnControl(s, gd, targetID, owner.ID); err != nil {
+			return res, err
+		}
 	} else {
-		res.AttackerEliminated = resolveBlackIceFailure(s, tgt.IceValue == domain.IceBlack || modifierBlack, attackerID, res.Success)
+		res.AttackerEliminated, err = resolveBlackIceFailure(s, gd, (tgt.IceValue == domain.IceBlack || modifierBlack || actorModifier.Black) && !actorModifier.IgnoresBlackIce, attackerID, res.Success)
+		if err != nil {
+			return res, err
+		}
 	}
 
-	markIcebreakerUsed(gd, owner, attackerID, atkPob.Attachments)
+	if s.RulesVersion == "" {
+		markIcebreakerUsed(s, gd, owner, attackerID, atkPob.Attachments)
+	}
 	return res, nil
 }

@@ -1,32 +1,357 @@
 {
-  "$comment": "Speedrunners information blocks. Mixed baseline: the original seed fixtures remain provisional, while page-1 source-backed blocks from 'Sp 01 Blocks A4' are now added as source-linked seven-zone records. Full block transcription is still tracked in tasks/BACKLOG.md.",
+  "$comment": "Mixed corpus. Central Core, Toyeku (legacy id idoru), Clandestine Broadcast and Pink District have verified geometry and implemented block behavior. Idoru/Gynoid pawn exceptions and other explicit effect dependencies remain provisional. Hacktivism, Sprawl, Antro, Electromagnetic Pulse and Copyleft retain reviewed geometry and open interpretation gates. Other fixtures do not establish source coverage; historical definitions remain frozen under spec/fixtures/provisional-v1.",
   "blocks": [
-    { "id": "central-core", "name": "Central Core", "expansion": "speedrunners", "layoutId": "standard-seven-zone-2-3-2-pointy", "isCentralCore": true, "iceValue": "none", "edges": [true, true, true, true, true, true], "boundarySpaces": [["core"], ["core"], ["core"], ["core"], ["core"], ["core"]], "bonusFragments": 0, "spaces": [{ "id": "core", "type": "special", "zoneIds": ["h1", "h2", "h3", "h4", "h5", "h6", "h7"], "capacity": "unlimited", "neighbors": [] }], "provisional": true },
-    { "id": "data-haven", "name": "Data Haven", "expansion": "speedrunners", "layoutId": "standard-seven-zone-2-3-2-pointy", "iceValue": "low", "edges": [true, false, true, true, false, true], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "normal", "zoneIds": ["h2", "h3"], "capacity": 2, "neighbors": ["a"] }], "provisional": true },
-    { "id": "firewall-node", "name": "Firewall Node", "expansion": "speedrunners", "layoutId": "standard-seven-zone-2-3-2-pointy", "iceValue": "medium", "edges": [true, true, false, true, true, false], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["a"], "modifier": { "kind": "defense", "amount": 1 } }], "provisional": true },
-    { "id": "black-market", "name": "Black Market", "expansion": "speedrunners", "layoutId": "standard-seven-zone-2-3-2-pointy", "iceValue": "high", "edges": [true, false, true, false, true, false], "bonusFragments": 1, "spaces": [{ "id": "a", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["b"] }, { "id": "b", "type": "effect", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["a"], "effectId": "sp-black-market" }], "provisional": true },
-    { "id": "server-farm", "name": "Server Farm", "expansion": "speedrunners", "layoutId": "standard-seven-zone-2-3-2-pointy", "iceValue": "black", "edges": [true, true, true, false, false, false], "bonusFragments": 0, "spaces": [{ "id": "a", "type": "special", "zoneIds": ["h1", "h2", "h3"], "capacity": "unlimited", "neighbors": [] }], "provisional": true },
     {
-      "id": "idoru",
-      "name": "Idoru",
+      "id": "central-core",
+      "name": "Central Core",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "isCentralCore": true,
+      "iceValue": "none",
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "core"
+        ],
+        [
+          "core"
+        ],
+        [
+          "core"
+        ],
+        [
+          "core"
+        ],
+        [
+          "core"
+        ],
+        [
+          "core"
+        ]
+      ],
+      "bonusFragments": 0,
+      "spaces": [
+        {
+          "id": "core",
+          "type": "special",
+          "zoneIds": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "h7"
+          ],
+          "capacity": "unlimited",
+          "neighbors": []
+        }
+      ],
+      "bonusCorners": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "iceFaces": [],
+      "assetRefs": [
+        "sp-en-blocks-a4-p03-c02"
+      ]
+    },
+    {
+      "id": "data-haven",
+      "name": "Data Haven",
       "expansion": "speedrunners",
       "layoutId": "standard-seven-zone-2-3-2-pointy",
       "iceValue": "low",
-      "edges": [false, false, true, true, false, false],
-      "boundarySpaces": [[], [], ["h4", "h5"], ["h5", "h6"], [], []],
-      "bonusFragments": 4,
-      "bonusCorners": [false, true, true, false, true, true],
-      "spaces": [
-        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
-        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
-        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
-        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
-        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
-        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
-        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      "edges": [
+        true,
+        false,
+        true,
+        true,
+        false,
+        true
       ],
-      "effects": { "underControl": { "kind": "place-pawn", "target": "idoru", "text": "Place the Idoru in this block under your control." } },
-      "assetRefs": ["sp-en-blocks-a4-p01-c01"]
+      "bonusFragments": 1,
+      "spaces": [
+        {
+          "id": "a",
+          "type": "normal",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "b"
+          ]
+        },
+        {
+          "id": "b",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h3"
+          ],
+          "capacity": 2,
+          "neighbors": [
+            "a"
+          ]
+        }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "firewall-node",
+      "name": "Firewall Node",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "edges": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "bonusFragments": 1,
+      "spaces": [
+        {
+          "id": "a",
+          "type": "normal",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "b"
+          ]
+        },
+        {
+          "id": "b",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "a"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "amount": 1
+          }
+        }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "black-market",
+      "name": "Black Market",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "high",
+      "edges": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      "bonusFragments": 1,
+      "spaces": [
+        {
+          "id": "a",
+          "type": "normal",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "b"
+          ]
+        },
+        {
+          "id": "b",
+          "type": "effect",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "a"
+          ],
+          "effectId": "sp-black-market"
+        }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "server-farm",
+      "name": "Server Farm",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "black",
+      "edges": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "bonusFragments": 0,
+      "spaces": [
+        {
+          "id": "a",
+          "type": "special",
+          "zoneIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "capacity": "unlimited",
+          "neighbors": []
+        }
+      ],
+      "provisional": true
+    },
+    {
+      "id": "idoru",
+      "name": "Toyeku Company",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "low",
+      "iceFaces": [
+        3,
+        4,
+        6
+      ],
+      "blackIce": false,
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper"
+        ],
+        [
+          "defense"
+        ],
+        [
+          "idoru"
+        ],
+        [
+          "idoru"
+        ],
+        [
+          "left"
+        ],
+        [
+          "upper"
+        ]
+      ],
+      "bonusFragments": 3,
+      "bonusCorners": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "spaces": [
+        {
+          "id": "upper",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h3"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "left",
+            "defense"
+          ]
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper",
+            "idoru"
+          ]
+        },
+        {
+          "id": "defense",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper",
+            "idoru"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 1,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "idoru",
+          "type": "pawn",
+          "pawnId": "idoru",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "displayShape": "circle",
+          "neighbors": [
+            "left",
+            "defense"
+          ]
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "place-neutral-pawn",
+          "target": "idoru",
+          "text": "Place the Idoru in this block."
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p01-c01"
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ]
     },
     {
       "id": "hacktivism",
@@ -34,43 +359,1821 @@
       "expansion": "speedrunners",
       "layoutId": "standard-seven-zone-2-3-2-pointy",
       "iceValue": "low",
-      "edges": [true, false, true, false, true, false],
-      "boundarySpaces": [["h2", "h3"], [], ["h4", "h5"], [], ["h6", "h7"], []],
-      "bonusFragments": 5,
-      "bonusCorners": [true, true, true, true, true, false],
-      "spaces": [
-        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
-        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
-        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
-        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
-        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
-        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
-        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
       ],
-      "effects": { "underControl": "sp-hacktivism" },
-      "assetRefs": ["sp-en-blocks-a4-p01-c02"]
+      "bonusFragments": 5,
+      "bonusCorners": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "spaces": [
+        {
+          "id": "shield",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h7"
+          ],
+          "capacity": 2,
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 2,
+                "shielded": true
+              },
+              {
+                "value": 3,
+                "shielded": true
+              }
+            ]
+          },
+          "neighbors": [
+            "upper",
+            "mask"
+          ]
+        },
+        {
+          "id": "upper",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "right"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper",
+            "lower"
+          ]
+        },
+        {
+          "id": "lower",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "right",
+            "mask"
+          ]
+        },
+        {
+          "id": "mask",
+          "type": "normal",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "lower"
+          ]
+        }
+      ],
+      "assetRefs": [
+        "sp-en-blocks-a4-p01-c02"
+      ],
+      "provisional": true,
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "iceFaces": [
+        2,
+        5,
+        6
+      ],
+      "blackIce": false,
+      "spaceArrows": [
+        {
+          "from": "upper",
+          "to": "right"
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "return-control-marker",
+          "amount": 1,
+          "text": "Each player sacrifices one Control marker from the Cybernet."
+        }
+      },
+      "boundarySpaces": [
+        [
+          "upper"
+        ],
+        [
+          "right"
+        ],
+        [
+          "lower"
+        ],
+        [
+          "mask"
+        ],
+        [
+          "shield"
+        ],
+        [
+          "shield"
+        ]
+      ]
     },
     {
       "id": "chiba-city",
-      "name": "Chiba City",
+      "name": "Sprawl",
       "expansion": "speedrunners",
       "layoutId": "standard-seven-zone-2-3-2-pointy",
       "iceValue": "low",
-      "edges": [false, false, true, false, false, false],
-      "boundarySpaces": [[], [], ["h4", "h5"], [], [], []],
-      "bonusFragments": 5,
-      "bonusCorners": [true, true, true, false, true, true],
-      "spaces": [
-        { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "neighbors": ["h2", "h3", "h4", "h5", "h6", "h7"] },
-        { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["h1", "h3", "h7"] },
-        { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["h1", "h2", "h4"] },
-        { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["h1", "h3", "h5"] },
-        { "id": "h5", "type": "normal", "zoneIds": ["h5"], "capacity": 1, "neighbors": ["h1", "h4", "h6"] },
-        { "id": "h6", "type": "normal", "zoneIds": ["h6"], "capacity": 1, "neighbors": ["h1", "h5", "h7"] },
-        { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["h1", "h2", "h6"] }
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
       ],
-      "effects": { "underControl": { "kind": "place-pawn", "target": "gynoid", "text": "Place the Gynoid in this block under your control." } },
-      "assetRefs": ["sp-en-blocks-a4-p01-c03"]
+      "bonusFragments": 4,
+      "bonusCorners": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "spaces": [
+        {
+          "id": "rabbit",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "left"
+          ]
+        },
+        {
+          "id": "shield",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 3,
+                "shielded": true
+              }
+            ]
+          },
+          "neighbors": [
+            "rabbit",
+            "right"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "city"
+          ]
+        },
+        {
+          "id": "city",
+          "type": "normal",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": 2,
+          "neighbors": [
+            "right",
+            "left"
+          ]
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "rabbit",
+            "city"
+          ]
+        }
+      ],
+      "assetRefs": [
+        "sp-en-blocks-a4-p01-c03"
+      ],
+      "provisional": true,
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "iceFaces": [
+        2,
+        4,
+        6
+      ],
+      "blackIce": false,
+      "spaceArrows": [
+        {
+          "from": "rabbit",
+          "to": "shield"
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "discard-per-controlled-pawn",
+          "text": "Each player discard one action card for each pawn under his or her control."
+        }
+      },
+      "boundarySpaces": [
+        [
+          "shield"
+        ],
+        [
+          "right"
+        ],
+        [
+          "city"
+        ],
+        [
+          "city"
+        ],
+        [
+          "left"
+        ],
+        [
+          "rabbit"
+        ]
+      ]
+    },
+    {
+      "id": "antro",
+      "name": "Antro",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "low",
+      "iceFaces": [
+        3,
+        5,
+        6
+      ],
+      "blackIce": false,
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper"
+        ],
+        [
+          "gadget"
+        ],
+        [
+          "dance"
+        ],
+        [
+          "dance"
+        ],
+        [
+          "add-on"
+        ],
+        [
+          "upper"
+        ]
+      ],
+      "bonusFragments": 3,
+      "bonusCorners": [
+        false,
+        false,
+        true,
+        false,
+        true,
+        true
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "upper",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h3"
+          ],
+          "capacity": 2,
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 3,
+                "shielded": true
+              },
+              {
+                "value": 4,
+                "shielded": true
+              },
+              {
+                "value": 5,
+                "shielded": true
+              }
+            ]
+          },
+          "neighbors": [
+            "add-on",
+            "gadget"
+          ]
+        },
+        {
+          "id": "add-on",
+          "type": "effect",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 6,
+                "shielded": true
+              }
+            ]
+          },
+          "effect": {
+            "kind": "discard-attachment",
+            "cardType": "add-on",
+            "scope": "cybernet",
+            "optional": true
+          },
+          "neighbors": [
+            "upper",
+            "dance"
+          ]
+        },
+        {
+          "id": "gadget",
+          "type": "effect",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 6,
+                "shielded": true
+              }
+            ]
+          },
+          "effect": {
+            "kind": "discard-attachment",
+            "cardType": "gadget",
+            "scope": "cybernet",
+            "optional": true
+          },
+          "neighbors": [
+            "upper",
+            "dance"
+          ]
+        },
+        {
+          "id": "dance",
+          "type": "normal",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": 2,
+          "neighbors": [
+            "add-on",
+            "gadget"
+          ]
+        }
+      ],
+      "assetRefs": [
+        "sp-en-blocks-a4-p02-c01"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "electromagnetic-pulse",
+      "name": "Electromagnetic Pulse",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "low",
+      "iceFaces": [
+        4,
+        5,
+        6
+      ],
+      "bonusFragments": 5,
+      "bonusCorners": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "danger"
+        ],
+        [
+          "atom"
+        ],
+        [
+          "defense"
+        ],
+        [
+          "globe"
+        ],
+        [
+          "circuit"
+        ],
+        [
+          "mask"
+        ]
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "mask",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "circuit",
+            "danger"
+          ],
+          "displayShape": "circle"
+        },
+        {
+          "id": "danger",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "mask",
+            "atom"
+          ],
+          "displayShape": "circle"
+        },
+        {
+          "id": "atom",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "danger",
+            "defense"
+          ],
+          "displayShape": "circle"
+        },
+        {
+          "id": "defense",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "atom",
+            "globe"
+          ],
+          "displayShape": "circle",
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 2,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "globe",
+          "type": "normal",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "defense",
+            "circuit"
+          ],
+          "displayShape": "circle"
+        },
+        {
+          "id": "circuit",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "globe",
+            "mask"
+          ],
+          "displayShape": "circle"
+        }
+      ],
+      "spaceArrows": [
+        {
+          "from": "danger",
+          "to": "mask"
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "sacrifice-per-player",
+          "amount": 1,
+          "minimumControlledPawns": 2
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p02-c02"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "copyleft",
+      "name": "Copyleft",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "low",
+      "iceFaces": [
+        2,
+        3,
+        6
+      ],
+      "bonusFragments": 3,
+      "bonusCorners": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "headset"
+        ],
+        [
+          "right"
+        ],
+        [
+          "portrait"
+        ],
+        [
+          "portrait"
+        ],
+        [
+          "shield"
+        ],
+        [
+          "shield"
+        ]
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "headset",
+          "to": "right"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "shield",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h7"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "headset",
+            "portrait"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 4,
+                "shielded": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "headset",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "right"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "headset",
+            "portrait"
+          ]
+        },
+        {
+          "id": "portrait",
+          "type": "normal",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "shield",
+            "right"
+          ]
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "gain-bonus-all-players",
+          "amount": 1
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p02-c03"
+      ],
+      "provisional": true
+    },
+    {
+      "id": "clandestine-broadcast",
+      "name": "Clandestine Broadcast",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "isCentralCore": false,
+      "iceValue": "medium",
+      "iceFaces": [
+        2,
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "broadcast"
+        ],
+        [
+          "broadcast"
+        ],
+        [
+          "right"
+        ],
+        [
+          "left"
+        ],
+        [
+          "broadcast"
+        ],
+        [
+          "broadcast"
+        ]
+      ],
+      "bonusFragments": 0,
+      "bonusCorners": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "spaces": [
+        {
+          "id": "broadcast",
+          "type": "special",
+          "zoneIds": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h7"
+          ],
+          "capacity": "unlimited",
+          "neighbors": [
+            "right",
+            "left"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 4,
+                "shielded": true
+              },
+              {
+                "value": 3,
+                "shielded": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "broadcast",
+            "left"
+          ]
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "broadcast",
+            "right"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "controller-core",
+          "target": "broadcast"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p03-c01"
+      ]
+    },
+    {
+      "id": "pink-district",
+      "name": "Pink District",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        2,
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "right"
+        ],
+        [
+          "right"
+        ],
+        [
+          "gynoid"
+        ],
+        [
+          "gynoid"
+        ],
+        [
+          "left"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "bonusFragments": 2,
+      "bonusCorners": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "gynoid",
+          "to": "left"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h7"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "right",
+            "gynoid"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h3",
+            "h4"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "left",
+            "gynoid"
+          ]
+        },
+        {
+          "id": "gynoid",
+          "type": "pawn",
+          "pawnId": "gynoid",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "displayShape": "circle",
+          "neighbors": [
+            "left",
+            "right"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "gynoid"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p03-c03"
+      ]
+    },
+    {
+      "id": "yakuza",
+      "name": "Yakuza",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        4,
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper"
+        ],
+        [
+          "right"
+        ],
+        [
+          "dragon"
+        ],
+        [
+          "dragon"
+        ],
+        [
+          "left"
+        ],
+        [
+          "upper"
+        ]
+      ],
+      "bonusFragments": 3,
+      "bonusCorners": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "right",
+          "to": "upper"
+        },
+        {
+          "from": "left",
+          "to": "dragon"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "upper",
+          "type": "normal",
+          "zoneIds": [
+            "h2",
+            "h3"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "left",
+            "right"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 3,
+                "shielded": false
+              },
+              {
+                "value": 2,
+                "shielded": false
+              },
+              {
+                "value": 1,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper",
+            "dragon"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper",
+            "dragon"
+          ]
+        },
+        {
+          "id": "dragon",
+          "type": "normal",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": 2,
+          "displayShape": "capsule",
+          "neighbors": [
+            "left",
+            "right"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "attack-pawn",
+          "amount": 1,
+          "scope": "adjacent-blocks",
+          "optional": true
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p04-c01"
+      ]
+    },
+    {
+      "id": "corporate-scandal",
+      "name": "Corporate Scandal",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        5,
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper-swirl"
+        ],
+        [
+          "circuit"
+        ],
+        [
+          "shield"
+        ],
+        [
+          "lower-swirl"
+        ],
+        [
+          "helmet"
+        ],
+        [
+          "camera"
+        ]
+      ],
+      "bonusFragments": 4,
+      "bonusCorners": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "camera",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "helmet",
+            "upper-swirl"
+          ]
+        },
+        {
+          "id": "upper-swirl",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "camera",
+            "circuit"
+          ]
+        },
+        {
+          "id": "circuit",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-swirl",
+            "shield"
+          ]
+        },
+        {
+          "id": "shield",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "circuit",
+            "lower-swirl"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 3,
+                "shielded": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "lower-swirl",
+          "type": "normal",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "shield",
+            "helmet"
+          ]
+        },
+        {
+          "id": "helmet",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "lower-swirl",
+            "camera"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "discard-hands-above-markers",
+          "markerThreshold": 5
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p04-c02"
+      ]
+    },
+    {
+      "id": "black-clinic",
+      "name": "Black Clinic",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        3,
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "helmet"
+        ],
+        [
+          "hand"
+        ],
+        [
+          "clinic"
+        ],
+        [
+          "clinic"
+        ],
+        [
+          "left"
+        ],
+        [
+          "stream"
+        ]
+      ],
+      "bonusFragments": 4,
+      "bonusCorners": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "helmet",
+          "to": "hand"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "stream",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "left",
+            "helmet"
+          ]
+        },
+        {
+          "id": "helmet",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "stream",
+            "hand"
+          ]
+        },
+        {
+          "id": "hand",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "helmet",
+            "clinic"
+          ],
+          "modifier": {
+            "kind": "hand-size",
+            "amount": -1
+          }
+        },
+        {
+          "id": "clinic",
+          "type": "special",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "neighbors": [
+            "hand",
+            "left"
+          ],
+          "displayShape": "circle",
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 1,
+                "shielded": false
+              },
+              {
+                "value": 2,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "clinic",
+            "stream"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "discard-pawn-attachments",
+          "scope": "cybernet"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p04-c03"
+      ]
+    },
+    {
+      "id": "engineering-war",
+      "name": "Engineering War",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        3,
+        6
+      ],
+      "edges": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "boundarySpaces": [
+        [],
+        [
+          "right"
+        ],
+        [],
+        [],
+        [
+          "defense"
+        ],
+        []
+      ],
+      "bonusFragments": 5,
+      "bonusCorners": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h2",
+        "h3",
+        "h5",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "defense",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-mk-2"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 1,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "drone-mk-2",
+          "type": "pawn",
+          "pawnId": "drone-mk-2",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "neighbors": [
+            "defense",
+            "right"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-mk-2"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "drone-mk-2"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p05-c01"
+      ]
+    },
+    {
+      "id": "combat-prototypes",
+      "name": "Combat Prototypes",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        4,
+        6
+      ],
+      "edges": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [],
+        [
+          "right"
+        ],
+        [
+          "lower-right"
+        ],
+        [],
+        [
+          "left"
+        ],
+        [
+          "upper-left"
+        ]
+      ],
+      "bonusFragments": 5,
+      "bonusCorners": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonPlayableZoneIds": [
+        "h3",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "upper-left",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "left",
+            "drone-probe"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-probe",
+            "lower-right"
+          ]
+        },
+        {
+          "id": "lower-right",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "right",
+            "drone-probe"
+          ]
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-left",
+            "drone-probe"
+          ]
+        },
+        {
+          "id": "drone-probe",
+          "type": "pawn",
+          "pawnId": "drone-probe",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "neighbors": [
+            "upper-left",
+            "right",
+            "lower-right",
+            "left"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "drone-probe"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p05-c02"
+      ]
+    },
+    {
+      "id": "military-development",
+      "name": "Military Development",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "medium",
+      "iceFaces": [
+        4,
+        6
+      ],
+      "edges": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "boundarySpaces": [
+        [],
+        [
+          "right"
+        ],
+        [],
+        [],
+        [
+          "hand"
+        ],
+        []
+      ],
+      "bonusFragments": 5,
+      "bonusCorners": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "nonPlayableZoneIds": [
+        "h2",
+        "h3",
+        "h5",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "hand",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-turret"
+          ],
+          "modifier": {
+            "kind": "hand-size",
+            "amount": 1
+          }
+        },
+        {
+          "id": "drone-turret",
+          "type": "pawn",
+          "pawnId": "drone-turret",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "neighbors": [
+            "hand",
+            "right"
+          ]
+        },
+        {
+          "id": "right",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-turret"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "drone-turret"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p05-c03"
+      ]
+    },
+    {
+      "id": "arms-industry",
+      "name": "Arms Industry",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "black",
+      "blackIce": true,
+      "iceFaces": [
+        6
+      ],
+      "edges": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper-right"
+        ],
+        [],
+        [],
+        [
+          "hand"
+        ],
+        [
+          "left"
+        ],
+        [
+          "upper-left"
+        ]
+      ],
+      "bonusFragments": 4,
+      "bonusCorners": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "nonPlayableZoneIds": [
+        "h1",
+        "h4",
+        "h5"
+      ],
+      "spaces": [
+        {
+          "id": "upper-left",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-right",
+            "left"
+          ]
+        },
+        {
+          "id": "upper-right",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-left"
+          ]
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-left",
+            "hand"
+          ]
+        },
+        {
+          "id": "hand",
+          "type": "normal",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "left"
+          ],
+          "modifier": {
+            "kind": "hand-size",
+            "amount": -1
+          }
+        }
+      ],
+      "effects": {
+        "inCybernet": {
+          "kind": "place-block-bonus",
+          "amount": 1
+        },
+        "underControl": {
+          "kind": "collect-block-bonus"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p06-c01"
+      ],
+      "provisional": true
     }
   ]
 }

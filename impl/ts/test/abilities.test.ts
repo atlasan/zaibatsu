@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { blockById, type GameData, type GameState } from "../src/domain/types.ts";
 import { neighbor, opposite, type Coord } from "../src/domain/hex.ts";
 import {
@@ -10,7 +10,7 @@ import {
   validSearchPlacements,
 } from "../src/engine/index.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function rotFacing(blockId: string, dir: number): number {
@@ -105,13 +105,13 @@ describe("reboot", () => {
 
 describe("ability removal via attachment", () => {
   test("an attachment that removes Search blocks it", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 1 });
     s.cybernet.pawns = [];
     s.cybernet.placePawn({ pawnId: "speedrunner-red", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
     s.blockPile = ["data-haven"];
-    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["search"] };
-    s.cybernet.pawnById("speedrunner-red")!.attachments = [{ cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 }];
+    d.cards[0]!.attach = { as: "pawn", slot: "add-on", removes: ["search"] };
+    s.cybernet.pawnById("speedrunner-red")!.attachments = [{ cardId: d.cards[0]!.id, slot: "add-on", bonusPaid: 0 }];
     expect(() => search(s, d, "speedrunner-red", 2, rotFacing("data-haven", 2))).toThrow();
   });
 });

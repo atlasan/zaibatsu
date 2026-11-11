@@ -182,6 +182,42 @@ func LoadDefault(expansion string) (*domain.GameData, error) {
 	return Load(dir, expansion)
 }
 
+// LoadThreats reads a validated component sidecar before a complete expansion bundle exists.
+func LoadThreats(expansion string, regression ...bool) ([]domain.Threat, error) {
+	dir, err := FindSpecDir()
+	if err != nil {
+		return nil, err
+	}
+	if len(regression) > 0 && regression[0] {
+		dir = filepath.Join(dir, "..", "fixtures", "provisional-v1", "spec", "data")
+	}
+	if err = validateManifest(dir, expansion); err != nil {
+		return nil, err
+	}
+	var file struct {
+		Threats []domain.Threat `json:"threats"`
+	}
+	if err = readJSON(filepath.Join(dir, expansion, "threats.json"), &file); err != nil {
+		return nil, err
+	}
+	return file.Threats, nil
+}
+
+// LoadMode selects a validated local mode, leaving the official default intact.
+func LoadMode(expansion, modeID string) (*domain.GameData, error) {
+	gd, err := LoadDefault(expansion)
+	if err != nil {
+		return nil, err
+	}
+	for _, mode := range append([]domain.Mode{gd.Mode}, gd.Modes...) {
+		if mode.ID == modeID {
+			gd.Mode = mode
+			return gd, nil
+		}
+	}
+	return nil, fmt.Errorf("unknown mode %q", modeID)
+}
+
 // validate performs light structural checks the loader guarantees to the engine.
 func validate(gd *domain.GameData) error {
 	if len(gd.Blocks) == 0 {

@@ -30,6 +30,10 @@ their exact SHA-256 values.
 
 See [coverage.md](coverage.md) for the current source-set assessment.
 
+The [asset review register](asset-review.md) saves per-component visual
+observations, normalized gameplay text, raw source extraction, individual sheet
+pieces and remaining interpretation checks.
+
 ## External register and rights
 
 `external-sources.json` records the official project, game, and download pages,
@@ -46,6 +50,12 @@ The [artifact toolset](toolset.md) renders and crops printable PDF sheets into
 ignored local PNG/WebP masters and deterministic atlases. Its tracked
 `spec/assets/manifest.json` records crop geometry, source hashes, output hashes,
 and optional gameplay references; it never embeds original PDFs or artwork.
+
+Core refresh includes both English18-card control sheets. Their36 stable
+`control-card` ids now live in the shared manifest rather than the supplemental
+review list. The combined review register still has228 unique assets; the core
+manifest has201. This makes physical references reusable by both loaders and
+clients without promoting unreviewed gameplay definitions.
 
 `gameplayRef` is the promotion boundary between a physical crop and a canonical
 gameplay record. Only add it when the target record is record-verified in

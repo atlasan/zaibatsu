@@ -1,0 +1,31 @@
+[
+  {
+    "type": "elimination",
+    "pawnId": "speedrunner-pink"
+  },
+  {
+    "type": "card-discarded",
+    "cardId": "electric-sheep"
+  },
+  {
+    "type": "draw",
+    "playerId": "p1",
+    "cardId": "biochip"
+  },
+  {
+    "type": "draw",
+    "playerId": "p1",
+    "cardId": "electric-sheep"
+  },
+  {
+    "type": "draw",
+    "playerId": "p1",
+    "cardId": "octagon-dex"
+  },
+  {
+    "type": "phase-advanced",
+    "playerId": "p1",
+    "fromPhase": "beginning",
+    "toPhase": "action"
+  }
+]

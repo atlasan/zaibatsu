@@ -1,4 +1,6 @@
-import { coordKey, neighbor, type BonusIcon, type Coord, type PlacedBlock } from "../domain/hex.ts";
+import {validateBlockBonus} from "./block-bonus.ts";
+import {requireBonusReserve,validateGlobalBonusEffect} from "./bonus-pool.ts";
+import { newCybernet,coordKey, neighbor, type BonusIcon, type Coord, type PlacedBlock } from "../domain/hex.ts";
 import { blockById, playerById, type Block, type GameData, type GameState } from "../domain/types.ts";
 
 const CORNER_DIRECTIONS: Array<readonly [number, number]> = [
@@ -51,47 +53,24 @@ function blockHasFragmentAtKey(gd: GameData, placed: PlacedBlock, key: string): 
   return blockVertexKeys(block, placed).some((entry) => entry.key === key);
 }
 
-/**
- * Detects any newly formed bonus icons created by the latest placed block and
- * stores them on the board exactly once.
- */
-export function detectBonusIconsAfterPlacement(
-  s: GameState,
-  gd: GameData,
-  placed: PlacedBlock,
-): BonusIcon[] {
-  const block = blockById(gd, placed.blockId);
-  if (!block) return [];
-  const created: BonusIcon[] = [];
-  for (const candidate of blockVertexKeys(block, placed)) {
-    if (s.cybernet.bonusIcons.some((icon) => icon.key === candidate.key)) continue;
-    const incident = candidate.coords.map((coord) => s.cybernet.at(coord));
-    if (incident.some((entry) => !entry)) continue;
-    if (!incident.every((entry) => blockHasFragmentAtKey(gd, entry!, candidate.key))) continue;
-    const icon: BonusIcon = { key: candidate.key, coords: candidate.coords };
-    s.cybernet.bonusIcons.push(icon);
-    created.push(icon);
-  }
-  return created;
+/** Pure candidate calculation; the virtual/real placed block must be present. */
+function bonusCandidates(s:GameState,gd:GameData,placed:PlacedBlock):BonusIcon[] {
+ const block=blockById(gd,placed.blockId);if(!block)return [];
+ return blockVertexKeys(block,placed).filter(candidate=>!s.cybernet.bonusIcons.some(i=>i.key===candidate.key) && candidate.coords.every(coord=>{const pb=s.cybernet.at(coord);return !!pb && blockHasFragmentAtKey(gd,pb,candidate.key);})).map(candidate=>({key:candidate.key,coords:candidate.coords}));
 }
-
-/**
- * Collects any formed bonus icons now controlled by playerId. Each icon pays
- * exactly one counter once for the whole game.
- */
-export function collectControlledBonusIcons(
-  s: GameState,
-  playerId: string,
-): BonusIcon[] {
-  const player = playerById(s, playerId);
-  if (!player) return [];
-  const collected: BonusIcon[] = [];
-  for (const icon of s.cybernet.bonusIcons) {
-    if (icon.collectedBy) continue;
-    if (!icon.coords.every((coord) => s.cybernet.at(coord)?.ownerId === playerId)) continue;
-    icon.collectedBy = playerId;
-    player.bonusCounters++;
-    collected.push(icon);
-  }
-  return collected;
+/** Preview allocation and the following global award without using state or RNG. */
+export function bonusPlacementError(s:GameState,gd:GameData,placed:PlacedBlock):string|undefined {
+ const cy=newCybernet();cy.blocks=[...s.cybernet.blocks,placed];cy.bonusIcons=s.cybernet.bonusIcons;cy.pawns=s.cybernet.pawns;const virtual={...s,cybernet:cy},block=blockById(gd,placed.blockId);
+ try {if(block){validateGlobalBonusEffect(block);validateBlockBonus(block);}const effect=block?.effects?.inCybernet,award=effect && typeof effect!=="string" && effect.kind==="gain-bonus-all-players"?s.players.length*effect.amount!:0;requireBonusReserve(s,bonusCandidates(virtual,gd,placed).length+award+(typeof effect==="object" && effect.kind==="place-block-bonus"?1:0));}catch(error){return (error as Error).message;}
+}
+/** Allocate every newly formed icon atomically before any placement effect. */
+export function detectBonusIconsAfterPlacement(s:GameState,gd:GameData,placed:PlacedBlock):BonusIcon[] {
+ const created=bonusCandidates(s,gd,placed);requireBonusReserve(s,created.length);if(s.bonusCounterSupply!==undefined)for(const icon of created)icon.counterPlaced=true;s.cybernet.bonusIcons.push(...created);return created;
+}
+/** Transfer existing board counters exactly once; reserve does not change. */
+export function collectControlledBonusIcons(s:GameState,playerId:string):BonusIcon[] {
+ const player=playerById(s,playerId);if(!player)return [];
+ const collected=s.cybernet.bonusIcons.filter(icon=>!icon.collectedBy && icon.coords.every(coord=>s.cybernet.at(coord)?.ownerId===playerId));
+ if(s.bonusCounterSupply!==undefined && collected.some(icon=>!icon.counterPlaced))throw new Error("a source bonus icon needs exactly one uncollected physical counter");
+ for(const icon of collected){icon.collectedBy=playerId;delete icon.counterPlaced;player.bonusCounters++;}return collected;
 }

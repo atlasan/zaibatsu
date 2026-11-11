@@ -1,0 +1,1026 @@
+﻿assetId,game,kind,name,category,class,printedRules,description,symbols,actions,specificInstructions,unresolved,artifactId,page,archiveMember,sourceSha256
+sh-en-action-cards-p01-c01,shadowraiders,action-card,Invisible Serum,add-on,Accelerator,,Syringe-like serum cylinder.,"Cost: 1 bonus counter.
+Stealth movement +1.","icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; add a stealth movement step.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c02,shadowraiders,action-card,Stealth Camo,add-on,E-Synapse,,Round camouflage chip.,"Cost: 1 bonus counter.
+Once-per-turn free stealth movement: 3 steps.","icebreaker
+move: 1 step
+Once-per-turn free stealth movement: 3 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant once-per-turn free three-step stealth movement.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c03,shadowraiders,action-card,Cyber Wings,add-on,Cyborg,,Black mechanical wing.,"Cost: 2 bonus counters.
+Once-per-turn free stealth movement: 1d6 steps.","icebreaker
+move: 1 step
+Once-per-turn free stealth movement: 1d6 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant once-per-turn free 1d6 stealth movement.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c04,shadowraiders,action-card,Ghost N812,add-on,Brainchip,,Needle-ended cybernetic chip.,"Cost: 1 bonus counter.
+Grants card-activated stealth movement badge; no step count printed.","icebreaker
+move: 1 step
+Grants card-activated stealth movement badge; no step count printed.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grants the printed stealth movement attribute; interpret its interaction with existing movement separately.,Ghost N812 has a card-activation stealth badge without a step count; do not invent a numeric movement budget.,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c05,shadowraiders,action-card,Flatline,add-on,Brainchip,,Wired needle-ended chip.,"Cost: 1 bonus counter.
+Grants gadget slot.
+Card-activated Icebreaker.
+Crossed-out Delete.","icebreaker
+move: 1 step
+Card-activated Icebreaker.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant gadget slot and Icebreaker; cancel Delete.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c06,shadowraiders,action-card,Alpha Wolf,add-on,Brainchip,,Multi-pin chip.,"Cost: 1 bonus counter.
+Grants mission slot.
+Once-per-turn free Search.","icebreaker
+move: 1 step
+Once-per-turn free Search.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant mission slot and once-per-turn free Search.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c07,shadowraiders,action-card,Hardsuit Volcano,armor,,This pawn ignores all Explosive ([Explosive icon]) attacks.,Heavy armored suit marked 13.,"Cost: 2 bonus counters.
+Defense: black faces 1-4; white faces 5-6.","reboot
+move: 1 step
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as armor; ignore Explosive attacks; use printed defense row.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c08,shadowraiders,action-card,Hardsuit Chimaera,armor,,This pawn ignores all Explosive ([Explosive icon]) attacks.,Heavy armored suit marked SOC68.,"Cost: 2 bonus counters.
+Defense: black faces 1-4; white faces 5-6.","reboot
+move: 1 step
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as armor; ignore Explosive attacks; use printed defense row.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p01-c09,shadowraiders,action-card,Hardsuit Basilisk,armor,,This pawn ignores all Explosive ([Explosive icon]) attacks.,Heavy armored suit marked 751.,"Cost: 2 bonus counters.
+Defense: black faces 1-4; white faces 5-6.","reboot
+move: 1 step
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as armor; ignore Explosive attacks; use printed defense row.,,sh-en-action-cards,1,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c01,shadowraiders,action-card,Viper,weapon,,,Long assault rifle.,"Cost: 1 bonus counter.
+Attack +1 skull.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as pawn weapon; add one skull.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c02,shadowraiders,action-card,Juggernaut,weapon,,,Large heavy gun.,"Cost: 3 bonus counters.
+Attack +2 skulls.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as pawn weapon; add two skulls.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c03,shadowraiders,action-card,Sara Jane,weapon,,"When you use the Delete action ([Delete icon]), add ([1 skull]) for each action card you discard from your hand.",Long black firearm.,Cost: 2 bonus counters.,"delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.","When using Delete, discard cards from hand for one extra skull each.",,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c04,shadowraiders,action-card,Stryker,weapon,,,Compact assault rifle.,"Cost: 1 bonus counter.
+Attack +1 skull.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as pawn weapon; add one skull.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c05,shadowraiders,action-card,Cerberus,weapon,,,Compact pistol.,"Cost: 2 bonus counters.
+Attack +1 skull.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as pawn weapon; add one skull.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c06,shadowraiders,action-card,P.K.D. III,weapon,,This pawn gains +([2 skulls]) if your target is a Cyborg ([Cyborg icon]).,Pistol with round detail.,"Cost: 2 bonus counters.
+Attack +1 skull.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Add one skull normally and two additional skulls against a Cyborg target.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c07,shadowraiders,action-card,Jack the Ripper,weapon,,,Assault rifle.,"Cost: 1 bonus counter.
+Attack +1 skull.","delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as pawn weapon; add one skull.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c08,shadowraiders,action-card,Masamune,weapon,Razorblade,This pawn does not cause Threats to activate.,Long straight sword.,Cost: 1 bonus counter.,"delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attached pawn does not activate Threats.,,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p02-c09,shadowraiders,action-card,Valkyrie,weapon,Sniper,This pawn may use Delete actions ([Delete icon]) on any pawn in the Cybernet. These attacks are limited to ([1 skull]).,Scoped long rifle.,Cost: 2 bonus counters.,"delete
+stealth move: 1 step
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.","Enable global pawn targeting, limited to one skull per attack.",,sh-en-action-cards,2,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c01,shadowraiders,action-card,Know How,mission,Cargo: Code-TradeSecret,You must move the “Code” as Cargo from a block containing a pawn controlled by another Player to the Central Core.,Data card labeled TOP SECRET.,"Cost: 1 bonus counter.
+Cargo tag.
+Hand size +1.
+Cannot stealth.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Attach mission; carry Code from a block containing another player’s pawn to Central Core; gain the printed reward. The origin block need not be controlled by that player.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c02,shadowraiders,action-card,Hot Potato,mission,Cargo: Mule-Bomb,You must move the “Mule” as Cargo from Hot-Zone to the Central Core. *Sacrifice this Cargo: Attack each pawn in this block with ([2 skulls]).,Heavy armored mule silhouette.,"Cargo tag.
+Cannot stealth.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Mule from Hot-Zone to Central Core; optional cargo sacrifice attacks each pawn in current block with two skulls.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c03,shadowraiders,action-card,Babysitter,mission,Cargo: Lost-Child,You must move the “Lost Child” as Cargo from Arkadia to the Central Core.,Child and small floating device.,"Cargo tag.
+Movement -1.
+Cannot stealth.
+Reward: Deviser-C control card and 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Lost Child from Arkadia to Central Core; apply movement penalty and no stealth.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c04,shadowraiders,action-card,Glitch,mission,Cargo: Aimbot-Bot,You must move the “Aimbot” as Cargo from Shooter to the Central Core. *You may only attempt to Icebreaker ([Icebreaker icon]) pawns.,Round tentacled bot.,"Cargo tag.
+Cannot stealth.
+Card-activated Icebreaker.
+Reward: 1 medal.","delete
+move: 2 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Aimbot from Shooter to Central Core; Icebreaker targets are limited to pawns; cannot stealth.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c05,shadowraiders,action-card,Brain Drain,mission,Cargo: Isolated Brain,You must move the “Isolated Brain” as Cargo from Triad to the Central Core.,Small cylindrical brain unit.,"Cargo tag.
+Once-per-turn free movement: 3 steps.
+Cannot stealth.
+Reward: 1 medal.","delete
+move: 2 steps
+Once-per-turn free movement: 3 steps.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Isolated Brain from Triad to Central Core; apply printed movement attribute and no stealth.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c06,shadowraiders,action-card,Show Busineess,mission,Cargo: Popstar-Lovedoll,"You must move the “Popstar” as Cargo from Senso-Red to the Central Core.
+She is quite valuable. The masses love her scandals and her lack of talent.",Female popstar silhouette.,"Cargo tag.
+Movement -1.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Popstar from Senso-Red to Central Core; reduce movement by one.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c07,shadowraiders,action-card,Shipper,mission,Cargo: Reminder,You must move the “Reminder” as Cargo from Memory Maker to the Central Core. *Sacrifice this Cargo: Activate the ([under-control icon]) ability of this block.,Wired remote-control box.,"Cargo tag.
+Movement -1.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Reminder from Memory Maker to Central Core; optionally sacrifice cargo to activate the occupied block’s under-control ability.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c08,shadowraiders,action-card,Prison Break,mission,Cargo: The Convict,You must move “The Convict” as Cargo from SRONA Corp to the Central Core.,Standing convict silhouette.,"Cargo tag.
+Defense modifier: removes shield from die face 3.
+Cannot stealth.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Convict from SRONA Corp to Central Core; remove the shield from defense die face 3; cannot stealth.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p03-c09,shadowraiders,action-card,Escort,mission,Cargo: Glittergirl-Cyborg,You must move the “Glittergirl” as Cargo from Beauty Claire to the Central Core.,Female cyborg wearing a hat.,"Cargo tag.
+Movement -1.
+Reward: 1 medal.","delete
+move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Carry Glittergirl from Beauty Claire to Central Core; reduce movement by one.,,sh-en-action-cards,3,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c01,shadowraiders,action-card,Extraction,mission,Mark: Doughboy,"Eliminate the Mark “Doughboy” and all other Threats in Triad.
+Enter, eliminate, extract and exit.",Armored soldier silhouette.,"Mark tag: fixed attack value 5.
+Defense: black faces 1-4; white faces 5-6.
+Reward: Deviser-B control card and 1 medal.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Doughboy and all other Threats in Triad to complete mission.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c02,shadowraiders,action-card,Commission,mission,Mark: Breetva,Eliminate the Mark “Breetva” and all other Threats in SRONA Corp.,Helmeted soldier silhouette.,"Mark tag: fixed attack value 5.
+Defense: black faces 1-4; white faces 5-6.
+Reward: 2 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Breetva and all other Threats in SRONA Corp.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c03,shadowraiders,action-card,Fragged,mission,Mark: Sardine,Eliminate the Mark “Sardine” and all other Threats in Hot-Zone.,Heavy armored Sardine figure.,"Mark tag: fixed attack value 5.
+Defense: black faces 1-5; white face 6.
+Reward: 3 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Sardine and all other Threats in Hot-Zone.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c04,shadowraiders,action-card,Gangsta,mission,Mark: Gangboss,Eliminate the Mark “Gangboss” in Edgezone. *Do not discard an attached Accelerator ([Accelerator icon]).,Standing Gangboss silhouette.,"Mark tag: fixed attack value 4.
+Defense: black faces 1-4; white faces 5-6.
+Reward: 1 medal.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Gangboss in Edgezone; preserve an attached Accelerator as instructed.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c05,shadowraiders,action-card,Emulator,mission,Mark / Cargo: Copycat,Eliminate the Mark “Copycat” in Maas Biolabs. *Then return to the Central Core with this card.,Thin humanoid Copycat silhouette.,"Mark tag: fixed attack value 6.
+Cargo tag: black die face 3.
+Defense: black faces 1-2 and 6; white faces 3-5.
+Reward: 2 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Copycat in Maas Biolabs; convert to cargo and return this card to Central Core.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c06,shadowraiders,action-card,Strafing,mission,Mark: Bioroid-Cyborg,Eliminate the Mark “Bioroid” and all other Threats in Shooter.,Heavy cyborg silhouette.,"Mark tag: fixed attack value 6.
+Defense: black faces 1-4; white faces 5-6.
+Reward: 3 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Bioroid and all other Threats in Shooter.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c07,shadowraiders,action-card,Wetwork,mission,Mark: Natty-Dread,Eliminate the Mark “Natty-Dread” in Zion Cluster.,Standing figure with star motifs.,"Mark tag: fixed attack value 5.
+Defense: black faces 1-3; white faces 4-6.
+Reward: 1 medal.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate Natty-Dread in Zion Cluster.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c08,shadowraiders,action-card,Snooper,mission,Mark: Spycam-Drone,Eliminate the Mark “Spycam” and all other Threats in any block containing a Drone ([Drone icon]).,Floating multi-lens spycam.,"Mark tag: fixed attack value 4.
+Defense: black faces 1-2; white faces 3-6.
+Reward: 2 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Choose a block containing a Drone; eliminate Spycam and all other Threats there.,,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p04-c09,shadowraiders,action-card,Luddism,mission,Mark: Tupilaq-Bomb,"Eliminate the Mark “Tupilaq” in Arkadia. *After eliminating “Tupilaq”, attack each pawn in the block with ([1 skull]).",Heavy robot with arm cannons.,"Mark tag: fixed attack value 6.
+Defense: black faces 1-4; white faces 5-6.
+Reward: 3 medals.","delete
+stealth move: 2 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.","Eliminate Tupilaq in Arkadia, then attack every pawn in that block with one skull.",,sh-en-action-cards,4,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c01,shadowraiders,action-card,Adquisition,mission,Cargo: Heavy Plume-Bot,Gain control of NORAD. *“Heavy Plume Bot” can only be activated in this block.,Winged mechanical bird.,"Cargo tag: black die face 3.
+Card-activated Icebreaker.
+Reward: 1 medal.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Gain control of NORAD; activate Heavy Plume Bot only in NORAD.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c02,shadowraiders,action-card,Runner C,gadget,,You may discard this card at any time.,Standing runner with a sword.,"Hand size -1.
+Icebreaker: one card-activated badge and one once-per-turn free badge.","icebreaker
+move: 3 steps
+Icebreaker: one card-activated badge and one once-per-turn free badge.
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as pawn gadget; grant both card-activated and once-per-turn free Icebreaker; hand size -1; discard freely.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c03,shadowraiders,action-card,Runner A,gadget,,You may discard this card at any time.,Standing runner with headphones.,"Hand size -1.
+White dice faces 1 and 5.
+Card-activated Icebreaker.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as pawn gadget; apply ICE face modifiers 1 and 5 and hand penalty; discard freely.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c04,shadowraiders,action-card,Crud,mission,Cargo: Gecko-Bot,Gain control of Beauty Claire. *“Gecko Bot” can only be activated in this block.,Mechanical gecko.,"Cargo tag: black die face 2.
+Card-activated Icebreaker.
+Reward: 1 medal.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Gain control of Beauty Claire; activate Gecko Bot only in that block.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c05,shadowraiders,action-card,Runner D,gadget,,You may discard this card at any time.,Hooded runner silhouette.,"Cost: 1 bonus counter.
+Hand size -1.
+Plus white ICE die.
+Card-activated Icebreaker.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as pawn gadget; apply ICE and hand modifiers; discard freely.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c06,shadowraiders,action-card,Runner B,gadget,,You may attach Brainchip ([Brainchip icon]) cards to pawns you control without paying their cost.,Running figure with cables.,"Hand size -2.
+Plus two black ICE dice.
+Card-activated Icebreaker.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as pawn gadget; waive Brainchip costs on controlled pawns; apply printed modifiers.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c07,shadowraiders,action-card,Blackmail,mission,Cargo: Eyebug-Bot,Gain control of Memory Maker. *“Eyebug Bot” can only be activated in this block.,Floating eyebot devices.,"Cargo tag.
+Plus black ICE die.
+Card-activated Icebreaker.
+Reward: Deviser-A control card and 1 medal.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Gain control of Memory Maker; activate Eyebug Bot only there.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c08,shadowraiders,action-card,Beat the Dealer,mission,Cargo: Shark FX-Bot,Gain control of Arkadia. *“Shark FX Bot” can only be activated in this block.,Mechanical shark.,"Cargo tag: black die face 5.
+Card-activated Icebreaker.
+Reward: 1 medal.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Gain control of Arkadia; activate Shark FX Bot only there.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p05-c09,shadowraiders,action-card,Simstim Tech,mission,Cargo: Paparazzo-Bot,Gain control of Senso-Red. *“Paparazzo Bot” can only be activated in this block.,Walking multi-lens camera.,"Cargo tag: black die face 4.
+Card-activated Icebreaker.
+Reward: 1 medal.","icebreaker
+move: 3 steps
+Card-activated Icebreaker.
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Gain control of Senso-Red; activate Paparazzo Bot only there.,,sh-en-action-cards,5,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c01,shadowraiders,action-card,Car Chase,mission,,Move this pawn through six different blocks in one turn.,Futuristic police car.,"Cost: 1 bonus counter.
+Reward: 2 medals.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Track six distinct blocks traversed by the attached pawn in one turn.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c02,shadowraiders,action-card,Street Racing,mission,,Move this pawn through ten different spaces in one turn.,Futuristic motorcycle.,"Cost: 1 bonus counter.
+Reward: 1 medal.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Track ten distinct spaces traversed by the attached pawn in one turn.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c03,shadowraiders,action-card,Red Riding Hood,mission,Cargo: Hit-girl,Eliminate all Threats in NORAD. *“HitGirl” can only be activated in this block.,Small armed girl silhouette.,"Cargo tag.
+Attack: 2 skulls.
+Reward: 2 medals.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Eliminate every Threat in NORAD; activate HitGirl only in NORAD.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c04,shadowraiders,action-card,Terminator,mission,,"Eliminate one, two, or three Shadowraiders. *Before entering combat you may abandon this Mission and collect the current Reward.",Armed humanoid robot.,"Cost: 1 bonus counter.
+Counters I, II, III.
+Rewards: 1, 2, 3 medals respectively.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.","Track eliminated Shadowraiders; before another combat, optionally abandon and collect the current reward.",,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c05,shadowraiders,action-card,Can Opener,mission,,Eliminate two Drones ([Drone icon]).,Round can opener device.,"Counters 01 and 02 with Drone icons.
+Reward: 3 medals.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.","Track two Drone eliminations, then collect three medals.",,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c06,shadowraiders,action-card,Lacuna Inc,mission,,"Each time you eliminate a pawn, steal one card a random from its controller’s hand. *Discard this card at the beginning of your next turn.",Many-legged robotic insect.,Beginning-of-turn clock.,"reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",For each pawn elimination steal one random card from its controller; discard this mission at your next turn beginning.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c07,shadowraiders,action-card,The Running Man,mission,Cargo: Price-Tag,"Survive two full turns. *If another player eliminates you, he or she collects the Reward instead.",Running humanoid.,"Cargo tag.
+Turn counters 01 and 02.
+Defense modifier: removes shields from die faces 1 and 2.
+Reward: 3 medals.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Track two full turns survived; another player who eliminates the pawn takes the reward.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c08,shadowraiders,action-card,Bodyguard,mission,Cargo: The Politician,"Protect “The Politician” for two full turns. *If another player eliminates you, he or she collects the Reward instead.",Seated politician silhouette.,"Cargo tag.
+Turn counters 01 and 02.
+Reward: 2 medals.","reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Protect cargo for two full turns; another player who eliminates the pawn takes the reward.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-action-cards-p06-c09,shadowraiders,action-card,Bribery,mission,,Move to Maas Biolabs and discard one Bonus counter ([bonus icon]).,Open cash-filled briefcase.,Reward: Deviser-D control card and 1 medal.,"reboot
+move: 3 steps
+Attach to pawn in the printed mission slot; apply its printed requirements and costs.",Reach Maas Biolabs and spend one bonus counter to complete mission.,,sh-en-action-cards,6,,c9b46bf7704f1ae283e7c83cdacbcf7117bc288d87bac25c3d2d8bac8fa821ee
+sh-en-blocks-a4-p01-c01,shadowraiders,block,Geo.Framating,information-block,,Discard all cards attached to each pawn in the Cybernet.,"Robotic face, skull space and several circular spaces.","In-Cybernet effect badge.
+Corner ICE faces: 3, 4, 6.
+Space Shield modifier: black face 5.
+Space attack modifier: +1 skull.
+One directional arrow.","On placement, discard every pawn’s attachments.","On placement, discard every pawn’s attachments.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+The highly stylized title is read as Geo.Framating; preserve the source image when resolving naming aliases.",sh-en-blocks-a4,1,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p01-c02,shadowraiders,block,Reset,information-block,,All players lose one Bonus token ([bonus icon]).,"Event silhouette, skull mask and alternating circular spaces.","In-Cybernet effect badge.
+Corner ICE faces: 2, 5, 6.
+Event space.
+Space ICE modifier: white face 2.
+One directional arrow.","On placement, every player loses one bonus token.","On placement, every player loses one bonus token.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,1,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p01-c03,shadowraiders,block,Akasen,information-block,,All players draw two action cards.,Female portrait below event silhouette and black die.,"In-Cybernet effect badge.
+Corner ICE faces: 2, 3, 6.
+Event space.
+Space Shield modifier: black face 4.
+One directional arrow.","On placement, every player draws two action cards.","On placement, every player draws two action cards.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,1,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p02-c01,shadowraiders,block,Landfill,information-block,,Place Bot-bomb A and Bot-bomb B in this block under your control.,Two large Bot-Bomb pawn spaces and a smaller cable space.,"Under-control effect badge.
+Corner ICE faces: 3, 5, 6.","On gaining control, place both Bot-Bomb pawns under your control.","On gaining control, place both Bot-Bomb pawns under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,2,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p02-c02,shadowraiders,block,Zion Cluster,information-block,,You may discard an attached Armor. You may discard an attached Weapon.,"Yellow Zion icon, two black-die spaces and dark portrait.","Corner ICE faces: 2, 4, 6.
+Space Shield modifiers: black face 4 in both discard spaces.
+Space hand-size modifier: -1.
+One directional arrow.",In the corresponding spaces optionally discard an attached Armor or Weapon.,In the corresponding spaces optionally discard an attached Armor or Weapon.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,2,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p02-c03,shadowraiders,block,Edgezone,information-block,,Place a Threat token on each empty Event space ([event icon]) in the Cybernet.,"Yellow hat icon, graffiti and white die space.","In-Cybernet effect badge.
+Corner ICE faces: 2, 3, 6.
+Space ICE modifier: white face 1.
+One directional arrow.","On placement, deploy a Threat token on every empty Cybernet Event space.","On placement, deploy a Threat token on every empty Cybernet Event space.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,2,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p03-c01,shadowraiders,block,SRONA Corp,information-block,,Place all Operative ([Operative icon]) pawns to this block.,"Yellow corporate icon, skull space, event space and Guard drone.","In-Cybernet effect badge.
+Corner ICE faces: 1, 6.
+Event space.
+Space attack modifier: +1 skull.
+Guard Drone: Fury 161; fixed Threat attack value 5; defense black 1-4, white 5-6.","On placement, relocate all Operative pawns to this block; resolve Guard Threat by expansion rules.","On placement, relocate all Operative pawns to this block; resolve Guard Threat by expansion rules.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,3,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p03-c02,shadowraiders,block,Mercenary (B),information-block,,Place Merc B on this block.,"Merc B pawn space with cable, fan and small hand-icon spaces.","In-Cybernet effect badge.
+Corner ICE faces: 3, 6.
+Space hand-size modifier: -1.
+One directional arrow.","On placement, place Merc B on this block; ownership is not granted by this text.","On placement, place Merc B on this block; ownership is not granted by this text.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,3,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p03-c03,shadowraiders,block,Mercenary (A),information-block,,Place Merc A on this block.,Merc A pawn space and circular event space.,"In-Cybernet effect badge.
+Corner ICE faces: 4, 6.
+Event space.
+One directional arrow.","On placement, place Merc A on this block; ownership is not granted by this text.","On placement, place Merc A on this block; ownership is not granted by this text.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,3,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p04-c01,shadowraiders,block,Mercenary (C),information-block,,Place Merc C on this block.,"Merc C pawn space, broad white capsule and event circle.","In-Cybernet effect badge.
+Corner ICE faces: 2, 6.
+Event space.","On placement, place Merc C on this block; ownership is not granted by this text.","On placement, place Merc C on this block; ownership is not granted by this text.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,4,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p04-c02,shadowraiders,block,Shooter,information-block,,All players with two or more Mission cards in front of them must discard their hands.,"Yellow revolver-cylinder symbol, event space and Rhino drone.","In-Cybernet effect badge.
+Corner ICE faces: 5, 6.
+Event space.
+Rhino Drone: fixed Threat attack value 5; defense black 1-4, white 5-6.","On placement, players with at least two mission cards discard their hands; resolve Rhino by Threat rules.","On placement, players with at least two mission cards discard their hands; resolve Rhino by Threat rules.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,4,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p04-c03,shadowraiders,block,Mercenary (D),information-block,,Place Merc D on this block.,"Merc D pawn space, cable, white die and barrel logo.","In-Cybernet effect badge.
+Corner ICE faces: 5, 6.
+Space ICE modifier: white face 1.
+One directional arrow.","On placement, place Merc D on this block; ownership is not granted by this text.","On placement, place Merc D on this block; ownership is not granted by this text.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,4,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p05-c01,shadowraiders,block,Pirate Radio,information-block,,This space counts as a Central Core.,Huge broadcast circle and smaller cable circle.,"Corner ICE face: 6.
+The Central Core instruction labels the large space.",Treat the labeled space as a Central Core; this is a space-specific instruction.,Treat the labeled space as a Central Core; this is a space-specific instruction.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,5,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p05-c02,shadowraiders,block,Memory Maker,information-block,,You may discard an attached Mission.,"REK ALL circular space, yellow memory logo and Deviser A small badge.","Corner ICE faces: 3, 6.
+Space ICE modifier: white face 1.
+One directional arrow.
+Deviser A placement/control cue shown by small pawn badge.",In the labeled space optionally discard an attached Mission; preserve the small Deviser badge for source interpretation.,In the labeled space optionally discard an attached Mission; preserve the small Deviser badge for source interpretation.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+The small Deviser badge is recorded as printed evidence; its complete placement/reward interpretation requires the expansion rules.",sh-en-blocks-a4,5,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p05-c03,shadowraiders,block,Synthetic Sunrise,information-block,,All pawns with an ICE value are freed from player control.,Female cyborg portrait and broad cable space.,"In-Cybernet effect badge.
+Corner ICE face: 6.","On placement, release every pawn with an ICE value from player control.","On placement, release every pawn with an ICE value from player control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,5,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p06-c01,shadowraiders,block,Senso-Red,information-block,,Draw one action card for each pawn under your control.,"Broad floating machine space, yellow camera logo and portrait.","Under-control effect badge.
+Corner ICE face: 6.
+One directional arrow.","On gaining control, draw one action card per controlled pawn.","On gaining control, draw one action card per controlled pawn.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,6,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p06-c02,shadowraiders,block,Triad,information-block,,Attack all player controlled pawns with ([1 skull]).,"Yellow Triad icon, event circle, flower graphic and Guinshen drone.","In-Cybernet effect badge.
+Corner ICE face: 6.
+Event space.
+Deviser B badge.
+Guishen Drone: fixed Threat attack value 5; defense black 1-4, white 5-6.","On placement, attack all player-controlled pawns with one skull; preserve Deviser B badge and drone attributes.","On placement, attack all player-controlled pawns with one skull; preserve Deviser B badge and drone attributes.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+The small Deviser badge is recorded as printed evidence; its complete placement/reward interpretation requires the expansion rules.",sh-en-blocks-a4,6,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p06-c03,shadowraiders,block,Hot-Zone,information-block,,All pawns with attached cards are eliminated.,"Yellow flame logo, event circle, skull space and Pushka drone.","In-Cybernet effect badge.
+Corner ICE faces: 4, 6.
+Event space.
+Space attack modifier: +1 skull.
+Pushka Drone: fixed Threat attack value 5; defense black 1-4, white 5-6.","On placement, eliminate all pawns with attachments; resolve Pushka by Threat rules.","On placement, eliminate all pawns with attachments; resolve Pushka by Threat rules.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,6,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p07-c01,shadowraiders,block,Central Core 02,information-block,,,One huge concentric circle with die-shaped positions around its rim.,"No corner ICE.
+Six rim die graphics: faces 1-6.",Use as expansion Central Core; distinguish direction die graphics from corner ICE.,Use as expansion Central Core; distinguish direction die graphics from corner ICE.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,7,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p07-c02,shadowraiders,block,Kanematsu Ltd,information-block,,Place Cyberninja on this block.,"Cyberninja pawn space, event circle and striped normal space.","In-Cybernet effect badge.
+Black ICE corner: face 6.
+Event space.","On placement, put Cyberninja on this block; the text does not grant ownership.","On placement, put Cyberninja on this block; the text does not grant ownership.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,7,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p07-c03,shadowraiders,block,Beauty Claire,information-block,,Place the Ballerina in this block under your control.,"Yellow flower logo, mechanical female face and Ballerina pawn circle.","Under-control effect badge.
+Black ICE corner: face 6.","On gaining control, place Ballerina under your control.","On gaining control, place Ballerina under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,7,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p08-c01,shadowraiders,block,NORAD,information-block,,Take a completed Mission card from another player and assign your own control markers to it.,"Yellow corporate logo, two event spaces and TK-253 drone.","Under-control effect badge.
+Black ICE corner: face 6.
+Two Event spaces.
+TK-253 Drone: fixed Threat attack value 5; defense black 1-4, white 5-6.","On gaining control, take another player’s completed mission and replace its control markers with yours.","On gaining control, take another player’s completed mission and replace its control markers with yours.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sh-en-blocks-a4,8,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p08-c02,shadowraiders,block,Arkadia,information-block,,Put the Arkadia card under your control.,"Yellow heart logo, tall building in broad space, black die and Deviser C badge.","Under-control effect badge.
+Black ICE corner: face 6.
+Space Shield modifier: black face 5.
+Deviser C badge.","On gaining control, take Arkadia control card; preserve Deviser C badge as separate source evidence.","On gaining control, take Arkadia control card; preserve Deviser C badge as separate source evidence.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+The small Deviser badge is recorded as printed evidence; its complete placement/reward interpretation requires the expansion rules.",sh-en-blocks-a4,8,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-blocks-a4-p08-c03,shadowraiders,block,Maas Biolabs,information-block,,Put the Maas Biolabs card under your control.,Yellow barred logo and laboratory tower with Deviser D badge.,"Under-control effect badge.
+Black ICE corner: face 6.
+Space ICE modifier: white face 1.
+Deviser D badge.","On gaining control, take Maas Biolabs control card; preserve Deviser D badge as separate source evidence.","On gaining control, take Maas Biolabs control card; preserve Deviser D badge as separate source evidence.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+The small Deviser badge is recorded as printed evidence; its complete placement/reward interpretation requires the expansion rules.",sh-en-blocks-a4,8,,cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6
+sh-en-chaos-card-p01-c01,shadowraiders,mode-reference,C.H.A.O.S. card and optional back,mode-reference,,"Carta de Chaos - Chaos card
+Dorso opcional - Optional card back
+C.H.A.O.S.
+ZAIBATSU
+CONTROL",Large armed robot on the left; optional control-pattern back on the right.,"Sector A: fixed attack value 6; defense black faces 1-3, white faces 4-6.
+Sector B: fixed attack value 5; defense black faces 1-3, white faces 4-6.
+Sector C: defense black faces 1-4, white faces 5-6.
+Sector D: defense black faces 1-5, white face 6.
+General attack: 4 skulls.
+Reward: 6 medals.
+Movement pictogram in black hex.
+The dice with skull bases on sectors A/B are fixed attack values, not ICE values.","Chaos opponent reference
+Use Chaos mode rules to interpret the four defense tracks, movement and combat; optional back is cosmetic, not a second card.","Use Chaos mode rules to interpret the four defense tracks, movement and combat; optional back is cosmetic, not a second card.","Chaos card glyphs and four defense tracks must be interpreted with the full Chaos procedure, not as an ordinary pawn profile.",sh-en-chaos-card,1,,8bda0df51c9f14436d24424221e411a3ff328f20d5076359f6a4e350f8e4ceb9
+sh-en-control-cards-p01-c01,shadowraiders,control-card,Merc A,pawn-control,,Gain +([1 skull]) when targeting Drones ([Drone icon]).,Heavy soldier holding a rifle.,"Slots: add-on, weapon, armor.
+Add-on acquisition banner: 1 bonus counter followed by 3 arrows.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Gain an additional skull against Drones; follow the mercenary acquisition procedure in the rulebook.",Gain an additional skull against Drones; follow the mercenary acquisition procedure in the rulebook.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c02,shadowraiders,control-card,Shadowraider (Blue),pawn-control,Operative,,Male operative with a large firearm.,"Slots: add-on, armor, weapon, mission.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Use this color’s Operative control card; activate each ability by its printed card/discard condition.",Use this color’s Operative control card; activate each ability by its printed card/discard condition.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c03,shadowraiders,control-card,Shadowraider (Green),pawn-control,Operative,,Male operative with a firearm and bright skull face.,"Slots: add-on, armor, weapon, mission.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Use this color’s Operative control card; activate each ability by its printed card/discard condition.",Use this color’s Operative control card; activate each ability by its printed card/discard condition.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c04,shadowraiders,control-card,Merc B,pawn-control,Razorblade,Does not cause Threats to activate.,Slim sword-bearing mercenary.,"Slots: add-on, weapon, armor.
+Add-on acquisition banner: 1 bonus counter followed by 3 arrows.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Does not activate Threats; follow mercenary acquisition procedure.",Does not activate Threats; follow mercenary acquisition procedure.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c05,shadowraiders,control-card,Shadowraider (Pink),pawn-control,Operative,,Female operative with a long gun.,"Slots: add-on, armor, weapon, mission.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Use this color’s Operative control card; activate each ability by its printed card/discard condition.",Use this color’s Operative control card; activate each ability by its printed card/discard condition.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c06,shadowraiders,control-card,Shadowraider (Orange),pawn-control,Operative,,Female operative holding a firearm.,"Slots: add-on, armor, weapon, mission.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Use this color’s Operative control card; activate each ability by its printed card/discard condition.",Use this color’s Operative control card; activate each ability by its printed card/discard condition.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c07,shadowraiders,control-card,Arkadia,block-control,,As long as you control this card you may reroll a single dice roll. Use only once per turn.,Tall black neon-style building.,,Reroll a single dice roll once per turn while controlled.,Reroll a single dice roll once per turn while controlled.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c08,shadowraiders,control-card,Merc D,pawn-control,Sniper,May use Delete actions ([Delete icon]) on any pawn in the Cybernet.,Female mercenary holding a long rifle.,"Slots: add-on, armor.
+Add-on acquisition banner: 1 bonus counter followed by 3 arrows.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Delete may target any pawn in Cybernet; follow mercenary acquisition procedure.",Delete may target any pawn in Cybernet; follow mercenary acquisition procedure.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p01-c09,shadowraiders,control-card,Merc C,pawn-control,Cyborg,,Heavy cybernetic mercenary.,"Slots: add-on, weapon, armor.
+Add-on acquisition banner: 1 bonus counter followed by 3 arrows.
+Card-activated Delete: 1 skull.
+Once-per-turn free movement: 1d6 steps.
+ICE faces: 1, 6.
+Defense: black faces 1-4; white faces 5-6.","Card-activated Delete: 1 skull.
+Once-per-turn free movement: 1d6 steps.
+Use printed combat/movement/ICE attributes; follow mercenary acquisition procedure.",Use printed combat/movement/ICE attributes; follow mercenary acquisition procedure.,,sh-en-control-cards,1,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c01,shadowraiders,control-card,Bot-Bomb A,pawn-control,Explosive,Sacrifice this pawn: attack every pawn in this block with ([1 skull]).,Small robot holding a pistol.,"Slots: add-on, armor.
+Card-activated movement.
+ICE faces: 2, 4.
+Defense: black faces 1-2; white faces 3-6.","Card-activated movement.
+Sacrifice Bot-Bomb to attack every pawn in its block with one skull.",Sacrifice Bot-Bomb to attack every pawn in its block with one skull.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c02,shadowraiders,control-card,Bot-Bomb B,pawn-control,Explosive,Sacrifice this pawn: attack every pawn in this block with ([1 skull]).,Small robot holding a large gun.,"Slots: add-on, armor.
+Card-activated movement.
+ICE faces: 3, 5.
+Defense: black faces 1-2; white faces 3-6.","Card-activated movement.
+Sacrifice Bot-Bomb to attack every pawn in its block with one skull.",Sacrifice Bot-Bomb to attack every pawn in its block with one skull.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c03,shadowraiders,control-card,Ballerina,pawn-control,Lovedoll,Gain +([1 skull]) when targeting Operatives ([Operative icon]).,Female dancer silhouette.,"Slots: add-on, armor, weapon.
+Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+ICE faces: 1, 6.
+Defense: black faces 1-4; white faces 5-6.","Card-activated Delete: 1 skull.
+Card-activated stealth movement.
+Gain an extra skull against Operatives.",Gain an extra skull against Operatives.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c04,shadowraiders,control-card,Deviser A,pawn-control,,All pawns under your control gain a Shield modifier.,Suited man wearing headphones.,"Slots: add-on, gadget, armor.
+Shield modifier icon: black die face 5.
+Card-activated Icebreaker.
+Card-activated movement.
+Defense: black face 1; white faces 2-6.","Card-activated Icebreaker.
+Card-activated movement.
+All controlled pawns gain the printed Shield modifier while this pawn is controlled.",All controlled pawns gain the printed Shield modifier while this pawn is controlled.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c05,shadowraiders,control-card,Deviser B,pawn-control,,As long as you control this pawn gain two Bonus counters.,Suited man holding gun-shaped devices.,"Slots: add-on, armor.
+Search: discard 1 card.
+Once-per-turn free movement: 3 steps.
+ICE faces: 1, 5.
+Defense: black face 1; white faces 2-6.","Once-per-turn free movement: 3 steps.
+Gain two bonus counters while controlled; use printed abilities.",Gain two bonus counters while controlled; use printed abilities.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c06,shadowraiders,control-card,Cyberninja,pawn-control,"Cyborg, Razorblade",Does not cause Threats to activate.,Armed cybernetic ninja.,"Slots: add-on, weapon, armor.
+Once-per-turn free Delete: 3 skulls.
+Once-per-turn free stealth movement: 2d6 steps.
+ICE face: 6.
+Defense: black faces 1-5; white face 6.","Once-per-turn free Delete: 3 skulls.
+Once-per-turn free stealth movement: 2d6 steps.
+Does not activate Threats; movement uses two seeded dice.",Does not activate Threats; movement uses two seeded dice.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c07,shadowraiders,control-card,Maas Biolabs,block-control,,At the beginning of your turn you may discard a card from your hand to Reboot ([Reboot icon]) an eliminated pawn.,Tall rounded laboratory building.,Beginning-of-turn clock.,At turn beginning optionally discard one hand card to Reboot an eliminated pawn.,At turn beginning optionally discard one hand card to Reboot an eliminated pawn.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c08,shadowraiders,control-card,Deviser C,pawn-control,Cyborg,Place two Control markers ([control-marker icon]) on this card.,Suited man with cybernetic eyewear.,"Slots: add-on, armor.
+2-control-marker star badge.
+Once-per-turn free movement: 1d6 steps.
+ICE face: 6.
+Defense: black face 1; white faces 2-6.","Once-per-turn free movement: 1d6 steps.
+Place two control markers on this card; use printed movement and ICE.",Place two control markers on this card; use printed movement and ICE.,,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-control-cards-p02-c09,shadowraiders,control-card,Deviser D,pawn-control,TradeSecret,,Suited man with tie and briefcase.,"Slots: add-on, armor, weapon.
+Hand size +1.
+Once-per-turn free Delete badge; no skull printed.
+Card-activated movement.
+ICE faces: 2, 3, 4.
+Defense: black face 1; white faces 2-6.","Once-per-turn free Delete badge; no skull printed.
+Card-activated movement.
+Apply hand-size modifier and printed abilities; preserve the Delete badge without inventing an attack skull.",Apply hand-size modifier and printed abilities; preserve the Delete badge without inventing an attack skull.,Deviser D prints a Delete activation badge without a skull; do not invent attack dice.,sh-en-control-cards,2,,7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3
+sh-en-markers-p01-sheet,shadowraiders,marker-sheet,Shadowraiders control marker sheet,assembly-sheet,,,Four color rows with 8 folded marker pairs per color.,"32 assembled markers.
+Page 1/2.",Assembly/use: Fold each insignia and reverse pair; preserve color and serial number.,Fold each insignia and reverse pair; preserve color and serial number.,,sh-en-markers,1,,b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa
+sh-en-markers-p02-sheet,shadowraiders,marker-sheet,Shadowraiders start-of-turn marker sheet,assembly-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.",Two folded rows of eight clock markers; bilingual replacement instructions.,"16 assembled markers; 32 printed clock faces.
+Page 2/2.","Assembly/use: Cut and fold paired panels; colored counters, buttons or seeds may substitute as printed.","Cut and fold paired panels; colored counters, buttons or seeds may substitute as printed.",,sh-en-markers,2,,b13a1a3390c2f9d7e85cfd78696df9bc2bee34e13f96a0ab0442c126910156fa
+sh-en-pawns-p01-sheet,shadowraiders,pawn-sheet,Shadowraiders pawn assembly sheet 1,assembly-sheet,,,"Four mercenary pairs above four colored Shadowraider pairs, with folding diagrams.","Page 1/3.
+Eight assembled pawns; sixteen printed character faces.",Assembly/use: Cut and fold each opposed pair.,Cut and fold each opposed pair.,,sh-en-pawns,1,,2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf
+sh-en-pawns-p02-sheet,shadowraiders,pawn-sheet,Shadowraiders pawn assembly sheet 2,assembly-sheet,,,Eight opposed pawn pairs with yellow/black tabs.,"Page 2/3.
+Eight assembled pawns; sixteen printed character faces.",Assembly/use: Cut and fold each opposed pair.,Cut and fold each opposed pair.,,sh-en-pawns,2,,2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf
+sh-en-pawns-p03-sheet,shadowraiders,pawn-sheet,Chaos and Outbreak pawn assembly sheet,assembly-sheet,,,One large opposed Chaos pair and six numbered Outbreak pairs.,"Page 3/3.
+Outbreak labels 01-06.",Assembly/use: Each face pair forms one piece; these are separate from the sixteen regular expansion pawns.,Each face pair forms one piece; these are separate from the sixteen regular expansion pawns.,,sh-en-pawns,3,,2c51dc22eae73caefbb6f2d52c5ae0aedb00e5f181624246d75604c1f55b9ebf
+sortme-token-backs-p01-c01,shared,token-sheet,Bonus counters sheet,token-sheet,,,Yellow/black bonus hexagons with BONUS repeated around the border.,24 separate hexagons; 4 rows × 6 columns.,Assembly/use: Cut each token along its outline; use matching game rules.,Cut each token along its outline; use matching game rules.,,sortme-token-backs,1,,bf60d5c2b83b2fe53233677e45abb1223a473e9dd8dd8591f4f258d9abac2c11
+sortme-token-backs-p02-c01,shared,token-sheet,Threat token faces sheet,token-sheet,,,Yellow hexagons with a black exclamation mark.,24 separate hexagons; 4 rows × 6 columns.,Assembly/use: Cut each token along its outline; use matching game rules.,Cut each token along its outline; use matching game rules.,,sortme-token-backs,2,,bf60d5c2b83b2fe53233677e45abb1223a473e9dd8dd8591f4f258d9abac2c11
+sortme-token-backs-p03-c01,shared,token-sheet,Mini-hex and block backs,token-sheet,,,Six small blank yellow/black hex backs above two turquoise ZAIBATSU block backs.,"6 mini-hex backs.
+2 larger block backs.",Assembly/use: Pair with the appropriate fronts; no action or effect printed.,Pair with the appropriate fronts; no action or effect printed.,,sortme-token-backs,3,,bf60d5c2b83b2fe53233677e45abb1223a473e9dd8dd8591f4f258d9abac2c11
+sortme-token-backs-p04-c01,shared,token-sheet,Drone mini-hex faces and backs,token-sheet,,,Five named drone fronts and five white gear reverse faces.,"Five fixed-attack-5 drone faces.
+Five gear reverse faces.",Assembly/use: Use supporting minis with their primary block evidence.,Use supporting minis with their primary block evidence.,,sortme-token-backs,4,,bf60d5c2b83b2fe53233677e45abb1223a473e9dd8dd8591f4f258d9abac2c11
+sp-en-action-cards-p01-c01,speedrunners,action-card,Octagon “Dex”,add-on,,This pawn ignores direction arrows.,Black octagonal DEX chip over turquoise circuitry.,Crossed-out Search badge.,"icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn add-on slot; ignore direction arrows and remove Search.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c02,speedrunners,action-card,Simstim Record,add-on,,"As long as you control this card, gain a one Bonus counter ([bonus icon]).",Black SIMSTIM 25 recording headset.,Crossed-out movement badge.,"icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; gain one bonus counter while controlled; movement is cancelled.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c03,speedrunners,action-card,DJ,add-on,,"As long as you control this card, you choose the music that plays during the game.",Black headphones with daft punk branding.,,"icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; its controller chooses the music.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c04,speedrunners,action-card,Transgenic Therapy,add-on,Accelerator,,Injection gun and chemical structure.,"Cost: 1 bonus counter.
+Movement +1 badge.","icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; adds a movement step.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c05,speedrunners,action-card,Hyper,add-on,Accelerator,,Three round HYPER tablets and chemical diagram.,"Cost: 1 bonus counter.
+Movement +1 badge.","icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; adds a movement step.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c06,speedrunners,action-card,Accela,add-on,Accelerator,,Opened capsule and chemical diagram.,"Cost: 1 bonus counter.
+Movement +1 badge.","icebreaker
+move: 1 step
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; adds a movement step.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c07,speedrunners,action-card,Biochip,add-on,E-Synapse,,Octagonal Maat Neotek biochip.,"Cost: 1 bonus counter.
+Once-per-turn free movement: 3 steps.","icebreaker
+move: 1 step
+Once-per-turn free movement: 3 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grants once-per-turn free three-step movement.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c08,speedrunners,action-card,Neural Interface,add-on,E-Synapse,,Round neural interface chip with contact pins.,"Cost: 2 bonus counters.
+Once-per-turn free movement: 5 steps.","icebreaker
+move: 1 step
+Once-per-turn free movement: 5 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grants once-per-turn free five-step movement.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p01-c09,speedrunners,action-card,Gentleman Loser,block,,Place the Cracker in this block under your control.,Inverted Cracker character silhouette in a round panel.,"Pawn-placement plus badge.
+Cracker pawn symbol.","icebreaker
+move: 1 step
+Block-target card use: Use the block-target card part to place Cracker under your control.",Use the block-target card part to place Cracker under your control.,,sp-en-action-cards,1,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c01,speedrunners,action-card,Virus,add-on,Malware,This card can only be attached to Cleaner pawns. Gain control of this pawn.,Segmented mechanical insect.,Enemy attachment; barred yellow badge.,"icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Attach only to an enemy Cleaner; take control of that pawn.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c02,speedrunners,action-card,Toxin,add-on,Malware,At the beginning of your turn: Discard a card from your hand or sacrifice this pawn.,Mechanical spider.,"Beginning-of-turn clock.
+Enemy attachment; barred yellow badge.","icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Resolve the discard-or-sacrifice choice at the beginning of the controller’s turn.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c03,speedrunners,action-card,Worm,add-on,Malware,This card cannot be attached to Operative ([Operative icon]).,Segmented robotic worm.,"Hand size -1.
+Enemy attachment; barred yellow badge.","icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Exclude Operative targets; reduce hand size by one.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c04,speedrunners,action-card,Lima Flag,add-on,Malware,This pawn cannot move onto the Central Core.,Mechanical flea with cylindrical abdomen.,Enemy attachment; barred yellow badge.,"icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Forbid movement onto the Central Core.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c05,speedrunners,action-card,Rootkit,add-on,Malware,"As long as you control this card, you must discard your hand at the end of your action phase.",Black many-legged robotic cluster.,Enemy attachment; barred yellow badge.,"icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Discard the controlling player’s entire hand at the end of their action phase.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c06,speedrunners,action-card,Under Clocker,add-on,Malware,This card cannot be attached to Operative ([Operative icon]).,Two wired COFFEST cylinders.,"Crossed-out Delete badge.
+Enemy attachment; barred yellow badge.","icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Exclude Operative targets; cancel Delete.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c07,speedrunners,action-card,Spammer,add-on,Malware,This pawn discards all attached cards. This pawn can no longer attach Add-On cards.,Walking warning-marked rectangular unit.,Enemy attachment; barred yellow badge.,"icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Discard attachments and prohibit further add-ons; attachment-discard ordering requires rule interpretation.,Resolve attachment-discard ordering against the rulebook before implementing Spammer.,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c08,speedrunners,action-card,Trojan,add-on,Malware,"As long as you control this card, you must play with your hand face up.",Round flying ZX6 device.,Enemy attachment; barred yellow badge.,"icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Reveal the controlling player's hand while this card is controlled.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p02-c09,speedrunners,action-card,Hijacker,add-on,Malware,This card cannot be attached to Operative ([Operative icon]).,Mechanical mosquito.,"Crossed-out movement badge.
+Enemy attachment; barred yellow badge.","icebreaker
+move: 1 step
+Attach to enemy in the printed add-on slot; apply its printed requirements and costs.",Exclude Operative targets; cancel movement.,,sp-en-action-cards,2,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c01,speedrunners,action-card,Dummy,add-on,,Detach and discard this card: Prevent this pawn from being eliminated.,Crash-test dummy head.,Cost: 1 bonus counter.,"delete
+move: 2 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Detach and discard as the pawn would be eliminated to prevent elimination.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c02,speedrunners,action-card,Electric Sheep,add-on,,Sacrifice this pawn at the beginning of your turn: Draw 3 action cards.,Sheep head inside a black hexagon.,"Cost: 2 bonus counters.
+Beginning-of-turn clock.","delete
+move: 2 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Sacrifice the attached pawn at the beginning of your turn to draw three action cards.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c03,speedrunners,action-card,Jetpack,add-on,,Discard this card at the beginning of your turn: Move this pawn to a space of your choice.,Black twin-thruster pack.,"Cost: 1 bonus counter.
+Beginning-of-turn clock.","delete
+move: 2 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.","Discard at the beginning of your turn, then relocate the attached pawn to a chosen space.",,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c04,speedrunners,action-card,Selective Disclosure,add-on,Trade Secret,Discard this card at the beginning of your turn.,Black data disc.,"Hand size +1.
+Beginning-of-turn clock.","delete
+move: 2 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Increase hand size by one until this card is discarded at turn beginning.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c05,speedrunners,action-card,Insider Trading,add-on,Trade Secret,At the beginning of your turn: Discard two card from your hand.,Rectangular data cartridge.,"Cost: 1 bonus counter.
+Hand size +2.
+Beginning-of-turn clock.","delete
+move: 2 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Increase hand size by two; discard two cards from hand at turn beginning.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c06,speedrunners,action-card,Gunhed,add-on,Brainchip,,Needle-like cybernetic chip.,"Cost: 2 bonus counters.
+Grants weapon slot.
+Card-activated Delete: 1 skull.","delete
+move: 2 steps
+Card-activated Delete: 1 skull.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant weapon slot and one-skull card-activated Delete.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c07,speedrunners,action-card,AK-12kM,weapon,,,Black assault rifle.,"Cost: 1 bonus counter.
+Attack: 1 skull.","delete
+move: 2 steps
+Attach to pawn in the printed weapon slot; apply its printed requirements and costs.",Attach as a pawn weapon; add one attack skull.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c08,speedrunners,action-card,Servocanon,module,,,Black rotary cannon.,"Cost: 1 bonus counter.
+Once-per-turn free Delete: 1 skull.","delete
+move: 2 steps
+Once-per-turn free Delete: 1 skull.
+Attach to pawn in the printed module slot; apply its printed requirements and costs.",Attach as pawn module; grant one-skull once-per-turn free Delete.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p03-c09,speedrunners,action-card,ChatsuBo,block,,Place the Automata in this block under your control.,Inverted Automata character in a round panel.,"Pawn-placement plus badge.
+Automata pawn symbol.","delete
+move: 2 steps
+Block-target card use: Use the block-target card part to place Automata under your control.",Use the block-target card part to place Automata under your control.,,sp-en-action-cards,3,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c01,speedrunners,action-card,Phase-Loop,gadget,Cyberdeck,This pawn is not affected by Black ICE.,Rectangular Phase-Loop cyberdeck.,"Cost: 1 bonus counter.
+Controller hand limit −2.
+Plus white three-dimensional die: one additional acting Icebreaker die, not target ICE.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.","EN/ES page4 cell1: one Cyberdeck Gadget. Own pawn attachment costs1; acting Icebreaker +1 die, Black ICE immunity, hand limit−2. No activation granted. Strip: two movement steps or Icebreaker. Cleanup removes benefits/refunds cost.",,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c02,speedrunners,action-card,Eriela,gadget,Bot,,Winged humanoid bot silhouette.,"Hand size -1.
+White ICE modifier die: face 5.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed face-5 ICE modifier and hand penalty.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c03,speedrunners,action-card,Durendin,gadget,Bot,,Long-tailed humanoid bot silhouette.,"Hand size -1.
+White ICE modifier die: face 2.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed face-2 ICE modifier and hand penalty.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c04,speedrunners,action-card,Navi,gadget,Cyberdeck,This pawn may attempt to Icebreak ([Icebreaker icon]) adjacent blocks.,Black Navi device.,"Cost: 2 bonus counters.
+Hand size -2.
+ICE modifier: plus black die.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; extend Icebreaker to adjacent blocks; apply the printed modifiers.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c05,speedrunners,action-card,Gaspar,gadget,Bot,,Winged bot holding a sphere.,"Hand size -1.
+White ICE modifier die: face 4.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed face-4 ICE modifier and hand penalty.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c06,speedrunners,action-card,Ad-Zarat,gadget,Bot,,Winged long-tailed bot.,"Hand size -1.
+White ICE modifier die: face 3.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed face-3 ICE modifier and hand penalty.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c07,speedrunners,action-card,Cyberspace-VII,gadget,Cyberdeck,,Black angular Cyberspace device.,"Cost: 3 bonus counters.
+Hand size -1.
+ICE modifier: plus two black dice.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed ICE and hand-size modifiers.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c08,speedrunners,action-card,Hyperdeck-6,gadget,Cyberdeck,,Black rectangular hyperdeck.,"Cost: 2 bonus counters.
+Hand size -1.
+ICE modifier: plus white die.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed ICE and hand-size modifiers.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p04-c09,speedrunners,action-card,7G Ma-Mi,gadget,Cyberdeck,,Rounded black 7G device.,"Cost: 1 bonus counter.
+Hand size -1.
+ICE modifier: plus black die.","icebreaker
+move: 2 steps
+Attach to pawn in the printed gadget slot; apply its printed requirements and costs.",Attach as a pawn gadget; apply the printed ICE and hand-size modifiers.,,sp-en-action-cards,4,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c01,speedrunners,action-card,Financial Crisis,add-on,Hazard,Discard this card at the beginning of your turn: All players discard their hands.,Abstract four-part financial emblem.,Beginning-of-turn clock.,"delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Discard at turn beginning; every player discards their hand.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c02,speedrunners,action-card,Zero-Day Attack,add-on,Hazard,Discard this card at the beginning of your turn: All pawns discard all attached cards.,Black biohazard emblem.,"Cost: 1 bonus counter.
+Beginning-of-turn clock.","delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Discard at turn beginning; all pawns discard every attachment.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c03,speedrunners,action-card,Deja Vu,add-on,,Discard this card at the beginning of your turn: Activate this block’s ([in-Cybernet icon]) effect.,Glitching black cat silhouette.,"Cost: 1 bonus counter.
+Beginning-of-turn clock.","delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Discard at turn beginning; activate the occupied block’s in-Cybernet effect.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c04,speedrunners,action-card,Black Cube,add-on,,"As long as you control this card, skip the beginning of your turn phase ([clock icon])!",Wired black cube.,Cost: 1 bonus counter.,"delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Skip the controller’s beginning-of-turn phase while controlled.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c05,speedrunners,action-card,Bionic Implant,add-on,Cyborg,,Mechanical hand and forearm.,"Cost: 2 bonus counters.
+Once-per-turn free movement: 1d6 steps.","delete
+move: 3 steps
+Once-per-turn free movement: 1d6 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant once-per-turn free 1d6 movement.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c06,speedrunners,action-card,Cyber Brain,add-on,Cyborg,,Black cybernetic head.,"Cost: 3 bonus counters.
+Once-per-turn free movement: 2d6 steps.","delete
+move: 3 steps
+Once-per-turn free movement: 2d6 steps.
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Attach to a pawn; grant once-per-turn free 2d6 movement.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c07,speedrunners,action-card,Kamikaze,add-on,Explosive,Sacrifice this pawn: Attack each pawn in this block with ([2 skulls]).,Explosive vest and detonators.,"Cost: 1 bonus counter.
+Attack: 2 skulls.","delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Sacrifice the attached pawn to attack every pawn in its block with two skulls.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c08,speedrunners,action-card,Rods from God,add-on,Explosive,Discard this card at the beginning of your turn: Attack each pawn in any one block with ([1 skull]).,Black pointed projectile.,"Cost: 2 bonus counters.
+Beginning-of-turn clock.
+Attack: 1 skull.","delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Discard at turn beginning; choose one block and attack every pawn in it with one skull.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p05-c09,speedrunners,action-card,Tsar Bomba,add-on,Explosive,Discard this card at the beginning of your turn: Attack each pawn in the Cybernet with ([3 skulls]).,Black cylindrical nuclear bomb.,"Cost: 3 bonus counters.
+Beginning-of-turn clock.
+Attack: 3 skulls.","delete
+move: 3 steps
+Attach to pawn in the printed add-on slot; apply its printed requirements and costs.",Discard at turn beginning; attack every pawn in the Cybernet with three skulls.,,sp-en-action-cards,5,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c01,speedrunners,action-card,Military Exo-Skeleton,armor,,,Heavy humanoid exoskeleton.,"Cost: 3 bonus counters.
+Defense row: black faces 1-5; white face 6.","reboot
+move: 3 steps
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; use the printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c02,speedrunners,action-card,Battle Suit,armor,,,Humanoid battle suit.,"Cost: 3 bonus counters.
+Defense row: black faces 1-5; white face 6.","reboot
+move: 3 steps
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; use the printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c03,speedrunners,action-card,Combat Armour,armor,,,Bulky combat armor.,"Cost: 3 bonus counters.
+Defense row: black faces 1-5; white face 6.","reboot
+move: 3 steps
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; use the printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c04,speedrunners,action-card,Cardboard Box,armor,,This pawn cannot be targeted by Delete abilities ([Delete icon]). Discard this card at the beginning of your turn.,Black cardboard carton.,"Cost: 1 bonus counter.
+Defense row: white faces 1-6.
+Beginning-of-turn clock.","reboot
+move: 3 steps
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Prevent Delete targeting until discarded at turn beginning.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c05,speedrunners,action-card,Ghost in the Machine,armor,Drone,,Walking black drone marked 27.,"Cost: 3 bonus counters.
+Defense row: black faces 1-2; white faces 3-6.
+Grants module slot.
+Once-per-turn free Icebreaker badge.","reboot
+move: 3 steps
+Once-per-turn free Icebreaker badge.
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; grant module slot and once-per-turn free Icebreaker; use printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c06,speedrunners,action-card,Full-Body Prosthesis,armor,Cyborg,,Slim humanoid prosthetic body.,"Cost: 3 bonus counters.
+Defense row: black faces 1-4; white faces 5-6.
+Once-per-turn free movement: 1d6 steps.","reboot
+move: 3 steps
+Once-per-turn free movement: 1d6 steps.
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; grant once-per-turn free 1d6 movement; use printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c07,speedrunners,action-card,Walker M-75,armor,,,Heavy bipedal walker.,"Cost: 3 bonus counters.
+Defense row: black faces 1-4; white faces 5-6.
+Once-per-turn free movement: 1 hex.","reboot
+move: 3 steps
+Once-per-turn free movement: 1 hex.
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; grant once-per-turn free one-block movement; use printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c08,speedrunners,action-card,Berserker,armor,,Sacrifice this pawn at the beginning of your turn.,Armored humanoid.,"Cost: 3 bonus counters.
+Defense row: black faces 1-3; white faces 4-6.
+Once-per-turn free Delete: 3 skulls.
+Beginning-of-turn clock.","reboot
+move: 3 steps
+Once-per-turn free Delete: 3 skulls.
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Grant three-skull once-per-turn free Delete; sacrifice the pawn at turn beginning.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-action-cards-p06-c09,speedrunners,action-card,Coffin,armor,,,Coffin-shaped machine marked YKN-534.,"Cost: 3 bonus counters.
+Defense row: black faces 1-6.
+Crossed-out Icebreaker badge.
+Crossed-out Delete badge.","reboot
+move: 3 steps
+Attach to pawn in the printed armor slot; apply its printed requirements and costs.",Attach as pawn armor; cancel Icebreaker and Delete; use printed defense row.,,sp-en-action-cards,6,,4086080df6e8406f44448fa1f89a880369c860a8a46ea0ae25034e2df13d2cb0
+sp-en-blocks-a4-p01-c01,speedrunners,block,Toyeku Company (Idoru),information-block,,Place the Idoru in this block.,"Four spaces around an unplayable central title area: an upper double capsule, two normal circles and the lower unlimited Idoru pawn space.","In-Cybernet effect badge.
+Corner ICE faces: 3, 4, 6.
+Space defense modifier: white flat die face 1 (unshielded); not ICE.
+Six open edges; bonus fragments at V2, V3 and V6 only; no arrows.","On placement, place neutral Idoru on its matching pawn space and keep its control card in the common area (EN/ES rulebook pp.13/16). White flat die1 changes defense shielding per p.21; the three-dimensional corner dice are block ICE. Dedicated bilingual topology pass is recorded in the movement rule module; Idoru pawn abilities remain provisional.","On placement, place neutral Idoru on its matching pawn space and keep its control card in the common area (EN/ES rulebook pp.13/16). White flat die1 changes defense shielding per p.21; the three-dimensional corner dice are block ICE. Dedicated bilingual topology pass is recorded in the movement rule module; Idoru pawn abilities remain provisional.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,1,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p01-c02,speedrunners,block,Hacktivism,information-block,,Each player sacrifices one Control marker ([control-marker icon]) from the Cybernet.,Five-space ring around h1 title: double shield h2/h7 and four single normal spaces h3/h4/h5/h6.,"In-Cybernet placement effect badge.
+Exact corner ICE: 2,5,6.
+Bonus fragments: V2/V3/V4/V5/V6. ICE corners are not bonus fragments.
+Square defense modifier: shielded2/3 in h2/h7.
+Internal one-way arrow: h3 to h4.
+Six connected edges; one physical tile in each alternative language sheet.","On placement: Each player sacrifices one Control marker ([control-marker icon]) from the Cybernet.
+Source geometry, capacities, arrow and faces are checked against EN/ES A4 p1. Marker removal remains unsupported T-RULES-025; do not silently skip the printed effect.","Source geometry, capacities, arrow and faces are checked against EN/ES A4 p1. Marker removal remains unsupported T-RULES-025; do not silently skip the printed effect.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,1,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p01-c03,speedrunners,block,Sprawl,information-block,,Each player discard one action card for each pawn under his or her control.,Five-space ring around h1 title: bottom double h5/h6 and four single normal circles h2/h3/h4/h7.,"In-Cybernet placement effect badge.
+Exact corner ICE: 2,4,6.
+Bonus fragments: V1/V2/V3/V6. ICE corners are not bonus fragments.
+Square defense modifier: shielded3 in h3.
+Internal one-way arrow: h2 to h3.
+Six connected edges; one physical tile in each alternative language sheet.","On placement: Each player discard one action card for each pawn under his or her control.
+Source geometry, capacities, arrow and faces are checked against EN/ES A4 p1. Each owner discards per controlled pawn, including retained control. Private commitment timing and hand shortfalls remain provisional T-RULES-026.","Source geometry, capacities, arrow and faces are checked against EN/ES A4 p1. Each owner discards per controlled pawn, including retained control. Private commitment timing and hand shortfalls remain provisional T-RULES-026.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,1,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p02-c01,speedrunners,block,Antro,information-block,,You may discard an attached Add-on. / You may discard an attached Gadget.,"Four-space ring: upper double h2/h3, left effect h7, right effect h4, lower double h5/h6; h1 is non-playable art.","Upper square defense faces: shielded3/4/5. Each side effect space: shielded6.
+Exact white corner ICE: 3/5/6.
+Bonus fragments V3/V5/V6; V2 ICE is not a bonus fragment.
+All six entrances; capacities2/1/1/2; no internal arrows.
+One physical tile; alternative language/format copies are aliases.","Optional Add-on discard on left effect space.
+Optional Gadget discard on right effect space.
+EN/ES A4 page2 tile1 and rulebooks p13/p33 checked. Stopping controller may decline. Experimental scope selects any matching physical attachment in Cybernet; targeting, relocation and threat ordering remain T-RULES-027. Full tile stays provisional.","EN/ES A4 page2 tile1 and rulebooks p13/p33 checked. Stopping controller may decline. Experimental scope selects any matching physical attachment in Cybernet; targeting, relocation and threat ordering remain T-RULES-027. Full tile stays provisional.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,2,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p02-c02,speedrunners,block,Electromagnetic Pulse,information-block,,"Each player with more than one pawn under his or her control, sacrifices one pawn.",Six capacity1 normal ring spaces h2–h7 around non-playable title/effect art h1.,"In-Cybernet placement effect badge; every player controlling more than one pawn sacrifices one.
+Exact corner ICE: 4/5/6; one physical tile.
+Bonus fragments V1/V2/V3/V4/V6; V5 ICE is not a bonus fragment.
+White flat square2 in h5 is an unshielded defense2 modifier, not ICE.
+Internal arrow h3→h2; all six edges connect.","On placement: each player with more than one controlled pawn sacrifices one pawn.
+EN/ES A4 page2 tile2 and rulebooks pp13/16–17/23/35 checked. Controller chooses a controlled pawn; sacrifice follows elimination cleanup. Public simultaneous commitments/stable seat cleanup and retained-pawn eligibility remain provisional T-RULES-029; Dummy prevention inherits T-RULES-010. Queries expose executable targets separately from unresolved ones.",EN/ES A4 page2 tile2 and rulebooks pp13/16–17/23/35 checked. Controller chooses a controlled pawn; sacrifice follows elimination cleanup. Public simultaneous commitments/stable seat cleanup and retained-pawn eligibility remain provisional T-RULES-029; Dummy prevention inherits T-RULES-010. Queries expose executable targets separately from unresolved ones.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,2,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p02-c03,speedrunners,block,Copyleft,information-block,,Each player collects one Bonus counter ([bonus icon]).,Four normal ring spaces: left h2/h7 and lower h5/h6 doubles; h3/headset and h4/right singles. Center h1 is title/effect artwork.,"Placement effect: each player takes one bonus counter; ES explicitly says from reserve.
+Own corner ICE2/3/6 at V3. The ICE outside V2 belongs to adjacent Electromagnetic Pulse.
+Bonus fragments V1/V2/V5; all six edges connect.
+Black flat square4 shields defense4 throughout the left double space.
+Internal arrow h3→h4.
+EKO is a lower normal-double artwork label, not a pawn/control-card component.","On placement: each player collects one bonus counter from reserve.
+EN/ES A4 p2 tile3 and rulebooks pp4/12–19 checked. Award all players from the finite24-counter supply after allocating counters to new bonus icons (p15 steps4/5). No EKO/Eiko pawn exists in the complete component set and no pawn-placement effect is printed. Reserve shortfall/partial-fulfillment policy remains T-RULES-030/031; unsupported placements preserve the paid Search reveal.",EN/ES A4 p2 tile3 and rulebooks pp4/12–19 checked. Award all players from the finite24-counter supply after allocating counters to new bonus icons (p15 steps4/5). No EKO/Eiko pawn exists in the complete component set and no pawn-placement effect is printed. Reserve shortfall/partial-fulfillment policy remains T-RULES-030/031; unsupported placements preserve the paid Search reveal.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,2,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p03-c01,speedrunners,block,Clandestine Broadcast,information-block,,The controller of this block may use it as a Central Core.,"One large upper broadcast circle (h1/h2/h3/h4/h7) and two lower normal single circles (h5/right, h6/left).","Under-control permission badge, not a placement trigger.
+Own white corner ICE2/6 at V6.
+Large special space adds shielded defense faces4/3; unlimited occupancy.
+All six entrances open; three mutually linked spaces.
+No internal arrows or bonus fragments.
+Lower block/enemy-style logos are normal artwork, without movement restriction text.","EN/ES A4 p3 tile1 and bilingual rulebooks pp12–14/18/23/27 checked. Controller may choose the large broadcast space as an optional Reboot Core while control lasts. Do not mark isCentralCore, grant Reboot, relocate on acquisition, change normal lower capacity or allow another player/out-of-turn use. One physical tile; paper/language sheets are aliases. Both engines, pure destination queries, byte snapshots/events and sandbox/editor/replay now cover this component.","EN/ES A4 p3 tile1 and bilingual rulebooks pp12–14/18/23/27 checked. Controller may choose the large broadcast space as an optional Reboot Core while control lasts. Do not mark isCentralCore, grant Reboot, relocate on acquisition, change normal lower capacity or allow another player/out-of-turn use. One physical tile; paper/language sheets are aliases. Both engines, pure destination queries, byte snapshots/events and sandbox/editor/replay now cover this component.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,3,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p03-c02,speedrunners,block,Central Core,information-block,,,One large concentric circular space spans the seven placement zones.,"No corner ICE.
+No bonus corners.
+Six open edges.",Use as the base-game starting Central Core; all printed space area is one special space.,Use as the base-game starting Central Core; all printed space area is one special space.,"Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,3,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p03-c03,speedrunners,block,Pink District,information-block,,Place the Gynoid in this block under your control.,Two upper normal double capsules h2/h7 and h3/h4; lower unlimited Gynoid home h5/h6 around excluded h1 title/art.,"Under-control badge, not tile-placement timing.
+Own white corner ICE2/6 at V3.
+Bonus fragmentsV1/V5 (white/black geometry, not nearby yellow loose counters).
+Gynoid home to left capsule arrow.
+All six entrances open; all three spaces touch; no defense modifier.","EN/ES A4 p3 tile3 and bilingual pp12–18/23/33 checked. Gaining block control places the one physical Gynoid on her matching pawn space and grants control; the tile alone leaves her in reserve. Repeat control relocates/acquires the existing pawn, discarding/refunding attachments only when pawn control changes. Immediate victory ends before further block effects. Her own native beginning theft/composition is a separate dependency.","EN/ES A4 p3 tile3 and bilingual pp12–18/23/33 checked. Gaining block control places the one physical Gynoid on her matching pawn space and grants control; the tile alone leaves her in reserve. Repeat control relocates/acquires the existing pawn, discarding/refunding attachments only when pawn control changes. Immediate victory ends before further block effects. Her own native beginning theft/composition is a separate dependency.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,3,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p04-c01,speedrunners,block,Yakuza,information-block,,You may choose a pawn on an adjacent block. This pawn is attacked with ([1 skull]).,"Four normal spaces: upper double, side singles and lower dragon double; h1 title/art excluded.","Under-control effect badge.
+Own white corner ICE4/6 at V6.
+Flat white defense faces3/2/1 on upper double.
+Arrows right-to-upper and left-to-dragon.
+Bonus fragments V2/V3/V5; all six entrances.","Optional adjacent pawn target or decline on control; one-skull roll after target acceptance.
+On gaining control, optionally choose a pawn on an adjacent block, then attack it with one skull. Friendly/neutral pawns are eligible; same-block/distant pawns are excluded. Effective defense and permitted prevention apply. Declining consumes no RNG. EN/ES p4 tile1 checked with rulebook pp12–14/18/21–23/38; artwork is not a pawn.","On gaining control, optionally choose a pawn on an adjacent block, then attack it with one skull. Friendly/neutral pawns are eligible; same-block/distant pawns are excluded. Effective defense and permitted prevention apply. Declining consumes no RNG. EN/ES p4 tile1 checked with rulebook pp12–14/18/21–23/38; artwork is not a pawn.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,4,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p04-c02,speedrunners,block,Corporate Scandal,information-block,,Each player with more than five Control markers ([control-marker icon]) in the Cybernet discards his or her hand.,"Six normal single ring spaces around excluded h1 title/effect art; camera, swirls, circuit/helmet and black die artwork.","Under-control effect badge.
+Own white corner ICE5/6 at V1.
+Flat black defense face3 on h5 shield.
+All six entrances; bonusV2/V3/V5/V6; no arrows.","Mandatory whole-hand discard on control, no target/decline choice.
+After capture and old-owner marker return, every player with more than five physical Cybernet markers discards all remaining hand cards. Idoru counted card marker contributes; played payment, attachments and reserve markers do not discard. Empty hands are valid. EN/ES p4 tile2 and rulebooks pp8–10/12–14/18/28/38 verified.","After capture and old-owner marker return, every player with more than five physical Cybernet markers discards all remaining hand cards. Idoru counted card marker contributes; played payment, attachments and reserve markers do not discard. Empty hands are valid. EN/ES p4 tile2 and rulebooks pp8–10/12–14/18/28/38 verified.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,4,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p04-c03,speedrunners,block,Black Clinic,information-block,,Choose a pawn in the Cybernet and discard all cards attached to that pawn.,Four normal singles around excluded h1 art and a large lower h5/h6 special/unlimited Clinic circle; medical artwork is not a pawn.,"Under-control effect badge.
+Own white corner ICE3/6 at V6.
+Flat white defense1/2 on the large special space.
+Hand-size minus1 on h4.
+Helmet-to-hand arrow; all entrances; bonusV1/V2/V3/V5.","Mandatory Cybernet pawn target; discard all physical attachments and refund investments.
+Stopped h4 hand-size minus1 applies to recycling maximum.
+On control, the controller must choose a live pawn anywhere in Cybernet and discard all attached cards. Own/enemy/neutral/distant/empty pawns qualify; retained off-board pieces do not. Refund investments to target controller; clear continuous benefits/reveal without elimination or control change. Current hand-space occupancy reduces controller recycling maximum by one. EN/ES p4 tile3 and rulebooks pp8/12–14/18/31–33/35/38 checked.","On control, the controller must choose a live pawn anywhere in Cybernet and discard all attached cards. Own/enemy/neutral/distant/empty pawns qualify; retained off-board pieces do not. Refund investments to target controller; clear continuous benefits/reveal without elimination or control change. Current hand-space occupancy reduces controller recycling maximum by one. EN/ES p4 tile3 and rulebooks pp8/12–14/18/31–33/35/38 checked.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,4,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p05-c01,speedrunners,block,Engineering War,information-block,,Place the Drone MK-2 in this block under your control.,"Central unlimited h1 Drone MK-2 pawn home, normal h7 defense and h4 right side spaces; title/effect artwork occupies h2/h3/h5/h6.","Under-control placement badge.
+Own white corner ICE3/6 at V6.
+Flat white defense face1 on h7.
+Only E2/right and E5/left entrances; bonusV1/V2/V3/V4/V5.","Under-control matching Drone MK-2 placement/control; no placement-only deployment.
+On capture, place/relocate and control the one physical Drone MK-2 on its matching home. Repeated takeover cleans up/refunds only when pawn ownership changes; last-marker victory skips deployment. The teal arrow-like right-circle graphic is artwork rather than a white outlined connector; no direction rule is inferred. EN/ES p5 tile1 and rulebook space/symbol/control pages verified.","On capture, place/relocate and control the one physical Drone MK-2 on its matching home. Repeated takeover cleans up/refunds only when pawn ownership changes; last-marker victory skips deployment. The teal arrow-like right-circle graphic is artwork rather than a white outlined connector; no direction rule is inferred. EN/ES p5 tile1 and rulebook space/symbol/control pages verified.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,5,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p05-c02,speedrunners,block,Combat Prototypes,information-block,,Place the Drone Probe in this block under your control.,"Five spaces: central h1 unlimited matching Drone Probe home with h2 upper-left, h4 right, h5 lower-right and h7 left singles. H3 title and h6 effect art are excluded.","Under-control matching Drone Probe placement.
+Own white ICE4/6 at V2.
+Entrances E2/E3/E5/E6.
+BonusV1/V3/V4/V5/V6; no modifiers/arrows.","On control, place/relocate and control the one physical Drone Probe on its matching home. Tile placement alone grants nothing.
+One physical Combat Prototypes tile, with alternate formats/languages treated as aliases. Five spaces: four normal singles h2/h4/h5/h7 surround unlimited matching Drone Probe h1. Center connects all four; h2–h7 and h4–h5 also connect. Exclude h3 title and h6 effect art. Entrances E2/E3/E5/E6, exact white ICE4/6 at V2, bonusV1/V3/V4/V5/V6. Circuit/globe/triangle graphics add no pawns, arrows or modifiers. Capture places/relocates and controls the one physical Drone Probe and card; placement alone does not. Ownership-sensitive module cleanup/refunds, retained native markers, physical pool guards and immediate-victory stop use shared handlers. Thirteen mirrored tests, shared byte evidence and sandbox/editor replay/save/load verify this component; full mode acceptance remains separate.","One physical Combat Prototypes tile, with alternate formats/languages treated as aliases. Five spaces: four normal singles h2/h4/h5/h7 surround unlimited matching Drone Probe h1. Center connects all four; h2–h7 and h4–h5 also connect. Exclude h3 title and h6 effect art. Entrances E2/E3/E5/E6, exact white ICE4/6 at V2, bonusV1/V3/V4/V5/V6. Circuit/globe/triangle graphics add no pawns, arrows or modifiers. Capture places/relocates and controls the one physical Drone Probe and card; placement alone does not. Ownership-sensitive module cleanup/refunds, retained native markers, physical pool guards and immediate-victory stop use shared handlers. Thirteen mirrored tests, shared byte evidence and sandbox/editor replay/save/load verify this component; full mode acceptance remains separate.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,5,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p05-c03,speedrunners,block,Military Development,information-block,,Place the Drone Turret in this block under your control.,Three-space hand–Turret home–right line; h2/h3/h5/h6 title/effect art excluded.,"Hand+1 on h7 normal single.
+White ICE4/6 at V5.
+Only E2/E5 entrances.
+BonusV1/V2/V3/V4/V6; no arrows.","On obtaining control, place and control the one Drone Turret on its matching unlimited home.
+One physical Military Development tile; alternate language/layout sheets are aliases. Three-space line: h7 normal hand+1 single, central h1 unlimited matching Drone Turret home, h4 normal right single. Exclude h2/h3 effect art and h5/h6 title art. Only E2/right and E5/left are entrances; exact white ICE4/6 at V5, fragmentsV1/V2/V3/V4/V6, no arrows. Teal lettering/circuit and STOP are artwork. Capture places/relocates and controls the same one physical Turret and card, with ownership-sensitive Module cleanup/refunds, preserved uses, physical guards and immediate-victory stop. Placement alone deploys nothing. Hand+1 aggregates for the controller of a stopped pawn, independent of tile ownership; no movement activation is granted to the Turret. Both mirrors and source Search/capture/byte evidence plus sandbox/editor persistence verify the component; full setup/content/mode acceptance remains separate.","One physical Military Development tile; alternate language/layout sheets are aliases. Three-space line: h7 normal hand+1 single, central h1 unlimited matching Drone Turret home, h4 normal right single. Exclude h2/h3 effect art and h5/h6 title art. Only E2/right and E5/left are entrances; exact white ICE4/6 at V5, fragmentsV1/V2/V3/V4/V6, no arrows. Teal lettering/circuit and STOP are artwork. Capture places/relocates and controls the same one physical Turret and card, with ownership-sensitive Module cleanup/refunds, preserved uses, physical guards and immediate-victory stop. Placement alone deploys nothing. Hand+1 aggregates for the controller of a stopped pawn, independent of tile ownership; no movement activation is granted to the Turret. Both mirrors and source Search/capture/byte evidence plus sandbox/editor persistence verify the component; full setup/content/mode acceptance remains separate.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,5,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p06-c01,speedrunners,block,Arms Industry,information-block,,Place a Bonus counter ([bonus icon]) on this block. Collect the Bonus counter ([bonus icon]).,"Four single normal spaces form an outer chain h3–h2–h7–h6; center h1 stores a physical bonus counter and h4/h5 are effect artwork, not pawn spaces.","Black ICE6 at V5.
+Four fragments V2/V3/V4/V6; no V1 fragment.
+Hand−1 at h6.
+E1/E4/E5/E6 entrances; no connector arrows.","On placement, put one reserve Bonus counter on this block.
+On control, collect the existing block counter once.
+One physical Arms Industry tile; language/layout variants are aliases. Four normal single spaces h2/h3/h7/h6 form upper-right–upper-left–left–hand; hand−1 on h6. H1 counter storage and h4/h5 effect artwork are not movement spaces. Entrances E1/E4/E5/E6; own Black ICE6 at V5; fragmentsV2/V3/V4/V6, no V1 fragment or white connector arrows. Teal lettering is artwork. Typed placement allocates one physical reserve counter on the block; control collects that same counter once, retaining collectedBy receipt. Counter ownership is distinct from three-block icons and player free/invested pools. Combined new-icon and block funding is checked before placement; collection works at empty reserve. Real source Search/capture, shared snapshots/events/views,11 tests in each mirror, sandbox replay/Undo/reset and editor pairing execute funded behavior. Placement reserve exhaustion remains T-RULES-031; record and strict official bundle acceptance remain provisional under T-RULES-047.","One physical Arms Industry tile; language/layout variants are aliases. Four normal single spaces h2/h3/h7/h6 form upper-right–upper-left–left–hand; hand−1 on h6. H1 counter storage and h4/h5 effect artwork are not movement spaces. Entrances E1/E4/E5/E6; own Black ICE6 at V5; fragmentsV2/V3/V4/V6, no V1 fragment or white connector arrows. Teal lettering is artwork. Typed placement allocates one physical reserve counter on the block; control collects that same counter once, retaining collectedBy receipt. Counter ownership is distinct from three-block icons and player free/invested pools. Combined new-icon and block funding is checked before placement; collection works at empty reserve. Real source Search/capture, shared snapshots/events/views,11 tests in each mirror, sandbox replay/Undo/reset and editor pairing execute funded behavior. Placement reserve exhaustion remains T-RULES-031; record and strict official bundle acceptance remain provisional under T-RULES-047.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,6,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p06-c02,speedrunners,block,Cleaner (B),information-block,,Place the Cleaner B in this block under your control.,"Cleaner B pawn space, capsule containing two white dice, hand icon and arrow.","Under-control effect badge.
+Corner ICE face: 6.
+Space ICE modifiers: white faces 1, 2.
+Space hand-size modifier: -1.
+One directional arrow.","On gaining control, place Cleaner B under your control.","On gaining control, place Cleaner B under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,6,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p06-c03,speedrunners,block,Cleaner (A),information-block,,Place the Cleaner A in this block under your control.,Cleaner A pawn space and two separate white die spaces.,"Under-control effect badge.
+Corner ICE face: 6.
+Space ICE modifiers: white faces 1, 2.
+Two directional arrows.","On gaining control, place Cleaner A under your control.","On gaining control, place Cleaner A under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,6,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p07-c01,speedrunners,block,Armament Research,information-block,,Place the Drone Hulk in this block under your control.,Large Drone Hulk pawn space plus smaller circular space.,"Under-control effect badge.
+Black ICE corner: face 6.","On gaining control, place Drone Hulk under your control.","On gaining control, place Drone Hulk under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,7,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p07-c02,speedrunners,block,Cleaner (C),information-block,,Place the Cleaner C in this block under your control.,"Cleaner C pawn space, hand icon and white die space.","Under-control effect badge.
+Corner ICE face: 6.
+Space ICE modifier: white face 2.
+Space hand-size modifier: -1.
+Two directional arrows.","On gaining control, place Cleaner C under your control.","On gaining control, place Cleaner C under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,7,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p07-c03,speedrunners,block,Cleaner (D),information-block,,Place the Cleaner D in this block under your control.,"Cleaner D pawn space, white die and skull spaces.","Under-control effect badge.
+Corner ICE face: 6.
+Space ICE modifier: white face 1.
+Space attack modifier: +1 skull.
+Two directional arrows.
+Four bonus corners.","On gaining control, place Cleaner D under your control.","On gaining control, place Cleaner D under your control.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,7,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p08-c01,speedrunners,block,Freeside,information-block,,Place an additional Control marker ([control-marker icon]) on this block.,"Huge black tower in broad circular space, hand icon and smaller hex space.","Under-control effect badge.
+Black ICE corner: face 6.
+Space hand-size modifier: -1.
+Four open edges.
+Two bonus corners.","On gaining control, place an additional control marker on this block.","On gaining control, place an additional control marker on this block.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,8,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p08-c02,speedrunners,block,Google ex Machina,information-block,,Place the Google Ex Machina card under your control.,"Many-eyed mechanical cloud in elongated space, capsule with white dice.","Under-control effect badge.
+Black ICE corner: face 6.
+Space ICE modifiers: white faces 1, 2.","On gaining control, take the Google ex Machina control card.","On gaining control, take the Google ex Machina control card.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,8,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-blocks-a4-p08-c03,speedrunners,block,Financial Sector,information-block,,Place the Financial Sector card under your control.,Black towers in broad circle with two upper circular spaces.,"Under-control effect badge.
+Black ICE corner: face 6.","On gaining control, take the Financial Sector control card.","On gaining control, take the Financial Sector control card.","Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.",sp-en-blocks-a4,8,,34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a
+sp-en-control-cards-p01-c01,speedrunners,control-card,Speedrunner (Blue),pawn-control,Operative,,Male runner holding a round disc.,"ICE face: 2.
+Slots: add-on, gadget, armor.
+Card-activated Icebreaker.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Icebreaker.
+Card-activated movement.
+Use this color’s Operative control card; activate each ability by its own printed card/discard condition.",Use this color’s Operative control card; activate each ability by its own printed card/discard condition.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c02,speedrunners,control-card,Speedrunner (Green),pawn-control,Operative,,Male runner with dark glasses.,"ICE face: 3.
+Slots: add-on, gadget, armor.
+Card-activated Icebreaker.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Icebreaker.
+Card-activated movement.
+Use this color’s Operative control card; activate each ability by its own printed card/discard condition.",Use this color’s Operative control card; activate each ability by its own printed card/discard condition.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c03,speedrunners,control-card,Cleaner A,pawn-control,,,Standing armed man with blade.,"Slots: add-on, weapon, armor.
+Card-activated Delete: 2 skull(s).
+Card-activated movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 2 skull(s).
+Card-activated movement.
+Activate Delete and movement with action cards; use the printed defense row.",Activate Delete and movement with action cards; use the printed defense row.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c04,speedrunners,control-card,Speedrunner (Pink),pawn-control,Operative,,Female runner holding a disc.,"ICE face: 4.
+Slots: add-on, gadget, armor.
+Card-activated Icebreaker.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Icebreaker.
+Card-activated movement.
+Use this color’s Operative control card; activate each ability by its own printed card/discard condition.",Use this color’s Operative control card; activate each ability by its own printed card/discard condition.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c05,speedrunners,control-card,Speedrunner (Orange),pawn-control,Operative,,Male runner with cables and a backpack.,"ICE face: 5.
+Slots: add-on, gadget, armor.
+Card-activated Icebreaker.
+Search: discard 1 card.
+Reboot: matching action card or discard 4 cards.
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Icebreaker.
+Card-activated movement.
+Use this color’s Operative control card; activate each ability by its own printed card/discard condition.",Use this color’s Operative control card; activate each ability by its own printed card/discard condition.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c06,speedrunners,control-card,Cleaner B,pawn-control,,,Heavy armed man wearing a cap.,"Slots: add-on, weapon, armor.
+Card-activated Delete: 1 skull(s).
+Card-activated movement.
+Defense: black faces 1-4; white faces 5-6.","Card-activated Delete: 1 skull(s).
+Card-activated movement.
+Activate Delete and movement with action cards; use the printed defense row.",Activate Delete and movement with action cards; use the printed defense row.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c07,speedrunners,control-card,Financial Sector,block-control,,Advanced quantum simulations can predict changes in the stock market by analyzing the statistical behavior of multiple viral mutations.,Tall black angular towers.,Hand size +2.,Control of this block card increases hand size by two.,Control of this block card increases hand size by two.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c08,speedrunners,control-card,Cleaner D,pawn-control,,,Armed woman with long rifle.,"Slots: add-on, weapon, armor.
+Card-activated Delete: 1 skull(s).
+Card-activated movement.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull(s).
+Card-activated movement.
+Activate Delete and movement with action cards; use the printed defense row.",Activate Delete and movement with action cards; use the printed defense row.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p01-c09,speedrunners,control-card,Cleaner C,pawn-control,,,Armed woman with sword.,"Slots: add-on, weapon, armor.
+Card-activated Delete: 2 skull(s).
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Delete: 2 skull(s).
+Card-activated movement.
+Activate Delete and movement with action cards; use the printed defense row.",Activate Delete and movement with action cards; use the printed defense row.,,sp-en-control-cards,1,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c01,speedrunners,control-card,Cracker,pawn-control,,Gain a Icebreaker roll modifier against blocks controlled by other players.,Male hacker holding a circular device.,"Slots: add-on, gadget, armor.
+ICE face: 6.
+Plus white ICE modifier die against other players’ blocks.
+Card-activated Icebreaker.
+Card-activated movement.
+Defense: black faces 1-2; white faces 3-6.","Card-activated Icebreaker.
+Card-activated movement.
+Apply the Icebreaker roll modifier only against blocks controlled by other players.",Apply the Icebreaker roll modifier only against blocks controlled by other players.,,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c02,speedrunners,control-card,Idoru,pawn-control,,Place a Control marker ([control-marker icon]) on this card. This marker counts as being in the Cybernet.,Female virtual idol silhouette.,"No class badge and no native ability.
+Slots: Add-on and Armor.
+Card-activated movement; amount comes from the card.
+Pawn ICE rhombi:1 and6; the right six-dot rhombus was formerly misread as5.
+Defense: black1; white2–6.","Card-activated movement; amount comes from the card.
+Place one control marker on the control card and count it in Cybernet. EN p2c2 / ES p2 top row third card agree on attributes. Untagged repeat/lifecycle remains provisional SR-PAWN-004/T-RULES-025; do not infer a refresh trigger.",Place one control marker on the control card and count it in Cybernet. EN p2c2 / ES p2 top row third card agree on attributes. Untagged repeat/lifecycle remains provisional SR-PAWN-004/T-RULES-025; do not infer a refresh trigger.,,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c03,speedrunners,control-card,Gynoid,pawn-control,Lovedoll,At the beginning of your turn you may target another pawn and steal one card at random from its controller’s hand.,Female gynoid holding a phone.,"Lovedoll class; Add-on/Armor slots.
+Card-activated movement without a fixed step count; no printed Search/Delete/Reboot/Icebreaker ability.
+Exact rhombus ICE2/3/4/5.
+Defense1 shielded, 2–6 vulnerable.
+Optional beginning clock; another pawn, not enemy-only or same-block-only.","Card-activated movement without a fixed step count; no printed Search/Delete/Reboot/Icebreaker ability.
+EN p2c3 / ES p2c2 (different cell order) verified. One physical card/pawn; paper/acetate variants are aliases. Typed native beginning choice offers decline or another controlled pawn with a nonempty hand, then selects one physical card uniformly via seeded RNG. Own other pawns are legal under the literal bilingual wording. Histories hide card identity from uninvolved players unless a hand was already publicly revealed at transfer; event-time reveal persists independently of later Trojan removal. Full same-timing composition stays provisional T-RULES-005.","EN p2c3 / ES p2c2 (different cell order) verified. One physical card/pawn; paper/acetate variants are aliases. Typed native beginning choice offers decline or another controlled pawn with a nonempty hand, then selects one physical card uniformly via seeded RNG. Own other pawns are legal under the literal bilingual wording. Histories hide card identity from uninvolved players unless a hand was already publicly revealed at transfer; event-time reveal persists independently of later Trojan removal. Full same-timing composition stays provisional T-RULES-005.",,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c04,speedrunners,control-card,Drone MK-2,pawn-control,Drone,,Compact flying drone.,"Slot: module.
+ICE faces: 2, 6.
+Card-activated Delete: 1 skull.
+Once-per-turn free movement: 5 steps.
+Defense: black faces 1-3; white faces 4-6.","Native free five-step movement with physical start marker.
+Matching-card one-skull Delete and subsequent target assignment.
+Card-activated Delete: 1 skull.
+Once-per-turn free movement: 5 steps.
+One Drone pawn/card: free up-to-five-step movement once each controller turn, marked on the physical card; additional paid card movement remains independent under p25. One-skull Delete requires a matching played card, with public roll before assignment. One Module slot; shielded1/2/3, vulnerable4/5/6 and exact ICE2/6. No native Search/Icebreaker/Reboot or out-of-turn exception. EN/ES p2c4 and EN folded pawn p2 unit2 checked.","One Drone pawn/card: free up-to-five-step movement once each controller turn, marked on the physical card; additional paid card movement remains independent under p25. One-skull Delete requires a matching played card, with public roll before assignment. One Module slot; shielded1/2/3, vulnerable4/5/6 and exact ICE2/6. No native Search/Icebreaker/Reboot or out-of-turn exception. EN/ES p2c4 and EN folded pawn p2 unit2 checked.",,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c05,speedrunners,control-card,Drone Hulk,pawn-control,Drone,,Large heavy drone.,"Slot: module.
+ICE face: 5.
+Card-activated Delete: 4 skulls.
+Once-per-turn free movement: 1 hex.
+Defense: black faces 1-5; white face 6.","Card-activated Delete: 4 skulls.
+Once-per-turn free movement: 1 hex.
+Activate Delete with an action card; move one hex once per turn as a free action.",Activate Delete with an action card; move one hex once per turn as a free action.,,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c06,speedrunners,control-card,Automata,pawn-control,Cyborg,,Humanoid robot holding a gun.,"Slots: add-on, weapon, armor.
+ICE faces: 1, 6.
+Card-activated Delete: 1 skull.
+Once-per-turn free movement: 1d6 steps.
+Defense: black faces 1-3; white faces 4-6.","Card-activated Delete: 1 skull.
+Once-per-turn free movement: 1d6 steps.
+Activate Delete with an action card; movement is a once-per-turn free seeded 1d6 roll.",Activate Delete with an action card; movement is a once-per-turn free seeded 1d6 roll.,,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c07,speedrunners,control-card,Drone Probe,pawn-control,Drone,,Floating drone with round optics.,"Drone; one Module slot.
+Shielded1/2, vulnerable3/4/5/6.
+Exact pawn ICE1/3/6.
+Search badge and free movement5; decorative skull is artwork, not native Delete.","Native free once-per-turn Search reveals before placement and marks its physical Search use.
+Native free five-step movement has an independent physical use marker.
+Search badge and free movement5; decorative skull is artwork, not native Delete.
+One Drone Probe pawn/control card; opposed standee panels and alternate formats/languages are aliases. Drone, one Module slot, shielded1/2 and vulnerable3/4/5/6, exact ICE1/3/6. Independent native once-per-turn free Search and five-step movement; no native Delete, Icebreaker, Reboot, stealth or turn exception. Decorative skull artwork is not a Delete badge. Accepted free Search spends no card and commits its own physical native marker when revealing the top block; authorized placement follows without a second cost. Public eligibility uses edges, occupancy and pile count without inspecting the hidden top tile; queries leave state/RNG unchanged. Movement has a separate marker; additional paid movement does not refresh either. No paid Search fallback or paid Delete badge is invented. Both native markers follow the physical control card through takeover/common release and clear only at its current controller beginning. Module costs/refunds and non-Reboot reserve/common release remain shared. Single Servocanon grants free Delete only, not paid Delete. Thirteen mirrored tests and shared snapshots/events/options cover native behavior, invalid commands, pile/placement limits, Sprawl shortfall and EMP sacrifice handoff. Existing T-RULES-007/014/021/025/029 interpretations remain provisional independently; this delivery does not promote them.","One Drone Probe pawn/control card; opposed standee panels and alternate formats/languages are aliases. Drone, one Module slot, shielded1/2 and vulnerable3/4/5/6, exact ICE1/3/6. Independent native once-per-turn free Search and five-step movement; no native Delete, Icebreaker, Reboot, stealth or turn exception. Decorative skull artwork is not a Delete badge. Accepted free Search spends no card and commits its own physical native marker when revealing the top block; authorized placement follows without a second cost. Public eligibility uses edges, occupancy and pile count without inspecting the hidden top tile; queries leave state/RNG unchanged. Movement has a separate marker; additional paid movement does not refresh either. No paid Search fallback or paid Delete badge is invented. Both native markers follow the physical control card through takeover/common release and clear only at its current controller beginning. Module costs/refunds and non-Reboot reserve/common release remain shared. Single Servocanon grants free Delete only, not paid Delete. Thirteen mirrored tests and shared snapshots/events/options cover native behavior, invalid commands, pile/placement limits, Sprawl shortfall and EMP sacrifice handoff. Existing T-RULES-007/014/021/025/029 interpretations remain provisional independently; this delivery does not promote them.",,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c08,speedrunners,control-card,Drone Turret,pawn-control,Drone,May activate abilities during any player’s turn.,Stationary turret with long barrel.,"Drone; one Module.
+Shielded1–4, vulnerable5/6; ICE1/4.
+Card Delete badge, one skull; crossed-out movement.","Card-activated one-skull Delete.
+Controller may activate this pawn’s abilities during any player’s turn.
+Cannot activate any movement.
+One physical Drone Turret pawn/card; opposed strip panels and alternative languages/formats are aliases. Drone, one Module, shielded1–4/vulnerable5/6, exact ICE1/4, one-skull card Delete, crossed-out movement. Replaces the incorrect provisional free-Delete/low-ICE pilot. Typed abilityTurn:any-player-turn changes ability timing only, retaining controller, printed/granted activation, costs, targets and physical markers. The explicit controller pays and owns the public roll/assignment while active player/turn/phase remain unchanged. No movement activation, other pawn, attachment or phase-control permission is created. Pending actions/choices/combat remain indivisible (p24 forbids movement interleaving); no simultaneous-priority rule is invented. Source p8 keeps paid face-up cards with their player until that player recycles, including cards played during another turn or outside action phase. Parallel playedCardOwners metadata preserves duplicates/physical inventory and controller-specific recycling. Module free Delete remains separate and clears at the current controller beginning. Native movement remains cancelled even with a movement grant. Thirteen equivalent mirror tests and shared byte evidence exercise controller/public assignment, private previews, all idle phases, payment/recycle conservation, Dummy, takeover/elimination, invalid authority/costs, pending windows and victory. Shadowraiders joint-threat composition and broader multiple-free/used-card gaps remain separate.","One physical Drone Turret pawn/card; opposed strip panels and alternative languages/formats are aliases. Drone, one Module, shielded1–4/vulnerable5/6, exact ICE1/4, one-skull card Delete, crossed-out movement. Replaces the incorrect provisional free-Delete/low-ICE pilot. Typed abilityTurn:any-player-turn changes ability timing only, retaining controller, printed/granted activation, costs, targets and physical markers. The explicit controller pays and owns the public roll/assignment while active player/turn/phase remain unchanged. No movement activation, other pawn, attachment or phase-control permission is created. Pending actions/choices/combat remain indivisible (p24 forbids movement interleaving); no simultaneous-priority rule is invented. Source p8 keeps paid face-up cards with their player until that player recycles, including cards played during another turn or outside action phase. Parallel playedCardOwners metadata preserves duplicates/physical inventory and controller-specific recycling. Module free Delete remains separate and clears at the current controller beginning. Native movement remains cancelled even with a movement grant. Thirteen equivalent mirror tests and shared byte evidence exercise controller/public assignment, private previews, all idle phases, payment/recycle conservation, Dummy, takeover/elimination, invalid authority/costs, pending windows and victory. Shadowraiders joint-threat composition and broader multiple-free/used-card gaps remain separate.",,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-control-cards-p02-c09,speedrunners,control-card,Google ex Machina,block-control,,At the beginning of your turn you may search the action deck for a card and place it in your hand. Shuffle the action deck.,Many-eyed floating cloudlike structure.,"Hand size -1.
+Beginning-of-turn clock.","At turn beginning optionally find one action-deck card and put it in hand, then shuffle; reduce hand size by one.","At turn beginning optionally find one action-deck card and put it in hand, then shuffle; reduce hand size by one.",,sp-en-control-cards,2,,4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346
+sp-en-markers-p01-sheet,speedrunners,marker-sheet,Speedrunners control marker sheet,assembly-sheet,,,Four color rows with 10 folded marker pairs per color.,"40 assembled markers.
+Page 1/2.",Assembly/use: Fold each insignia and reverse pair; preserve color and serial number.,Fold each insignia and reverse pair; preserve color and serial number.,,sp-en-markers,1,,c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66
+sp-en-markers-p02-sheet,speedrunners,marker-sheet,Speedrunners start-of-turn marker sheet,assembly-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.",Two folded rows of eight clock markers; bilingual replacement instructions.,"16 assembled markers; 32 printed clock faces.
+Page 2/2.","Assembly/use: Cut and fold paired panels; colored counters, buttons or seeds may substitute as printed.","Cut and fold paired panels; colored counters, buttons or seeds may substitute as printed.",,sp-en-markers,2,,c8f79b8b7a46e8fa5b106049477097a2d9e099283a0797bc1c6ff5750d154f66
+sp-en-pawns-p01-sheet,speedrunners,pawn-sheet,Speedrunners pawn assembly sheet 1,assembly-sheet,,,"Eight opposed front/back pawn pairs, yellow/black tabs and folding diagrams labeled 1 and 2.","Page 1/2.
+Eight assembled pawns; sixteen printed character faces.",Assembly/use: Cut and fold each opposed face pair into a standing pawn.,Cut and fold each opposed face pair into a standing pawn.,,sp-en-pawns,1,,7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753
+sp-en-pawns-p02-sheet,speedrunners,pawn-sheet,Speedrunners pawn assembly sheet 2,assembly-sheet,,,Seven opposed pawn pairs in the main column and a separate Drone Turret strip.,"Page 2/2.
+Eight assembled pawns; sixteen printed character faces.
+Drone Turret carries STOP decoration.",Assembly/use: Cut and fold each pair; the separate right strip is Drone Turret.,Cut and fold each pair; the separate right strip is Drone Turret.,,sp-en-pawns,2,,7e5f924d3ef61d03b346da5909d4b6c67b18e31159a511078c82f4d1c5ddf753
+support-11a9f541e7af-p01-sheet,speedrunners,supporting-sheet,Speedrunners marker bases p.1,supporting-sheet,,,Four color rows of ten folding hex bases; second page has yellow bases and bilingual replacement advice.,,Assembly/use: Follow diagrams 1-3 to attach marker faces to folded Type C bases.,Follow diagrams 1-3 to attach marker faces to folded Type C bases.,,sortme-sp-markers-color-c,1,Sp 05 Markers C Base.pdf,95c5ad17a6d737c48e659f26336ee95f1cd1595c02ee1ac96a0c41c8acdebc4a
+support-11a9f541e7af-p02-sheet,speedrunners,supporting-sheet,Speedrunners marker bases p.2,supporting-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.",Four color rows of ten folding hex bases; second page has yellow bases and bilingual replacement advice.,,Assembly/use: Follow diagrams 1-3 to attach marker faces to folded Type C bases.,Follow diagrams 1-3 to attach marker faces to folded Type C bases.,,sortme-sp-markers-color-c,2,Sp 05 Markers C Base.pdf,95c5ad17a6d737c48e659f26336ee95f1cd1595c02ee1ac96a0c41c8acdebc4a
+support-12800982d766-p01-sheet,shadowraiders,supporting-sheet,Shared Type B adhesive tabs p.1,supporting-sheet,,Print on self-adhesive paper; fold/attach the strips as shown by diagrams 1 and 2.,"Speedrunners, Shadowraiders, Outbreak, Chaos and Drone Hulk adhesive strips with assembly diagrams.",,Assembly/use: Print on self-adhesive paper; fold/attach the strips as shown by diagrams 1 and 2.,Print on self-adhesive paper; fold/attach the strips as shown by diagrams 1 and 2.,,sortme-sh-pawns-acetate-b,1,Sp-Sh 02 Pawns B Adhesive.pdf,5398ddc4dcfb74e159c429e494c0ac79d6ad43937936fa157162c6bcabb0a024
+support-1311e52791a3-p01-sheet,speedrunners,supporting-sheet,Speedrunners alternate color pawn sheet p.1,supporting-sheet,,,"Two pages of the same sixteen named/color-coded pawn pairs, with Type B and Type C diagrams.","Opposed character panels are paired faces, not extra pawn copies.",Assembly/use: Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,,sortme-sp-pawns-color-b,1,Sp 04 Pawns BC Color.pdf,8e5b8660bb2aed1d4ee38a39d6ca29227e789b7ae96173a91fc8b09a45785f28
+support-1311e52791a3-p02-sheet,speedrunners,supporting-sheet,Speedrunners alternate color pawn sheet p.2,supporting-sheet,,,"Two pages of the same sixteen named/color-coded pawn pairs, with Type B and Type C diagrams.","Opposed character panels are paired faces, not extra pawn copies.",Assembly/use: Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,,sortme-sp-pawns-color-b,2,Sp 04 Pawns BC Color.pdf,8e5b8660bb2aed1d4ee38a39d6ca29227e789b7ae96173a91fc8b09a45785f28
+support-1d96a94392b9-p01-sheet,speedrunners,supporting-sheet,Speedrunners Type C pawn bases p.1,supporting-sheet,,,"Named pawn bases, four Operative colors, larger Drone Hulk base and assembly diagrams 1-3.",,Assembly/use: Cut and fold each matching base; insert corresponding pawn faces as illustrated.,Cut and fold each matching base; insert corresponding pawn faces as illustrated.,,sortme-sp-pawns-acetate-c,1,Sp 04 Pawns C Base.pdf,f464eeae3fc8e4f1c0cddf83a3a0754a728dc0bff11683308449f61084fb52d7
+support-27e7adedd88e-p01-sheet,speedrunners,supporting-sheet,Speedrunners alternate marker faces p.1,supporting-sheet,,,Four colored control-marker rows of ten units; second page has sixteen paired clock markers and bilingual replacement advice.,,Assembly/use: Use paired marker faces with separate Type C bases when desired.,Use paired marker faces with separate Type C bases when desired.,,sortme-sp-markers-color-b,1,Sp 05 Markers BC Color.pdf,aceba43b4517f77f6d471a014a19901fbacc87876f5b6daaaefcc02d45368403
+support-27e7adedd88e-p02-sheet,speedrunners,supporting-sheet,Speedrunners alternate marker faces p.2,supporting-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.",Four colored control-marker rows of ten units; second page has sixteen paired clock markers and bilingual replacement advice.,,Assembly/use: Use paired marker faces with separate Type C bases when desired.,Use paired marker faces with separate Type C bases when desired.,,sortme-sp-markers-color-b,2,Sp 05 Markers BC Color.pdf,aceba43b4517f77f6d471a014a19901fbacc87876f5b6daaaefcc02d45368403
+support-2c0d88888088-p01-sheet,shared,supporting-sheet,Control card backs p.1,supporting-sheet,,CONTROL / ZAIBATSU. Imprimir 2 copias - Print 2 copies. Design by Kotdesign.,Nine pale turquoise honeycomb control backs; black standing character silhouettes.,"9 backs per printed page.
+Instruction: print 2 copies.",Assembly/use: CONTROL / ZAIBATSU. Imprimir 2 copias - Print 2 copies. Design by Kotdesign.,CONTROL / ZAIBATSU. Imprimir 2 copias - Print 2 copies. Design by Kotdesign.,,sortme-card-backs,1,Sp-Sh 02b Control Backs Kot.pdf,11423adf001a52ed289c45e1de4269a527465c91d1412a524f3ff055a2ed22b9
+support-2f370a9c3b0a-p01-sheet,shadowraiders,supporting-sheet,Shadowraiders alternate marker faces p.1,supporting-sheet,,,"Four colored control/medal rows, eight units per color; second page has sixteen paired clock markers and bilingual replacement advice.",,Assembly/use: Use paired marker faces with the separate Type C bases when desired.,Use paired marker faces with the separate Type C bases when desired.,,sortme-sh-markers-color-b,1,Sh 05 Markers BC Color.pdf,48a91aaaf608aeb661f9dc0c86e4d623504bd60a5ce0fde3ffd2a28560747e3c
+support-2f370a9c3b0a-p02-sheet,shadowraiders,supporting-sheet,Shadowraiders alternate marker faces p.2,supporting-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.","Four colored control/medal rows, eight units per color; second page has sixteen paired clock markers and bilingual replacement advice.",,Assembly/use: Use paired marker faces with the separate Type C bases when desired.,Use paired marker faces with the separate Type C bases when desired.,,sortme-sh-markers-color-b,2,Sh 05 Markers BC Color.pdf,48a91aaaf608aeb661f9dc0c86e4d623504bd60a5ce0fde3ffd2a28560747e3c
+support-38439f9a591f-p01-sheet,shadowraiders,supporting-sheet,Shadowraiders acetate pawn sheet p.1,supporting-sheet,,,Black character silhouettes on white/transparent stock; differently arranged opposed pairs.,,Assembly/use: Use transparent/acetate stock; pair with Type B adhesive strips or Type C bases.,Use transparent/acetate stock; pair with Type B adhesive strips or Type C bases.,,sortme-sh-pawns-acetate-b,1,Sh 04 Pawns BC Acetate.pdf,5398ddc4dcfb74e159c429e494c0ac79d6ad43937936fa157162c6bcabb0a024
+support-59ebe7180f05-p01-sheet,shared,supporting-sheet,Letter block backs p.1,supporting-sheet,,Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,Three turquoise honeycomb/circuitry block backs with ZAIBATSU strip; bilingual Letter/Carta printing instructions.,"3 backs per printed page.
+Instruction: print 8 copies.",Assembly/use: Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,,sortme-block-backs,1,Sp-Sh 01b Blocks Backs Letter.pdf,33b02900efc592bcb21ae40edd6b380c8c2e6df4d636045c5ec250f12852ab0d
+support-66684dabec0b-p01-sheet,shared,supporting-sheet,Action card backs p.1,supporting-sheet,,ACTION / ZAIBATSU. Imprimir 6 copias - Print 6 copies. Design by Kotdesign.,Nine dark turquoise honeycomb action backs; black Google ex Machina-like silhouettes.,"9 backs per printed page.
+Instruction: print 6 copies.",Assembly/use: ACTION / ZAIBATSU. Imprimir 6 copias - Print 6 copies. Design by Kotdesign.,ACTION / ZAIBATSU. Imprimir 6 copias - Print 6 copies. Design by Kotdesign.,,sortme-card-backs,1,Sp-Sh 03b Action Backs Kot.pdf,11423adf001a52ed289c45e1de4269a527465c91d1412a524f3ff055a2ed22b9
+support-73cb9208b561-p01-sheet,shadowraiders,supporting-sheet,Shadowraiders Type C bases p.1,supporting-sheet,,,"Pawn-specific yellow circular folding bases; page 2 has a large Chaos base, Outbreak bases and diagrams 1-3.",,Assembly/use: Cut and fold bases; insert corresponding pawn faces as illustrated.,Cut and fold bases; insert corresponding pawn faces as illustrated.,,sortme-sh-pawns-acetate-c,1,Sh 04 Pawns C Base.pdf,a859316275e24d4bc92c67e24b6f80785254b9ae27d9b39bea58a0bba13aa5c2
+support-73cb9208b561-p02-sheet,shadowraiders,supporting-sheet,Shadowraiders Type C bases p.2,supporting-sheet,,,"Pawn-specific yellow circular folding bases; page 2 has a large Chaos base, Outbreak bases and diagrams 1-3.",,Assembly/use: Cut and fold bases; insert corresponding pawn faces as illustrated.,Cut and fold bases; insert corresponding pawn faces as illustrated.,,sortme-sh-pawns-acetate-c,2,Sh 04 Pawns C Base.pdf,a859316275e24d4bc92c67e24b6f80785254b9ae27d9b39bea58a0bba13aa5c2
+support-a9ff0718a1ec-p01-sheet,shadowraiders,supporting-sheet,Shadowraiders marker bases p.1,supporting-sheet,,,Four color groups of folding hex bases; second page has yellow bases and bilingual replacement advice.,,Assembly/use: Follow diagrams 1-3 to attach marker faces to folded Type C bases.,Follow diagrams 1-3 to attach marker faces to folded Type C bases.,,sortme-sh-markers-color-c,1,Sh 05 Markers C Base.pdf,06d8fe6f916667b29740ee5cc04c0c8d7968d72afc2f9eea3308260a783b8bb0
+support-a9ff0718a1ec-p02-sheet,shadowraiders,supporting-sheet,Shadowraiders marker bases p.2,supporting-sheet,,"The control markers and start-of-turn markers can be replaced by color counters from some other game, or even colored buttons or seeds.
+Los contadores de control y los contadores de inicio de turno pueden ser remplazados por contadores de colores de algún otro juego, o inclusive botones o semillas.",Four color groups of folding hex bases; second page has yellow bases and bilingual replacement advice.,,Assembly/use: Follow diagrams 1-3 to attach marker faces to folded Type C bases.,Follow diagrams 1-3 to attach marker faces to folded Type C bases.,,sortme-sh-markers-color-c,2,Sh 05 Markers C Base.pdf,06d8fe6f916667b29740ee5cc04c0c8d7968d72afc2f9eea3308260a783b8bb0
+support-c28e07076360-p01-sheet,speedrunners,supporting-sheet,Speedrunners acetate pawn sheet p.1,supporting-sheet,,,"Sixteen black character silhouettes on white/transparent stock, opposed pairs and Type B/C assembly diagrams.",,Assembly/use: Transparencia (Acetato) / Transparent paper (Cellulose acetate). Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,Transparencia (Acetato) / Transparent paper (Cellulose acetate). Type B: binder clip 32 mm (1 1/4 inch). Type C: separate folded base.,,sortme-sp-pawns-acetate-b,1,Sp 04 Pawns BC Acetate.pdf,5bdde552d4c84ad6e01f6aedf7118b6052d90c059410466e6fe6961de6047d8b
+support-d40beaae84db-p01-sheet,shared,supporting-sheet,A4 block backs p.1,supporting-sheet,,Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,Three turquoise honeycomb/circuitry block backs with ZAIBATSU strip; A4 printing instructions.,"3 backs per printed page.
+Instruction: print 8 copies.",Assembly/use: Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,Print 8 copies / Imprimir 8 copias. Print card stock or sticker paper. Cut with scissor or cutter.,,sortme-block-backs,1,Sp-Sh 01b Blocks Backs A4.pdf,33b02900efc592bcb21ae40edd6b380c8c2e6df4d636045c5ec250f12852ab0d
+support-fa4d323523b9-p01-sheet,shadowraiders,supporting-sheet,Shadowraiders alternate color pawn sheet p.1,supporting-sheet,,,"Colored opposed pawn pairs, yellow Outbreak pairs, and a large Chaos pair without integral Type A foot tabs.","Opposed character panels are paired faces, not extra pawn copies.",Assembly/use: Use these faces with Type B adhesive tabs or Type C bases; they do not print additional abilities.,Use these faces with Type B adhesive tabs or Type C bases; they do not print additional abilities.,,sortme-sh-pawns-color-b,1,Sh 04 Pawns BC Color.pdf,ebee1ab13a0d23c429110dc41c95106ce62a131fff8feec795f98f7f57cdff0e
+support-fa4d323523b9-p02-sheet,shadowraiders,supporting-sheet,Shadowraiders alternate color pawn sheet p.2,supporting-sheet,,,"Colored opposed pawn pairs, yellow Outbreak pairs, and a large Chaos pair without integral Type A foot tabs.","Opposed character panels are paired faces, not extra pawn copies.",Assembly/use: Use these faces with Type B adhesive tabs or Type C bases; they do not print additional abilities.,Use these faces with Type B adhesive tabs or Type C bases; they do not print additional abilities.,,sortme-sh-pawns-color-b,2,Sh 04 Pawns BC Color.pdf,ebee1ab13a0d23c429110dc41c95106ce62a131fff8feec795f98f7f57cdff0e

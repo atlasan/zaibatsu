@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "type": "choice-required",
+      "playerId": "p1",
+      "elementId": "1:beginning:speedrunner-pink:0:0",
+      "cardId": "toxin"
+    }
+  ],
+  [
+    {
+      "type": "choice-resolved",
+      "playerId": "p1",
+      "cardId": "toxin",
+      "elementId": "1:beginning:speedrunner-pink:0:0"
+    },
+    {
+      "type": "card-discarded",
+      "cardId": "dj"
+    },
+    {
+      "type": "phase-advanced",
+      "playerId": "p1",
+      "fromPhase": "beginning",
+      "toPhase": "action"
+    }
+  ]
+]

@@ -1,10 +1,10 @@
-// Runs a demo Speedrunners game to completion using the shared data in
+// Runs a demo Speedrunners game to completion using the frozen provisional data in
 // spec/data. The TS mirror of impl/go/cmd/zaibatsu/main.go.
 
-import { loadDefault } from "./data/index.ts";
+import { loadRegression } from "./data/index.ts";
 import { newGame, runTurn, winner } from "./engine/index.ts";
 
-const data = loadDefault("speedrunners");
+const data = loadRegression("speedrunners");
 
 const s = newGame({
   data,

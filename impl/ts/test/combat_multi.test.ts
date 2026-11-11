@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import type { GameData, GameState } from "../src/domain/types.ts";
 import { abilityUsedKey, defeats, deleteMulti, newGame } from "../src/engine/index.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN = { q: 0, r: 0 };
 
 function multiScenario(s: GameState) {

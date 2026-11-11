@@ -123,6 +123,30 @@ export function loadDefault(expansion: string): GameData {
   return loadGameData(findSpecDir(), expansion);
 }
 
+/** Frozen provisional corpus for legacy regression scenarios, never official play. */
+export function loadRegression(expansion: string, modeId?: string): GameData {
+  const data = loadGameData(join(findSpecDir(), "../fixtures/provisional-v1/spec/data"), expansion);
+  if (!modeId) return {...data,regressionFixture:"provisional-v1",mode:{...data.mode,provisional:true}};
+  const mode = [data.mode, ...(data.modes ?? [])].find((entry) => entry.id === modeId);
+  if (!mode) throw new Error(`unknown regression mode "${modeId}"`);
+  return { ...data, regressionFixture:"provisional-v1", mode: {...mode,provisional:true} };
+}
+
+/** Load a validated component sidecar while its full expansion bundle is being authored. */
+export function loadThreats(expansion: string, regression = false): Threat[] {
+  const dir = regression ? join(findSpecDir(), "../fixtures/provisional-v1/spec/data") : findSpecDir();
+  assertValidatedSpecData(dir, expansion);
+  return readJson<{ threats: Threat[] }>(join(dir, expansion, "threats.json")).threats;
+}
+
+/** Selects a validated local mode without changing the official default. */
+export function loadMode(expansion: string, modeId: string): GameData {
+  const data = loadDefault(expansion);
+  const mode = [data.mode, ...(data.modes ?? [])].find((mode) => mode.id === modeId);
+  if (!mode) throw new Error(`unknown mode "${modeId}"`);
+  return { ...data, mode };
+}
+
 /** Light structural checks the loader guarantees to the engine. */
 function validate(data: GameData): void {
   if (data.blocks.length === 0) throw new Error("no blocks loaded");

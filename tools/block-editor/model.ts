@@ -20,8 +20,8 @@ export interface GridCell { q: number; r: number; }
 export interface LegacyFootprint { shape?: "hex" | "pill" | "large"; cells?: GridCell[]; }
 
 export type SpaceModifierKind = "defense" | "hand-size" | "attack" | "ice";
-export type BlockEffectKind = "gain-control-card" | "place-pawn" | "area-attack" | "all-players" | "modify-ice" | "custom";
-export type BlockEffect = string | { kind: BlockEffectKind; amount?: number; target?: string; text?: string };
+export type BlockEffectKind = "discard-hands-above-markers" | "place-block-bonus" | "collect-block-bonus" | "discard-pawn-attachments" | "attack-pawn" | "place-controlled-pawn" | "controller-core" | "gain-bonus-all-players" | "gain-control-card" | "place-pawn" | "place-neutral-pawn" | "sacrifice-per-player" | "discard-per-controlled-pawn" | "return-control-marker" | "area-attack" | "all-players" | "modify-ice" | "custom";
+export type BlockEffect = string | { kind: BlockEffectKind;markerThreshold?:number;scope?:"adjacent-blocks"|"cybernet";optional?:true; minimumControlledPawns?:number;amount?: number; target?: string; text?: string };
 export interface EditorSpace {
   id: string;
   type: EditorSpaceType;
@@ -35,12 +35,15 @@ export interface EditorSpace {
   displayShape?: SpaceDisplayShape;
   pawnId?: string;
   effectId?: string;
+  effect?:{kind:"discard-attachment";cardType:"add-on"|"gadget";scope:"cybernet";optional:true};
   /** Cross-edge exit restriction; 0 is top, then clockwise. */
   direction?: number;
-  modifier?: { kind: SpaceModifierKind; amount?: number };
+  modifier?: { kind: SpaceModifierKind; amount?: number; dice?:Array<{value:number;shielded:boolean}> };
 }
 
 export interface BlockRecord {
+  spaceArrows?:Array<{from:string;to:string}>;
+  nonPlayableZoneIds?:ZoneId[];
   id: string; name: string; expansion: Expansion; layoutId: typeof STANDARD_BLOCK_LAYOUT_ID;
   /** Legacy engine fallback, derived from authored faces by the editor. */
   iceValue?: "none" | "low" | "medium" | "high" | "black";
@@ -68,18 +71,22 @@ export type GrantableAbility = CardAbility | "move";
 export type CardSlot = "add-on" | "gadget" | "weapon" | "armor" | "module" | "mission";
 export interface MovementValue { type: "fixed" | "d6" | "2d6" | "hex"; amount?: number; stealth?: boolean; }
 export interface AbilityUse { ability: GrantableAbility; perTurn?: number; dice?: "d6"; activation?: "card" | "once-per-turn"; }
-export type CardEffectKind = "gain-control-card" | "place-pawn" | "area-attack" | "all-players" | "modify-ice" | "draw-cards" | "gain-bonus" | "sacrifice-pawn" | "custom";
-export interface CardEffect { kind: CardEffectKind; amount?: number; target?: string; text?: string; trigger?: "on-play" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; }
+export type CardEffectKind = "gain-control-card" | "gain-target-control" | "place-pawn" | "area-attack" | "all-players" | "modify-ice" | "draw-cards" | "gain-bonus" | "sacrifice-pawn" | "custom";
+export interface CardEffect { kind: CardEffectKind; amount?: number; target?: string; text?: string; trigger?: "on-attach" | "on-play" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; }
 export interface CardAttach {
-  as?: "pawn" | "enemy" | "block"; slot?: CardSlot; class?: string[];
-  grants?: GrantableAbility[]; removes?: GrantableAbility[]; grantsMovement?: MovementValue[]; grantsStealth?: boolean; grantsSlot?: CardSlot[];
+  delete?:{skulls:number;activation?:"card"|"once-per-turn"};
+  eliminationPrevention?: {kind:"discard-self"};
+  phaseEffects?: Array<{trigger:"begin-turn"|"end-action";kind:"discard-self"|"discard-hand"|"discard-or-sacrifice"|"sacrifice-and-draw"|"discard-and-relocate"|"discard-cards";amount?:number;threatMode?:"normal-movement"|"placement"}>;
+  as?: "pawn" | "enemy" | "block"; slot?: CardSlot; class?: string[]; forbiddenClasses?: string[]; forbiddenDestinations?: "central-core"[]; controllerHand?: "face-up";
+  grants?: GrantableAbility[]; removes?: GrantableAbility[]; grantsMovement?: MovementValue[]; grantsStealth?: boolean; ignoresDirectionArrows?: boolean; movementModifier?: number; grantsSlot?: CardSlot[];
+  icebreakerModifier?: {faces?:number[];rollDice?:number;black?:boolean;ignoresBlackIce?:boolean};
   abilityUses?: AbilityUse[]; iceModifier?: { faces?: number[]; deltaDice?: number; black?: boolean };
   defenseOverride?: Array<{ value: number; shielded: boolean }>; nullifiesIce?: boolean;
-  drawModifier?: number; handModifier?: number; blockSpace?: { shape?: "circle" | "hex" };
+  drawModifier?: number; handModifier?: number; attackModifier?: number; blockSpace?: { shape?: "circle" | "hex" };
   effectText?: string; effectTrigger?: "on-attach" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous"; cost?: number;
 }
 export interface ActionCardRecord {
-  id: string; name: string; type?: CardSlot | "action" | "movement" | "event"; class?: string[];
+  id: string; name: string; type?: CardSlot | "action" | "movement" | "event" | "block"; class?: string[];
   expansion: Expansion; copies: number; summary?: string;
   movement?: number; movements?: MovementValue[]; activates?: CardAbility[]; effects?: CardEffect[]; attach?: CardAttach;
   assetRefs: string[]; provisional: boolean;
@@ -133,7 +140,7 @@ export function deriveBoundarySpaces(block: Pick<BlockRecord, "edges" | "spaces"
 /** Deterministic manual starting point: one ordinary gameplay space per placement hex. */
 export function prefillSevenZones(document: BlockDocument, layout: BlockLayout): BlockDocument {
   const spaces = STANDARD_ZONE_IDS.map((zoneId) => ({ id: zoneId, type: "normal" as const, zoneIds: [zoneId], capacity: 1, displayShape: "auto" as const, neighbors: [] }));
-  const block = { ...document.block, spaces: inferNeighbors(spaces, layout) };
+  const block = { ...document.block, nonPlayableZoneIds:[],spaceArrows:[], spaces: inferNeighbors(spaces, layout) };
   return { ...document, block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
 }
 
@@ -142,7 +149,7 @@ export function prefillSevenZones(document: BlockDocument, layout: BlockLayout):
  * suggestions are intentionally left out for the author to resolve manually.
  */
 export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout, vision: HexVisionTile): BlockDocument {
-  const claimed = new Set<ZoneId>();
+  const claimed = new Set<ZoneId>(document.block.nonPlayableZoneIds??[]);
   const spaces: EditorSpace[] = [];
   let unresolved = 0;
   for (const [index, candidate] of (vision.spaces ?? []).entries()) {
@@ -155,9 +162,10 @@ export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout,
   const iceFaces = (vision.iceDiceCandidates ?? []).map((candidate) => candidate.face).filter((face) => Number.isInteger(face) && face >= 1 && face <= 6);
   const block = {
     ...document.block,
+    spaceArrows:[],
     edges: vision.edges?.length === 6 ? vision.edges as EdgeList : document.block.edges,
     bonusCorners: vision.whiteCorners?.length === 6 ? vision.whiteCorners as EdgeList : document.block.bonusCorners,
-    bonusFragments: vision.whiteCorners?.filter(Boolean).length === 6 ? vision.whiteCorners.filter(Boolean).length : document.block.bonusFragments,
+    bonusFragments: vision.whiteCorners?.length === 6 ? vision.whiteCorners.filter(Boolean).length : document.block.bonusFragments,
     spaces: inferNeighbors(spaces, layout),
     iceFaces,
     iceValue: derivedIceValue(iceFaces, document.block.blackIce),
@@ -169,7 +177,7 @@ export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout,
 
 /** Clear editable gameplay fields without deleting the source-linked draft itself. */
 export function clearBlockContent(document: BlockDocument, layout: BlockLayout): BlockDocument {
-  const block = { ...document.block, iceFaces: [], iceValue: "none" as const, blackIce: false, edges: [false, false, false, false, false, false] as EdgeList, bonusCorners: [false, false, false, false, false, false] as EdgeList, bonusFragments: 0, spaces: [], effects: undefined };
+  const block = { ...document.block, iceFaces: [], iceValue: "none" as const, blackIce: false, spaceArrows:[],nonPlayableZoneIds:[], edges: [false, false, false, false, false, false] as EdgeList, bonusCorners: [false, false, false, false, false, false] as EdgeList, bonusFragments: 0, spaces: [], effects: undefined };
   return { ...document, block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
 }
 
@@ -188,31 +196,60 @@ function validKnowledgeTag(value: string): boolean { return /^[a-z][a-z0-9-]*:[a
 function validEntryId(value: string): boolean { return /^[a-z0-9./-]+$/.test(value); }
 function validBlockEffect(effect: BlockEffect | undefined): boolean {
   if (effect === undefined || typeof effect === "string") return true;
-  if (!["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "custom"].includes(effect.kind)) return false;
+  if (!["place-block-bonus", "collect-block-bonus", "discard-pawn-attachments", "discard-hands-above-markers", "attack-pawn", "place-controlled-pawn", "controller-core", "gain-bonus-all-players", "gain-control-card", "place-pawn", "place-neutral-pawn", "sacrifice-per-player", "discard-per-controlled-pawn", "return-control-marker", "area-attack", "all-players", "modify-ice", "custom"].includes(effect.kind)) return false;
+  if(effect.kind==="discard-hands-above-markers" && (!Number.isInteger(effect.markerThreshold) || effect.markerThreshold!<1 || effect.amount!==undefined || effect.target!==undefined || effect.scope!==undefined || effect.optional!==undefined || effect.minimumControlledPawns!==undefined))return false;
+  if(effect.kind!=="discard-hands-above-markers" && effect.markerThreshold!==undefined)return false;
+  if(effect.kind==="discard-pawn-attachments" && (effect.scope!=="cybernet" || effect.optional!==undefined || effect.amount!==undefined || effect.target!==undefined || effect.markerThreshold!==undefined || effect.minimumControlledPawns!==undefined))return false;
+  if(effect.kind==="attack-pawn" && (!Number.isInteger(effect.amount) || effect.amount!<1 || effect.scope!=="adjacent-blocks" || effect.optional!==true || effect.target!==undefined))return false;
+  if(effect.kind!=="attack-pawn" && (effect.scope && effect.kind!=="discard-pawn-attachments" || effect.optional))return false;
+  if(effect.kind==="place-controlled-pawn" && (!effect.target || (effect.amount??0)!==0))return false;
+  if(effect.kind==="controller-core" && (!effect.target || (effect.amount??0)!==0))return false;
+  if(effect.kind==="gain-bonus-all-players" && (!Number.isInteger(effect.amount)||effect.amount!<1||effect.target!==undefined))return false;
+  if(effect.kind==="sacrifice-per-player" && (effect.amount!==1 || !Number.isInteger(effect.minimumControlledPawns) || effect.minimumControlledPawns!<1 || effect.target!==undefined))return false;
+  if(effect.kind!=="sacrifice-per-player" && effect.minimumControlledPawns!==undefined)return false;
   if (effect.amount !== undefined && !Number.isInteger(effect.amount)) return false;
   if (effect.target !== undefined && typeof effect.target !== "string") return false;
   return effect.text === undefined || typeof effect.text === "string";
 }
 function object(value: unknown): value is Record<string, unknown> { return typeof value === "object" && value !== null && !Array.isArray(value); }
 function validMovement(value: unknown): boolean { return object(value) && Object.keys(value).every((key) => ["type", "amount", "stealth"].includes(key)) && ["fixed", "d6", "2d6", "hex"].includes(String(value.type)) && (value.amount === undefined || (Number.isInteger(value.amount) && Number(value.amount) >= 1)) && (value.stealth === undefined || typeof value.stealth === "boolean"); }
-function validCardEffect(value: unknown): boolean { return object(value) && Object.keys(value).every((key) => ["kind", "amount", "target", "text", "trigger"].includes(key)) && ["gain-control-card", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"].includes(String(value.kind)) && (value.amount === undefined || Number.isInteger(value.amount)) && (value.target === undefined || typeof value.target === "string") && (value.text === undefined || typeof value.text === "string") && (value.trigger === undefined || ["on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(String(value.trigger))); }
+function validCardEffect(value: unknown): boolean { return object(value) && Object.keys(value).every((key) => ["kind", "amount", "target", "text", "trigger"].includes(key)) && ["gain-control-card", "gain-target-control", "place-pawn", "area-attack", "all-players", "modify-ice", "draw-cards", "gain-bonus", "sacrifice-pawn", "custom"].includes(String(value.kind)) && (value.amount === undefined || Number.isInteger(value.amount)) && (value.target === undefined || typeof value.target === "string") && (value.text === undefined || typeof value.text === "string") && (value.trigger === undefined || ["on-attach", "on-play", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(String(value.trigger))); }
 function validActionCard(card: ActionCardRecord): boolean {
   const abilities = ["search", "delete", "reboot", "icebreaker", "move"], slots = ["add-on", "gadget", "weapon", "armor", "module", "mission"];
-  if (card.type !== undefined && ![...slots, "action", "movement", "event"].includes(card.type)) return false;
+  if (card.type !== undefined && ![...slots, "action", "movement", "event", "block"].includes(card.type)) return false;
   if (card.class && (!Array.isArray(card.class) || card.class.some((item) => typeof item !== "string") || new Set(card.class).size !== card.class.length)) return false;
   if (card.movements && (!Array.isArray(card.movements) || card.movements.some((movement) => !validMovement(movement)))) return false;
   if (card.effects && (!Array.isArray(card.effects) || card.effects.some((effect) => !validCardEffect(effect)))) return false;
-  const attach = card.attach; if (!attach) return true;
-  if (Object.keys(attach).some((key) => !["as", "slot", "class", "grants", "removes", "grantsMovement", "grantsStealth", "grantsSlot", "abilityUses", "iceModifier", "defenseOverride", "nullifiesIce", "drawModifier", "handModifier", "blockSpace", "effectText", "effectTrigger", "cost"].includes(key))) return false;
+  const attach = card.attach;
+  const control=card.effects?.filter(effect=>effect.kind==="gain-target-control")??[];
+  if(control.length && (control.length!==1 || control[0]!.trigger!=="on-attach" || control[0]!.amount!==undefined || control[0]!.target!==undefined || attach?.as!=="enemy" || !!attach.cost || card.effects!.filter(effect=>effect.trigger==="on-attach").length!==1)) return false;
+  if (!attach) return true;
+  if (Object.keys(attach).some((key) => !["delete", "eliminationPrevention", "phaseEffects", "as", "slot", "class", "forbiddenClasses", "forbiddenDestinations", "controllerHand", "grants", "removes", "grantsMovement", "grantsStealth", "ignoresDirectionArrows", "movementModifier", "grantsSlot", "abilityUses", "icebreakerModifier", "iceModifier", "defenseOverride", "nullifiesIce", "drawModifier", "handModifier", "attackModifier", "blockSpace", "effectText", "effectTrigger", "cost"].includes(key))) return false;
   if (attach.as !== undefined && !["pawn", "enemy", "block"].includes(attach.as)) return false;
+  if(attach.controllerHand!==undefined && (attach.controllerHand!=="face-up" || !["pawn","enemy"].includes(attach.as??""))) return false;
+  if(attach.forbiddenDestinations!==undefined && (!Array.isArray(attach.forbiddenDestinations) || !attach.forbiddenDestinations.length || attach.forbiddenDestinations.some(kind=>kind!=="central-core") || new Set(attach.forbiddenDestinations).size!==attach.forbiddenDestinations.length || !["pawn","enemy"].includes(attach.as??""))) return false;
+  if(attach.icebreakerModifier!==undefined) {
+    const m=attach.icebreakerModifier;
+    if(!m || typeof m!=="object" || Object.keys(m).some(k=>!["faces","rollDice","black","ignoresBlackIce"].includes(k)) || !["pawn","enemy"].includes(attach.as??"") || m.rollDice!==undefined && (!Number.isInteger(m.rollDice)||m.rollDice<0) || m.faces!==undefined && (!Array.isArray(m.faces)||new Set(m.faces).size!==m.faces.length||m.faces.some(f=>!Number.isInteger(f)||f<1||f>6)) || m.black!==undefined && typeof m.black!=="boolean" || m.ignoresBlackIce!==undefined && typeof m.ignoresBlackIce!=="boolean")return false;
+  }
   if (attach.slot !== undefined && !slots.includes(attach.slot)) return false;
-  if ([attach.class, attach.grants, attach.removes, attach.grantsSlot].some((items) => items !== undefined && (!Array.isArray(items) || items.some((item) => typeof item !== "string")))) return false;
+  if ([attach.class, attach.forbiddenClasses, attach.grants, attach.removes, attach.grantsSlot].some((items) => items !== undefined && (!Array.isArray(items) || items.some((item) => typeof item !== "string")))) return false;
+  if(attach.delete!==undefined) {
+    const value=attach.delete;
+    if(!value || typeof value!=="object" || Object.keys(value).some(key=>!["skulls","activation"].includes(key)) || !Number.isInteger(value.skulls) || value.skulls<1 || (value.activation!==undefined && !["card","once-per-turn"].includes(value.activation)) || !["pawn","enemy"].includes(attach.as??"") || attach.grants?.includes("delete") || attach.abilityUses?.some(use=>use.ability==="delete")) return false;
+  }
+  if ([attach.class,attach.forbiddenClasses].some(items=>items!==undefined && (!items.length || new Set(items).size!==items.length || items.some(item=>!item.trim())))) return false;
+  if ((attach.class || attach.forbiddenClasses) && !["pawn","enemy"].includes(attach.as??"")) return false;
   if (attach.grants?.some((item) => !abilities.includes(item)) || attach.removes?.some((item) => !abilities.includes(item)) || attach.grantsSlot?.some((item) => !slots.includes(item))) return false;
   if (attach.grantsMovement && (!Array.isArray(attach.grantsMovement) || attach.grantsMovement.some((movement) => !validMovement(movement)))) return false;
   if (attach.abilityUses && (!Array.isArray(attach.abilityUses) || attach.abilityUses.some((use) => !object(use) || Object.keys(use).some((key) => !["ability", "perTurn", "dice", "activation"].includes(key)) || !abilities.includes(String(use.ability)) || (use.perTurn !== undefined && (!Number.isInteger(use.perTurn) || Number(use.perTurn) < 1)) || (use.dice !== undefined && use.dice !== "d6") || (use.activation !== undefined && !["card", "once-per-turn"].includes(String(use.activation)))))) return false;
   const ice = attach.iceModifier; if (ice && (!object(ice) || Object.keys(ice).some((key) => !["faces", "deltaDice", "black"].includes(key)) || (ice.faces !== undefined && (!Array.isArray(ice.faces) || ice.faces.some((face) => !Number.isInteger(face) || Number(face) < 1 || Number(face) > 6))) || (ice.deltaDice !== undefined && !Number.isInteger(ice.deltaDice)) || (ice.black !== undefined && typeof ice.black !== "boolean"))) return false;
   if (attach.defenseOverride && (!Array.isArray(attach.defenseOverride) || attach.defenseOverride.some((die) => !object(die) || Object.keys(die).some((key) => !["value", "shielded"].includes(key)) || !Number.isInteger(die.value) || Number(die.value) < 1 || Number(die.value) > 6 || typeof die.shielded !== "boolean"))) return false;
-  if ((attach.drawModifier !== undefined && !Number.isInteger(attach.drawModifier)) || (attach.handModifier !== undefined && !Number.isInteger(attach.handModifier)) || (attach.cost !== undefined && (!Number.isInteger(attach.cost) || attach.cost < 0)) || (attach.grantsStealth !== undefined && typeof attach.grantsStealth !== "boolean") || (attach.nullifiesIce !== undefined && typeof attach.nullifiesIce !== "boolean") || (attach.effectText !== undefined && typeof attach.effectText !== "string") || (attach.effectTrigger !== undefined && !["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(attach.effectTrigger))) return false;
+  if (attach.eliminationPrevention !== undefined && (!object(attach.eliminationPrevention) || attach.eliminationPrevention.kind!=="discard-self" || Object.keys(attach.eliminationPrevention).some(key=>key!=="kind"))) return false;
+  if (attach.phaseEffects !== undefined && (!Array.isArray(attach.phaseEffects) || attach.phaseEffects.some(effect => !object(effect) || !["begin-turn","end-action"].includes(effect.trigger) || !["discard-self","discard-hand","discard-or-sacrifice","sacrifice-and-draw","discard-and-relocate","discard-cards"].includes(effect.kind) || (["sacrifice-and-draw","discard-cards"].includes(effect.kind) ? !Number.isInteger(effect.amount) || effect.amount! < 1 : effect.amount !== undefined) || (effect.threatMode !== undefined && (effect.kind !== "discard-and-relocate" || !["normal-movement","placement"].includes(effect.threatMode))) || Object.keys(effect).some(key => !["trigger","kind","amount","threatMode"].includes(key))))) return false;
+  if (attach.ignoresDirectionArrows !== undefined && typeof attach.ignoresDirectionArrows !== "boolean") return false;
+  if (attach.movementModifier !== undefined && !Number.isInteger(attach.movementModifier)) return false;
+  if ((attach.attackModifier !== undefined && !Number.isInteger(attach.attackModifier)) || (attach.drawModifier !== undefined && !Number.isInteger(attach.drawModifier)) || (attach.handModifier !== undefined && !Number.isInteger(attach.handModifier)) || (attach.cost !== undefined && (!Number.isInteger(attach.cost) || attach.cost < 0)) || (attach.grantsStealth !== undefined && typeof attach.grantsStealth !== "boolean") || (attach.nullifiesIce !== undefined && typeof attach.nullifiesIce !== "boolean") || (attach.effectText !== undefined && typeof attach.effectText !== "string") || (attach.effectTrigger !== undefined && !["on-attach", "begin-turn", "end-turn", "on-control", "on-icebreak", "continuous"].includes(attach.effectTrigger))) return false;
   return attach.blockSpace === undefined || (object(attach.blockSpace) && Object.keys(attach.blockSpace).every((key) => key === "shape") && (attach.blockSpace.shape === undefined || ["circle", "hex"].includes(attach.blockSpace.shape)));
 }
 export function validateDocument(document: EditorDocument, assets: AssetRecord[], layout?: BlockLayout): string[] {
@@ -252,13 +289,32 @@ export function validateDocument(document: EditorDocument, assets: AssetRecord[]
     if (isCapacityOverride(space) && !space.capacityNote?.trim()) errors.push(`Space ${space.id} needs a source-review note for its capacity override.`);
     if (space.direction !== undefined && (!Number.isInteger(space.direction) || space.direction < 0 || space.direction > 5)) errors.push(`Space ${space.id} direction must be an edge index from 0 to 5.`);
     if (space.modifier && (!["defense", "hand-size", "attack", "ice"].includes(space.modifier.kind) || (space.modifier.amount !== undefined && !Number.isInteger(space.modifier.amount)))) errors.push(`Space ${space.id} has an invalid modifier.`);
+    if(space.modifier?.kind==="hand-size" && (!Number.isInteger(space.modifier.amount) || !space.modifier.amount || space.modifier.dice!==undefined))errors.push(`Space ${space.id} requires a nonzero signed hand-size amount without defense dice.`);
   }
+  for(const space of block.spaces) {const e=space.effect;if(e && (space.type!=="effect" || e.kind!=="discard-attachment" || !["add-on","gadget"].includes(e.cardType) || e.scope!=="cybernet" || e.optional!==true || Object.keys(e).some(k=>!["kind","cardType","scope","optional"].includes(k)))) errors.push(`Space ${space.id} has an invalid optional attachment effect.`);}
+  const arrows=new Set<string>();for(const a of block.spaceArrows??[]) {const from=block.spaces.find(s=>s.id===a.from),to=block.spaces.find(s=>s.id===a.to),key=[a.from,a.to].sort().join("/");if(!from || !to || from.id===to.id || !from.neighbors.includes(to.id) || !to.neighbors.includes(from.id) || arrows.has(key)) errors.push("One-way space links require distinct adjacent spaces and one direction per link.");arrows.add(key);}
+  const excluded=block.nonPlayableZoneIds??[];
+  if(typeof block.effects?.inCybernet==="object" && block.effects.inCybernet.kind==="discard-hands-above-markers")errors.push("Marker hand discard requires under-control timing");
+  if(typeof block.effects?.inCybernet==="object" && block.effects.inCybernet.kind==="discard-pawn-attachments")errors.push("Pawn detachment requires under-control timing");
+  if(typeof block.effects?.inCybernet==="object" && block.effects.inCybernet.kind==="attack-pawn")errors.push("Targeted attacks require under-control timing.");
+  for(const trigger of ["inCybernet","underControl"] as const) {const e=block.effects?.[trigger];if(typeof e==="object" && e.kind==="place-controlled-pawn" && (trigger!=="underControl" || block.spaces.filter(s=>s.type==="pawn" && s.pawnId===e.target).length!==1))errors.push("Controlled placement needs under-control timing and one matching pawn space.");}
+  for(const trigger of ["inCybernet","underControl"] as const) {const effect=block.effects?.[trigger];if(typeof effect==="object" && effect.kind==="controller-core" && (trigger!=="underControl" || block.isCentralCore || block.spaces.filter(s=>s.id===effect.target && s.type==="special" && s.capacity==="unlimited").length!==1))errors.push("Controller Core permission needs under-control timing and one unlimited special landing space.");}
+  if(typeof block.effects?.underControl==="object" && block.effects.underControl.kind==="gain-bonus-all-players")errors.push("All-player bonus awards require placement timing.");
+  if(typeof block.effects?.underControl==="object" && block.effects.underControl.kind==="sacrifice-per-player")errors.push("Per-player sacrifice requires placement timing.");
+  for(const trigger of ["inCybernet","underControl"] as const) {const effect=block.effects?.[trigger];if(effect && typeof effect!=="string" && effect.kind==="place-neutral-pawn" && (trigger!=="inCybernet" || !effect.target || block.spaces.filter(s=>s.type==="pawn" && s.pawnId===effect.target).length!==1)) errors.push("Neutral placement needs one matching pawn space and placement timing.");}
+
+  const first=typeof block.effects?.inCybernet==="object"?block.effects.inCybernet:undefined,second=typeof block.effects?.underControl==="object"?block.effects.underControl:undefined;
+  if([first,second].some(e=>e && ["place-block-bonus","collect-block-bonus"].includes(e.kind))) {
+   if(first?.kind!=="place-block-bonus" || first.amount!==1 || second?.kind!=="collect-block-bonus" || second.amount!==undefined || [first,second].some(e=>e && ["target","scope","optional","minimumControlledPawns","markerThreshold"].some(k=>(e as any)[k]!==undefined)))errors.push("Block bonus requires one placement counter and collection on control without extra costs/targets");
+  }
+  if(new Set(excluded).size!==excluded.length || excluded.some(id=>!STANDARD_ZONE_IDS.includes(id) || zoneOwner.has(id))) errors.push("Non-playable zones must be unique canonical zones without a gameplay space.");
+  for(const space of block.spaces) if(space.modifier?.dice!==undefined) {const m=space.modifier;if(m.kind!=="defense" || (m.amount!==undefined && m.amount!==0) || !Array.isArray(m.dice) || !m.dice.length || m.dice.length>6 || m.dice.some(d=>!Number.isInteger(d.value) || d.value<1 || d.value>6 || typeof d.shielded!=="boolean") || new Set(m.dice.map(d=>d.value)).size!==m.dice.length) errors.push(`Space ${space.id} needs unique printed defense faces and shielding.`);} else if(space.modifier?.kind==="defense") errors.push(`Space ${space.id} needs printed defense faces, not a numeric amount.`);
   const inferred = layout ? inferNeighbors(block.spaces, layout) : block.spaces;
   for (const space of inferred) { const supplied = [...(block.spaces.find((candidate) => candidate.id === space.id)?.neighbors ?? [])].sort(); if (JSON.stringify(supplied) !== JSON.stringify(space.neighbors)) errors.push(`Space ${space.id} neighbours must match touching selected zones.`); }
   block.boundarySpaces.forEach((edge, index) => edge.forEach((spaceId) => { if (!ids.has(spaceId)) errors.push(`Edge ${index + 1} references unknown space '${spaceId}'.`); }));
   if (!document.provenance.primaryArtifactId || document.provenance.page < 1 || !document.provenance.locator.trim()) errors.push("Primary artifact, page, and locator are required for provenance.");
   if (document.status === "verified" && block.provisional) errors.push("A verified draft cannot remain provisional.");
-  if (document.status === "verified" && zoneOwner.size !== STANDARD_ZONE_IDS.length) errors.push("A verified block must account for all seven placement hexes.");
+  if (document.status === "verified" && zoneOwner.size + excluded.length !== STANDARD_ZONE_IDS.length) errors.push("A verified block must account for all seven placement hexes as spaces or explicit non-playable zones.");
   return errors;
 }
 
@@ -284,7 +340,7 @@ export function normalizeBlockDocument(document: BlockDocument, layout: BlockLay
     const type: EditorSpaceType = raw.type === "double" ? "normal" : (["normal", "special", "pawn", "effect"].includes(raw.type ?? "") ? raw.type as EditorSpaceType : "normal");
     const capacity = raw.capacity ?? (raw.type === "double" ? 2 : defaultCapacity(type, zoneIds));
     const displayShape = ["auto", "circle", "capsule", "compound"].includes(raw.displayShape ?? "") ? raw.displayShape as SpaceDisplayShape : "auto";
-    return { id: raw.id, type, zoneIds, capacity, displayShape, ...(raw.capacityNote ? { capacityNote: raw.capacityNote } : {}), neighbors: [], ...(raw.pawnId ? { pawnId: raw.pawnId } : {}), ...(raw.effectId ? { effectId: raw.effectId } : {}), ...(Number.isInteger(raw.direction) ? { direction: raw.direction } : {}), ...(raw.modifier ? { modifier: raw.modifier } : {}) };
+    return { id: raw.id, type, zoneIds, capacity, displayShape, ...(raw.capacityNote ? { capacityNote: raw.capacityNote } : {}), neighbors: [], ...(raw.pawnId ? { pawnId: raw.pawnId } : {}), ...(raw.effectId ? { effectId: raw.effectId } : {}), ...(raw.effect ? { effect: structuredClone(raw.effect) } : {}), ...(Number.isInteger(raw.direction) ? { direction: raw.direction } : {}), ...(raw.modifier ? { modifier: raw.modifier } : {}) };
   });
   const annotations = requiresGeometryReview && !document.annotations.includes("Review 2-3-2 geometry before export.") ? [...document.annotations, "Review 2-3-2 geometry before export."] : document.annotations;
 const authoredFaces = document.block.iceFaces === undefined ? legacyIceFaces(document.block.iceValue) : document.block.iceFaces;

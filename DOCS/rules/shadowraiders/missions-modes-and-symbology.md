@@ -45,3 +45,10 @@
 - **Rule:** Attack dice, defense and double-ICE modifiers, direction dice,
   event spaces, pawn Black ICE, stealth, medal rewards, and Deviser control
   symbols are expansion data interpreted by their owning rule modules.
+
+The [asset review register](../../artifacts/asset-review.md) preserves all
+54 expansion action cards, including each mission's objective, target/cargo,
+reward, tags, timing and restrictions. The Chaos card's sector defense rows
+and fixed-attack glyphs are recorded separately. Symbol interpretation uses
+`sh-en-rulebook` PDF p.43; canonical promotion and full mission/Chaos behavior
+remain pending under T-SOURCE-REVIEW-002 and T-PLAY-002.

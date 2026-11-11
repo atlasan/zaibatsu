@@ -1,99 +1,320 @@
 {
-  "$comment": "Speedrunners pawns. SEED DATA — provisional. The four starter Speedrunners plus a couple of recruitable pawns, with representative (not yet transcribed) stats. Real values come from 'Sp 02 Control Cards' + rulebook. Tracked in tasks/BACKLOG.md.",
+  "$comment": "Mixed source promotion: the four printed starting Speedrunners are bilingual-verified; other pawn records remain provisional. Original seed corpus is frozen under spec/fixtures/provisional-v1.",
   "pawns": [
-    {
-      "id": "speedrunner-red",
-      "name": "Speedrunner (Red)",
-      "expansion": "speedrunners",
-      "isStarter": true,
-      "class": ["operative"],
-      "defense": [
-        { "value": 2, "shielded": true },
-        { "value": 4, "shielded": false }
-      ],
-      "movement": { "type": "steps", "steps": 3, "activation": "once-per-turn" },
-      "abilities": [
-        { "ability": "search", "activation": "card" },
-        { "ability": "delete", "activation": "card", "skulls": 1 },
-        { "ability": "icebreaker", "activation": "card" },
-        { "ability": "reboot", "activation": "card" }
-      ],
-      "slots": ["add-on", "gadget", "weapon", "armor"],
-      "provisional": true
-    },
     {
       "id": "speedrunner-blue",
       "name": "Speedrunner (Blue)",
       "expansion": "speedrunners",
       "isStarter": true,
-      "class": ["operative"],
+      "class": [
+        "operative"
+      ],
       "defense": [
-        { "value": 3, "shielded": true },
-        { "value": 5, "shielded": false }
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
       ],
-      "movement": { "type": "d6", "activation": "once-per-turn" },
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
       "abilities": [
-        { "ability": "search", "activation": "card" },
-        { "ability": "delete", "activation": "card", "skulls": 1 },
-        { "ability": "icebreaker", "activation": "card" },
-        { "ability": "reboot", "activation": "card" }
+        {
+          "ability": "search",
+          "activation": "card"
+        },
+        {
+          "ability": "icebreaker",
+          "activation": "card"
+        },
+        {
+          "ability": "reboot",
+          "activation": "card"
+        }
       ],
-      "slots": ["add-on", "gadget", "weapon", "armor"],
-      "provisional": true
+      "icebreakerModifier": {
+        "faces": [
+          1
+        ]
+      },
+      "slots": [
+        "add-on",
+        "gadget",
+        "armor"
+      ],
+      "artwork": {
+        "assetId": "sp-en-pawns-p01-sheet",
+        "width": 2241,
+        "height": 3094,
+        "rect": {
+          "x": 280,
+          "y": 2728,
+          "width": 485,
+          "height": 295
+        },
+        "rotation": 270
+      },
+      "color": "blue"
     },
     {
       "id": "speedrunner-green",
       "name": "Speedrunner (Green)",
       "expansion": "speedrunners",
       "isStarter": true,
-      "class": ["operative"],
+      "class": [
+        "operative"
+      ],
       "defense": [
-        { "value": 1, "shielded": true },
-        { "value": 2, "shielded": true },
-        { "value": 6, "shielded": false }
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
       ],
-      "movement": { "type": "steps", "steps": 2, "activation": "once-per-turn" },
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
       "abilities": [
-        { "ability": "search", "activation": "card" },
-        { "ability": "delete", "activation": "card", "skulls": 2 },
-        { "ability": "icebreaker", "activation": "card" },
-        { "ability": "reboot", "activation": "card" }
+        {
+          "ability": "search",
+          "activation": "card"
+        },
+        {
+          "ability": "icebreaker",
+          "activation": "card"
+        },
+        {
+          "ability": "reboot",
+          "activation": "card"
+        }
       ],
-      "slots": ["add-on", "gadget", "weapon", "armor"],
-      "provisional": true
+      "icebreakerModifier": {
+        "faces": [
+          2
+        ]
+      },
+      "slots": [
+        "add-on",
+        "gadget",
+        "armor"
+      ],
+      "artwork": {
+        "assetId": "sp-en-pawns-p01-sheet",
+        "width": 2241,
+        "height": 3094,
+        "rect": {
+          "x": 280,
+          "y": 2349,
+          "width": 485,
+          "height": 295
+        },
+        "rotation": 270
+      },
+      "color": "green"
     },
     {
-      "id": "speedrunner-yellow",
-      "name": "Speedrunner (Yellow)",
+      "id": "speedrunner-pink",
+      "name": "Speedrunner (Pink)",
       "expansion": "speedrunners",
       "isStarter": true,
-      "class": ["operative"],
+      "class": [
+        "operative"
+      ],
       "defense": [
-        { "value": 4, "shielded": false },
-        { "value": 5, "shielded": false }
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
       ],
-      "movement": { "type": "hex", "activation": "once-per-turn" },
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
       "abilities": [
-        { "ability": "search", "activation": "card" },
-        { "ability": "delete", "activation": "card", "skulls": 1 },
-        { "ability": "icebreaker", "activation": "card" },
-        { "ability": "reboot", "activation": "card" }
+        {
+          "ability": "search",
+          "activation": "card"
+        },
+        {
+          "ability": "icebreaker",
+          "activation": "card"
+        },
+        {
+          "ability": "reboot",
+          "activation": "card"
+        }
       ],
-      "slots": ["add-on", "gadget", "weapon", "armor"],
-      "provisional": true
+      "icebreakerModifier": {
+        "faces": [
+          4
+        ]
+      },
+      "slots": [
+        "add-on",
+        "gadget",
+        "armor"
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "speedrunner-orange",
+      "name": "Speedrunner (Orange)",
+      "expansion": "speedrunners",
+      "isStarter": true,
+      "class": [
+        "operative"
+      ],
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
+      "abilities": [
+        {
+          "ability": "search",
+          "activation": "card"
+        },
+        {
+          "ability": "icebreaker",
+          "activation": "card"
+        },
+        {
+          "ability": "reboot",
+          "activation": "card"
+        }
+      ],
+      "icebreakerModifier": {
+        "faces": [
+          5
+        ]
+      },
+      "slots": [
+        "add-on",
+        "gadget",
+        "armor"
+      ],
+      "color": "orange"
     },
     {
       "id": "cracker",
       "name": "Cracker",
       "expansion": "speedrunners",
-      "class": ["cracker", "cyborg"],
-      "defense": [
-        { "value": 2, "shielded": true },
-        { "value": 5, "shielded": false }
+      "class": [
+        "cracker",
+        "cyborg"
       ],
-      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
-      "abilities": [{ "ability": "icebreaker", "activation": "card" }],
-      "slots": ["add-on", "gadget", "armor"],
+      "defense": [
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "steps": 1,
+        "activation": "once-per-turn"
+      },
+      "abilities": [
+        {
+          "ability": "icebreaker",
+          "activation": "card"
+        }
+      ],
+      "slots": [
+        "add-on",
+        "gadget",
+        "armor"
+      ],
       "special": "Gain a +1 Icebreaker roll modifier against blocks controlled by other players.",
       "provisional": true
     },
@@ -101,61 +322,327 @@
       "id": "idoru",
       "name": "Idoru",
       "expansion": "speedrunners",
-      "class": ["lovedoll"],
+      "class": [],
       "defense": [
-        { "value": 1, "shielded": true },
-        { "value": 4, "shielded": false }
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": false
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
       ],
-      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
-      "abilities": [{ "ability": "search", "activation": "card" }],
-      "slots": ["add-on", "armor"],
-      "special": "Place a control marker on this card. This marker counts as being in the Cybernet.",
-      "provisional": true
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
+      "abilities": [],
+      "slots": [
+        "add-on",
+        "armor"
+      ],
+      "special": "Place a Control marker on this card. This marker counts as being in the Cybernet.",
+      "provisional": true,
+      "iceFaces": [
+        1,
+        6
+      ],
+      "controlMarkerEffect": {
+        "kind": "place-on-control-card",
+        "amount": 1
+      }
     },
     {
       "id": "gynoid",
       "name": "Gynoid",
       "expansion": "speedrunners",
-      "class": ["lovedoll"],
-      "defense": [
-        { "value": 2, "shielded": true },
-        { "value": 4, "shielded": false }
+      "class": [
+        "lovedoll"
       ],
-      "movement": { "type": "steps", "steps": 1, "activation": "once-per-turn" },
-      "abilities": [{ "ability": "search", "activation": "card" }],
-      "slots": ["add-on", "armor"],
-      "special": "At the beginning of your turn you may target another pawn and steal one card at random from its controller's hand.",
-      "provisional": true
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": false
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
+      "abilities": [],
+      "slots": [
+        "add-on",
+        "armor"
+      ],
+      "provisional": true,
+      "iceFaces": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "phaseEffects": [
+        {
+          "trigger": "begin-turn",
+          "kind": "steal-random-card",
+          "amount": 1,
+          "scope": "cybernet",
+          "target": "another-pawn",
+          "optional": true
+        }
+      ],
+      "assetRefs": [
+        "sp-en-control-cards-p02-c03"
+      ]
     },
     {
       "id": "drone-turret",
       "name": "Drone Turret",
       "expansion": "speedrunners",
-      "class": ["drone"],
-      "defense": [{ "value": 3, "shielded": true }],
-      "movement": { "type": "steps", "steps": 0, "activation": "none" },
-      "abilities": [{ "ability": "delete", "activation": "once-per-turn", "skulls": 1 }],
-      "iceValue": "low",
-      "slots": ["module"],
-      "special": "May activate abilities during any player's turn.",
-      "provisional": true
+      "class": [
+        "drone"
+      ],
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "steps": 0,
+        "activation": "none"
+      },
+      "abilities": [
+        {
+          "ability": "delete",
+          "activation": "card",
+          "skulls": 1
+        }
+      ],
+      "slots": [
+        "module"
+      ],
+      "iceFaces": [
+        1,
+        4
+      ],
+      "abilityTurn": "any-player-turn",
+      "assetRefs": [
+        "sp-en-control-cards-p02-c08"
+      ]
     },
     {
       "id": "merc-cyberninja",
       "name": "Cyberninja",
       "expansion": "speedrunners",
-      "class": ["operative", "mercenary"],
-      "defense": [
-        { "value": 2, "shielded": true },
-        { "value": 3, "shielded": true },
-        { "value": 4, "shielded": false }
+      "class": [
+        "operative",
+        "mercenary"
       ],
-      "movement": { "type": "steps", "steps": 3, "activation": "once-per-turn" },
-      "abilities": [{ "ability": "delete", "activation": "card", "skulls": 3 }],
+      "defense": [
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "steps": 3,
+        "activation": "once-per-turn"
+      },
+      "abilities": [
+        {
+          "ability": "delete",
+          "activation": "card",
+          "skulls": 3
+        }
+      ],
       "iceValue": "high",
-      "slots": ["add-on", "weapon", "armor"],
+      "slots": [
+        "add-on",
+        "weapon",
+        "armor"
+      ],
       "mercCost": 2,
       "provisional": true
+    },
+    {
+      "id": "drone-mk-2",
+      "name": "Drone MK-2",
+      "expansion": "speedrunners",
+      "class": [
+        "drone"
+      ],
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "iceFaces": [
+        2,
+        6
+      ],
+      "movement": {
+        "type": "steps",
+        "steps": 5,
+        "activation": "once-per-turn"
+      },
+      "abilities": [
+        {
+          "ability": "delete",
+          "activation": "card",
+          "skulls": 1
+        }
+      ],
+      "slots": [
+        "module"
+      ],
+      "assetRefs": [
+        "sp-en-control-cards-p02-c04"
+      ]
+    },
+    {
+      "id": "drone-probe",
+      "name": "Drone Probe",
+      "expansion": "speedrunners",
+      "class": [
+        "drone"
+      ],
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "iceFaces": [
+        1,
+        3,
+        6
+      ],
+      "movement": {
+        "type": "steps",
+        "steps": 5,
+        "activation": "once-per-turn"
+      },
+      "abilities": [
+        {
+          "ability": "search",
+          "activation": "once-per-turn"
+        }
+      ],
+      "slots": [
+        "module"
+      ],
+      "assetRefs": [
+        "sp-en-control-cards-p02-c07"
+      ]
     }
   ]
 }

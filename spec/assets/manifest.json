@@ -2647,6 +2647,456 @@
       "sourceSha256": "cd7c6985bdc0d6ea7a2efa8a79e0674506a26e9a921cbb050a2a74f8c7d669c6"
     },
     {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c01.webp"
+      },
+      "page": 1,
+      "pngSha256": "973e3c063f2b10dcd2a22b84fb3cdb1771d8705016502d095e48cdb13af00f06",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "c824fe291376481951ebb05a73aa80d130fd5b5229aa0b0fdc43e0677ba1eebd",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "5ddd520aed20905468613a747ca92658cbd157278e999104e009959d684a5d8c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c04.webp"
+      },
+      "page": 1,
+      "pngSha256": "e89667f917ca545ade5021a89db1c5cb6d1a54e12021eb72b5fd8cdd7ae46007",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c05.webp"
+      },
+      "page": 1,
+      "pngSha256": "db820c6952174029e6a7a29e179de24c5ba142913406c08ad7c64916c8299ddf",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c06.webp"
+      },
+      "page": 1,
+      "pngSha256": "35d727c8116633159acf701c7dc6dfae7ceb4c29865b457ce9d59cfc0071e735",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c07.webp"
+      },
+      "page": 1,
+      "pngSha256": "325c005e0bf64365b88a5fee299b95f40620264f93ddd609661d5423041b1a7e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c08.webp"
+      },
+      "page": 1,
+      "pngSha256": "a726f56c397fdefcfa2066ebd00ba82e6f39304a61088e27eed38c8b10287e72",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p01-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p01-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p01-c09.webp"
+      },
+      "page": 1,
+      "pngSha256": "2228052d3001a6d680448d8b7911d70908b8ad4ef283971cbaf5da4666317c8c",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c01.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c01.webp"
+      },
+      "page": 2,
+      "pngSha256": "3c7bbfb70310a449bc14fee5162f233d156191aced2f0b63123731c91cc8dda6",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c02.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "8ec497833b3ab17ca7751af730e03e477745dde24eae92168441236029691d6f",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c03.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "9c0c0666621fdb10d337abd67c51ed6c7305d138b626b6c404daec66b1302995",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c04.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c04.webp"
+      },
+      "page": 2,
+      "pngSha256": "29624e3b80f0ba1d76b26f8ce94b9ddeb6fb0e45d0d4c08b261a08b569413b96",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c05.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c05.webp"
+      },
+      "page": 2,
+      "pngSha256": "7e4c70943af91b000bd3524f0dbcca4e059d8c512cd3e232044f50081db1bcec",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c06.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c06.webp"
+      },
+      "page": 2,
+      "pngSha256": "c49360e2b3265e1a6b6b63f12df3012be2bbd2ffaf9f619ae8dfb787abf5eb19",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c07.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c07.webp"
+      },
+      "page": 2,
+      "pngSha256": "150016538d2b6e8a2f9ab8f17ed13839f2240b53d88b3b5193d9930eb0afe84b",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c08.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c08.webp"
+      },
+      "page": 2,
+      "pngSha256": "1a9fab1c17756a619dc3a61e71ae37cf44a523004b7eb80af027ca3eb23d246e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
+      "artifactId": "sh-en-control-cards",
+      "assetId": "sh-en-control-cards-p02-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sh-en-control-cards/png/sh-en-control-cards-p02-c09.png",
+        "webp": "tmp/artifacts/build/sh-en-control-cards/webp/sh-en-control-cards-p02-c09.webp"
+      },
+      "page": 2,
+      "pngSha256": "3f22fd5923d64b02d362802ad3f4c53320f7eab19d923d74b6d820780084231a",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "7c35672f5fdcd19251ff1037a7f4574f78548d55ef66214f01786dc9a02a60b3"
+    },
+    {
       "artifactId": "sh-en-markers",
       "assetId": "sh-en-markers-p01-sheet",
       "crop": {
@@ -5416,6 +5866,456 @@
       "renderDpi": 300,
       "role": "face",
       "sourceSha256": "34e7da872ad99f8ada79f0a8e89113ca78001d05b01e2895eb8628803ba9739a"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c01.webp"
+      },
+      "page": 1,
+      "pngSha256": "85c6b23e642cfabbe5650f3ff116a5c718bcc71679c986fb6752abe4a884ecb3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c02.webp"
+      },
+      "page": 1,
+      "pngSha256": "9365b92df3ee37a34750ad52b5e3615c5fdceca1f2c8cdc973a09f68cca67b99",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c03.webp"
+      },
+      "page": 1,
+      "pngSha256": "0f9a48cf43dba4dc0c6358f494a719c98b4fd2356d7ae4c7fc34841f7fa207e9",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c04.webp"
+      },
+      "page": 1,
+      "pngSha256": "323292c54faaaffd6fceb6a64dc40b745eb64050804abd44df924ba1cd3310f7",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c05.webp"
+      },
+      "page": 1,
+      "pngSha256": "26b22fa24f9c7d1b107a84974b50463fb5b454b0478e4b5c79dd55d5980751c4",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c06.webp"
+      },
+      "page": 1,
+      "pngSha256": "824030c98e790094ed25273355cdfb68cbbabdc225dbeaf754a29881a7319e5e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c07.webp"
+      },
+      "page": 1,
+      "pngSha256": "f545fc413774335a99be96f5feebdfdb05a881621170781db681d7ea5610f5ef",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c08.webp"
+      },
+      "page": 1,
+      "pngSha256": "b56af22c88129035808aee6dfb599554f9408ab86ecc2aec7ddc37998f9f0b80",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p01-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p01-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p01-c09.webp"
+      },
+      "page": 1,
+      "pngSha256": "d7d99946269d68351735d16dfb01e11aa213a61022443e07b78d240db7210a3b",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c01",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c01.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c01.webp"
+      },
+      "page": 2,
+      "pngSha256": "890fa6c97c41a4d351f4ec96da61178029354f77c7fa12656686c942c7e2431b",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c02",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c02.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c02.webp"
+      },
+      "page": 2,
+      "pngSha256": "9838d5edba61dcd160c27c11ae413bf7bee41d6a41746e6773c84355a8b05f38",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c03",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 74
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c03.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c03.webp"
+      },
+      "page": 2,
+      "pngSha256": "d228461ca129d4700b72560700bcbb4ae24958d3f7bbfa8554b9b6220c3f81a3",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c04",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 149,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c04.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c04.webp"
+      },
+      "page": 2,
+      "pngSha256": "83c4b75d30880cc9c22a64bf5eba0b79b8257a2bdf684fd2014e3dff4ad042c2",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c05",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 748,
+        "x": 901,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c05.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c05.webp"
+      },
+      "page": 2,
+      "pngSha256": "4c6860464c0ec504cab2a2fc900df245a15ae1684e0826986a687fb19c16d0ee",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c06",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1048,
+        "width": 750,
+        "x": 1651,
+        "y": 1126
+      },
+      "dimensions": {
+        "height": 1048,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c06.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c06.webp"
+      },
+      "page": 2,
+      "pngSha256": "8d7660a5fd4f833d2cec95c5e3e830027a3d00873bfd4a443dae41482223ddc1",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c07",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 149,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c07.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c07.webp"
+      },
+      "page": 2,
+      "pngSha256": "2bccf8678982cdc6239c3da0418e0c97fba6dcc31b758483bc25a181e546fe8e",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c08",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 748,
+        "x": 901,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 748
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c08.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c08.webp"
+      },
+      "page": 2,
+      "pngSha256": "66af18b32a6ff2308eb47e43607999f7108d5fe0d248a53ffc35320cedb99338",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
+    },
+    {
+      "artifactId": "sp-en-control-cards",
+      "assetId": "sp-en-control-cards-p02-c09",
+      "crop": {
+        "confidence": 0.99,
+        "height": 1050,
+        "width": 750,
+        "x": 1651,
+        "y": 2176
+      },
+      "dimensions": {
+        "height": 1050,
+        "width": 750
+      },
+      "kind": "control-card",
+      "outputs": {
+        "png": "tmp/artifacts/build/sp-en-control-cards/png/sp-en-control-cards-p02-c09.png",
+        "webp": "tmp/artifacts/build/sp-en-control-cards/webp/sp-en-control-cards-p02-c09.webp"
+      },
+      "page": 2,
+      "pngSha256": "69f918dc79251cf6b9056b4757be2657e28799b9bd50acfe5fb48f064887a7ed",
+      "renderDpi": 300,
+      "role": "face",
+      "sourceSha256": "4f88c52633daf2e217940e04bb5ebb170ea9caccb12ff3abf65f39822bef3346"
     },
     {
       "artifactId": "sp-en-markers",

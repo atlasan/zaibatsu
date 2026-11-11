@@ -1,10 +1,12 @@
 #!/usr/bin/env bun
+import {modeBonusSupplyErrors} from "./validate-bonus.ts";
 
 // Validates the tracked knowledge baseline without requiring ignored source PDFs.
 // Full source checksum verification remains tools/verify-artifacts.ts.
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
+import {blockSourceErrors,controlCardSourceErrors} from "./validate-blocks.ts";
 
 type Json = Record<string, unknown>;
 const root = resolve(import.meta.dir, "..");
@@ -243,6 +245,7 @@ for (const source of (externalCatalog.sources as Json[] | undefined) ?? []) {
   }
 
 }
+for(const file of ["spec/data/speedrunners/mode.json","spec/data/speedrunners/modes.json"]) {const loaded=readJson(join(root,file)),modes=(loaded.modes as Json[]|undefined)??[loaded];for(const mode of modes)for(const error of modeBonusSupplyErrors(mode,inventory.products as Json[]))fail(error);}
 if (inventory.inventoryVersion !== 1) fail("spec/inventory.json must declare inventoryVersion 1");
 const rights = inventory.rights as Json | undefined;
 const rightsEvidence = rights?.evidence as Json | undefined;
@@ -319,6 +322,18 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
       for (const record of records as Json[]) {
         if (!validId(record.id) || ids.has(record.id)) fail(`${expansion}/${name} has invalid or duplicate record id ${String(record.id)}`);
         if (group === "blocks" && record.layoutId !== "standard-seven-zone-2-3-2-pointy") fail(`${expansion}/${name} block ${String(record.id)} must use the standard 2-3-2 seven-hex layout`);
+        if (group === "cards" && isObject(record.attach) && (record.attach.class !== undefined || record.attach.forbiddenClasses !== undefined) && !["pawn","enemy"].includes(String(record.attach.as))) fail(`${expansion}/${name} card ${String(record.id)} target-class restrictions require a pawn or enemy attachment`);
+        if(group==="cards" && isObject(record.attach) && record.attach.delete!==undefined) {
+          const attach=record.attach;
+          if(!["pawn","enemy"].includes(String(attach.as)) || strings(attach.grants).includes("delete") || (Array.isArray(attach.abilityUses) && attach.abilityUses.some(use=>isObject(use) && use.ability==="delete"))) fail(`${expansion}/${name} card ${String(record.id)} has incompatible printed Delete fields`);
+        }
+        if(group==="cards") {
+          const attach=isObject(record.attach)?record.attach:undefined;
+          if(attach?.controllerHand!==undefined && !["pawn","enemy"].includes(String(attach.as))) fail(`${expansion}/${name} card ${String(record.id)} hand visibility requires a pawn attachment`);
+          if(attach?.forbiddenDestinations!==undefined && !["pawn","enemy"].includes(String(attach.as))) fail(`${expansion}/${name} card ${String(record.id)} movement restrictions require a pawn attachment`);
+          const effects=Array.isArray(record.effects)?record.effects.filter(isObject):[];
+          if(effects.some(effect=>effect.kind==="gain-target-control") && (attach?.as!=="enemy" || (attach.cost!==undefined && attach.cost!==0) || effects.filter(effect=>effect.trigger==="on-attach").length!==1)) fail(`${expansion}/${name} card ${String(record.id)} has unsupported attachment control timing/target/cost`);
+        }
         if (typeof record.id === "string") ids.add(record.id);
       }
     }
@@ -328,10 +343,15 @@ for (const expansion of ["speedrunners", "shadowraiders"]) {
 validateFileAgainstSchema(join(root, "spec/data/speedrunners/blocks.json"), collectionSchema("blocks", blockSchema), "speedrunners/blocks.json");
 validateFileAgainstSchema(join(root, "spec/data/speedrunners/pawns.json"), collectionSchema("pawns", pawnSchema), "speedrunners/pawns.json");
 validateFileAgainstSchema(join(root, "spec/data/speedrunners/action-cards.json"), collectionSchema("cards", actionCardSchema), "speedrunners/action-cards.json");
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/control-cards.json"), collectionSchema("controlCards", controlCardSchema), "speedrunners/control-cards.json");
 validateFileAgainstSchema(join(root, "spec/data/speedrunners/mode.json"), allowComment(modeSchema), "speedrunners/mode.json");
+validateFileAgainstSchema(join(root, "spec/data/speedrunners/modes.json"), collectionSchema("modes", modeSchema), "speedrunners/modes.json");
 validateFileAgainstSchema(join(root, "spec/data/shadowraiders/control-cards.json"), collectionSchema("controlCards", controlCardSchema), "shadowraiders/control-cards.json");
+validateFileAgainstSchema(join(root, "spec/data/shadowraiders/modes.json"), collectionSchema("modes", modeSchema), "shadowraiders/modes.json");
 validateFileAgainstSchema(join(root, "spec/data/shadowraiders/threats.json"), collectionSchema("threats", threatSchema), "shadowraiders/threats.json");
 validateFileAgainstSchema(join(root, "spec/data/shadowraiders/missions.json"), collectionSchema("missions", missionCardSchema), "shadowraiders/missions.json");
+for(const error of blockSourceErrors((readJson(join(root,"spec/data/speedrunners/blocks.json")).blocks as Json[])??[],(readJson(join(root,"spec/data/speedrunners/pawns.json")).pawns as Json[])??[],(readJson(join(root,"spec/data/speedrunners/control-cards.json")).controlCards as Json[])??[])) fail(error);
+for(const error of controlCardSourceErrors((readJson(join(root,"spec/data/speedrunners/pawns.json")).pawns as Json[])??[],(readJson(join(root,"spec/data/speedrunners/control-cards.json")).controlCards as Json[])??[])) fail(error);
 
 // The knowledge layer is the canonical cross-reference index across sources, assets, data, and docs.
 if (knowledgeTaxonomy.taxonomyVersion !== 1) fail("spec/knowledge/taxonomy.json must declare taxonomyVersion 1");
@@ -410,6 +430,9 @@ for (const asset of (assetManifest.assets as Json[] | undefined) ?? []) {
 
 const validationManifestEntries: ManifestEntry[] = [];
 const speedrunnersLoaderFiles = [
+  join(root, "spec/data/speedrunners/control-cards.json"),
+  join(root, "spec/schema/control-card.schema.json"),
+  join(root, "spec/data/speedrunners/modes.json"),
   join(root, "spec/data/speedrunners/blocks.json"),
   join(root, "spec/data/speedrunners/pawns.json"),
   join(root, "spec/data/speedrunners/action-cards.json"),
@@ -423,6 +446,10 @@ if (speedrunnersLoaderFiles.every((path) => existsSync(path))) {
   validationManifestEntries.push(buildValidationManifestEntry("speedrunners", speedrunnersLoaderFiles));
 }
 
+validationManifestEntries.push(buildValidationManifestEntry("shadowraiders", [
+  join(root,"spec/data/shadowraiders/threats.json"),join(root,"spec/data/shadowraiders/missions.json"),join(root,"spec/data/shadowraiders/control-cards.json"),join(root,"spec/data/shadowraiders/modes.json"),
+  join(root,"spec/schema/threat.schema.json"),join(root,"spec/schema/mission-card.schema.json"),join(root,"spec/schema/control-card.schema.json"),join(root,"spec/schema/mode.schema.json")
+]));
 if (failures.length) {
   for (const message of failures) console.error(`error: ${message}`);
   process.exit(1);

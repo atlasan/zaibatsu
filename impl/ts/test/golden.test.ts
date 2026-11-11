@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { findSpecDir, loadDefault } from "../src/data/index.ts";
+import { findSpecDir, loadRegression } from "../src/data/index.ts";
 import { applyAction, newGame, runTurn, snapshot, winner } from "../src/engine/index.ts";
 
 // Golden-game tests: run a scripted game/scenario and assert the canonical
@@ -9,7 +9,7 @@ import { applyAction, newGame, runTurn, snapshot, winner } from "../src/engine/i
 // asserts against too. A divergence in either mirror fails here — a whole-state
 // cross-mirror equivalence check. See DOCS/parity.md.
 
-const data = loadDefault("speedrunners");
+const data = loadRegression("speedrunners");
 
 function readGolden(name: string): string {
   const root = dirname(dirname(findSpecDir())); // <root>/spec/data -> <root>

@@ -1,0 +1,149 @@
+{
+  "profiles": [
+    {
+      "space": "plain",
+      "dice": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ]
+    },
+    {
+      "space": "shield",
+      "dice": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ]
+    },
+    {
+      "space": "weak",
+      "dice": [
+        {
+          "value": 1,
+          "shielded": false
+        },
+        {
+          "value": 2,
+          "shielded": false
+        },
+        {
+          "value": 3,
+          "shielded": false
+        },
+        {
+          "value": 4,
+          "shielded": false
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ]
+    },
+    {
+      "space": "armor:weak",
+      "dice": [
+        {
+          "value": 1,
+          "shielded": false
+        },
+        {
+          "value": 2,
+          "shielded": false
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": true
+        },
+        {
+          "value": 6,
+          "shielded": true
+        }
+      ]
+    },
+    {
+      "space": "armor:plain",
+      "dice": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": true
+        },
+        {
+          "value": 6,
+          "shielded": true
+        }
+      ]
+    }
+  ]
+}

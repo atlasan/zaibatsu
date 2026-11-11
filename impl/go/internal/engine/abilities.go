@@ -32,6 +32,13 @@ func ValidSearchPlacements(s *domain.GameState, gd *domain.GameData, pawnID stri
 	if pob == nil {
 		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
 	}
+	if gd.RegressionFixture != "provisional-v1" {
+		choice := s.PendingChoice
+		if choice == nil || choice.Kind != "place-block" || choice.PawnID != pawnID || choice.Reference == nil || choice.BlockID == "" {
+			return nil, fmt.Errorf("declare Search before requesting placement options")
+		}
+		return ValidPlacements(s.Cybernet, gd, *choice.Reference, choice.BlockID), nil
+	}
 	top := SearchTopBlock(s)
 	if top == "" {
 		return nil, fmt.Errorf("no blocks left in the pile")
@@ -44,6 +51,9 @@ func ValidSearchPlacements(s *domain.GameState, gd *domain.GameData, pawnID stri
 // block is only consumed if the placement is legal, so a rejected attempt leaves
 // the pile intact for a retry.
 func Search(s *domain.GameState, gd *domain.GameData, pawnID string, dir, rot int) (*domain.PlacedBlock, error) {
+	if gd.RegressionFixture != "provisional-v1" {
+		return nil, fmt.Errorf("source Search requires declaration and placement choices")
+	}
 	pob := s.Cybernet.PawnByID(pawnID)
 	if pob == nil {
 		return nil, fmt.Errorf("pawn %q is not on the board", pawnID)
@@ -78,31 +88,23 @@ func Search(s *domain.GameState, gd *domain.GameData, pawnID string, dir, rot in
 	if err != nil {
 		return nil, err
 	}
-	ApplyBlockEffectForTrigger(s, gd, pb.Coord, BlockEffectInCybernet)
+	if _, err := ApplyBlockEffectForTrigger(s, gd, pb.Coord, BlockEffectInCybernet); err != nil {
+		return nil, err
+	}
 	if ability.Activation == "once-per-turn" {
 		owner.OncePerTurnUsed[key] = true
 	}
 	return pb, nil
 }
 
-// centralCorePlacement returns the placed Central Core's coordinate and landing
-// space id.
-func centralCorePlacement(s *domain.GameState, gd *domain.GameData) (domain.Coord, string, error) {
-	for _, pb := range s.Cybernet.Blocks {
-		if bd, ok := gd.BlockByID(pb.BlockID); ok && bd.IsCentralCore {
-			space := ""
-			if len(bd.Spaces) > 0 {
-				space = bd.Spaces[0].ID
-			}
-			return pb.Coord, space, nil
-		}
-	}
-	return domain.Coord{}, "", fmt.Errorf("no Central Core in the Cybernet")
-}
-
 // Reboot re-enters an eliminated pawn at the Central Core under playerID's
 // control. The pawn must have the Reboot ability and be in the Eliminated pool.
-func Reboot(s *domain.GameState, gd *domain.GameData, pawnID, playerID string) (*domain.PawnOnBoard, error) {
+func Reboot(s *domain.GameState, gd *domain.GameData, pawnID, playerID string, destination ...SpaceRef) (*domain.PawnOnBoard, error) {
+	for _, card := range s.ControlCards {
+		if card.Subject.Kind == "pawn" && card.Subject.ID == pawnID && card.OwnerID != playerID {
+			return nil, fmt.Errorf("only a pawn you control can Reboot")
+		}
+	}
 	idx := -1
 	for i, id := range s.Eliminated {
 		if id == pawnID {
@@ -127,19 +129,19 @@ func Reboot(s *domain.GameState, gd *domain.GameData, pawnID, playerID string) (
 	if owner == nil {
 		return nil, fmt.Errorf("unknown player %q", playerID)
 	}
-	key := abilityUsedKey("reboot", pawnID)
-	if ability.Activation == "once-per-turn" && owner.OncePerTurnUsed[key] {
+	if ability.Activation == "once-per-turn" && AbilityUseSpent(s, gd, owner, pawnID, "reboot") {
 		return nil, fmt.Errorf("pawn %q already used its once-per-turn Reboot this turn", pawnID)
 	}
-	coord, space, err := centralCorePlacement(s, gd)
+	landing, err := rebootDestination(s, gd, playerID, pawnID, destination...)
 	if err != nil {
 		return nil, err
 	}
-	pob := &domain.PawnOnBoard{PawnID: pawnID, OwnerID: playerID, Coord: coord, SpaceID: space}
+	pob := &domain.PawnOnBoard{PawnID: pawnID, OwnerID: playerID, Coord: landing.Coord, SpaceID: landing.SpaceID}
 	s.Cybernet.PlacePawn(pob)
+	SetPawnControl(s, pawnID, playerID)
 	s.Eliminated = append(s.Eliminated[:idx], s.Eliminated[idx+1:]...)
 	if ability.Activation == "once-per-turn" {
-		owner.OncePerTurnUsed[key] = true
+		SpendAbilityUse(s, gd, owner, pawnID, "reboot")
 	}
 	return pob, nil
 }

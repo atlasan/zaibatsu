@@ -1,0 +1,79 @@
+[
+  {
+    "cardId": "accelerator-transgenic-therapy",
+    "name": "Transgenic Therapy",
+    "attached": [
+      "operative",
+      "accelerator"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "hyper-accelerator",
+    "name": "Hyper",
+    "attached": [
+      "operative",
+      "accelerator"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "accela-accelerator",
+    "name": "Accela",
+    "attached": [
+      "operative",
+      "accelerator"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "biochip",
+    "name": "Biochip",
+    "attached": [
+      "operative",
+      "e-synapse"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "e-synapse-neural-interface",
+    "name": "Neural Interface",
+    "attached": [
+      "operative",
+      "e-synapse"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "selective-disclosure",
+    "name": "Selective Disclosure",
+    "attached": [
+      "operative",
+      "trade-secret"
+    ],
+    "after": [
+      "operative"
+    ]
+  },
+  {
+    "cardId": "insider-trading",
+    "name": "Insider Trading",
+    "attached": [
+      "operative",
+      "trade-secret"
+    ],
+    "after": [
+      "operative"
+    ]
+  }
+]

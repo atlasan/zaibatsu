@@ -1,4 +1,4 @@
-// Zaibatsu entity types and game state — pure data, no I/O. Mirrors
+// Zaibatsu entity types and game state â€” pure data, no I/O. Mirrors
 // impl/go/internal/domain. See DOCS/domain-model.md and DOCS/parity.md.
 
 import type { Rng } from "./rng.ts";
@@ -10,7 +10,7 @@ export type Phase = "beginning" | "action" | "recycle" | "end";
 
 export type IceValue = "none" | "low" | "medium" | "high" | "black";
 
-export type SpaceType = "normal" | "double" | "special" | "pawn" | "effect";
+export type SpaceType = "normal" | "double" | "special" | "pawn" | "effect" | "event" | "drone";
 
 export type SlotType = "add-on" | "gadget" | "weapon" | "armor" | "module" | "mission";
 
@@ -29,6 +29,7 @@ export interface DefenseDie {
 export interface SpaceModifier {
   kind: "defense" | "hand-size" | "attack" | "ice";
   amount?: number;
+  dice?: DefenseDie[];
 }
 
 /** Normalized visual/source position in a block crop; not movement geometry. */
@@ -55,7 +56,9 @@ export type ExplicitSpaceCapacity = number | "unlimited";
 /** Source-facing render metadata only; never interpreted by the engine. */
 export type SpaceDisplayShape = "auto" | "circle" | "capsule" | "compound";
 
+export interface SpaceEffect {kind:"discard-attachment";cardType:"add-on"|"gadget";scope:"cybernet";optional:true;}
 export interface Space {
+  effect?:SpaceEffect;
   id: string;
   /** `double` remains readable for legacy data only; new canonical data uses explicit capacity. */
   type: SpaceType;
@@ -68,6 +71,7 @@ export interface Space {
   neighbors?: string[];
   pawnId?: string;
   effectId?: string;
+  threatId?: string;
   location?: SpaceLocation;
   footprint?: SpaceFootprint;
   modifier?: SpaceModifier;
@@ -80,12 +84,28 @@ export type BlockEffect =
   | string
   | {
     kind:
+      | "discard-hands-above-markers"
+      | "discard-pawn-attachments"
+      | "attack-pawn"
+      | "place-controlled-pawn"
+      | "controller-core"
+      | "place-block-bonus"
+      | "collect-block-bonus"
+      | "gain-bonus-all-players"
       | "gain-control-card"
       | "place-pawn"
+      | "sacrifice-per-player"
+      | "discard-per-controlled-pawn"
+      | "return-control-marker"
+      | "place-neutral-pawn"
       | "area-attack"
       | "all-players"
       | "modify-ice"
       | "custom";
+    markerThreshold?:number;
+    scope?:"adjacent-blocks"|"cybernet";
+    optional?:true;
+    minimumControlledPawns?:number;
     amount?: number;
     target?: string;
     text?: string;
@@ -97,6 +117,7 @@ export interface BlockEffects {
 }
 
 export type CardEffectTrigger =
+  | "on-attach"
   | "on-play"
   | "begin-turn"
   | "end-turn"
@@ -107,6 +128,7 @@ export type CardEffectTrigger =
 export interface CardEffect {
   kind:
     | "gain-control-card"
+    | "gain-target-control"
     | "place-pawn"
     | "area-attack"
     | "all-players"
@@ -121,7 +143,10 @@ export interface CardEffect {
   trigger?: CardEffectTrigger;
 }
 
+export interface SpaceArrow {from:string;to:string;}
 export interface Block {
+  spaceArrows?:SpaceArrow[];
+  nonPlayableZoneIds?: ("h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7")[];
   id: string;
   name: string;
   expansion: Expansion;
@@ -175,7 +200,21 @@ export interface IceModifier {
   black?: boolean;
 }
 
+/** Modifiers supplied by the acting pawn, distinct from a target's ICE. */
+export interface IcebreakerModifier {
+  faces?: number[];
+  rollDice?: number;
+  black?: boolean;
+  ignoresBlackIce?: boolean;
+}
+
+export interface ControlMarkerEffect {kind:"place-on-control-card";amount:1;}
+export interface ControlCardMarker {playerId:string;cardId:string;amount:number;}
+export interface PawnPhaseEffect {trigger:"begin-turn";kind:"steal-random-card";amount:1;scope:"cybernet";target:"another-pawn";optional:true;}
 export interface Pawn {
+  abilityTurn?: "any-player-turn";
+  phaseEffects?:PawnPhaseEffect[];
+  controlMarkerEffect?:ControlMarkerEffect;
   id: string;
   name: string;
   expansion: Expansion;
@@ -184,18 +223,29 @@ export interface Pawn {
   movement: Movement;
   abilities?: Ability[];
   iceValue?: IceValue;
+  iceFaces?: number[];
+  icebreakerModifier?: IcebreakerModifier;
   slots?: SlotType[];
   special?: string;
   isStarter?: boolean;
+  color?: string;
   mercCost?: number;
   provisional?: boolean;
+  assetRefs?: string[];
+  artwork?: { assetId: string; width: number; height: number; rect: { x: number; y: number; width: number; height: number }; rotation?: number };
 }
 
 export interface Attach {
+  icebreakerModifier?:IcebreakerModifier;
+  controllerHand?: "face-up";
+  delete?: {skulls:number;activation?:"card"|"once-per-turn"};
   as: "pawn" | "enemy" | "block";
   slot?: SlotType;
   /** Target class restriction: the classes this card may attach to. */
   class?: string[];
+  /** Effective target classes barred at attachment time. */
+  forbiddenClasses?: string[];
+  forbiddenDestinations?: "central-core"[];
   /** Abilities this attachment gives its target. */
   grants?: GrantedAbilityName[];
   /** Abilities this attachment strips from its target (the cross-marked badge). */
@@ -204,6 +254,10 @@ export interface Attach {
   grantsMovement?: MovementGrant[];
   /** The attachment grants stealth-capable movement to its target. */
   grantsStealth?: boolean;
+  ignoresDirectionArrows?: boolean;
+  movementModifier?: number;
+  phaseEffects?: PhaseEffect[];
+  eliminationPrevention?: {kind:"discard-self"};
   /** Extra attachment slots this attachment grants to its target. */
   grantsSlot?: SlotType[];
   /** How the granted abilities may be used. */
@@ -224,16 +278,22 @@ export interface Attach {
   effectText?: string;
   effectTrigger?: "on-attach" | "begin-turn" | "end-turn" | "on-control" | "on-icebreak" | "continuous";
   cost?: number;
+  attackModifier?: number;
 }
 
 export interface ActionCard {
   id: string;
   name: string;
+  type?: "add-on" | "gadget" | "weapon" | "armor" | "module" | "mission" | "action" | "movement" | "event" | "block";
+  /** Printed card classes, distinct from attachment target restrictions. */
+  class?: string[];
   copies?: number;
   movement?: number;
   activates?: AbilityName[];
   effects?: CardEffect[];
   attach?: Attach;
+  assetRefs?: string[];
+  summary?: string;
   provisional?: boolean;
 }
 
@@ -252,6 +312,8 @@ export interface Threat {
   name: string;
   type: "drone" | "token" | "mark" | "chaos";
   attackDie?: 4 | 5 | 6;
+  defense?: DefenseDie[];
+  copies?: number;
   effects?: string[];
   provisional?: boolean;
 }
@@ -271,19 +333,26 @@ export interface PlayerRange {
 }
 
 export interface Mode {
+  bonusCounterSupply?:number;
   id: string;
   name: string;
   expansions?: Expansion[];
   players: PlayerRange;
+  allowedPlayerCounts?: number[];
+  sourceId?: string;
+  setup?: string[];
   controlMarkers: Record<string, number>;
   maxHandSize?: number;
   startingHand?: number[];
   win?: string[];
   lose?: string[];
   notes?: string;
+  provisional?: boolean;
 }
 
 export interface GameData {
+  /** Explicit compatibility corpus; never set by the ordinary loaders. */
+  regressionFixture?: "provisional-v1";
   blocks: Block[];
   pawns: Pawn[];
   cards: ActionCard[];
@@ -323,19 +392,109 @@ export function markersRemaining(p: Player): number {
   return p.controlMarkersTotal - p.controlMarkersPlaced;
 }
 
+export interface UseMarker {ability:string;uses:number;}
+export interface NativeUseMarker extends UseMarker {pawnId:string;}
+export interface BlockSacrificeDecision {id:string;playerId:string;candidatePawnIds:string[];submitted:boolean;pawnId?:string;}
+export interface PendingBlockSacrifices {blockId:string;coord:import("./hex.ts").Coord;decisions:BlockSacrificeDecision[];}
+export interface BlockDiscardDecision {id:string;playerId:string;amount:number;submitted:boolean;cardIds?:string[];}
+export interface PendingBlockDiscards {blockId:string;coord:import("./hex.ts").Coord;decisions:BlockDiscardDecision[];}
 export interface GameState {
+  bonusCounterSupply?:number;
+  pendingBlockSacrifices?:PendingBlockSacrifices;
+  pendingBlockDiscards?:PendingBlockDiscards;
+  controlCardMarkers?:ControlCardMarker[];
+  nativeUseMarkers?:NativeUseMarker[];
+  unresolvedUseCards?:import("./pawn_board.ts").Attachment[];
+  attachmentSerial?:number;
+  rulesVersion?: "source-v20";
+  /** Physical pawn pieces available outside the Cybernet. */
+  reserve?: string[];
+  outOfGame?: string[];
   players: Player[];
   currentPlayer: number;
   turn: number;
   phase: Phase;
   deck: string[];
   discard: string[];
+  playedCards?: string[];
+  playedCardOwners?: string[];
+  controlCards?: Array<{ cardId: string; ownerId: string; subject: ControlCard["subject"]; zone?: "control"|"common"|"out-of-game" }>;
+  pendingPhase?: "beginning" | "action";
+  pendingEffects?: PendingEffect[];
+  pendingChoice?: PendingChoice;
+  pendingEliminations?: PendingElimination[];
+  decisionSerial?: number;
+  threats?: ThreatOnBoard[];
+  threatPile?: string[];
+  clearedEvents?: string[];
+  pendingAttack?: PendingAttack;
+  pendingThreats?: PendingThreatCombat;
   blockPile: string[];
   cybernet: Cybernet;
   /** Pawn ids removed from the Cybernet (a Reboot re-enters them at the core). */
   eliminated: string[];
   winnerId?: string;
   rng: Rng;
+}
+
+export interface PhaseEffect {
+  trigger: "begin-turn" | "end-action";
+  kind: "steal-random-card" | "discard-self" | "discard-hand" | "discard-or-sacrifice" | "sacrifice-and-draw" | "discard-and-relocate" | "discard-cards";
+  amount?: number;
+  threatMode?: "normal-movement" | "placement";
+}
+export interface PendingEffect extends PhaseEffect {
+  source?:"pawn";
+  scope?:"cybernet";
+  target?:"another-pawn";
+  optional?:true;
+  id: string;
+  playerId: string;
+  pawnId: string;
+  cardId: string;
+}
+export interface PendingElimination {
+  id: string;
+  pawnId: string;
+  playerId: string;
+  cause: "attack" | "black-ice" | "sacrifice";
+}
+
+export interface PendingChoice {
+  spaceId?:string;
+  id: string;
+  playerId: string;
+  kind: "block-detach" | "block-attack" | "steal-card" | "block-sacrifice" | "space-discard" | "block-discard" | "discard-or-sacrifice" | "relocate-pawn" | "discard-cards" | "prevent-elimination" | "place-block" | "move-path";
+  movement?: {roll:number[];budget:number;origin:{coord:import("./hex.ts").Coord;spaceId:string};movementIndex:number;movementKey:string;stealth:boolean};
+  blockId?: string;
+  reference?: import("./hex.ts").Coord;
+  effectId: string;
+  pawnId: string;
+  cardId: string;
+  amount?: number;
+  cardIds?: string[];
+}
+
+export interface ThreatOnBoard {
+  id: string;
+  threatId: string;
+  coord: import("./hex.ts").Coord;
+  spaceId: string;
+  status: "inactive" | "active" | "eliminated";
+}
+
+/** The roll is public before dice are assigned. Empty target ids discard a die. */
+export interface PendingAttack {
+  playerId: string;
+  attackerIds: string[];
+  coord: import("./hex.ts").Coord;
+  roll: number[];
+}
+
+export interface PendingThreatCombat {
+  coord: import("./hex.ts").Coord;
+  attackerIds: string[];
+  stage: "response" | "retaliation";
 }
 
 export function currentPlayer(s: GameState): Player {

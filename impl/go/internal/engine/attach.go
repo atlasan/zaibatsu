@@ -26,7 +26,8 @@ import (
 // PARTIAL RUNTIME RESOLUTION: ability grants/removals, granted slots, recycle
 // draw/hand modifiers, ICE-face / ICE-dice / Black-ICE modifiers, and
 // attachment-granted movement activation are now wired. Armor-style defense
-// replacement plus the richer movement-use semantics remain later work.
+// replacement, own-class/target eligibility and provider-slot cascades execute.
+// Broader non-move activation semantics remain later work.
 
 // removeCardFromHand removes one copy of cardID from the hand without discarding it.
 func removeCardFromHand(p *domain.Player, cardID string) error {
@@ -46,6 +47,7 @@ func discardAttachments(s *domain.GameState, pob *domain.PawnOnBoard) {
 	if pob == nil || len(pob.Attachments) == 0 {
 		return
 	}
+	RetainDiscardedUseCards(s, pob.Attachments)
 	owner := s.PlayerByID(pob.OwnerID)
 	for _, a := range pob.Attachments {
 		s.Discard = append(s.Discard, a.CardID)
@@ -71,7 +73,7 @@ func payAttachCost(player *domain.Player, attach *domain.Attach) (int, error) {
 }
 
 // AttachToPawn attaches a `pawn` card to a pawn the player controls.
-func AttachToPawn(s *domain.GameState, gd *domain.GameData, playerID, cardID, targetPawnID string) error {
+func AttachToPawn(s *domain.GameState, gd *domain.GameData, playerID, cardID, targetPawnID string, slotRefs ...string) error {
 	player := s.PlayerByID(playerID)
 	if player == nil {
 		return fmt.Errorf("unknown player %q", playerID)
@@ -90,12 +92,19 @@ func AttachToPawn(s *domain.GameState, gd *domain.GameData, playerID, cardID, ta
 	if tgt.OwnerID != playerID {
 		return fmt.Errorf("pawn %q is not controlled by %s", targetPawnID, playerID)
 	}
-	return attachToPawnElement(s, gd, player, card, tgt)
+	return attachToPawnElement(s, gd, player, card, tgt, slotRefs...)
 }
 
 // AttachToEnemy attaches an `enemy` card to an opponent's pawn co-located with an
 // acting pawn the player controls.
-func AttachToEnemy(s *domain.GameState, gd *domain.GameData, playerID, cardID, actorPawnID, targetPawnID string) error {
+func AttachToEnemy(s *domain.GameState, gd *domain.GameData, playerID, cardID, actorPawnID, targetPawnID string, slotRefs ...string) error {
+	slotRef := ""
+	if len(slotRefs) > 0 {
+		slotRef = slotRefs[0]
+	}
+	return attachToEnemyWithEvents(s, gd, playerID, cardID, actorPawnID, targetPawnID, slotRef, nil)
+}
+func attachToEnemyWithEvents(s *domain.GameState, gd *domain.GameData, playerID, cardID, actorPawnID, targetPawnID, slotRef string, events *[]EngineEvent) error {
 	player := s.PlayerByID(playerID)
 	if player == nil {
 		return fmt.Errorf("unknown player %q", playerID)
@@ -118,14 +127,30 @@ func AttachToEnemy(s *domain.GameState, gd *domain.GameData, playerID, cardID, a
 	if tgt.OwnerID == playerID {
 		return fmt.Errorf("enemy attachment must target another player's pawn")
 	}
+	if gd.RegressionFixture != "provisional-v1" && s.PlayerByID(tgt.OwnerID) == nil {
+		return fmt.Errorf("enemy attachments require another player's controlled pawn")
+	}
 	if actor.Coord != tgt.Coord {
 		return fmt.Errorf("acting pawn and target are not in the same block")
 	}
-	return attachToPawnElement(s, gd, player, card, tgt)
+	return attachToPawnElementWithEvents(s, gd, player, card, tgt, slotRef, events)
 }
 
 // attachToPawnElement performs the slot + cost checks and attaches to a pawn.
-func attachToPawnElement(s *domain.GameState, gd *domain.GameData, player *domain.Player, card *domain.ActionCard, tgt *domain.PawnOnBoard) error {
+func attachToPawnElement(s *domain.GameState, gd *domain.GameData, player *domain.Player, card *domain.ActionCard, tgt *domain.PawnOnBoard, slotRefs ...string) error {
+	slotRef := ""
+	if len(slotRefs) > 0 {
+		slotRef = slotRefs[0]
+	}
+	return attachToPawnElementWithEvents(s, gd, player, card, tgt, slotRef, nil)
+}
+func attachToPawnElementWithEvents(s *domain.GameState, gd *domain.GameData, player *domain.Player, card *domain.ActionCard, tgt *domain.PawnOnBoard, slotRef string, events *[]EngineEvent) error {
+	if err := RequireResolvedCardReuse(s, card.ID); err != nil {
+		return err
+	}
+	if err := ValidateAttachmentRules(card); err != nil {
+		return err
+	}
 	slot := card.Attach.Slot
 	if slot == "" {
 		return fmt.Errorf("card %q has no slot to attach into", card.ID)
@@ -133,11 +158,57 @@ func attachToPawnElement(s *domain.GameState, gd *domain.GameData, player *domai
 	if _, ok := gd.PawnByID(tgt.PawnID); !ok {
 		return fmt.Errorf("unknown pawn %q", tgt.PawnID)
 	}
+	if gd.RegressionFixture != "provisional-v1" {
+		classes := EffectivePawnClasses(gd, tgt)
+		for _, class := range card.Attach.ForbiddenClasses {
+			if containsString(classes, class) {
+				return fmt.Errorf("card %q forbids the target pawn's class", card.ID)
+			}
+		}
+		if len(card.Attach.Class) > 0 {
+			matches := false
+			for _, class := range card.Attach.Class {
+				matches = matches || containsString(classes, class)
+			}
+			if !matches {
+				return fmt.Errorf("card %q requires a matching target class", card.ID)
+			}
+		}
+	}
 	if !containsString(EffectivePawnSlots(gd, tgt), slot) {
 		return fmt.Errorf("pawn %q has no %s slot", tgt.PawnID, slot)
 	}
-	if tgt.HasSlotFilled(slot) {
-		return fmt.Errorf("pawn %q already has its %s slot filled", tgt.PawnID, slot)
+	selected := ""
+	if gd.RegressionFixture == "provisional-v1" {
+		if slotRef != "" {
+			return fmt.Errorf("physical slot references require the source engine")
+		}
+		if tgt.HasSlotFilled(slot) {
+			return fmt.Errorf("pawn %q already has its %s slot filled", tgt.PawnID, slot)
+		}
+	} else {
+		free := AvailableAttachmentSlots(gd, tgt, slot)
+		if slotRef != "" {
+			for _, location := range free {
+				if location.Ref == slotRef {
+					selected = slotRef
+				}
+			}
+			if selected == "" {
+				return fmt.Errorf("the selected attachment slot is unavailable")
+			}
+		} else {
+			if len(free) == 0 {
+				return fmt.Errorf("pawn %q has no empty %s slot", tgt.PawnID, slot)
+			}
+			if len(free) > 1 {
+				return fmt.Errorf("choose a physical attachment slot")
+			}
+			selected = free[0].Ref
+		}
+	}
+	if !SupportsAttachmentTiming(card) {
+		return fmt.Errorf("attachment-time effects require unsupported placement/choice resolution")
 	}
 	paid, err := payAttachCost(player, card.Attach)
 	if err != nil {
@@ -147,12 +218,32 @@ func attachToPawnElement(s *domain.GameState, gd *domain.GameData, player *domai
 		player.BonusCounters += paid // refund on the (unexpected) failure
 		return err
 	}
-	tgt.Attachments = append(tgt.Attachments, domain.Attachment{CardID: card.ID, Slot: slot, BonusPaid: paid})
+	att := domain.Attachment{CardID: card.ID, Slot: slot, SlotRef: selected, BonusPaid: paid}
+	if s.RulesVersion != "" {
+		att.InstanceID = NewAttachmentInstance(s)
+	}
+	tgt.Attachments = append(tgt.Attachments, att)
+	for _, effect := range card.Effects {
+		if effect.Trigger == "on-attach" && effect.Kind == "gain-target-control" {
+			if events != nil {
+				for _, att := range tgt.Attachments {
+					*events = append(*events, EngineEvent{Type: "card-discarded", CardID: att.CardID})
+				}
+			}
+			discardAttachments(s, tgt)
+			if err := GainPawnControl(s, gd, tgt.PawnID, player.ID, events); err != nil {
+				return err
+			}
+		}
+	}
 	return nil
 }
 
 // AttachToBlock attaches a `block` card to the block an acting pawn occupies.
 func AttachToBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, actorPawnID string, coord domain.Coord) error {
+	if err := RequireResolvedCardReuse(s, cardID); err != nil {
+		return err
+	}
 	player := s.PlayerByID(playerID)
 	if player == nil {
 		return fmt.Errorf("unknown player %q", playerID)
@@ -163,6 +254,9 @@ func AttachToBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, a
 	card := cardByID(gd, cardID)
 	if card == nil || card.Attach == nil || card.Attach.As != "block" {
 		return fmt.Errorf("card %q is not a block attachment", cardID)
+	}
+	if gd.RegressionFixture != "provisional-v1" && (len(card.Attach.Class) > 0 || len(card.Attach.ForbiddenClasses) > 0) {
+		return fmt.Errorf("target-class restrictions require a pawn or enemy attachment")
 	}
 	if err := requireOwnedActor(s, playerID, actorPawnID); err != nil {
 		return err
@@ -182,6 +276,11 @@ func AttachToBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, a
 	if len(IceFaces(def.IceValue)) == 0 {
 		return fmt.Errorf("cannot attach to block %q: it has no ICE value", pb.BlockID)
 	}
+	for _, effect := range card.Effects {
+		if effect.Trigger == "on-attach" {
+			return fmt.Errorf("attachment-time effects require unsupported placement/choice resolution")
+		}
+	}
 	paid, err := payAttachCost(player, card.Attach)
 	if err != nil {
 		return err
@@ -190,7 +289,11 @@ func AttachToBlock(s *domain.GameState, gd *domain.GameData, playerID, cardID, a
 		player.BonusCounters += paid
 		return err
 	}
-	pb.Attachments = append(pb.Attachments, domain.Attachment{CardID: card.ID, Slot: card.Attach.Slot, BonusPaid: paid})
+	att := domain.Attachment{CardID: card.ID, Slot: card.Attach.Slot, BonusPaid: paid}
+	if s.RulesVersion != "" {
+		att.InstanceID = NewAttachmentInstance(s)
+	}
+	pb.Attachments = append(pb.Attachments, att)
 	return nil
 }
 
@@ -231,8 +334,13 @@ func EffectivePawnClasses(gd *domain.GameData, pob *domain.PawnOnBoard) []string
 	}
 	for _, a := range pob.Attachments {
 		if card := cardByID(gd, a.CardID); card != nil && card.Attach != nil {
-			for _, c := range card.Attach.Class {
+			for _, c := range card.Class {
 				add(c)
+			}
+			if gd.RegressionFixture == "provisional-v1" {
+				for _, c := range card.Attach.Class {
+					add(c)
+				}
 			}
 		}
 	}
@@ -242,6 +350,15 @@ func EffectivePawnClasses(gd *domain.GameData, pob *domain.PawnOnBoard) []string
 // EffectivePawnSlots returns the pawn's printed slots plus any additional slots
 // granted by its attachments.
 func EffectivePawnSlots(gd *domain.GameData, pob *domain.PawnOnBoard) []string {
+	if gd.RegressionFixture != "provisional-v1" {
+		out := []string{}
+		for _, slot := range PawnAttachmentSlots(gd, pob) {
+			if !containsString(out, slot.Slot) {
+				out = append(out, slot.Slot)
+			}
+		}
+		return out
+	}
 	seen := map[string]bool{}
 	out := []string{}
 	add := func(slot string) {
@@ -297,27 +414,23 @@ func PlayerAttachmentModifiers(s *domain.GameState, gd *domain.GameData, playerI
 }
 
 func EffectiveDefenseDice(gd *domain.GameData, pob *domain.PawnOnBoard) []domain.DefenseDie {
-        base := []domain.DefenseDie{}
-        if def, ok := gd.PawnByID(pob.PawnID); ok {
-                base = append(base, def.Defense...)
-        }
-        override := []domain.DefenseDie(nil)
-        for _, card := range attachmentCards(gd, pob.Attachments) {
-                if card.Attach != nil && len(card.Attach.DefenseOverride) > 0 {
-                        override = card.Attach.DefenseOverride
-                }
-        }
-        if override != nil {
-                        return append([]domain.DefenseDie{}, override...)
-        }
-        return append([]domain.DefenseDie{}, base...)
+	base := []domain.DefenseDie{}
+	if def, ok := gd.PawnByID(pob.PawnID); ok {
+		base = append(base, def.Defense...)
+	}
+	for _, card := range attachmentCards(gd, pob.Attachments) {
+		if card.Attach != nil && len(card.Attach.DefenseOverride) > 0 {
+			base = card.Attach.DefenseOverride
+		}
+	}
+	return append([]domain.DefenseDie{}, base...)
 }
 
 func TargetIceNullified(gd *domain.GameData, atts []domain.Attachment) bool {
-        for _, card := range attachmentCards(gd, atts) {
-                if card.Attach != nil && card.Attach.NullifiesIce {
-                        return true
-                }
-        }
-        return false
+	for _, card := range attachmentCards(gd, atts) {
+		if card.Attach != nil && card.Attach.NullifiesIce {
+			return true
+		}
+	}
+	return false
 }

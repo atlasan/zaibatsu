@@ -48,7 +48,10 @@ export function coordEqual(a: Coord, b: Coord): boolean {
  * A block instance positioned in the Cybernet with a rotation. A block's local
  * edge e faces grid direction (e + rotation) mod 6.
  */
+export interface BlockBonusCounter {collectedBy?:string;}
+
 export interface PlacedBlock {
+  bonusCounter?:BlockBonusCounter;
   blockId: string;
   rotation: number;
   coord: Coord;
@@ -60,6 +63,7 @@ export interface PlacedBlock {
 
 /** A formed bonus icon keyed by the three incident block coordinates. */
 export interface BonusIcon {
+  counterPlaced?:boolean;
   key: string;
   coords: Coord[];
   /** Empty until a player collects the counter from this icon. */

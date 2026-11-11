@@ -9,7 +9,7 @@ import (
 
 func loadOrSkip(t *testing.T) *domain.GameData {
 	t.Helper()
-	gd, err := data.LoadDefault("speedrunners")
+	gd, err := data.LoadRegression("speedrunners")
 	if err != nil {
 		t.Fatalf("load speedrunners data: %v", err)
 	}
@@ -89,18 +89,18 @@ func TestRecycleRefillsHand(t *testing.T) {
 }
 
 func TestRecycleAppliesAttachmentModifiers(t *testing.T) {
-        gd := loadOrSkip(t)
-        gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", DrawModifier: -1, HandModifier: -2}
-        s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 11})
-        p1 := s.Players[0]
-        p1.Hand = []string{}
-        s.Cybernet.PawnByID(p1.PawnID).Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
-        if err := RunTurn(s, gd, []Action{{Type: ActPass}}); err != nil {
-                t.Fatalf("RunTurn: %v", err)
-        }
-        if got := len(s.Players[0].Hand); got != 2 {
-                t.Errorf("p1 hand after modified recycle = %d, want 2", got)
-        }
+	gd := loadOrSkip(t)
+	gd.Cards[0].Attach = &domain.Attach{As: "pawn", Slot: "add-on", DrawModifier: -1, HandModifier: -2}
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 11})
+	p1 := s.Players[0]
+	p1.Hand = []string{}
+	s.Cybernet.PawnByID(p1.PawnID).Attachments = []domain.Attachment{{CardID: gd.Cards[0].ID, Slot: "add-on"}}
+	if err := RunTurn(s, gd, []Action{{Type: ActPass}}); err != nil {
+		t.Fatalf("RunTurn: %v", err)
+	}
+	if got := len(s.Players[0].Hand); got != 2 {
+		t.Errorf("p1 hand after modified recycle = %d, want 2", got)
+	}
 }
 
 func TestTurnAdvances(t *testing.T) {
@@ -164,6 +164,7 @@ func TestLivePhaseAPI(t *testing.T) {
 	if recycle.Phase != domain.PhaseRecycle {
 		t.Fatalf("action advance = %s", recycle.Phase)
 	}
+	recycle = AdvancePhase(s, gd)
 	foundDraw := false
 	for _, event := range recycle.Events {
 		if event.Type == EventDraw {
@@ -173,7 +174,7 @@ func TestLivePhaseAPI(t *testing.T) {
 	if !foundDraw {
 		t.Error("recycle did not report a draw")
 	}
-	if got := AdvancePhase(s, gd).Phase; got != domain.PhaseEnd {
+	if got := recycle.Phase; got != domain.PhaseEnd {
 		t.Fatalf("recycle advance = %s", got)
 	}
 	if got := AdvancePhase(s, gd).Phase; got != domain.PhaseBeginning {
@@ -192,13 +193,16 @@ func TestApplyWithEventsRejectsIllegalPhaseAndReportsControl(t *testing.T) {
 		t.Fatalf("expected validation failure, got %#v", blocked)
 	}
 	AdvancePhase(s, gd)
-	accepted := ApplyWithEvents(s, gd, Action{Type: ActPlaceMarker})
+	if ApplyWithEvents(s, gd, Action{Type: ActPlaceMarker}).Accepted {
+		t.Fatal("free marker placement accepted")
+	}
+	accepted := ApplyWithEvents(s, gd, Action{Type: ActPass})
 	if !accepted.Accepted {
 		t.Fatalf("expected accepted action: %#v", accepted)
 	}
 	found := false
 	for _, event := range accepted.Events {
-		if event.Type == EventControlChanged {
+		if event.Type == EventActionAccepted {
 			found = true
 		}
 	}
@@ -212,40 +216,40 @@ func TestApplyWithEventsRejectsIllegalPhaseAndReportsControl(t *testing.T) {
 }
 
 func TestApplyWithEventsReportsPawnPlacedForOnIcebreakCardEffects(t *testing.T) {
-        gd := loadOrSkip(t)
-        cloned := *gd
-        cloned.Blocks = append([]domain.Block{}, gd.Blocks...)
-        for i := range cloned.Blocks {
-                if cloned.Blocks[i].ID == "data-haven" {
-                        cloned.Blocks[i].IceFaces = []int{1, 2, 3, 4, 5, 6}
-                }
-        }
-        gd = &cloned
-        s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 43})
-        coord := domain.Coord{Q: 1, R: 0}
-        s.Cybernet.Blocks = append(s.Cybernet.Blocks, &domain.PlacedBlock{BlockID: "data-haven", Rotation: 0, Coord: coord})
-        s.Cybernet.Pawns = []*domain.PawnOnBoard{}
-        s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
-        s.Players[0].Hand = []string{"cracker"}
-        AdvancePhase(s, gd)
+	gd := loadOrSkip(t)
+	cloned := *gd
+	cloned.Blocks = append([]domain.Block{}, gd.Blocks...)
+	for i := range cloned.Blocks {
+		if cloned.Blocks[i].ID == "data-haven" {
+			cloned.Blocks[i].IceFaces = []int{1, 2, 3, 4, 5, 6}
+		}
+	}
+	gd = &cloned
+	s, _ := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 43})
+	coord := domain.Coord{Q: 1, R: 0}
+	s.Cybernet.Blocks = append(s.Cybernet.Blocks, &domain.PlacedBlock{BlockID: "data-haven", Rotation: 0, Coord: coord})
+	s.Cybernet.Pawns = []*domain.PawnOnBoard{}
+	s.Cybernet.PlacePawn(&domain.PawnOnBoard{PawnID: "speedrunner-red", OwnerID: "p1", Coord: coord, SpaceID: "a"})
+	s.Players[0].Hand = []string{"cracker"}
+	AdvancePhase(s, gd)
 
-        result := ApplyWithEvents(s, gd, Action{
-                Type:   ActPlayIcebreakBlk,
-                CardID: "cracker",
-                PawnID: "speedrunner-red",
-                Coord:  &coord,
-        })
+	result := ApplyWithEvents(s, gd, Action{
+		Type:   ActPlayIcebreakBlk,
+		CardID: "cracker",
+		PawnID: "speedrunner-red",
+		Coord:  &coord,
+	})
 
-        if !result.Accepted {
-                t.Fatalf("expected accepted action: %#v", result)
-        }
-        found := false
-        for _, event := range result.Events {
-                if event.Type == EventPawnPlaced && event.ElementID == "cracker" {
-                        found = true
-                }
-        }
-        if !found {
-                t.Fatalf("expected pawn-placed event in %#v", result.Events)
-        }
+	if !result.Accepted {
+		t.Fatalf("expected accepted action: %#v", result)
+	}
+	found := false
+	for _, event := range result.Events {
+		if event.Type == EventPawnPlaced && event.ElementID == "cracker" {
+			found = true
+		}
+	}
+	if !found {
+		t.Fatalf("expected pawn-placed event in %#v", result.Events)
+	}
 }

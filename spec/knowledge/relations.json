@@ -18,6 +18,11 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "action-card/ak-12km",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "action-card/armor-brainchip",
       "to": "game/speedrunners"
     },
@@ -38,7 +43,17 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "action-card/dummy",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "action-card/e-synapse-neural-interface",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/electric-sheep",
       "to": "game/speedrunners"
     },
     {
@@ -48,7 +63,27 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "action-card/hijacker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "action-card/hyper-accelerator",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/insider-trading",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/jetpack",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/lima-flag",
       "to": "game/speedrunners"
     },
     {
@@ -73,12 +108,57 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "action-card/phase-loop",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/rootkit",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/selective-disclosure",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/servocanon",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "action-card/simstim-record",
       "to": "game/speedrunners"
     },
     {
       "type": "belongs-to-expansion",
+      "from": "action-card/toxin",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/trojan",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/under-clocker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/virus",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "action-card/weapon-gunhed",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "action-card/worm",
       "to": "game/speedrunners"
     },
     {
@@ -469,6 +549,96 @@
     {
       "type": "belongs-to-expansion",
       "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p01-c09",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c01",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c02",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c03",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c04",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c05",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c06",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c07",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c08",
+      "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sh-en-control-cards-p02-c09",
       "to": "game/shadowraiders"
     },
     {
@@ -888,6 +1058,96 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p01-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c01",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c02",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c03",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c04",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c05",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c06",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c07",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c08",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "asset/sp-en-control-cards-p02-c09",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "asset/sp-en-markers-p01-sheet",
       "to": "game/speedrunners"
     },
@@ -908,6 +1168,21 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "block/antro",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/arms-industry",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/black-clinic",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "block/black-market",
       "to": "game/speedrunners"
     },
@@ -923,7 +1198,37 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "block/clandestine-broadcast",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/combat-prototypes",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/copyleft",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/corporate-scandal",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "block/data-haven",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/electromagnetic-pulse",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/engineering-war",
       "to": "game/speedrunners"
     },
     {
@@ -943,7 +1248,22 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "block/military-development",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/pink-district",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "block/server-farm",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "block/yakuza",
       "to": "game/speedrunners"
     },
     {
@@ -973,6 +1293,11 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "mode/speedrunners-quick-match",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "mode/strategic-alliance",
       "to": "game/shadowraiders"
     },
@@ -989,6 +1314,16 @@
     {
       "type": "belongs-to-expansion",
       "from": "pawn/cracker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/drone-mk-2",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/drone-probe",
       "to": "game/speedrunners"
     },
     {
@@ -1023,12 +1358,12 @@
     },
     {
       "type": "belongs-to-expansion",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "game/speedrunners"
     },
     {
       "type": "belongs-to-expansion",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "game/speedrunners"
     },
     {
@@ -1317,22 +1652,27 @@
       "to": "game/speedrunners"
     },
     {
+      "type": "belongs-to-expansion",
+      "from": "threat/guard",
+      "to": "game/shadowraiders"
+    },
+    {
       "type": "cross-checks-with",
       "from": "source/sp-en-action-cards",
-      "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 1 <-> page 1, card 1"
+      "to": "source/sp-en-rulebook",
+      "locator": "page 4, cell 1 (Phase-Loop) <-> pages 29, 32–33, 37–38"
     },
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-action-cards",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 2 <-> page 1, card 2"
+      "locator": "page 1, card 1 <-> page 1, card 2"
     },
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-action-cards",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 3 <-> page 1, card 3"
+      "locator": "page 1, card 3 <-> page 1, card 1"
     },
     {
       "type": "cross-checks-with",
@@ -1368,13 +1708,169 @@
       "type": "cross-checks-with",
       "from": "source/sp-en-action-cards",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 9 <-> page 1, card 9"
+      "locator": "page 2, card 1 <-> page 2, card 4"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 3 <-> page 2, card 2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 4 <-> page 2, card 5"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 6 <-> page 2, card 3"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 8 <-> page 2, card 7"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 9 <-> page 2, card 1"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 3, card 6 <-> page 3, card 6"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 3, card 7 <-> page 3, card 7"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 4, cell 1 (Phase-Loop) <-> page 4, cell 1 (Phase-Loop)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-action-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 4, cell 1 (Phase-Loop) <-> pages 29, 32–33, 37–38"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, tile 3 (Copyleft) <-> pages 1–2, complete18-card set (no EKO pawn)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 4, tile 2 (Corporate Scandal) <-> page 2, card 2 (Idoru: marker counts as in Cybernet)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 1, tile 1 (Toyeku Company) <-> pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 1, tile 2 <-> pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 1, tile 3 <-> pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, tile 1 (Antro) <-> pages 13, 21, 33"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, tile 2 (Electromagnetic Pulse) <-> pages 13, 16–17, 21–23, 35"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, tile 3 (Copyleft) <-> pages 4, 12–19 (spaces, inventory and ordered placement)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 3, tile 1 (Clandestine Broadcast) <-> pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 3, tile 3 (Pink District) <-> pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 4, tile 1 (Yakuza) <-> pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 4, tile 2 (Corporate Scandal) <-> pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 4, tile 3 (Black Clinic) <-> pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 5, tile 1 (Engineering War) <-> pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 5, tile 2 (Combat Prototypes) <-> pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 5, tile 3 (Military Development) <-> pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 6, tile 1 (Arms Industry) <-> pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
     },
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
-      "locator": "page 1, tile 1 <-> page 1, tile 1"
+      "locator": "page 1, tile 1 (Toyeku Company) <-> page 1, tile 1 (Toyeku Company)"
     },
     {
       "type": "cross-checks-with",
@@ -1390,6 +1886,186 @@
     },
     {
       "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 1 (Antro) <-> page 2, tile 1 (Antro)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 2 (Electromagnetic Pulse) <-> page 2, tile 2 (Electromagnetic Pulse)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 3 (Copyleft) <-> page 2, tile 3 (Copyleft)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 1 (Clandestine Broadcast) <-> page 3, tile 1 (Clandestine Broadcast)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 2 (Central Core) <-> page 3, tile 2 (Central Core)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 3 (Pink District) <-> page 3, tile 3 (Pink District)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 1 (Yakuza) <-> page 4, tile 1 (Yakuza)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 2 (Corporate Scandal) <-> page 4, tile 2 (Corporate Scandal)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 3 (Black Clinic) <-> page 4, tile 3 (Black Clinic)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 1 (Engineering War) <-> page 5, tile 1 (Engineering War)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 2 (Combat Prototypes) <-> page 5, tile 2 (Combat Prototypes)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 3 (Military Development) <-> page 5, tile 3 (Military Development)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 6, tile 1 (Arms Industry) <-> page 6, tile 1 (Arms Industry)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, tile 3 (Copyleft) <-> pages 1–2, complete18-card set (no EKO pawn)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 4, tile 2 (Corporate Scandal) <-> page 2, third card in top row (Idoru: counted Cybernet marker)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 1, tile 1 (Toyeku Company) <-> pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 1, tile 2 <-> pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 1, tile 3 <-> pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, tile 1 (Antro) <-> pages 13, 21, 33"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, tile 2 (Electromagnetic Pulse) <-> pages 13, 16–17, 21–23, 35"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, tile 3 (Copyleft) <-> pages 4, 12–19 (spaces, inventory and ordered placement)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 3, tile 1 (Clandestine Broadcast) <-> pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 3, tile 3 (Pink District) <-> pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 4, tile 1 (Yakuza) <-> pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 4, tile 2 (Corporate Scandal) <-> pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 4, tile 3 (Black Clinic) <-> pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 5, tile 1 (Engineering War) <-> pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 5, tile 2 (Combat Prototypes) <-> pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 5, tile 3 (Military Development) <-> pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 6, tile 1 (Arms Industry) <-> pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+    },
+    {
+      "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
       "locator": "page 2, card 1 <-> page 2"
@@ -1398,19 +2074,157 @@
       "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
-      "locator": "page 2, card 2 <-> page 2"
+      "locator": "page 2, card 3 (Gynoid) <-> page 2, folded pawn unit7; aliases assemble the same single pawn"
     },
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
-      "locator": "page 2, card 3 <-> page 2"
+      "locator": "page 2, card 4 (Drone MK-2) <-> page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 7 (Drone Probe) <-> page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 8 (Drone Turret) <-> page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 2 (Idoru) <-> pages 18, 20–23, 24–25, 36, 38"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 3 (Gynoid) <-> pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 4 (Drone MK-2) <-> pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 7 (Drone Probe) <-> pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 8 (Drone Turret) <-> pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 1 (Speedrunner blue) <-> page 1, card 1 (Speedrunner blue)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 2 (Speedrunner green) <-> page 1, card 2 (Speedrunner green)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 4 (Speedrunner pink) <-> page 1, card 4 (Speedrunner pink)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 5 (Speedrunner orange) <-> page 1, card 5 (Speedrunner orange)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 2 (Idoru) <-> page 2, top row third card (Idoru)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 3 (Gynoid) <-> page 2, card 2 (Gynoid)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 4 (Drone MK-2) <-> page 2, card 4 (Drone MK-2)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 7 (Drone Probe) <-> page 2, card 7 (Drone Probe)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 8 (Drone Turret) <-> page 2, card 8 (Drone Turret)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 2 (Idoru) <-> pages 18, 20–23, 24–25, 36, 38"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 3 (Gynoid) <-> pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 4 (Drone MK-2) <-> pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 7 (Drone Probe) <-> pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 8 (Drone Turret) <-> pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-rulebook",
+      "to": "source/sp-en-rulebook",
+      "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5 <-> pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
     },
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-rulebook",
       "to": "source/sp-es-rulebook",
-      "locator": "pp. 6-7 <-> pp. 6-7"
+      "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5 <-> pages 4, 6, 15–18, 35 (24-counter supply, allocation and refunds)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-rulebook",
+      "to": "source/sp-es-rulebook",
+      "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5 <-> pp.5–7, including removal of unused starter cards/pawns on p.5"
     },
     {
       "type": "depicted-by-asset",
@@ -1421,6 +2235,11 @@
       "type": "depicted-by-asset",
       "from": "action-card/accelerator-transgenic-therapy",
       "to": "asset/sp-en-action-cards-p01-c04"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/ak-12km",
+      "to": "asset/sp-en-action-cards-p03-c07"
     },
     {
       "type": "depicted-by-asset",
@@ -1439,8 +2258,23 @@
     },
     {
       "type": "depicted-by-asset",
+      "from": "action-card/dummy",
+      "to": "asset/sp-en-action-cards-p03-c01"
+    },
+    {
+      "type": "depicted-by-asset",
       "from": "action-card/e-synapse-neural-interface",
       "to": "asset/sp-en-action-cards-p01-c08"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/electric-sheep",
+      "to": "asset/sp-en-action-cards-p03-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/hijacker",
+      "to": "asset/sp-en-action-cards-p02-c09"
     },
     {
       "type": "depicted-by-asset",
@@ -1449,8 +2283,43 @@
     },
     {
       "type": "depicted-by-asset",
+      "from": "action-card/insider-trading",
+      "to": "asset/sp-en-action-cards-p03-c05"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/jetpack",
+      "to": "asset/sp-en-action-cards-p03-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/lima-flag",
+      "to": "asset/sp-en-action-cards-p02-c04"
+    },
+    {
+      "type": "depicted-by-asset",
       "from": "action-card/octagon-dex",
       "to": "asset/sp-en-action-cards-p01-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/phase-loop",
+      "to": "asset/sp-en-action-cards-p04-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/rootkit",
+      "to": "asset/sp-en-action-cards-p02-c05"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/selective-disclosure",
+      "to": "asset/sp-en-action-cards-p03-c04"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/servocanon",
+      "to": "asset/sp-en-action-cards-p03-c08"
     },
     {
       "type": "depicted-by-asset",
@@ -1459,8 +2328,88 @@
     },
     {
       "type": "depicted-by-asset",
+      "from": "action-card/toxin",
+      "to": "asset/sp-en-action-cards-p02-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/trojan",
+      "to": "asset/sp-en-action-cards-p02-c08"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/under-clocker",
+      "to": "asset/sp-en-action-cards-p02-c06"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/virus",
+      "to": "asset/sp-en-action-cards-p02-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/weapon-gunhed",
+      "to": "asset/sp-en-action-cards-p03-c06"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "action-card/worm",
+      "to": "asset/sp-en-action-cards-p02-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/antro",
+      "to": "asset/sp-en-blocks-a4-p02-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/arms-industry",
+      "to": "asset/sp-en-blocks-a4-p06-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/black-clinic",
+      "to": "asset/sp-en-blocks-a4-p04-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/central-core",
+      "to": "asset/sp-en-blocks-a4-p03-c02"
+    },
+    {
+      "type": "depicted-by-asset",
       "from": "block/chiba-city",
       "to": "asset/sp-en-blocks-a4-p01-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/clandestine-broadcast",
+      "to": "asset/sp-en-blocks-a4-p03-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/combat-prototypes",
+      "to": "asset/sp-en-blocks-a4-p05-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/copyleft",
+      "to": "asset/sp-en-blocks-a4-p02-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/corporate-scandal",
+      "to": "asset/sp-en-blocks-a4-p04-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/electromagnetic-pulse",
+      "to": "asset/sp-en-blocks-a4-p02-c02"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/engineering-war",
+      "to": "asset/sp-en-blocks-a4-p05-c01"
     },
     {
       "type": "depicted-by-asset",
@@ -1473,6 +2422,41 @@
       "to": "asset/sp-en-blocks-a4-p01-c01"
     },
     {
+      "type": "depicted-by-asset",
+      "from": "block/military-development",
+      "to": "asset/sp-en-blocks-a4-p05-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/pink-district",
+      "to": "asset/sp-en-blocks-a4-p03-c03"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "block/yakuza",
+      "to": "asset/sp-en-blocks-a4-p04-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/drone-mk-2",
+      "to": "asset/sp-en-control-cards-p02-c04"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/drone-probe",
+      "to": "asset/sp-en-control-cards-p02-c07"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/drone-turret",
+      "to": "asset/sp-en-control-cards-p02-c08"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/gynoid",
+      "to": "asset/sp-en-control-cards-p02-c03"
+    },
+    {
       "type": "documented-by",
       "from": "action-card/accela-accelerator",
       "to": "doc/docs/block-editor-plan.md"
@@ -1680,6 +2664,76 @@
     {
       "type": "documented-by",
       "from": "action-card/add-on-accelerator",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/ak-12km",
       "to": "doc/readme.md"
     },
     {
@@ -1964,6 +3018,76 @@
     },
     {
       "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/dummy",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "action-card/e-synapse-neural-interface",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -2030,6 +3154,76 @@
     {
       "type": "documented-by",
       "from": "action-card/e-synapse-neural-interface",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/electric-sheep",
       "to": "doc/readme.md"
     },
     {
@@ -2104,6 +3298,76 @@
     },
     {
       "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/hijacker",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "action-card/hyper-accelerator",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -2170,6 +3434,216 @@
     {
       "type": "documented-by",
       "from": "action-card/hyper-accelerator",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/insider-trading",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/jetpack",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/lima-flag",
       "to": "doc/readme.md"
     },
     {
@@ -2454,6 +3928,286 @@
     },
     {
       "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/phase-loop",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/rootkit",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/selective-disclosure",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/servocanon",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "action-card/simstim-record",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -2524,6 +4278,286 @@
     },
     {
       "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/toxin",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/trojan",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/under-clocker",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/virus",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "action-card/weapon-gunhed",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -2590,6 +4624,76 @@
     {
       "type": "documented-by",
       "from": "action-card/weapon-gunhed",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "action-card/worm",
       "to": "doc/readme.md"
     },
     {
@@ -3370,6 +5474,186 @@
     {
       "type": "documented-by",
       "from": "asset/sh-en-blocks-a4-p08-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p01-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sh-en-control-cards-p02-c09",
       "to": "doc/docs/artifacts/toolset.md"
     },
     {
@@ -4204,6 +6488,186 @@
     },
     {
       "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p01-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c01",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c01",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c02",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c02",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c03",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c03",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c04",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c04",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c05",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c05",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c06",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c06",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c07",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c07",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c08",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c08",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c09",
+      "to": "doc/docs/artifacts/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "asset/sp-en-control-cards-p02-c09",
+      "to": "doc/docs/artifacts/toolset.md"
+    },
+    {
+      "type": "documented-by",
       "from": "asset/sp-en-markers-p01-sheet",
       "to": "doc/docs/artifacts/readme.md"
     },
@@ -4244,6 +6708,216 @@
     },
     {
       "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/antro",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/arms-industry",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/black-clinic",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/black-market",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -4454,6 +7128,286 @@
     },
     {
       "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/clandestine-broadcast",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/combat-prototypes",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/copyleft",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/corporate-scandal",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/data-haven",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -4524,6 +7478,146 @@
     },
     {
       "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/electromagnetic-pulse",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/engineering-war",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/firewall-node",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -4734,6 +7828,146 @@
     },
     {
       "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/military-development",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/pink-district",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/server-farm",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -4804,6 +8038,76 @@
     },
     {
       "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/yakuza",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "mode/speedrunners",
       "to": "doc/docs/domain-model.md"
     },
@@ -4865,6 +8169,71 @@
     {
       "type": "documented-by",
       "from": "mode/speedrunners",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "mode/speedrunners-quick-match",
       "to": "doc/readme.md"
     },
     {
@@ -4934,6 +8303,136 @@
     },
     {
       "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-mk-2",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-probe",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "pawn/drone-turret",
       "to": "doc/docs/domain-model.md"
     },
@@ -5324,132 +8823,132 @@
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/domain-model.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/knowledge/catalog.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/knowledge/index.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/speedrunners.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/speedrunners/board-and-movement.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "doc/readme.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/domain-model.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/knowledge/catalog.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/knowledge/index.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/speedrunners.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/speedrunners/board-and-movement.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
     },
     {
       "type": "documented-by",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "doc/readme.md"
     },
     {
@@ -6003,6 +9502,66 @@
       "to": "workflow-step/source-evidence"
     },
     {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/shadowraiders.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/shadowraiders/missions-modes-and-symbology.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/shadowraiders/pawns-threats-and-combat.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/shadowraiders/setup-and-components.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/transcripts/shadowraiders-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/transcripts/shadowraiders-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/transcripts/shadowraiders-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/docs/rules/transcripts/shadowraiders-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "threat/guard",
+      "to": "doc/readme.md"
+    },
+    {
       "type": "drafted-from-asset",
       "from": "action-card/accela-accelerator",
       "to": "asset/sp-en-action-cards-p01-c06"
@@ -6011,6 +9570,11 @@
       "type": "drafted-from-asset",
       "from": "action-card/accelerator-transgenic-therapy",
       "to": "asset/sp-en-action-cards-p01-c04"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/ak-12km",
+      "to": "asset/sp-en-action-cards-p03-c07"
     },
     {
       "type": "drafted-from-asset",
@@ -6029,8 +9593,23 @@
     },
     {
       "type": "drafted-from-asset",
+      "from": "action-card/dummy",
+      "to": "asset/sp-en-action-cards-p03-c01"
+    },
+    {
+      "type": "drafted-from-asset",
       "from": "action-card/e-synapse-neural-interface",
       "to": "asset/sp-en-action-cards-p01-c08"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/electric-sheep",
+      "to": "asset/sp-en-action-cards-p03-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/hijacker",
+      "to": "asset/sp-en-action-cards-p02-c09"
     },
     {
       "type": "drafted-from-asset",
@@ -6039,8 +9618,43 @@
     },
     {
       "type": "drafted-from-asset",
+      "from": "action-card/insider-trading",
+      "to": "asset/sp-en-action-cards-p03-c05"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/jetpack",
+      "to": "asset/sp-en-action-cards-p03-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/lima-flag",
+      "to": "asset/sp-en-action-cards-p02-c04"
+    },
+    {
+      "type": "drafted-from-asset",
       "from": "action-card/octagon-dex",
       "to": "asset/sp-en-action-cards-p01-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/phase-loop",
+      "to": "asset/sp-en-action-cards-p04-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/rootkit",
+      "to": "asset/sp-en-action-cards-p02-c05"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/selective-disclosure",
+      "to": "asset/sp-en-action-cards-p03-c04"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/servocanon",
+      "to": "asset/sp-en-action-cards-p03-c08"
     },
     {
       "type": "drafted-from-asset",
@@ -6049,8 +9663,88 @@
     },
     {
       "type": "drafted-from-asset",
+      "from": "action-card/toxin",
+      "to": "asset/sp-en-action-cards-p02-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/trojan",
+      "to": "asset/sp-en-action-cards-p02-c08"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/under-clocker",
+      "to": "asset/sp-en-action-cards-p02-c06"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/virus",
+      "to": "asset/sp-en-action-cards-p02-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/weapon-gunhed",
+      "to": "asset/sp-en-action-cards-p03-c06"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "action-card/worm",
+      "to": "asset/sp-en-action-cards-p02-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/antro",
+      "to": "asset/sp-en-blocks-a4-p02-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/arms-industry",
+      "to": "asset/sp-en-blocks-a4-p06-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/black-clinic",
+      "to": "asset/sp-en-blocks-a4-p04-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/central-core",
+      "to": "asset/sp-en-blocks-a4-p03-c02"
+    },
+    {
+      "type": "drafted-from-asset",
       "from": "block/chiba-city",
       "to": "asset/sp-en-blocks-a4-p01-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/clandestine-broadcast",
+      "to": "asset/sp-en-blocks-a4-p03-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/combat-prototypes",
+      "to": "asset/sp-en-blocks-a4-p05-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/copyleft",
+      "to": "asset/sp-en-blocks-a4-p02-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/corporate-scandal",
+      "to": "asset/sp-en-blocks-a4-p04-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/electromagnetic-pulse",
+      "to": "asset/sp-en-blocks-a4-p02-c02"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/engineering-war",
+      "to": "asset/sp-en-blocks-a4-p05-c01"
     },
     {
       "type": "drafted-from-asset",
@@ -6063,6 +9757,21 @@
       "to": "asset/sp-en-blocks-a4-p01-c01"
     },
     {
+      "type": "drafted-from-asset",
+      "from": "block/military-development",
+      "to": "asset/sp-en-blocks-a4-p05-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/pink-district",
+      "to": "asset/sp-en-blocks-a4-p03-c03"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/yakuza",
+      "to": "asset/sp-en-blocks-a4-p04-c01"
+    },
+    {
       "type": "evidenced-by-source",
       "from": "action-card/accela-accelerator",
       "to": "source/sp-en-action-cards",
@@ -6108,6 +9817,23 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "action-card/ak-12km",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3, card 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/ak-12km",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/ak-12km",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 3, card 7"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "action-card/armor-brainchip",
       "to": "source/sp-en-action-cards"
     },
@@ -6136,19 +9862,12 @@
     {
       "type": "evidenced-by-source",
       "from": "action-card/cracker",
-      "to": "source/sp-en-action-cards",
-      "locator": "page 1, card 9"
+      "to": "source/sp-en-action-cards"
     },
     {
       "type": "evidenced-by-source",
       "from": "action-card/cracker",
       "to": "source/sp-en-rulebook"
-    },
-    {
-      "type": "evidenced-by-source",
-      "from": "action-card/cracker",
-      "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 9"
     },
     {
       "type": "evidenced-by-source",
@@ -6165,7 +9884,17 @@
       "type": "evidenced-by-source",
       "from": "action-card/dj",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 3"
+      "locator": "page 1, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/dummy",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/dummy",
+      "to": "source/sp-en-rulebook"
     },
     {
       "type": "evidenced-by-source",
@@ -6183,6 +9912,16 @@
       "from": "action-card/e-synapse-neural-interface",
       "to": "source/sp-es-action-cards",
       "locator": "page 1, card 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/electric-sheep",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/electric-sheep",
+      "to": "source/sp-en-rulebook"
     },
     {
       "type": "evidenced-by-source",
@@ -6196,6 +9935,23 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "action-card/hijacker",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 9"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/hijacker",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/hijacker",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "action-card/hyper-accelerator",
       "to": "source/sp-en-action-cards",
       "locator": "page 1, card 5"
@@ -6210,6 +9966,43 @@
       "from": "action-card/hyper-accelerator",
       "to": "source/sp-es-action-cards",
       "locator": "page 1, card 5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/insider-trading",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/insider-trading",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/jetpack",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/jetpack",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/lima-flag",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/lima-flag",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/lima-flag",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 5"
     },
     {
       "type": "evidenced-by-source",
@@ -6256,34 +10049,166 @@
       "type": "evidenced-by-source",
       "from": "action-card/octagon-dex",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 1"
+      "locator": "page 1, card 2"
     },
     {
       "type": "evidenced-by-source",
-      "from": "action-card/simstim-record",
+      "from": "action-card/phase-loop",
       "to": "source/sp-en-action-cards",
-      "locator": "page 1, card 2"
+      "locator": "page 4, cell 1 (Phase-Loop)"
     },
     {
       "type": "evidenced-by-source",
-      "from": "action-card/simstim-record",
-      "to": "source/sp-en-rulebook"
+      "from": "action-card/phase-loop",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 29, 32–33, 37–38"
     },
     {
       "type": "evidenced-by-source",
-      "from": "action-card/simstim-record",
+      "from": "action-card/phase-loop",
       "to": "source/sp-es-action-cards",
-      "locator": "page 1, card 2"
+      "locator": "page 4, cell 1 (Phase-Loop)"
     },
     {
       "type": "evidenced-by-source",
-      "from": "action-card/weapon-gunhed",
+      "from": "action-card/phase-loop",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 29, 32–33, 37–38"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/rootkit",
       "to": "source/sp-en-action-cards"
     },
     {
       "type": "evidenced-by-source",
+      "from": "action-card/rootkit",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/selective-disclosure",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/selective-disclosure",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/servocanon",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/servocanon",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/simstim-record",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/simstim-record",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/toxin",
+      "to": "source/sp-en-action-cards"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/toxin",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/trojan",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/trojan",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/trojan",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 7"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/under-clocker",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/under-clocker",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/under-clocker",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/virus",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/virus",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/virus",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 4"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/weapon-gunhed",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 3, card 6"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "action-card/weapon-gunhed",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/weapon-gunhed",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 3, card 6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/worm",
+      "to": "source/sp-en-action-cards",
+      "locator": "page 2, card 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/worm",
+      "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "action-card/worm",
+      "to": "source/sp-es-action-cards",
+      "locator": "page 2, card 2"
     },
     {
       "type": "evidenced-by-source",
@@ -6752,6 +10677,114 @@
       "from": "asset/sh-en-blocks-a4-p08-c03",
       "to": "source/sh-en-blocks-a4",
       "locator": "page 8"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c01",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c02",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c03",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c04",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c05",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c06",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c07",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c08",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p01-c09",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c01",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c02",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c03",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c04",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c05",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c06",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c07",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c08",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sh-en-control-cards-p02-c09",
+      "to": "source/sh-en-control-cards",
+      "locator": "page 2"
     },
     {
       "type": "evidenced-by-source",
@@ -7253,6 +11286,114 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c01",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c02",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c03",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c04",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c05",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c06",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c07",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c08",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p01-c09",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c01",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c02",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c03",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c04",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c05",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c06",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c07",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c08",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "asset/sp-en-control-cards-p02-c09",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "asset/sp-en-markers-p01-sheet",
       "to": "source/sp-en-markers",
       "locator": "page 1"
@@ -7277,6 +11418,93 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "block/antro",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2, tile 1 (Antro)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/antro",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/antro",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 13, 21, 33"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/antro",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 1 (Antro)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/antro",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 13, 21, 33"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/arms-industry",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 6, tile 1 (Arms Industry)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/arms-industry",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/arms-industry",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/arms-industry",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 6, tile 1 (Arms Industry)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/arms-industry",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 6, 12–18, 28, 31, 35, 38 (physical reserve, spaces, counters, control, Black ICE and hand symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-clinic",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4, tile 3 (Black Clinic)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-clinic",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-clinic",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-clinic",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 3 (Black Clinic)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/black-clinic",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 8, 12–14, 18, 31–33, 35, 38 (spaces, control timing, hand limits, attachment cleanup and refunds)"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "block/black-market",
       "to": "source/sp-en-blocks-a4"
     },
@@ -7293,7 +11521,8 @@
     {
       "type": "evidenced-by-source",
       "from": "block/central-core",
-      "to": "source/sp-en-blocks-a4"
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3, tile 2 (Central Core)"
     },
     {
       "type": "evidenced-by-source",
@@ -7304,6 +11533,12 @@
       "type": "evidenced-by-source",
       "from": "block/central-core",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/central-core",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 2 (Central Core)"
     },
     {
       "type": "evidenced-by-source",
@@ -7319,13 +11554,160 @@
     {
       "type": "evidenced-by-source",
       "from": "block/chiba-city",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 11–14, 18, 21, 23"
     },
     {
       "type": "evidenced-by-source",
       "from": "block/chiba-city",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 1, tile 3"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/chiba-city",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/clandestine-broadcast",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3, tile 1 (Clandestine Broadcast)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/clandestine-broadcast",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/clandestine-broadcast",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/clandestine-broadcast",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 1 (Clandestine Broadcast)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/clandestine-broadcast",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–14, 18, 23, 27 (special spaces/defense/ICE, control, retention and Reboot)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/combat-prototypes",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5, tile 2 (Combat Prototypes)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/combat-prototypes",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/combat-prototypes",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/combat-prototypes",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 2 (Combat Prototypes)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/combat-prototypes",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control, repeated effects, cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2, tile 3 (Copyleft)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-en-control-cards",
+      "locator": "pages 1–2, complete18-card set (no EKO pawn)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 4, 12–19 (spaces, inventory and ordered placement)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 3 (Copyleft)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-es-control-cards",
+      "locator": "pages 1–2, complete18-card set (no EKO pawn)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/copyleft",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 4, 12–19 (spaces, inventory and ordered placement)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4, tile 2 (Corporate Scandal)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 2 (Idoru: marker counts as in Cybernet)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 2 (Corporate Scandal)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, third card in top row (Idoru: counted Cybernet marker)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/corporate-scandal",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 8–10, 12–14, 18, 28, 38 (played cards, geometry, control timing, markers, Icebreaker and defense)"
     },
     {
       "type": "evidenced-by-source",
@@ -7341,6 +11723,64 @@
       "type": "evidenced-by-source",
       "from": "block/data-haven",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/electromagnetic-pulse",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/electromagnetic-pulse",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/electromagnetic-pulse",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 13, 16–17, 21–23, 35"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/electromagnetic-pulse",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 2, tile 2 (Electromagnetic Pulse)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/electromagnetic-pulse",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 13, 16–17, 21–23, 35"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/engineering-war",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5, tile 1 (Engineering War)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/engineering-war",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/engineering-war",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/engineering-war",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 1 (Engineering War)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/engineering-war",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–18, 21, 23, 33, 38 (spaces, control/repeated effects, defense, physical cleanup and symbols)"
     },
     {
       "type": "evidenced-by-source",
@@ -7371,7 +11811,8 @@
     {
       "type": "evidenced-by-source",
       "from": "block/hacktivism",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 11–14, 18, 21, 23"
     },
     {
       "type": "evidenced-by-source",
@@ -7381,9 +11822,15 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "block/hacktivism",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 11–14, 18, 21, 23"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "block/idoru",
       "to": "source/sp-en-blocks-a4",
-      "locator": "page 1, tile 1"
+      "locator": "page 1, tile 1 (Toyeku Company)"
     },
     {
       "type": "evidenced-by-source",
@@ -7393,13 +11840,78 @@
     {
       "type": "evidenced-by-source",
       "from": "block/idoru",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
     },
     {
       "type": "evidenced-by-source",
       "from": "block/idoru",
       "to": "source/sp-es-blocks-a4",
-      "locator": "page 1, tile 1"
+      "locator": "page 1, tile 1 (Toyeku Company)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/idoru",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–13, 16, 21, 38; spaces, neutral placement, defense symbols"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/military-development",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 5, tile 3 (Military Development)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/military-development",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/military-development",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/military-development",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 5, tile 3 (Military Development)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/military-development",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–18, 20, 24, 31, 33, 35, 38 (spaces, hand limit, control, cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/pink-district",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 3, tile 3 (Pink District)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/pink-district",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/pink-district",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/pink-district",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 3, tile 3 (Pink District)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/pink-district",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–18, 23, 33 (spaces, repeated control, placement, victory and attachment cleanup)"
     },
     {
       "type": "evidenced-by-source",
@@ -7415,6 +11927,35 @@
       "type": "evidenced-by-source",
       "from": "block/server-farm",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/yakuza",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 4, tile 1 (Yakuza)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/yakuza",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/yakuza",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/yakuza",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 4, tile 1 (Yakuza)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/yakuza",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–14, 18, 21–23, 38 (control timing, geometry, defense, attack and elimination)"
     },
     {
       "type": "evidenced-by-source",
@@ -7449,8 +11990,14 @@
     {
       "type": "evidenced-by-source",
       "from": "mode/speedrunners",
+      "to": "source/sp-en-rulebook",
+      "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "mode/speedrunners",
       "to": "source/sp-es-rulebook",
-      "locator": "pp. 6-7"
+      "locator": "pp.5–7, including removal of unused starter cards/pawns on p.5"
     },
     {
       "type": "evidenced-by-source",
@@ -7489,52 +12036,152 @@
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/drone-turret",
-      "to": "source/sp-en-control-cards"
+      "from": "pawn/drone-mk-2",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 4 (Drone MK-2)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-mk-2",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-mk-2",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-mk-2",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 4 (Drone MK-2)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-mk-2",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-probe",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 7 (Drone Probe)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-probe",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, folded pawn unit3; opposed front/back faces assemble one Drone Probe"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-probe",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-probe",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 7 (Drone Probe)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-probe",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 15, 18, 20–27, 30, 33, 35, 38 (Search/placement, markers, attributes, movement, costs and symbols)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/drone-turret",
-      "to": "source/sp-en-pawns"
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 8 (Drone Turret)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/drone-turret",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 8 (Drone Turret)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-turret",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 8, 18, 20, 24, 26, 28, 30, 33, 35, 38 (turn permission, activation, payment, played/recycle, cleanup and symbols)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/gynoid",
       "to": "source/sp-en-control-cards",
-      "locator": "page 2, card 3"
+      "locator": "page 2, card 3 (Gynoid)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/gynoid",
       "to": "source/sp-en-pawns",
-      "locator": "page 2"
+      "locator": "page 2, folded pawn unit7; aliases assemble the same single pawn"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/gynoid",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/gynoid",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 2 (Gynoid)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/gynoid",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 8, 10, 20–25, 38 (beginning timing, hidden hands, attributes and symbols)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/idoru",
       "to": "source/sp-en-control-cards",
-      "locator": "page 2, card 2"
+      "locator": "page 2, card 2 (Idoru)"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/idoru",
-      "to": "source/sp-en-pawns",
-      "locator": "page 2"
+      "to": "source/sp-en-pawns"
     },
     {
       "type": "evidenced-by-source",
       "from": "pawn/idoru",
-      "to": "source/sp-en-rulebook"
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 18, 20–23, 24–25, 36, 38"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/idoru",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, top row third card (Idoru)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/idoru",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 18, 20–23, 24–25, 36, 38"
     },
     {
       "type": "evidenced-by-source",
@@ -7554,7 +12201,8 @@
     {
       "type": "evidenced-by-source",
       "from": "pawn/speedrunner-blue",
-      "to": "source/sp-en-control-cards"
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1, card 1 (Speedrunner blue)"
     },
     {
       "type": "evidenced-by-source",
@@ -7568,8 +12216,15 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-blue",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 1 (Speedrunner blue)"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "pawn/speedrunner-green",
-      "to": "source/sp-en-control-cards"
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1, card 2 (Speedrunner green)"
     },
     {
       "type": "evidenced-by-source",
@@ -7583,33 +12238,53 @@
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-red",
-      "to": "source/sp-en-control-cards"
+      "from": "pawn/speedrunner-green",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 2 (Speedrunner green)"
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1, card 5 (Speedrunner orange)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-orange",
       "to": "source/sp-en-pawns"
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-red",
+      "from": "pawn/speedrunner-orange",
       "to": "source/sp-en-rulebook"
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-yellow",
-      "to": "source/sp-en-control-cards"
+      "from": "pawn/speedrunner-orange",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 5 (Speedrunner orange)"
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1, card 4 (Speedrunner pink)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-pink",
       "to": "source/sp-en-pawns"
     },
     {
       "type": "evidenced-by-source",
-      "from": "pawn/speedrunner-yellow",
+      "from": "pawn/speedrunner-pink",
       "to": "source/sp-en-rulebook"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/speedrunner-pink",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 4 (Speedrunner pink)"
     },
     {
       "type": "evidenced-by-source",
@@ -7752,6 +12427,37 @@
       "to": "source/sp-es-rulebook"
     },
     {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-en-chaos-card"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-en-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-en-rulebook",
+      "locator": "p.21, Guard drone: fixed attack 5; shielded defense 1–4, unshielded 5–6"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-es-chaos-card"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-es-markers"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "threat/guard",
+      "to": "source/sh-es-rulebook"
+    },
+    {
       "type": "verified-by-provenance",
       "from": "action-card/accela-accelerator",
       "to": "workflow-step/provenance-review",
@@ -7765,13 +12471,13 @@
     },
     {
       "type": "verified-by-provenance",
-      "from": "action-card/biochip",
+      "from": "action-card/ak-12km",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
     {
       "type": "verified-by-provenance",
-      "from": "action-card/cracker",
+      "from": "action-card/biochip",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
@@ -7789,7 +12495,19 @@
     },
     {
       "type": "verified-by-provenance",
+      "from": "action-card/hijacker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
       "from": "action-card/hyper-accelerator",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/lima-flag",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
@@ -7801,13 +12519,103 @@
     },
     {
       "type": "verified-by-provenance",
-      "from": "action-card/simstim-record",
+      "from": "action-card/phase-loop",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/trojan",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/under-clocker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/virus",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/weapon-gunhed",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "action-card/worm",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/antro",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/arms-industry",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/black-clinic",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/central-core",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
     {
       "type": "verified-by-provenance",
       "from": "block/chiba-city",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/clandestine-broadcast",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/combat-prototypes",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/copyleft",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/corporate-scandal",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/electromagnetic-pulse",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/engineering-war",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
@@ -7825,6 +12633,24 @@
     },
     {
       "type": "verified-by-provenance",
+      "from": "block/military-development",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/pink-district",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "block/yakuza",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
       "from": "mode/speedrunners",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
@@ -7832,6 +12658,24 @@
     {
       "type": "verified-by-provenance",
       "from": "pawn/cracker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/drone-mk-2",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/drone-probe",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/drone-turret",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },
@@ -7846,6 +12690,36 @@
       "from": "pawn/idoru",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/speedrunner-blue",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/speedrunner-green",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/speedrunner-orange",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/speedrunner-pink",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "threat/guard",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/shadowraiders.json"
     }
   ]
 }

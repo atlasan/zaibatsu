@@ -90,7 +90,7 @@ export function placeBlock(
     coord: neighbor(refCoord, dir),
   };
   s.cybernet.blocks.push(pb);
-  detectBonusIconsAfterPlacement(s, data, pb);
+  try {detectBonusIconsAfterPlacement(s, data, pb);}catch(error){s.cybernet.blocks.pop();throw error;}
   return pb;
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import { type GameData, type GameState } from "../src/domain/types.ts";
 import { slotFilled } from "../src/domain/pawn_board.ts";
 import { neighbor, opposite, type Coord } from "../src/domain/hex.ts";
@@ -20,7 +20,7 @@ import {
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function freshData(): GameData {
-  return loadDefault("speedrunners");
+  return loadRegression("speedrunners");
 }
 
 function game(data: GameData, seed = 1): GameState {
@@ -200,6 +200,6 @@ describe("attachment runtime helpers", () => {
       name: "ICE Nullifier",
       attach: { as: "pawn", slot: "armor", nullifiesIce: true },
     });
-    expect(targetIceNullified(d, [{ cardId: "ice-nullifier", slot: "armor", bonusPaid: 0 }])).toBe(true);
+    expect(targetIceNullified(d, [{ cardId: "ice-nullifier" }])).toBe(true);
   });
 });

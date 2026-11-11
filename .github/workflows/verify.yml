@@ -1,0 +1,40 @@
+name: Rules and engine verification
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.1
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: impl/go/go.mod
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r tools/artifacts/requirements.txt
+      - run: python -m unittest discover -s tools/artifacts/tests
+      - run: bun install --frozen-lockfile
+        working-directory: impl/ts
+      - run: bun install --frozen-lockfile
+        working-directory: tools/block-editor
+      - run: bun tools/validate-docs.ts
+      - run: bun tools/build-knowledge.ts
+      - run: bun tools/validate-spec.ts
+      - run: bun tools/verify-artifacts.ts
+      - run: bun tools/rules-coverage.ts --check
+      - run: bun tools/verify-regression.ts
+      - run: bun test
+      - run: go test ./...
+        working-directory: impl/go
+      - run: bun run typecheck
+        working-directory: impl/ts
+      - run: git diff --exit-code -- spec/knowledge/catalog.json spec/knowledge/relations.json spec/validation/manifest.json
+      - run: bunx playwright install --with-deps chromium
+        working-directory: tools/block-editor
+      - run: bun run test:play
+        working-directory: tools/block-editor

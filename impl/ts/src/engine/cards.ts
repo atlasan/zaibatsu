@@ -1,3 +1,4 @@
+import type {EngineEvent} from "./index.ts";
 // Action-card use resolution: playing cards from hand to drive the core
 // abilities. Mirrors impl/go/internal/engine/cards.go. See
 // DOCS/rules/speedrunners/pawns-abilities-and-cards.md ("SR-CARD-001").
@@ -10,14 +11,14 @@
 // Card movement uses PlayMove and attachment actions live in attach.ts; attached
 // effect grants/removals remain a separate resolver concern.
 //
-// Consumed cards move to the discard pile. Illegal plays are rejected WITHOUT
-// consuming a card; a legal play (including a Delete/Icebreak that misses)
-// consumes it.
+// Played ability cards remain face up until recycle; explicit discard costs go
+// directly to discard. Illegal plays consume nothing. Card-paid Delete selects
+// only its printed card activation, preserving a separate free use.
 
 import type { Coord, PlacedBlock } from "../domain/hex.ts";
 import type { PawnOnBoard } from "../domain/pawn_board.ts";
 import type { GameData, GameState, Player } from "../domain/types.ts";
-import { deleteAbility, deleteArea, type DeleteAreaResult, type DeleteResult } from "./combat.ts";
+import { deleteAbility, deleteArea, deleteMulti, type DeleteMultiResult, type DeleteAreaResult, type DeleteResult } from "./combat.ts";
 import { applyCardEffectsForTrigger } from "./effects.ts";
 import { icebreakBlock, icebreakPawn, type IcebreakResult } from "./icebreaker.ts";
 import { search } from "./abilities.ts";
@@ -37,11 +38,16 @@ function cardActivates(gd: GameData, cardId: string, ability: string): boolean {
 }
 
 /** Removes one copy of cardId from the hand and moves it to the discard pile. */
-export function consumeCard(s: GameState, p: Player, cardId: string): void {
+export function consumeCard(s: GameState, p: Player, cardId: string, discardNow = false): void {
+  if(s.playedCardOwners && s.playedCardOwners.length!==(s.playedCards??[]).length) throw new Error("played card ownership does not match physical cards");
   const i = p.hand.indexOf(cardId);
   if (i < 0) throw new Error(`card "${cardId}" is not in ${p.id}'s hand`);
   p.hand.splice(i, 1);
-  s.discard.push(cardId);
+  if ((s.rulesVersion || s.phase === "action" || s.pendingPhase) && !discardNow) {
+    if(s.rulesVersion) {s.playedCardOwners??=(s.playedCards??[]).map(()=>s.players[s.currentPlayer]!.id);if(s.playedCardOwners.length!==(s.playedCards??[]).length) throw new Error("played card ownership does not match physical cards");s.playedCardOwners.push(p.id);}
+    (s.playedCards ??= []).push(cardId);
+  }
+  else s.discard.push(cardId);
 }
 
 function handContainsAll(p: Player, cardIds: string[]): boolean {
@@ -102,9 +108,20 @@ export function playDelete(
   if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   if (!cardActivates(gd, cardId, "delete")) throw new Error(`card "${cardId}" cannot activate Delete`);
   requireOwnedActor(s, playerId, attackerId);
-  const res = deleteAbility(s, gd, attackerId, targetId, extraSkulls);
+  const res = deleteAbility(s, gd, attackerId, targetId, extraSkulls, "card");
   consumeCard(s, p, cardId);
   return res;
+}
+
+/** Plays one Delete card and assigns individual dice, including concentration. */
+export function playDeleteMulti(s: GameState, gd: GameData, playerId: string, cardId: string, attackerId: string, targetIds: string[], extraSkulls = 0): DeleteMultiResult {
+  const p = player(s, playerId);
+  if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
+  if (!cardActivates(gd, cardId, "delete")) throw new Error(`card "${cardId}" cannot activate Delete`);
+  requireOwnedActor(s, playerId, attackerId);
+  const result = deleteMulti(s, gd, attackerId, targetIds, extraSkulls, "card");
+  consumeCard(s, p, cardId);
+  return result;
 }
 
 /** Plays a Delete-capable card to activate a Bomb-class area Delete. */
@@ -120,7 +137,7 @@ export function playDeleteArea(
   if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   if (!cardActivates(gd, cardId, "delete")) throw new Error(`card "${cardId}" cannot activate Delete`);
   requireOwnedActor(s, playerId, attackerId);
-  const res = deleteArea(s, gd, attackerId, extraSkulls);
+  const res = deleteArea(s, gd, attackerId, extraSkulls, "card");
   consumeCard(s, p, cardId);
   return res;
 }
@@ -134,14 +151,15 @@ export function playIcebreakBlock(
   attackerId: string,
   coord: Coord,
   extraRollDice = 0,
+  events:EngineEvent[]=[],
 ): IcebreakResult {
   const p = player(s, playerId);
   if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   if (!cardActivates(gd, cardId, "icebreaker")) throw new Error(`card "${cardId}" cannot activate Icebreaker`);
   requireOwnedActor(s, playerId, attackerId);
-  const res = icebreakBlock(s, gd, attackerId, coord, extraRollDice);
+  const res = icebreakBlock(s, gd, attackerId, coord, extraRollDice,events,s.rulesVersion?()=>consumeCard(s,p,cardId):undefined);
   if (res.success) applyCardEffectsForTrigger(s, gd, playerId, cardId, "on-icebreak", coord);
-  consumeCard(s, p, cardId);
+  if(!s.rulesVersion)consumeCard(s, p, cardId);
   return res;
 }
 
@@ -178,7 +196,7 @@ export function playSearch(
   if (!cardInHand(p, cardId)) throw new Error(`card "${cardId}" is not in ${playerId}'s hand`);
   requireOwnedActor(s, playerId, pawnId);
   const pb = search(s, gd, pawnId, dir, rot);
-  consumeCard(s, p, cardId);
+  consumeCard(s, p, cardId, true);
   return pb;
 }
 
@@ -189,6 +207,7 @@ export function playReboot(
   playerId: string,
   cardIds: string[],
   pawnId: string,
+  destination?:SpaceRef,
 ): PawnOnBoard {
   const p = player(s, playerId);
   if (cardIds.length !== 4) {
@@ -197,7 +216,16 @@ export function playReboot(
   if (!handContainsAll(p, cardIds)) {
     throw new Error(`${playerId} does not hold all 4 cards to discard`);
   }
-  const pob = reboot(s, gd, pawnId, playerId);
-  for (const c of cardIds) consumeCard(s, p, c);
+  const pob = reboot(s, gd, pawnId, playerId,destination);
+  for (const c of cardIds) consumeCard(s, p, c, true);
+  return pob;
+}
+
+/** Matching Reboot action part; the discard-four alternative remains available. */
+export function playRebootCard(s: GameState, gd: GameData, playerId: string, cardId: string, pawnId: string,destination?:SpaceRef): PawnOnBoard {
+  const p = player(s, playerId);
+  if (!cardInHand(p, cardId) || !cardActivates(gd, cardId, "reboot")) throw new Error("select a Reboot card in hand");
+  const pob = reboot(s, gd, pawnId, playerId,destination);
+  consumeCard(s, p, cardId);
   return pob;
 }

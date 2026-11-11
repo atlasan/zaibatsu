@@ -1,0 +1,553 @@
+{
+  "format": "zaibatsu-speedrunners-trace/v1",
+  "setup": {
+    "playerNames": [
+      "Arasaka",
+      "Militech"
+    ],
+    "seed": 101,
+    "modeId": "speedrunners-quick-match"
+  },
+  "dataChecksum": "a5eb90a1a5ee51038cf25fbb58a76d2c524f59cbbabe465173db7efd72242249",
+  "commands": [
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-2",
+        "dir": 0,
+        "rotation": 0
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "accela-accelerator",
+        "dir": 1,
+        "rotation": 0
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-2",
+        "dir": 2,
+        "rotation": 1
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "enemy-malware",
+        "dir": 3,
+        "rotation": 3
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 0
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-1",
+        "coord": {
+          "q": 1,
+          "r": 0
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "e-synapse-neural-interface",
+        "coord": {
+          "q": 1,
+          "r": 0
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "armor-brainchip",
+        "coord": {
+          "q": 1,
+          "r": 0
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "hyper-accelerator",
+        "coord": {
+          "q": 1,
+          "r": 0
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "weapon-gunhed",
+        "dir": 0,
+        "rotation": 1
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 2
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "dj",
+        "coord": {
+          "q": 1,
+          "r": -1
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "weapon-gunhed",
+        "dir": 0,
+        "rotation": 0
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-search",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "biochip",
+        "dir": 2,
+        "rotation": 3
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 0
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-2",
+        "coord": {
+          "q": 2,
+          "r": -1
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 4
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-2",
+        "coord": {
+          "q": 1,
+          "r": 0
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 1
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 4
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 2
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "pass"
+      }
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "phase"
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "move-hex",
+        "pawnId": "speedrunner-yellow",
+        "dir": 2
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "simstim-record",
+        "coord": {
+          "q": 1,
+          "r": -2
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "octagon-dex",
+        "coord": {
+          "q": 1,
+          "r": -2
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-3",
+        "coord": {
+          "q": 1,
+          "r": -2
+        }
+      }
+    },
+    {
+      "kind": "action",
+      "action": {
+        "type": "play-icebreak-block",
+        "pawnId": "speedrunner-yellow",
+        "cardId": "move-1",
+        "coord": {
+          "q": 1,
+          "r": -2
+        }
+      }
+    }
+  ]
+}

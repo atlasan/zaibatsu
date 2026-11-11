@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { loadDefault } from "../src/data/index.ts";
+import { loadRegression } from "../src/data/index.ts";
 import type { DefenseDie, GameData, GameState } from "../src/domain/types.ts";
 import type { Coord } from "../src/domain/hex.ts";
 import type { PawnOnBoard } from "../src/domain/pawn_board.ts";
@@ -14,7 +14,7 @@ import {
   newGame,
 } from "../src/engine/index.ts";
 
-const data: GameData = loadDefault("speedrunners");
+const data: GameData = loadRegression("speedrunners");
 const ORIGIN: Coord = { q: 0, r: 0 };
 
 function game(seed: number) {
@@ -170,13 +170,13 @@ describe("deleteArea", () => {
 
 describe("ability removal via attachment", () => {
   test("an attachment that removes Delete blocks the attack", () => {
-    const d = loadDefault("speedrunners");
+    const d = loadRegression("speedrunners");
     const s = newGame({ data: d, playerNames: ["A", "B"], seed: 3 });
     s.cybernet.pawns = [];
     s.cybernet.placePawn({ pawnId: "drone-turret", ownerId: "p1", coord: { ...ORIGIN }, spaceId: "core" });
     s.cybernet.placePawn({ pawnId: "speedrunner-yellow", ownerId: "p2", coord: { ...ORIGIN }, spaceId: "core" });
-    d.cards[0].attach = { as: "pawn", slot: "add-on", removes: ["delete"] };
-    s.cybernet.pawnById("drone-turret")!.attachments = [{ cardId: d.cards[0].id, slot: "add-on", bonusPaid: 0 }];
+    d.cards[0]!.attach = { as: "pawn", slot: "add-on", removes: ["delete"] };
+    s.cybernet.pawnById("drone-turret")!.attachments = [{ cardId: d.cards[0]!.id, slot: "add-on", bonusPaid: 0 }];
     expect(() => deleteAbility(s, d, "drone-turret", "speedrunner-yellow", 0)).toThrow();
   });
 
@@ -184,7 +184,7 @@ describe("ability removal via attachment", () => {
     const vulnerable = [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: false }));
     const armored = [1, 2, 3, 4, 5, 6].map((value) => ({ value, shielded: true }));
 
-    const baselineData = loadDefault("speedrunners");
+    const baselineData = loadRegression("speedrunners");
     baselineData.cards.push({
       id: "armor-override",
       name: "Armor Override",

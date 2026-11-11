@@ -19,6 +19,10 @@ SpeedRunners/
 !DOCS/rules/shadowraiders/**
 !DOCS/rules/speedrunners/
 !DOCS/rules/speedrunners/**
+!spec/data/speedrunners/
+!spec/data/speedrunners/**
+!spec/data/shadowraiders/
+!spec/data/shadowraiders/**
 *.rar
 *.pdf
 

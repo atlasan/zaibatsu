@@ -26,3 +26,10 @@
 - **Rule:** Event spaces and drone-threat spaces introduce threats; Central Core
   02 uses a direction die. Pawns may expose a mission slot, hand-size or defense
   modifiers, Black ICE, mercenary cost, and stealth movement.
+
+The [asset review register](../../artifacts/asset-review.md) saves the
+24 expansion block and 18 control-card observations, individual pawn/marker
+pieces, six Outbreak standees, Chaos and the shared Threat/drone print sheets.
+Supporting assembly variants are indexed separately from primary gameplay
+evidence. Exact topology, interpretation and bilingual canonical promotion
+remain T-SOURCE-REVIEW-002.

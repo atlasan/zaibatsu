@@ -1,13 +1,17 @@
 {
-  "_note": "Human-authored ground truth for the printed Speedrunners block tiles (sp-en-blocks-a4), from source review. It is authoritative for detection targets and data authoring; exact zone ids (h1..h7 per space) are left to the editor, while space SHAPES/COUNTS, open-edge counts, bonus corners, ICE, direction arrows, and ICE modifiers are source-verified. Keyed by asset id.",
-  "_iceModel": "ICE has two distinct printed forms: (1) ICE DIFFICULTY sits at a hex CORNER (a die / 3-D dice showing the value; a BLACK die means Black ICE) and sets the block's iceValue/iceFaces/blackIce; (2) an ICE MODIFIER sits INSIDE a space/zone (a flat die on that zone) and is a space.modifier{kind:ice, amount}. Detection must not conflate the two.",
+  "_note": "Historical human detection targets, with explicit source-pass corrections. Canonical verified topology and executable rules live in spec/data and provenance; these detection observations do not independently promote a component. Flat-symbol classification on unreviewed tiles still requires checking primary symbology.",
+  "_iceModel": "Three-dimensional corner dice encode block ICE. Flat square black/white dice on spaces change defense shielding of named faces (EN/ES pp.13/21/38), not ICE. Pawn ICE uses a different rhombus symbol. The Toyeku pass corrects the earlier flat-die ICE misclassification; other historical flat-die observations need review before promotion.",
   "blocks": {
     "sp-en-blocks-a4-p03-c02": {
       "name": "Central Core",
       "isCentralCore": true,
       "edgesOpen": 6,
       "spaces": [
-        { "shape": "circle", "zoneCount": 7, "note": "a single huge area covering the whole tile; the only space this large in the set" }
+        {
+          "shape": "circle",
+          "zoneCount": 7,
+          "note": "a single huge area covering the whole tile; the only space this large in the set"
+        }
       ],
       "bonusCorners": 0,
       "iceDifficultyCorner": false
@@ -16,12 +20,33 @@
       "name": "Pink District",
       "edgesOpen": 6,
       "spaces": [
-        { "shape": "capsule", "zoneCount": 2 },
-        { "shape": "capsule", "zoneCount": 2 },
-        { "shape": "circle", "zoneCount": 2 }
+        {
+          "shape": "capsule",
+          "zoneCount": 2,
+          "note": "Normal double h2/h7 left."
+        },
+        {
+          "shape": "capsule",
+          "zoneCount": 2,
+          "note": "Normal double h3/h4 right."
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 2,
+          "note": "Unlimited Gynoid home h5/h6; h1 title/art excluded."
+        }
       ],
       "bonusCorners": 2,
-      "iceDifficultyCorner": true
+      "bonusVertices": [
+        "v1",
+        "v5"
+      ],
+      "iceDifficultyCorner": true,
+      "iceFaces": [
+        2,
+        6
+      ],
+      "note": "EN/ES p3 tile3 exact pass; own ICE at V3, Gynoid-to-left arrow. Under-control placement is distinct from neutral tile placement. Canonical topology/effect and provenance live in shared spec data."
     },
     "sp-en-blocks-a4-p07-c03": {
       "name": "Cleaner",
@@ -29,36 +54,556 @@
       "iceModifierZone": true,
       "_spacesNote": "full space layout not enumerated in source review; one zone carries an ICE modifier (a flat die on the zone)",
       "bonusCorners": 4,
-      "iceDifficultyCorner": true
+      "iceDifficultyCorner": true,
+      "_symbolReview": "Historical iceModifierZone classification is provisional; recheck the flat symbol against the p.21 defense examples before source promotion."
     },
     "sp-en-blocks-a4-p02-c02": {
       "name": "Electromagnetic Pulse",
       "edgesOpen": 6,
       "spaces": [
-        { "shape": "hex", "zoneCount": 1 },
-        { "shape": "hex", "zoneCount": 1 },
-        { "shape": "hex", "zoneCount": 1 },
-        { "shape": "hex", "zoneCount": 1 },
-        { "shape": "hex", "zoneCount": 1 },
-        { "shape": "hex", "zoneCount": 1 }
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1
+        }
       ],
       "bonusCorners": 5,
       "iceDifficultyCorner": true,
       "iceValue": "low",
-      "iceFaces": [4, 5, 6],
+      "iceFaces": [
+        4,
+        5,
+        6
+      ],
       "_iceNote": "3 dice showing 4, 5, 6 at the difficulty corner (3 dice = low ICE)"
     },
     "sp-en-blocks-a4-p08-c01": {
       "name": "Freeside",
       "edgesOpen": 4,
       "spaces": [
-        { "shape": "circle", "note": "one big circle" },
-        { "shape": "capsule", "zoneCount": 2 },
-        { "shape": "hex", "zoneCount": 1, "note": "one normal single-hex space" }
+        {
+          "shape": "circle",
+          "note": "one big circle"
+        },
+        {
+          "shape": "capsule",
+          "zoneCount": 2
+        },
+        {
+          "shape": "hex",
+          "zoneCount": 1,
+          "note": "one normal single-hex space"
+        }
       ],
       "bonusCorners": 2,
       "iceDifficultyCorner": true,
       "iceValue": "black"
+    },
+    "sp-en-blocks-a4-p01-c01": {
+      "name": "Toyeku Company",
+      "edgesOpen": 6,
+      "spaces": [
+        {
+          "shape": "capsule",
+          "zoneCount": 2,
+          "capacity": 2
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 1,
+          "capacity": 1
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 1,
+          "capacity": 1
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 2,
+          "capacity": "unlimited",
+          "pawnId": "idoru"
+        }
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "bonusCorners": 3,
+      "iceDifficultyCorner": true,
+      "iceValue": "low",
+      "iceFaces": [
+        3,
+        4,
+        6
+      ],
+      "defenseSpaceDice": [
+        {
+          "value": 1,
+          "shielded": false
+        }
+      ],
+      "sourcePass": "EN/ES A4 p1 tile1; rulebooks pp.12/13/16/21/38; 2026-10-17"
+    },
+    "sp-en-blocks-a4-p03-c01": {
+      "name": "Clandestine Broadcast",
+      "isCentralCore": false,
+      "edgesOpen": 6,
+      "spaces": [
+        {
+          "shape": "circle",
+          "zoneCount": 5,
+          "note": "Unlimited special broadcast h1/h2/h3/h4/h7; adds shielded defense4/3."
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 1,
+          "note": "Normal single h5/right artwork."
+        },
+        {
+          "shape": "circle",
+          "zoneCount": 1,
+          "note": "Normal single h6/left artwork."
+        }
+      ],
+      "bonusCorners": 0,
+      "iceDifficultyCorner": true,
+      "iceFaces": [
+        2,
+        6
+      ],
+      "note": "Primary EN/ES p3 tile1 source pass; optional controller Core use remains distinct from actual Core identity. Canonical exact graph/permission lives in shared spec data."
+    },
+    "sp-en-blocks-a4-p04-c01": {
+      "name": "Yakuza",
+      "sourcePass": "EN/ES p4 tile1; see block/yakuza provenance and SR-BOARD-015. Earlier flat-die ICE classification corrected.",
+      "edgesOpen": 6,
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "upper",
+          "zoneIds": [
+            "h2",
+            "h3"
+          ],
+          "capacity": 2,
+          "defenseVulnerable": [
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "id": "left",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "right",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "dragon",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": 2
+        }
+      ],
+      "iceFaces": [
+        4,
+        6
+      ],
+      "iceVertex": 6,
+      "bonusVertices": [
+        2,
+        3,
+        5
+      ],
+      "arrows": [
+        {
+          "from": "right",
+          "to": "upper"
+        },
+        {
+          "from": "left",
+          "to": "dragon"
+        }
+      ]
+    },
+    "sp-en-blocks-a4-p04-c02": {
+      "name": "Corporate Scandal",
+      "sourcePass": "EN/ES p4 tile2 and symbol/rules review; earlier Portal Scandal alias was a misreading. See SR-BOARD-016 and shared canonical data.",
+      "edgesOpen": 6,
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "camera",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "upper-swirl",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "circuit",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "shield",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "defenseShielded": [
+            3
+          ]
+        },
+        {
+          "id": "lower-swirl",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "helmet",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1
+        }
+      ],
+      "iceFaces": [
+        5,
+        6
+      ],
+      "iceVertex": 1,
+      "bonusVertices": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "arrows": []
+    },
+    "sp-en-blocks-a4-p04-c03": {
+      "name": "Black Clinic",
+      "sourcePass": "EN/ES p4 tile3 and rulebooks pp12–14/31/38; earlier flat-die ICE reading corrected. Large lower circle is special/unlimited under p12. See shared canonical data and SR-BOARD-017.",
+      "edgesOpen": 6,
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaces": [
+        {
+          "id": "stream",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "helmet",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "hand",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "handModifier": -1
+        },
+        {
+          "id": "clinic",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "defenseVulnerable": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "left",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1
+        }
+      ],
+      "iceFaces": [
+        3,
+        6
+      ],
+      "iceVertex": 6,
+      "bonusVertices": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "arrows": [
+        {
+          "from": "helmet",
+          "to": "hand"
+        }
+      ]
+    },
+    "sp-en-blocks-a4-p05-c01": {
+      "name": "Engineering War",
+      "sourcePass": "EN/ES p5 tile1; exact three-space line, two side entrances and excluded title/effect zones. Teal right-circle glyph is artwork, distinct from outlined white connector arrows. See SR-BOARD-018 and canonical data.",
+      "edgesOpen": 2,
+      "nonPlayableZoneIds": [
+        "h2",
+        "h3",
+        "h5",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "defense",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "defenseVulnerable": [
+            1
+          ]
+        },
+        {
+          "id": "drone-mk-2",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "pawnId": "drone-mk-2"
+        },
+        {
+          "id": "right",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1
+        }
+      ],
+      "iceFaces": [
+        3,
+        6
+      ],
+      "iceVertex": 6,
+      "bonusVertices": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "arrows": []
+    },
+    "sp-en-blocks-a4-p05-c02": {
+      "name": "Combat Prototypes",
+      "sourcePass": "EN/ES p5 tile2; five spaces, four entrances and excluded h3/h6 title/effect zones. No circuit/triangle artwork is a pawn/modifier/arrow. See SR-BOARD-019 and canonical data.",
+      "edgesOpen": 4,
+      "nonPlayableZoneIds": [
+        "h3",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "upper-left",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "right",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "lower-right",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "left",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "drone-probe",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "pawnId": "drone-probe"
+        }
+      ],
+      "iceFaces": [
+        4,
+        6
+      ],
+      "iceVertex": 2,
+      "bonusVertices": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "arrows": []
+    },
+    "sp-en-blocks-a4-p05-c03": {
+      "name": "Military Development",
+      "sourcePass": "EN/ES p5 tile3; three-space line with hand+1 at h7, central matching unlimited Turret home, only E2/E5 entrances, excluded title/effect zones; six-corner crop confirms ICE at V5 and other five bonus corners. See SR-BOARD-020.",
+      "edgesOpen": 2,
+      "nonPlayableZoneIds": [
+        "h2",
+        "h3",
+        "h5",
+        "h6"
+      ],
+      "spaces": [
+        {
+          "id": "hand",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "handSizeModifier": 1
+        },
+        {
+          "id": "drone-turret",
+          "zoneIds": [
+            "h1"
+          ],
+          "capacity": "unlimited",
+          "pawnId": "drone-turret"
+        },
+        {
+          "id": "right",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1
+        }
+      ],
+      "iceFaces": [
+        4,
+        6
+      ],
+      "iceVertex": 5,
+      "bonusVertices": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "arrows": []
+    },
+    "sp-en-blocks-a4-p06-c01": {
+      "name": "Arms Industry",
+      "sourcePass": "EN/ES p6 tile1; four single spaces, center counter storage excluded from movement, four entrances, Black ICE6 at V5, fragmentsV2/V3/V4/V6. All six crop corners checked; teal inner glyphs are artwork. Funded counter handlers execute; T-RULES-031 reserve shortage stays provisional.",
+      "edgesOpen": 4,
+      "nonPlayableZoneIds": [
+        "h1",
+        "h4",
+        "h5"
+      ],
+      "spaces": [
+        {
+          "id": "upper-left",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "upper-right",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "left",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "hand",
+          "zoneIds": [
+            "h6"
+          ],
+          "capacity": 1,
+          "handSizeModifier": -1
+        }
+      ],
+      "iceFaces": [
+        6
+      ],
+      "iceVertex": 5,
+      "blackIce": true,
+      "bonusVertices": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "arrows": []
     }
   },
   "assetNames": {
@@ -70,7 +615,7 @@
     "sp-en-blocks-a4-p03-c02": "Central Core",
     "sp-en-blocks-a4-p03-c03": "Pink District",
     "sp-en-blocks-a4-p04-c01": "Yakuza",
-    "sp-en-blocks-a4-p04-c02": "Portal Scandal",
+    "sp-en-blocks-a4-p04-c02": "Corporate Scandal",
     "sp-en-blocks-a4-p04-c03": "Black Clinic",
     "sp-en-blocks-a4-p05-c01": "Engineering War",
     "sp-en-blocks-a4-p07-c01": "Armament Research",

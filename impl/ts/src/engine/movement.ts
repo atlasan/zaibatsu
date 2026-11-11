@@ -1,20 +1,23 @@
+import {arrowAllowsStep} from "./space-arrows.ts";
 // Movement resolution: step budgets, activation gating, occupancy, and hex
 // (block-to-block) execution. Mirrors impl/go/internal/engine/movement.go. See
 // DOCS/rules/speedrunners/board-and-movement.md ("SR-MOVE-001") and DOCS/domain-model.md.
 //
-// SCOPE (Phase 1): pawn positions, space occupancy, the numeric step budget for
+// Shared movement primitives; source die decisions live in movement-choice.ts.
+// Pawn positions, space occupancy, the numeric step budget for
 // every movement type (fixed / d6 / 2d6 / hex) including modifiers, activation
 // gating (card / once-per-turn / none), and execution of both space paths and
 // whole-block hex movement. Individual source records remain provisional until
 // transcribed, but the shared adjacency contract is live and mirror-tested.
 
+import {movementUsesTaken,spendMovementUse} from "./use-markers.ts";
 import { neighbor, opposite, type Coord, type Cybernet } from "../domain/hex.ts";
 import { UNLIMITED, blockSpace, spaceCapacityFor, type PawnOnBoard } from "../domain/pawn_board.ts";
 import {
   blockById,
   pawnById,
   playerById,
-  type Attachment,
+  type Attach,
   type GameData,
   type GameState,
   type Movement,
@@ -29,6 +32,8 @@ export function movementUsedKey(pawnId: string, movementKey = "base"): string {
 }
 
 export interface MovementOption {
+  attachmentIndex?:number;
+  grantIndex?:number;
   key: string;
   movement: Movement;
   stealth: boolean;
@@ -43,20 +48,20 @@ export interface MovementExecutionResult {
   stealth: boolean;
 }
 
-function grantsMove(att: Attachment | undefined): boolean {
+function grantsMove(att: Attach | undefined): boolean {
   return !!att?.grants?.includes("move");
 }
 
-function removesMove(att: Attachment | undefined): boolean {
+function removesMove(att: Attach | undefined): boolean {
   return !!att?.removes?.includes("move");
 }
 
-function grantActivation(att: Attachment | undefined): Movement["activation"] {
+function grantActivation(att: Attach | undefined): Movement["activation"] {
   const activation = att?.abilityUses?.find((use) => use.ability === "move")?.activation;
   return activation === "once-per-turn" ? "once-per-turn" : "card";
 }
 
-function grantUseRule(att: Attachment | undefined): Pick<MovementOption, "perTurnUses" | "rolledPerTurn"> {
+function grantUseRule(att: Attach | undefined): Pick<MovementOption, "perTurnUses" | "rolledPerTurn"> {
   const use = att?.abilityUses?.find((entry) => entry.ability === "move");
   if (use?.perTurn && use.perTurn >= 1) return { perTurnUses: use.perTurn };
   if (use?.dice === "d6") return { rolledPerTurn: "d6" };
@@ -85,9 +90,11 @@ export function effectiveMovementOptions(
   pawn: Pawn,
   atts: { cardId: string }[] | undefined,
 ): MovementOption[] {
+  const attachmentIndices:number[]=[];
   const attached = (atts ?? [])
-    .map((att) => gd.cards.find((card) => card.id === att.cardId)?.attach)
-    .filter((attach): attach is Attachment => !!attach);
+    .map((att,index) => {const spec=gd.cards.find((card) => card.id === att.cardId)?.attach;if(spec) attachmentIndices.push(index);return spec;})
+    .filter((attach): attach is Attach => !!attach);
+  if(gd.regressionFixture!=="provisional-v1" && pawn.movement.activation==="none") return [];
   if (attached.some(removesMove)) return [];
 
   const options: MovementOption[] = [{ key: "base", movement: pawn.movement, stealth: false }];
@@ -99,6 +106,7 @@ export function effectiveMovementOptions(
       }
       options.push({
         key: `${attachIndex}:${grantIndex}`,
+        ...(gd.regressionFixture!=="provisional-v1"?{attachmentIndex:attachmentIndices[attachIndex]!,grantIndex}:{}),
         movement: movementFromGrant(grant.amount, grant.type, grantActivation(attach)),
         stealth: !!(grant.stealth || attach.grantsStealth),
         ...grantUseRule(attach),
@@ -127,6 +135,11 @@ export function canActivateMovementOption(
   pawnId: string,
   option: MovementOption,
 ): string | undefined {
+  if(s.rulesVersion) {
+    if(option.rolledPerTurn) return "unsupported source rolled movement-use budget";
+    const limit=option.perTurnUses??(option.movement.activation==="once-per-turn"?1:undefined);
+    if(limit!==undefined) return movementUsesTaken(s,pawnId,option.attachmentIndex,option.grantIndex)<limit?undefined:"the physical movement ability is already spent this turn";
+  }
   if (option.perTurnUses !== undefined) {
     return grantedMovementUsesRemaining(s, p, pawnId, option) > 0
       ? undefined
@@ -219,12 +232,13 @@ function grantedMovementUsesRemaining(
   return budget - used;
 }
 
-function consumeGrantedMovementUse(
+export function consumeGrantedMovementUse(
   s: GameState,
   p: Player,
   pawnId: string,
   option: MovementOption,
 ): void {
+  if(s.rulesVersion) {spendMovementUse(s,pawnId,option.attachmentIndex,option.grantIndex);return;}
   const budget = ensureGrantedMovementBudget(s, p, pawnId, option);
   for (let slot = 0; slot < budget; slot++) {
     const key = grantedMovementUseKey(pawnId, option.key, slot);
@@ -297,6 +311,15 @@ export interface SpaceRef {
   spaceId: string;
 }
 
+/** Entry restrictions apply to movement, not occupancy or explicit placement. */
+export function movementEntryError(gd:GameData,cy:Cybernet,pawnId:string,from:Coord,to:Coord):string|undefined {
+  if(gd.regressionFixture!=="provisional-v1" && (pawnById(gd,pawnId)?.movement.activation==="none" || cy.pawnById(pawnId)?.attachments?.some(att=>gd.cards.find(card=>card.id===att.cardId)?.attach?.removes?.includes("move")))) return "pawn cannot move";
+  if(from.q===to.q && from.r===to.r) return undefined;
+  const placed=cy.at(to),block=placed && blockById(gd,placed.blockId);
+  if(block?.isCentralCore && cy.pawnById(pawnId)?.attachments?.some(att=>gd.cards.find(card=>card.id===att.cardId)?.attach?.forbiddenDestinations?.includes("central-core"))) return `pawn "${pawnId}" cannot enter Central Core`;
+  return undefined;
+}
+
 /**
  * The spaces a pawn on (coord, spaceId) may step to in one step: intra-block
  * neighbours (space.neighbors) plus cross-edge boundary hops into an adjacent
@@ -310,6 +333,7 @@ export function stepTargets(
   cy: Cybernet,
   coord: Coord,
   spaceId: string,
+  pawnId?: string,
 ): SpaceRef[] {
   const pb = cy.at(coord);
   if (!pb) return [];
@@ -319,14 +343,14 @@ export function stepTargets(
   if (!sp) return [];
   const out: SpaceRef[] = [];
   for (const nb of sp.neighbors ?? []) {
-    if (blockSpace(block, nb)) out.push({ coord, spaceId: nb });
+    if (blockSpace(block, nb) && (gd.regressionFixture==="provisional-v1" || ignoresDirectionArrows(gd,cy.pawnById(pawnId??"")) || arrowAllowsStep(block,spaceId,nb))) out.push({ coord, spaceId: nb });
   }
   const edges = block.edges;
   const bounds = block.boundarySpaces;
   if (bounds && bounds.length === 6 && edges && edges.length === 6) {
     for (let e = 0; e < 6; e++) {
       if (!edges[e] || !(bounds[e] ?? []).includes(spaceId)) continue;
-      if (sp.direction !== undefined && sp.direction !== e) continue; // arrow restricts exit edge
+      if (sp.direction !== undefined && sp.direction !== e && !ignoresDirectionArrows(gd, cy.pawnById(pawnId ?? ""))) continue;
       const gridDir = (e + pb.rotation) % 6;
       const ncoord = neighbor(coord, gridDir);
       const npb = cy.at(ncoord);
@@ -340,7 +364,15 @@ export function stepTargets(
       for (const nsid of nblock.boundarySpaces[ne] ?? []) out.push({ coord: ncoord, spaceId: nsid });
     }
   }
-  return out;
+  return out.filter(target=>!pawnId || !movementEntryError(gd,cy,pawnId,coord,target.coord));
+}
+
+export function ignoresDirectionArrows(gd: GameData, pawn: PawnOnBoard | undefined): boolean {
+  return !!pawn?.attachments?.some(att => gd.cards.find(card => card.id === att.cardId)?.attach?.ignoresDirectionArrows);
+}
+
+export function movementStepModifier(gd: GameData, pawn: PawnOnBoard): number {
+  return (pawn.attachments ?? []).reduce((sum, att) => sum + (gd.cards.find(card => card.id === att.cardId)?.attach?.movementModifier ?? 0), 0);
 }
 
 /**
@@ -357,7 +389,7 @@ export function moveStep(
 ): PawnOnBoard {
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
-  const reachable = stepTargets(gd, s.cybernet, pob.coord, pob.spaceId).some(
+  const reachable = stepTargets(gd, s.cybernet, pob.coord, pob.spaceId, pawnId).some(
     (t) => t.coord.q === target.q && t.coord.r === target.r && t.spaceId === targetSpaceId,
   );
   if (!reachable) {
@@ -385,12 +417,15 @@ function validatePath(
 ): ValidatedPath {
   const pob = s.cybernet.pawnById(pawnId);
   if (!pob) throw new Error(`pawn "${pawnId}" is not on the board`);
-  if (path.length === 0) throw new Error("empty movement path");
+  if (path.length === 0) {
+    if(gd.regressionFixture==="provisional-v1") throw new Error("empty movement path");
+    const full=canEndOn(gd,s.cybernet,pob.coord,pob.spaceId,pawnId);if(full) throw new Error(full);
+  }
   let coord = pob.coord;
   let spaceId = pob.spaceId;
   for (let i = 0; i < path.length; i++) {
     const step = path[i]!;
-    const reachable = stepTargets(gd, s.cybernet, coord, spaceId).some(
+    const reachable = stepTargets(gd, s.cybernet, coord, spaceId, pawnId).some(
       (target) => target.coord.q === step.coord.q && target.coord.r === step.coord.r && target.spaceId === step.spaceId,
     );
     if (!reachable) throw new Error(`step ${i + 1} to space "${step.spaceId}" is not adjacent`);
@@ -415,7 +450,13 @@ export function movePathWithBudget(
   pawnId: string,
   path: SpaceRef[],
   budget: number,
+  applyModifiers = true,
 ): PawnOnBoard {
+  const pawn = s.cybernet.pawnById(pawnId);
+  if(gd.regressionFixture!=="provisional-v1" && pawn && pawnById(gd,pawnId)?.movement.activation==="none") throw new Error("pawn cannot move");
+  if (!pawn || (pawn.attachments ?? []).some(att => gd.cards.find(card => card.id === att.cardId)?.attach?.removes?.includes("move"))) throw new Error("pawn cannot move");
+  if (applyModifiers) budget = Math.max(0, budget + movementStepModifier(gd, pawn));
+  budget=Math.max(0,budget);
   const result = validatePath(s, gd, pawnId, path);
   if (path.length > budget) throw new Error(`path of ${path.length} steps exceeds the movement budget of ${budget}`);
   result.pawn.coord = result.coord;
@@ -452,20 +493,22 @@ export function moveStepsWithOption(
   const pawn = pawnById(gd, pawnId);
   if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
   const option = movementOptionAt(gd, pawn, pob.attachments, movementIndex);
+  if(gd.regressionFixture!=="provisional-v1" && ["d6","2d6"].includes(option.movement.type)) throw new Error("roll movement before choosing its path");
+  if(gd.regressionFixture!=="provisional-v1" && option.rolledPerTurn) throw new Error("unsupported source rolled movement-use budget");
   if (option.movement.type === "hex") throw new Error(`pawn "${pawnId}" movement option "${option.key}" is hex; use moveHex`);
   const owner = playerById(s, pob.ownerId);
   if (!owner) throw new Error(`pawn "${pawnId}" has no controlling player`);
   const gate = canActivateMovementOption(s, owner, pawnId, option);
   if (gate) throw new Error(gate);
-  // Validate before resolving dice, so an illegal path never consumes RNG.
+  // Frozen dice validate here before RNG; source dice use the committed decision API.
   validatePath(s, gd, pawnId, path);
   // Then resolve the budget (d6/2d6 draw the RNG) and apply the walk.
-  const budget = resolveSteps(option.movement, s.rng, 0);
-  movePathWithBudget(s, gd, pawnId, path, budget);
+  const budget = resolveSteps(option.movement, s.rng, movementStepModifier(gd, pob));
+  movePathWithBudget(s, gd, pawnId, path, budget, false);
   if (option.perTurnUses !== undefined || option.rolledPerTurn === "d6") {
     consumeGrantedMovementUse(s, owner, pawnId, option);
   } else if (option.movement.activation === "once-per-turn") {
-    owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
+    if(s.rulesVersion) spendMovementUse(s,pawnId,option.attachmentIndex,option.grantIndex);else owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return { pawn: pob, movementIndex, movementKey: option.key, stealth: option.stealth };
 }
@@ -499,6 +542,7 @@ export function moveHexWithOption(
   const pawn = pawnById(gd, pawnId);
   if (!pawn) throw new Error(`unknown pawn "${pawnId}"`);
   const option = movementOptionAt(gd, pawn, pob.attachments, movementIndex);
+  if(gd.regressionFixture!=="provisional-v1" && option.rolledPerTurn) throw new Error("unsupported source rolled movement-use budget");
   if (option.movement.type !== "hex") {
     throw new Error(`pawn "${pawnId}" movement option "${option.key}" is not hex`);
   }
@@ -511,6 +555,7 @@ export function moveHexWithOption(
   if (!s.cybernet.at(target)) {
     throw new Error(`no block at (${target.q},${target.r}) to move onto`);
   }
+  const restriction=movementEntryError(gd,s.cybernet,pawnId,pob.coord,target);if(restriction) throw new Error(restriction);
   const landing = firstOpenSpace(gd, s.cybernet, target, pawnId);
   if (!landing) throw new Error(`no open space to land on at (${target.q},${target.r})`);
 
@@ -519,7 +564,7 @@ export function moveHexWithOption(
   if (option.perTurnUses !== undefined || option.rolledPerTurn === "d6") {
     consumeGrantedMovementUse(s, owner, pawnId, option);
   } else if (option.movement.activation === "once-per-turn") {
-    owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
+    if(s.rulesVersion) spendMovementUse(s,pawnId,option.attachmentIndex,option.grantIndex);else owner.oncePerTurnUsed[movementUsedKey(pawnId, option.key)] = true;
   }
   return { pawn: pob, movementIndex, movementKey: option.key, stealth: option.stealth };
 }
