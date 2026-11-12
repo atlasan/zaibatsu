@@ -104,6 +104,15 @@
         "kind": "pawn",
         "id": "cleaner-a"
       }
+    },
+    {
+      "id": "drone-hulk-control",
+      "name": "Drone Hulk",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "drone-hulk"
+      }
     }
   ]
 }

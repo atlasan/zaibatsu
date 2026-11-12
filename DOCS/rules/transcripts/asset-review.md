@@ -4288,10 +4288,10 @@ Details and symbols:
 
 - Source: `sp-en-blocks-a4`, PDF page 7; asset sp-en-blocks-a4-p07-c01.
 - Status: visual-reviewed; canonical promotion pending.
-- Description: Large Drone Hulk pawn space plus smaller circular space.
+- Description: Large Drone Hulk pawn space plus a smaller hand-size −1 circle.
 - Category: information-block; class: none printed.
-- Actions: On gaining control, place Drone Hulk under your control.
-- Specific instructions: On gaining control, place Drone Hulk under your control.
+- Actions: On gaining control, place the one Drone Hulk on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-024.
+- Specific instructions: On gaining control, place the one Drone Hulk on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-024.
 
 Printed gameplay/assembly text (normalized):
 
@@ -4302,11 +4302,10 @@ Place the Drone Hulk in this block under your control.
 Details and symbols:
 
 - Under-control effect badge.
-- Black ICE corner: face 6.
-
-Remaining interpretation/precision checks:
-
-- Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+- Black ICE corner: face 6 at V2.
+- H1 and h2 are the unlimited circular Drone Hulk home. H5 is hand-size −1. H3, h4, h6 and h7 are artwork and are not spaces.
+- Entrances are E3 (hand) and E6 (home).
+- No bonus fragment. The cyan plus inside the ring, the title, 07, warning and CYBERDYNE logo are artwork.
 
 ## sp-en-blocks-a4-p07-c02 - Cleaner (C)
 
@@ -4691,8 +4690,8 @@ Details and symbols:
 - Status: visual-reviewed; canonical promotion pending.
 - Description: Large heavy drone.
 - Category: pawn-control; class: Drone.
-- Actions: Card-activated Delete: 4 skulls.; Once-per-turn free movement: 1 hex.; Activate Delete with an action card; move one hex once per turn as a free action.
-- Specific instructions: Activate Delete with an action card; move one hex once per turn as a free action.
+- Actions: Card-activated Delete: 4 skulls.; Once-per-turn free movement: 1 hex.; Activate Delete with an action card; move one hex once per turn as a free action. The dedicated EN/ES crop pass is SR-PAWN-011.
+- Specific instructions: Activate Delete with an action card; move one hex once per turn as a free action. Paid card movement stays available after the native marker is spent. The dedicated EN/ES crop pass is SR-PAWN-011.
 
 Details and symbols:
 

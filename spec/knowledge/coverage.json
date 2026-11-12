@@ -4380,18 +4380,37 @@
       "kind": "block",
       "source": "sp-en-blocks-a4",
       "locator": "PDF page 7; asset sp-en-blocks-a4-p07-c01",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "black-ice",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/armament-research",
+        "pawn/drone-hulk",
+        "control-card/drone-hulk-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/armament_research_test.go",
+            "contains": "TestArmamentResearchBilingualGeometryCaptureAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/armament-research.test.ts",
+            "contains": "Armament Research: bilingual geometry, capture and shared byte evidence"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-blocks-a4-p07-c02",
@@ -4907,18 +4926,34 @@
       "kind": "control-card",
       "source": "sp-en-control-cards",
       "locator": "PDF page 2; asset sp-en-control-cards-p02-c05",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "once-per-turn-hex-movement",
+        "card-activated-four-skull-delete",
+        "printed-defense-row",
+        "module-slot"
+      ],
+      "records": [
+        "pawn/drone-hulk",
+        "control-card/drone-hulk-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/armament_research_test.go",
+            "contains": "TestArmamentResearchHexMovementAndFourSkullDelete"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/armament-research.test.ts",
+            "contains": "Armament Research: once-per-turn hex movement is separate from paid card steps and four-skull Delete"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-control-cards-p02-c06",
@@ -7064,6 +7099,45 @@
       "gaps": []
     },
     {
+      "id": "rule/SR-BOARD-024",
+      "title": "Armament Research controlled placement",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-blocks-a4",
+      "locator": "p.7 tile1; cross-check `sp-es-blocks-a4` p.7 tile1; bilingual rulebooks pp.12–14, 31, 33, 35, 38; Drone Hulk under SR-PAWN-011.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "two-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "black-ice",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/armament-research",
+        "pawn/drone-hulk",
+        "control-card/drone-hulk-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/armament_research_test.go",
+            "contains": "TestArmamentResearchBilingualGeometryCaptureAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/armament-research.test.ts",
+            "contains": "Armament Research: bilingual geometry, capture and shared byte evidence"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
       "id": "rule/SR-PAWN-001",
       "title": "Pawn state and control",
       "game": "speedrunners",
@@ -8235,6 +8309,42 @@
           {
             "path": "impl/ts/test/cleaner-a.test.ts",
             "contains": "Cleaner A: card movement and two-skull Delete spend a card"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-011",
+      "title": "Drone Hulk pawn and control card",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-control-cards",
+      "locator": "p.2 cell5; cross-check `sp-es-control-cards` p.2 center card (Drone Hulk); `sp-en-pawns` p.2 folded unit1. Bilingual rulebooks pp.18, 20–26, 30, 33, 35, 38.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "once-per-turn-hex-movement",
+        "card-activated-four-skull-delete",
+        "printed-defense-row",
+        "module-slot"
+      ],
+      "records": [
+        "pawn/drone-hulk",
+        "control-card/drone-hulk-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/armament_research_test.go",
+            "contains": "TestArmamentResearchHexMovementAndFourSkullDelete"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/armament-research.test.ts",
+            "contains": "Armament Research: once-per-turn hex movement is separate from paid card steps and four-skull Delete"
           }
         ]
       },

@@ -6,4 +6,4 @@ Cleaner (A) places its one pawn and takes its one control card through the exist
 
 **Why:** The printed instruction and the Spanish control-card line are the same capture handler already used by Cleaner B. In-space white dice are defense, and the corner die is high ICE, so no new mechanic is required.
 
-**How to apply:** Keep the record non-provisional. Do not invent a bonus fragment from the sheet BONUS legend. Current source protocol/checksum is v22/cleaner-a-placement. The next printed tile is Armament Research. No official mode is accepted.
+**How to apply:** Keep the record non-provisional. Do not invent a bonus fragment from the sheet BONUS legend. That delivery used source protocol v22/cleaner-a-placement. Armament Research is now SR-BOARD-024. No official mode is accepted.

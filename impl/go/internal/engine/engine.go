@@ -439,7 +439,7 @@ func NewGame(cfg Config) (*domain.GameState, error) {
 	}
 
 	if cfg.Data.RegressionFixture == "" {
-		state.RulesVersion = "source-v22"
+		state.RulesVersion = "source-v23"
 		if mode.BonusCounterSupply != nil {
 			n := *mode.BonusCounterSupply
 			state.BonusCounterSupply = &n

@@ -1,12 +1,12 @@
 # Remaining work to complete Zaibatsu
 
-Updated 2026-11-12 after the Cleaner A controlled-placement delivery. This is a completion-gap snapshot, not a new rules authority. The ordered live list remains [tasks/BACKLOG.md](../tasks/BACKLOG.md); source interpretations belong to the [rule modules](rules/README.md), and mirrored delivery evidence belongs to [parity](parity.md).
+Updated 2026-11-12 after the Armament Research and Drone Hulk delivery. This is a completion-gap snapshot, not a new rules authority. The ordered live list remains [tasks/BACKLOG.md](../tasks/BACKLOG.md); source interpretations belong to the [rule modules](rules/README.md), and mirrored delivery evidence belongs to [parity](parity.md).
 
 ## Current boundary
 
 **No complete official mode is accepted yet.** The executable local quick match and focused scenarios prove substantial engine behavior, but do not prove all printed content, official setup or every end condition. Keep the original target: Speedrunners → Shadowraiders → Total War → Strategic Alliance → Cyber-Revolution → Chaos → Outbreak → Total War–Chaos.
 
-The current checks pass: 529 Bun tests, all Go packages, TypeScript checking, 70 browser tests and six Python artifact tests. Documentation/spec/artifact checks verify 55 local source originals and 22 unchanged frozen regression files. The coverage checklist has 328 rows, of which 78 are both source-verified and implemented. Rows include components and rules; 78 is not a number of complete components or modes. Knowledge has 385 entries and 2549 relations. The mixed corpus has 22 block definitions, 13 pawns and 11 control cards; those counts are not physical completeness.
+The current checks pass: 539 Bun tests, all Go packages, TypeScript checking, 72 browser tests and six Python artifact tests. Documentation/spec/artifact checks verify 55 local source originals and 22 unchanged frozen regression files. The coverage checklist has 330 rows, of which 82 are both source-verified and implemented. Rows include components and rules; 82 is not a number of complete components or modes. Knowledge has 387 entries and 2600 relations. The mixed corpus has 23 block definitions, 14 pawns and 12 control cards; those counts are not physical completeness.
 
 The local verification recipe in `.github/localonly_workflows/verify.yml` runs without ignored primary PDFs, generated page renders or local OCR caches. GitHub Actions does not run it. Exact transcript page-render links are optional local evidence; ordinary missing documents and anchors still fail. A local source audit can require originals with `bun tools/verify-artifacts.ts --require-originals`. Frozen regression JSON is explicitly tracked and its original bytes remain protected.
 
@@ -18,11 +18,11 @@ Physical targets from [inventory](../spec/inventory.json): 24 blocks including C
 
 | Printed English sheet entries | Implemented | Partial | Planned |
 |---|---:|---:|---:|
-| Blocks: 24 | 12 | 6 | 6 |
-| Control cards: 18 | 9 | 2 | 7 |
+| Blocks: 24 | 13 | 6 | 5 |
+| Control cards: 18 | 10 | 2 | 6 |
 | Action-card cells/copies: 54 | 16 | 10 | 28 |
 
-These are printed asset rows, not counts of unique executable definitions. The shared mixed corpus currently has 22 block definitions, 13 pawn definitions, 11 control-card definitions and 32 action-card definitions representing 48 declared copies. Provisional pilots and legacy aliases remain, so these totals cannot be subtracted directly from the physical inventory to establish completion. Reconcile actual copies, aliases and classes before accepting the official deck/bundle.
+These are printed asset rows, not counts of unique executable definitions. The shared mixed corpus currently has 23 block definitions, 14 pawn definitions, 12 control-card definitions and 32 action-card definitions representing 48 declared copies. Provisional pilots and legacy aliases remain, so these totals cannot be subtracted directly from the physical inventory to establish completion. Reconcile actual copies, aliases and classes before accepting the official deck/bundle.
 
 ### Blocks still partial or planned
 
@@ -34,18 +34,17 @@ These are printed asset rows, not counts of unique executable definitions. The s
 | Electromagnetic Pulse | sp-en-blocks-a4-p02-c02 | partial |
 | Copyleft | sp-en-blocks-a4-p02-c03 | partial |
 | Arms Industry | sp-en-blocks-a4-p06-c01 | partial |
-| Armament Research | sp-en-blocks-a4-p07-c01 | planned |
 | Cleaner (C) | sp-en-blocks-a4-p07-c02 | planned |
 | Cleaner (D) | sp-en-blocks-a4-p07-c03 | planned |
 | Freeside | sp-en-blocks-a4-p08-c01 | planned |
 | Google ex Machina | sp-en-blocks-a4-p08-c02 | planned |
 | Financial Sector | sp-en-blocks-a4-p08-c03 | planned |
 
-Cleaner (A) and Cleaner (B) are implemented. Continue printed order with p7 tile1 Armament Research, then Cleaner C/D, Freeside, Google ex Machina and Financial Sector. Independently settle the six partial blocks. Arms Industry's funded placement/collection is implemented in both engines and sandbox, but reserve exhaustion still gates its full acceptance.
+Cleaner (A), Cleaner (B) and Armament Research are implemented. Continue printed order with p7 tile2 Cleaner C, then Cleaner D, Freeside, Google ex Machina and Financial Sector. Independently settle the six partial blocks. Arms Industry's funded placement/collection is implemented in both engines and sandbox, but reserve exhaustion still gates its full acceptance.
 
 ### Pawn/control-card work
 
-The four starters, Drone MK-2, Drone Probe, Drone Turret, Cleaner A and Cleaner B have accepted native records. Idoru/Gynoid remain partial; additional pilot pawn definitions do not establish official physical coverage. The following control-card rows still need acceptance, including the pawn or block behavior they own:
+The four starters, Drone MK-2, Drone Probe, Drone Turret, Drone Hulk, Cleaner A and Cleaner B have accepted native records. Idoru/Gynoid remain partial; additional pilot pawn definitions do not establish official physical coverage. The following control-card rows still need acceptance, including the pawn or block behavior they own:
 
 | Printed title | Primary English locator | Coverage |
 |---|---|---|
@@ -55,11 +54,10 @@ The four starters, Drone MK-2, Drone Probe, Drone Turret, Cleaner A and Cleaner 
 | Cracker | sp-en-control-cards-p02-c01 | planned |
 | Idoru | sp-en-control-cards-p02-c02 | partial |
 | Gynoid | sp-en-control-cards-p02-c03 | partial |
-| Drone Hulk | sp-en-control-cards-p02-c05 | planned |
 | Automata | sp-en-control-cards-p02-c06 | planned |
 | Google ex Machina | sp-en-control-cards-p02-c09 | planned |
 
-Financial Sector's hand-size rule and Google ex Machina's deck search/selection/shuffle remain explicit missing families. Cleaner variants, Cracker, Drone Hulk and Automata need their exact printed attributes, costs, copies, special effects and integration tests. Verify the correct pawn/control-card matching rather than reusing a generic pilot definition.
+Financial Sector's hand-size rule and Google ex Machina's deck search/selection/shuffle remain explicit missing families. Cleaner C and D, Cracker and Automata need their exact printed attributes, costs, copies, special effects and integration tests. Verify the correct pawn/control-card matching rather than reusing a generic pilot definition.
 
 ### Action deck and shared mechanics
 

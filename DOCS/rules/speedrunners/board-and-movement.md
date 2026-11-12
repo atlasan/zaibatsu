@@ -327,3 +327,16 @@ The two white faces inside spaces are defense, not space ICE. The upper medallio
 English says “Place the Cleaner A in this block under your control.” Spanish says to place the Cleaner A pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler: placement alone leaves the one physical pawn in reserve and its one control card common; obtaining control places that pawn on the matching home and takes the card. Repeat takeover relocates the same piece, discards and refunds attachments only when the pawn’s controller changes, and keeps them when the same controller places it again. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
 
 Eight equivalent tests in each mirror and golden/cleaner-a.json assert the geometry, Search then capture, both defense faces, both arrow directions, attachment cleanup, rejection/RNG and victory timing. Sandbox placement, capture, modifiers, replay, Undo and reset, and editor save/load of the target, cover T-RULES-049. Full corpus, setup and modes remain open.
+
+## SR-BOARD-024 — Armament Research controlled placement
+
+- **Source:** `sp-en-blocks-a4` — p.7 tile1; cross-check `sp-es-blocks-a4` p.7 tile1; bilingual rulebooks pp.12–14, 31, 33, 35, 38; Drone Hulk under SR-PAWN-011.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** Armament Research has two playable spaces. H1 and h2 form one unlimited circular Drone Hulk pawn home. H5 is a single normal circle whose modifier is hand-size −1 while a pawn stands there. H3 is the warning and banner edge, h4 is the instruction and CYBERDYNE logo, h6 is the title and 07, and h7 is the title arc; none of those four zones is a space. Only E3 and E6 are entrances, so the hand faces one direction and the home faces the opposite direction. Own ICE is one black die, face 6, at V2. No bonus fragment is printed. The title, 07, lightning and the cyan plus inside the ring are artwork.
+
+The hand glyph is a card with a minus bar, the same hand-size −1 already used by other tiles. It changes only the occupant's hand profile. Standing on the home does not.
+
+English says “Place the Drone Hulk in this block under your control.” Spanish says to place the Drone Hulk pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler: placement alone leaves the one physical pawn in reserve and its one control card common; obtaining control places that pawn on the matching home and takes the card. Repeat takeover relocates the same piece, discards and refunds attachments only when the pawn’s controller changes, and keeps them when the same controller places it again. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
+
+Eight equivalent tests in each mirror and golden/armament-research.json assert the geometry, the two legal rotations, Search then capture, the hand-size space, rejection/RNG and victory timing. Sandbox placement, capture, the hand limit, the once-per-turn hex move, replay, Undo and reset, and editor save/load of the target, cover T-RULES-050. Full corpus, setup and modes remain open.

@@ -1173,6 +1173,11 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "block/armament-research",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "block/arms-industry",
       "to": "game/speedrunners"
     },
@@ -1334,6 +1339,11 @@
     {
       "type": "belongs-to-expansion",
       "from": "pawn/cracker",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/drone-hulk",
       "to": "game/speedrunners"
     },
     {
@@ -1901,6 +1911,12 @@
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 7, tile 1 (Armament Research) <-> pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 1, tile 1 (Toyeku Company) <-> page 1, tile 1 (Toyeku Company)"
     },
@@ -2005,6 +2021,12 @@
       "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 6, tile 3 (Cleaner A) <-> page 6, tile 3 (Cleaner A)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 7, tile 1 (Armament Research) <-> page 7, tile 1 (Armament Research)"
     },
     {
       "type": "cross-checks-with",
@@ -2122,6 +2144,12 @@
     },
     {
       "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 7, tile 1 (Armament Research) <-> pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
       "locator": "page 1, card 3 (Cleaner A) <-> page 1, folded pawn unit 4; opposed faces assemble one Cleaner A"
@@ -2149,6 +2177,12 @@
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
       "locator": "page 2, card 4 (Drone MK-2) <-> page 2, folded pawn unit2; opposed front/back faces assemble one Drone MK-2"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, card 5 (Drone Hulk) <-> page 2, folded pawn unit 1; opposed faces assemble one Drone Hulk"
     },
     {
       "type": "cross-checks-with",
@@ -2191,6 +2225,12 @@
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-rulebook",
       "locator": "page 2, card 4 (Drone MK-2) <-> pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 2, card 5 (Drone Hulk) <-> pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"
     },
     {
       "type": "cross-checks-with",
@@ -2262,6 +2302,12 @@
       "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-es-control-cards",
+      "locator": "page 2, card 5 (Drone Hulk) <-> page 2, center card (Drone Hulk)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
       "locator": "page 2, card 7 (Drone Probe) <-> page 2, card 7 (Drone Probe)"
     },
     {
@@ -2299,6 +2345,12 @@
       "from": "source/sp-en-control-cards",
       "to": "source/sp-es-rulebook",
       "locator": "page 2, card 4 (Drone MK-2) <-> pages 18, 20–26, 30, 33, 35, 38 (physical markers, native attributes, movement/activation, cleanup, costs and symbols)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 2, card 5 (Drone Hulk) <-> pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"
     },
     {
       "type": "cross-checks-with",
@@ -2467,6 +2519,11 @@
     },
     {
       "type": "depicted-by-asset",
+      "from": "block/armament-research",
+      "to": "asset/sp-en-blocks-a4-p07-c01"
+    },
+    {
+      "type": "depicted-by-asset",
       "from": "block/arms-industry",
       "to": "asset/sp-en-blocks-a4-p06-c01"
     },
@@ -2559,6 +2616,11 @@
       "type": "depicted-by-asset",
       "from": "pawn/cleaner-b",
       "to": "asset/sp-en-control-cards-p01-c06"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/drone-hulk",
+      "to": "asset/sp-en-control-cards-p02-c05"
     },
     {
       "type": "depicted-by-asset",
@@ -6902,6 +6964,76 @@
     },
     {
       "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/armament-research",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/arms-industry",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -8693,6 +8825,71 @@
     {
       "type": "documented-by",
       "from": "pawn/cracker",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/drone-hulk",
       "to": "doc/readme.md"
     },
     {
@@ -10089,6 +10286,11 @@
       "type": "drafted-from-asset",
       "from": "block/antro",
       "to": "asset/sp-en-blocks-a4-p02-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/armament-research",
+      "to": "asset/sp-en-blocks-a4-p07-c01"
     },
     {
       "type": "drafted-from-asset",
@@ -11851,6 +12053,35 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "block/armament-research",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 7, tile 1 (Armament Research)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/armament-research",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/armament-research",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/armament-research",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 7, tile 1 (Armament Research)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/armament-research",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "block/arms-industry",
       "to": "source/sp-en-blocks-a4",
       "locator": "page 6, tile 1 (Arms Industry)"
@@ -12558,6 +12789,36 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "pawn/drone-hulk",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 2, card 5 (Drone Hulk)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-hulk",
+      "to": "source/sp-en-pawns",
+      "locator": "page 2, folded pawn unit 1; opposed faces assemble one Drone Hulk"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-hulk",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-hulk",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 2, center card (Drone Hulk)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/drone-hulk",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "pawn/drone-mk-2",
       "to": "source/sp-en-control-cards",
       "locator": "page 2, card 4 (Drone MK-2)"
@@ -13083,6 +13344,12 @@
     },
     {
       "type": "verified-by-provenance",
+      "from": "block/armament-research",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
       "from": "block/arms-industry",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
@@ -13204,6 +13471,12 @@
     {
       "type": "verified-by-provenance",
       "from": "pawn/cracker",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/drone-hulk",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },

@@ -2473,6 +2473,92 @@
       "assetRefs": [
         "sp-en-blocks-a4-p06-c03"
       ]
+    },
+    {
+      "id": "armament-research",
+      "name": "Armament Research",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "black",
+      "blackIce": true,
+      "iceFaces": [
+        6
+      ],
+      "edges": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "boundarySpaces": [
+        [],
+        [],
+        [
+          "hand"
+        ],
+        [],
+        [],
+        [
+          "drone-hulk"
+        ]
+      ],
+      "bonusFragments": 0,
+      "bonusCorners": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h3",
+        "h4",
+        "h6",
+        "h7"
+      ],
+      "spaces": [
+        {
+          "id": "drone-hulk",
+          "type": "pawn",
+          "pawnId": "drone-hulk",
+          "zoneIds": [
+            "h1",
+            "h2"
+          ],
+          "capacity": "unlimited",
+          "displayShape": "circle",
+          "neighbors": [
+            "hand"
+          ]
+        },
+        {
+          "id": "hand",
+          "type": "normal",
+          "zoneIds": [
+            "h5"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "drone-hulk"
+          ],
+          "modifier": {
+            "kind": "hand-size",
+            "amount": -1
+          }
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "drone-hulk"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p07-c01"
+      ]
     }
   ]
 }

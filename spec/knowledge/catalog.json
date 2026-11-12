@@ -7722,6 +7722,53 @@
       }
     },
     {
+      "entryId": "block/armament-research",
+      "kind": "block",
+      "localId": "armament-research",
+      "title": "Armament Research",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "mechanic:block-control",
+        "resource:block",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/blocks.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/block-editor-plan.md",
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-blocks-a4-p07-c01"
+        ],
+        "sourceIds": [
+          "sp-en-blocks-a4",
+          "sp-en-blocks-letter",
+          "sp-en-rulebook",
+          "sp-es-blocks-a4",
+          "sp-es-rulebook"
+        ]
+      }
+    },
+    {
       "entryId": "block/arms-industry",
       "kind": "block",
       "localId": "arms-industry",
@@ -10272,6 +10319,51 @@
           "sp-en-control-cards",
           "sp-en-pawns",
           "sp-en-rulebook"
+        ]
+      }
+    },
+    {
+      "entryId": "pawn/drone-hulk",
+      "kind": "pawn",
+      "localId": "drone-hulk",
+      "title": "Drone Hulk",
+      "status": "verified",
+      "expansion": "speedrunners",
+      "tags": [
+        "game:speedrunners",
+        "resource:pawn",
+        "status:verified",
+        "workflow:canonical-data"
+      ],
+      "refs": {
+        "filePaths": [
+          "spec/data/speedrunners/pawns.json",
+          "spec/provenance/speedrunners.json"
+        ],
+        "docPaths": [
+          "DOCS/domain-model.md",
+          "DOCS/knowledge/catalog.md",
+          "DOCS/knowledge/INDEX.md",
+          "DOCS/rules/speedrunners.md",
+          "DOCS/rules/speedrunners/board-and-movement.md",
+          "DOCS/rules/speedrunners/pawns-abilities-and-cards.md",
+          "DOCS/rules/speedrunners/setup-and-victory.md",
+          "DOCS/rules/speedrunners/turns-and-actions.md",
+          "DOCS/rules/transcripts/speedrunners-components.en.md",
+          "DOCS/rules/transcripts/speedrunners-components.es.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.en.md",
+          "DOCS/rules/transcripts/speedrunners-rulebook.es.md",
+          "README.md"
+        ],
+        "assetIds": [
+          "sp-en-control-cards-p02-c05"
+        ],
+        "sourceIds": [
+          "sp-en-control-cards",
+          "sp-en-pawns",
+          "sp-en-rulebook",
+          "sp-es-control-cards",
+          "sp-es-rulebook"
         ]
       }
     },

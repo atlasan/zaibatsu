@@ -1046,6 +1046,33 @@
         {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 4; opposed faces assemble one Cleaner A"}
       ],
       "note": "The English and Spanish page-1 card 3 are the same physical Cleaner A control card. Capture moves it from common to the block controller; elimination returns the non-Reboot piece and card to reserve/common."
+    },
+    "block/armament-research": {
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 7, tile 1 (Armament Research)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 7, tile 1 (Armament Research)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, hand limit, control and cleanup)"}
+      ],
+      "note": "One physical Armament Research tile; language/layout sheets are aliases. Playable spaces are the unlimited Drone Hulk home covering h1/h2 and the h5 hand-size −1 circle. H3, h4, h6 and h7 are artwork and are not spaces. Entrances are E3 (hand) and E6 (home). Black ICE 6 is at V2; no bonus fragment is printed. The title, 07, warning, CYBERDYNE logo and the cyan plus inside the ring are artwork. Capture places the one physical Drone Hulk and its control card; tile placement alone does not."
+    },
+    "pawn/drone-hulk": {
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 2, card 5 (Drone Hulk)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 2, center card (Drone Hulk)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 2, folded pawn unit 1; opposed faces assemble one Drone Hulk"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20–26, 33, 35, 38 (defense, card activation, slots and symbols)"}
+      ],
+      "note": "One Drone Hulk pawn and one control card. Class Drone. One Module slot. Exact ICE face 5. Shielded defense 1–5 and vulnerable 6. Card-activated four-skull Delete and once-per-turn hex movement. Paid card movement remains available after the native marker is spent. No native Search, Icebreaker, Reboot or out-of-turn permission."
+    },
+    "control-card/drone-hulk-control": {
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 2, card 5 (Drone Hulk)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 2, center card (Drone Hulk)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 2, folded pawn unit 1; opposed faces assemble one Drone Hulk"}
+      ],
+      "note": "The English page-2 card 5 and the Spanish page-2 center card are the same physical Drone Hulk control card. Capture moves it from common to the block controller; elimination returns the non-Reboot piece and card to reserve/common."
     }
   }
 }

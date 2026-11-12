@@ -355,3 +355,12 @@ Eight equivalent tests in each mirror and golden/cleaner-b.json cover the printe
 - **Rule:** One physical Cleaner A pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and two skulls. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–3 and unshielded on 4–6. The English and Spanish cards agree. A defense space that names face 1 or face 2 overrides that face to unshielded while the pawn stands there. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed. The folded standee is the same one piece; its artwork does not add abilities.
 
 Eight equivalent tests in each mirror and golden/cleaner-a.json cover the printed pawn facts, card movement, two-skull Delete payment, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. Sandbox and editor paths use the existing engine options under SR-BOARD-023 and T-RULES-049. Full corpus and modes remain unaccepted.
+
+## SR-PAWN-011 — Drone Hulk pawn and control card
+
+- **Source:** `sp-en-control-cards` — p.2 cell5; cross-check `sp-es-control-cards` p.2 center card (Drone Hulk); `sp-en-pawns` p.2 folded unit1. Bilingual rulebooks pp.18, 20–26, 30, 33, 35, 38.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** One physical Drone Hulk pawn and one matching control card. Class is Drone. The slot is one Module. ICE is the exact face 5. Delete is card-activated and four skulls. Native movement is one hex, once per turn: the pawn moves onto one adjacent block and lands on that block’s first open space, ignoring the internal spaces of the block it leaves. A movement card is still offered after that native use and does not refresh the native marker. Defense is shielded on 1–5 and unshielded on 6. The English card, the Spanish center card and the folded standee agree. No native Search, Icebreaker, Reboot or any-player-turn permission is printed.
+
+Eight equivalent tests in each mirror and golden/armament-research.json cover the printed pawn facts, the once-per-turn hex separate from paid card steps, four-skull Delete payment, a rejected module-incompatible weapon, Module refund on takeover and retention for the same controller. Sandbox and editor paths use the existing engine options under SR-BOARD-024 and T-RULES-050. Full corpus and modes remain unaccepted.
