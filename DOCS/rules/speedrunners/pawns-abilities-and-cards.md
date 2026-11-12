@@ -346,3 +346,12 @@ Thirteen equivalent tests in each mirror and golden/drone-turret.json assert sou
 - **Rule:** One physical Cleaner B pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and one skull. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–4 and unshielded on 5–6. A defense space that names faces 1 and 2 overrides those faces to unshielded while the pawn stands there. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed. The folded standee is the same one piece; its artwork does not add abilities.
 
 Eight equivalent tests in each mirror and golden/cleaner-b.json cover the printed pawn facts, card movement, one-skull Delete payment, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. Sandbox and editor paths use the existing engine options under SR-BOARD-022 and T-RULES-048. Full corpus and modes remain unaccepted.
+
+## SR-PAWN-010 — Cleaner A pawn and control card
+
+- **Source:** `sp-en-control-cards` — p.1 cell3; cross-check `sp-es-control-cards` p.1 cell3; `sp-en-pawns` p.1 folded unit4. Bilingual rulebooks pp.18, 20, 24, 26, 30, 33, 35, 38.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** One physical Cleaner A pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and two skulls. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–3 and unshielded on 4–6. The English and Spanish cards agree. A defense space that names face 1 or face 2 overrides that face to unshielded while the pawn stands there. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed. The folded standee is the same one piece; its artwork does not add abilities.
+
+Eight equivalent tests in each mirror and golden/cleaner-a.json cover the printed pawn facts, card movement, two-skull Delete payment, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. Sandbox and editor paths use the existing engine options under SR-BOARD-023 and T-RULES-049. Full corpus and modes remain unaccepted.

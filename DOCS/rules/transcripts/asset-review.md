@@ -4263,10 +4263,10 @@ Details and symbols:
 
 - Source: `sp-en-blocks-a4`, PDF page 6; asset sp-en-blocks-a4-p06-c03.
 - Status: visual-reviewed; canonical promotion pending.
-- Description: Cleaner A pawn space and two separate white die spaces.
+- Description: Cleaner A pawn space, two separate white defense dice, two CLEANER medallion spaces and two arrows.
 - Category: information-block; class: none printed.
-- Actions: On gaining control, place Cleaner A under your control.
-- Specific instructions: On gaining control, place Cleaner A under your control.
+- Actions: On gaining control, place the one Cleaner A pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-023.
+- Specific instructions: On gaining control, place the one Cleaner A pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-023.
 
 Printed gameplay/assembly text (normalized):
 
@@ -4277,13 +4277,12 @@ Place the Cleaner A in this block under your control.
 Details and symbols:
 
 - Under-control effect badge.
-- Corner ICE face: 6.
-- Space ICE modifiers: white faces 1, 2.
-- Two directional arrows.
-
-Remaining interpretation/precision checks:
-
-- Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+- Corner ICE face: 6 at V3 (high, not black).
+- Space defense: unshielded face 1 on h7 and unshielded face 2 on h4. These white dice are defense, not space ICE.
+- H2 and h3 are normal spaces; the CLEANER medallions are artwork.
+- One arrow from the face-1 space into the pawn home, and one from the face-2 space into the upper-right space.
+- No bonus fragment. The sheet BONUS legend and page index sit outside the tile.
+- All six edges are entrances. H1 is not a space.
 
 ## sp-en-blocks-a4-p07-c01 - Armament Research
 

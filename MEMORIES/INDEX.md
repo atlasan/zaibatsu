@@ -62,5 +62,6 @@ type: decision | domain | constraint | reference
 
 - [physical-block-bonus.md](physical-block-bonus.md) — decision: physical held block counters, one-time transfer and reserve-policy gate.
 
+- [cleaner-a-placement.md](cleaner-a-placement.md) — decision: Cleaner A reuses controlled placement; two white faces are defense and two arrows do not reverse.
 - [cleaner-b-placement.md](cleaner-b-placement.md) — decision: Cleaner B reuses controlled placement; white faces are defense.
 - [local-verification.md](local-verification.md) — decision: the verification recipe stays outside GitHub Actions and runs on this machine.

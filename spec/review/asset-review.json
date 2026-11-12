@@ -15682,35 +15682,36 @@
         "rawExtractedText": "1\nBon\nu\nn\ns\nBonus\nBon\nnus\nBonus\n6/8\na\nn\ne\ne\nl\nr\nc\na\nn\ne\ne\nl\nr\nc\nPlace the \n \nin this block under \ny u\nt\no r con rol.\nCleaner A\nPlace the \n \nin this block under \ny u\nt\no r con rol.\nCleaner A\nC\nl\ne\na\nn\ne\nr\n \nA\n",
         "conventions": "Gameplay prose visually normalized; printed grammar retained; non-text icons appear in square brackets. Raw extraction preserves duplicates, decorative labels and possible neighboring text; it is not a reviewed verbatim transcript."
       },
-      "description": "Cleaner A pawn space and two separate white die spaces.",
+      "description": "Cleaner A pawn space, two separate white defense dice, two CLEANER medallion spaces and two arrows.",
       "details": {
         "classification": null,
         "category": "information-block",
         "symbols": [
           "Under-control effect badge.",
-          "Corner ICE face: 6.",
-          "Space ICE modifiers: white faces 1, 2.",
-          "Two directional arrows."
+          "Corner ICE face: 6 at V3 (high, not black).",
+          "Space defense: unshielded face 1 on h7 and unshielded face 2 on h4. These white dice are defense, not space ICE.",
+          "H2 and h3 are normal spaces; the CLEANER medallions are artwork.",
+          "One arrow from the face-1 space into the pawn home, and one from the face-2 space into the upper-right space.",
+          "No bonus fragment. The sheet BONUS legend and page index sit outside the tile.",
+          "All six edges are entrances. H1 is not a space."
         ],
         "bonusCounterCost": null,
         "timing": [
           "Under-control effect badge."
         ],
         "modifiers": [
-          "Space ICE modifiers: white faces 1, 2."
+          "Space defense: unshielded face 1 on h7 and unshielded face 2 on h4. These white dice are defense, not space ICE."
         ],
         "rewards": [],
         "restrictions": []
       },
       "actions": [
-        "On gaining control, place Cleaner A under your control."
+        "On gaining control, place the one Cleaner A pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-023."
       ],
       "inheritedRules": [],
-      "specificInstructions": "On gaining control, place Cleaner A under your control.",
+      "specificInstructions": "On gaining control, place the one Cleaner A pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-023.",
       "parts": [],
-      "unresolved": [
-        "Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass."
-      ],
+      "unresolved": [],
       "symbolKeys": [
         {
           "artifactId": "sp-en-rulebook",

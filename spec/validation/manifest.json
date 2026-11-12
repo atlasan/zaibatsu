@@ -11,11 +11,11 @@
         },
         {
           "path": "spec/data/speedrunners/blocks.json",
-          "sha256": "a4b3cdde5b165171529d7cf7e7273d360928118b314522f3ca5f3b25c19b2e03"
+          "sha256": "0e843caa7ccc01ed0ef7dcfa3b84d7c42777152494937b596ce43c3544375ec7"
         },
         {
           "path": "spec/data/speedrunners/control-cards.json",
-          "sha256": "a49478025b9035a640108437ab6d3288959758cd2e9c0be17f5ac757bd787561"
+          "sha256": "2165f5e1f196cbc09d0f8e736acf7f6009f91b83382d6ebe5da5f97f4b18d1bb"
         },
         {
           "path": "spec/data/speedrunners/mode.json",
@@ -27,7 +27,7 @@
         },
         {
           "path": "spec/data/speedrunners/pawns.json",
-          "sha256": "c3eacd92c77b4868c86c0d7e7c4d8294b4af102c796ed6e3bbec3cd5ac7a4f5c"
+          "sha256": "9f219513ecc1d73b2085114ef0e179d1f91480702271661018aa0eee563a6ed8"
         },
         {
           "path": "spec/schema/action-card.schema.json",

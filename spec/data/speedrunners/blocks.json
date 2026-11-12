@@ -2321,6 +2321,158 @@
       "assetRefs": [
         "sp-en-blocks-a4-p06-c02"
       ]
+    },
+    {
+      "id": "cleaner-a",
+      "name": "Cleaner (A)",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "high",
+      "iceFaces": [
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "upper-right"
+        ],
+        [
+          "two"
+        ],
+        [
+          "cleaner-a"
+        ],
+        [
+          "cleaner-a"
+        ],
+        [
+          "one"
+        ],
+        [
+          "upper-left"
+        ]
+      ],
+      "bonusFragments": 0,
+      "bonusCorners": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "one",
+          "to": "cleaner-a"
+        },
+        {
+          "from": "two",
+          "to": "upper-right"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "upper-left",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-right",
+            "one"
+          ]
+        },
+        {
+          "id": "upper-right",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-left",
+            "two"
+          ]
+        },
+        {
+          "id": "two",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-right",
+            "cleaner-a"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 2,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "one",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "upper-left",
+            "cleaner-a"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 1,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "cleaner-a",
+          "type": "pawn",
+          "pawnId": "cleaner-a",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "displayShape": "circle",
+          "neighbors": [
+            "one",
+            "two"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "cleaner-a"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p06-c03"
+      ]
     }
   ]
 }

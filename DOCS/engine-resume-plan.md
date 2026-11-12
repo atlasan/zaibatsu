@@ -211,6 +211,14 @@ The pawn is classless, has no ICE rhombi, card-activated movement without a prin
 
 Continue independent printed order at p6 tile3 Cleaner A. Arms Industry remains partial under T-RULES-031/047. No official mode is accepted.
 
+## Cleaner A controlled-placement checkpoint
+
+SR-BOARD-023/SR-PAWN-010/T-RULES-049 verify EN/ES p6 tile3 Cleaner (A), the EN/ES p1c3 control card and the EN pawn p1 folded unit4. The dedicated crop pass assigns h2 and h3 as normal spaces, h7 unshielded defense face 1, h4 unshielded defense face 2, h5+h6 the unlimited circular home, h1 non-playable, all six entrances, white ICE 6 at V3, no bonus fragment, and arrows from face 1 into the home and from face 2 into the upper-right space. The CLEANER medallions, ML-350 lettering and barcode are artwork. English and Spanish agree on placing the pawn under control and taking its card. No new mechanic appeared, so the existing place-controlled-pawn handler is reused and the record is not provisional.
+
+The pawn is classless, has no ICE rhombi, card-activated movement without a printed step count, card-activated two-skull Delete, Add-on/Weapon/Armor slots, and shielded defense 1–3 / unshielded 4–6. Eight tests per mirror and golden/cleaner-a.json cover capture, cleanup, both defense faces, both arrows, rejection and victory timing. The Test Lab path and editor save/load use those same options. Source protocol/checksum is v22/cleaner-a-placement. Current source evidence refreshes because the new block changes the pile shuffle; the 22 frozen fixture files stay unchanged. The mixed corpus has 22 blocks, 13 pawns and 11 control cards. Those counts are not physical completeness.
+
+Continue independent printed order at p7 tile1 Armament Research. Arms Industry remains partial under T-RULES-031/047. No official mode is accepted.
+
 ## Clean-checkout publication validation
 
 The first remote verification run exposed missing optional transcript PNG links and omitted nested frozen data. The documentation validator now permits only exact generated page-render paths to be unavailable, retaining strict ordinary-link/anchor/outside-root checks. Two focused documentation tests cover both acceptance and rejection. The frozen corpus is explicitly unignored so all22 listed evidence files ship with their unchanged bytes.

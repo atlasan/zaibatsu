@@ -1019,6 +1019,33 @@
         }
       ],
       "note": "The English and Spanish page-1 card 6 are the same physical Cleaner B control card. Capture moves it from common to the block controller; elimination returns the non-Reboot piece and card to reserve/common."
+    },
+    "block/cleaner-a": {
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 6, tile 3 (Cleaner A)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 6, tile 3 (Cleaner A)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, control and cleanup)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, control and cleanup)"}
+      ],
+      "note": "One physical Cleaner (A) tile; language/layout sheets are aliases. H1 is the instruction banner and is not a space. Playable spaces are h2 and h3 normal medallions, h7 unshielded defense face 1, h4 unshielded defense face 2, and the unlimited Cleaner A home covering h5/h6. All six entrances connect. White ICE6 is at V3; no bonus fragment is printed. Arrows run from face 1 into the home and from face 2 into the upper-right space. ML-350 lettering and the barcode are artwork. Capture places the one physical Cleaner A and its control card; tile placement alone does not. The white faces are defense, not space ICE."
+    },
+    "pawn/cleaner-a": {
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 3 (Cleaner A)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 3 (Cleaner A)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 4; opposed faces assemble one Cleaner A"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"}
+      ],
+      "note": "One Cleaner A pawn and one control card. No class and no pawn ICE rhombi. Add-on, Weapon and Armor slots. Shielded defense1–3 and vulnerable4–6. Card-activated two-skull Delete and card-activated movement with no printed step count. No native Search, Icebreaker, Reboot, free movement or out-of-turn permission."
+    },
+    "control-card/cleaner-a-control": {
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 3 (Cleaner A)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 3 (Cleaner A)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 4; opposed faces assemble one Cleaner A"}
+      ],
+      "note": "The English and Spanish page-1 card 3 are the same physical Cleaner A control card. Capture moves it from common to the block controller; elimination returns the non-Reboot piece and card to reserve/common."
     }
   }
 }

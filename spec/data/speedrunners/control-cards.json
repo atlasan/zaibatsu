@@ -95,6 +95,15 @@
         "kind": "pawn",
         "id": "cleaner-b"
       }
+    },
+    {
+      "id": "cleaner-a-control",
+      "name": "Cleaner A",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "cleaner-a"
+      }
     }
   ]
 }
