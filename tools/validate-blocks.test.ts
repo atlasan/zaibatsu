@@ -65,6 +65,10 @@ test("Military Development exact hand topology and physical Turret card reject p
  const b:any=structuredClone(blocks.blocks.find(b=>b.id==="military-development")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards.filter(c=>c.subject.id!=="drone-turret")).length).toBeGreaterThan(0);b.edges[0]=true;b.boundarySpaces[0]=["drone-turret"];expect(blockSourceErrors([b],pawns.pawns,cards.controlCards).length).toBeGreaterThan(0);
 });
 
+test("Cleaner C matching home, hand entrance, two arrows and physical card reject a reversed arrow and a missing card",()=>{
+ const b:any=structuredClone(blocks.blocks.find(b=>b.id==="cleaner-c")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards.filter(c=>c.subject.id!=="cleaner-c")).length).toBeGreaterThan(0);b.spaceArrows=[{from:"upper-left",to:"two"},{from:"two",to:"upper-left"}];expect(blockSourceErrors([b],pawns.pawns,cards.controlCards).join(" ")).toContain("space arrows");
+});
+
 test("Armament Research matching home, hand entrance and physical Drone Hulk card reject a phantom entrance and a missing card",()=>{
  const b:any=structuredClone(blocks.blocks.find(b=>b.id==="armament-research")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards.filter(c=>c.subject.id!=="drone-hulk")).length).toBeGreaterThan(0);b.edges[0]=true;b.boundarySpaces[0]=["drone-hulk"];expect(blockSourceErrors([b],pawns.pawns,cards.controlCards).join(" ")).toContain("boundaries");
 });

@@ -63,6 +63,22 @@ def test_overlay_runs(tmp_path):
     assert ov.shape == bgr.shape
 
 
+def test_zone_sample_separates_a_white_anchor_from_artwork(tmp_path):
+    img, _, center = _synthetic_tile()
+    cv2.circle(img, (center, center), 40, (255, 255, 255, 255), -1)
+    path = tmp_path / "syn.png"
+    cv2.imwrite(str(path), img)
+    bgr, alpha = detect.load_tile(str(path))
+    fitted, _, inradius = detect.hexagon(alpha)
+    samples = {item["zone"]: item for item in detect.sample_zones(bgr, alpha, fitted, inradius)}
+    assert samples["h1"]["whiteFraction"] > 0.5
+    assert samples["h4"]["whiteFraction"] < 0.2
+    tile = detect.extract_tile(str(path), "syn")
+    text = detect.brief_text(tile, list(samples.values()))
+    assert "review hint only" in text
+    assert "E1/h3:" in text
+
+
 def test_real_cut_tiles_if_present():
     tiles = glob.glob(os.path.join(REPO, "tmp", "artifacts", "build", "sp-en-blocks-a4", "png", "*-c*.png"))
     tiles = [t for t in tiles if "-sheet" not in os.path.basename(t)]

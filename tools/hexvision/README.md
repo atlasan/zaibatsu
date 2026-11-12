@@ -36,6 +36,7 @@ between vertex `i` and `i+1`.
 pip install -r tools/hexvision/requirements.txt   # opencv-headless + numpy
 python -m hexvision generate     # extract -> out/<asset>.vision.json + out/overlays/
 python -m hexvision check        # structural validation + verify-me warnings
+python -m hexvision brief --tile sp-en-blocks-a4-p07-c02
 python -m hexvision verify       # re-extract; confirm determinism vs the JSON
 ```
 
@@ -48,6 +49,15 @@ Outputs live under the artifacts pipeline's own build tree —
 the process is **unified** with the asset tool and everything for an asset sits
 together. It's **git-ignored** (regenerate any time); the JSON is marked
 `"provisional": true`.
+
+```bash
+python -m hexvision brief --tile sp-en-blocks-a4-p07-c02
+```
+
+`brief` re-reads one cut tile and prints passages, the white fraction at each
+standard zone anchor, merged-space candidates, and the ICE-corner candidate.
+It also writes `tmp/hexvision-brief/<tile>.overlay.png` with the zone and edge
+labels. Those lines and the overlay are review hints. They do not write `spec/data`.
 
 ## Workflow
 

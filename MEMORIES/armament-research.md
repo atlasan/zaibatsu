@@ -6,4 +6,4 @@ Armament Research places its one Drone Hulk and takes its one control card throu
 
 **Why:** The printed instruction and the Spanish control-card line are the same capture handler already used by Cleaner A. The hex walker, four skulls, Module slot and black corner die are existing movement, Delete, slot and ICE symbols.
 
-**How to apply:** Keep the record non-provisional. Do not invent a bonus fragment from the cyan plus inside the ring. Current source protocol/checksum is v23/armament-research. The next printed tile is Cleaner C. No official mode is accepted.
+**How to apply:** Keep the record non-provisional. Do not invent a bonus fragment from the cyan plus inside the ring. Its delivery protocol was v23/armament-research. Current source protocol/checksum is v24/cleaner-c. The next printed tile is Cleaner D. No official mode is accepted.

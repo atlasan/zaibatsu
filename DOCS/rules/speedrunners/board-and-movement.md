@@ -340,3 +340,16 @@ The hand glyph is a card with a minus bar, the same hand-size −1 already used 
 English says “Place the Drone Hulk in this block under your control.” Spanish says to place the Drone Hulk pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler: placement alone leaves the one physical pawn in reserve and its one control card common; obtaining control places that pawn on the matching home and takes the card. Repeat takeover relocates the same piece, discards and refunds attachments only when the pawn’s controller changes, and keeps them when the same controller places it again. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
 
 Eight equivalent tests in each mirror and golden/armament-research.json assert the geometry, the two legal rotations, Search then capture, the hand-size space, rejection/RNG and victory timing. Sandbox placement, capture, the hand limit, the once-per-turn hex move, replay, Undo and reset, and editor save/load of the target, cover T-RULES-050. Full corpus, setup and modes remain open.
+
+## SR-BOARD-025 — Cleaner C controlled placement
+
+- **Source:** `sp-en-blocks-a4` — p.7 tile2; cross-check `sp-es-blocks-a4` p.7 tile2; bilingual rulebooks pp.12–14, 31, 33, 35, 38; Cleaner C under SR-PAWN-012.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** Cleaner (C) has five playable spaces. H2 is a single normal circle. H3 is a single normal circle with hand-size −1. H4 is a single normal circle. H7 is a single normal defense space with unshielded face 2. H5 and h6 form one unlimited circular Cleaner C pawn home. H1 is the instruction banner and is not a space. All six edges are entrances, in order hand, right, home, home, face 2, upper-left. Own ICE is one white die, face 6, at V6, category high, not Black ICE. One bonus fragment is printed at V1. An arrow runs from the face-2 space into the upper-left space, and another from the hand space into the right space. Neither reverses.
+
+The white face inside h7 is defense, not space ICE. The upper-left circle is a space because it uses the circular space frame and is the head of a printed arrow; its teal interior is artwork. The hand glyph is a card with a minus bar.
+
+English says “Place the Cleaner C in this block under your control.” Spanish says to place the Cleaner C pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler. Placement alone leaves the one physical pawn in reserve and its one control card common. Obtaining control places that pawn on the matching home and takes the card. Repeat takeover refunds attachments only when the controller changes. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
+
+Eight equivalent tests in each mirror and golden/cleaner-c.json assert the geometry, Search then capture, the hand limit, the defense face, both arrow directions, rejection/RNG and victory timing. The Test Lab path and editor save/load cover T-RULES-051. Full corpus, setup and modes remain open.

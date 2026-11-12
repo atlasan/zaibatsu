@@ -77,6 +77,8 @@ STANDARD_ZONE_ANCHORS: dict[str, tuple[float, float]] = {
     "h4": (0.674, 0.0), "h5": (0.337, 0.583), "h6": (-0.337, 0.583),
     "h7": (-0.674, 0.0),
 }
+# Clockwise entrances E1..E6, matching the standard layout's edge zone ids.
+EDGE_ZONE_IDS = ("h3", "h4", "h5", "h6", "h7", "h2")
 
 
 def suggest_zone_ids(space: Space) -> tuple[list[str], float]:
@@ -96,6 +98,71 @@ def standard_zone_centers(center: tuple[int, int], inradius: int) -> dict[str, t
     cx, cy = center
     return {zone_id: (int(round(cx + x * inradius)), int(round(cy + y * inradius)))
             for zone_id, (x, y) in STANDARD_ZONE_ANCHORS.items()}
+def sample_zones(bgr: np.ndarray, alpha: np.ndarray, center: tuple[int, int], inr: int, radius_frac: float = 0.08) -> list[dict]:
+    """Sample a small disk at each standard zone anchor.
+
+    A pixel counts as paper-white when every channel is at least 200. The
+    fraction is a review hint for playable interiors versus colored artwork.
+    It does not decide spaces, entrances, or bonus corners.
+    """
+    cx, cy = center
+    height, width = alpha.shape[:2]
+    radius = max(2, int(round(inr * radius_frac)))
+    samples = []
+    for zone, (ax, ay) in STANDARD_ZONE_ANCHORS.items():
+        px = int(round(cx + ax * inr))
+        py = int(round(cy + ay * inr))
+        total = white = 0
+        acc = np.zeros(3, np.float64)
+        for dy in range(-radius, radius + 1):
+            for dx in range(-radius, radius + 1):
+                if dx * dx + dy * dy > radius * radius:
+                    continue
+                x, y = px + dx, py + dy
+                if not (0 <= x < width and 0 <= y < height) or alpha[y, x] <= 10:
+                    continue
+                pixel = bgr[y, x].astype(np.int16)
+                total += 1
+                acc += pixel
+                if int(pixel.min()) >= 200:
+                    white += 1
+        mean = [int(round(v)) for v in (acc / total)] if total else [0, 0, 0]
+        samples.append({
+            "zone": zone,
+            "whiteFraction": round(white / total, 3) if total else 0.0,
+            "opaque": total,
+            "meanBgr": mean,
+        })
+    return samples
+
+
+def brief_text(tile: Tile, samples: list[dict]) -> str:
+    """One-tile review sheet. Candidates stay provisional until a person promotes them."""
+    edges = " ".join(
+        f"E{i + 1}/{EDGE_ZONE_IDS[i]}:{'open' if open_ else 'wall'}"
+        for i, open_ in enumerate(tile.edges)
+    )
+    zones = " ".join(f"{item['zone']}:{item['whiteFraction']:.2f}" for item in samples)
+    spaces = "; ".join(
+        f"{sp.kind} {'/'.join(sp.suggestedZoneIds) or '?'}" for sp in tile.spaces
+    ) or "none"
+    ice = tile.iceCorner or {}
+    ice_text = (
+        f"corner V{ice['corner'] + 1} dice {ice.get('dice')} black {bool(ice.get('black'))}"
+        if ice else "none"
+    )
+    bonus = " ".join(f"V{i + 1}:{'yes' if flag else 'no'}" for i, flag in enumerate(tile.bonusCorners))
+    return "\n".join([
+        f"asset {tile.asset}",
+        "review hint only; this does not promote block data",
+        f"edges {edges}",
+        f"zone white fraction {zones}",
+        f"spaces {spaces}",
+        f"ice {ice_text}",
+        f"bonus {bonus}",
+    ])
+
+
 def load_tile(path: str) -> tuple[np.ndarray, np.ndarray]:
     """Load a cut tile; returns (BGR composited over white, alpha mask uint8)."""
     img = cv2.imread(path, cv2.IMREAD_UNCHANGED)

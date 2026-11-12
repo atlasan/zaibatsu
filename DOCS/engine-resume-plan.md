@@ -223,7 +223,7 @@ SR-BOARD-024/SR-PAWN-011/T-RULES-050 verify EN/ES p7 tile1 Armament Research, th
 
 The pawn is a Drone, with one Module slot, exact ICE face 5, card-activated four-skull Delete, once-per-turn hex movement, and shielded defense 1–5 / unshielded 6. Paid card movement stays available after the native marker is spent. Eight tests per mirror and golden/armament-research.json cover capture, cleanup, the hand-size space, hex movement, Delete, rejection and victory timing. The Test Lab path and editor save/load use those same options. Source protocol/checksum is v23/armament-research. Current source evidence refreshes because the new block changes the pile shuffle; the 22 frozen fixture files stay unchanged. The mixed corpus has 23 blocks, 14 pawns and 12 control cards. Those counts are not physical completeness.
 
-Continue independent printed order at p7 tile2 Cleaner C. Arms Industry remains partial under T-RULES-031/047. No official mode is accepted.
+Continue independent printed order at p7 tile3 Cleaner D. Cleaner C is T-RULES-051 on the existing place-controlled-pawn handler. Arms Industry remains partial under T-RULES-031/047. No official mode is accepted.
 
 ## Clean-checkout publication validation
 

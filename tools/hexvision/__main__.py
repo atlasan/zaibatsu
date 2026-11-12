@@ -26,7 +26,7 @@ from . import detect
 from . import cards
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DEFAULT_BUILD = os.path.join("tmp", "artifacts", "build")
+DEFAULT_BUILD = os.path.join(REPO, "tmp", "artifacts", "build")
 
 
 def _out_dir(args: argparse.Namespace) -> str:
@@ -158,6 +158,28 @@ def cmd_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_brief(args: argparse.Namespace) -> int:
+    """Print one tile's passages, zone samples, spaces, and ICE candidates."""
+    tile_id = args.tile
+    if not tile_id:
+        print("error: brief requires --tile <asset-id>", file=sys.stderr)
+        return 2
+    path = os.path.join(args.build_dir, args.asset, "png", f"{tile_id}.png")
+    if not os.path.exists(path):
+        print(f"error: cut tile not found: {path}", file=sys.stderr)
+        return 2
+    tile = detect.extract_tile(path, tile_id)
+    bgr, alpha = detect.load_tile(path)
+    samples = detect.sample_zones(bgr, alpha, tile.center, tile.inradius)
+    print(detect.brief_text(tile, samples))
+    out = os.path.join(REPO, "tmp", "hexvision-brief")
+    os.makedirs(out, exist_ok=True)
+    overlay = os.path.join(out, f"{tile_id}.overlay.png")
+    cv2.imwrite(overlay, detect.draw_overlay(bgr, tile))
+    print(f"overlay {overlay}")
+    return 0
+
+
 def cmd_verify(args: argparse.Namespace) -> int:
     try:
         doc = _load_doc(args)
@@ -188,8 +210,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--build-dir", default=DEFAULT_BUILD, help="artifacts build dir with cut tiles")
     ap.add_argument("--out", default=None, help="output dir (default: <build>/<asset>/hexvision)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name, fn in (("generate", cmd_generate), ("check", cmd_check), ("verify", cmd_verify)):
+    for name, fn in (("generate", cmd_generate), ("check", cmd_check), ("brief", cmd_brief), ("verify", cmd_verify)):
         sp = sub.add_parser(name)
+        if name == "brief":
+            sp.add_argument("--tile", required=True, help="one cut-tile asset id, such as sp-en-blocks-a4-p07-c02")
         sp.set_defaults(func=fn)
     args = ap.parse_args(argv)
     return args.func(args)

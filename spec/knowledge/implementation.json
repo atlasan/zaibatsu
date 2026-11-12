@@ -5160,6 +5160,80 @@
       },
       "sandbox": "supported",
       "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p07-c02",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 7, tile 2 (Cleaner C)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 7, tile 2 (Cleaner C)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, arrows and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, arrows and symbols)"}
+      ],
+      "records": ["block/cleaner-c", "pawn/cleaner-c", "control-card/cleaner-c-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "current-stopped-pawn-hand-size", "defense-face-override", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_c_test.go", "contains": "TestCleanerCBilingualGeometryCaptureAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-c.test.ts", "contains": "Cleaner C: bilingual geometry, capture and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c09",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 9 (Cleaner C)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 9 (Cleaner C)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 2; opposed faces assemble one Cleaner C"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-c", "control-card/cleaner-c-control"],
+      "mechanics": ["card-activated-movement", "card-activated-two-skull-delete", "printed-defense-row", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_c_test.go", "contains": "TestCleanerCCardMovementAndTwoSkullDelete"}],
+        "ts": [{"path": "impl/ts/test/cleaner-c.test.ts", "contains": "Cleaner C: card movement and two-skull Delete spend a card"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-025",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 7, tile 2 (Cleaner C)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 7, tile 2 (Cleaner C)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, arrows and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, arrows and symbols)"}
+      ],
+      "records": ["block/cleaner-c", "pawn/cleaner-c", "control-card/cleaner-c-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "current-stopped-pawn-hand-size", "defense-face-override", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_c_test.go", "contains": "TestCleanerCBilingualGeometryCaptureAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-c.test.ts", "contains": "Cleaner C: bilingual geometry, capture and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-012",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 9 (Cleaner C)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 9 (Cleaner C)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 2; opposed faces assemble one Cleaner C"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-c", "control-card/cleaner-c-control"],
+      "mechanics": ["card-activated-movement", "card-activated-two-skull-delete", "printed-defense-row", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_c_test.go", "contains": "TestCleanerCCardMovementAndTwoSkullDelete"}],
+        "ts": [{"path": "impl/ts/test/cleaner-c.test.ts", "contains": "Cleaner C: card movement and two-skull Delete spend a card"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
     }
   ]
 }

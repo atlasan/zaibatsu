@@ -4419,18 +4419,38 @@
       "kind": "block",
       "source": "sp-en-blocks-a4",
       "locator": "PDF page 7; asset sp-en-blocks-a4-p07-c02",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "all-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "defense-face-override",
+        "one-way-space-arrow",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/cleaner-c",
+        "pawn/cleaner-c",
+        "control-card/cleaner-c-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_c_test.go",
+            "contains": "TestCleanerCBilingualGeometryCaptureAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-c.test.ts",
+            "contains": "Cleaner C: bilingual geometry, capture and shared byte evidence"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-blocks-a4-p07-c03",
@@ -4771,18 +4791,34 @@
       "kind": "control-card",
       "source": "sp-en-control-cards",
       "locator": "PDF page 1; asset sp-en-control-cards-p01-c09",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "card-activated-movement",
+        "card-activated-two-skull-delete",
+        "printed-defense-row",
+        "add-on-weapon-armor-slots"
+      ],
+      "records": [
+        "pawn/cleaner-c",
+        "control-card/cleaner-c-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_c_test.go",
+            "contains": "TestCleanerCCardMovementAndTwoSkullDelete"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-c.test.ts",
+            "contains": "Cleaner C: card movement and two-skull Delete spend a card"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-control-cards-p02-c01",
@@ -7138,6 +7174,46 @@
       "gaps": []
     },
     {
+      "id": "rule/SR-BOARD-025",
+      "title": "Cleaner C controlled placement",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-blocks-a4",
+      "locator": "p.7 tile2; cross-check `sp-es-blocks-a4` p.7 tile2; bilingual rulebooks pp.12–14, 31, 33, 35, 38; Cleaner C under SR-PAWN-012.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "all-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "defense-face-override",
+        "one-way-space-arrow",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/cleaner-c",
+        "pawn/cleaner-c",
+        "control-card/cleaner-c-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_c_test.go",
+            "contains": "TestCleanerCBilingualGeometryCaptureAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-c.test.ts",
+            "contains": "Cleaner C: bilingual geometry, capture and shared byte evidence"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
       "id": "rule/SR-PAWN-001",
       "title": "Pawn state and control",
       "game": "speedrunners",
@@ -8345,6 +8421,42 @@
           {
             "path": "impl/ts/test/armament-research.test.ts",
             "contains": "Armament Research: once-per-turn hex movement is separate from paid card steps and four-skull Delete"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-012",
+      "title": "Cleaner C pawn and control card",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-control-cards",
+      "locator": "p.1 cell9; cross-check `sp-es-control-cards` p.1 cell9; `sp-en-pawns` p.1 folded unit2. Bilingual rulebooks pp.18, 20, 24, 26, 30, 33, 35, 38.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "card-activated-movement",
+        "card-activated-two-skull-delete",
+        "printed-defense-row",
+        "add-on-weapon-armor-slots"
+      ],
+      "records": [
+        "pawn/cleaner-c",
+        "control-card/cleaner-c-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_c_test.go",
+            "contains": "TestCleanerCCardMovementAndTwoSkullDelete"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-c.test.ts",
+            "contains": "Cleaner C: card movement and two-skull Delete spend a card"
           }
         ]
       },

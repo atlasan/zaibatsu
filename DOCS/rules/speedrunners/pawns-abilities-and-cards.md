@@ -364,3 +364,12 @@ Eight equivalent tests in each mirror and golden/cleaner-a.json cover the printe
 - **Rule:** One physical Drone Hulk pawn and one matching control card. Class is Drone. The slot is one Module. ICE is the exact face 5. Delete is card-activated and four skulls. Native movement is one hex, once per turn: the pawn moves onto one adjacent block and lands on that block’s first open space, ignoring the internal spaces of the block it leaves. A movement card is still offered after that native use and does not refresh the native marker. Defense is shielded on 1–5 and unshielded on 6. The English card, the Spanish center card and the folded standee agree. No native Search, Icebreaker, Reboot or any-player-turn permission is printed.
 
 Eight equivalent tests in each mirror and golden/armament-research.json cover the printed pawn facts, the once-per-turn hex separate from paid card steps, four-skull Delete payment, a rejected module-incompatible weapon, Module refund on takeover and retention for the same controller. Sandbox and editor paths use the existing engine options under SR-BOARD-024 and T-RULES-050. Full corpus and modes remain unaccepted.
+
+## SR-PAWN-012 — Cleaner C pawn and control card
+
+- **Source:** `sp-en-control-cards` — p.1 cell9; cross-check `sp-es-control-cards` p.1 cell9; `sp-en-pawns` p.1 folded unit2. Bilingual rulebooks pp.18, 20, 24, 26, 30, 33, 35, 38.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** One physical Cleaner C pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and two skulls. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–2 and unshielded on 3–6. The English and Spanish cards agree. The defense space that names face 2 overrides that face to unshielded while the pawn stands there. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed.
+
+Eight equivalent tests in each mirror and golden/cleaner-c.json cover the printed pawn facts, card movement, two-skull Delete payment, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. The Test Lab path uses the existing engine options under SR-BOARD-025 and T-RULES-051. Full corpus and modes remain unaccepted.

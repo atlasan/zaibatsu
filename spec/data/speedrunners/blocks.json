@@ -2559,6 +2559,32 @@
       "assetRefs": [
         "sp-en-blocks-a4-p07-c01"
       ]
+    },
+    {
+      "id": "cleaner-c",
+      "name": "Cleaner (C)",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "high",
+      "iceFaces": [6],
+      "edges": [true, true, true, true, true, true],
+      "boundarySpaces": [["hand"], ["right"], ["cleaner-c"], ["cleaner-c"], ["two"], ["upper-left"]],
+      "bonusFragments": 1,
+      "bonusCorners": [true, false, false, false, false, false],
+      "nonPlayableZoneIds": ["h1"],
+      "spaceArrows": [
+        {"from": "two", "to": "upper-left"},
+        {"from": "hand", "to": "right"}
+      ],
+      "spaces": [
+        {"id": "upper-left", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["hand", "two"]},
+        {"id": "hand", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["upper-left", "right"], "modifier": {"kind": "hand-size", "amount": -1}},
+        {"id": "right", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["hand", "cleaner-c"]},
+        {"id": "two", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["upper-left", "cleaner-c"], "modifier": {"kind": "defense", "dice": [{"value": 2, "shielded": false}]}},
+        {"id": "cleaner-c", "type": "pawn", "pawnId": "cleaner-c", "zoneIds": ["h5", "h6"], "capacity": "unlimited", "displayShape": "circle", "neighbors": ["right", "two"]}
+      ],
+      "effects": {"underControl": {"kind": "place-controlled-pawn", "target": "cleaner-c"}},
+      "assetRefs": ["sp-en-blocks-a4-p07-c02"]
     }
   ]
 }
