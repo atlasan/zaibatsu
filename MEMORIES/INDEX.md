@@ -61,3 +61,6 @@ type: decision | domain | constraint | reference
 - [played-card-owners.md](played-card-owners.md) — decision: face-up physical cards recycle with their paying player.
 
 - [physical-block-bonus.md](physical-block-bonus.md) — decision: physical held block counters, one-time transfer and reserve-policy gate.
+
+- [cleaner-b-placement.md](cleaner-b-placement.md) — decision: Cleaner B reuses controlled placement; white faces are defense.
+- [local-verification.md](local-verification.md) — decision: the verification recipe stays outside GitHub Actions and runs on this machine.

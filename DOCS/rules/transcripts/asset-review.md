@@ -4240,8 +4240,8 @@ Remaining interpretation/precision checks:
 - Status: visual-reviewed; canonical promotion pending.
 - Description: Cleaner B pawn space, capsule containing two white dice, hand icon and arrow.
 - Category: information-block; class: none printed.
-- Actions: On gaining control, place Cleaner B under your control.
-- Specific instructions: On gaining control, place Cleaner B under your control.
+- Actions: On gaining control, place the one Cleaner B pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-022.
+- Specific instructions: On gaining control, place the one Cleaner B pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-022.
 
 Printed gameplay/assembly text (normalized):
 
@@ -4252,14 +4252,12 @@ Place the Cleaner B in this block under your control.
 Details and symbols:
 
 - Under-control effect badge.
-- Corner ICE face: 6.
-- Space ICE modifiers: white faces 1, 2.
+- Corner ICE face: 6 (high, not black).
+- Space defense: unshielded faces 1 and 2. These white dice are defense, not space ICE.
 - Space hand-size modifier: -1.
-- One directional arrow.
-
-Remaining interpretation/precision checks:
-
-- Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+- One directional arrow from the hand space into the circuit space.
+- One bonus fragment at V3.
+- All six edges are entrances. H1 is not a space.
 
 ## sp-en-blocks-a4-p06-c03 - Cleaner (A)
 

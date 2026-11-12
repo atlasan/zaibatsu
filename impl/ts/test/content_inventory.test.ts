@@ -18,7 +18,7 @@ test("knowledge inventory declares both official products and all documented mod
 
 test("loader exposes the optional content collections with a primary-mode fallback", () => {
   const data = loadDefault("speedrunners");
-  expect(data.controlCards).toHaveLength(9);expect(data.controlCards!.filter(c=>c.isStarter)).toHaveLength(4);expect(data.controlCards!.find(c=>c.id==="idoru-control")!.provisional).toBe(true);
+  expect(data.controlCards).toHaveLength(10);expect(data.controlCards!.filter(c=>c.isStarter)).toHaveLength(4);expect(data.controlCards!.find(c=>c.id==="idoru-control")!.provisional).toBe(true);
   expect(data.threats).toEqual([]);
   expect(data.missions).toEqual([]);
   expect(data.modes?.[0]?.id).toBe("speedrunners-quick-match");

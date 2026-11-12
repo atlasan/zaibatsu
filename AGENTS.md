@@ -48,7 +48,8 @@ in code. `DOCS/governance.md` defines authority and required updates.
   tools/verify-artifacts.ts`, and `bun tools/validate-spec.ts` for applicable
   documentation, source, schema, or content changes. Prefer the repo-root
   wrapper scripts `test-engines.bat` and `check-docs.bat` when they cover the
-  touched surface.
+  touched surface. The full recipe is `.github/localonly_workflows/verify.yml`.
+  It is outside `.github/workflows/`, so GitHub Actions does not run it.
 
 ## Conventions
 

@@ -406,7 +406,7 @@ export interface GameState {
   nativeUseMarkers?:NativeUseMarker[];
   unresolvedUseCards?:import("./pawn_board.ts").Attachment[];
   attachmentSerial?:number;
-  rulesVersion?: "source-v20";
+  rulesVersion?: "source-v21";
   /** Physical pawn pieces available outside the Cybernet. */
   reserve?: string[];
   outOfGame?: string[];

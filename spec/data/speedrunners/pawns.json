@@ -643,6 +643,57 @@
       "assetRefs": [
         "sp-en-control-cards-p02-c07"
       ]
+    },
+    {
+      "id": "cleaner-b",
+      "name": "Cleaner B",
+      "expansion": "speedrunners",
+      "class": [],
+      "defense": [
+        {
+          "value": 1,
+          "shielded": true
+        },
+        {
+          "value": 2,
+          "shielded": true
+        },
+        {
+          "value": 3,
+          "shielded": true
+        },
+        {
+          "value": 4,
+          "shielded": true
+        },
+        {
+          "value": 5,
+          "shielded": false
+        },
+        {
+          "value": 6,
+          "shielded": false
+        }
+      ],
+      "movement": {
+        "type": "steps",
+        "activation": "card"
+      },
+      "abilities": [
+        {
+          "ability": "delete",
+          "activation": "card",
+          "skulls": 1
+        }
+      ],
+      "slots": [
+        "add-on",
+        "weapon",
+        "armor"
+      ],
+      "assetRefs": [
+        "sp-en-control-cards-p01-c06"
+      ]
     }
   ]
 }

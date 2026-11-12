@@ -234,4 +234,13 @@ Current source protocol/checksum is source-v19 / source-v19/any-turn-abilities. 
 | SR-BOARD-021 / Arms Industry | EN/ES block p6 tile1; spaces/counter/Black ICE/hand rulebook pages | Four-space chain, storage/title exclusions, exact entrances/ICE/fragments/hand−1, paired counter effects and sandbox/editor support | T-RULES-031/047 reserve exhaustion; record remains provisional and strict official construction rejects. |
 | SR-BONUS-002 / counter on a block | EN/ES p6 tile1 placement/control text; physical reserve/counter rules pp6/16–18/35 | Shared public allocation/receipt, combined placement funding, existing-piece transfer at empty reserve, conservation, snapshots/views,11 mirror tests and golden/arms-industry.json | No invented partial award or replacement-counter rule; full source acceptance remains gated. |
 
-Current protocol/checksum: source-v20 / source-v20/block-bonus-counters. Continue independent printed block p6 tile2 Cleaner B, verifying its pawn/control card and geometry first; resolve the separate reserve-policy gate before claiming Arms Industry complete.
+Current protocol/checksum at that delivery: source-v20 / source-v20/block-bonus-counters. Resolve the separate reserve-policy gate before claiming Arms Industry complete.
+
+## Cleaner B p6 tile2
+
+| Rule/component | Primary evidence | Mirrored execution and UI | Remaining gate |
+|---|---|---|---|
+| SR-BOARD-022 / Cleaner (B) | EN/ES blocks p6 tile2; Spanish text also names the control card | Five spaces, all entrances, high ICE 6, V3 fragment, hand−1, unshielded defense 1/2, hand-to-circuit arrow, existing controlled placement | Implemented component; full corpus/setup/modes remain open. |
+| SR-PAWN-009 / Cleaner B | EN/ES control p1c6; EN pawn p1 folded unit3 | One classless pawn/card, card movement, one-skull card Delete, Add-on/Weapon/Armor, shielded 1–4 | Implemented native record; no official mode is accepted. |
+
+Current protocol/checksum: source-v21 / source-v21/cleaner-b-placement. Continue independent printed block p6 tile3 Cleaner A. Arms Industry stays partial under T-RULES-031/047.

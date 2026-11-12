@@ -348,7 +348,7 @@ export function newGame(cfg: Config): GameState {
   };
 
   if (!cfg.data.regressionFixture) {
-    state.rulesVersion="source-v20";state.bonusCounterSupply=mode.bonusCounterSupply;state.nativeUseMarkers=[];state.unresolvedUseCards=[];
+    state.rulesVersion="source-v21";state.bonusCounterSupply=mode.bonusCounterSupply;state.nativeUseMarkers=[];state.unresolvedUseCards=[];
     state.outOfGame=cfg.data.pawns.filter(pawn=>pawn.isStarter && !cybernet.pawnById(pawn.id)).map(pawn=>pawn.id);
     state.reserve=cfg.data.pawns.filter(pawn=>!cybernet.pawnById(pawn.id) && !state.outOfGame!.includes(pawn.id)).map(pawn=>pawn.id);
   }

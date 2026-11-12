@@ -17,7 +17,7 @@ Use primary English artwork/rulebook and Spanish cross-checks. Record uncertain 
 
 Schema changes precede content changes. Gameplay data is shared; code handlers and tests are mirrored. Keep content definitions separate from runtime instances, and UI/bot integrations on the same action/event/query contracts. Model pending effects/choices in snapshots and clones as they arrive.
 
-Run both engine suites, TypeScript checking, documentation/spec/artifact verification, checklist freshness and frozen-fixture verification. Add shared golden scenarios and ordered-event evidence, interaction tests, and applicable browser controls/replay checks. CI enforces the repeatable checks.
+Run both engine suites, TypeScript checking, documentation/spec/artifact verification, checklist freshness and frozen-fixture verification. Add shared golden scenarios and ordered-event evidence, interaction tests, and applicable browser controls/replay checks. The local verification recipe in `.github/localonly_workflows/verify.yml` enforces the repeatable checks and is kept outside `.github/workflows/`.
 
 No mode is complete while its required content, effects or interpretations remain provisional. Visual polish, public hosting, native/network clients and general-purpose bots remain later integration targets.
 
@@ -117,7 +117,7 @@ SR-PAWN-005/T-RULES-035 corrects Gynoid from the pilot to Lovedoll, shielded1/vu
 
 Eleven tests per mirror and `golden/gynoid.json` assert byte snapshots, native pending state, options, observer projections, ordered events and private/public histories. They cover source placement/control, ownership cleanup/refunds, physical conservation, all rejection windows, ordinary turn handoffs after pawn takeover, native cleanup and immediate victory. Two sandbox scenarios and editor controls exercise Search/capture, optional theft, inspection, replay/recovery/undo/reset and matching-home save/load/export. These focused scenarios are not full official-mode acceptance.
 
-T-RULES-036 resolves a real source-link gap: both English control-card PDFs now yield36 repeatable core crops/atlases, replacing the same supplemental ids without duplicate review pieces. The shared manifest has201 assets; all201 local outputs verify. The review set remains228 assets/557 parts, with55 local originals and62 archive members. Six Python detector/core-source tests pass and are wired into CI.
+T-RULES-036 resolves a real source-link gap: both English control-card PDFs now yield36 repeatable core crops/atlases, replacing the same supplemental ids without duplicate review pieces. The shared manifest has201 assets; all201 local outputs verify. The review set remains228 assets/557 parts, with55 local originals and62 archive members. Six Python detector/core-source tests pass and are wired into the local verification recipe.
 
 Validation: **403 Bun tests**, all Go packages, TypeScript checking and **52 browser checks** pass. Documentation/spec/artifact checks retain **22 unchanged frozen files**. Knowledge has371 entries/2203 relations; coverage has311 items/50 source-verified implemented claim rows. The added36 physical crops explain most knowledge growth; these are not counts of completed mechanics or modes. Source state/checksums now use source-v13 / source-v13/native-phase-theft; v12 source traces reject and all source goldens were refreshed.
 
@@ -201,7 +201,15 @@ Eleven tests per mirror and golden/arms-industry.json cover primary facts, paid 
 
 Validation passes:506 Bun tests, all Go packages, TypeScript checking,66 browser checks and six Python artifact tests. Source/docs/spec checks verify55 local originals,228 assets/557 parts/62 archive members and22 unchanged frozen files. Before adding the remaining-work report, knowledge has380 entries/2447 relations and coverage324 rows/70 source-verified implemented rows; generated current totals are authoritative. Counts are not unique complete components or modes. Mixed data has20 blocks,11 pawns,9 control cards and32 action definitions/48 declared copies, requiring official reconciliation.
 
-User requested finishing this slice, committing/pushing all accumulated workspace changes and documenting gaps. [Remaining work](remaining-work.md) records the full retained scope and missing component/rule/mode/UI acceptance. Continue independent printed order at p6 tile2 Cleaner B after verifying its own pawn/control-card dependency. All earlier provisional gates and all official-mode acceptance remain open; do not mark the full goal complete.
+User requested finishing this slice, committing/pushing all accumulated workspace changes and documenting gaps. [Remaining work](remaining-work.md) records the full retained scope and missing component/rule/mode/UI acceptance. All earlier provisional gates and all official-mode acceptance remain open; do not mark the full goal complete.
+
+## Cleaner B controlled-placement checkpoint
+
+SR-BOARD-022/SR-PAWN-009/T-RULES-048 verify EN/ES p6 tile2 Cleaner (B), the EN/ES p1c6 control card and the EN pawn p1 folded unit3. The dedicated crop pass assigns h2 hand−1, h3 circuit, h4 unshielded defense faces 1 and 2, h7 empty, h5+h6 the unlimited circular home, h1 non-playable, all six entrances, white ICE 6 at V1, one bonus fragment at V3, and one arrow from hand to circuit. English and Spanish agree on placing the pawn under control and taking its card. No new mechanic appeared, so the existing place-controlled-pawn handler is reused and the record is not provisional.
+
+The pawn is classless, has no ICE rhombi, card-activated movement without a printed step count, card-activated one-skull Delete, Add-on/Weapon/Armor slots, and shielded defense 1–4. Eight tests per mirror and golden/cleaner-b.json cover capture, cleanup, modifiers, the arrow, rejection and victory timing. The Test Lab path and editor save/load use those same options. Source protocol/checksum is v21/cleaner-b-placement. Current source evidence refreshes because the new block changes the pile shuffle; the 22 frozen fixture files stay unchanged. The mixed corpus has 21 blocks, 12 pawns and 10 control cards. Those counts are not physical completeness.
+
+Continue independent printed order at p6 tile3 Cleaner A. Arms Industry remains partial under T-RULES-031/047. No official mode is accepted.
 
 ## Clean-checkout publication validation
 

@@ -1,3 +1,6 @@
+# Local verification recipe. GitHub Actions only reads .github/workflows/,
+# so this file does not run on push or pull request. Keep the steps here and
+# run them on this machine. See README.md in this directory.
 name: Rules and engine verification
 on: [push, pull_request]
 permissions:

@@ -42,7 +42,7 @@ test("source foundation: Core and printed starters use exact attributes and phys
     expect(s.players.map(p=>p.hand.length)).toEqual([3,4,5,5].slice(0,n));
     expect(s.controlCards!.filter(c=>c.ownerId)).toHaveLength(n);
     expect(s.controlCards!.filter(c=>c.zone==="out-of-game")).toHaveLength(4-n);
-    expect(s.controlCards!.filter(c=>c.zone==="common").map(c=>c.subject.id)).toEqual(["idoru","gynoid","drone-mk-2","drone-probe","drone-turret"]);
+    expect(s.controlCards!.filter(c=>c.zone==="common").map(c=>c.subject.id)).toEqual(["idoru","gynoid","drone-mk-2","drone-probe","drone-turret","cleaner-b"]);
     expect(s.outOfGame).toHaveLength(4-n);
     expect(s.reserve!.some(id=>gd.pawns.find(pawn=>pawn.id===id)!.isStarter)).toBe(false);
     for (const p of s.players) expect(p.color).toBe(p.pawnId.split("-").at(-1)!);

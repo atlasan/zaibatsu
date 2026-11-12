@@ -59,4 +59,6 @@ Current Speedrunners delivery includes verified Combat Prototypes and Drone Prob
 
 Speedrunners now includes verified Military Development/Drone Turret, typed permitted-turn ability execution and controller-owned played-card recycling, with shared data, both mirrors and sandbox/editor acceptance. Continue printed p6 tile1 after primary review. Full official setup-to-victory, remaining corpus and mode acceptance remain open; the latest checkpoint and backlog remain the ordered delivery owners.
 
-Arms Industry's funded physical block-counter lifecycle is implemented in both mirrors and sandbox, with reserve exhaustion explicitly provisional. The [remaining-work snapshot](remaining-work.md) inventories outstanding components, interpretations, all official modes and UI/acceptance gates; the backlog remains the ordered live list. Next independent printed block is Cleaner B at p6 tile2.
+Arms Industry's funded physical block-counter lifecycle is implemented in both mirrors and sandbox, with reserve exhaustion explicitly provisional. The [remaining-work snapshot](remaining-work.md) inventories outstanding components, interpretations, all official modes and UI/acceptance gates; the backlog remains the ordered live list.
+
+Cleaner B at p6 tile2 is implemented in both mirrors and the sandbox: controlled placement of its one pawn and control card, the hand−1 space, unshielded defense faces 1 and 2, and the hand-to-circuit arrow. Next independent printed block is Cleaner A at p6 tile3. No official mode is accepted.

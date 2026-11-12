@@ -2174,6 +2174,153 @@
         "sp-en-blocks-a4-p06-c01"
       ],
       "provisional": true
+    },
+    {
+      "id": "cleaner-b",
+      "name": "Cleaner (B)",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "high",
+      "iceFaces": [
+        6
+      ],
+      "edges": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "boundarySpaces": [
+        [
+          "circuit"
+        ],
+        [
+          "defense"
+        ],
+        [
+          "cleaner-b"
+        ],
+        [
+          "cleaner-b"
+        ],
+        [
+          "left"
+        ],
+        [
+          "hand"
+        ]
+      ],
+      "bonusFragments": 1,
+      "bonusCorners": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "nonPlayableZoneIds": [
+        "h1"
+      ],
+      "spaceArrows": [
+        {
+          "from": "hand",
+          "to": "circuit"
+        }
+      ],
+      "spaces": [
+        {
+          "id": "hand",
+          "type": "normal",
+          "zoneIds": [
+            "h2"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "circuit",
+            "left"
+          ],
+          "modifier": {
+            "kind": "hand-size",
+            "amount": -1
+          }
+        },
+        {
+          "id": "circuit",
+          "type": "normal",
+          "zoneIds": [
+            "h3"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "hand",
+            "defense"
+          ]
+        },
+        {
+          "id": "defense",
+          "type": "normal",
+          "zoneIds": [
+            "h4"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "circuit",
+            "cleaner-b"
+          ],
+          "modifier": {
+            "kind": "defense",
+            "dice": [
+              {
+                "value": 1,
+                "shielded": false
+              },
+              {
+                "value": 2,
+                "shielded": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "left",
+          "type": "normal",
+          "zoneIds": [
+            "h7"
+          ],
+          "capacity": 1,
+          "neighbors": [
+            "hand",
+            "cleaner-b"
+          ]
+        },
+        {
+          "id": "cleaner-b",
+          "type": "pawn",
+          "pawnId": "cleaner-b",
+          "zoneIds": [
+            "h5",
+            "h6"
+          ],
+          "capacity": "unlimited",
+          "displayShape": "circle",
+          "neighbors": [
+            "defense",
+            "left"
+          ]
+        }
+      ],
+      "effects": {
+        "underControl": {
+          "kind": "place-controlled-pawn",
+          "target": "cleaner-b"
+        }
+      },
+      "assetRefs": [
+        "sp-en-blocks-a4-p06-c02"
+      ]
     }
   ]
 }

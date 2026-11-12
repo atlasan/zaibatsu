@@ -69,5 +69,5 @@ test("Physical use markers: views and snapshots clone native, active and unresol
 test("Physical use markers: official bundles reject unresolved discarded-card lifetimes",()=>{
  const gd=loadDefault("speedrunners");gd.blocks=gd.blocks.filter(b=>b.id==="central-core");gd.pawns=gd.pawns.filter(p=>p.isStarter);gd.cards=[{id:"fixture-limited",name:"Synthetic limited card",attach:{as:"pawn",slot:"gadget",grantsMovement:[{type:"fixed",amount:1}],abilityUses:[{ability:"move",perTurn:1}]}}];gd.controlCards=[];
  expect(()=>newGame({data:gd,playerNames:["A","B"],seed:42})).toThrow(/unresolved discarded-card use-marker lifetime/);
- expect(newGame({data:gd,playerNames:["A","B"],seed:42,allowProvisional:true}).rulesVersion).toBe("source-v20");
+ expect(newGame({data:gd,playerNames:["A","B"],seed:42,allowProvisional:true}).rulesVersion).toBe("source-v21");
 });

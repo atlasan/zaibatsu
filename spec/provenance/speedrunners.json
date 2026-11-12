@@ -956,6 +956,69 @@
         }
       ],
       "note": "One physical Arms Industry tile; language/layout variants are aliases. Four normal single spaces h2/h3/h7/h6 form upper-right–upper-left–left–hand; hand−1 on h6. H1 counter storage and h4/h5 effect artwork are not movement spaces. Entrances E1/E4/E5/E6; own Black ICE6 at V5; fragmentsV2/V3/V4/V6, no V1 fragment or white connector arrows. Teal lettering is artwork. Typed placement allocates one physical reserve counter on the block; control collects that same counter once, retaining collectedBy receipt. Counter ownership is distinct from three-block icons and player free/invested pools. Combined new-icon and block funding is checked before placement; collection works at empty reserve. Real source Search/capture, shared snapshots/events/views,11 tests in each mirror, sandbox replay/Undo/reset and editor pairing execute funded behavior. Placement reserve exhaustion remains T-RULES-031; record and strict official bundle acceptance remain provisional under T-RULES-047."
+    },
+    "block/cleaner-b": {
+      "sources": [
+        {
+          "artifactId": "sp-en-blocks-a4",
+          "locator": "page 6, tile 2 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-es-blocks-a4",
+          "locator": "page 6, tile 2 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+        }
+      ],
+      "note": "One physical Cleaner (B) tile; language/layout sheets are aliases. H1 is the instruction banner and is not a space. Playable spaces are h2 hand−1, h3 normal circuit, h4 white defense1/2, h7 normal left, and the unlimited Cleaner B home covering h5/h6. All six entrances connect. White ICE6 is at V1; the single bonus fragment is at V3. The white outlined arrow runs from hand to circuit. PROTOCOL lettering is artwork. Capture places the one physical Cleaner B and its control card; tile placement alone does not. The white faces are defense, not space ICE."
+    },
+    "pawn/cleaner-b": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 6 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 6 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"
+        },
+        {
+          "artifactId": "sp-en-rulebook",
+          "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
+        },
+        {
+          "artifactId": "sp-es-rulebook",
+          "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
+        }
+      ],
+      "note": "One Cleaner B pawn and one control card. No class and no pawn ICE rhombi. Add-on, Weapon and Armor slots. Shielded defense1–4 and vulnerable5–6. Card-activated one-skull Delete and card-activated movement with no printed step count. No native Search, Icebreaker, Reboot, free movement or out-of-turn permission."
+    },
+    "control-card/cleaner-b-control": {
+      "sources": [
+        {
+          "artifactId": "sp-en-control-cards",
+          "locator": "page 1, card 6 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-es-control-cards",
+          "locator": "page 1, card 6 (Cleaner B)"
+        },
+        {
+          "artifactId": "sp-en-pawns",
+          "locator": "page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"
+        }
+      ],
+      "note": "The English and Spanish page-1 card 6 are the same physical Cleaner B control card. Capture moves it from common to the block controller; elimination returns the non-Reboot piece and card to reserve/common."
     }
   }
 }

@@ -44,6 +44,12 @@ From the repository root, double-click or run these commands from `cmd.exe`:
 | `check-docs.bat` | Validate governed docs, rebuild knowledge, and validate specs/artifacts. |
 | `test-engines.bat` | Run the Bun and Go regression suites. |
 
+The full check list is [`.github/localonly_workflows/verify.yml`](.github/localonly_workflows/verify.yml).
+It stays outside `.github/workflows/`, so GitHub Actions does not run it.
+`check-docs.bat` and `test-engines.bat` cover the documentation and engine
+portions. The Python artifact tests, TypeScript check, generated-file diff,
+and block-editor browser suite are the remaining steps in that recipe.
+
 The two launchers run the same local host; use only one at a time. Before
 starting, each stops the process listening on local port `4173`, so relaunching
 recovers from an address-in-use error. Windows may ask for administrator

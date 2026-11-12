@@ -2632,12 +2632,14 @@
     "printedRules": "Place the Cleaner B in this block under your control.",
     "symbols": [
       "Under-control effect badge.",
-      "Corner ICE face: 6.",
-      "Space ICE modifiers: white faces 1, 2.",
+      "Corner ICE face: 6 (high, not black).",
+      "Space defense: unshielded faces 1 and 2. These white dice are defense, not space ICE.",
       "Space hand-size modifier: -1.",
-      "One directional arrow."
+      "One directional arrow from the hand space into the circuit space.",
+      "One bonus fragment at V3.",
+      "All six edges are entrances. H1 is not a space."
     ],
-    "specificInstructions": "On gaining control, place Cleaner B under your control.",
+    "specificInstructions": "On gaining control, place the one Cleaner B pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-022.",
     "actions": []
   },
   "sp-en-blocks-a4-p06-c03": {

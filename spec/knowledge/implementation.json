@@ -4938,6 +4938,80 @@
         "T-RULES-031: reserve exhaustion/partial fulfillment is not sourced; strict official construction remains gated.",
         "T-RULES-047: funded behavior executes in both mirrors and sandbox; do not declare the component or mode fully accepted."
       ]
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p06-c02",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 6, tile 2 (Cleaner B)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 6, tile 2 (Cleaner B)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–18, 31, 33, 35, 38 (spaces, control, hand limit, defense and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–18, 31, 33, 35, 38 (spaces, control, hand limit, defense and symbols)"}
+      ],
+      "records": ["block/cleaner-b", "pawn/cleaner-b", "control-card/cleaner-b-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "current-stopped-pawn-hand-size", "defense-face-override", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_b_test.go", "contains": "TestCleanerBBilingualGeometryCaptureHandLimitAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-b.test.ts", "contains": "Cleaner B: bilingual geometry, capture, hand limit and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c06",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 6 (Cleaner B)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 6 (Cleaner B)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-b", "control-card/cleaner-b-control"],
+      "mechanics": ["card-activated-movement", "card-activated-one-skull-delete", "printed-defense-row", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_b_test.go", "contains": "TestCleanerBCardMovementAndDeleteSpendCards"}],
+        "ts": [{"path": "impl/ts/test/cleaner-b.test.ts", "contains": "Cleaner B: card movement and one-skull Delete spend cards"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-022",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 6, tile 2 (Cleaner B)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 6, tile 2 (Cleaner B)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–18, 31, 33, 35, 38 (spaces, control, hand limit, defense and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–18, 31, 33, 35, 38 (spaces, control, hand limit, defense and symbols)"}
+      ],
+      "records": ["block/cleaner-b", "pawn/cleaner-b", "control-card/cleaner-b-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "current-stopped-pawn-hand-size", "defense-face-override", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_b_test.go", "contains": "TestCleanerBBilingualGeometryCaptureHandLimitAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-b.test.ts", "contains": "Cleaner B: bilingual geometry, capture, hand limit and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-009",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 6 (Cleaner B)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 6 (Cleaner B)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-b", "control-card/cleaner-b-control"],
+      "mechanics": ["card-activated-movement", "card-activated-one-skull-delete", "printed-defense-row", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_b_test.go", "contains": "TestCleanerBCardMovementAndDeleteSpendCards"}],
+        "ts": [{"path": "impl/ts/test/cleaner-b.test.ts", "contains": "Cleaner B: card movement and one-skull Delete spend cards"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
     }
   ]
 }

@@ -15608,31 +15608,31 @@
         "category": "information-block",
         "symbols": [
           "Under-control effect badge.",
-          "Corner ICE face: 6.",
-          "Space ICE modifiers: white faces 1, 2.",
+          "Corner ICE face: 6 (high, not black).",
+          "Space defense: unshielded faces 1 and 2. These white dice are defense, not space ICE.",
           "Space hand-size modifier: -1.",
-          "One directional arrow."
+          "One directional arrow from the hand space into the circuit space.",
+          "One bonus fragment at V3.",
+          "All six edges are entrances. H1 is not a space."
         ],
         "bonusCounterCost": null,
         "timing": [
           "Under-control effect badge."
         ],
         "modifiers": [
-          "Space ICE modifiers: white faces 1, 2.",
+          "Space defense: unshielded faces 1 and 2. These white dice are defense, not space ICE.",
           "Space hand-size modifier: -1."
         ],
         "rewards": [],
         "restrictions": []
       },
       "actions": [
-        "On gaining control, place Cleaner B under your control."
+        "On gaining control, place the one Cleaner B pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-022."
       ],
       "inheritedRules": [],
-      "specificInstructions": "On gaining control, place Cleaner B under your control.",
+      "specificInstructions": "On gaining control, place the one Cleaner B pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-022.",
       "parts": [],
-      "unresolved": [
-        "Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass."
-      ],
+      "unresolved": [],
       "symbolKeys": [
         {
           "artifactId": "sp-en-rulebook",

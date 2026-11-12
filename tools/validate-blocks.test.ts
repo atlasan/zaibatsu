@@ -65,6 +65,10 @@ test("Military Development exact hand topology and physical Turret card reject p
  const b:any=structuredClone(blocks.blocks.find(b=>b.id==="military-development")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards.filter(c=>c.subject.id!=="drone-turret")).length).toBeGreaterThan(0);b.edges[0]=true;b.boundarySpaces[0]=["drone-turret"];expect(blockSourceErrors([b],pawns.pawns,cards.controlCards).length).toBeGreaterThan(0);
 });
 
+test("Cleaner B matching home, hand arrow and physical card reject a reversed arrow and a missing card",()=>{
+ const b:any=structuredClone(blocks.blocks.find(b=>b.id==="cleaner-b")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards.filter(c=>c.subject.id!=="cleaner-b")).length).toBeGreaterThan(0);b.spaceArrows=[{from:"circuit",to:"hand"},{from:"hand",to:"circuit"}];expect(blockSourceErrors([b],pawns.pawns,cards.controlCards).join(" ")).toContain("space arrows");
+});
+
 test("Arms Industry paired reserve allocation/collection requires exact timing, amount and mandatory transfer",()=>{
  const b:any=structuredClone(blocks.blocks.find(b=>b.id==="arms-industry")!);expect(blockSourceErrors([b],pawns.pawns,cards.controlCards)).toEqual([]);for(const kind of ["missing","amount","target","optional","timing"]){const c=structuredClone(b);if(kind==="missing")delete c.effects.underControl;if(kind==="amount")c.effects.inCybernet.amount=2;if(kind==="target")c.effects.underControl.target="p1";if(kind==="optional")c.effects.underControl.optional=true;if(kind==="timing")[c.effects.inCybernet,c.effects.underControl]=[c.effects.underControl,c.effects.inCybernet];expect(blockSourceErrors([c],pawns.pawns,cards.controlCards).length).toBeGreaterThan(0);}
 });

@@ -81,4 +81,5 @@ They link physical pawn/control evidence without automatically assigning a
 verified gameplay reference. Gynoid uses `sp-en-control-cards-p02-c03`; the
 Spanish cross-check is p2c2 and remains independent primary review evidence.
 Run `python -m unittest discover -s tools/artifacts/tests` for repeatable
-detector/core-source checks; CI runs these without requiring ignored PDFs.
+detector/core-source checks. The local verification recipe runs these without
+requiring ignored PDFs.

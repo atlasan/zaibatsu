@@ -81,8 +81,8 @@ func TestLoadProvidesOptionalContentCollections(t *testing.T) {
 	if data.ControlCards == nil || data.Threats == nil || data.Missions == nil {
 		t.Fatal("optional content collections must be initialized")
 	}
-	if len(data.ControlCards) != 9 {
-		t.Fatal("expected four starters plus Idoru, Gynoid, Drone MK-2 and Drone Probe cards")
+	if len(data.ControlCards) != 10 {
+		t.Fatal("expected four starters plus Idoru, Gynoid, Drone MK-2, Drone Probe, Drone Turret and Cleaner B cards")
 	}
 	starters := 0
 	for _, card := range data.ControlCards {

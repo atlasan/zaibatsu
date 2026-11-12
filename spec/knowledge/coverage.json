@@ -4301,18 +4301,38 @@
       "kind": "block",
       "source": "sp-en-blocks-a4",
       "locator": "PDF page 6; asset sp-en-blocks-a4-p06-c02",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "all-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "defense-face-override",
+        "one-way-space-arrow",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/cleaner-b",
+        "pawn/cleaner-b",
+        "control-card/cleaner-b-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_b_test.go",
+            "contains": "TestCleanerBBilingualGeometryCaptureHandLimitAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-b.test.ts",
+            "contains": "Cleaner B: bilingual geometry, capture, hand limit and shared byte evidence"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-blocks-a4-p06-c03",
@@ -4621,18 +4641,34 @@
       "kind": "control-card",
       "source": "sp-en-control-cards",
       "locator": "PDF page 1; asset sp-en-control-cards-p01-c06",
-      "sourceStatus": "visual-reviewed",
-      "runtime": "planned",
-      "mechanics": [],
-      "records": [],
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "card-activated-movement",
+        "card-activated-one-skull-delete",
+        "printed-defense-row",
+        "add-on-weapon-armor-slots"
+      ],
+      "records": [
+        "pawn/cleaner-b",
+        "control-card/cleaner-b-control"
+      ],
       "tests": {
-        "go": [],
-        "ts": []
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_b_test.go",
+            "contains": "TestCleanerBCardMovementAndDeleteSpendCards"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-b.test.ts",
+            "contains": "Cleaner B: card movement and one-skull Delete spend cards"
+          }
+        ]
       },
-      "sandbox": "planned",
-      "gaps": [
-        "Source-to-runtime acceptance not yet completed."
-      ]
+      "sandbox": "supported",
+      "gaps": []
     },
     {
       "id": "asset/sp-en-control-cards-p01-c07",
@@ -6914,6 +6950,46 @@
       ]
     },
     {
+      "id": "rule/SR-BOARD-022",
+      "title": "Cleaner B controlled placement",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-blocks-a4",
+      "locator": "p.6 tile2; cross-check `sp-es-blocks-a4` p.6 tile2; bilingual rulebooks pp.12–18, 31, 33, 35, 38; Cleaner B under SR-PAWN-009.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "controlled-matching-pawn-placement",
+        "all-entrance-rotation",
+        "current-stopped-pawn-hand-size",
+        "defense-face-override",
+        "one-way-space-arrow",
+        "ownership-sensitive-attachment-cleanup",
+        "immediate-victory-effect-stop"
+      ],
+      "records": [
+        "block/cleaner-b",
+        "pawn/cleaner-b",
+        "control-card/cleaner-b-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_b_test.go",
+            "contains": "TestCleanerBBilingualGeometryCaptureHandLimitAndSharedByteEvidence"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-b.test.ts",
+            "contains": "Cleaner B: bilingual geometry, capture, hand limit and shared byte evidence"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
       "id": "rule/SR-PAWN-001",
       "title": "Pawn state and control",
       "game": "speedrunners",
@@ -8013,6 +8089,42 @@
           {
             "path": "impl/ts/test/drone-turret.test.ts",
             "contains": "Military Development / Drone Turret: bilingual facts"
+          }
+        ]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-009",
+      "title": "Cleaner B pawn and control card",
+      "game": "speedrunners",
+      "kind": "rule",
+      "source": "sp-en-control-cards",
+      "locator": "p.1 cell6; cross-check `sp-es-control-cards` p.1 cell6; `sp-en-pawns` p.1 folded unit3. Bilingual rulebooks pp.18, 20, 24, 26, 30, 33, 35, 38.",
+      "sourceStatus": "verified",
+      "runtime": "implemented",
+      "mechanics": [
+        "card-activated-movement",
+        "card-activated-one-skull-delete",
+        "printed-defense-row",
+        "add-on-weapon-armor-slots"
+      ],
+      "records": [
+        "pawn/cleaner-b",
+        "control-card/cleaner-b-control"
+      ],
+      "tests": {
+        "go": [
+          {
+            "path": "impl/go/internal/engine/cleaner_b_test.go",
+            "contains": "TestCleanerBCardMovementAndDeleteSpendCards"
+          }
+        ],
+        "ts": [
+          {
+            "path": "impl/ts/test/cleaner-b.test.ts",
+            "contains": "Cleaner B: card movement and one-skull Delete spend cards"
           }
         ]
       },

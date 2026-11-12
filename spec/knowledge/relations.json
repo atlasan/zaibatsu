@@ -1203,6 +1203,11 @@
     },
     {
       "type": "belongs-to-expansion",
+      "from": "block/cleaner-b",
+      "to": "game/speedrunners"
+    },
+    {
+      "type": "belongs-to-expansion",
       "from": "block/combat-prototypes",
       "to": "game/speedrunners"
     },
@@ -1310,6 +1315,11 @@
       "type": "belongs-to-expansion",
       "from": "mode/total-war-chaos",
       "to": "game/shadowraiders"
+    },
+    {
+      "type": "belongs-to-expansion",
+      "from": "pawn/cleaner-b",
+      "to": "game/speedrunners"
     },
     {
       "type": "belongs-to-expansion",
@@ -1869,6 +1879,12 @@
     {
       "type": "cross-checks-with",
       "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 6, tile 2 (Cleaner B) <-> pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 1, tile 1 (Toyeku Company) <-> page 1, tile 1 (Toyeku Company)"
     },
@@ -1961,6 +1977,12 @@
       "from": "source/sp-en-blocks-a4",
       "to": "source/sp-es-blocks-a4",
       "locator": "page 6, tile 1 (Arms Industry) <-> page 6, tile 1 (Arms Industry)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 6, tile 2 (Cleaner B) <-> page 6, tile 2 (Cleaner B)"
     },
     {
       "type": "cross-checks-with",
@@ -2066,6 +2088,18 @@
     },
     {
       "type": "cross-checks-with",
+      "from": "source/sp-en-blocks-a4",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 6, tile 2 (Cleaner B) <-> pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-pawns",
+      "locator": "page 1, card 6 (Cleaner B) <-> page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"
+    },
+    {
+      "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
       "locator": "page 2, card 1 <-> page 2"
@@ -2093,6 +2127,12 @@
       "from": "source/sp-en-control-cards",
       "to": "source/sp-en-pawns",
       "locator": "page 2, card 8 (Drone Turret) <-> page 2, separate right strip, folded pawn unit8; opposed faces assemble one Drone Turret"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-en-rulebook",
+      "locator": "page 1, card 6 (Cleaner B) <-> pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
     },
     {
       "type": "cross-checks-with",
@@ -2152,6 +2192,12 @@
       "type": "cross-checks-with",
       "from": "source/sp-en-control-cards",
       "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 6 (Cleaner B) <-> page 1, card 6 (Cleaner B)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-control-cards",
       "locator": "page 2, card 2 (Idoru) <-> page 2, top row third card (Idoru)"
     },
     {
@@ -2177,6 +2223,12 @@
       "from": "source/sp-en-control-cards",
       "to": "source/sp-es-control-cards",
       "locator": "page 2, card 8 (Drone Turret) <-> page 2, card 8 (Drone Turret)"
+    },
+    {
+      "type": "cross-checks-with",
+      "from": "source/sp-en-control-cards",
+      "to": "source/sp-es-rulebook",
+      "locator": "page 1, card 6 (Cleaner B) <-> pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
     },
     {
       "type": "cross-checks-with",
@@ -2388,6 +2440,11 @@
     },
     {
       "type": "depicted-by-asset",
+      "from": "block/cleaner-b",
+      "to": "asset/sp-en-blocks-a4-p06-c02"
+    },
+    {
+      "type": "depicted-by-asset",
       "from": "block/combat-prototypes",
       "to": "asset/sp-en-blocks-a4-p05-c02"
     },
@@ -2435,6 +2492,11 @@
       "type": "depicted-by-asset",
       "from": "block/yakuza",
       "to": "asset/sp-en-blocks-a4-p04-c01"
+    },
+    {
+      "type": "depicted-by-asset",
+      "from": "pawn/cleaner-b",
+      "to": "asset/sp-en-control-cards-p01-c06"
     },
     {
       "type": "depicted-by-asset",
@@ -7198,6 +7260,76 @@
     },
     {
       "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/block-editor-plan.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "block/cleaner-b",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
       "from": "block/combat-prototypes",
       "to": "doc/docs/block-editor-plan.md"
     },
@@ -8234,6 +8366,71 @@
     {
       "type": "documented-by",
       "from": "mode/speedrunners-quick-match",
+      "to": "doc/readme.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/domain-model.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/knowledge/catalog.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/knowledge/index.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/speedrunners.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/board-and-movement.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/pawns-abilities-and-cards.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/setup-and-victory.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/speedrunners/turns-and-actions.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-components.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.en.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
+      "to": "doc/docs/rules/transcripts/speedrunners-rulebook.es.md"
+    },
+    {
+      "type": "documented-by",
+      "from": "pawn/cleaner-b",
       "to": "doc/readme.md"
     },
     {
@@ -9720,6 +9917,11 @@
       "type": "drafted-from-asset",
       "from": "block/clandestine-broadcast",
       "to": "asset/sp-en-blocks-a4-p03-c01"
+    },
+    {
+      "type": "drafted-from-asset",
+      "from": "block/cleaner-b",
+      "to": "asset/sp-en-blocks-a4-p06-c02"
     },
     {
       "type": "drafted-from-asset",
@@ -11600,6 +11802,35 @@
     },
     {
       "type": "evidenced-by-source",
+      "from": "block/cleaner-b",
+      "to": "source/sp-en-blocks-a4",
+      "locator": "page 6, tile 2 (Cleaner B)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/cleaner-b",
+      "to": "source/sp-en-blocks-letter"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/cleaner-b",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/cleaner-b",
+      "to": "source/sp-es-blocks-a4",
+      "locator": "page 6, tile 2 (Cleaner B)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "block/cleaner-b",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 12–18, 21, 23, 31, 33, 35, 38 (spaces, arrows, defense, hand symbols, control and cleanup)"
+    },
+    {
+      "type": "evidenced-by-source",
       "from": "block/combat-prototypes",
       "to": "source/sp-en-blocks-a4",
       "locator": "page 5, tile 2 (Combat Prototypes)"
@@ -12016,6 +12247,36 @@
       "from": "mode/total-war-chaos",
       "to": "source/sh-en-rulebook",
       "locator": "p. 44"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cleaner-b",
+      "to": "source/sp-en-control-cards",
+      "locator": "page 1, card 6 (Cleaner B)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cleaner-b",
+      "to": "source/sp-en-pawns",
+      "locator": "page 1, folded pawn unit 3; opposed faces assemble one Cleaner B"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cleaner-b",
+      "to": "source/sp-en-rulebook",
+      "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cleaner-b",
+      "to": "source/sp-es-control-cards",
+      "locator": "page 1, card 6 (Cleaner B)"
+    },
+    {
+      "type": "evidenced-by-source",
+      "from": "pawn/cleaner-b",
+      "to": "source/sp-es-rulebook",
+      "locator": "pages 21–26, 33, 35, 38 (defense, card activation, slots and symbols)"
     },
     {
       "type": "evidenced-by-source",
@@ -12591,6 +12852,12 @@
     },
     {
       "type": "verified-by-provenance",
+      "from": "block/cleaner-b",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
       "from": "block/combat-prototypes",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
@@ -12652,6 +12919,12 @@
     {
       "type": "verified-by-provenance",
       "from": "mode/speedrunners",
+      "to": "workflow-step/provenance-review",
+      "note": "spec/provenance/speedrunners.json"
+    },
+    {
+      "type": "verified-by-provenance",
+      "from": "pawn/cleaner-b",
       "to": "workflow-step/provenance-review",
       "note": "spec/provenance/speedrunners.json"
     },

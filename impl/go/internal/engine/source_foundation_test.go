@@ -90,7 +90,7 @@ func TestSourceCoreAndPrintedStarters(t *testing.T) {
 			if card.Zone == "out-of-game" {
 				excluded++
 			}
-			if card.Zone == "common" && card.Subject.ID != "idoru" && card.Subject.ID != "gynoid" && card.Subject.ID != "drone-mk-2" && card.Subject.ID != "drone-probe" && card.Subject.ID != "drone-turret" {
+			if card.Zone == "common" && card.Subject.ID != "idoru" && card.Subject.ID != "gynoid" && card.Subject.ID != "drone-mk-2" && card.Subject.ID != "drone-probe" && card.Subject.ID != "drone-turret" && card.Subject.ID != "cleaner-b" {
 				t.Fatal("unused starter card incorrectly in common area")
 			}
 			if card.OwnerID != "" {

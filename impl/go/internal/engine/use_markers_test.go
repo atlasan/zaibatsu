@@ -295,7 +295,7 @@ func TestPhysicalMarkersOfficialBundleRejectsUnresolvedLifetime(t *testing.T) {
 		t.Fatal(err)
 	}
 	s, err := NewGame(Config{Data: gd, PlayerNames: []string{"A", "B"}, Seed: 42, AllowProvisional: true})
-	if err != nil || s.RulesVersion != "source-v20" {
+	if err != nil || s.RulesVersion != "source-v21" {
 		t.Fatal(s, err)
 	}
 }

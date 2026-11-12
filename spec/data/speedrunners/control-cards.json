@@ -86,6 +86,15 @@
         "kind": "pawn",
         "id": "drone-turret"
       }
+    },
+    {
+      "id": "cleaner-b-control",
+      "name": "Cleaner B",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "cleaner-b"
+      }
     }
   ]
 }
