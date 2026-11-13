@@ -4337,8 +4337,8 @@ Details and symbols:
 - Status: visual-reviewed; canonical promotion pending.
 - Description: Cleaner D pawn space, white die and skull spaces.
 - Category: information-block; class: none printed.
-- Actions: On gaining control, place Cleaner D under your control.
-- Specific instructions: On gaining control, place Cleaner D under your control.
+- Actions: On gaining control, place the one Cleaner D pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-026.
+- Specific instructions: On gaining control, place the one Cleaner D pawn on its home and take its control card. The dedicated EN/ES crop pass is SR-BOARD-026.
 
 Printed gameplay/assembly text (normalized):
 
@@ -4349,15 +4349,11 @@ Place the Cleaner D in this block under your control.
 Details and symbols:
 
 - Under-control effect badge.
-- Corner ICE face: 6.
-- Space ICE modifier: white face 1.
-- Space attack modifier: +1 skull.
-- Two directional arrows.
-- Four bonus corners.
-
-Remaining interpretation/precision checks:
-
-- Exact h1-h7 space assignment, edge/vertex arrays and complete bonus-corner geometry are not promoted by this visual review; use the source crop for a dedicated topology pass.
+- Corner ICE face: 6 at V2 (high, not black).
+- Space defense: unshielded face 1 on h7. This white die is defense, not space ICE.
+- H3 is attack +1 skull. H2 and h4 are normal spaces. H5 and h6 are the unlimited pawn home. H1 is not a space.
+- One arrow from the skull space into the upper-left space, and one from the home into the right space.
+- Bonus fragments at V1, V3, V5 and V6. The ICE die at V2 is not a fragment.
 
 ## sp-en-blocks-a4-p08-c01 - Freeside
 
@@ -4568,8 +4564,8 @@ Details and symbols:
 - Status: visual-reviewed; canonical promotion pending.
 - Description: Armed woman with long rifle.
 - Category: pawn-control; class: none printed.
-- Actions: Card-activated Delete: 1 skull(s).; Card-activated movement.; Activate Delete and movement with action cards; use the printed defense row.
-- Specific instructions: Activate Delete and movement with action cards; use the printed defense row.
+- Actions: Card-activated Delete: 1 skull(s).; Card-activated movement.; Activate Delete and movement with action cards; use the printed defense row. The dedicated EN/ES crop pass is SR-PAWN-013.
+- Specific instructions: Activate Delete and movement with action cards; use the printed defense row. Defense is shielded on 1–3 and unshielded on 4–6. The dedicated EN/ES crop pass is SR-PAWN-013.
 
 Details and symbols:
 

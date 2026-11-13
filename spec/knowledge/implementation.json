@@ -5234,6 +5234,80 @@
       },
       "sandbox": "supported",
       "gaps": []
+    },
+    {
+      "id": "asset/sp-en-blocks-a4-p07-c03",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 7, tile 3 (Cleaner D)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 7, tile 3 (Cleaner D)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, attack, arrows and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, attack, arrows and symbols)"}
+      ],
+      "records": ["block/cleaner-d", "pawn/cleaner-d", "control-card/cleaner-d-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "defense-face-override", "printed-space-attack-skull", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_d_test.go", "contains": "TestCleanerDBilingualGeometryCaptureAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-d.test.ts", "contains": "Cleaner D: bilingual geometry, capture and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "asset/sp-en-control-cards-p01-c08",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 8 (Cleaner D)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 8 (Cleaner D)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 1; opposed faces assemble one Cleaner D"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-d", "control-card/cleaner-d-control"],
+      "mechanics": ["card-activated-movement", "card-activated-one-skull-delete", "printed-defense-row", "printed-space-attack-skull", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_d_test.go", "contains": "TestCleanerDCardMovementAndOneSkullDelete"}],
+        "ts": [{"path": "impl/ts/test/cleaner-d.test.ts", "contains": "Cleaner D: card movement and one-skull Delete spend a card"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-BOARD-026",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-blocks-a4", "locator": "page 7, tile 3 (Cleaner D)"},
+        {"artifactId": "sp-es-blocks-a4", "locator": "page 7, tile 3 (Cleaner D)"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, attack, arrows and symbols)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 12–14, 31, 33, 35, 38 (spaces, control, defense, attack, arrows and symbols)"}
+      ],
+      "records": ["block/cleaner-d", "pawn/cleaner-d", "control-card/cleaner-d-control"],
+      "mechanics": ["controlled-matching-pawn-placement", "all-entrance-rotation", "defense-face-override", "printed-space-attack-skull", "one-way-space-arrow", "ownership-sensitive-attachment-cleanup", "immediate-victory-effect-stop"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_d_test.go", "contains": "TestCleanerDBilingualGeometryCaptureAndSharedByteEvidence"}],
+        "ts": [{"path": "impl/ts/test/cleaner-d.test.ts", "contains": "Cleaner D: bilingual geometry, capture and shared byte evidence"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
+    },
+    {
+      "id": "rule/SR-PAWN-013",
+      "runtime": "implemented",
+      "sources": [
+        {"artifactId": "sp-en-control-cards", "locator": "page 1, card 8 (Cleaner D)"},
+        {"artifactId": "sp-es-control-cards", "locator": "page 1, card 8 (Cleaner D)"},
+        {"artifactId": "sp-en-pawns", "locator": "page 1, folded pawn unit 1; opposed faces assemble one Cleaner D"},
+        {"artifactId": "sp-en-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"},
+        {"artifactId": "sp-es-rulebook", "locator": "pages 18, 20, 24, 26, 30, 33, 35, 38 (activation, movement, Delete, slots and defense)"}
+      ],
+      "records": ["pawn/cleaner-d", "control-card/cleaner-d-control"],
+      "mechanics": ["card-activated-movement", "card-activated-one-skull-delete", "printed-defense-row", "printed-space-attack-skull", "add-on-weapon-armor-slots"],
+      "tests": {
+        "go": [{"path": "impl/go/internal/engine/cleaner_d_test.go", "contains": "TestCleanerDCardMovementAndOneSkullDelete"}],
+        "ts": [{"path": "impl/ts/test/cleaner-d.test.ts", "contains": "Cleaner D: card movement and one-skull Delete spend a card"}]
+      },
+      "sandbox": "supported",
+      "gaps": []
     }
   ]
 }

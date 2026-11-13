@@ -2585,6 +2585,32 @@
       ],
       "effects": {"underControl": {"kind": "place-controlled-pawn", "target": "cleaner-c"}},
       "assetRefs": ["sp-en-blocks-a4-p07-c02"]
+    },
+    {
+      "id": "cleaner-d",
+      "name": "Cleaner (D)",
+      "expansion": "speedrunners",
+      "layoutId": "standard-seven-zone-2-3-2-pointy",
+      "iceValue": "high",
+      "iceFaces": [6],
+      "edges": [true, true, true, true, true, true],
+      "boundarySpaces": [["skull"], ["right"], ["cleaner-d"], ["cleaner-d"], ["one"], ["upper-left"]],
+      "bonusFragments": 4,
+      "bonusCorners": [true, false, true, false, true, true],
+      "nonPlayableZoneIds": ["h1"],
+      "spaceArrows": [
+        {"from": "skull", "to": "upper-left"},
+        {"from": "cleaner-d", "to": "right"}
+      ],
+      "spaces": [
+        {"id": "upper-left", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "neighbors": ["skull", "one"]},
+        {"id": "skull", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "neighbors": ["upper-left", "right"], "modifier": {"kind": "attack", "amount": 1}},
+        {"id": "right", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "neighbors": ["skull", "cleaner-d"]},
+        {"id": "one", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "neighbors": ["upper-left", "cleaner-d"], "modifier": {"kind": "defense", "dice": [{"value": 1, "shielded": false}]}},
+        {"id": "cleaner-d", "type": "pawn", "pawnId": "cleaner-d", "zoneIds": ["h5", "h6"], "capacity": "unlimited", "displayShape": "circle", "neighbors": ["right", "one"]}
+      ],
+      "effects": {"underControl": {"kind": "place-controlled-pawn", "target": "cleaner-d"}},
+      "assetRefs": ["sp-en-blocks-a4-p07-c03"]
     }
   ]
 }

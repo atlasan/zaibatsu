@@ -353,3 +353,16 @@ The white face inside h7 is defense, not space ICE. The upper-left circle is a s
 English says “Place the Cleaner C in this block under your control.” Spanish says to place the Cleaner C pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler. Placement alone leaves the one physical pawn in reserve and its one control card common. Obtaining control places that pawn on the matching home and takes the card. Repeat takeover refunds attachments only when the controller changes. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
 
 Eight equivalent tests in each mirror and golden/cleaner-c.json assert the geometry, Search then capture, the hand limit, the defense face, both arrow directions, rejection/RNG and victory timing. The Test Lab path and editor save/load cover T-RULES-051. Full corpus, setup and modes remain open.
+
+## SR-BOARD-026 — Cleaner D controlled placement
+
+- **Source:** `sp-en-blocks-a4` — p.7 tile3; cross-check `sp-es-blocks-a4` p.7 tile3; bilingual rulebooks pp.12–14, 31, 33, 35, 38; Cleaner D under SR-PAWN-013.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** Cleaner (D) has five playable spaces. H2 is a single normal circle. H3 is a single normal circle whose modifier is attack +1 skull while a pawn stands there. H4 is a single normal circle. H7 is a single normal defense space with unshielded face 1. H5 and h6 form one unlimited circular Cleaner D pawn home. H1 is the instruction banner and is not a space. All six edges are entrances, in order skull, right, home, home, face 1, upper-left. Own ICE is one white die, face 6, at V2, category high, not Black ICE. Bonus fragments are printed at V1, V3, V5 and V6. The white die at V2 is ICE, not a fifth fragment. An arrow runs from the skull space into the upper-left space, and another from the home into the right space. Neither reverses.
+
+The white face inside h7 is defense, not space ICE. The skull icon is the existing attack-space modifier. The aperture and hex circles are spaces because they use the circular space frame and the aperture is the head of a printed direction arrow.
+
+English says “Place the Cleaner D in this block under your control.” Spanish says to place the Cleaner D pawn on this block and obtain its control card. Both readings are the existing under-control place-controlled-pawn handler. Placement alone leaves the one physical pawn in reserve and its one control card common. Obtaining control places that pawn on the matching home and takes the card. Repeat takeover refunds attachments only when the controller changes. Immediate final-marker victory stops before deployment. No new effect kind is introduced.
+
+Eight equivalent tests in each mirror and golden/cleaner-d.json assert the geometry, Search then capture, defense face 1, the skull-space extra die, both arrow directions, rejection/RNG and victory timing. The Test Lab path and editor save/load cover T-RULES-052. Full corpus, setup and modes remain open.

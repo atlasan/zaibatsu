@@ -6,4 +6,4 @@ Cleaner (C) places its one pawn and takes its one control card through the exist
 
 **Why:** The printed instruction and the Spanish control-card line are the same capture handler already used by Cleaner A. The in-space white die is defense, and the corner die is high ICE, so no new mechanic is required.
 
-**How to apply:** Keep the record non-provisional. Review the next crop with `python -m hexvision brief --tile <asset-id>` before promoting geometry. Current source protocol/checksum is v24/cleaner-c. The next printed tile is Cleaner D. No official mode is accepted.
+**How to apply:** Keep the record non-provisional. Review the next crop with `python -m hexvision brief --tile <asset-id>` before promoting geometry. Its delivery protocol was v24/cleaner-c. Current source protocol/checksum is v25/cleaner-d. The next printed tile is Freeside. No official mode is accepted.

@@ -122,6 +122,15 @@
         "kind": "pawn",
         "id": "cleaner-c"
       }
+    },
+    {
+      "id": "cleaner-d-control",
+      "name": "Cleaner D",
+      "expansion": "speedrunners",
+      "subject": {
+        "kind": "pawn",
+        "id": "cleaner-d"
+      }
     }
   ]
 }

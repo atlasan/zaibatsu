@@ -243,4 +243,4 @@ Current protocol/checksum at that delivery: source-v20 / source-v20/block-bonus-
 | SR-BOARD-022 / Cleaner (B) | EN/ES blocks p6 tile2; Spanish text also names the control card | Five spaces, all entrances, high ICE 6, V3 fragment, hand−1, unshielded defense 1/2, hand-to-circuit arrow, existing controlled placement | Implemented component; full corpus/setup/modes remain open. |
 | SR-PAWN-009 / Cleaner B | EN/ES control p1c6; EN pawn p1 folded unit3 | One classless pawn/card, card movement, one-skull card Delete, Add-on/Weapon/Armor, shielded 1–4 | Implemented native record; no official mode is accepted. |
 
-Current protocol/checksum: source-v24 / source-v24/cleaner-c. Continue independent printed block p7 tile3 Cleaner D. Cleaner C, Armament Research and Cleaner A are implemented. Arms Industry stays partial under T-RULES-031/047.
+Current protocol/checksum: source-v25 / source-v25/cleaner-d. Continue independent printed block p8 tile1 Freeside. Cleaner D, Cleaner C, Armament Research and Cleaner A are implemented. Arms Industry stays partial under T-RULES-031/047.

@@ -373,3 +373,12 @@ Eight equivalent tests in each mirror and golden/armament-research.json cover th
 - **Rule:** One physical Cleaner C pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and two skulls. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–2 and unshielded on 3–6. The English and Spanish cards agree. The defense space that names face 2 overrides that face to unshielded while the pawn stands there. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed.
 
 Eight equivalent tests in each mirror and golden/cleaner-c.json cover the printed pawn facts, card movement, two-skull Delete payment, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. The Test Lab path uses the existing engine options under SR-BOARD-025 and T-RULES-051. Full corpus and modes remain unaccepted.
+
+## SR-PAWN-013 — Cleaner D pawn and control card
+
+- **Source:** `sp-en-control-cards` — p.1 cell8; cross-check `sp-es-control-cards` p.1 cell8; `sp-en-pawns` p.1 folded unit1. Bilingual rulebooks pp.18, 20, 24, 26, 30, 33, 35, 38.
+- **Applies to:** Speedrunners.
+- **Maturity:** implemented.
+- **Rule:** One physical Cleaner D pawn and one matching control card. No class is printed. No ICE rhombi are printed. Slots are Add-on, Weapon and Armor. Delete is card-activated and one skull. Movement is card-activated steps with no printed step count, so a movement card supplies the distance. Defense is shielded on 1–3 and unshielded on 4–6. The English and Spanish cards agree. The defense space that names face 1 overrides that face to unshielded while the pawn stands there. Standing on the skull space adds one skull to that Delete roll. No native Search, Icebreaker, Reboot, free movement or any-player-turn permission is printed.
+
+Eight equivalent tests in each mirror and golden/cleaner-d.json cover the printed pawn facts, card movement, one-skull Delete payment, the skull-space extra die, absent native abilities, Weapon attachment versus a rejected module, takeover refund and same-controller retention. The Test Lab path uses the existing engine options under SR-BOARD-026 and T-RULES-052. Full corpus and modes remain unaccepted.

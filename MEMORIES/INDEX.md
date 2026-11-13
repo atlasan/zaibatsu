@@ -62,6 +62,7 @@ type: decision | domain | constraint | reference
 
 - [physical-block-bonus.md](physical-block-bonus.md) — decision: physical held block counters, one-time transfer and reserve-policy gate.
 
+- [cleaner-d-placement.md](cleaner-d-placement.md) — decision: Cleaner D reuses controlled placement; the white face-1 die is defense and the skull space adds one attack skull.
 - [cleaner-c-placement.md](cleaner-c-placement.md) — decision: Cleaner C reuses controlled placement; the white face-2 die is defense and both arrows are one-way.
 - [armament-research.md](armament-research.md) — decision: Armament Research reuses controlled placement; the small circle is hand-size −1 and the corner die is black ICE 6.
 - [cleaner-a-placement.md](cleaner-a-placement.md) — decision: Cleaner A reuses controlled placement; two white faces are defense and two arrows do not reverse.
