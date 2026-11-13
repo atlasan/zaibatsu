@@ -1,0 +1,164 @@
+{
+  "cases": [
+    {
+      "name": "maps a reviewed crop into a block draft without promoting it",
+      "tile": {
+        "asset": "sp-en-blocks-a4-p07-c02",
+        "edges": [true, true, true, true, true, true],
+        "whiteCorners": [true, true, false, false, false, false],
+        "bonusCorners": [true, false, false, false, false, false],
+        "iceCorner": { "corner": 1, "dice": 1, "black": false },
+        "iceDiceCandidates": [
+          { "face": 6, "role": "difficulty" },
+          { "face": 2, "role": "modifier", "zone": "h7", "shielded": false }
+        ],
+        "spaces": [
+          { "kind": "circle", "suggestedZoneIds": ["h2"] },
+          { "kind": "circle", "suggestedZoneIds": ["h3"] },
+          { "kind": "circle", "suggestedZoneIds": ["h4"] },
+          { "kind": "circle", "suggestedZoneIds": ["h7"] },
+          { "kind": "circle", "suggestedZoneIds": ["h5", "h6"], "pawnHome": true }
+        ],
+        "symbols": {
+          "handSize": [{ "zone": "h3", "amount": -1 }],
+          "arrows": [
+            { "from": "h7", "to": "h2" },
+            { "from": "h3", "to": "h4" }
+          ]
+        }
+      },
+      "samples": [
+        { "zone": "h1", "whiteFraction": 0.02 },
+        { "zone": "h2", "whiteFraction": 0.91 }
+      ],
+      "draft": {
+        "asset": "sp-en-blocks-a4-p07-c02",
+        "reviewRequired": true,
+        "promoted": false,
+        "edges": [true, true, true, true, true, true],
+        "bonusCorners": [true, false, false, false, false, false],
+        "bonusFragments": 1,
+        "iceValue": "high",
+        "blackIce": false,
+        "iceFaces": [],
+        "nonPlayableZoneIds": ["h1"],
+        "spaces": [
+          { "id": "h2", "type": "normal", "zoneIds": ["h2"], "capacity": 1, "displayShape": "circle", "neighbors": [] },
+          { "id": "h3", "type": "normal", "zoneIds": ["h3"], "capacity": 1, "displayShape": "circle", "neighbors": [], "modifier": { "kind": "hand-size", "amount": -1 } },
+          { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "displayShape": "circle", "neighbors": [] },
+          { "id": "h7", "type": "normal", "zoneIds": ["h7"], "capacity": 1, "displayShape": "circle", "neighbors": [], "modifier": { "kind": "defense", "dice": [{ "value": 2, "shielded": false }] } },
+          { "id": "h5-h6", "type": "pawn", "zoneIds": ["h5", "h6"], "capacity": "unlimited", "displayShape": "circle", "neighbors": [] }
+        ],
+        "spaceArrows": [
+          { "from": "h7", "to": "h2" },
+          { "from": "h3", "to": "h4" }
+        ],
+        "unresolved": ["ICE corner count is a category hint; exact faces stay unread"]
+      }
+    },
+    {
+      "name": "drops the ice corner out of raw white corners and keeps black ice",
+      "tile": {
+        "asset": "black-corner",
+        "edges": [true, false, true, false, true, false],
+        "whiteCorners": [true, true, false, false, false, false],
+        "iceCorner": { "corner": 1, "dice": 1, "black": true },
+        "spaces": []
+      },
+      "draft": {
+        "bonusCorners": [true, false, false, false, false, false],
+        "bonusFragments": 1,
+        "iceValue": "black",
+        "blackIce": true,
+        "iceFaces": [],
+        "promoted": false,
+        "unresolved": ["ICE corner count is a category hint; exact faces stay unread"]
+      }
+    },
+    {
+      "name": "does not copy unclassified flat dice into ice faces",
+      "tile": {
+        "asset": "flat-dice",
+        "edges": [false, false, false, false, false, false],
+        "whiteCorners": [false, false, false, false, false, false],
+        "iceDiceCandidates": [{ "face": 2 }, { "face": 6 }],
+        "spaces": []
+      },
+      "draft": {
+        "iceValue": "none",
+        "blackIce": false,
+        "iceFaces": [],
+        "promoted": false,
+        "unresolved": ["unclassified flat dice were not copied into ICE faces"]
+      }
+    },
+    {
+      "name": "leaves overlapping zones and conflicting modifiers unresolved",
+      "tile": {
+        "asset": "conflict",
+        "edges": [true, true, true, true, true, true],
+        "bonusCorners": [false, false, false, false, false, false],
+        "iceDiceCandidates": [{ "face": 3, "role": "modifier", "zone": "h4", "shielded": true }],
+        "spaces": [
+          { "kind": "circle", "suggestedZoneIds": ["h1"] },
+          { "kind": "circle", "suggestedZoneIds": ["h1"] },
+          { "kind": "circle", "suggestedZoneIds": ["h4"] }
+        ],
+        "symbols": { "handSize": [{ "zone": "h4", "amount": -1 }] }
+      },
+      "draft": {
+        "spaces": [
+          { "id": "h1", "type": "normal", "zoneIds": ["h1"], "capacity": 1, "displayShape": "circle", "neighbors": [] },
+          { "id": "h4", "type": "normal", "zoneIds": ["h4"], "capacity": 1, "displayShape": "circle", "neighbors": [] }
+        ],
+        "spaceArrows": [],
+        "promoted": false,
+        "unresolved": [
+          "overlapping zone proposal left unresolved",
+          "h4 has both a defense die and a hand-size mark; neither was applied"
+        ]
+      }
+    }
+  ],
+  "score": {
+    "case": "maps a reviewed crop into a block draft without promoting it",
+    "block": {
+      "id": "cleaner-c",
+      "iceValue": "high",
+      "iceFaces": [6],
+      "blackIce": false,
+      "edges": [true, true, true, true, true, true],
+      "bonusCorners": [true, false, false, false, false, false],
+      "nonPlayableZoneIds": ["h1"],
+      "spaceArrows": [
+        { "from": "two", "to": "upper-left" },
+        { "from": "hand", "to": "right" }
+      ],
+      "spaces": [
+        { "id": "upper-left", "zoneIds": ["h2"] },
+        { "id": "hand", "zoneIds": ["h3"], "modifier": { "kind": "hand-size", "amount": -1 } },
+        { "id": "right", "zoneIds": ["h4"] },
+        { "id": "two", "zoneIds": ["h7"], "modifier": { "kind": "defense", "dice": [{ "value": 2, "shielded": false }] } },
+        { "id": "cleaner-c", "type": "pawn", "zoneIds": ["h5", "h6"] }
+      ]
+    },
+    "expect": {
+      "blockId": "cleaner-c",
+      "asset": "sp-en-blocks-a4-p07-c02",
+      "promoted": false,
+      "fields": {
+        "edges": "match",
+        "bonusCorners": "match",
+        "blackIce": "match",
+        "iceValue": "match",
+        "iceFaces": "unread",
+        "nonPlayable": "match",
+        "defense": "match",
+        "handSize": "match",
+        "arrows": "match",
+        "pawnZones": "match",
+        "effects": "unread"
+      }
+    }
+  }
+}

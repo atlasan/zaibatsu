@@ -24,6 +24,7 @@ import cv2
 
 from . import detect
 from . import cards
+from .compile import compile_block_draft, draft_text, score_draft
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_BUILD = os.path.join(REPO, "tmp", "artifacts", "build")
@@ -172,11 +173,52 @@ def cmd_brief(args: argparse.Namespace) -> int:
     bgr, alpha = detect.load_tile(path)
     samples = detect.sample_zones(bgr, alpha, tile.center, tile.inradius)
     print(detect.brief_text(tile, samples))
+    print(draft_text(compile_block_draft(tile.to_dict(), samples)))
     out = os.path.join(REPO, "tmp", "hexvision-brief")
     os.makedirs(out, exist_ok=True)
     overlay = os.path.join(out, f"{tile_id}.overlay.png")
     cv2.imwrite(overlay, detect.draw_overlay(bgr, tile))
+    crops = detect.save_review_crops(bgr, tile, os.path.join(out, tile_id))
     print(f"overlay {overlay}")
+    print(f"crops {len(crops)} {os.path.join(out, tile_id)}")
+    return 0
+
+
+def _compiled_tile(args: argparse.Namespace) -> dict | None:
+    path = os.path.join(args.build_dir, args.asset, "png", f"{args.tile}.png")
+    if not os.path.exists(path):
+        print(f"error: cut tile not found: {path}", file=sys.stderr)
+        return None
+    tile = detect.extract_tile(path, args.tile)
+    bgr, alpha = detect.load_tile(path)
+    samples = detect.sample_zones(bgr, alpha, tile.center, tile.inradius)
+    return compile_block_draft(tile.to_dict(), samples)
+
+
+def cmd_compile(args: argparse.Namespace) -> int:
+    """Print one review draft. This does not write spec/data."""
+    draft = _compiled_tile(args)
+    if draft is None:
+        return 2
+    print(draft_text(draft))
+    print(json.dumps(draft, indent=2, ensure_ascii=False))
+    return 0
+
+
+def cmd_score(args: argparse.Namespace) -> int:
+    """Score one review draft against a canonical block that cites the same asset."""
+    draft = _compiled_tile(args)
+    if draft is None:
+        return 2
+    blocks_path = os.path.join(REPO, "spec", "data", "speedrunners", "blocks.json")
+    with open(blocks_path, encoding="utf-8") as handle:
+        blocks = json.load(handle).get("blocks", [])
+    block = next((item for item in blocks if args.tile in (item.get("assetRefs") or [])), None)
+    if block is None:
+        print("score: no canonical block cites this asset; the draft was not promoted")
+        print(draft_text(draft))
+        return 0
+    print(json.dumps(score_draft(draft, block), indent=2, ensure_ascii=False))
     return 0
 
 
@@ -210,9 +252,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--build-dir", default=DEFAULT_BUILD, help="artifacts build dir with cut tiles")
     ap.add_argument("--out", default=None, help="output dir (default: <build>/<asset>/hexvision)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name, fn in (("generate", cmd_generate), ("check", cmd_check), ("brief", cmd_brief), ("verify", cmd_verify)):
+    for name, fn in (("generate", cmd_generate), ("check", cmd_check), ("brief", cmd_brief), ("compile", cmd_compile), ("score", cmd_score), ("verify", cmd_verify)):
         sp = sub.add_parser(name)
-        if name == "brief":
+        if name in ("brief", "compile", "score"):
             sp.add_argument("--tile", required=True, help="one cut-tile asset id, such as sp-en-blocks-a4-p07-c02")
         sp.set_defaults(func=fn)
     args = ap.parse_args(argv)

@@ -167,8 +167,12 @@ icons/text stay as labeled evidence rather than being guessed. Everything stays
 - **Card**: `attach.grants[]` / `attach.removes[]` (abilities conferred/stripped),
   `attach.effectText`, and clarified `attach.class[]` = target-class restriction.
 
-**Detection landed** (`tools/hexvision/*`): block ICE die faces
-(`iceDiceCandidates`); action-card OCR + stable zone-attributed proposals
+**Detection landed** (`tools/hexvision/*`): block geometry plus a review draft
+(`python -m hexvision compile`) that keeps the ICE corner out of `bonusCorners`,
+reads in-zone flat dice as defense faces, and leaves exact `iceFaces` unread.
+Hand-size, arrows, and pawn homes compile only from explicit symbol marks.
+`score` compares a draft with the canonical block for that asset and never
+promotes it. Action-card OCR + stable zone-attributed proposals
 (`title`, `subtitle`, `activates`, movement/stealth, cost, attach, badge counts,
 and custom text) plus icon regions. The editors load only fresh, session-local
 review drafts in bulk; individual Vision fields and suggested copy groups require

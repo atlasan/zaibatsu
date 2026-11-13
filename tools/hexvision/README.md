@@ -37,6 +37,8 @@ pip install -r tools/hexvision/requirements.txt   # opencv-headless + numpy
 python -m hexvision generate     # extract -> out/<asset>.vision.json + out/overlays/
 python -m hexvision check        # structural validation + verify-me warnings
 python -m hexvision brief --tile sp-en-blocks-a4-p07-c02
+python -m hexvision compile --tile sp-en-blocks-a4-p07-c02
+python -m hexvision score --tile sp-en-blocks-a4-p07-c02
 python -m hexvision verify       # re-extract; confirm determinism vs the JSON
 ```
 
@@ -55,9 +57,19 @@ python -m hexvision brief --tile sp-en-blocks-a4-p07-c02
 ```
 
 `brief` re-reads one cut tile and prints passages, the white fraction at each
-standard zone anchor, merged-space candidates, and the ICE-corner candidate.
-It also writes `tmp/hexvision-brief/<tile>.overlay.png` with the zone and edge
-labels. Those lines and the overlay are review hints. They do not write `spec/data`.
+standard zone anchor, merged-space candidates, the ICE-corner candidate, and
+the review draft. It also writes `tmp/hexvision-brief/<tile>.overlay.png` and
+crops under `tmp/hexvision-brief/<tile>/`: one file at each vertex, one inward
+corner window, and one disk at each standard zone anchor.
+
+`compile` prints that draft as JSON. `score` compares it with the canonical
+block whose `assetRefs` cite the tile. A miss is a review finding. The corner
+cluster suggests high, medium, low, or black ICE, and exact faces stay unread.
+An in-zone flat square die becomes a defense-face candidate. Hand-size, arrows,
+and a pawn home are filled only when the tile carries those symbol marks. A
+dark unclaimed anchor becomes an exclusion candidate. The draft never invents
+an effect or a pawn id. Those lines, the overlay, and the crops are review
+hints. They do not write `spec/data`.
 
 ## Workflow
 

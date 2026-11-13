@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { compileBlockDraft } from "./block-draft";
 
 export type Expansion = "speedrunners" | "shadowraiders";
 export type ResourceType = "block" | "action-card";
@@ -100,8 +101,15 @@ export interface BlockLayoutZone { id: ZoneId; q: number; r: number; x: number; 
 /** Each outer entrance targets its nearest standardized ring placement hex. */
 export interface BlockLayoutEdge { id: string; x: number; y: number; zoneId: ZoneId; }
 export interface BlockLayout { id: typeof STANDARD_BLOCK_LAYOUT_ID; name: string; smallHexCount: 7; outerHex: { vertices: Array<{ id: string; x: number; y: number }> }; corners: Array<{ id: string; x: number; y: number }>; edges: BlockLayoutEdge[]; zoneShape: { width: number; height: number }; zones: BlockLayoutZone[]; }
-export interface HexVisionSpace { kind?: string; suggestedZoneIds?: ZoneId[]; suggestionConfidence?: number; }
-export interface HexVisionTile { asset: string; center: [number, number]; inradius: number; vertices: Array<[number, number]>; edges?: boolean[]; whiteCorners?: boolean[]; spaces?: HexVisionSpace[]; iceDiceCandidates?: Array<{ face: number }>; }
+export interface HexVisionSpace { kind?: string; suggestedZoneIds?: ZoneId[]; suggestionConfidence?: number; pawnHome?: boolean; }
+export interface HexVisionTile {
+  asset: string; center?: [number, number]; inradius?: number; vertices?: Array<[number, number]>;
+  edges?: boolean[]; whiteCorners?: boolean[]; bonusCorners?: boolean[]; spaces?: HexVisionSpace[];
+  iceCorner?: { corner?: number; dice?: number; black?: boolean } | null;
+  iceDiceCandidates?: Array<{ face?: number; role?: string; zone?: string; shielded?: boolean }>;
+  symbols?: { defense?: Array<{ zone?: string; value?: number; shielded?: boolean }>; handSize?: Array<{ zone?: string; amount?: number }>; arrows?: Array<{ from?: string; to?: string }>; pawnHomes?: string[][] };
+  zoneSamples?: Array<{ zone?: string; whiteFraction?: number }>;
+}
 
 export function defaultCapacity(type: EditorSpaceType, zoneIds: ZoneId[]): SpaceCapacity { return (type === "special" || type === "pawn") ? "unlimited" : Math.max(1, zoneIds.length); }
 export function derivedIceValue(iceFaces: number[] | undefined, blackIce = false): BlockRecord["iceValue"] {
@@ -145,33 +153,39 @@ export function prefillSevenZones(document: BlockDocument, layout: BlockLayout):
 }
 
 /**
- * Applies only internally consistent HexVision candidates. Incomplete/overlapping
- * suggestions are intentionally left out for the author to resolve manually.
+ * Applies a HexVision review draft. Overlapping zones, unread ICE faces, and
+ * proposals on zones already marked non-playable stay unresolved. The draft
+ * never writes canonical data and never invents an effect or a pawn id.
  */
 export function applyVisionPrefill(document: BlockDocument, layout: BlockLayout, vision: HexVisionTile): BlockDocument {
-  const claimed = new Set<ZoneId>(document.block.nonPlayableZoneIds??[]);
-  const spaces: EditorSpace[] = [];
-  let unresolved = 0;
-  for (const [index, candidate] of (vision.spaces ?? []).entries()) {
-    const zoneIds = (candidate.suggestedZoneIds ?? []).filter((zoneId, position, values) => STANDARD_ZONE_IDS.includes(zoneId) && values.indexOf(zoneId) === position);
-    if (!zoneIds.length || zoneIds.some((zoneId) => claimed.has(zoneId))) { unresolved++; continue; }
-    zoneIds.forEach((zoneId) => claimed.add(zoneId));
-    const displayShape: SpaceDisplayShape = ["circle", "capsule", "compound"].includes(candidate.kind ?? "") ? candidate.kind as SpaceDisplayShape : "auto";
-    spaces.push({ id: `vision-space-${index + 1}`, type: "normal", zoneIds, capacity: defaultCapacity("normal", zoneIds), displayShape, neighbors: [] });
+  const draft = compileBlockDraft(vision, vision.zoneSamples);
+  const blocked = new Set<ZoneId>(document.block.nonPlayableZoneIds ?? []);
+  const unresolved = [...draft.unresolved];
+  const kept: EditorSpace[] = [];
+  for (const space of draft.spaces) {
+    if (space.zoneIds.some((zoneId) => blocked.has(zoneId))) { unresolved.push("zone proposal overlaps a non-playable zone and was left unresolved"); continue; }
+    kept.push({ id: space.id, type: space.type, zoneIds: space.zoneIds, capacity: space.capacity, displayShape: space.displayShape, neighbors: [], ...(space.modifier ? { modifier: space.modifier } : {}) });
   }
-  const iceFaces = (vision.iceDiceCandidates ?? []).map((candidate) => candidate.face).filter((face) => Number.isInteger(face) && face >= 1 && face <= 6);
+  const claimed = new Set(kept.flatMap((space) => space.zoneIds));
+  const nonPlayable = [...blocked, ...draft.nonPlayableZoneIds.filter((zoneId) => !claimed.has(zoneId) && !blocked.has(zoneId))];
+  nonPlayable.sort((left, right) => STANDARD_ZONE_IDS.indexOf(left) - STANDARD_ZONE_IDS.indexOf(right));
+  const keptIds = new Set(kept.map((space) => space.id));
+  const sawCorner = vision.iceCorner != null;
+  const bonusRead = vision.bonusCorners?.length === 6 || vision.whiteCorners?.length === 6;
   const block = {
     ...document.block,
-    spaceArrows:[],
-    edges: vision.edges?.length === 6 ? vision.edges as EdgeList : document.block.edges,
-    bonusCorners: vision.whiteCorners?.length === 6 ? vision.whiteCorners as EdgeList : document.block.bonusCorners,
-    bonusFragments: vision.whiteCorners?.length === 6 ? vision.whiteCorners.filter(Boolean).length : document.block.bonusFragments,
-    spaces: inferNeighbors(spaces, layout),
-    iceFaces,
-    iceValue: derivedIceValue(iceFaces, document.block.blackIce),
+    edges: vision.edges?.length === 6 ? draft.edges as EdgeList : document.block.edges,
+    bonusCorners: bonusRead ? draft.bonusCorners as EdgeList : document.block.bonusCorners,
+    bonusFragments: bonusRead ? draft.bonusFragments : document.block.bonusFragments,
+    iceFaces: draft.iceFaces,
+    iceValue: sawCorner ? draft.iceValue : derivedIceValue(draft.iceFaces, document.block.blackIce),
+    blackIce: sawCorner ? draft.blackIce : document.block.blackIce,
+    nonPlayableZoneIds: nonPlayable,
+    spaceArrows: draft.spaceArrows.filter((arrow) => keptIds.has(arrow.from) && keptIds.has(arrow.to)),
+    spaces: inferNeighbors(kept, layout),
   };
-  const annotations = ["HexVision suggestions applied; review all detected gameplay data against the source."];
-  if (unresolved) annotations.push(`HexVision left ${unresolved} conflicting or incomplete zone proposal${unresolved === 1 ? "" : "s"} unresolved.`);
+  const annotations = ["HexVision review draft applied; it does not promote block data.", ...unresolved];
+  if (unresolved.length) annotations.push(`HexVision left ${unresolved.length} review note${unresolved.length === 1 ? "" : "s"} unresolved.`);
   return { ...document, annotations: [...new Set([...document.annotations, ...annotations])], block: { ...block, boundarySpaces: deriveBoundarySpaces(block, layout) } };
 }
 

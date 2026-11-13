@@ -63,6 +63,21 @@ def test_overlay_runs(tmp_path):
     assert ov.shape == bgr.shape
 
 
+def test_review_crops_cover_every_vertex_and_zone(tmp_path):
+    img, _, _ = _synthetic_tile()
+    path = tmp_path / "syn.png"
+    cv2.imwrite(str(path), img)
+    bgr, _ = detect.load_tile(str(path))
+    tile = detect.extract_tile(str(path), "syn")
+    written = detect.save_review_crops(bgr, tile, str(tmp_path / "crops"))
+    names = {os.path.basename(item) for item in written}
+    expected = {f"syn-v{i}.png" for i in range(1, 7)}
+    expected |= {f"syn-corner{i}.png" for i in range(1, 7)}
+    expected |= {f"syn-zone-h{i}.png" for i in range(1, 8)}
+    assert names == expected
+    assert all(os.path.getsize(item) > 0 for item in written)
+
+
 def test_zone_sample_separates_a_white_anchor_from_artwork(tmp_path):
     img, _, center = _synthetic_tile()
     cv2.circle(img, (center, center), 40, (255, 255, 255, 255), -1)
@@ -74,6 +89,8 @@ def test_zone_sample_separates_a_white_anchor_from_artwork(tmp_path):
     assert samples["h1"]["whiteFraction"] > 0.5
     assert samples["h4"]["whiteFraction"] < 0.2
     tile = detect.extract_tile(str(path), "syn")
+    stored = {item["zone"]: item["whiteFraction"] for item in tile.zoneSamples}
+    assert stored["h1"] > 0.5
     text = detect.brief_text(tile, list(samples.values()))
     assert "review hint only" in text
     assert "E1/h3:" in text

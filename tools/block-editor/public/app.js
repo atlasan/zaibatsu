@@ -30,7 +30,87 @@ function render(){const a=asset(),d=draft(),ratio=state.imageSize?`${state.image
 async function layoutFor(a){const d=await api(`/api/block-layout/${encodeURIComponent(a.assetId)}`);state.layout=d.layout;state.override=d.override;state.vision=d.vision??null;state.imageSize=d.imageSize??null}
 function applySpace(){const d=read(),s=selected(d);if(!s)return;const q=id=>document.querySelector(id),auto=capacity(q("#space-type").value,s.zoneIds);s.id=q("#space-id").value.trim();s.type=q("#space-type").value;const family=q("#space-effect-family").value;s.effect=family?{kind:"discard-attachment",cardType:family,scope:"cybernet",optional:true}:undefined;s.displayShape=q("#space-display").value;s.capacity=q("#space-capacity").value==="auto"?auto:q("#space-capacity").value==="unlimited"?"unlimited":Number(q("#space-capacity").value);s.capacityNote=s.capacity===auto?undefined:q("#capacity-note").value.trim();s.direction=q("#space-direction").value===""?undefined:Number(q("#space-direction").value);const modifierKind=q("#space-modifier-kind").value;s.modifier=modifierKind?{kind:modifierKind,...(modifierKind==="defense"?{dice:[...document.querySelectorAll("[data-defense-face]")].filter(i=>i.value).map(i=>({value:Number(i.dataset.defenseFace),shielded:i.value==="shielded"}))}:q("#space-modifier-amount").value===""?{}:{amount:Number(q("#space-modifier-amount").value)})}:undefined;d.block.spaces=neighbors(d.block.spaces);sync(d);state.selectedSpaceId=s.id}
 function seven(d){d.block.nonPlayableZoneIds=[];d.block.spaceArrows=[];d.block.spaces=neighbors(ZONES.map(id=>({id,type:"normal",zoneIds:[id],capacity:1,displayShape:"auto",neighbors:[]})));state.selectedSpaceId="h1";sync(d)}
-function vision(d,v){const claimed=new Set(d.block.nonPlayableZoneIds??[]),spaces=[];let unresolved=0;for(const [i,c] of(v.spaces??[]).entries()){const ids=[...new Set((c.suggestedZoneIds??[]).filter(id=>ZONES.includes(id)))];if(!ids.length||ids.some(id=>claimed.has(id))){unresolved++;continue}ids.forEach(id=>claimed.add(id));spaces.push({id:`vision-space-${i+1}`,type:"normal",zoneIds:ids,capacity:ids.length,displayShape:["circle","capsule","compound"].includes(c.kind)?c.kind:"auto",neighbors:[]})}d.block.spaceArrows=[];d.block.edges=v.edges?.length===6?[...v.edges]:d.block.edges;d.block.bonusCorners=v.whiteCorners?.length===6?[...v.whiteCorners]:d.block.bonusCorners;d.block.bonusFragments=d.block.bonusCorners.filter(Boolean).length;d.block.iceFaces=(v.iceDiceCandidates??[]).map(x=>x.face).filter(f=>Number.isInteger(f)&&f>=1&&f<=6);d.block.iceValue=iceValue(d.block.iceFaces,d.block.blackIce);d.block.spaces=neighbors(spaces);d.annotations=[...new Set([...(d.annotations??[]),"HexVision suggestions applied; review all detected gameplay data against the source.",...(unresolved?[`HexVision left ${unresolved} conflicting or incomplete zone proposal${unresolved===1?"":"s"} unresolved.`]:[])])];state.selectedSpaceId=d.block.spaces[0]?.id??null;state.notice=unresolved?`HexVision applied; ${unresolved} zone proposal${unresolved===1?"":"s"} unresolved for review`:"HexVision suggestions applied for review";sync(d)}
+function zonesOf(values){return [...new Set((values??[]).filter(id=>ZONES.includes(id)))].sort((a,b)=>ZONES.indexOf(a)-ZONES.indexOf(b))}
+function compileDraft(v){
+  const unresolved=[];
+  let edges=Array.isArray(v.edges)&&v.edges.length===6&&v.edges.every(item=>typeof item==="boolean")?[...v.edges]:null;
+  if(!edges){edges=[false,false,false,false,false,false];unresolved.push("edges were not read")}
+  const ice=v.iceCorner&&typeof v.iceCorner==="object"?v.iceCorner:null;
+  let bonus=Array.isArray(v.bonusCorners)&&v.bonusCorners.length===6?[...v.bonusCorners]:null;
+  if(!bonus&&Array.isArray(v.whiteCorners)&&v.whiteCorners.length===6){bonus=[...v.whiteCorners];if(ice&&Number.isInteger(ice.corner)&&ice.corner>=0&&ice.corner<=5)bonus[ice.corner]=false}
+  if(!bonus){bonus=[false,false,false,false,false,false];unresolved.push("bonus corners were not read")}
+  const black=Boolean(ice?.black);
+  const iceValueName=black?"black":ice?.dice===1?"high":ice?.dice===2?"medium":ice?.dice===3?"low":"none";
+  if(ice&&iceValueName==="none")unresolved.push("ICE corner die count was not 1, 2, or 3");
+  if(ice&&iceValueName!=="none")unresolved.push("ICE corner count is a category hint; exact faces stay unread");
+  const claimed=new Set(),spaces=[];
+  for(const candidate of v.spaces??[]){
+    const zoneIds=zonesOf(candidate?.suggestedZoneIds);
+    if(!zoneIds.length){unresolved.push("incomplete zone proposal left unresolved");continue}
+    if(zoneIds.some(id=>claimed.has(id))){unresolved.push("overlapping zone proposal left unresolved");continue}
+    zoneIds.forEach(id=>claimed.add(id));
+    const pawn=Boolean(candidate.pawnHome);
+    spaces.push({id:zoneIds.join("-"),type:pawn?"pawn":"normal",zoneIds,capacity:pawn?"unlimited":zoneIds.length,displayShape:["circle","capsule","compound"].includes(candidate.kind)?candidate.kind:"auto",neighbors:[]});
+  }
+  for(const home of v.symbols?.pawnHomes??[]){
+    const zoneIds=zonesOf(home),match=spaces.find(space=>space.zoneIds.join()===zoneIds.join());
+    if(!match)unresolved.push(`pawn home ${zoneIds.join("-")||"(empty)"} is not one detected space`);
+    else{match.type="pawn";match.capacity="unlimited"}
+  }
+  const defense=new Map(),hand=new Map();
+  let unclassified=false;
+  for(const candidate of v.iceDiceCandidates??[]){
+    const face=candidate?.face,ok=Number.isInteger(face)&&face>=1&&face<=6;
+    if(candidate?.role==="modifier"&&ZONES.includes(candidate.zone)&&ok)defense.set(candidate.zone,[...(defense.get(candidate.zone)??[]),{value:face,shielded:Boolean(candidate.shielded)}]);
+    else if(candidate?.role!=="difficulty")unclassified=true;
+  }
+  for(const mark of v.symbols?.defense??[]){
+    const face=mark?.value;
+    if(ZONES.includes(mark?.zone)&&Number.isInteger(face)&&face>=1&&face<=6)defense.set(mark.zone,[...(defense.get(mark.zone)??[]).filter(item=>item.value!==face),{value:face,shielded:Boolean(mark.shielded)}]);
+    else unresolved.push("defense mark was not a face on a placement zone");
+  }
+  for(const mark of v.symbols?.handSize??[]){
+    if(ZONES.includes(mark?.zone)&&Number.isInteger(mark.amount)&&mark.amount!==0)hand.set(mark.zone,mark.amount);
+    else unresolved.push("hand-size mark was not a nonzero integer on a placement zone");
+  }
+  for(const space of spaces){
+    const defenseZones=space.zoneIds.filter(id=>defense.has(id)),handZones=space.zoneIds.filter(id=>hand.has(id));
+    if(defenseZones.length&&handZones.length){unresolved.push(`${space.id} has both a defense die and a hand-size mark; neither was applied`);continue}
+    if(defenseZones.length)space.modifier={kind:"defense",dice:defenseZones.flatMap(id=>defense.get(id)).sort((a,b)=>a.value-b.value||Number(a.shielded)-Number(b.shielded))};
+    else if(handZones.length){
+      const amounts=new Set(handZones.map(id=>hand.get(id)));
+      if(amounts.size>1)unresolved.push(`${space.id} has conflicting hand-size marks; neither was applied`);
+      else space.modifier={kind:"hand-size",amount:hand.get(handZones[0])};
+    }
+  }
+  if(unclassified)unresolved.push("unclassified flat dice were not copied into ICE faces");
+  const excluded=[];
+  for(const sample of v.zoneSamples??[])if(ZONES.includes(sample?.zone)&&!claimed.has(sample.zone)&&typeof sample.whiteFraction==="number"&&sample.whiteFraction<=0.15&&!excluded.includes(sample.zone))excluded.push(sample.zone);
+  excluded.sort((a,b)=>ZONES.indexOf(a)-ZONES.indexOf(b));
+  const byZone=new Map(spaces.flatMap(space=>space.zoneIds.map(id=>[id,space.id])));
+  const arrows=[];
+  for(const mark of v.symbols?.arrows??[]){
+    const source=byZone.get(mark?.from),dest=byZone.get(mark?.to);
+    if(!source||!dest){unresolved.push(`arrow from ${mark?.from} to ${mark?.to} references a zone with no space`);continue}
+    if(source===dest){unresolved.push(`arrow from ${mark?.from} to ${mark?.to} stays inside one space`);continue}
+    if(!arrows.some(arrow=>arrow.from===source&&arrow.to===dest))arrows.push({from:source,to:dest});
+  }
+  return {edges,bonus,bonusFragments:bonus.filter(Boolean).length,iceValue:iceValueName,black,nonPlayableZoneIds:excluded,spaces,spaceArrows:arrows,unresolved};
+}
+function vision(d,v){
+  const draft=compileDraft(v),blocked=new Set(d.block.nonPlayableZoneIds??[]),unresolved=[...draft.unresolved],spaces=[];
+  for(const space of draft.spaces){if(space.zoneIds.some(id=>blocked.has(id))){unresolved.push("zone proposal overlaps a non-playable zone and was left unresolved");continue}spaces.push(space)}
+  const claimed=new Set(spaces.flatMap(space=>space.zoneIds));
+  const nonPlayable=[...blocked,...draft.nonPlayableZoneIds.filter(id=>!claimed.has(id)&&!blocked.has(id))].sort((a,b)=>ZONES.indexOf(a)-ZONES.indexOf(b));
+  const kept=new Set(spaces.map(space=>space.id)),sawCorner=v.iceCorner!=null,bonusRead=v.bonusCorners?.length===6||v.whiteCorners?.length===6;
+  d.block.edges=v.edges?.length===6?[...draft.edges]:d.block.edges;
+  if(bonusRead){d.block.bonusCorners=[...draft.bonus];d.block.bonusFragments=draft.bonusFragments}
+  d.block.iceFaces=[];d.block.blackIce=sawCorner?draft.black:d.block.blackIce;d.block.iceValue=sawCorner?draft.iceValue:iceValue([],d.block.blackIce);
+  d.block.nonPlayableZoneIds=nonPlayable;d.block.spaceArrows=draft.spaceArrows.filter(arrow=>kept.has(arrow.from)&&kept.has(arrow.to));d.block.spaces=neighbors(spaces);
+  const notes=["HexVision review draft applied; it does not promote block data.",...unresolved];
+  if(unresolved.length)notes.push(`HexVision left ${unresolved.length} review note${unresolved.length===1?"":"s"} unresolved.`);
+  d.annotations=[...new Set([...(d.annotations??[]),...notes])];state.selectedSpaceId=d.block.spaces[0]?.id??null;state.notice=unresolved.length?`HexVision applied; ${unresolved.length} review note${unresolved.length===1?"":"s"} unresolved`:"HexVision review draft applied";sync(d)
+}
 function clear(d){Object.assign(d.block,{nonPlayableZoneIds:[],spaceArrows:[],iceFaces:[],iceValue:"none",blackIce:false,edges:[false,false,false,false,false,false],bonusCorners:[false,false,false,false,false,false],bonusFragments:0,spaces:[],effects:undefined});state.selectedSpaceId=null;sync(d)}
 async function validate(){const d=read();applySpace();if(!d)return;const r=await api("/api/validate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({document:d})});state.validation=r.errors;state.notice=state.validation.length?`${state.validation.length} issues to resolve`:"Draft is valid for export";render()}
 async function save(){const d=read();applySpace();const n=document.querySelector("#session-name").value.trim();state.sessionName=n;await api("/api/sessions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:n,session:{sessionVersion:4,projectId:"zaibatsu-data-editor",assetManifestPath:"spec/assets/manifest.json",documents:state.drafts,history:[]}})});state.notice="Session saved";render()}

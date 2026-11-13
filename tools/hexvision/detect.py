@@ -27,6 +27,7 @@ between vertex i and vertex (i+1) mod 6.
 from __future__ import annotations
 
 import math
+import os
 from dataclasses import dataclass, field, asdict
 
 import cv2
@@ -62,6 +63,9 @@ class Tile:
     # printed ICE is an isometric-dice cluster at a hex corner (dice count ->
     # low/medium/high; a black die -> Black ICE). Review-required.
     iceCorner: dict | None = None
+    # White-fraction samples at the seven anchors. Low fractions are exclusion
+    # candidates for the review draft; they do not decide spaces by themselves.
+    zoneSamples: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -161,6 +165,36 @@ def brief_text(tile: Tile, samples: list[dict]) -> str:
         f"ice {ice_text}",
         f"bonus {bonus}",
     ])
+
+
+def save_review_crops(bgr: np.ndarray, tile: Tile, directory: str) -> list[str]:
+    """Write vertex, inward-corner, and zone crops for one tile.
+
+    Corner windows sit 26% of the way from each vertex toward the center, the
+    same neighborhood the ICE candidate uses. These files are review hints.
+    They do not promote block data.
+    """
+    os.makedirs(directory, exist_ok=True)
+    height, width = bgr.shape[:2]
+    inr = max(8, int(tile.inradius))
+    written: list[str] = []
+
+    def crop(name: str, cx: float, cy: float, half: float) -> None:
+        x0, y0 = max(0, int(cx - half)), max(0, int(cy - half))
+        x1, y1 = min(width, int(cx + half)), min(height, int(cy + half))
+        if x1 <= x0 or y1 <= y0:
+            return
+        path = os.path.join(directory, f"{tile.asset}-{name}.png")
+        cv2.imwrite(path, bgr[y0:y1, x0:x1])
+        written.append(path)
+
+    cx, cy = tile.center
+    for index, (vx, vy) in enumerate(tile.vertices):
+        crop(f"v{index + 1}", vx, vy, inr * 0.22)
+        crop(f"corner{index + 1}", vx + (cx - vx) * 0.26, vy + (cy - vy) * 0.26, inr * 0.32)
+    for zone, (zx, zy) in standard_zone_centers(tile.center, tile.inradius).items():
+        crop(f"zone-{zone}", zx, zy, inr * 0.28)
+    return written
 
 
 def load_tile(path: str) -> tuple[np.ndarray, np.ndarray]:
@@ -502,6 +536,7 @@ def extract_tile(path: str, asset: str) -> Tile:
     ice_corner = detect_ice_corner(bgr, alpha, center, verts, inr)
     ice_idx = ice_corner["corner"] if ice_corner else None
     bonus = [w and i != ice_idx for i, w in enumerate(white_corners)]
+    samples = sample_zones(bgr, alpha, center, inr)
     return Tile(
         asset=asset,
         center=center,
@@ -513,6 +548,7 @@ def extract_tile(path: str, asset: str) -> Tile:
         spaces=detect_spaces(bgr, alpha, center, inr),
         iceDiceCandidates=classify_ice_dice(detect_ice_dice(bgr, alpha), center, verts, inr),
         iceCorner=ice_corner,
+        zoneSamples=samples,
     )
 
 
@@ -545,7 +581,7 @@ def draw_overlay(bgr: np.ndarray, tile: Tile) -> np.ndarray:
         x, y, w, h = die["box"]
         modifier = die.get("role") == "modifier"
         color = (0, 165, 255) if modifier else (200, 0, 200)  # orange modifier / magenta difficulty
-        label = f"ICEmod {die.get('zone', '?')}?{die['face']}" if modifier else f"ICE?{die['face']}"
+        label = f"DEF {die.get('zone', '?')}:{die['face']}" if modifier else f"corner-die?{die['face']}"
         cv2.rectangle(ov, (x, y), (x + w, y + h), color, 4)
         cv2.putText(ov, label, (x, max(24, y - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
     if tile.iceCorner is not None:

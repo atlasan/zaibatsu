@@ -84,8 +84,13 @@ bun run test:play
   aligned.
 - Offers a deterministic **Prefill 7 zones** starting point, **Clear all** for
   editable block content, and review-required HexVision application for the
-  selected source or all sources. Bulk HexVision creates drafts only where one
-  does not already exist and reports skipped/unavailable assets.
+  selected source or all sources. Apply compiles a block-shaped review draft:
+  open edges, bonus corners with the ICE corner removed, defense faces from
+  in-zone square dice, hand-size and arrows when those marks are present, dark
+  unclaimed zones as title/art exclusions, and a pawn home when one is marked.
+  Exact ICE faces, effects, and pawn ids stay unfilled. Bulk HexVision creates
+  drafts only where one does not already exist and reports skipped/unavailable
+  assets. Nothing in this apply writes `spec/data`.
 
 The editor never writes `spec/data` itself. Review and apply exported patches
 through the normal source/provenance workflow. Canonical status, source links,
